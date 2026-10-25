@@ -35,8 +35,13 @@ def voice_for(text):
 BREEZY = 'breezy-v1'   # 換聲音範本或改念法時換號碼，全部重錄
 
 
+# 錄壞要重錄的句子（tools/voice/redo.json）：換個檔名，才不會又撿回舊的壞錄音
+REDO = set(json.load(open('tools/voice/redo.json', encoding='utf-8'))) if os.path.exists('tools/voice/redo.json') else set()
+
+
 def breezy_name(text):
-    return hashlib.sha1(f'{BREEZY}|trim|{text}'.encode('utf-8')).hexdigest()[:12] + '.mp3'
+    tag = BREEZY + '-redo1' if text in REDO else BREEZY
+    return hashlib.sha1(f'{tag}|trim|{text}'.encode('utf-8')).hexdigest()[:12] + '.mp3'
 
 
 def file_name(text):
