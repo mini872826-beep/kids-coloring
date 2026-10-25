@@ -30,7 +30,7 @@ jobs:
           for i in 1 2 3; do git pull --rebase -q origin voice-trial && git push origin HEAD:voice-trial && break; sleep 5; done
   breezy:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -49,7 +49,7 @@ jobs:
       - name: BreezyVoice 錄音
         env:
           PYTHONUTF8: '1'
-        run: python tools/trial_voices.py breezy
+        run: python tools/trial_voices.py cv
       - name: 推回 voice-trial 分支
         if: always()
         run: |

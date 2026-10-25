@@ -11,6 +11,7 @@ os.makedirs('trial', exist_ok=True)
 
 
 def mp3(wav, name):
+    os.makedirs('trial', exist_ok=True)
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-ac', '1', '-b:a', '64k', f'trial/{name}.mp3'], check=True)
 
 
@@ -24,10 +25,44 @@ async def edge():
                 print('skip', voice, i + 1, e)
 
 
-def breezy():
+def pick_voices(n=3):
+    """從 Common Voice 台灣志工錄音（CC0）挑幾個：女生、二三十歲、評價好、長度適中"""
+    from datasets import load_dataset, Audio
+    ds = load_dataset('JacobLinCool/common_voice_19_0_zh-TW', split='train', streaming=True)
+    ds = ds.cast_column('audio', Audio(decode=False))
+    os.makedirs('prompts', exist_ok=True)
+    picked, seen = [], set()
+    for k, row in enumerate(ds):
+        if k > 40000 or len(picked) >= n:
+            break
+        g, a = str(row.get('gender', '')), str(row.get('age', ''))
+        if 'fem' not in g or a not in ('twenties', 'thirties'):
+            continue
+        if int(row.get('up_votes') or 0) < 2 or int(row.get('down_votes') or 0) > 0:
+            continue
+        cid = row.get('client_id')
+        if cid in seen or len(row['sentence']) < 12:
+            continue
+        i = len(picked) + 1
+        src = f'prompts/v{i}.mp3'
+        open(src, 'wb').write(row['audio']['bytes'])
+        wav = os.path.abspath(f'prompts/v{i}.wav')
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-ar', '16000', '-ac', '1', wav], check=True)
+        dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', wav],
+                                   capture_output=True, text=True).stdout or 0)
+        if not 3.5 <= dur <= 12:
+            continue
+        seen.add(cid)
+        picked.append((wav, row['sentence'], f'voice{i}'))
+        print('picked', i, g, a, '%.1fs' % dur, row['sentence'], flush=True)
+    return picked
+
+
+def breezy(prompts, sentences):
     bv = os.path.abspath('bv')
     sys.path.insert(0, bv)
     sys.path.insert(0, os.path.join(bv, 'third_party', 'Matcha-TTS'))
+    here = os.getcwd()
     os.chdir(bv)
     # 新版 onnxruntime 一定要指定 providers，g2pw 沒寫：幫它預設用 CPU
     import onnxruntime as ort
@@ -44,21 +79,22 @@ def breezy():
     cosy = CustomCosyVoice('MediaTek-Research/BreezyVoice-300M')
     conv = G2PWConverter()
     print('load model %.0fs' % (time.time() - t0), flush=True)
-    prompt = '在密碼學中，加密是將明文資訊改變為難以讀取的密文內容，使之不可讀的方法。只有擁有解密方法的對象，經由解密過程，才能將密文還原為正常可讀的內容。'
-    for i, s in enumerate(SENTENCES):
-        t = time.time()
-        if i == 2 and time.time() - t0 > 2400:
-            break   # 太慢就先停，至少有前兩句可以聽
-        single_inference('data/example.wav', s, f'../trial/breezy-{i + 1}.wav', cosy, conv, prompt)
-        print('breezy %d: %.0fs' % (i + 1, time.time() - t), flush=True)
-    os.chdir('..')
-    for i in range(len(SENTENCES)):
-        if os.path.exists(f'trial/breezy-{i + 1}.wav'):
-            mp3(f'trial/breezy-{i + 1}.wav', f'breezy-{i + 1}')
-            os.remove(f'trial/breezy-{i + 1}.wav')
+    for wav, text, name in prompts:
+        for i, s in enumerate(sentences):
+            t = time.time()
+            out = os.path.join(here, f'trial/{name}-{i + 1}.wav')
+            single_inference(wav, s, out, cosy, conv, text)
+            print('%s %d: %.0fs' % (name, i + 1, time.time() - t), flush=True)
+            mp3(out, f'{name}-{i + 1}')
+            os.remove(out)
+    os.chdir(here)
 
 
 if sys.argv[1] == 'edge':
     asyncio.run(edge())
+elif sys.argv[1] == 'cv':
+    voices = pick_voices()
+    breezy(voices, SENTENCES[:2])
 else:
-    breezy()
+    prompt = '在密碼學中，加密是將明文資訊改變為難以讀取的密文內容，使之不可讀的方法。只有擁有解密方法的對象，經由解密過程，才能將密文還原為正常可讀的內容。'
+    breezy([(os.path.abspath('bv/data/example.wav'), prompt, 'breezy')], SENTENCES)
