@@ -1031,8 +1031,20 @@ button {
 .twinkle { animation: tw 1.8s ease-in-out infinite; }
 @keyframes tw { 50% { opacity: .35; } }
 
+/* 插畫小動畫：角色晃動、樹和花搖擺、水波流動、進場彈跳、跟著節拍跳 */
+.idle { animation: idle 3.2s ease-in-out infinite; animation-delay: var(--d, 0s); transform-origin: center bottom; }
+@keyframes idle { 0%, 100% { transform: translateY(0) scale(1, 1); } 50% { transform: translateY(-2.5%) scale(1.02, .98); } }
+.sway { animation: sway 4s ease-in-out infinite; animation-delay: var(--d, 0s); transform-origin: center bottom; }
+@keyframes sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2.5deg); } }
+.wave { animation: wave 3s ease-in-out infinite alternate; }
+@keyframes wave { to { transform: translateX(-36px); } }
+.art.enter .idle { animation: enter .7s cubic-bezier(.3, 1.6, .6, 1) var(--e, 0s) backwards, idle 3.2s ease-in-out calc(var(--e, 0s) + .7s) infinite; }
+@keyframes enter { from { opacity: 0; transform: translateY(25%) scale(.5); } }
+.art.beat .idle { animation: beat .42s ease; }
+@keyframes beat { 40% { transform: translateY(-6%) scale(1.06, .95); } }
+
 @media (prefers-reduced-motion: reduce) {
-  .float, .drift, .twinkle { animation: none; }
+  .float, .drift, .twinkle, .idle, .sway, .wave, .art.enter .idle, .art.beat .idle { animation: none; }
 }
 
 /* ================= 讀完啦 / 彩紙 ================= */

@@ -1013,12 +1013,12 @@
     grass: (y = 380) => `<rect y="${y}" width="800" height="${500 - y}" fill="#9be07a"/>`,
     road: () => `<rect y="380" width="800" height="120" fill="#9be07a"/><rect y="410" width="800" height="70" fill="#8d8d8d"/>
       ${[40, 200, 360, 520, 680].map(x => `<rect x="${x}" y="440" width="80" height="10" rx="5" fill="#fff"/>`).join('')}`,
-    tree: (x, y = 385) => `<g class="tap" data-anim="wiggle" data-sound="pop"><rect x="${x - 12}" y="${y - 90}" width="24" height="90" fill="#9c6b3c"/><circle cx="${x}" cy="${y - 120}" r="55" fill="#55b85a"/><circle cx="${x - 35}" cy="${y - 95}" r="35" fill="#55b85a"/><circle cx="${x + 35}" cy="${y - 95}" r="35" fill="#55b85a"/></g>`,
+    tree: (x, y = 385) => `<g class="tap sway" style="--d:${(Math.random() * -4).toFixed(2)}s" data-anim="wiggle" data-sound="pop"><rect x="${x - 12}" y="${y - 90}" width="24" height="90" fill="#9c6b3c"/><circle cx="${x}" cy="${y - 120}" r="55" fill="#55b85a"/><circle cx="${x - 35}" cy="${y - 95}" r="35" fill="#55b85a"/><circle cx="${x + 35}" cy="${y - 95}" r="35" fill="#55b85a"/></g>`,
     sea: () => `<rect width="800" height="500" fill="#4fc3f7"/><rect y="0" width="800" height="70" fill="#81d4fa"/>
       <rect y="440" width="800" height="60" fill="#ffe0a3"/>
-      ${[80, 260, 560, 720].map((x, i) => `<path d="M${x} 445 Q${x - 20} 390 ${x} 340 Q${x + 20} 390 ${x} 445" fill="#43a047" class="tap" data-anim="wiggle" data-sound="splash"/>`).join('')}`,
+      ${[80, 260, 560, 720].map((x, i) => `<path d="M${x} 445 Q${x - 20} 390 ${x} 340 Q${x + 20} 390 ${x} 445" fill="#43a047" class="tap sway" style="--d:-${i}s" data-anim="wiggle" data-sound="splash"/>`).join('')}`,
     beach: () => `<rect width="800" height="250" fill="#bfe8ff"/><rect y="230" width="800" height="150" fill="#4fc3f7"/>
-      <path d="M0 240 Q50 225 100 240 T200 240 T300 240 T400 240 T500 240 T600 240 T700 240 T800 240" fill="none" stroke="#fff" stroke-width="6"/>
+      <path d="M0 240 Q50 225 100 240 T200 240 T300 240 T400 240 T500 240 T600 240 T700 240 T800 240" fill="none" stroke="#fff" stroke-width="6" class="wave"/>
       <rect y="370" width="800" height="130" fill="#ffe0a3"/>`,
     night: () => `<rect width="800" height="500" fill="#2b2d6e"/>
       <circle cx="640" cy="90" r="45" fill="#fff3b0" class="tap" data-anim="boing" data-sound="twinkle"/>
@@ -1107,14 +1107,14 @@
       ${Array.from({ length: 7 }, (_, i) => `<path d="M${x + i * w / 6} ${y} Q${x + i * w / 6 + 15} ${y + h / 2} ${x + i * w / 6} ${y + h}"/>`).join('')}
       ${Array.from({ length: 5 }, (_, i) => `<path d="M${x} ${y + i * h / 4} Q${x + w / 2} ${y + i * h / 4 + 20} ${x + w} ${y + i * h / 4}"/>`).join('')}</g>`,
     pond: () => `<rect width="800" height="500" fill="#c5f6fa"/><rect y="330" width="800" height="170" fill="#66d9e8"/>
-      <path d="M0 340 Q100 320 200 340 T400 340 T600 340 T800 340" fill="none" stroke="#fff" stroke-width="6"/>
+      <path d="M0 340 Q100 320 200 340 T400 340 T600 340 T800 340" fill="none" stroke="#fff" stroke-width="6" class="wave"/>
       ${[[90, 420], [700, 450]].map(([x, y]) => `<ellipse class="tap" data-anim="wiggle" data-sound="splash" cx="${x}" cy="${y}" rx="55" ry="18" fill="#51cf66" stroke="#222" stroke-width="4"/>`).join('')}`,
     mountains: (c1 = '#8ce99a', c2 = '#69db7c') => `<path d="M-20 400 L170 170 L320 330 L470 140 L660 360 L820 220 L820 500 L-20 500 Z" fill="${c1}" stroke="#222" stroke-width="5" stroke-linejoin="round"/>
       <path d="M-20 440 L200 300 L420 420 L620 320 L820 420 L820 500 L-20 500 Z" fill="${c2}" stroke="#222" stroke-width="5" stroke-linejoin="round"/>`,
     river: () => `<path d="M330 500 Q380 430 360 380 Q340 340 420 300 L470 300 Q400 350 430 390 Q460 440 430 500 Z" fill="#74c0fc" stroke="#222" stroke-width="5" stroke-linejoin="round"/>`,
     sunset: () => `<rect width="800" height="500" fill="#ffd8a8"/><circle class="tap" data-anim="boing" data-sound="twinkle" cx="400" cy="250" r="70" fill="#ff8787" stroke="#222" stroke-width="5"/>`,
     birds: (n = 3) => [[150, 110], [230, 80], [620, 130], [540, 90]].slice(0, n).map(([x, y], i) => `<path class="float tap" data-anim="jump" data-sound="twinkle" style="animation-delay:${i * .5}s" d="M${x - 24} ${y} Q${x - 12} ${y - 16} ${x} ${y} Q${x + 12} ${y - 16} ${x + 24} ${y}" fill="none" stroke="#222" stroke-width="5" stroke-linecap="round"/>`).join(''),
-    flowers: (y = 440) => [90, 200, 600, 720].map((x, i) => `<g class="tap" data-anim="wiggle" data-sound="pop"><path d="M${x} ${y + 50} L${x} ${y}" stroke="#2f9e44" stroke-width="6"/>${[0, 1, 2, 3, 4].map(k => { const a = k * Math.PI * 2 / 5; return `<circle cx="${x + 16 * Math.cos(a)}" cy="${y + 16 * Math.sin(a)}" r="12" fill="${['#ff8fab', '#ffd43b', '#b197fc', '#ff922b'][i]}" stroke="#222" stroke-width="3"/>`; }).join('')}<circle cx="${x}" cy="${y}" r="9" fill="#fff3bf" stroke="#222" stroke-width="3"/></g>`).join(''),
+    flowers: (y = 440) => [90, 200, 600, 720].map((x, i) => `<g class="tap sway" style="--d:-${i * .7}s" data-anim="wiggle" data-sound="pop"><path d="M${x} ${y + 50} L${x} ${y}" stroke="#2f9e44" stroke-width="6"/>${[0, 1, 2, 3, 4].map(k => { const a = k * Math.PI * 2 / 5; return `<circle cx="${x + 16 * Math.cos(a)}" cy="${y + 16 * Math.sin(a)}" r="12" fill="${['#ff8fab', '#ffd43b', '#b197fc', '#ff922b'][i]}" stroke="#222" stroke-width="3"/>`; }).join('')}<circle cx="${x}" cy="${y}" r="9" fill="#fff3bf" stroke="#222" stroke-width="3"/></g>`).join(''),
     rice: () => `<rect y="360" width="800" height="140" fill="#d8f5a2"/>${Array.from({ length: 12 }, (_, i) => { const x = 40 + i * 66; return `<g class="tap" data-anim="wiggle" data-sound="pop"><path d="M${x} 470 L${x} 380 M${x} 400 Q${x - 26} 380 ${x - 30} 350 M${x} 400 Q${x + 26} 380 ${x + 30} 350" fill="none" stroke="#5c940d" stroke-width="5" stroke-linecap="round"/><ellipse cx="${x}" cy="370" rx="8" ry="16" fill="#ffd43b" stroke="#222" stroke-width="3"/></g>`; }).join('')}`,
     snow: () => `<rect width="800" height="500" fill="#d0ebff"/>${Array.from({ length: 40 }, (_, i) => `<circle class="fall" style="animation-delay:${(i * .13) % 1.2}s" cx="${(i * 97) % 800}" cy="${(i * 53) % 460}" r="${3 + (i % 3) * 2}" fill="#fff"/>`).join('')}`,
     boat: (x, y) => `<g class="tap" data-anim="wiggle" data-sound="splash" stroke="#222" stroke-width="5" stroke-linejoin="round"><path d="M${x - 110} ${y} L${x + 110} ${y} L${x + 80} ${y + 40} L${x - 80} ${y + 40} Z" fill="#c98a4b"/>
@@ -1155,7 +1155,9 @@
   function put(id, x, y, w, anim = 'jump', sound = 'boing') {
     const d = DRAWINGS.find(d => d.id === id);
     const h = w * 0.75;
-    return `<g class="tap" data-anim="${anim}" data-sound="${sound}"><svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="0 0 800 600" overflow="visible">${outlined(d.svg)}</svg></g>`;
+    // idle：角色輕輕晃動（每個人節奏不同）；--e 是進場的先後
+    const motion = `--d:${(Math.random() * -3).toFixed(2)}s;--e:${(Math.random() * .45).toFixed(2)}s`;
+    return `<g class="tap idle" style="${motion}" data-anim="${anim}" data-sound="${sound}"><svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="0 0 800 600" overflow="visible">${outlined(d.svg)}</svg></g>`;
   }
 
   // 英文名字（學英文、畫完教念英文用）
@@ -1174,5 +1176,20 @@
   const CAT_EN = { car: 'Vehicles', animal: 'Animals', dino: 'Dinosaurs', sea: 'Ocean', building: 'Buildings', halloween: 'Halloween', free: 'Free drawing' };
   CATEGORIES.forEach(c => { c.en = CAT_EN[c.id]; });
 
-  window.ART = { DRAWINGS, CATEGORIES, lineArt, svgDoc, scene, put };
+  // 線稿包（js/pack-*.js）用這個加新分類和新線稿；分類會插在「自由畫」前面
+  function addPack({ categories = [], drawings = [] }) {
+    for (const c of categories) {
+      if (CATEGORIES.some(x => x.id === c.id)) continue;
+      const at = CATEGORIES.findIndex(x => x.id === 'free');
+      CATEGORIES.splice(at < 0 ? CATEGORIES.length : at, 0, c);
+    }
+    for (const d of drawings) {
+      if (DRAWINGS.some(x => x.id === d.id)) continue;
+      const at = DRAWINGS.findIndex(x => x.cat === 'free');
+      DRAWINGS.splice(at < 0 ? DRAWINGS.length : at, 0, d);
+    }
+  }
+  const helpers = { eye, ground, wheel, scallop, sparkle, miniBat, win, tree2 };
+
+  window.ART = { addPack, helpers, DRAWINGS, CATEGORIES, lineArt, svgDoc, scene, put };
 })();

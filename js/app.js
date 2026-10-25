@@ -278,10 +278,20 @@
   /* ---------------- 講故事 ---------------- */
   let book = null, pageIdx = 0, auto = false, sayTitle = false;
 
+  // 換頁時角色一個一個彈出來；彈完拿掉 enter，點角色的動畫才不會被蓋掉
+  function enter(el) {
+    el.classList.remove('enter');
+    void el.offsetWidth;
+    el.classList.add('enter');
+    clearTimeout(el._enterT);
+    el._enterT = setTimeout(() => el.classList.remove('enter'), 1300);
+  }
+
   function openPage(b, i, dir) {
     book = b; pageIdx = i;
     const p = b.pages[i];
     $('art').innerHTML = p.art;
+    enter($('art'));
     $('text').textContent = p.text;
     $('bookTitle').textContent = b.title;
     $('dots').innerHTML = b.pages.map((_, k) => `<span class="${k === i ? 'on' : ''}"></span>`).join('');
@@ -395,6 +405,14 @@
   }
   function highlight(i) {
     [...$('lyrics').children].forEach((li, k) => li.classList.toggle('on', k === i));
+    // 唱到新的一句，畫面裡的角色跟著跳一下
+    if (i >= 0) {
+      const art = $('songArt');
+      art.classList.remove('beat', 'enter');
+      void art.offsetWidth;
+      art.classList.add('beat');
+      setTimeout(() => art.classList.remove('beat'), 450);
+    }
   }
   function openSong(sg) {
     song = sg;
@@ -402,6 +420,7 @@
     $('songSub').textContent = { poem: `唐・${sg.author}`, sanzi: `宋・${sg.author}`, dizi: `清・${sg.author}`, times: '九九乘法歌', 'en-song': 'English nursery rhyme・英文兒歌' }[sg.kind]
       || (sg.original ? '原創兒歌' : '傳統兒歌');
     $('songArt').innerHTML = sg.art;
+    enter($('songArt'));
     $('lyrics').className = 'lyrics ' + sg.kind;
     $('lyrics').innerHTML = sg.lines.map((l, i) => `<li>${l}${sg.sub ? `<small>${sg.sub[i]}</small>` : ''}</li>`).join('');
     setPlaying(false);

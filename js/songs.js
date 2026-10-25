@@ -351,6 +351,21 @@
     },
   ];
 
+  /* ======== 更多唐詩 ======== */
+  const P = (id, title, author, art, lines) => SONGS.push({ id, kind: 'poem', title, author, art: svg(art), lines });
+  P('deer-park', '鹿柴', '王維', scene.forest() + scene.tree(150) + scene.tree(400) + scene.tree(650) + scene.sun(700, 80), ['空山不見人', '但聞人語響', '返景入深林', '復照青苔上']);
+  P('mountain-walk', '山行', '杜牧', scene.sunset() + scene.mountains('#ffa94d', '#ff8787') + scene.tree(650), ['遠上寒山石徑斜', '白雲生處有人家', '停車坐愛楓林晚', '霜葉紅於二月花']);
+  P('temple-night', '夜宿山寺', '李白', scene.night() + scene.mountains('#5f3dc4', '#7048e8'), ['危樓高百尺', '手可摘星辰', '不敢高聲語', '恐驚天上人']);
+  P('waterfall', '望廬山瀑布', '李白', scene.day() + scene.mountains() + `<path d="M380 120 L420 120 L440 500 L360 500 Z" fill="#a5d8ff" stroke="#222" stroke-width="5"/>`, ['日照香爐生紫煙', '遙看瀑布掛前川', '飛流直下三千尺', '疑是銀河落九天']);
+  P('baidi', '早發白帝城', '李白', scene.day() + scene.sun() + scene.mountains() + scene.river() + scene.boat(400, 430), ['朝辭白帝彩雲間', '千里江陵一日還', '兩岸猿聲啼不住', '輕舟已過萬重山']);
+  P('wang-lun', '贈汪倫', '李白', scene.day() + `<rect y="320" width="800" height="180" fill="#74c0fc"/>` + scene.boat(300, 340) + put('shepherd', 520, 140, 220), ['李白乘舟將欲行', '忽聞岸上踏歌聲', '桃花潭水深千尺', '不及汪倫送我情']);
+  P('two-orioles', '絕句', '杜甫', scene.day() + scene.tree(200) + scene.birds(4) + `<rect y="380" width="800" height="120" fill="#74c0fc"/>` + scene.boat(560, 400), ['兩個黃鸝鳴翠柳', '一行白鷺上青天', '窗含西嶺千秋雪', '門泊東吳萬里船']);
+  P('wind', '風', '李嶠', scene.day() + scene.grass() + scene.tree(200) + scene.tree(600) + `<g class="drift"><path d="M300 150 Q360 120 420 150 M280 200 Q360 170 440 200 M320 250 Q380 220 440 250" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/></g>`, ['解落三秋葉', '能開二月花', '過江千尺浪', '入竹萬竿斜']);
+  P('pond', '池上', '白居易', scene.pond() + scene.boat(400, 360) + scene.flowers(470), ['小娃撐小艇', '偷採白蓮回', '不解藏蹤跡', '浮萍一道開']);
+  P('spring-rain', '春夜喜雨', '杜甫', scene.rain() + `<rect y="400" width="800" height="100" fill="#8ce99a"/>` + scene.flowers(440), ['好雨知時節', '當春乃發生', '隨風潛入夜', '潤物細無聲', '野徑雲俱黑', '江船火獨明', '曉看紅濕處', '花重錦官城']);
+  P('maple-bridge', '楓橋夜泊', '張繼', scene.night() + `<rect y="380" width="800" height="120" fill="#364fc7"/>` + scene.boat(400, 390), ['月落烏啼霜滿天', '江楓漁火對愁眠', '姑蘇城外寒山寺', '夜半鐘聲到客船']);
+  P('homecoming', '回鄉偶書', '賀知章', scene.day() + scene.grass() + scene.house('grandma', 500, 150, 240) + put('grandma', 40, 120, 300) + put('shepherd', 300, 180, 220), ['少小離家老大回', '鄉音無改鬢毛衰', '兒童相見不相識', '笑問客從何處來']);
+
   /* ======== 三字經、弟子規（幾百年前的經典，全文可用）：每段四句 ======== */
   const scroll = (bg, who) => svg(`<rect width="800" height="500" fill="${bg}"/>` + scene.grass(400) +
     `<g stroke="#222" stroke-width="6" stroke-linejoin="round"><rect x="440" y="90" width="300" height="250" rx="12" fill="#fff8e6"/><rect x="425" y="80" width="330" height="26" rx="13" fill="#c98a4b"/><rect x="425" y="326" width="330" height="26" rx="13" fill="#c98a4b"/>${[140, 180, 220, 260, 300].map(y => `<path d="M480 ${y} L700 ${y}" stroke-width="4" stroke="#d9c7a3"/>`).join('')}</g>` +
@@ -362,6 +377,11 @@
       ['養不教，父之過', '教不嚴，師之惰', '子不學，非所宜', '幼不學，老何為'],
       ['玉不琢，不成器', '人不學，不知義', '為人子，方少時', '親師友，習禮儀'],
       ['香九齡，能溫席', '孝於親，所當執', '融四歲，能讓梨', '弟於長，宜先知'],
+      ['首孝弟，次見聞', '知某數，識某文', '一而十，十而百', '百而千，千而萬'],
+      ['三才者，天地人', '三光者，日月星', '三綱者，君臣義', '父子親，夫婦順'],
+      ['曰春夏，曰秋冬', '此四時，運不窮', '曰南北，曰西東', '此四方，應乎中'],
+      ['稻粱菽，麥黍稷', '此六穀，人所食', '馬牛羊，雞犬豕', '此六畜，人所飼'],
+      ['勤有功，戲無益', '戒之哉，宜勉力', '人遺子，金滿籯', '我教子，惟一經'],
     ]],
     ['dizi', '弟子規', '李毓秀', '#e7f5ff', 'redhood', [
       ['弟子規，聖人訓', '首孝悌，次謹信', '泛愛眾，而親仁', '有餘力，則學文'],
@@ -369,9 +389,14 @@
       ['兄道友，弟道恭', '兄弟睦，孝在中', '財物輕，怨何生', '言語忍，忿自泯'],
       ['朝起早，夜眠遲', '老易至，惜此時', '晨必盥，兼漱口', '便溺回，輒淨手'],
       ['凡出言，信為先', '詐與妄，奚可焉', '話說多，不如少', '惟其是，勿佞巧'],
+      ['冠必正，紐必結', '襪與履，俱緊切', '置冠服，有定位', '勿亂頓，致污穢'],
+      ['對飲食，勿揀擇', '食適可，勿過則', '年方少，勿飲酒', '飲酒醉，最為醜'],
+      ['用人物，須明求', '倘不問，即為偷', '借人物，及時還', '後有急，借不難'],
+      ['凡是人，皆須愛', '天同覆，地同載', '見人善，即思齊', '縱去遠，以漸躋'],
+      ['不力行，但學文', '長浮華，成何人', '但力行，不學文', '任己見，昧理真'],
     ]],
   ];
-  const nth = ['一', '二', '三', '四', '五', '六'];
+  const nth = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
   for (const [kind, name, author, bg, who, parts] of classics) {
     parts.forEach((lines, i) => SONGS.push({
       id: `${kind}-${i + 1}`, kind, title: `${name}（${nth[i]}）`, author, art: scroll(bg, who), lines,
