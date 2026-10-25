@@ -8,7 +8,8 @@ RAW = 'https://raw.githubusercontent.com/mini872826-beep/kids-coloring/__BRANCH_
 SVC = '/kaggle/tmp/seed-vc'
 VENV = '/kaggle/tmp/venv/bin/python'
 os.makedirs('/kaggle/working/out/ref', exist_ok=True)
-LOG = open('/kaggle/working/log.txt', 'w')
+open('/kaggle/working/log.txt', 'w').close()
+LOG = open('/kaggle/working/log.txt', 'a')   # 用附加模式，才不會蓋掉 gen.py 寫的紀錄
 
 
 def log(*a):
@@ -114,7 +115,7 @@ try:
     sh(f'uv pip install --python {VENV} -r /kaggle/tmp/req.txt torch==2.4.0 torchaudio==2.4.0 '
        '--extra-index-url https://download.pytorch.org/whl/cu121 --index-strategy unsafe-best-match')
     sh(f'uv pip install --python {VENV} julius dora-search openunmix lameenc')
-    sh(f'uv pip install --python {VENV} --no-deps demucs')
+    sh(f'uv pip install --python {VENV} --no-deps demucs==4.0.1')   # 4.1 多要一個 sphn 套件
     json.dump(JOBS, open('/kaggle/tmp/jobs.json', 'w', encoding='utf-8'), ensure_ascii=False)
     open('/kaggle/tmp/raw.txt', 'w').write(RAW)
     open('/kaggle/tmp/gen.py', 'w', encoding='utf-8').write(GEN)
