@@ -1,0 +1,69 @@
+# 兒歌「原本旋律＋自然歌聲」：先照歌譜唱好（tools/sing.py），再到 Kaggle 免費 GPU 用 Seed-VC 換成自然的人聲
+name: 兒歌自然歌聲
+on:
+  push:
+    branches: [main]
+    paths: ['js/songs.js', 'tools/sing.py', 'tools/sing_vc.py', 'tools/kaggle_svc/**', '.github/workflows/sing-vc.yml']
+  workflow_dispatch:
+    inputs:
+      only:
+        description: '只做這幾首（id 用逗號分開，空白 = 全部）'
+        required: false
+        default: ''
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: sing-vc
+jobs:
+  sing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - uses: actions/cache@v4
+        with:
+          path: .sing-cache
+          key: sing-${{ hashFiles('js/songs.js') }}
+          restore-keys: sing-
+      - run: pip install edge-tts "setuptools<80" pyworld soundfile numpy
+      - run: node tools/songs.js > "$RUNNER_TEMP/songs.json"
+      # 1. 照歌譜唱好，人聲和伴奏分開存（Kaggle 要從 GitHub 抓，所以先推上去）
+      - run: python tools/sing.py "$RUNNER_TEMP/songs.json"
+      - name: 推人聲檔
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/sing
+          if git diff --cached --quiet; then echo "人聲檔沒變"; exit 0; fi
+          git commit -m "Update sung vocal stems"
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 10; done
+      # 2. Kaggle 換成自然歌聲
+      - run: python3 tools/sing_vc.py "$RUNNER_TEMP/songs.json" --plan "$RUNNER_TEMP/jobs.json" "${{ github.event.inputs.only }}"
+      - name: Kaggle 換聲音
+        continue-on-error: true
+        env:
+          KAGGLE_USERNAME: pacokids
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          if [ "$(python3 -c 'import json,sys;print(len(json.load(open(sys.argv[1]))))' "$RUNNER_TEMP/jobs.json")" = 0 ]; then echo "都做好了"; exit 0; fi
+          pip install -q "kaggle>=1.8"
+          tools/kaggle_svc/kaggle.sh "$RUNNER_TEMP/jobs.json" main audio/sing-vc
+          mv audio/sing-vc/kaggle-svc-log.txt tools/kaggle_svc/last-log.txt 2>/dev/null || true
+      - run: python3 tools/sing_vc.py "$RUNNER_TEMP/songs.json"
+      - name: 推回 main
+        run: |
+          git add -A audio/sing-vc tools/kaggle_svc
+          if git diff --cached --quiet; then echo "沒有新的歌"; exit 0; fi
+          git commit -m "Update natural-voice songs"
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 10; done
+          curl -sS -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || true

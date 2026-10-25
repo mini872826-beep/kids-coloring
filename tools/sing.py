@@ -241,10 +241,13 @@ def render(song):
         t += beat * .5
     vox /= max(1e-6, np.abs(vox).max())
     acc /= max(1e-6, np.abs(acc).max())
+    end = int(min(len(vox), (t + 1) * FS))
+    return vox[:end], acc[:end], times
+
+
+def mixdown(vox, acc):
     mix = vox * .85 + acc * .3
-    mix /= max(1e-6, np.abs(mix).max()) / .9
-    end = int(min(len(mix), (t + 1) * FS))
-    return mix[:end], times
+    return mix / (max(1e-6, np.abs(mix).max()) / .9)
 
 
 def sing_slice(feat, part, k):
@@ -267,10 +270,14 @@ def song_key(song):
     return hashlib.sha1(raw.encode()).hexdigest()[:10]
 
 
+def stem(name, kind):
+    return f"stems/{name[:-4]}-{kind}.mp3"
+
+
 def main():
     songs = json.load(open(sys.argv[1], encoding='utf-8'))
     only = set(sys.argv[2].split(',')) if len(sys.argv) > 2 else None
-    os.makedirs(OUT, exist_ok=True)
+    os.makedirs(os.path.join(OUT, 'stems'), exist_ok=True)
     ipath = os.path.join(OUT, 'index.json')
     index = json.load(open(ipath, encoding='utf-8')) if os.path.exists(ipath) else {}
     keep = set()
@@ -281,16 +288,21 @@ def main():
             continue
         name = f"{song['id']}-{song_key(song)}.mp3"
         keep.add(name)
-        if song['id'] in index and index[song['id']]['file'] == name and os.path.exists(os.path.join(OUT, name)):
+        stems = [stem(name, k) for k in ('vox', 'acc')]
+        if (song['id'] in index and index[song['id']]['file'] == name and os.path.exists(os.path.join(OUT, name))
+                and all(os.path.exists(os.path.join(OUT, f)) for f in stems)):
             continue
         print('sing:', song['id'])
-        mix, times = render(song)
-        wav = os.path.join(CACHE, 'mix.wav')
-        sf.write(wav, mix, FS)
-        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-ac', '1', '-b:a', '64k', os.path.join(OUT, name)], check=True)
+        vox, acc, times = render(song)
+        # 人聲和伴奏也分開存一份：tools/sing_vc.py 拿人聲去換成自然的歌聲，再跟伴奏混在一起
+        for y, f, rate in ((mixdown(vox, acc), name, '64k'), (vox * .9, stems[0], '96k'), (acc * .9, stems[1], '48k')):
+            wav = os.path.join(CACHE, 'mix.wav')
+            sf.write(wav, y, FS)
+            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-ac', '1', '-b:a', rate, os.path.join(OUT, f)], check=True)
         index[song['id']] = {'file': name, 'times': times}
     index = {k: v for k, v in index.items() if v['file'] in keep}
-    for f in os.listdir(OUT):
+    keep |= {stem(v['file'], k) for v in index.values() for k in ('vox', 'acc')}
+    for f in os.listdir(OUT) + ['stems/' + f for f in os.listdir(os.path.join(OUT, 'stems'))]:
         if f.endswith('.mp3') and f not in keep:
             os.remove(os.path.join(OUT, f))
     with open(ipath, 'w', encoding='utf-8') as fp:

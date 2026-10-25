@@ -412,20 +412,14 @@
   /* ---------------- 兒歌唐詩 ---------------- */
   let song = null, songToken = 0;
   // 兒歌有 AI 唱好的錄音（tools/sing.py 產生）就放錄音，沒有才用八音盒彈旋律
-  let SUNG = {}, AI = {};
+  let SUNG = {}, VC = {};
   fetch('audio/sing/index.json').then(r => r.ok ? r.json() : {}).then(j => { SUNG = j; }).catch(() => {});
-  // AI 歌手（ACE-Step）唱的版本：cover = 保留原本旋律（小朋友聽得出是哪首歌）、new = AI 新作的旋律
-  const AI_STYLE = 'cover';
-  fetch('audio/sing-ai/index.json').then(r => r.ok ? r.json() : {}).then(j => { AI = j; }).catch(() => {});
-  // 這首歌要放哪個錄音：AI 歌手 > 合成的唱歌 > 沒有（八音盒）
+  // 自然歌聲版（tools/sing_vc.py）：旋律、節拍和上面完全一樣，只是把聲音換成自然的人聲
+  fetch('audio/sing-vc/index.json').then(r => r.ok ? r.json() : {}).then(j => { VC = j; }).catch(() => {});
+  // 這首歌要放哪個錄音：自然歌聲 > 合成的唱歌 > 沒有（八音盒）
   function track(id) {
-    const a = AI[id];
-    if (a) {
-      const style = a[AI_STYLE] ? AI_STYLE : (a.new ? 'new' : 'cover');
-      // 原旋律版的段落和原本一樣，可以沿用每句的時間；新旋律版就不知道每句在哪
-      return { url: 'audio/sing-ai/' + a[style], times: style === 'cover' && SUNG[id] ? SUNG[id].times : null };
-    }
-    if (SUNG[id]) return { url: 'audio/sing/' + SUNG[id].file, times: SUNG[id].times };
+    const a = VC[id] || SUNG[id];
+    if (a) return { url: (VC[id] ? 'audio/sing-vc/' : 'audio/sing/') + a.file, times: a.times };
     return null;
   }
   const singer = new Audio();
