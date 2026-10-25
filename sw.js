@@ -5,6 +5,7 @@ const FILES = [
   './',
   'index.html',
   'css/style.css',
+  'js/version.js',
   'js/art.js',
   'js/books.js',
   'js/words.js',

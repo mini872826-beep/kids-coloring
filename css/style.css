@@ -122,7 +122,17 @@ button {
 .music-btn.on { background: #c9f0b0; animation: bob 1.6s ease-in-out infinite; }
 .music-btn:active { transform: translateY(4px); }
 
-.cats { display: flex; gap: 12px; flex-wrap: wrap; margin: 0 4px 22px; }
+.cats { display: flex; flex-direction: column; gap: 12px; margin: 0 4px 22px; }
+.cat-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.story-row .cat { font-size: 19px; }
+.story-row .cat-icon { width: 38px; height: 38px; font-size: 22px; }
+.row-label {
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #1c6ea4;
+  padding: 0 4px;
+}
 .cat {
   display: flex;
   align-items: center;
@@ -233,6 +243,33 @@ button {
   font-weight: 700;
   font-size: 24px;
   text-shadow: 0 2px 0 rgba(0, 0, 0, .15);
+}
+
+.version {
+  position: relative;
+  z-index: 1;
+  text-align: right;
+  padding: 0 10px 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2b6a3a;
+  opacity: .75;
+}
+.toast {
+  position: fixed;
+  z-index: 30;
+  left: 50%;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  padding: 14px 26px;
+  border-radius: 999px;
+  background: #fff;
+  border: 4px solid #8fd16a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .2);
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  animation: popIn2 .4s cubic-bezier(.3, 1.5, .6, 1);
 }
 
 .pill {

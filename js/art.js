@@ -684,6 +684,58 @@
   const shepherd = kid('', '', '#4dabf7', '#3d2f1f') + `
     <path d="M560 540 L560 300 Q560 260 595 262 Q625 265 620 300" fill="none" stroke-width="10"/>`;
 
+  const grandma = kid('#9775fa', '', '#fff3bf', '#dee2e6') + `
+    <circle cx="400" cy="112" r="34" fill="#dee2e6"/>
+    <path d="M341 238 a24 24 0 1 0 48 0 a24 24 0 1 0 -48 0 M411 238 a24 24 0 1 0 48 0 a24 24 0 1 0 -48 0 M389 236 L411 236"/>
+    <path fill="#c98a4b" d="M560 545 L560 330"/><path d="M560 545 L560 330 Q560 300 585 300"/>`;
+
+  // 房子線稿：稻草、木頭、磚頭、外婆家
+  const houseArt = type => {
+    const col = { straw: ['#f6d365', '#e0b23f'], wood: ['#c98a4b', '#9c6332'], brick: ['#e8664f', '#b5442f'], grandma: ['#ffe8cc', '#e8590c'] }[type];
+    const deco = type === 'straw'
+      ? [190, 240, 290, 520, 570, 610].map(x => `<path d="M${x} 300 L${x + 10} 500"/>`).join('')
+      : type === 'wood'
+        ? [350, 400, 450].map(y => `<path d="M175 ${y} L625 ${y}"/>`).join('')
+        : type === 'brick'
+          ? [340, 380, 420, 460].map((y, i) => `<path d="M175 ${y} L625 ${y}"/>${[230, 300, 520, 590].map(x => `<path d="M${x + (i % 2) * 35} ${y - 40} L${x + (i % 2) * 35} ${y}"/>`).join('')}`).join('')
+          : '<path fill="#ff8fab" d="M200 330 Q215 300 230 330 Q215 345 200 330 Z"/><path fill="#ff8fab" d="M570 330 Q585 300 600 330 Q585 345 570 330 Z"/>';
+    return `
+      <rect x="470" y="110" width="60" height="110" fill="#adb5bd"/>
+      <rect x="175" y="290" width="450" height="240" fill="${col[0]}"/>
+      ${deco}
+      <path fill="${col[1]}" d="M130 305 L400 95 L670 305 Z"/>
+      <circle cx="400" cy="220" r="34" fill="#fff3a0"/>
+      <path fill="#7a4a22" d="M345 530 L345 420 Q345 370 400 370 Q455 370 455 420 L455 530 Z"/>
+      <circle cx="435" cy="455" r="8" fill="#ffd43b"/>
+      <rect x="205" y="350" width="100" height="90" rx="8" fill="#fff3a0"/>
+      <rect x="495" y="350" width="100" height="90" rx="8" fill="#fff3a0"/>
+      <path d="M255 350 L255 440 M205 395 L305 395 M545 350 L545 440 M495 395 L595 395"/>
+      ${ground(530)}`;
+  };
+
+  const trophy = `
+    ${sparkle(170, 150, 20)} ${sparkle(630, 130, 16)} ${sparkle(600, 330, 12)}
+    <path fill="#ffd43b" d="M290 130 Q220 130 225 200 Q232 270 320 280 L330 255 Q258 245 255 200 Q255 160 290 160 Z"/>
+    <path fill="#ffd43b" d="M510 130 Q580 130 575 200 Q568 270 480 280 L470 255 Q542 245 545 200 Q545 160 510 160 Z"/>
+    <path fill="#ffe066" d="M280 110 L520 110 L510 220 Q490 330 400 335 Q310 330 290 220 Z"/>
+    <path fill="#fff" d="M320 135 L345 135 L340 230 Q330 250 325 230 Z"/>
+    <rect x="375" y="330" width="50" height="70" fill="#fab005"/>
+    <rect x="300" y="400" width="200" height="40" rx="8" fill="#fab005"/>
+    <rect x="270" y="440" width="260" height="70" rx="10" fill="#8a5a2b"/>
+    <path fill="#ffe066" d="M400 160 L413 190 L445 193 L421 214 L428 246 L400 229 L372 246 L379 214 L355 193 L387 190 Z"/>
+    ${ground(512)}`;
+
+  const basket = `
+    <path d="M230 300 Q400 60 570 300" fill="none" stroke-width="16"/>
+    <path fill="#e8590c" d="M300 260 Q290 210 340 205 Q380 205 375 255 Z"/>
+    <path fill="#e03131" d="M370 250 Q365 200 410 200 Q455 205 445 255 Z"/>
+    <path fill="#ffd43b" d="M440 255 Q440 205 490 210 Q525 220 505 262 Z"/>
+    <path fill="#c98a4b" d="M200 280 L600 280 L560 500 Q555 520 535 520 L265 520 Q245 520 240 500 Z"/>
+    <path d="M215 350 L585 350 M228 420 L572 420 M300 280 L320 520 M400 280 L400 520 M500 280 L480 520"/>
+    <path fill="#ff8fab" d="M200 270 L600 270 L600 300 L200 300 Z"/>
+    ${[250, 330, 410, 490, 560].map(x => `<circle cx="${x}" cy="285" r="7" fill="#fff"/>`).join('')}
+    ${ground(522)}`;
+
   const DRAWINGS = [
     { id: 'car', cat: 'car', name: '小汽車', svg: car },
     { id: 'firetruck', cat: 'car', name: '消防車', svg: fireTruck },
@@ -695,16 +747,16 @@
     { id: 'heli', cat: 'car', name: '直升機', svg: heli },
     { id: 'cat', cat: 'animal', name: '小貓咪', svg: cat },
     { id: 'dog', cat: 'animal', name: '小狗狗', svg: dog },
-    { id: 'bunny', cat: 'animal', name: '小兔子', svg: bunny },
+    { id: 'bunny', cat: 'animal', name: '小兔子', svg: bunny, also: ['story-race'] },
     { id: 'lion', cat: 'animal', name: '小獅子', svg: lion },
-    { id: 'pig', cat: 'animal', name: '小豬', svg: pig },
+    { id: 'pig', cat: 'animal', name: '小豬', svg: pig, also: ['story-pigs'] },
     { id: 'elephant', cat: 'animal', name: '大象', svg: elephant },
     { id: 'bear', cat: 'animal', name: '小熊', svg: bear },
     { id: 'chick', cat: 'animal', name: '小雞', svg: chick },
-    { id: 'wolf', cat: 'animal', name: '大野狼', svg: wolf },
-    { id: 'sheep', cat: 'animal', name: '小綿羊', svg: sheep },
-    { id: 'redhood', cat: 'animal', name: '小紅帽', svg: redHood },
-    { id: 'shepherd', cat: 'animal', name: '放羊的孩子', svg: shepherd },
+    { id: 'wolf', cat: 'animal', name: '大野狼', svg: wolf, also: ['story-redhood', 'story-pigs', 'story-wolf'] },
+    { id: 'sheep', cat: 'animal', name: '小綿羊', svg: sheep, also: ['story-wolf'] },
+    { id: 'redhood', cat: 'animal', name: '小紅帽', svg: redHood, also: ['story-redhood'] },
+    { id: 'shepherd', cat: 'animal', name: '放羊的孩子', svg: shepherd, also: ['story-wolf'] },
     { id: 'giraffe', cat: 'animal', name: '長頸鹿', svg: giraffe },
     { id: 'trex', cat: 'dino', name: '霸王龍', svg: trex },
     { id: 'trike', cat: 'dino', name: '三角龍', svg: trike },
@@ -716,13 +768,21 @@
     { id: 'fish', cat: 'sea', name: '小丑魚', svg: fish },
     { id: 'octopus', cat: 'sea', name: '章魚', svg: octopus },
     { id: 'whale', cat: 'sea', name: '大鯨魚', svg: whale },
-    { id: 'turtle', cat: 'sea', name: '海龜', svg: turtle },
+    { id: 'turtle', cat: 'sea', name: '海龜', svg: turtle, also: ['story-race'] },
     { id: 'crab', cat: 'sea', name: '小螃蟹', svg: crab },
     { id: 'starfish', cat: 'sea', name: '海星', svg: starfish },
     { id: 'jelly', cat: 'sea', name: '水母', svg: jelly },
     { id: 'seahorse', cat: 'sea', name: '海馬', svg: seahorse },
     { id: 'shark', cat: 'sea', name: '小鯊魚', svg: shark },
     { id: 'dolphin', cat: 'sea', name: '海豚', svg: dolphin },
+    // 故事主題（有些角色同時出現在別的分類，用 also 標記）
+    { id: 'grandma', cat: 'story-redhood', name: '外婆', svg: grandma },
+    { id: 'grandma-house', cat: 'story-redhood', name: '外婆家', svg: houseArt('grandma') },
+    { id: 'basket', cat: 'story-redhood', name: '點心籃', svg: basket },
+    { id: 'straw-house', cat: 'story-pigs', name: '稻草屋', svg: houseArt('straw') },
+    { id: 'wood-house', cat: 'story-pigs', name: '木頭屋', svg: houseArt('wood') },
+    { id: 'brick-house', cat: 'story-pigs', name: '磚頭屋', svg: houseArt('brick') },
+    { id: 'trophy', cat: 'story-race', name: '獎盃', svg: trophy },
     { id: 'pumpkin', cat: 'halloween', name: '南瓜燈', svg: pumpkin },
     { id: 'ghost', cat: 'halloween', name: '小幽靈', svg: ghost },
     { id: 'bat', cat: 'halloween', name: '蝙蝠', svg: bat },
@@ -738,6 +798,10 @@
     { id: 'dino', name: '恐龍', icon: '🦖', color: '#69c24f', dark: '#4a9a35' },
     { id: 'sea', name: '海洋', icon: '🐠', color: '#4dabf7', dark: '#2b86d1' },
     { id: 'halloween', name: '萬聖節', icon: '🎃', color: '#7950f2', dark: '#5f3dc4' },
+    { id: 'story-redhood', group: 'story', name: '小紅帽', icon: '👧', color: '#f03e3e', dark: '#c92a2a' },
+    { id: 'story-pigs', group: 'story', name: '三隻小豬', icon: '🐷', color: '#f783ac', dark: '#d6336c' },
+    { id: 'story-race', group: 'story', name: '龜兔賽跑', icon: '🐢', color: '#20c997', dark: '#0ca678' },
+    { id: 'story-wolf', group: 'story', name: '狼來了', icon: '🐑', color: '#748ffc', dark: '#4c6ef5' },
     { id: 'free', name: '自由畫', icon: '🖼️', color: '#b197fc', dark: '#8b6fe0' },
   ];
 

@@ -92,12 +92,13 @@
 
     if (pref.tab === 'paint') {
       $('cats').hidden = false;
-      $('cats').innerHTML = CATEGORIES.map(c =>
-        `<button class="cat${c.id === pref.cat ? ' on' : ''}" data-cat="${c.id}" style="--c:${c.color};--cd:${c.dark}"><span class="cat-icon">${c.icon}</span>${c.name}</button>`).join('');
+      const chip = c => `<button class="cat${c.id === pref.cat ? ' on' : ''}" data-cat="${c.id}" style="--c:${c.color};--cd:${c.dark}"><span class="cat-icon">${c.icon}</span>${c.name}</button>`;
+      $('cats').innerHTML = `<div class="cat-row">${CATEGORIES.filter(c => !c.group).map(chip).join('')}</div>
+        <div class="cat-row story-row"><span class="row-label">📚 故事主題</span>${CATEGORIES.filter(c => c.group === 'story').map(chip).join('')}</div>`;
       const cat = CATEGORIES.find(c => c.id === pref.cat);
       const list = pref.cat === 'free'
         ? Blanks.list().slice().reverse().map(Blanks.drawing)
-        : DRAWINGS.filter(d => d.cat === pref.cat);
+        : DRAWINGS.filter(d => d.cat === pref.cat || (d.also || []).includes(pref.cat));
       $('grid').style.cssText = `--c:${cat.color};--cd:${cat.dark}`;
       const add = pref.cat === 'free'
         ? `<div class="card add" role="button" data-add="1" style="--i:0"><span class="thumb"><span class="blank">➕</span></span><div class="name">新增白紙</div></div>`
@@ -307,6 +308,17 @@
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
   }
+
+  /* ---------------- 版本：讓爸媽知道有沒有更新 ---------------- */
+  $('version').textContent = '版本：' + window.APP_VERSION;
+  const lastVersion = localStorage.getItem('version');
+  if (lastVersion && lastVersion !== window.APP_VERSION) {
+    const t = $('toast');
+    t.textContent = '🎉 已更新到最新版（' + window.APP_VERSION + '）';
+    t.hidden = false;
+    setTimeout(() => { t.hidden = true; }, 5000);
+  }
+  localStorage.setItem('version', window.APP_VERSION);
 
   route();
 })();
