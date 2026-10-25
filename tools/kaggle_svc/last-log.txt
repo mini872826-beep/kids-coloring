@@ -1,6 +1,6 @@
 $ nvidia-smi -L
-GPU 0: Tesla T4 (UUID: GPU-2c7557f7-44b5-5ee1-0b01-e7abbf1817e6)
-GPU 1: Tesla T4 (UUID: GPU-547c3919-7546-7e25-2a8c-c84886b1a563)
+GPU 0: Tesla T4 (UUID: GPU-c354a066-1733-e400-03bf-99f3df4b6032)
+GPU 1: Tesla T4 (UUID: GPU-0b24a8b9-bfbc-046c-fa59-b78f0682e6cc)
  
 $ git clone --depth 1 https://github.com/Plachtaa/seed-vc /kaggle/tmp/seed-vc
  Cloning into '/kaggle/tmp/seed-vc'...
@@ -17,45 +17,45 @@ Activate with: source /kaggle/tmp/venv/bin/activate
 
 $ uv pip install --python /kaggle/tmp/venv/bin/python torch==2.4.0 torchaudio==2.4.0 torchvision==0.19.0 --index-url https://download.pytorch.org/whl/cu121
  Using Python 3.10.22 environment at: /kaggle/tmp/venv
-Resolved 26 packages in 535ms
+Resolved 26 packages in 1.74s
+Downloading numpy (16.0MiB)
+Downloading nvidia-nvjitlink-cu12 (37.9MiB)
 Downloading nvidia-cudnn-cu12 (634.0MiB)
 Downloading nvidia-cublas-cu12 (391.6MiB)
-Downloading nvidia-nvjitlink-cu12 (37.9MiB)
-Downloading torch (762.1MiB)
-Downloading triton (199.7MiB)
-Downloading torchaudio (3.2MiB)
-Downloading nvidia-cusolver-cu12 (118.4MiB)
-Downloading pillow (6.6MiB)
 Downloading sympy (6.0MiB)
 Downloading networkx (1.6MiB)
-Downloading numpy (16.0MiB)
+Downloading torchaudio (3.2MiB)
 Downloading torchvision (6.7MiB)
- Downloaded torchaudio
- Downloaded torchvision
+Downloading pillow (6.6MiB)
+Downloading triton (199.7MiB)
+Downloading nvidia-cusolver-cu12 (118.4MiB)
 Downloading nvidia-cusparse-cu12 (186.9MiB)
 Downloading nvidia-cuda-nvrtc-cu12 (22.6MiB)
 Downloading nvidia-cufft-cu12 (116.0MiB)
-Downloading nvidia-cuda-cupti-cu12 (13.5MiB)
 Downloading nvidia-curand-cu12 (53.9MiB)
+Downloading nvidia-cuda-cupti-cu12 (13.5MiB)
 Downloading nvidia-nccl-cu12 (168.1MiB)
+ Downloaded torchaudio
+Downloading torch (762.1MiB)
  Downloaded networkx
+ Downloaded sympy
+ Downloaded torchvision
+ Downloaded pillow
  Downloaded nvidia-nvjitlink-cu12
+ Downloaded numpy
  Downloaded nvidia-cuda-cupti-cu12
  Downloaded nvidia-cuda-nvrtc-cu12
- Downloaded sympy
- Downloaded pillow
- Downloaded numpy
- Downloaded nvidia-curand-cu12
  Downloaded nvidia-cusolver-cu12
+ Downloaded nvidia-curand-cu12
  Downloaded nvidia-cufft-cu12
- Downloaded nvidia-cusparse-cu12
  Downloaded nvidia-nccl-cu12
+ Downloaded nvidia-cusparse-cu12
  Downloaded triton
  Downloaded nvidia-cublas-cu12
- Downloaded torch
  Downloaded nvidia-cudnn-cu12
-Prepared 26 packages in 29.65s
-Installed 26 packages in 258ms
+ Downloaded torch
+Prepared 26 packages in 29.49s
+Installed 26 packages in 271ms
  + filelock==3.32.3
  + fsspec==2026.7.0
  + jinja2==3.1.6
@@ -84,8 +84,8 @@ Installed 26 packages in 258ms
  + typing-extensions==4.16.0
 
 $ uv pip install --python /kaggle/tmp/venv/bin/python -r /kaggle/tmp/req.txt torch==2.4.0 torchaudio==2.4.0 --extra-index-url https://download.pytorch.org/whl/cu121 --index-strategy unsafe-best-match
-  1 package in 19ms
-Installed 118 packages in 237ms
+  1 package in 18ms
+Installed 118 packages in 236ms
  + absl-py==2.5.1
  + accelerate==1.15.0
  + aliyun-python-sdk-core==2.16.1
@@ -208,9 +208,9 @@ Installed 118 packages in 237ms
 
 $ uv pip install --python /kaggle/tmp/venv/bin/python julius dora-search openunmix lameenc
  Using Python 3.10.22 environment at: /kaggle/tmp/venv
-Resolved 36 packages in 408ms
-Prepared 6 packages in 59ms
-Installed 6 packages in 4ms
+Resolved 36 packages in 525ms
+Prepared 6 packages in 13ms
+Installed 6 packages in 5ms
  + dora-search==0.1.13
  + lameenc==1.9.0
  + openunmix==1.3.0
@@ -218,740 +218,248 @@ Installed 6 packages in 4ms
  + submitit==1.5.4
  + treetable==0.2.6
 
-$ uv pip install --python /kaggle/tmp/venv/bin/python --no-deps demucs
+$ uv pip install --python /kaggle/tmp/venv/bin/python --no-deps demucs==4.0.1
  Using Python 3.10.22 environment at: /kaggle/tmp/venv
-Resolved 1 package in 236ms
-Prepared 1 package in 262ms
-Installed 1 package in 3ms
- + demucs==4.1.0
+Resolved 1 package in 58ms
+   Building demucs==4.0.1
+      Built demucs==4.0.1
+Prepared 1 package in 770ms
+Installed 1 package in 2ms
+ + demucs==4.0.1
 
-setup 53s
-gen exit 0
-done
-D little-star-56acef75.mp3 Traceback (most recent call last):
+setup 58s
+loaded 48s
+FAILED little-star-56acef75.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED two-tigers-9bb47a0c.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED birthday-7d719ae2.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED old-farm-30e11e6d.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED pull-carrot-2dac3cb0.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED mom-dad-5f854682.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED sheep-home-bb9e7d0c.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED tricycle-b9ea5a75.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED london-bridge-b711692e.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED brush-song-8c36a8e2.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED wash-song-977812d3.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED number-song-c395db5c.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED color-song-eb097dca.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED goodnight-song-3d79b01e.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED animal-sounds-ccb0f342.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED vehicle-song-eda22c40.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED rain-song-ffe6d332.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_little-star-new-beeee6d3.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-twinkle-846c4cc1.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-abc-4db2b2b0.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-baa-6ff88d63.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-row-d164e97f.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-mary-cb5113e7.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-london-504b00ee.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-farm-a598c5d5.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-john-e904357d.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-humpty-06d209d4.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-hickory-0a6b244c.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-rain-db7e0728.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-spider-97a9cc28.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-ducks-c94065b6.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-happy-40fce654.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-birthday-c824b2ab.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 FAILED en-jack-0b5101f2.mp3 Traceback (most recent call last):
   File "/kaggle/tmp/gen.py", line 59, in <module>
     args.source, args.target, args.output = vox, reference(job['ref']), odir
-  File "/kaggle/tmp/gen.py", line 35, in reference
-    run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-  File "/kaggle/tmp/gen.py", line 15, in run
-    raise RuntimeError(' '.join(cmd) + '\n' + r.stderr[-1500:])
-RuntimeError: /kaggle/tmp/venv/bin/python -m demucs --two-stems vocals -n htdemucs -o /kaggle/tmp/sep /kaggle/tmp/dl/audio_sing-ai_en-twinkle-new-191155e6.mp3
-Traceback (most recent call last):
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/__main__.py", line 7, in <module>
-    from .separate import main
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/separate.py", line 13, in <module>
-    from .api import Separator, save_audio, list_models
-  File "/kaggle/tmp/venv/lib/python3.10/site-packages/demucs/api.py", line 25, in <module>
-    import sphn
-ModuleNotFoundError: No module named 'sphn'
-
+  File "/kaggle/tmp/gen.py", line 36, in reference
+    src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+IndexError: list index out of range
 
 gen done
+gen exit 0
+done
