@@ -18,7 +18,10 @@ async def edge():
     import edge_tts
     for voice in ['zh-TW-HsiaoYuNeural', 'zh-TW-HsiaoChenNeural', 'zh-TW-YunJheNeural']:
         for i, s in enumerate(SENTENCES):
-            await edge_tts.Communicate(s, voice, rate='-8%').save(f'trial/{voice.split("-")[2]}-{i + 1}.mp3')
+            try:
+                await edge_tts.Communicate(s, voice, rate='-8%').save(f'trial/{voice.split("-")[2]}-{i + 1}.mp3')
+            except Exception as e:
+                print('skip', voice, i + 1, e)
 
 
 def breezy():
@@ -34,12 +37,15 @@ def breezy():
     prompt = '在密碼學中，加密是將明文資訊改變為難以讀取的密文內容，使之不可讀的方法。只有擁有解密方法的對象，經由解密過程，才能將密文還原為正常可讀的內容。'
     for i, s in enumerate(SENTENCES):
         t = time.time()
+        if i == 2 and time.time() - t0 > 2400:
+            break   # 太慢就先停，至少有前兩句可以聽
         single_inference('data/example.wav', s, f'../trial/breezy-{i + 1}.wav', cosy, conv, prompt)
         print('breezy %d: %.0fs' % (i + 1, time.time() - t), flush=True)
     os.chdir('..')
     for i in range(len(SENTENCES)):
-        mp3(f'trial/breezy-{i + 1}.wav', f'breezy-{i + 1}')
-        os.remove(f'trial/breezy-{i + 1}.wav')
+        if os.path.exists(f'trial/breezy-{i + 1}.wav'):
+            mp3(f'trial/breezy-{i + 1}.wav', f'breezy-{i + 1}')
+            os.remove(f'trial/breezy-{i + 1}.wav')
 
 
 if sys.argv[1] == 'edge':
