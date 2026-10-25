@@ -29,6 +29,15 @@ def breezy():
     sys.path.insert(0, bv)
     sys.path.insert(0, os.path.join(bv, 'third_party', 'Matcha-TTS'))
     os.chdir(bv)
+    # 新版 onnxruntime 一定要指定 providers，g2pw 沒寫：幫它預設用 CPU
+    import onnxruntime as ort
+    _Session = ort.InferenceSession
+
+    class Session(_Session):
+        def __init__(self, *a, **k):
+            k.setdefault('providers', ['CPUExecutionProvider'])
+            super().__init__(*a, **k)
+    ort.InferenceSession = Session
     from single_inference import single_inference, CustomCosyVoice
     from g2pw import G2PWConverter
     t0 = time.time()
