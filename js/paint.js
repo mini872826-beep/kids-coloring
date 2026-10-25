@@ -107,7 +107,7 @@
         timer = setInterval(schedule, 100);
         // 念字、講故事的時候把音樂調小聲
         duckTimer = setInterval(() => {
-          const talking = 'speechSynthesis' in window && speechSynthesis.speaking;
+          const talking = Voice.busy();
           master.gain.setTargetAtTime(talking ? .02 : .07, ac.currentTime, .25);
         }, 250);
       } catch (e) { /* 沒有聲音也不影響 */ }
@@ -140,16 +140,19 @@
     };
   })();
 
-  /* ---------------- 念出文字（幫小朋友認字） ---------------- */
+  /* ---------------- 念出文字（幫小朋友認字） ----------------
+   * 先找 audio/ 裡用 AI 聲音錄好的 mp3（GitHub 自動產生，見 tools/gen_voice.py），
+   * 找不到才用 iPad 內建的語音。
+   */
   const Voice = (() => {
-    const ok = 'speechSynthesis' in window;
+    const tts = 'speechSynthesis' in window;
     let voice = null;
     function pick() {
       const vs = speechSynthesis.getVoices();
       voice = vs.find(v => /zh[-_]TW/i.test(v.lang)) || vs.find(v => /zh[-_]HK/i.test(v.lang))
         || vs.find(v => /^zh/i.test(v.lang)) || null;
     }
-    if (ok) {
+    if (tts) {
       pick();
       speechSynthesis.addEventListener?.('voiceschanged', pick);
     }
@@ -161,40 +164,72 @@
       u.pitch = 1.15;
       return u;
     }
-    return {
-      ok,
-      utter,
-      say(text) {
-        if (!ok) return;
-        speechSynthesis.cancel();
-        speechSynthesis.speak(utter(text));
+
+    let index = {};
+    fetch('audio/index.json').then(r => r.ok ? r.json() : {}).then(j => { index = j; setTimeout(precache, 4000); }).catch(() => {});
+    // 背景慢慢把音檔存起來，沒網路也能念
+    async function precache() {
+      if (!('caches' in window)) return;
+      const c = await caches.open('kids-coloring');
+      for (const f of new Set(Object.values(index))) {
+        const url = 'audio/' + f;
+        try { if (!(await c.match(url))) await c.add(url); } catch (e) { return; }
+      }
+    }
+
+    const au = new Audio();
+    au.preload = 'auto';
+    let playing = false, token = 0;
+    // iPad 規定第一次播放要手指點擊，先播一段無聲的把它解鎖
+    document.addEventListener('pointerdown', () => {
+      au.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+      au.play().catch(() => {});
+    }, { once: true });
+
+    function fallback(text, done) {
+      if (!tts) return done();
+      const u = utter(text);
+      u.onend = u.onerror = done;
+      speechSynthesis.speak(u);
+    }
+    function one(text, done) {
+      const f = index[text];
+      if (!f) return fallback(text, done);
+      playing = true;
+      au.onended = () => { playing = false; done(); };
+      au.onerror = () => { playing = false; fallback(text, done); };
+      au.src = 'audio/' + f;
+      au.play().catch(() => { playing = false; au.onended = au.onerror = null; fallback(text, done); });
+    }
+
+    const api = {
+      ok: true,
+      // 依序念一串句子，全部念完呼叫 onend
+      speak(list, onend) {
+        api.cancel();
+        const my = ++token;
+        let i = 0;
+        const next = () => {
+          if (my !== token) return;
+          if (i >= list.length) return onend && onend();
+          one(list[i++], next);
+        };
+        next();
       },
-      cancel() { if (ok) speechSynthesis.cancel(); },
+      say(text) { api.speak([text]); },
+      cancel() {
+        token++;
+        au.onended = au.onerror = null;
+        au.pause();
+        playing = false;
+        if (tts) speechSynthesis.cancel();
+      },
+      busy() { return playing || (tts && speechSynthesis.speaking); },
     };
+    return api;
   })();
 
-  // 顏色名字：照色相、深淺算出來，例如「淺藍色」「深綠色」
-  function colorName(hex) {
-    const [r, g, b] = hexToRgb(hex).map(v => v / 255);
-    const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2, d = max - min;
-    const sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
-    if (sat < .18 || d < .08) return l > .93 ? '白色' : l < .12 ? '黑色' : l > .7 ? '淺灰色' : l < .4 ? '深灰色' : '灰色';
-    let h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
-    h = (h * 60 + 360) % 360;
-    let name;
-    if (h < 12 || h >= 345) name = '紅色';
-    else if (h < 42) name = l < .45 ? '咖啡色' : '橘色';
-    else if (h < 68) name = l < .4 ? '橄欖綠' : '黃色';
-    else if (h < 160) name = '綠色';
-    else if (h < 195) name = '青色';
-    else if (h < 250) name = '藍色';
-    else if (h < 290) name = '紫色';
-    else name = '粉紅色';
-    if (name === '咖啡色' || name === '橄欖綠') return name;
-    if (l > .74) return (name === '紅色' ? '粉紅色' : '淺' + name);
-    if (l < .32) return '深' + name;
-    return name;
-  }
+  const { COLORS, colorName, BRUSHES } = window.WORDS;
 
   /* ---------------- 本地保存（IndexedDB，作品不會上傳到任何地方） ---------------- */
   const Store = (() => {
@@ -217,16 +252,6 @@
     };
   })();
 
-  /* ---------------- 顏色：8 列 x 7 行，和參考圖一樣 ---------------- */
-  const COLORS = [
-    '#ff1f1f', '#ff9d1f', '#ffee00', '#2e8b1f', '#29b6f6', '#0019ff', '#7b1fd6', '#5a5a5a',
-    '#c41414', '#ff6d00', '#ffc400', '#145214', '#1976d2', '#0a0f8c', '#3b0f8c', '#111111',
-    '#f0625a', '#ff9f73', '#ffd633', '#33c41f', '#4dd0e1', '#2962ff', '#6a5cf0', '#a8a8a8',
-    '#f8b8c0', '#ffd9a8', '#fff09a', '#c8ff7a', '#b2f0f0', '#b3d4ff', '#c5b5f5', '#ffffff',
-    '#f06ad8', '#f7c060', '#99cc0f', '#7ddba0', '#36cfc0', '#2f8de0', '#b073f0', '#c9c5bf',
-    '#e0249c', '#cc8a2e', '#b0b010', '#2fae8a', '#2aa2b8', '#2148c4', '#8e3fe0', '#9c9890',
-    '#b5157a', '#6b2e10', '#5b7a10', '#1d8a72', '#1b7a8a', '#1e3f8a', '#5a2a80', '#5f5d58',
-  ];
 
   /* ---------------- 筆刷圖標（會跟著當前顏色變色） ---------------- */
   // 每支笔都有描边、亮面、暗面，看起来立体一点
@@ -301,17 +326,6 @@
       <rect x="66" y="15" width="50" height="16" rx="8" fill="#6c7a89"/>
       <rect x="70" y="18" width="42" height="4" rx="2" ${HI}/></g>`,
   };
-  const BRUSHES = [
-    { id: 'bucket', name: '油漆桶' },
-    { id: 'marker', name: '馬克筆' },
-    { id: 'crayon', name: '蠟筆' },
-    { id: 'pencil', name: '鉛筆' },
-    { id: 'water', name: '水彩筆' },
-    { id: 'spray', name: '噴漆' },
-    { id: 'glitter', name: '閃粉筆' },
-    { id: 'rainbow', name: '彩虹筆' },
-    { id: 'pattern', name: '花紋筆' },
-  ];
   const ERASER_ICON = `<svg viewBox="0 0 100 100"><g transform="rotate(-32 50 50)" stroke="#3d2f1f" stroke-width="3" stroke-linejoin="round">
     <path d="M14 46 L86 46 L86 70 Q86 76 80 76 L20 76 Q14 76 14 70 Z" fill="#c2577a"/>
     <path d="M50 46 L86 46 L86 70 Q86 76 80 76 L50 76 Z" fill="#3f5bc4"/>

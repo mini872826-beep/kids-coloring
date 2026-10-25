@@ -1,0 +1,45 @@
+# 自動配音：有新的句子就用 AI 聲音錄成 mp3，推回 main，網站會自動更新
+name: 產生配音
+
+on:
+  push:
+    branches: [main]
+    paths: ['js/**', 'tools/**', '.github/workflows/voice.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: voice
+  cancel-in-progress: false
+
+jobs:
+  voice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install edge-tts
+      - run: node tools/phrases.js > "$RUNNER_TEMP/phrases.json"
+      - run: python tools/gen_voice.py "$RUNNER_TEMP/phrases.json"
+      - name: 推回 main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio
+          if git diff --cached --quiet; then echo "沒有新的配音"; exit 0; fi
+          git commit -m "Update voice audio"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          # 用 GITHUB_TOKEN 推的不會自動觸發 Pages，手動叫它重建
+          curl -sS -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || true

@@ -1,0 +1,67 @@
+/* 會被念出來的字：顏色、筆刷名字、固定用語。
+ * 這個檔案不碰畫面，所以 GitHub 自動配音（tools/phrases.js）也讀得到。
+ */
+(function () {
+  function hexToRgb(h) {
+    const n = parseInt(h.slice(1), 16);
+    return [n >> 16 & 255, n >> 8 & 255, n & 255];
+  }
+
+  // 顏色名字：照色相、深淺算出來，例如「淺藍色」「深綠色」
+  function colorName(hex) {
+    const [r, g, b] = hexToRgb(hex).map(v => v / 255);
+    const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2, d = max - min;
+    const sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+    if (sat < .18 || d < .08) return l > .93 ? '白色' : l < .12 ? '黑色' : l > .7 ? '淺灰色' : l < .4 ? '深灰色' : '灰色';
+    let h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+    h = (h * 60 + 360) % 360;
+    let name;
+    if (h < 12 || h >= 345) name = '紅色';
+    else if (h < 42) name = l < .45 ? '咖啡色' : '橘色';
+    else if (h < 68) name = l < .4 ? '橄欖綠' : '黃色';
+    else if (h < 160) name = '綠色';
+    else if (h < 195) name = '青色';
+    else if (h < 250) name = '藍色';
+    else if (h < 290) name = '紫色';
+    else name = '粉紅色';
+    if (name === '咖啡色' || name === '橄欖綠') return name;
+    if (l > .74) return (name === '紅色' ? '粉紅色' : '淺' + name);
+    if (l < .32) return '深' + name;
+    return name;
+  }
+
+  /* ---------------- 顏色：8 列 x 7 行，和參考圖一樣 ---------------- */
+  const COLORS = [
+    '#ff1f1f', '#ff9d1f', '#ffee00', '#2e8b1f', '#29b6f6', '#0019ff', '#7b1fd6', '#5a5a5a',
+    '#c41414', '#ff6d00', '#ffc400', '#145214', '#1976d2', '#0a0f8c', '#3b0f8c', '#111111',
+    '#f0625a', '#ff9f73', '#ffd633', '#33c41f', '#4dd0e1', '#2962ff', '#6a5cf0', '#a8a8a8',
+    '#f8b8c0', '#ffd9a8', '#fff09a', '#c8ff7a', '#b2f0f0', '#b3d4ff', '#c5b5f5', '#ffffff',
+    '#f06ad8', '#f7c060', '#99cc0f', '#7ddba0', '#36cfc0', '#2f8de0', '#b073f0', '#c9c5bf',
+    '#e0249c', '#cc8a2e', '#b0b010', '#2fae8a', '#2aa2b8', '#2148c4', '#8e3fe0', '#9c9890',
+    '#b5157a', '#6b2e10', '#5b7a10', '#1d8a72', '#1b7a8a', '#1e3f8a', '#5a2a80', '#5f5d58',
+  ];
+
+  const BRUSHES = [
+    { id: 'bucket', name: '油漆桶' },
+    { id: 'marker', name: '馬克筆' },
+    { id: 'crayon', name: '蠟筆' },
+    { id: 'pencil', name: '鉛筆' },
+    { id: 'water', name: '水彩筆' },
+    { id: 'spray', name: '噴漆' },
+    { id: 'glitter', name: '閃粉筆' },
+    { id: 'rainbow', name: '彩虹筆' },
+    { id: 'pattern', name: '花紋筆' },
+  ];
+
+  // 程式裡固定會念的句子
+  const FIXED = [
+    '塗顏色', '聽故事', '新的白紙', '畫好了，好棒！', '太棒啦，讀完啦！', '橡皮擦', '全部擦掉嗎？',
+    '細細的', '中等的', '粗粗的', '不畫出線外，打開', '不畫出線外，關掉', '音樂開', '音樂關',
+  ];
+  // 所有可能的顏色名字（自選顏色也會落在這些裡面）
+  const base = ['紅色', '橘色', '黃色', '綠色', '青色', '藍色', '紫色', '粉紅色'];
+  const COLOR_NAMES = ['白色', '黑色', '灰色', '淺灰色', '深灰色', '咖啡色', '橄欖綠',
+    ...base, ...base.map(n => '淺' + n), ...base.map(n => '深' + n)];
+
+  window.WORDS = { COLORS, colorName, BRUSHES, FIXED, COLOR_NAMES };
+})();

@@ -7,6 +7,7 @@ const FILES = [
   'css/style.css',
   'js/art.js',
   'js/books.js',
+  'js/words.js',
   'js/paint.js',
   'js/app.js',
   'manifest.webmanifest',

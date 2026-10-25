@@ -231,7 +231,7 @@
 
   // iPad 規定第一次發聲必須在手指點擊時，所以點書本那一下先"解鎖"語音
   function unlockSpeech() {
-    if (!Voice.ok) return;
+    if (!('speechSynthesis' in window)) return;
     const u = new SpeechSynthesisUtterance(' ');
     u.volume = 0;
     speechSynthesis.speak(u);
@@ -243,7 +243,7 @@
     stopSpeaking();
     const id = ++speakId;
     // 第一頁先念書名
-    const text = (sayTitle && pageIdx === 0 ? book.title + '。' : '') + book.pages[pageIdx].text;
+    const list = (sayTitle && pageIdx === 0 ? [book.title] : []).concat(book.pages[pageIdx].text);
     sayTitle = false;
     const txt = $('text');
     let finished = false;
@@ -255,13 +255,9 @@
       if (auto) autoTimer = setTimeout(() => turn(1), 1500);
     };
     txt.classList.add('reading');
-    // 保險：就算語音沒反應（沒聲音、被系統擋住），時間到也會自動翻頁
-    safetyTimer = setTimeout(done, text.length * 380 + 2500);
-    if (!Voice.ok) return;
-    const u = Voice.utter(text);
-    u.onend = done;
-    u.onerror = done;
-    speechSynthesis.speak(u);
+    // 保險：就算聲音沒反應（沒聲音、被系統擋住），時間到也會自動翻頁
+    safetyTimer = setTimeout(done, list.join('').length * 400 + 3000);
+    Voice.speak(list, done);
   }
   function stopSpeaking() {
     speakId++;
