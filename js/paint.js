@@ -1,13 +1,13 @@
-/* 涂色引擎
- * 三层画布：cPaint（颜色）→ cStroke（马克笔正在画的那一笔）→ cLines（黑色线稿，永远在最上面）
- * 所以涂色永远不会盖住线条。
+/* 塗色引擎
+ * 三層畫布：cPaint（顏色）→ cStroke（馬克筆正在畫的那一筆）→ cLines（黑色線稿，永遠在最上面）
+ * 所以塗色永遠不會蓋住線條。
  */
 (function () {
-  const W = 1200, H = 900;           // 画布实际像素（4:3）
+  const W = 1200, H = 900;           // 畫布實際像素（4:3）
   const UNDO_MAX = 12;
   const SIZES = [10, 22, 42];        // 小 / 中 / 大
 
-  /* ---------------- 声音（用 WebAudio 现场合成，不用音频文件） ---------------- */
+  /* ---------------- 聲音（用 WebAudio 現場合成，不用音頻文件） ---------------- */
   const Sound = (() => {
     let ac;
     const ctx = () => (ac ||= new (window.AudioContext || window.webkitAudioContext)());
@@ -22,7 +22,7 @@
         g.gain.exponentialRampToValueAtTime(.001, t + dur);
         o.connect(g).connect(a.destination);
         o.start(t); o.stop(t + dur);
-      } catch (e) { /* 没声音也不影响玩 */ }
+      } catch (e) { /* 沒聲音也不影響玩 */ }
     }
     function noise(dur, vol = .2, freq = 1200) {
       try {
@@ -47,7 +47,63 @@
     return { play: name => sounds[name] && sounds[name]() };
   })();
 
-  /* ---------------- 本地保存（IndexedDB，作品不会上传到任何地方） ---------------- */
+  /* ---------------- 念出文字（幫小朋友認字） ---------------- */
+  const Voice = (() => {
+    const ok = 'speechSynthesis' in window;
+    let voice = null;
+    function pick() {
+      const vs = speechSynthesis.getVoices();
+      voice = vs.find(v => /zh[-_]TW/i.test(v.lang)) || vs.find(v => /zh[-_]HK/i.test(v.lang))
+        || vs.find(v => /^zh/i.test(v.lang)) || null;
+    }
+    if (ok) {
+      pick();
+      speechSynthesis.addEventListener?.('voiceschanged', pick);
+    }
+    function utter(text) {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = voice ? voice.lang : 'zh-TW';
+      if (voice) u.voice = voice;
+      u.rate = .85;
+      u.pitch = 1.15;
+      return u;
+    }
+    return {
+      ok,
+      utter,
+      say(text) {
+        if (!ok) return;
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utter(text));
+      },
+      cancel() { if (ok) speechSynthesis.cancel(); },
+    };
+  })();
+
+  // 顏色名字：照色相、深淺算出來，例如「淺藍色」「深綠色」
+  function colorName(hex) {
+    const [r, g, b] = hexToRgb(hex).map(v => v / 255);
+    const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2, d = max - min;
+    const sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+    if (sat < .18 || d < .08) return l > .93 ? '白色' : l < .12 ? '黑色' : l > .7 ? '淺灰色' : l < .4 ? '深灰色' : '灰色';
+    let h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+    h = (h * 60 + 360) % 360;
+    let name;
+    if (h < 12 || h >= 345) name = '紅色';
+    else if (h < 42) name = l < .45 ? '咖啡色' : '橘色';
+    else if (h < 68) name = l < .4 ? '橄欖綠' : '黃色';
+    else if (h < 160) name = '綠色';
+    else if (h < 195) name = '青色';
+    else if (h < 250) name = '藍色';
+    else if (h < 290) name = '紫色';
+    else name = '粉紅色';
+    if (name === '咖啡色' || name === '橄欖綠') return name;
+    if (l > .74) return (name === '紅色' ? '粉紅色' : '淺' + name);
+    if (l < .32) return '深' + name;
+    return name;
+  }
+
+  /* ---------------- 本地保存（IndexedDB，作品不會上傳到任何地方） ---------------- */
   const Store = (() => {
     let dbp;
     const db = () => (dbp ||= new Promise((res, rej) => {
@@ -68,7 +124,7 @@
     };
   })();
 
-  /* ---------------- 颜色：8 列 x 7 行，和参考图一样 ---------------- */
+  /* ---------------- 顏色：8 列 x 7 行，和參考圖一樣 ---------------- */
   const COLORS = [
     '#ff1f1f', '#ff9d1f', '#ffee00', '#2e8b1f', '#29b6f6', '#0019ff', '#7b1fd6', '#5a5a5a',
     '#c41414', '#ff6d00', '#ffc400', '#145214', '#1976d2', '#0a0f8c', '#3b0f8c', '#111111',
@@ -79,7 +135,7 @@
     '#b5157a', '#6b2e10', '#5b7a10', '#1d8a72', '#1b7a8a', '#1e3f8a', '#5a2a80', '#5f5d58',
   ];
 
-  /* ---------------- 笔刷图标（会跟着当前颜色变色） ---------------- */
+  /* ---------------- 筆刷圖標（會跟著當前顏色變色） ---------------- */
   const ICON = {
     bucket: c => `<path d="M30 8 L60 8 L56 36 L34 36 Z" fill="${c}" stroke="#555" stroke-width="2.5"/><ellipse cx="45" cy="8" rx="15" ry="4" fill="${shade(c, -.25)}" stroke="#555" stroke-width="2.5"/><path d="M30 10 Q20 10 22 24" fill="none" stroke="#777" stroke-width="3"/><path d="M60 14 Q72 18 70 30 Q66 38 64 30 Q64 22 58 22" fill="${c}" stroke="#555" stroke-width="2"/><rect x="78" y="14" width="40" height="18" rx="5" fill="#d9d9d9" stroke="#999" stroke-width="2"/>`,
     marker: c => `<path d="M6 23 L22 14 L22 32 Z" fill="${c}" stroke="#555" stroke-width="2"/><rect x="22" y="11" width="22" height="24" rx="3" fill="#9e9e9e"/><rect x="44" y="8" width="72" height="30" rx="5" fill="${c}"/><rect x="48" y="12" width="64" height="6" rx="3" fill="#fff" opacity=".35"/>`,
@@ -93,14 +149,14 @@
   };
   const BRUSHES = [
     { id: 'bucket', name: '油漆桶' },
-    { id: 'marker', name: '马克笔' },
-    { id: 'crayon', name: '蜡笔' },
-    { id: 'pencil', name: '铅笔' },
-    { id: 'water', name: '水彩笔' },
-    { id: 'spray', name: '喷漆' },
-    { id: 'glitter', name: '闪粉笔' },
-    { id: 'rainbow', name: '彩虹笔' },
-    { id: 'pattern', name: '花纹笔' },
+    { id: 'marker', name: '馬克筆' },
+    { id: 'crayon', name: '蠟筆' },
+    { id: 'pencil', name: '鉛筆' },
+    { id: 'water', name: '水彩筆' },
+    { id: 'spray', name: '噴漆' },
+    { id: 'glitter', name: '閃粉筆' },
+    { id: 'rainbow', name: '彩虹筆' },
+    { id: 'pattern', name: '花紋筆' },
   ];
   const ERASER_ICON = `<svg viewBox="0 0 100 100"><g transform="rotate(-35 50 50)"><rect x="14" y="32" width="72" height="36" rx="8" fill="#fff" stroke="#8a8fd6" stroke-width="4"/><rect x="50" y="32" width="36" height="36" rx="6" fill="#6b6fd6"/></g></svg>`;
 
@@ -110,12 +166,12 @@
     const n = parseInt(h.slice(1), 16);
     return [n >> 16 & 255, n >> 8 & 255, n & 255];
   }
-  function shade(h, amt) { // amt>0 变浅，amt<0 变深
+  function shade(h, amt) { // amt>0 變淺，amt<0 變深
     const [r, g, b] = hexToRgb(h).map(v => Math.round(amt > 0 ? v + (255 - v) * amt : v * (1 + amt)));
     return `rgb(${r},${g},${b})`;
   }
 
-  /* ---------------- 主体 ---------------- */
+  /* ---------------- 主體 ---------------- */
   const $ = id => document.getElementById(id);
   const stage = $('stage'), board = $('board');
   const cPaint = $('cPaint'), cStroke = $('cStroke'), cLines = $('cLines');
@@ -135,7 +191,7 @@
   };
   let lastTool = state.tool !== 'eraser' ? state.tool : 'bucket';
 
-  /* 画布大小：在可用空间里保持 4:3 */
+  /* 畫布大小：在可用空間裡保持 4:3 */
   function fit() {
     const r = board.getBoundingClientRect();
     const pad = 20;
@@ -145,7 +201,7 @@
   }
   new ResizeObserver(fit).observe(board);
 
-  /* ---------- 线稿：渲染成黑线 + 透明背景 ---------- */
+  /* ---------- 線稿：渲染成黑線 + 透明背景 ---------- */
   function loadLines(drawing) {
     lctx.clearRect(0, 0, W, H);
     state.barrier.fill(0);
@@ -156,7 +212,7 @@
         lctx.drawImage(img, 0, 0, W, H);
         const id = lctx.getImageData(0, 0, W, H), d = id.data;
         for (let i = 0, p = 0; i < d.length; i += 4, p++) {
-          // 越黑越不透明，白色（被遮住线条用的白底）变透明
+          // 越黑越不透明，白色（被遮住線條用的白底）變透明
           const dark = 255 - (d[i] + d[i + 1] + d[i + 2]) / 3;
           const a = Math.min(255, d[i + 3] * dark / 200);
           d[i] = d[i + 1] = d[i + 2] = 34;
@@ -197,7 +253,7 @@
     });
   }
 
-  /* ---------- 撤销 ---------- */
+  /* ---------- 撤銷 ---------- */
   function snapshot() {
     state.undo.push(pctx.getImageData(0, 0, W, H));
     if (state.undo.length > UNDO_MAX) state.undo.shift();
@@ -219,7 +275,7 @@
     scheduleSave();
   }
 
-  /* ---------- 自动保存 ---------- */
+  /* ---------- 自動保存 ---------- */
   let saveTimer;
   function scheduleSave() {
     state.dirty = true;
@@ -250,12 +306,12 @@
     return c;
   }
 
-  /* ---------- 油漆桶：按线稿边界填满一块 ---------- */
+  /* ---------- 油漆桶：按線稿邊界填滿一塊 ---------- */
   function bucket(sx, sy) {
     sx = Math.floor(sx); sy = Math.floor(sy);
     if (sx < 0 || sy < 0 || sx >= W || sy >= H) return;
     const bar = state.barrier;
-    if (bar[sy * W + sx]) return;   // 点到线上了
+    if (bar[sy * W + sx]) return;   // 點到線上了
     snapshot();
     const mask = new Uint8Array(W * H);
     const open = i => !mask[i] && !bar[i];
@@ -280,7 +336,7 @@
         x++; i++;
       }
     }
-    // 往线条下面多涂 3 像素，避免边缘留白
+    // 往線條下面多塗 3 像素，避免邊緣留白
     for (let pass = 0; pass < 3; pass++) {
       const add = [];
       for (let i = W; i < W * H - W; i++) {
@@ -302,13 +358,13 @@
     scheduleSave();
   }
 
-  /* ---------- 各种笔 ---------- */
+  /* ---------- 各種筆 ---------- */
   const rnd = (a, b) => a + Math.random() * (b - a);
   let pat = { key: '', crayon: null, pattern: null };
   function patterns() {
     const key = state.color;
     if (pat.key === key) return pat;
-    // 蜡笔：带小洞的纹理
+    // 蠟筆：帶小洞的紋理
     const c1 = document.createElement('canvas');
     c1.width = c1.height = 64;
     const x1 = c1.getContext('2d');
@@ -316,7 +372,7 @@
     x1.fillRect(0, 0, 64, 64);
     x1.globalCompositeOperation = 'destination-out';
     for (let i = 0; i < 420; i++) x1.fillRect(Math.random() * 64, Math.random() * 64, rnd(1, 2.5), rnd(1, 2.5));
-    // 花纹：浅底 + 波浪线
+    // 花紋：淺底 + 波浪線
     const c2 = document.createElement('canvas');
     c2.width = c2.height = 48;
     const x2 = c2.getContext('2d');
@@ -377,7 +433,7 @@
     ctx.stroke();
   }
 
-  // 沿着线段每隔 step 做一件事
+  // 沿著線段每隔 step 做一件事
   function along(a, b, step, fn) {
     const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy);
     stroke.carry += len;
@@ -441,7 +497,7 @@
     }
   }
 
-  /* ---------- 触摸/鼠标 ---------- */
+  /* ---------- 觸摸/鼠標 ---------- */
   let active = null;
   const toCanvas = e => {
     const r = stage.getBoundingClientRect();
@@ -449,7 +505,7 @@
   };
 
   stage.addEventListener('pointerdown', e => {
-    if (active !== null) return;      // 只认一根手指，手掌碰到也没关系
+    if (active !== null) return;      // 只認一根手指，手掌碰到也沒關係
     e.preventDefault();
     const p = toCanvas(e);
     if (state.tool === 'bucket') { bucket(p.x, p.y); return; }
@@ -459,7 +515,7 @@
     const t = TOOLS[state.tool];
     stroke.last = p; stroke.pos = p; stroke.carry = 0;
     t.start && t.start(p);
-    t.move(p, { x: p.x + .1, y: p.y + .1 }, SIZES[state.size]);   // 点一下也有一个点
+    t.move(p, { x: p.x + .1, y: p.y + .1 }, SIZES[state.size]);   // 點一下也有一個點
   });
 
   stage.addEventListener('pointermove', e => {
@@ -484,13 +540,28 @@
   stage.addEventListener('pointerup', endStroke);
   stage.addEventListener('pointercancel', endStroke);
 
-  /* ---------- 工具栏和弹出面板 ---------- */
+  /* ---------- 工具欄和彈出面板 ---------- */
   const brushPop = $('brushPop'), colorPop = $('colorPop'), scrim = $('scrim');
-  function showPop(pop) {
+  // 打開面板，並把小箭頭指向按下的按鈕（和參考圖一樣）
+  function showPop(pop, anchor) {
     const opening = pop && pop.hidden;
+    const arrow = $('popArrow');
     brushPop.hidden = colorPop.hidden = true;
-    scrim.hidden = !opening;
-    if (opening) pop.hidden = false;
+    scrim.hidden = arrow.hidden = !opening;
+    if (!opening) return;
+    pop.hidden = false;
+    const box = $('paint').getBoundingClientRect(), a = anchor.getBoundingClientRect();
+    const portrait = innerHeight > innerWidth;
+    pop.style.animation = 'none';
+    const p = pop.getBoundingClientRect();
+    pop.style.animation = '';
+    if (portrait) {
+      arrow.style.left = (a.left + a.width / 2 - 19 - box.left) + 'px';
+      arrow.style.top = (p.bottom - 26 - box.top) + 'px';
+    } else {
+      arrow.style.left = (p.right - 26 - box.left) + 'px';
+      arrow.style.top = (a.top + a.height / 2 - 19 - box.top) + 'px';
+    }
   }
   scrim.addEventListener('pointerdown', () => showPop(null));
 
@@ -518,7 +589,7 @@
     $('brushList').innerHTML = BRUSHES.map(b =>
       `<button class="brush${b.id === state.tool ? ' on' : ''}" data-id="${b.id}">${iconSVG(b.id, state.color)}<span>${b.name}</span></button>`).join('');
     $('sizes').innerHTML = SIZES.map((s, i) =>
-      `<button class="size${i === state.size ? ' on' : ''}" data-i="${i}" aria-label="粗细${i + 1}"><i style="width:${10 + i * 14}px;height:${10 + i * 14}px"></i></button>`).join('');
+      `<button class="size${i === state.size ? ' on' : ''}" data-i="${i}" aria-label="粗細${i + 1}"><i style="width:${10 + i * 14}px;height:${10 + i * 14}px"></i></button>`).join('');
     $('colorGrid').innerHTML = COLORS.map(c =>
       `<button class="swatch${c === state.color ? ' on' : ''}${c === '#ffffff' ? ' light' : ''}" data-c="${c}" style="background:${c}" aria-label="${c}"></button>`).join('');
   }
@@ -527,6 +598,7 @@
     const b = e.target.closest('.brush');
     if (!b) return;
     Sound.play('pop');
+    Voice.say(BRUSHES.find(x => x.id === b.dataset.id).name);
     setTool(b.dataset.id);
     setTimeout(() => showPop(null), 150);
   });
@@ -534,6 +606,7 @@
     const b = e.target.closest('.size');
     if (!b) return;
     Sound.play('click');
+    Voice.say(['細細的', '中等的', '粗粗的'][+b.dataset.i]);
     state.size = +b.dataset.i;
     localStorage.setItem('size', state.size);
     if (state.tool === 'eraser' || state.tool === 'bucket') state.tool = state.tool === 'bucket' ? 'marker' : 'eraser';
@@ -543,6 +616,7 @@
     const b = e.target.closest('.swatch');
     if (!b) return;
     Sound.play('pop');
+    Voice.say(colorName(b.dataset.c));
     setColor(b.dataset.c);
     setTimeout(() => showPop(null), 150);
   });
@@ -551,13 +625,13 @@
   $('brushBtn').addEventListener('click', () => {
     Sound.play('click');
     if (state.tool === 'eraser') setTool(lastTool);
-    showPop(brushPop);
+    showPop(brushPop, $('brushBtn'));
   });
-  $('colorBtn').addEventListener('click', () => { Sound.play('click'); showPop(colorPop); });
+  $('colorBtn').addEventListener('click', () => { Sound.play('click'); showPop(colorPop, $('colorBtn')); });
   $('eraserBtn').innerHTML = ERASER_ICON;
-  $('eraserBtn').addEventListener('click', () => { Sound.play('click'); showPop(null); setTool('eraser'); });
+  $('eraserBtn').addEventListener('click', () => { Sound.play('click'); Voice.say('橡皮擦'); showPop(null); setTool('eraser'); });
   $('undoBtn').addEventListener('click', undo);
-  $('clearBtn').addEventListener('click', () => { showPop(null); $('confirm').hidden = false; });
+  $('clearBtn').addEventListener('click', () => { showPop(null); Voice.say('全部擦掉嗎？'); $('confirm').hidden = false; });
   $('confirmYes').addEventListener('click', () => { $('confirm').hidden = true; clearAll(); });
   $('confirmNo').addEventListener('click', () => { $('confirm').hidden = true; });
 
@@ -580,6 +654,7 @@
   document.addEventListener('visibilitychange', () => document.hidden && save());
 
   window.Sound = Sound;
+  window.Voice = Voice;
   window.Store = Store;
   window.Painter = { open, save };
 })();

@@ -1,5 +1,6 @@
-// 离线缓存：改了文件以后把版本号 +1，平板上下次打开就会更新
-const VERSION = 'v1';
+// 離線緩存：有網絡時先抓最新版（順便更新緩存），沒網絡或太慢才用緩存。
+// 所以改完推上 GitHub，下次打開 App 就是新版，不用手動改版本號。
+const CACHE = 'kids-coloring';
 const FILES = [
   './',
   'index.html',
@@ -14,22 +15,45 @@ const FILES = [
   'icons/icon-512.png',
   'icons/icon-maskable.png',
 ];
+const TIMEOUT = 3000;
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== VERSION).map(k => caches.delete(k))))
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', e => {
-  if (e.request.method !== 'GET') return;
-  e.respondWith(
-    caches.match(e.request, { ignoreSearch: true }).then(hit => hit || fetch(e.request))
-  );
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  const host = new URL(req.url).hostname;
+  // 可愛字體：第一次下載後存起來，離線也能用
+  if (host === 'fonts.googleapis.com' || host === 'fonts.gstatic.com') {
+    e.respondWith(caches.open(CACHE).then(c => c.match(req).then(hit => hit || fetch(req).then(res => {
+      c.put(req, res.clone());
+      return res;
+    }))));
+    return;
+  }
+  if (new URL(req.url).origin !== location.origin) return;
+  e.respondWith((async () => {
+    const cache = await caches.open(CACHE);
+    const fresh = fetch(req, { cache: 'no-cache' }).then(res => {
+      if (res.ok) cache.put(req, res.clone());
+      return res;
+    });
+    const slow = new Promise(r => setTimeout(r, TIMEOUT));
+    try {
+      const res = await Promise.race([fresh, slow]);
+      if (res) return res;
+    } catch (err) { /* 沒網絡 */ }
+    const hit = await cache.match(req, { ignoreSearch: true });
+    return hit || fresh;
+  })());
 });

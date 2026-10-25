@@ -8,7 +8,7 @@
   --shadow: 0 6px 0 rgba(61, 47, 31, 0.18);
   --radius: 26px;
   --bar: 132px;
-  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -43,59 +43,170 @@ button {
            max(12px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
 }
 
-/* ================= 首页 ================= */
-#home { overflow-y: auto; background: var(--paper); }
+/* ================= 首頁 ================= */
+#home {
+  overflow-y: auto;
+  background: linear-gradient(#7fd3ff 0%, #b8e8ff 55%, #dff6ff 100%);
+}
+#home > *:not(.scenery) { position: relative; z-index: 1; }
+
+/* 背景：飄動的雲 + 草地 */
+.scenery { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.cloud { position: absolute; width: 180px; opacity: .9; animation: cloud 60s linear infinite; }
+.cloud.c1 { top: 12%; animation-duration: 70s; animation-delay: -10s; }
+.cloud.c2 { top: 32%; width: 130px; opacity: .7; animation-duration: 90s; animation-delay: -50s; }
+.cloud.c3 { top: 6%; width: 110px; opacity: .8; animation-duration: 80s; animation-delay: -30s; }
+@keyframes cloud { from { transform: translateX(-220px); } to { transform: translateX(110vw); } }
+.hills { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 22vh; }
 
 .home-header {
   display: flex;
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
-  margin: 4px 4px 14px;
+  margin: 6px 4px 18px;
 }
-.home-header h1 { margin: 0; font-size: clamp(24px, 5vw, 36px); flex: 1 1 auto; }
 
-.tabs { display: flex; gap: 10px; }
+.logo {
+  margin: 0;
+  flex: 1 1 auto;
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 900;
+  font-size: clamp(36px, 6.5vw, 56px);
+  letter-spacing: .04em;
+  line-height: 1.1;
+}
+.logo span {
+  display: inline-block;
+  color: var(--k);
+  text-shadow:
+    3px 0 #fff, -3px 0 #fff, 0 3px #fff, 0 -3px #fff,
+    2px 2px #fff, -2px 2px #fff, 2px -2px #fff, -2px -2px #fff,
+    0 7px 0 rgba(0, 0, 0, .12);
+  animation: bob 3s ease-in-out infinite;
+}
+.logo span:nth-child(1) { --k: #ff5a5a; animation-delay: 0s; transform: rotate(-6deg); }
+.logo span:nth-child(2) { --k: #ff9d1f; animation-delay: .2s; }
+.logo span:nth-child(3) { --k: #3fb64a; animation-delay: .4s; }
+.logo span:nth-child(4) { --k: #2f8de0; animation-delay: .6s; }
+.logo span:nth-child(5) { --k: #9b5de5; animation-delay: .8s; }
+.logo span:nth-child(6) { --k: #ff5fa2; animation-delay: 1s; transform: rotate(6deg); }
+@keyframes bob { 50% { translate: 0 -6px; } }
+
+.tabs { display: flex; gap: 12px; }
 .tab {
-  padding: 12px 20px;
+  padding: 12px 22px;
+  border-radius: 22px;
+  background: #fff;
+  border: 4px solid #fff;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, .14);
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  transition: transform .12s;
+}
+.tab:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0, 0, 0, .14); }
+.tab.on { background: #ffc94d; border-color: #fff; box-shadow: 0 6px 0 #d9a21f; }
+
+.cats { display: flex; gap: 12px; flex-wrap: wrap; margin: 0 4px 22px; }
+.cat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px 6px 6px;
   border-radius: 999px;
   background: #fff;
-  box-shadow: var(--shadow);
-  font-size: 20px;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, .12);
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
   font-weight: 700;
+  font-size: 22px;
+  color: var(--cd);
+  transition: transform .15s, background .15s;
 }
-.tab.on { background: #ffc94d; }
-
-.cats { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 4px 16px; }
-.cat {
-  padding: 10px 18px;
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: var(--shadow);
-  font-size: 20px;
-  font-weight: 700;
+.cat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--c);
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .15);
 }
-.cat.on { background: #8fd16a; }
+.cat:active { transform: scale(.94); }
+.cat.on { background: var(--c); color: #fff; box-shadow: 0 5px 0 var(--cd); transform: scale(1.06); }
+.cat.on .cat-icon { background: #fff; }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 18px;
-  padding: 0 4px 24px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 22px;
+  padding: 0 6px 28px;
 }
 .card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: #fff;
+  border-radius: 28px;
+  border: 5px solid #fff;
+  box-shadow: 0 8px 0 var(--cd), 0 14px 24px rgba(0, 0, 0, .12);
   overflow: hidden;
   text-align: center;
-  transition: transform .12s;
+  animation: cardIn .45s cubic-bezier(.3, 1.5, .6, 1) backwards;
+  animation-delay: calc(var(--i) * 70ms);
+  transition: transform .15s;
 }
-.card:active { transform: scale(.95); }
-.card .thumb { display: block; width: 100%; aspect-ratio: 4 / 3; background: #fff; position: relative; }
-.card .thumb > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.card .thumb.story { aspect-ratio: 8 / 5; }
-.card .name { padding: 8px 10px 12px; font-size: 20px; font-weight: 700; }
+.card:nth-child(odd)  { rotate: -1.2deg; }
+.card:nth-child(even) { rotate: 1.2deg; }
+.card:active { transform: scale(.94); }
+@keyframes cardIn { from { opacity: 0; transform: translateY(30px) scale(.8); } }
+
+.card .thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  position: relative;
+  border-radius: 22px 22px 0 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle, rgba(0, 0, 0, .05) 1.5px, transparent 2px) 0 0 / 16px 16px,
+    #fff;
+}
+.card.story .thumb { aspect-ratio: 8 / 5; }
+.card .thumb > svg, .card .thumb > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card .thumb .blank { position: absolute; inset: 0; display: grid; place-items: center; font-size: 56px; opacity: .5; }
+.card .badge {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 30px;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .25));
+  animation: pop .5s ease;
+}
+.card { position: relative; cursor: pointer; }
+.card .del {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .35);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+}
+.card.add .thumb { background: repeating-linear-gradient(45deg, #fff 0 14px, #f4f0ff 14px 28px); }
+.card.add .blank { opacity: 1; font-size: 64px; animation: bob 2s ease-in-out infinite; }
+.card .name {
+  padding: 8px 10px 10px;
+  background: var(--c);
+  color: #fff;
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, .15);
+}
 
 .pill {
   background: #ffc94d;
@@ -106,13 +217,20 @@ button {
   box-shadow: 0 4px 0 #d9a21f;
 }
 .pill:active { transform: translateY(3px); box-shadow: 0 1px 0 #d9a21f; }
-.pill.big { font-size: 22px; padding: 14px 26px; }
+.pill.big {
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  padding: 14px 28px;
+}
 
-/* ================= 涂色 ================= */
+/* ================= 塗色 ================= */
 #paint {
   padding: 0;
   display: flex;
-  background: var(--bg);
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, .22) 2.5px, transparent 3px) 0 0 / 30px 30px,
+    linear-gradient(135deg, #5cc8fa, #3fb0ec);
 }
 
 .board {
@@ -125,20 +243,23 @@ button {
 .stage {
   position: relative;
   background: #fff;
-  border-radius: 18px;
+  border-radius: 22px;
   overflow: hidden;
-  box-shadow: 0 6px 0 rgba(0, 0, 0, .12);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, .55), 0 14px 30px rgba(0, 40, 80, .25);
   touch-action: none;
 }
 .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 #cStroke, #cLines { pointer-events: none; }
 
-/* 右侧木头工具栏，和参考图一样 */
+/* 右側木頭工具欄，和參考圖一樣 */
 .toolbar {
   width: calc(var(--bar) + env(safe-area-inset-right));
   padding: max(14px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) 12px;
-  background: var(--wood);
+  background:
+    repeating-linear-gradient(90deg, rgba(160, 110, 40, .07) 0 2px, transparent 2px 9px, rgba(160, 110, 40, .05) 9px 10px, transparent 10px 23px),
+    linear-gradient(90deg, #f9e7ad, #f2d690 60%, #ecc979);
   border-left: 6px solid var(--wood-edge);
+  box-shadow: inset 6px 0 10px rgba(120, 80, 20, .18);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -156,9 +277,11 @@ button {
   color: #fff;
   display: grid;
   place-items: center;
-  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, .18);
+  border: 3px solid rgba(255, 255, 255, .5);
+  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, .2), inset 0 4px 0 rgba(255, 255, 255, .3), 0 4px 0 rgba(0, 0, 0, .15);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, .15);
 }
-.sq:active { transform: translateY(2px); }
+.sq:active { transform: translateY(3px); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .2), 0 1px 0 rgba(0, 0, 0, .15); }
 .sq:disabled { opacity: .35; }
 .sq.big { width: 80px; height: 80px; font-size: 40px; border-radius: 20px; }
 .green  { background: #6cc534; }
@@ -171,17 +294,18 @@ button {
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff, #d8ecff 70%);
-  border: 6px solid #b9d6f5;
-  box-shadow: 0 5px 0 rgba(0, 0, 0, .15);
+  background: radial-gradient(circle at 35% 28%, #fff 0 20%, #e3f1ff 55%, #c5defa 100%);
+  border: 6px solid #fff;
+  box-shadow: 0 0 0 4px #a9c9ef, 0 7px 0 4px rgba(90, 120, 160, .35);
   display: grid;
   place-items: center;
   transition: transform .12s;
 }
 .bigbtn:active { transform: scale(.92); }
-.bigbtn.on { border-color: #ffb300; box-shadow: 0 0 0 5px rgba(255, 179, 0, .35), 0 5px 0 rgba(0, 0, 0, .15); }
+.bigbtn.on { box-shadow: 0 0 0 4px #ffb300, 0 0 0 10px rgba(255, 179, 0, .3), 0 7px 0 4px rgba(90, 120, 160, .35); animation: wob .4s ease; }
+@keyframes wob { 40% { transform: scale(1.1); } 70% { transform: scale(.96); } }
 .bigbtn svg { width: 80%; height: 80%; }
-#colorBtn { background: #fff; border-color: #e7e7e7; }
+#colorBtn { background: #fff; }
 .dot {
   width: 74px;
   height: 74px;
@@ -189,7 +313,7 @@ button {
   box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .15), inset 0 6px 8px rgba(255, 255, 255, .45);
 }
 
-/* 弹出面板 */
+/* 彈出面板 */
 .scrim { position: absolute; inset: 0; z-index: 5; }
 .pop {
   position: absolute;
@@ -197,16 +321,29 @@ button {
   right: calc(var(--bar) + env(safe-area-inset-right) + 18px);
   top: 50%;
   transform: translateY(-50%);
-  background: #f4f7fb;
-  border: 6px solid #c8d6ea;
-  border-radius: 26px;
+  background: #f7faff;
+  border: 6px solid #fff;
+  outline: 4px solid #b9d0ee;
+  border-radius: 28px;
   padding: 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+  box-shadow: 0 16px 40px rgba(0, 40, 80, .3);
   max-height: calc(100% - 24px);
   overflow-y: auto;
-  animation: popIn .18s ease;
+  animation: popIn .25s cubic-bezier(.3, 1.5, .6, 1);
 }
-@keyframes popIn { from { opacity: 0; transform: translateY(-50%) scale(.9); } }
+@keyframes popIn { from { opacity: 0; transform: translateY(-50%) scale(.85); } }
+.pop-arrow {
+  position: absolute;
+  z-index: 7;
+  width: 26px;
+  height: 26px;
+  background: #f7faff;
+  border: 6px solid #fff;
+  outline: 4px solid #b9d0ee;
+  clip-path: polygon(100% 0, 100% 100%, -10% 100%);
+  transform: rotate(-45deg);
+  pointer-events: none;
+}
 
 .brush-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; }
 .brush {
@@ -216,12 +353,14 @@ button {
   width: 210px;
   padding: 4px 10px 4px 4px;
   border-radius: 16px;
-  font-size: 17px;
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
   font-weight: 700;
+  font-size: 20px;
   text-align: left;
+  transition: background .15s;
 }
 .brush svg { width: 120px; height: 46px; flex: none; transition: transform .15s; }
-.brush.on { background: #fff3c4; }
+.brush.on { background: #fff1b8; box-shadow: inset 0 0 0 3px #ffcf4d; }
 .brush.on svg { transform: translateX(-8px); }
 
 .sizes {
@@ -231,13 +370,14 @@ button {
   gap: 18px;
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 3px dashed #c8d6ea;
+  border-top: 3px dashed #cfdcef;
 }
 .size {
   width: 64px;
   height: 64px;
   border-radius: 18px;
   background: #fff;
+  box-shadow: 0 4px 0 #dbe5f2;
   display: grid;
   place-items: center;
 }
@@ -254,8 +394,11 @@ button {
   aspect-ratio: 1;
   border-radius: 12px;
   position: relative;
-  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .12);
+  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, .14), inset 0 4px 0 rgba(255, 255, 255, .25);
+  transition: transform .12s;
 }
+.swatch:active { transform: scale(.88); }
+.swatch.on { transform: scale(1.08); box-shadow: 0 0 0 4px #fff, 0 0 0 7px #ffb300; }
 .swatch.light { outline: 2px solid #ddd; outline-offset: -2px; }
 .swatch.on::after {
   content: "✔";
@@ -293,6 +436,9 @@ button {
 }
 .modal-box {
   background: #fff;
+  border: 6px solid #fff;
+  outline: 4px solid #b9d0ee;
+  animation: popIn2 .3s cubic-bezier(.3, 1.5, .6, 1);
   border-radius: 28px;
   padding: 24px 28px;
   text-align: center;
@@ -303,12 +449,14 @@ button {
   align-items: center;
   gap: 14px;
 }
-.modal-box p { margin: 0; font-size: 30px; font-weight: 800; }
+.modal-box p { margin: 0; font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 700; font-size: 34px; }
 .modal-box p.hint { font-size: 18px; font-weight: 600; opacity: .7; }
 .modal-box img { max-width: min(80vw, 800px); max-height: 60vh; border-radius: 12px; box-shadow: var(--shadow); -webkit-touch-callout: default; user-select: auto; -webkit-user-select: auto; }
 .modal-actions { display: flex; gap: 24px; }
+@keyframes popIn2 { from { opacity: 0; transform: scale(.8); } }
 
-/* 竖着拿平板/手机：工具栏移到下面 */
+/* 豎著拿平板/手機：工具欄移到下面 */
 @media (orientation: portrait) {
   :root { --bar: 116px; }
   #paint { flex-direction: column; }
@@ -319,6 +467,10 @@ button {
     flex-direction: row;
     border-left: none;
     border-top: 6px solid var(--wood-edge);
+    background:
+      repeating-linear-gradient(0deg, rgba(160, 110, 40, .07) 0 2px, transparent 2px 9px, rgba(160, 110, 40, .05) 9px 10px, transparent 10px 23px),
+      linear-gradient(#f9e7ad, #ecc979);
+    box-shadow: inset 0 6px 10px rgba(120, 80, 20, .18);
     padding: 10px max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
   }
   .pair { flex-direction: column; gap: 6px; }
@@ -334,13 +486,16 @@ button {
     max-height: calc(100% - var(--bar) - 40px);
     animation: none;
   }
+  .pop-arrow {
+    transform: rotate(45deg);
+  }
   .brush { width: auto; }
   .brush svg { width: 96px; height: 38px; }
   .swatch { width: clamp(30px, 9.4vw, 72px); }
   .color-grid { gap: 7px; }
 }
 
-/* ================= 阅读器 ================= */
+/* ================= 閱讀器 ================= */
 #reader { display: flex; flex-direction: column; gap: 10px; background: var(--paper); }
 
 .reader-top, .reader-bottom {
@@ -391,7 +546,8 @@ button {
 .text {
   margin: 0;
   padding: 14px 22px 18px;
-  font-size: clamp(22px, 4.4vw, 34px);
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-size: clamp(24px, 4.6vw, 38px);
   line-height: 1.6;
   text-align: center;
   font-weight: 700;
@@ -427,7 +583,7 @@ button {
   .float, .drift, .twinkle { animation: none; }
 }
 
-/* ================= 读完啦 / 彩纸 ================= */
+/* ================= 讀完啦 / 彩紙 ================= */
 #done { display: grid; place-items: center; background: var(--paper); }
 .done-box { text-align: center; }
 .done-box h2 { font-size: clamp(30px, 8vw, 48px); margin: 12px 0 28px; }

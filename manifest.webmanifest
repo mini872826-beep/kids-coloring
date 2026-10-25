@@ -1,8 +1,8 @@
 {
-  "name": "小小绘本屋",
-  "short_name": "绘本屋",
-  "description": "给小朋友的涂色绘本和故事书",
-  "lang": "zh-CN",
+  "name": "小朋友愛畫畫",
+  "short_name": "小朋友愛畫畫",
+  "description": "給小朋友的塗色繪本和故事書",
+  "lang": "zh-TW",
   "start_url": "./",
   "scope": "./",
   "display": "fullscreen",
