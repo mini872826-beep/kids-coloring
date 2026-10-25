@@ -45,7 +45,10 @@
   <!-- 塗色 -->
   <section id="paint" class="screen" hidden>
     <div id="board" class="board">
-      <button id="nameChip" class="name-chip" aria-label="念名字"></button>
+      <div class="board-top">
+        <button id="nameChip" class="name-chip" aria-label="念名字"></button>
+        <div id="progress" class="progress" hidden><span><i></i></span><b></b></div>
+      </div>
       <div id="stage" class="stage">
         <canvas id="cPaint"></canvas>
         <canvas id="cStroke"></canvas>

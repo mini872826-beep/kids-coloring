@@ -111,7 +111,11 @@
         if (saved && saved.thumb && el) {
           const url = URL.createObjectURL(saved.thumb);
           thumbURLs.push(url);
-          el.innerHTML = `<img src="${url}" alt=""><span class="badge">⭐</span>`;
+          // 畫完的有星星；畫到一半的顯示鉛筆和進度條
+          const pct = saved.cover && typeof saved.cover === 'object' ? saved.cover.pct : 100;
+          el.innerHTML = `<img src="${url}" alt="">` + (pct >= 100
+            ? '<span class="badge">⭐</span>'
+            : `<span class="badge half">✏️ 畫到一半</span><span class="mini-bar"><i style="width:${pct}%"></i></span>`);
         }
       });
     } else {
@@ -153,11 +157,17 @@
     }
   });
 
+  // ✔：自動判斷畫完了沒，畫完才放彩紙；沒畫完就先存起來，下次接著畫
   $('doneBtn').addEventListener('click', async () => {
-    await window.Painter.save();
-    Sound.play('yay');
-    Voice.say('畫好了，好棒！');
-    confetti();
+    const { cover, done } = await window.Painter.finish();
+    if (done) {
+      Sound.play('yay');
+      Voice.say(cover === null ? '畫好了，好棒！' : '全部塗好了，好棒！');
+      confetti();
+    } else {
+      Sound.play('pop');
+      Voice.say('先存起來囉，還有地方沒塗完，下次再畫！');
+    }
     go('#/');
   });
 

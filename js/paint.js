@@ -383,6 +383,7 @@
   function loadLines(drawing) {
     lctx.clearRect(0, 0, W, H);
     state.barrier.fill(0);
+    state.samples = null;
     if (!drawing.svg) return Promise.resolve();
     return new Promise(res => {
       const img = new Image();
@@ -398,6 +399,7 @@
           if (a > 90) state.barrier[p] = 1;
         }
         lctx.putImageData(id, 0, 0);
+        computeInterior();
         res();
       };
       img.onerror = res;
@@ -405,7 +407,71 @@
     });
   }
 
+  /* ---------- 完成度：線稿被分成一塊一塊，算有幾塊塗了顏色 ---------- */
+  // 按「塊」算而不是按面積算：車身很大、車燈很小，但都要塗才算完成
+  const MIN_REGION = 900;   // 太小的地方（眼睛反光點、門把手這種細縫）不算
+  function computeInterior() {
+    const bar = state.barrier, label = new Int32Array(W * H);   // 0 = 還沒看過，-1 = 外面
+    const fill = (start, id) => {
+      const stack = [start], pts = [];
+      label[start] = id;
+      while (stack.length) {
+        const i = stack.pop(), x = i % W;
+        pts.push(i);
+        if (x > 0 && !bar[i - 1] && !label[i - 1]) { label[i - 1] = id; stack.push(i - 1); }
+        if (x < W - 1 && !bar[i + 1] && !label[i + 1]) { label[i + 1] = id; stack.push(i + 1); }
+        if (i >= W && !bar[i - W] && !label[i - W]) { label[i - W] = id; stack.push(i - W); }
+        if (i < W * (H - 1) && !bar[i + W] && !label[i + W]) { label[i + W] = id; stack.push(i + W); }
+      }
+      return pts;
+    };
+    // 先把碰到畫布邊的「外面」標起來
+    for (let x = 0; x < W; x++) for (const i of [x, (H - 1) * W + x]) if (!bar[i] && !label[i]) fill(i, -1);
+    for (let y = 0; y < H; y++) for (const i of [y * W, y * W + W - 1]) if (!bar[i] && !label[i]) fill(i, -1);
+    // 剩下的每一塊各取最多 60 個點來檢查
+    const regions = [];
+    for (let i = 0; i < W * H; i++) {
+      if (bar[i] || label[i]) continue;
+      const pts = fill(i, regions.length + 1);
+      if (pts.length < MIN_REGION) continue;
+      const step = Math.max(1, Math.floor(pts.length / 60));
+      const sample = [];
+      for (let k = 0; k < pts.length; k += step) sample.push(pts[k]);
+      regions.push(Int32Array.from(sample));
+    }
+    state.samples = regions.length ? regions : null;
+  }
+
+  // 回傳 { done, total, pct }；自由畫的白紙沒有線稿，回傳 null
+  function coverage() {
+    if (!state.samples) return null;
+    const d = pctx.getImageData(0, 0, W, H).data;
+    let colored = 0;
+    for (const pts of state.samples) {
+      let n = 0;
+      for (const i of pts) if (d[i * 4] + d[i * 4 + 1] + d[i * 4 + 2] < 735) n++;
+      if (n >= pts.length * .5) colored++;
+    }
+    const total = state.samples.length;
+    const allowMiss = Math.floor(total * .1);   // 可以漏塗一成（很多塊的圖才有用）
+    const done = total - colored <= allowMiss;
+    return { done, total, colored, pct: done ? 100 : Math.round(colored / total * 100) };
+  }
+
+  function showProgress() {
+    const c = coverage(), el = $('progress');
+    el.hidden = c === null;
+    if (c === null) return;
+    el.querySelector('i').style.width = c.pct + '%';
+    el.querySelector('b').textContent = c.done ? '⭐ 完成！' : c.pct + '%';
+    el.classList.toggle('full', c.done);
+  }
+
   async function open(drawing) {
+    // 每次進來都從「畫筆」開始（上次用的筆，預設蠟筆），油漆桶這些特別工具要自己選
+    const pen = localStorage.getItem('pen');
+    state.tool = BRUSHES.some(b => b.id === pen && b.group === 'pen') ? pen : 'crayon';
+    lastTool = state.tool;
     state.drawing = drawing;
     state.undo = [];
     const cat = ART.CATEGORIES.find(c => c.id === drawing.cat) || ART.CATEGORIES[0];
@@ -423,6 +489,7 @@
       const bmp = await blobToImage(saved.paint);
       if (bmp) pctx.drawImage(bmp, 0, 0, W, H);
     }
+    showProgress();
     updateUI();
   }
 
@@ -463,7 +530,10 @@
     state.dirty = true;
     clearTimeout(saveTimer);
     saveTimer = setTimeout(save, 700);
+    clearTimeout(progressTimer);
+    progressTimer = setTimeout(showProgress, 150);
   }
+  let progressTimer;
   async function save() {
     clearTimeout(saveTimer);
     if (!state.dirty || !state.drawing) return;
@@ -476,7 +546,15 @@
     tc.drawImage(cPaint, 0, 0, 400, 300);
     tc.drawImage(cLines, 0, 0, 400, 300);
     const thumb = await new Promise(r => t.toBlob(r, 'image/png'));
-    await Store.put('paint:' + id, { paint, thumb, t: Date.now() });
+    await Store.put('paint:' + id, { paint, thumb, t: Date.now(), cover: coverage() });
+  }
+
+  // 按 ✔ 的時候：存起來，並告訴首頁到底畫完了沒
+  async function finish() {
+    state.dirty = true;
+    const c = coverage();
+    await save();
+    return { cover: c, done: c === null ? true : c.done };
   }
 
   function composite() {
@@ -900,6 +978,7 @@
 
   function setTool(id) {
     state.tool = id;
+    if (BRUSHES.some(b => b.id === id && b.group === 'pen')) localStorage.setItem('pen', id);
     if (id !== 'eraser') lastTool = id;
     localStorage.setItem('tool', id);
     updateUI();
@@ -1037,5 +1116,5 @@
   window.Voice = Voice;
   window.Music = Music;
   window.Store = Store;
-  window.Painter = { open, save };
+  window.Painter = { open, save, finish };
 })();
