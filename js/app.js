@@ -67,7 +67,7 @@
       openSong(sg);
     } else if (view === 'math') {
       show('math');
-      window.MathGame.open(id);
+      window.MathGame.open(id, page === 'learn');
     } else if (view === 'done') {
       show('done');
       Sound.play('yay');
@@ -177,8 +177,8 @@
       $('cats').hidden = true;
       $('grid').style.cssText = '--c:#ff922b;--cd:#e8590c';
       // 練習題關卡＋九九乘法歌（一到九）
-      $('grid').innerHTML = window.MathGame.cards() + SONGS.filter(x => x.kind === 'times').map((x, i) =>
-        `<div class="card story" role="button" data-go="#/song/${x.id}" data-say="${x.title}" style="--i:${i + 4};--c:#ff922b;--cd:#e8590c"><span class="thumb">${x.art}</span><div class="name">✖️ ${x.title}</div></div>`).join('');
+      $('grid').innerHTML = window.MathGame.cards(SONGS.filter(x => x.kind === 'times').map((x, i) =>
+        `<div class="card story" role="button" data-go="#/song/${x.id}" data-say="${x.title}" style="--i:${i + 4};--c:#ff922b;--cd:#e8590c"><span class="thumb">${x.art}</span><div class="name">✖️ ${x.title}</div></div>`).join(''));
     } else {
       $('cats').hidden = false;
       $('cats').innerHTML = `<div class="cat-row main-row">${BOOK_TAGS.map(t =>

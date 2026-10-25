@@ -784,6 +784,67 @@ button {
 @keyframes hintPulse { 50% { box-shadow: 0 0 0 8px #ffd43b, 0 7px 0 var(--cd); } }
 @media (orientation: portrait) { .math-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 #mathSay { color: #fff; background: #4dabf7; }
+.tier-title {
+  grid-column: 1 / -1;
+  margin: 8px 4px -6px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  color: #fff;
+  text-shadow: 0 3px 0 rgba(0, 60, 110, .25);
+}
+.tier-title small { font-size: 16px; font-weight: 700; opacity: .9; }
+.math-card .learn {
+  position: absolute !important;
+  inset: 8px auto auto 8px !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--cd);
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .18);
+}
+.math-card .best { position: absolute !important; inset: auto 10px 8px auto !important; width: auto !important; height: auto !important; font-size: 18px; }
+.math-visual-in { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px; }
+.math-visual-in.many .obj { width: clamp(30px, 4.4vw, 46px); }
+.obj { position: relative; transition: transform .2s; }
+.obj.lit { transform: scale(1.15); filter: drop-shadow(0 0 6px #ffd43b); }
+.obj b { position: absolute; left: 50%; top: -14px; transform: translateX(-50%); font-size: 16px; font-weight: 900; color: #e8590c; }
+.dot-groups { display: flex; flex-direction: column; gap: 10px; }
+.dot-row { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 14px; background: #f1f3f5; }
+.dot-row i { width: 26px; height: 26px; border-radius: 50%; background: #ced4da; border: 3px solid #222; }
+.dot-row.lit { background: #fff3bf; }
+.dot-row.lit i { background: var(--c); }
+.dot-row b { margin-left: 10px; font-size: 26px; font-weight: 900; color: var(--cd); min-width: 2ch; }
+.column {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(var(--w, 4), auto);
+  justify-content: center;
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 6vw, 64px);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+.column .cell { min-width: 1.1em; text-align: center; border-radius: 12px; }
+.column .cell.hl { background: #fff3bf; }
+.column .cell.carry { font-size: .5em; color: #e03131; min-height: 1em; }
+.column .cell.ans { color: var(--cd); }
+.column .cell s { font-size: .6em; color: #adb5bd; margin-right: 2px; }
+.column .cell em { font-style: normal; color: #e03131; }
+.column .line { height: 6px; border-radius: 3px; background: #3d2f1f; margin: 6px 0; }
+.math-q.done-step { color: var(--cd); }
+.lesson-bar { display: flex !important; justify-content: center; gap: 18px; }
+.lesson-bar .go { opacity: .5; }
+.lesson-bar.ready .go { opacity: 1; animation: wob .6s ease; background: #8ce99a; box-shadow: 0 4px 0 #2f9e44; }
 .dots span.done { background: #8ce99a; }
 #math .modal { position: fixed; }
 .math-card .thumb { background: linear-gradient(135deg, var(--c), var(--cd)); display: grid; place-items: center; }
