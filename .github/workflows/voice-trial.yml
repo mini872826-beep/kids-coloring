@@ -1,0 +1,37 @@
+# 試聽：比較 BreezyVoice 和微軟免費台灣聲音（只在 voice-trial 分支跑，不影響 App）
+name: 試聽聲音
+on:
+  push:
+    branches: [voice-trial]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg sox libsox-dev
+      - run: pip install edge-tts && python tools/trial_voices.py edge
+      - name: 安裝 BreezyVoice（CPU 版）
+        run: |
+          git clone --depth 1 --recursive https://github.com/mtkresearch/BreezyVoice.git bv
+          sed -e 's/onnxruntime-gpu/onnxruntime/' -e '/extra-index-url/d' -e '/deepspeed/d' bv/requirements.txt > req.txt
+          pip install torch==2.3.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cpu
+          pip install -r req.txt
+      - name: BreezyVoice 錄音
+        env:
+          PYTHONUTF8: '1'
+        run: python tools/trial_voices.py breezy
+      - name: 推回 voice-trial 分支
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add trial
+          git commit -m "Voice trial recordings" || exit 0
+          git push origin HEAD:voice-trial
