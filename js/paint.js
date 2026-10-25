@@ -240,14 +240,37 @@
       u.onend = u.onerror = done;
       speechSynthesis.speak(u);
     }
-    function one(text, done) {
+    // 音檔先抓成 blob 放在記憶體：播的時候不用再等網路，一句接一句不會卡
+    const blobs = new Map();
+    function load(text) {
       const f = index[text];
-      if (!f) return fallback(text, done);
+      if (!f) return null;
+      if (!blobs.has(f)) {
+        const p = fetch('audio/' + f).then(r => r.ok ? r.blob() : null)
+          .then(b => b && URL.createObjectURL(b)).catch(() => null);
+        blobs.set(f, p);
+        p.then(u => { if (!u) blobs.delete(f); });
+        // 最多留 80 句，舊的放掉
+        if (blobs.size > 80) {
+          const [old, op] = blobs.entries().next().value;
+          blobs.delete(old);
+          op.then(u => u && URL.revokeObjectURL(u));
+        }
+      }
+      return blobs.get(f);
+    }
+    function one(text, done, my) {
+      const p = load(text);
+      if (!p) return fallback(text, done);
       playing = true;
-      au.onended = () => { playing = false; done(); };
-      au.onerror = () => { playing = false; fallback(text, done); };
-      au.src = 'audio/' + f;
-      au.play().catch(() => { playing = false; au.onended = au.onerror = null; fallback(text, done); });
+      p.then(url => {
+        if (my !== token) return;
+        if (!url) { playing = false; return fallback(text, done); }
+        au.onended = () => { playing = false; done(); };
+        au.onerror = () => { playing = false; fallback(text, done); };
+        au.src = url;
+        au.play().catch(() => { playing = false; au.onended = au.onerror = null; fallback(text, done); });
+      });
     }
 
     const api = {
@@ -257,13 +280,16 @@
         api.cancel();
         const my = ++token;
         let i = 0;
+        list.forEach(load);
         const next = () => {
           if (my !== token) return;
           if (i >= list.length) return onend && onend();
-          one(list[i++], next);
+          one(list[i++], next, my);
         };
         next();
       },
+      // 先把等一下要念的句子抓好
+      warm(list) { list.forEach(load); },
       say(text) { api.speak([text]); },
       cancel() {
         token++;

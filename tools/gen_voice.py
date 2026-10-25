@@ -8,6 +8,8 @@ import asyncio
 import hashlib
 import json
 import os
+import shutil
+import subprocess
 import sys
 
 import edge_tts
@@ -17,6 +19,8 @@ VOICE_EN = 'en-US-AnaNeural'    # 英文：美國小朋友的聲音
 RATE = '-8%'                     # 講慢一點，小朋友比較聽得懂
 PITCH = '+6Hz'
 OUT = 'audio'
+# 錄好的檔頭尾各有快一秒的靜音，句子之間會卡卡的；用 ffmpeg 修掉（名字加 trim，修過的才算數）
+TRIM = 'silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.03,areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.08,areverse'
 
 
 def is_english(text):
@@ -29,8 +33,18 @@ def voice_for(text):
 
 def file_name(text):
     # 聲音設定也算進去，換聲音時會全部重錄
-    key = f'{voice_for(text)}|{RATE}|{PITCH}|{text}'
+    key = f'{voice_for(text)}|{RATE}|{PITCH}|trim|{text}'
     return hashlib.sha1(key.encode('utf-8')).hexdigest()[:12] + '.mp3'
+
+
+def trim(path):
+    tmp = path + '.tmp.mp3'
+    cmd = ['ffmpeg', '-v', 'error', '-y', '-i', path, '-af', TRIM,
+           '-ar', '24000', '-ac', '1', '-b:a', '48k', tmp]
+    if subprocess.run(cmd).returncode == 0 and os.path.getsize(tmp) > 0:
+        os.replace(tmp, path)
+    elif os.path.exists(tmp):
+        os.remove(tmp)
 
 
 async def record(text, path):
@@ -38,6 +52,7 @@ async def record(text, path):
         try:
             await edge_tts.Communicate(text, voice_for(text), rate=RATE, pitch='+0Hz' if is_english(text) else PITCH).save(path)
             if os.path.getsize(path) > 0:
+                trim(path)
                 return
         except Exception as e:  # 網路不穩就再試
             print(f'retry {attempt + 1}: {text} ({e})')
@@ -48,6 +63,8 @@ async def record(text, path):
 
 
 async def main():
+    if not shutil.which('ffmpeg'):
+        sys.exit('需要 ffmpeg 來修掉靜音')
     phrases = json.load(open(sys.argv[1], encoding='utf-8'))
     os.makedirs(OUT, exist_ok=True)
     index = {}

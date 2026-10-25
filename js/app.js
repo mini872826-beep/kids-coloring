@@ -304,6 +304,8 @@
     const pg = $('page');
     pg.classList.remove('turn-next', 'turn-prev');
     if (dir) { void pg.offsetWidth; pg.classList.add(dir > 0 ? 'turn-next' : 'turn-prev'); }
+    // 這頁和後面兩頁的聲音先抓好，翻頁就能馬上念
+    Voice.warm([b.title].concat(b.pages.slice(i, i + 3).map(x => x.text)));
     if (auto) speak();
   }
 
@@ -322,6 +324,8 @@
   $('nextBtn').addEventListener('click', () => turn(1));
   $('homeBtn').addEventListener('click', () => { setAuto(false); go('#/'); });
   $('speakBtn').addEventListener('click', () => speak());
+  // 點故事的字：念這一頁，念完自動往下一頁繼續
+  $('text').addEventListener('click', () => { setAuto(true); speak(); });
   $('autoBtn').addEventListener('click', () => {
     setAuto(!auto);
     if (auto) speak(); else stopSpeaking();
@@ -429,9 +433,11 @@
     $('lyrics').className = 'lyrics ' + sg.kind;
     $('lyrics').innerHTML = sg.lines.map((l, i) => `<li>${l}${sg.sub ? `<small>${sg.sub[i]}</small>` : ''}</li>`).join('');
     setPlaying(false);
+    // 一打開就先把題目和前幾句的聲音抓好
+    Voice.warm([sg.title, sg.author].filter(Boolean).concat(sg.lines.slice(0, 4)));
     // 點進來就開始：兒歌彈旋律，唐詩念出來
     const my = songToken;
-    setTimeout(() => { if (my === songToken && current === 'song' && song === sg) playSong(); }, 600);
+    setTimeout(() => { if (my === songToken && current === 'song' && song === sg) playSong(); }, 300);
   }
   function stopSong() {
     songToken++;
@@ -454,17 +460,27 @@
   }
   const sg_title = sg => !sg.notes;
   // 一句一句念，念到哪句就亮哪句；唐詩先念題目和作者
-  function readLines(my, withTitle) {
-    let i = -1;
+  function readLines(my, withTitle, from = 0) {
+    let i = from - 1;
+    Voice.warm(song.lines.slice(from, from + 4));
     const next = () => {
       if (my !== songToken) return;
       i++;
       if (i >= song.lines.length) { highlight(-1); setPlaying(false); return; }
       highlight(i);
-      Voice.speak([song.lines[i]], () => setTimeout(next, 400));
+      Voice.warm(song.lines.slice(i + 1, i + 4));
+      Voice.speak([song.lines[i]], () => setTimeout(next, 250));
     };
-    Voice.speak(withTitle ? [song.title, song.author].filter(Boolean) : [], () => setTimeout(next, 300));
+    Voice.speak(withTitle ? [song.title, song.author].filter(Boolean) : [], () => setTimeout(next, 150));
   }
+  // 點歌詞的任何一句：從那一句開始往下念
+  $('lyrics').addEventListener('click', e => {
+    const li = e.target.closest('li');
+    if (!li || !song) return;
+    stopSong();
+    setPlaying(true);
+    readLines(songToken, false, [...$('lyrics').children].indexOf(li));
+  });
   function songStep(d) {
     const list = SONGS.filter(x => x.kind === song.kind);
     const k = (list.indexOf(song) + d + list.length) % list.length;

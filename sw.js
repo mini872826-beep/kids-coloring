@@ -59,6 +59,14 @@ self.addEventListener('fetch', e => {
     return;
   }
   if (new URL(req.url).origin !== location.origin) return;
+  // 語音 mp3 的檔名就是內容的指紋，內容不會變：有存就直接用，不用等網路
+  if (/\/audio\/[^/]+\.mp3$/.test(new URL(req.url).pathname) && !req.headers.has('range')) {
+    e.respondWith(caches.open(CACHE).then(c => c.match(req).then(hit => hit || fetch(req).then(res => {
+      if (res.ok) c.put(req, res.clone());
+      return res;
+    }))));
+    return;
+  }
   e.respondWith((async () => {
     const cache = await caches.open(CACHE);
     const fresh = fetch(req, { cache: 'no-cache' }).then(res => {

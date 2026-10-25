@@ -27,6 +27,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install edge-tts
+      - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: node tools/phrases.js > "$RUNNER_TEMP/phrases.json"
       - run: python tools/gen_voice.py "$RUNNER_TEMP/phrases.json"
       - name: 推回 main
