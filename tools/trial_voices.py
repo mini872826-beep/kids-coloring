@@ -10,9 +10,20 @@ SENTENCES = [
 os.makedirs('trial', exist_ok=True)
 
 
+ROOT = os.path.abspath('.')
+
+
 def mp3(wav, name):
-    os.makedirs('trial', exist_ok=True)
-    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-ac', '1', '-b:a', '64k', f'trial/{name}.mp3'], check=True)
+    os.makedirs(f'{ROOT}/trial', exist_ok=True)
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-ac', '1', '-b:a', '64k', f'{ROOT}/trial/{name}.mp3'], check=True)
+
+
+def push(msg):
+    """做好一部分就先推上去，爸爸不用等全部做完"""
+    sh = lambda c: subprocess.run(c, shell=True, cwd=ROOT)
+    sh('git config user.name "github-actions[bot]"')
+    sh('git config user.email "41898282+github-actions[bot]@users.noreply.github.com"')
+    sh(f'git add trial && git commit -q -m "{msg}" && for i in 1 2 3; do git pull --rebase -q origin voice-trial && git push -q origin HEAD:voice-trial && break; sleep 5; done')
 
 
 async def edge():
@@ -55,6 +66,11 @@ def pick_voices(n=3):
         seen.add(cid)
         picked.append((wav, row['sentence'], f'voice{i}'))
         print('picked', i, g, a, '%.1fs' % dur, row['sentence'], flush=True)
+        mp3(wav, f'voice{i}-original')
+    with open(f'{ROOT}/trial/voices.txt', 'w', encoding='utf-8') as f:
+        for k, (_, text, name) in enumerate(picked):
+            f.write(f'{name}: {text}\n')
+    push('Volunteer voices (originals)')
     return picked
 
 
@@ -87,6 +103,7 @@ def breezy(prompts, sentences):
             print('%s %d: %.0fs' % (name, i + 1, time.time() - t), flush=True)
             mp3(out, f'{name}-{i + 1}')
             os.remove(out)
+        push(f'BreezyVoice {name}')
     os.chdir(here)
 
 
