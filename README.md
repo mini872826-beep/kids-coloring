@@ -46,7 +46,7 @@
 
 ## 聲音
 - **點什麼念什麼**：分類、圖卡、筆、顏色、花紋都會念出來，幫小朋友認字
-- **AI 配音**：`tools/gen_voice.py` 用台灣口音的「曉雨」把每一句錄成 mp3（`audio/`）。
+- **AI 配音**：`tools/gen_voice.py` 用台灣口音的「曉臻」把每一句錄成 mp3（`audio/`）。
   GitHub Actions（`.github/workflows/voice.yml`）每次推上新內容會自動補錄，錄不到的才用 iPad 內建語音
 - **背景音樂**：程式現場合成的八音盒小曲，念字時自動變小聲，首頁 🎵 可開關
 

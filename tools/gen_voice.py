@@ -14,10 +14,10 @@ import sys
 
 import edge_tts
 
-VOICE = 'zh-TW-HsiaoYuNeural'   # 台灣口音、溫柔的女生聲音
+VOICE = 'zh-TW-HsiaoChenNeural' # 台灣口音、溫柔的大姊姊聲音（爸爸試聽後選的）
 VOICE_EN = 'en-US-AnaNeural'    # 英文：美國小朋友的聲音
 RATE = '-8%'                     # 講慢一點，小朋友比較聽得懂
-PITCH = '+6Hz'
+PITCH = '+0Hz'
 OUT = 'audio'
 # 錄好的檔頭尾各有快一秒的靜音，句子之間會卡卡的；用 ffmpeg 修掉（名字加 trim，修過的才算數）
 TRIM = 'silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.03,areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.08,areverse'
