@@ -1,6 +1,6 @@
 $ nvidia-smi -L
-GPU 0: Tesla T4 (UUID: GPU-a473065e-c19d-2c23-1af2-56203f681c47)
-GPU 1: Tesla T4 (UUID: GPU-6a22c459-0e72-7d4d-c19b-68115597a8cd)
+GPU 0: Tesla T4 (UUID: GPU-63923501-32d8-37e5-dc5c-a2f90098d264)
+GPU 1: Tesla T4 (UUID: GPU-91fb1550-4765-4a0a-4a75-75a1cd39deee)
  
 $ git clone --depth 1 https://github.com/ace-step/ACE-Step-1.5 /kaggle/tmp/ace
  Cloning into '/kaggle/tmp/ace'...
@@ -158,21 +158,23 @@ Successfully downloaded from HuggingFace: ACE-Step/Ace-Step1.5
 
 Download complete!
 Models are available at: /kaggle/tmp/ace/checkpoints
- 2026-10-25 13:04:30.280 | INFO     | __main__:_smart_download:249 - [Model Download] Auto-detected: HuggingFace Hub
-2026-10-25 13:04:30.280 | INFO     | __main__:_smart_download:252 - [Model Download] Using HuggingFace Hub...
-2026-10-25 13:04:30.890 | INFO     | __main__:_download_from_huggingface_internal:180 - [Model Download] Downloading from HuggingFace: ACE-Step/Ace-Step1.5 -> /kaggle/tmp/ace/checkpoints
+ 2026-10-25 14:07:09.317 | INFO     | __main__:_smart_download:249 - [Model Download] Auto-detected: HuggingFace Hub
+2026-10-25 14:07:09.317 | INFO     | __main__:_smart_download:252 - [Model Download] Using HuggingFace Hub...
+2026-10-25 14:07:09.898 | INFO     | __main__:_download_from_huggingface_internal:180 - [Model Download] Downloading from HuggingFace: ACE-Step/Ace-Step1.5 -> /kaggle/tmp/ace/checkpoints
 
 Fetching 28 files:   0%|          | 0/28 [00:00<?, ?it/s]
-Fetching 28 files:  29%|██▊       | 8/28 [00:00<00:01, 19.42it/s]
-Fetching 28 files:  57%|█████▋    | 16/28 [00:00<00:00, 27.02it/s]
-Fetching 28 files:  86%|████████▌ | 24/28 [00:06<00:01,  3.79it/s]
-Fetching 28 files:  93%|█████████▎| 26/28 [00:20<00:01,  1.30it/s]
-Fetching 28 files:  96%|█████████▋| 27/28 [00:39<00:01,  1.44s/it]
-Fetching 28 files: 100%|██████████| 28/28 [00:57<00:00,  2.04s/it]
-Fetching 28 files: 100%|██████████| 28/28 [00:57<00:00,  2.04s/it]
-2026-10-25 13:05:28.344 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced modeling_acestep_v15_turbo.py -> /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/modeling_acestep_v15_turbo.py
-2026-10-25 13:05:28.345 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced configuration_acestep_v15.py -> /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/configuration_acestep_v15.py
-2026-10-25 13:05:28.345 | INFO     | __main__:download_main_model:489 - [Model Download] Synced code files for acestep-v15-turbo: ['modeling_acestep_v15_turbo.py', 'configuration_acestep_v15.py']
+Fetching 28 files:  29%|██▊       | 8/28 [00:00<00:00, 23.32it/s]
+Fetching 28 files:  57%|█████▋    | 16/28 [00:00<00:00, 34.52it/s]
+Fetching 28 files:  86%|████████▌ | 24/28 [00:05<00:00,  4.39it/s]
+Fetching 28 files:  86%|████████▌ | 24/28 [00:20<00:03,  1.20it/s]
+Fetching 28 files:  89%|████████▉ | 25/28 [00:26<00:03,  1.07s/it]
+Fetching 28 files:  93%|█████████▎| 26/28 [00:26<00:02,  1.04s/it]
+Fetching 28 files:  96%|█████████▋| 27/28 [00:27<00:01,  1.01s/it]
+Fetching 28 files: 100%|██████████| 28/28 [00:45<00:00,  1.63s/it]
+Fetching 28 files: 100%|██████████| 28/28 [00:45<00:00,  1.63s/it]
+2026-10-25 14:07:55.752 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced modeling_acestep_v15_turbo.py -> /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/modeling_acestep_v15_turbo.py
+2026-10-25 14:07:55.753 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced configuration_acestep_v15.py -> /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/configuration_acestep_v15.py
+2026-10-25 14:07:55.753 | INFO     | __main__:download_main_model:489 - [Model Download] Synced code files for acestep-v15-turbo: ['modeling_acestep_v15_turbo.py', 'configuration_acestep_v15.py']
 
 gen exit 0
 done
@@ -180,7 +182,7 @@ del initialized successfully on cuda
 Main model: /kaggle/tmp/ace/checkpoints/acestep-v15-turbo
 VAE: /kaggle/tmp/ace/checkpoints/vae
 Text encoder: /kaggle/tmp/ace/checkpoints/Qwen3-Embedding-0.6B
-Dtype: torch.float16
+Dtype: torch.float32
 Attention: eager
 Compiled: False
 Quantization: Disabled
@@ -189,66 +191,158 @@ Offload DiT to CPU: False
 MLX DiT: Disabled
 MLX VAE: Disabled
 llm False ❌ 5Hz LM model not found at /kaggle/tmp/ace/checkpoints/acestep-5Hz-lm-0.6B
-acestep-little-star-cover FAILED 5s Error: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).
-Common causes and fixes:
-  1. LoRA/adapter trained on an older model version — retrain or update the adapter.
-  2. Checkpoint/config mismatch — verify model checkpoints match this release.
-  3. Unsupported quantization/backend — try running with --backend pt.
-  4. CPU offload left parameters on wrong device — restart and regenerate.
-  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.
+acestep-little-star-cover FAILED 1s Error: CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 610.81 MiB is free. Including non-PyTorch memory, this process has 13.96 GiB memory in use. Of the allocated memory 13.74 GiB is allocated by PyTorch, and 109.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
 Traceback (most recent call last):
-  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py", line 465, in generate_music
-    pred_latents, time_costs = self._prepare_generate_music_decode_state(
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py", line 81, in _prepare_generate_music_decode_state
-    raise RuntimeError("\n".join(hints))
-RuntimeError: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).
-Common causes and fixes:
-  1. LoRA/adapter trained on an older model version — retrain or update the adapter.
-  2. Checkpoint/config mismatch — verify model checkpoints match this release.
-  3. Unsupported quantization/backend — try running with --backend pt.
-  4. CPU offload left parameters on wrong device — restart and regenerate.
-  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py", line 424, in generate_music
+    service_run = self._run_generate_music_service_with_progress(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py", line 160, in _run_generate_music_service_with_progress
+    raise _error["exc"]
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py", line 79, in _service_target
+    _result["outputs"] = self.service_generate(
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/service_generate.py", line 102, in service_generate
+    batch = self._prepare_batch(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_batch.py", line 83, in _prepare_batch
+    self._prepare_target_latents_and_wavs(
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_target.py", line 105, in _prepare_target_latents_and_wavs
+    target_latent = self._encode_audio_to_latents(current_wav.squeeze(0))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/batch_prep.py", line 70, in _encode_audio_to_latents
+    latents = self.tiled_encode(audio, offload_latent_to_cpu=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode.py", line 76, in tiled_encode
+    result = self._tiled_encode_offload_cpu(audio, batch_size, samples, stride, overlap, num_steps, chunk_size)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode_chunks.py", line 50, in _tiled_encode_offload_cpu
+    first_latent_chunk = self.vae.encode(first_audio_chunk).latent_dist.sample()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/utils/accelerate_utils.py", line 46, in wrapper
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 397, in encode
+    h = self._encode(x)
+        ^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 375, in _encode
+    return self.encoder(x)
+           ^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 246, in forward
+    hidden_state = module(hidden_state)
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 108, in forward
+    hidden_state = self.res_unit1(hidden_state)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 84, in forward
+    output_tensor = self.conv2(self.snake2(output_tensor))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 51, in forward
+    hidden_states = hidden_states + (beta + 1e-9).reciprocal() * torch.sin(alpha * hidden_states).pow(2)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 610.81 MiB is free. Including non-PyTorch memory, this process has 13.96 GiB memory in use. Of the allocated memory 13.74 GiB is allocated by PyTorch, and 109.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
 
-acestep-twinkle-cover FAILED 2s Error: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).
-Common causes and fixes:
-  1. LoRA/adapter trained on an older model version — retrain or update the adapter.
-  2. Checkpoint/config mismatch — verify model checkpoints match this release.
-  3. Unsupported quantization/backend — try running with --backend pt.
-  4. CPU offload left parameters on wrong device — restart and regenerate.
-  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.
+acestep-twinkle-cover FAILED 1s Error: CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 610.81 MiB is free. Including non-PyTorch memory, this process has 13.96 GiB memory in use. Of the allocated memory 13.74 GiB is allocated by PyTorch, and 109.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
 Traceback (most recent call last):
-  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py", line 465, in generate_music
-    pred_latents, time_costs = self._prepare_generate_music_decode_state(
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py", line 81, in _prepare_generate_music_decode_state
-    raise RuntimeError("\n".join(hints))
-RuntimeError: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).
-Common causes and fixes:
-  1. LoRA/adapter trained on an older model version — retrain or update the adapter.
-  2. Checkpoint/config mismatch — verify model checkpoints match this release.
-  3. Unsupported quantization/backend — try running with --backend pt.
-  4. CPU offload left parameters on wrong device — restart and regenerate.
-  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py", line 424, in generate_music
+    service_run = self._run_generate_music_service_with_progress(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py", line 160, in _run_generate_music_service_with_progress
+    raise _error["exc"]
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py", line 79, in _service_target
+    _result["outputs"] = self.service_generate(
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/service_generate.py", line 102, in service_generate
+    batch = self._prepare_batch(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_batch.py", line 83, in _prepare_batch
+    self._prepare_target_latents_and_wavs(
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_target.py", line 105, in _prepare_target_latents_and_wavs
+    target_latent = self._encode_audio_to_latents(current_wav.squeeze(0))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/batch_prep.py", line 70, in _encode_audio_to_latents
+    latents = self.tiled_encode(audio, offload_latent_to_cpu=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode.py", line 76, in tiled_encode
+    result = self._tiled_encode_offload_cpu(audio, batch_size, samples, stride, overlap, num_steps, chunk_size)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode_chunks.py", line 50, in _tiled_encode_offload_cpu
+    first_latent_chunk = self.vae.encode(first_audio_chunk).latent_dist.sample()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/utils/accelerate_utils.py", line 46, in wrapper
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 397, in encode
+    h = self._encode(x)
+        ^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 375, in _encode
+    return self.encoder(x)
+           ^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 246, in forward
+    hidden_state = module(hidden_state)
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 108, in forward
+    hidden_state = self.res_unit1(hidden_state)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 84, in forward
+    output_tensor = self.conv2(self.snake2(output_tensor))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py", line 51, in forward
+    hidden_states = hidden_states + (beta + 1e-9).reciprocal() * torch.sin(alpha * hidden_states).pow(2)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 610.81 MiB is free. Including non-PyTorch memory, this process has 13.96 GiB memory in use. Of the allocated memory 13.74 GiB is allocated by PyTorch, and 109.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
 
-acestep-little-star-new FAILED 2s Error: Generation produced NaN or Inf latents (shape=[1, 1125, 64], dtype=torch.float16, device=cuda:0, nan=72000, inf=0).
-Common causes and fixes:
-  1. LoRA/adapter trained on an older model version — retrain or update the adapter.
-  2. Checkpoint/config mismatch — verify model checkpoints match this release.
-  3. Unsupported quantization/backend — try running with --backend pt.
-  4. CPU offload left parameters on wrong device — restart and regenerate.
-  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.
-Traceback (most recent call last):
-  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py", line 465, in generate_music
-    pred_latents, time_costs = self._prepare_generate_music_decode_state(
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py", line 81, in _prepare_generate_music_decode_state
-    raise RuntimeError("\n".join(hints))
-RuntimeError: Generation produced NaN or Inf latents (shape=[1, 1125, 64], dtype=torch.float16, device=cuda:0, nan=72000, inf=0).
-Common causes and fixes:
-  1. LoRA/adapter trained on an older model version — retrain or update the adapter.
-  2. Checkpoint/config mismatch — verify model checkpoints match this release.
-  3. Unsupported quantization/backend — try running with --backend pt.
-  4. CPU offload left parameters on wrong device — restart and regenerate.
-  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.
-
+acestep-little-star-new ok 13s Generation completed successfully!
