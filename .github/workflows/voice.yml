@@ -36,7 +36,7 @@ jobs:
           path: .sing-cache
           key: sing-${{ hashFiles('js/songs.js') }}
           restore-keys: sing-
-      - run: pip install pyworld soundfile numpy
+      - run: pip install "setuptools<80" pyworld soundfile numpy
       - run: node tools/songs.js > "$RUNNER_TEMP/songs.json"
       - run: python tools/sing.py "$RUNNER_TEMP/songs.json"
       - name: 推回 main
