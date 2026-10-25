@@ -33,6 +33,7 @@
         <button class="tab" data-tab="paint">🖍️ 塗顏色</button>
         <button class="tab" data-tab="story">📖 聽故事</button>
         <button class="tab" data-tab="song">🎵 兒歌唐詩</button>
+        <button class="tab" data-tab="math">🔢 學數學</button>
       </nav>
       <button id="musicBtn" class="music-btn" aria-label="背景音樂">🎵</button>
       <button id="installBtn" class="pill" hidden>⬇️ 安裝</button>
@@ -152,6 +153,30 @@
     </div>
   </section>
 
+  <!-- 學數學 -->
+  <section id="math" class="screen" hidden>
+    <div class="reader-top">
+      <button id="mathHome" class="round" aria-label="回首頁"><svg viewBox="0 0 48 48"><path d="M8 24 L24 9 L40 24" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 22 L13 39 Q13 41 15 41 L21 41 L21 31 L27 31 L27 41 L33 41 Q35 41 35 39 L35 22" fill="currentColor"/></svg></button>
+      <div class="reader-title"><h2 id="mathTitle"></h2><div id="mathDots" class="dots"></div></div>
+      <button id="mathSay" class="round" aria-label="再念一次"><svg viewBox="0 0 48 48"><path d="M8 19 L16 19 L26 10 L26 38 L16 29 L8 29 Z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M32 17 Q37 24 32 31 M36 12 Q45 24 36 36" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></button>
+    </div>
+    <div id="mathPage" class="page math-page">
+      <div id="mathVisual" class="math-visual"></div>
+      <div id="mathQ" class="math-q"></div>
+      <div id="mathChoices" class="math-choices"></div>
+    </div>
+    <div id="mathResult" class="modal" hidden>
+      <div class="modal-box">
+        <div id="mathStars" class="stars"></div>
+        <p id="mathScore"></p>
+        <div class="modal-actions">
+          <button id="mathAgain" class="pill big">🔁 再玩一次</button>
+          <button id="mathBack" class="pill big">🏠 回首頁</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 讀完啦 -->
   <section id="done" class="screen" hidden>
     <div class="done-box">
@@ -167,11 +192,12 @@
   <div id="confetti" class="confetti"></div>
 
   <script src="js/version.js"></script>
+  <script src="js/words.js"></script>
   <script src="js/art.js"></script>
   <script src="js/books.js"></script>
   <script src="js/songs.js"></script>
-  <script src="js/words.js"></script>
   <script src="js/paint.js"></script>
+  <script src="js/math.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

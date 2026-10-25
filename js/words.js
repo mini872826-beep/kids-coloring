@@ -90,5 +90,33 @@
   const COLOR_NAMES = ['白色', '黑色', '灰色', '淺灰色', '深灰色', '咖啡色', '橄欖綠',
     ...base, ...base.map(n => '淺' + n), ...base.map(n => '深' + n)];
 
-  window.WORDS = { COLORS, colorName, BRUSHES, BRUSH_GROUPS, PATTERNS, SHAPES, FIXED, COLOR_NAMES };
+  /* ---------- 數字念法（學數學用） ----------
+   * 念一個數字時拆成幾段，例如 325 =「三百」+「二十五」，
+   * 這樣只要錄 0~99、幾百、零幾、一十幾這些片段，就能念 0~1000 的任何數字。
+   */
+  const DIG = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+  function zh(n) {   // 0 ~ 99
+    if (n < 10) return DIG[n];
+    if (n === 10) return '十';
+    if (n < 20) return '十' + DIG[n % 10];
+    return DIG[Math.floor(n / 10)] + '十' + (n % 10 ? DIG[n % 10] : '');
+  }
+  function numberWords(n) {
+    if (n === 1000) return ['一千'];
+    if (n < 100) return [zh(n)];
+    const h = Math.floor(n / 100), r = n % 100, H = (h === 2 ? '兩' : DIG[h]) + '百';
+    if (r === 0) return [H];
+    if (r < 10) return [H, '零' + DIG[r]];
+    if (r < 20) return [H, '一十' + (r % 10 ? DIG[r % 10] : '')];
+    return [H, zh(r)];
+  }
+  // 九九乘法口訣：二三得六、三四十二、二五一十
+  function timesLine(a, b) {
+    const p = a * b;
+    return zh(a) + zh(b) + (p < 10 ? '得' + zh(p) : p === 10 ? '一十' : zh(p));
+  }
+  const MATH_WORDS = ['學數學', '數一數', '個位數加減', '十位數加減', '百位數加減', '九九乘法', '九九乘法歌',
+    '加', '減', '等於多少？', '數一數，有幾個？', '答對了，好棒！', '再想想看', '答案是', '全部答完了！', '答對了', '題'];
+
+  window.WORDS = { COLORS, colorName, BRUSHES, BRUSH_GROUPS, PATTERNS, SHAPES, FIXED, COLOR_NAMES, zh, numberWords, timesLine, MATH_WORDS };
 })();

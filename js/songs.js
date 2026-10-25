@@ -97,6 +97,29 @@
       ],
     },
 
+    {
+      id: 'tricycle', kind: 'song', title: '三輪車', bpm: 132,
+      art: svg(scene.day() + scene.sun() + scene.road() + scene.tree(680) + put('grandma', 230, 120, 320, 'jump', 'pop')),
+      lines: ['三輪車，跑得快', '上面坐個老太太', '要五毛，給一塊', '你說奇怪不奇怪'],
+      notes: [
+        [[G, 1], [G, 1], [E, 2], [G, 1], [G, 1], [E, 2]],
+        [[A, 1], [A, 1], [G, 1], [G, 1], [E, 1], [E, 1], [D, 2]],
+        [[C, 1], [C, 1], [D, 2], [E, 1], [E, 1], [D, 2]],
+        [[D, 1], [E, 1], [G, 1], [E, 1], [D, 1], [D, 1], [C, 2]],
+      ],
+    },
+    {
+      id: 'london-bridge', kind: 'song', title: '倫敦鐵橋垮下來', bpm: 120,
+      art: svg(scene.day() + scene.sun() + `<rect y="330" width="800" height="170" fill="#74c0fc"/>` + `<g stroke="#222" stroke-width="6" stroke-linejoin="round"><path d="M60 300 L740 300 L740 330 L60 330 Z" fill="#c98a4b"/><path d="M180 330 Q260 230 340 330 M460 330 Q540 230 620 330" fill="none"/>${[100, 400, 700].map(x => `<rect x="${x - 20}" y="230" width="40" height="190" fill="#adb5bd"/>`).join('')}</g>`),
+      lines: ['倫敦鐵橋垮下來', '垮下來，垮下來', '倫敦鐵橋垮下來', '就要垮下來'],
+      notes: [
+        [[G, 1.5], [A, .5], [G, 1], [F, 1], [E, 1], [F, 1], [G, 2]],
+        [[D, 1], [E, 1], [F, 2], [E, 1], [F, 1], [G, 2]],
+        [[G, 1.5], [A, .5], [G, 1], [F, 1], [E, 1], [F, 1], [G, 2]],
+        [[D, 2], [G, 2], [E, 1], [C, 3]],
+      ],
+    },
+
     /* ======== 唐詩 ======== */
     {
       id: 'quiet-night', kind: 'poem', title: '靜夜思', author: '李白',
@@ -139,6 +162,47 @@
       lines: ['慈母手中線', '遊子身上衣', '臨行密密縫', '意恐遲遲歸', '誰言寸草心', '報得三春暉'],
     },
   ];
+
+  /* ======== 三字經、弟子規（幾百年前的經典，全文可用）：每段四句 ======== */
+  const scroll = (bg, who) => svg(`<rect width="800" height="500" fill="${bg}"/>` + scene.grass(400) +
+    `<g stroke="#222" stroke-width="6" stroke-linejoin="round"><rect x="440" y="90" width="300" height="250" rx="12" fill="#fff8e6"/><rect x="425" y="80" width="330" height="26" rx="13" fill="#c98a4b"/><rect x="425" y="326" width="330" height="26" rx="13" fill="#c98a4b"/>${[140, 180, 220, 260, 300].map(y => `<path d="M480 ${y} L700 ${y}" stroke-width="4" stroke="#d9c7a3"/>`).join('')}</g>` +
+    put(who, 20, 120, 360, 'jump', 'pop'));
+  const classics = [
+    ['sanzi', '三字經', '王應麟', '#fff3bf', 'shepherd', [
+      ['人之初，性本善', '性相近，習相遠', '苟不教，性乃遷', '教之道，貴以專'],
+      ['昔孟母，擇鄰處', '子不學，斷機杼', '竇燕山，有義方', '教五子，名俱揚'],
+      ['養不教，父之過', '教不嚴，師之惰', '子不學，非所宜', '幼不學，老何為'],
+      ['玉不琢，不成器', '人不學，不知義', '為人子，方少時', '親師友，習禮儀'],
+      ['香九齡，能溫席', '孝於親，所當執', '融四歲，能讓梨', '弟於長，宜先知'],
+    ]],
+    ['dizi', '弟子規', '李毓秀', '#e7f5ff', 'redhood', [
+      ['弟子規，聖人訓', '首孝悌，次謹信', '泛愛眾，而親仁', '有餘力，則學文'],
+      ['父母呼，應勿緩', '父母命，行勿懶', '父母教，須敬聽', '父母責，須順承'],
+      ['兄道友，弟道恭', '兄弟睦，孝在中', '財物輕，怨何生', '言語忍，忿自泯'],
+      ['朝起早，夜眠遲', '老易至，惜此時', '晨必盥，兼漱口', '便溺回，輒淨手'],
+      ['凡出言，信為先', '詐與妄，奚可焉', '話說多，不如少', '惟其是，勿佞巧'],
+    ]],
+  ];
+  const nth = ['一', '二', '三', '四', '五', '六'];
+  for (const [kind, name, author, bg, who, parts] of classics) {
+    parts.forEach((lines, i) => SONGS.push({
+      id: `${kind}-${i + 1}`, kind, title: `${name}（${nth[i]}）`, author, art: scroll(bg, who), lines,
+    }));
+  }
+
+  // 九九乘法歌：一到九，每一段念「二一得二、二二得四……」
+  const { zh, timesLine } = window.WORDS;
+  for (let n = 1; n <= 9; n++) {
+    const dots = Array.from({ length: n }, (_, r) => Array.from({ length: Math.min(n, 9) }, (_, c) =>
+      `<circle cx="${470 + c * 30}" cy="${130 + r * 30}" r="10" fill="#fff" opacity=".9"/>`).join('')).join('');
+    SONGS.push({
+      id: 'times-' + n, kind: 'times', title: zh(n) + '的乘法',
+      art: svg(`<rect width="800" height="500" fill="${['#ff8787', '#ffa94d', '#ffd43b', '#69db7c', '#38d9a9', '#4dabf7', '#748ffc', '#b197fc', '#f783ac'][n - 1]}"/>
+        <text x="230" y="330" text-anchor="middle" font-size="260" font-weight="900" fill="#fff" stroke="#222" stroke-width="8" paint-order="stroke" font-family="Chiron GoRound TC, sans-serif">${n}×</text>${dots}`),
+      lines: Array.from({ length: 9 }, (_, i) => timesLine(n, i + 1)),
+      sub: Array.from({ length: 9 }, (_, i) => `${n} × ${i + 1} = ${n * (i + 1)}`),
+    });
+  }
 
   window.SONGS = SONGS;
 })();

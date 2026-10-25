@@ -103,12 +103,13 @@ button {
   box-shadow: 0 6px 0 rgba(0, 0, 0, .12);
 }
 .tab {
-  padding: 10px 24px;
+  padding: 10px 18px;
   border-radius: 999px;
   font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 20px;
   color: #8a6d3b;
+  white-space: nowrap;
   transition: background .2s, color .2s;
 }
 .tab:active { transform: scale(.95); }
@@ -745,8 +746,49 @@ button {
 }
 
 /* ================= 閱讀器 ================= */
-#reader, #song, #done { background: linear-gradient(#7fd3ff 0%, #b8e8ff 60%, #dff6ff 100%); }
-#reader, #song { display: flex; flex-direction: column; gap: 12px; }
+#reader, #song, #math, #done { background: linear-gradient(#7fd3ff 0%, #b8e8ff 60%, #dff6ff 100%); }
+#reader, #song, #math { display: flex; flex-direction: column; gap: 12px; }
+
+/* 學數學 */
+.math-page { flex-direction: column !important; align-items: center; justify-content: center; gap: 22px; padding: 20px; }
+.math-page.slide { animation: turnNext .35s ease; }
+.math-visual { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px; }
+.objs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 420px; }
+.obj { width: clamp(40px, 6vw, 60px); aspect-ratio: 1; display: block; }
+.obj svg { width: 100%; height: 100%; }
+.math-visual.big .obj { width: clamp(56px, 9vw, 86px); }
+.math-visual.big .objs { max-width: 560px; gap: 10px; }
+.obj.gone { opacity: .3; position: relative; }
+.obj.gone::after { content: "✕"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 40px; font-weight: 900; color: #e03131; }
+.op { font-size: 48px; font-weight: 900; color: var(--cd); }
+.math-q { font-family: "Chiron GoRound TC", "PingFang TC", sans-serif; font-weight: 900; font-size: clamp(40px, 8vw, 84px); color: #3d2f1f; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.math-choices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; width: min(100%, 760px); }
+.choice {
+  padding: 18px 8px;
+  border-radius: 24px;
+  background: #fff;
+  border: 5px solid var(--c, #4dabf7);
+  box-shadow: 0 7px 0 var(--cd, #1c7ed6);
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 900;
+  font-size: clamp(30px, 5vw, 52px);
+  font-variant-numeric: tabular-nums;
+  color: #3d2f1f;
+  transition: transform .12s;
+}
+.choice:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--cd, #1c7ed6); }
+.choice.right { background: #b2f2bb; border-color: #2f9e44; box-shadow: 0 7px 0 #2b8a3e; animation: wob .5s ease; }
+.choice.wrong { background: #ffe3e3; border-color: #fa5252; box-shadow: none; opacity: .55; animation: shake .4s ease; }
+.choice.hint { animation: hintPulse 1s ease-in-out infinite; }
+@keyframes shake { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+@keyframes hintPulse { 50% { box-shadow: 0 0 0 8px #ffd43b, 0 7px 0 var(--cd); } }
+@media (orientation: portrait) { .math-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+#mathSay { color: #fff; background: #4dabf7; }
+.dots span.done { background: #8ce99a; }
+#math .modal { position: fixed; }
+.math-card .thumb { background: linear-gradient(135deg, var(--c), var(--cd)); display: grid; place-items: center; }
+.math-show { position: static !important; font-family: "Chiron GoRound TC", "PingFang TC", sans-serif; font-weight: 900; font-size: 46px; color: #fff; text-shadow: 0 4px 0 rgba(0, 0, 0, .2); }
+.chip-sep { width: 3px; height: 34px; border-radius: 2px; background: rgba(255, 255, 255, .8); margin: 0 4px; }
 .song-sub { font-size: 15px; font-weight: 700; color: #fff; opacity: .9; }
 
 /* 歌詞：一句一行，唱到哪句就亮哪句 */
@@ -767,6 +809,8 @@ button {
 .lyrics li.on { background: #fff3bf; color: #3d2f1f; transform: scale(1.06); }
 .lyrics.poem { align-items: center; letter-spacing: .25em; font-size: clamp(26px, 4vw, 38px); }
 .lyrics.poem li { transform-origin: center; }
+.lyrics.times { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); align-content: center; gap: 6px 10px; font-size: clamp(20px, 2.6vw, 26px); }
+.lyrics li small { display: block; font-size: .6em; font-family: "Noto Sans TC", sans-serif; opacity: .7; letter-spacing: 0; }
 #songPlay { color: #fff; }
 #songPlay.on { background: #ff8787; }
 #songRead { color: #fff; background: #4dabf7; }

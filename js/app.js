@@ -4,7 +4,7 @@
   const { DRAWINGS, CATEGORIES, svgDoc, lineArt } = window.ART;
   const BOOKS = window.BOOKS;
   const SONGS = window.SONGS;
-  const screens = ['home', 'paint', 'reader', 'song', 'done'];
+  const screens = ['home', 'paint', 'reader', 'song', 'math', 'done'];
 
   function show(name) {
     for (const s of screens) $(s).hidden = s !== name;
@@ -46,6 +46,7 @@
     const [, view, id, page] = location.hash.split('/');
     if (current === 'read') stopSpeaking();
     if (current === 'song') stopSong();
+    if (current === 'math') window.MathGame.stop();
     current = view;
     if (view === 'paint') {
       const d = findDrawing(id);
@@ -64,6 +65,9 @@
       if (!sg) return go('#/');
       show('song');
       openSong(sg);
+    } else if (view === 'math') {
+      show('math');
+      window.MathGame.open(id);
     } else if (view === 'done') {
       show('done');
       Sound.play('yay');
@@ -106,7 +110,9 @@
 
   const SONG_KINDS = [
     { id: 'song', name: '兒歌', icon: '🎵', color: '#ff8787', dark: '#e03131' },
-    { id: 'poem', name: '唐詩', icon: '📜', color: '#c0a37a', dark: '#8c6d46' },
+    { id: 'poem', name: '唐詩', icon: '📜', color: '#c0a37a', dark: '#8c6d46', sep: true },
+    { id: 'sanzi', name: '三字經', icon: '📖', color: '#e8a33c', dark: '#b8741a' },
+    { id: 'dizi', name: '弟子規', icon: '🎎', color: '#74c0fc', dark: '#1c7ed6' },
   ];
 
   function renderHome() {
@@ -146,13 +152,20 @@
         }
       });
     } else if (pref.tab === 'song') {
+      if (!SONG_KINDS.some(k => k.id === pref.songKind)) pref.songKind = 'song';
       $('cats').hidden = false;
       $('cats').innerHTML = `<div class="cat-row main-row">${SONG_KINDS.map(k =>
-        `<button class="cat${k.id === pref.songKind ? ' on' : ''}" data-kind="${k.id}" style="--c:${k.color};--cd:${k.dark}"><span class="cat-icon">${k.icon}</span>${k.name}</button>`).join('')}</div>`;
+        `${k.sep ? '<span class="chip-sep"></span>' : ''}<button class="cat${k.id === pref.songKind ? ' on' : ''}" data-kind="${k.id}" style="--c:${k.color};--cd:${k.dark}"><span class="cat-icon">${k.icon}</span>${k.name}</button>`).join('')}</div>`;
       const kind = SONG_KINDS.find(k => k.id === pref.songKind) || SONG_KINDS[0];
       $('grid').style.cssText = `--c:${kind.color};--cd:${kind.dark}`;
       $('grid').innerHTML = SONGS.filter(x => x.kind === kind.id).map((x, i) =>
         `<div class="card story" role="button" data-go="#/song/${x.id}" data-say="${x.title}" style="--i:${i}"><span class="thumb">${x.art}${x.author ? `<span class="tag">${x.author}</span>` : ''}</span><div class="name">${kind.icon} ${x.title}</div></div>`).join('');
+    } else if (pref.tab === 'math') {
+      $('cats').hidden = true;
+      $('grid').style.cssText = '--c:#ff922b;--cd:#e8590c';
+      // 練習題關卡＋九九乘法歌（一到九）
+      $('grid').innerHTML = window.MathGame.cards() + SONGS.filter(x => x.kind === 'times').map((x, i) =>
+        `<div class="card story" role="button" data-go="#/song/${x.id}" data-say="${x.title}" style="--i:${i + 4};--c:#ff922b;--cd:#e8590c"><span class="thumb">${x.art}</span><div class="name">✖️ ${x.title}</div></div>`).join('');
     } else {
       $('cats').hidden = false;
       $('cats').innerHTML = `<div class="cat-row main-row">${BOOK_TAGS.map(t =>
@@ -354,10 +367,11 @@
   function openSong(sg) {
     song = sg;
     $('songTitle').textContent = sg.title;
-    $('songSub').textContent = sg.kind === 'poem' ? `唐・${sg.author}` : sg.original ? '原創兒歌' : '傳統兒歌';
+    $('songSub').textContent = { poem: `唐・${sg.author}`, sanzi: `宋・${sg.author}`, dizi: `清・${sg.author}`, times: '九九乘法歌' }[sg.kind]
+      || (sg.original ? '原創兒歌' : '傳統兒歌');
     $('songArt').innerHTML = sg.art;
     $('lyrics').className = 'lyrics ' + sg.kind;
-    $('lyrics').innerHTML = sg.lines.map(l => `<li>${l}</li>`).join('');
+    $('lyrics').innerHTML = sg.lines.map((l, i) => `<li>${l}${sg.sub ? `<small>${sg.sub[i]}</small>` : ''}</li>`).join('');
     setPlaying(false);
     // 點進來就開始：兒歌彈旋律，唐詩念出來
     const my = songToken;
@@ -379,9 +393,10 @@
         if (my === songToken) { highlight(-1); setPlaying(false); }
       });
     } else {
-      readLines(my, true);
+      readLines(my, sg_title(song));
     }
   }
+  const sg_title = sg => sg.kind !== 'song';
   // 一句一句念，念到哪句就亮哪句；唐詩先念題目和作者
   function readLines(my, withTitle) {
     let i = -1;
@@ -392,7 +407,7 @@
       highlight(i);
       Voice.speak([song.lines[i]], () => setTimeout(next, 400));
     };
-    Voice.speak(withTitle ? [song.title, song.author] : [], () => setTimeout(next, 300));
+    Voice.speak(withTitle ? [song.title, song.author].filter(Boolean) : [], () => setTimeout(next, 300));
   }
   function songStep(d) {
     const list = SONGS.filter(x => x.kind === song.kind);

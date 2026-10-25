@@ -5,7 +5,7 @@ const vm = require('vm');
 
 const ctx = { window: {}, console };
 vm.createContext(ctx);
-for (const f of ['js/art.js', 'js/books.js', 'js/songs.js', 'js/words.js']) {
+for (const f of ['js/words.js', 'js/art.js', 'js/books.js', 'js/songs.js']) {
   vm.runInContext(fs.readFileSync(f, 'utf8'), ctx, { filename: f });
 }
 const { ART, BOOKS, SONGS, WORDS } = ctx.window;
@@ -22,5 +22,8 @@ const all = new Set([
   ...WORDS.FIXED,
 ]);
 for (let i = 1; i <= 60; i++) all.add(`白紙 ${i}`);
+// 學數學：0~1000 的數字片段、題目用語
+for (let n = 0; n <= 1000; n++) WORDS.numberWords(n).forEach(w => all.add(w));
+WORDS.MATH_WORDS.forEach(w => all.add(w));
 
 process.stdout.write(JSON.stringify([...all], null, 1));
