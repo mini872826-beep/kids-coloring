@@ -45,6 +45,7 @@ jobs:
           pip install torch==2.3.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cpu
           pip install --no-build-isolation openai-whisper==20231117
           pip install -r req.txt
+          pip install "ruamel.yaml<0.18"
       - name: BreezyVoice 錄音
         env:
           PYTHONUTF8: '1'
