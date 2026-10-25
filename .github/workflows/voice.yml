@@ -18,6 +18,7 @@ concurrency:
 jobs:
   voice:
     runs-on: ubuntu-latest
+    timeout-minutes: 340
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,6 +30,19 @@ jobs:
       - run: pip install edge-tts
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: node tools/phrases.js > "$RUNNER_TEMP/phrases.json"
+      # 中文旁白：Kaggle 免費 GPU 上用 BreezyVoice（志工 1 的聲音）錄還沒錄過的句子
+      - run: python tools/gen_voice.py "$RUNNER_TEMP/phrases.json" --plan "$RUNNER_TEMP/jobs.json"
+      - name: Kaggle 錄中文旁白
+        continue-on-error: true
+        env:
+          KAGGLE_USERNAME: pacokids
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          if [ "$(python3 -c 'import json,sys;print(len(json.load(open(sys.argv[1]))))' "$RUNNER_TEMP/jobs.json")" = 0 ]; then echo "都錄好了"; exit 0; fi
+          pip install -q "kaggle>=1.8"
+          tools/kaggle_voice/kaggle.sh "$RUNNER_TEMP/jobs.json" main audio
+          rm -f audio/kaggle-voice-log.txt
       - run: python tools/gen_voice.py "$RUNNER_TEMP/phrases.json"
       # 兒歌：AI 一個字一個字錄，再照歌譜改音高，變成真的在唱（每個字的錄音存在 cache）
       - uses: actions/cache@v4

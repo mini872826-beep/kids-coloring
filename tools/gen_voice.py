@@ -1,4 +1,5 @@
-"""用 AI 聲音把每一句錄成 mp3，放在 audio/，並寫出 audio/index.json（句子 -> 檔名）。
+"""用 AI 聲音把每一句錄成 mp3（中文：BreezyVoice 模仿志工 1 的聲音，在 Kaggle GPU 上錄；
+英文：微軟 Ana。BreezyVoice 還沒錄到的中文句子，先用微軟曉臻頂著，下次再補），放在 audio/，並寫出 audio/index.json（句子 -> 檔名）。
 
 GitHub Actions 每次推上新內容會自動跑（.github/workflows/voice.yml），
 只會錄新增或改過的句子；刪掉的句子對應的 mp3 也會一起清掉。
@@ -29,6 +30,13 @@ def is_english(text):
 
 def voice_for(text):
     return VOICE_EN if is_english(text) else VOICE
+
+
+BREEZY = 'breezy-v1'   # 換聲音範本或改念法時換號碼，全部重錄
+
+
+def breezy_name(text):
+    return hashlib.sha1(f'{BREEZY}|trim|{text}'.encode('utf-8')).hexdigest()[:12] + '.mp3'
 
 
 def file_name(text):
@@ -67,8 +75,18 @@ async def main():
         sys.exit('需要 ffmpeg 來修掉靜音')
     phrases = json.load(open(sys.argv[1], encoding='utf-8'))
     os.makedirs(OUT, exist_ok=True)
+    if len(sys.argv) > 2 and sys.argv[2] == '--plan':
+        # 列出還沒有 BreezyVoice 錄音的中文句子，交給 tools/kaggle_voice/kaggle.sh 去錄
+        jobs = [[t, breezy_name(t)] for t in phrases
+                if not is_english(t) and not os.path.exists(os.path.join(OUT, breezy_name(t)))]
+        json.dump(jobs, open(sys.argv[3], 'w', encoding='utf-8'), ensure_ascii=False)
+        print(f'{len(jobs)} phrases need BreezyVoice')
+        return
     index = {}
     for text in phrases:
+        if not is_english(text) and os.path.exists(os.path.join(OUT, breezy_name(text))):
+            index[text] = breezy_name(text)
+            continue
         name = file_name(text)
         path = os.path.join(OUT, name)
         if not (os.path.exists(path) and os.path.getsize(path) > 0):
