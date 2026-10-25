@@ -1,0 +1,48 @@
+[{"stream_name":"stdout","time":1.792173837,"data":"$ nvidia-smi\n"}
+,{"stream_name":"stdout","time":2.240343353,"data":"Sun Oct 25 10:59:05 2026       \n"}
+,{"stream_name":"stdout","time":2.240368293,"data":"+-----------------------------------------------------------------------------------------+\n"}
+,{"stream_name":"stdout","time":2.240372828,"data":"| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |\n"}
+,{"stream_name":"stdout","time":2.240376627,"data":"+-----------------------------------------+------------------------+----------------------+\n"}
+,{"stream_name":"stdout","time":2.2403801,"data":"| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n"}
+,{"stream_name":"stdout","time":2.240385078,"data":"| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n"}
+,{"stream_name":"stdout","time":2.240390597,"data":"|                                         |                        |               MIG M. |\n"}
+,{"stream_name":"stdout","time":2.240394199,"data":"|=========================================+========================+======================|\n"}
+,{"stream_name":"stdout","time":2.240398281,"data":"|   0  Tesla T4                       Off |   00000000:00:04.0 Off |                    0 |\n"}
+,{"stream_name":"stdout","time":2.240402213,"data":"| N/A   38C    P8              9W /   70W |       0MiB /  15360MiB |      0%      Default |\n"}
+,{"stream_name":"stdout","time":2.240406236,"data":"|                                         |                        |                  N/A |\n"}
+,{"stream_name":"stdout","time":2.240410801,"data":"+-----------------------------------------+------------------------+----------------------+\n"}
+,{"stream_name":"stdout","time":2.240425568,"data":"|   1  Tesla T4                       Off |   00000000:00:05.0 Off |                    0 |\n"}
+,{"stream_name":"stdout","time":2.240429555,"data":"| N/A   44C    P8              9W /   70W |       0MiB /  15360MiB |      0%      Default |\n"}
+,{"stream_name":"stdout","time":2.24043346,"data":"|                                         |                        |                  N/A |\n"}
+,{"stream_name":"stdout","time":2.240437968,"data":"+-----------------------------------------+------------------------+----------------------+\n"}
+,{"stream_name":"stdout","time":2.240441741,"data":"\n"}
+,{"stream_name":"stdout","time":2.240445173,"data":"+-----------------------------------------------------------------------------------------+\n"}
+,{"stream_name":"stdout","time":2.24044888,"data":"| Processes:                                                                              |\n"}
+,{"stream_name":"stdout","time":2.240452516,"data":"|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n"}
+,{"stream_name":"stdout","time":2.240456252,"data":"|        ID   ID                                                               Usage      |\n"}
+,{"stream_name":"stdout","time":2.24046012,"data":"|=========================================================================================|\n"}
+,{"stream_name":"stdout","time":2.24046385,"data":"|  No running processes found                                                             |\n"}
+,{"stream_name":"stdout","time":2.240468565,"data":"+-----------------------------------------------------------------------------------------+\n"}
+,{"stream_name":"stdout","time":2.240472891,"data":" \n"}
+,{"stream_name":"stdout","time":2.240476455,"data":"$ git clone --depth 1 https://github.com/ace-step/ACE-Step-1.5 /kaggle/tmp/ace\n"}
+,{"stream_name":"stdout","time":4.276515093,"data":" Cloning into '/kaggle/tmp/ace'...\n"}
+,{"stream_name":"stdout","time":4.276555025,"data":"\n"}
+,{"stream_name":"stdout","time":4.276560319,"data":"$ pip install -q -e .\n"}
+,{"stream_name":"stdout","time":14.686988664,"data":" ERROR: Package 'ace-step' requires a different Python: 3.13.15 not in '\u003c3.13,\u003e=3.11'\n"}
+,{"stream_name":"stdout","time":14.687020927,"data":"\n"}
+,{"stream_name":"stdout","time":14.688002714,"data":"SETUP EXCEPTION Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":14.688022151,"data":"  File \"/kaggle/src/script.py\", line 41, in \u003cmodule\u003e\n"}
+,{"stream_name":"stdout","time":14.688027319,"data":"    sh('pip install -q -e .', cwd=ACE)\n"}
+,{"stream_name":"stdout","time":14.688031063,"data":"    ~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stdout","time":14.68803466,"data":"  File \"/kaggle/src/script.py\", line 21, in sh\n"}
+,{"stream_name":"stdout","time":14.688038979,"data":"    raise RuntimeError(f'failed: {cmd}')\n"}
+,{"stream_name":"stdout","time":14.688043737,"data":"RuntimeError: failed: pip install -q -e .\n"}
+,{"stream_name":"stdout","time":14.688047919,"data":"\n"}
+,{"stream_name":"stdout","time":14.68805154,"data":"done\n"}
+,{"stream_name":"stderr","time":17.400761597,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":17.400790847,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":18.015207417,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":18.015245113,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":19.278370965,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":20.92473234,"data":"[NbConvertApp] Writing 294055 bytes to __results__.html\n"}
+]
