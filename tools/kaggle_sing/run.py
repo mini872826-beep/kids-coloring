@@ -48,7 +48,8 @@ try:
     json.dump(JOBS, open('/kaggle/tmp/jobs.json', 'w', encoding='utf-8'), ensure_ascii=False)
     open('/kaggle/tmp/gen.py', 'w', encoding='utf-8').write(GEN)
     LOG.flush()
-    r = subprocess.run('/kaggle/tmp/venv/bin/python /kaggle/tmp/gen.py', shell=True, cwd=ACE)
+    r = subprocess.run('/kaggle/tmp/venv/bin/python /kaggle/tmp/gen.py', shell=True, cwd=ACE,
+                       env={**os.environ, 'ACESTEP_DTYPE': 'float32'})   # T4 是舊顯卡，半精度會溢位
     log('gen exit', r.returncode)
 except Exception:
     log('SETUP EXCEPTION', traceback.format_exc()[-3000:])
