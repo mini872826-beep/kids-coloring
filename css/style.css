@@ -64,8 +64,33 @@ button {
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
-  margin: 6px 4px 18px;
+  margin: 6px 4px 12px;
 }
+
+/* 分頁＋分類：往下滑時黏在最上面（滑過標題後加上半透明底色） */
+#home > .home-bar {
+  position: sticky;
+  top: calc(-1 * max(12px, env(safe-area-inset-top)));
+  z-index: 5;
+  margin: 0 calc(-1 * max(16px, env(safe-area-inset-right))) 18px calc(-1 * max(16px, env(safe-area-inset-left)));
+  padding: max(12px, env(safe-area-inset-top)) 0 0;
+  transition: background .2s, box-shadow .2s;
+}
+#home > .home-bar.stuck {
+  background: rgba(150, 218, 255, .93);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 14px rgba(0, 60, 110, .15);
+}
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left));
+}
+.bar-row .tabs { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.bar-row .tabs::-webkit-scrollbar { display: none; }
+.bar-row .tabs > * { flex: none; }
 
 .logo {
   margin: 0;
@@ -130,7 +155,9 @@ button {
 .music-btn:active { transform: translateY(4px); }
 
 /* 分類：一排可以左右滑；故事主題打開時下面多一個托盤 */
-.cats { display: flex; flex-direction: column; gap: 10px; margin: 0 -16px 20px; }
+.cats { display: flex; flex-direction: column; gap: 10px; margin: 12px 0 0; }
+.cats[hidden] { display: none; }
+#home > .home-bar:has(.cats[hidden]) { padding-bottom: 10px; }
 .cat-row {
   display: flex;
   gap: 10px;
@@ -1065,3 +1092,39 @@ button {
   animation: confetti 2.6s linear forwards;
 }
 @keyframes confetti { to { transform: translateY(110vh) rotate(720deg); } }
+
+/* ================= 手機（窄螢幕） ================= */
+@media (max-width: 600px) {
+  /* 五個分頁擠得下：圖示在上、字在下，平均分 */
+  .bar-row { gap: 8px; }
+  .bar-row .tabs { flex: 1; gap: 2px; padding: 4px; }
+  .bar-row .tabs > .tab { flex: 1 1 0; min-width: 0; padding: 6px 2px; font-size: 12px; line-height: 1.2; white-space: normal; word-break: keep-all; text-align: center; }
+  .music-btn { width: 44px; height: 44px; font-size: 22px; border-width: 3px; flex: none; }
+  .cat { font-size: 15px; }
+  /* 一排兩張卡 */
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 0 0 24px; }
+  .card .name { font-size: 16px; }
+  .card.word .name b { font-size: 20px; }
+  .card.word .name small { font-size: 13px; }
+  /* 畫畫頁上方：名字不要直的排，進度條縮短 */
+  .board-top { right: max(12px, env(safe-area-inset-right)); left: max(12px, env(safe-area-inset-left)); gap: 8px; }
+  .name-chip { white-space: nowrap; font-size: 18px; padding: 4px 12px 4px 6px; }
+  .name-chip .ic { width: 30px; height: 30px; }
+  .name-chip .en { font-size: 14px; margin-left: 4px; }
+  .progress { min-width: 0; padding: 6px 10px; }
+  .progress span { width: auto; flex: 1; min-width: 40px; }
+  /* 兒歌唐詩：圖照原本比例縮小，不要被裁掉 */
+  #song .art { flex: none; }
+  #song .art svg { width: 100%; height: auto; aspect-ratio: 8 / 5; }
+}
+
+/* 手機橫拿（很矮）：故事和兒歌改成左圖右字，圖才不會變很小 */
+@media (orientation: landscape) and (max-height: 500px) {
+  #reader .page, #reader .page.turn-next, #reader .page.turn-prev { flex-direction: row; }
+  #reader .art { flex: 1.6; }
+  #reader .text { flex: 1; align-self: center; text-align: left; font-size: 20px; }
+  #reader, #song, #math { gap: 6px; }
+  .lyrics, .lyrics.poem { font-size: 20px; }
+  .lyrics.poem { letter-spacing: .12em; }
+  .lyrics li { white-space: nowrap; padding: 2px 12px; }
+}

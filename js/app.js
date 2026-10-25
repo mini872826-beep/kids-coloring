@@ -196,6 +196,11 @@
     });
   }
 
+  // 滑過標題後，黏在上面的分頁列加上底色
+  $('home').addEventListener('scroll', () => {
+    $('homeBar').classList.toggle('stuck', $('home').scrollTop > $('homeBar').offsetTop - 20);
+  }, { passive: true });
+
   $('home').addEventListener('click', e => {
     const tab = e.target.closest('.tab'), cat = e.target.closest('.cat');
     const del = e.target.closest('[data-del]'), add = e.target.closest('[data-add]'), card = e.target.closest('[data-go]');

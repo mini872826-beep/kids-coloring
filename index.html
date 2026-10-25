@@ -29,6 +29,10 @@
     </div>
     <header class="home-header">
       <h1 class="logo"><span>小</span><span>朋</span><span>友</span><span>愛</span><span>畫</span><span>畫</span></h1>
+    </header>
+    <!-- 往下滑時，分頁和分類這一條會黏在最上面，隨時可以換 -->
+    <div id="homeBar" class="home-bar">
+     <div class="bar-row">
       <nav class="tabs">
         <button class="tab" data-tab="paint">🖍️ 塗顏色</button>
         <button class="tab" data-tab="story">📖 聽故事</button>
@@ -38,8 +42,9 @@
       </nav>
       <button id="musicBtn" class="music-btn" aria-label="背景音樂">🎵</button>
       <button id="installBtn" class="pill" hidden>⬇️ 安裝</button>
-    </header>
-    <div id="cats" class="cats"></div>
+     </div>
+     <div id="cats" class="cats"></div>
+    </div>
     <div id="grid" class="grid"></div>
     <div id="version" class="version"></div>
   </section>
