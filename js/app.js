@@ -111,6 +111,7 @@
 
   const SONG_KINDS = [
     { id: 'song', name: '兒歌', icon: '🎵', color: '#ff8787', dark: '#e03131' },
+    { id: 'en-song', name: '英文兒歌', icon: '🔤', color: '#4dabf7', dark: '#1c7ed6' },
     { id: 'poem', name: '唐詩', icon: '📜', color: '#c0a37a', dark: '#8c6d46', sep: true },
     { id: 'sanzi', name: '三字經', icon: '📖', color: '#e8a33c', dark: '#b8741a' },
     { id: 'dizi', name: '弟子規', icon: '🎎', color: '#74c0fc', dark: '#1c7ed6' },
@@ -398,7 +399,7 @@
   function openSong(sg) {
     song = sg;
     $('songTitle').textContent = sg.title;
-    $('songSub').textContent = { poem: `唐・${sg.author}`, sanzi: `宋・${sg.author}`, dizi: `清・${sg.author}`, times: '九九乘法歌' }[sg.kind]
+    $('songSub').textContent = { poem: `唐・${sg.author}`, sanzi: `宋・${sg.author}`, dizi: `清・${sg.author}`, times: '九九乘法歌', 'en-song': 'English nursery rhyme・英文兒歌' }[sg.kind]
       || (sg.original ? '原創兒歌' : '傳統兒歌');
     $('songArt').innerHTML = sg.art;
     $('lyrics').className = 'lyrics ' + sg.kind;
@@ -419,7 +420,7 @@
     stopSong();
     setPlaying(true);
     const my = songToken;
-    if (song.kind === 'song') {
+    if (song.notes) {
       Music.playMelody(song.notes, song.bpm, i => my === songToken && highlight(i), () => {
         if (my === songToken) { highlight(-1); setPlaying(false); }
       });
@@ -427,7 +428,7 @@
       readLines(my, sg_title(song));
     }
   }
-  const sg_title = sg => sg.kind !== 'song';
+  const sg_title = sg => !sg.notes;
   // 一句一句念，念到哪句就亮哪句；唐詩先念題目和作者
   function readLines(my, withTitle) {
     let i = -1;
@@ -452,7 +453,7 @@
   $('songRead').addEventListener('click', () => {
     stopSong();
     setPlaying(true);
-    readLines(songToken, song.kind === 'poem');
+    readLines(songToken, !song.notes);
   });
   $('songPrev').addEventListener('click', () => songStep(-1));
   $('songNext').addEventListener('click', () => songStep(1));

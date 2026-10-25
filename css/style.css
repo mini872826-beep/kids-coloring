@@ -885,6 +885,7 @@ button {
 }
 .lyrics li { padding: 4px 16px; border-radius: 16px; color: #6b7c8a; transition: background .25s, color .25s, transform .25s; transform-origin: left center; }
 .lyrics li.on { background: #fff3bf; color: #3d2f1f; transform: scale(1.06); }
+.lyrics.en-song { font-family: "Nunito", "Chiron GoRound TC", sans-serif; font-weight: 800; font-size: clamp(18px, 2.4vw, 26px); }
 .lyrics.poem { align-items: center; letter-spacing: .25em; font-size: clamp(26px, 4vw, 38px); }
 .lyrics.poem li { transform-origin: center; }
 .lyrics.times { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); align-content: center; gap: 6px 10px; font-size: clamp(20px, 2.6vw, 26px); }
