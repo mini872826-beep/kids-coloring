@@ -28,7 +28,7 @@ async def edge():
 def pick_voices(n=3):
     """從 Common Voice 台灣志工錄音（CC0）挑幾個：女生、二三十歲、評價好、長度適中"""
     from datasets import load_dataset, Audio
-    ds = load_dataset('JacobLinCool/common_voice_19_0_zh-TW', split='train', streaming=True)
+    ds = load_dataset('JacobLinCool/common_voice_19_0_zh-TW', split='validated_without_test', streaming=True)
     ds = ds.cast_column('audio', Audio(decode=False))
     os.makedirs('prompts', exist_ok=True)
     picked, seen = [], set()
