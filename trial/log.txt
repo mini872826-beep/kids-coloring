@@ -1,6 +1,6 @@
 $ nvidia-smi -L
-GPU 0: Tesla T4 (UUID: GPU-425a3657-a9eb-17d9-2ebe-68d0febd22a8)
-GPU 1: Tesla T4 (UUID: GPU-34a12244-395b-95fa-85d3-5487d149057f)
+GPU 0: Tesla T4 (UUID: GPU-a473065e-c19d-2c23-1af2-56203f681c47)
+GPU 1: Tesla T4 (UUID: GPU-6a22c459-0e72-7d4d-c19b-68115597a8cd)
  
 $ git clone --depth 1 https://github.com/ace-step/ACE-Step-1.5 /kaggle/tmp/ace
  Cloning into '/kaggle/tmp/ace'...
@@ -158,21 +158,21 @@ Successfully downloaded from HuggingFace: ACE-Step/Ace-Step1.5
 
 Download complete!
 Models are available at: /kaggle/tmp/ace/checkpoints
- 2026-10-25 12:05:03.821 | INFO     | __main__:_smart_download:249 - [Model Download] Auto-detected: HuggingFace Hub
-2026-10-25 12:05:03.821 | INFO     | __main__:_smart_download:252 - [Model Download] Using HuggingFace Hub...
-2026-10-25 12:05:04.363 | INFO     | __main__:_download_from_huggingface_internal:180 - [Model Download] Downloading from HuggingFace: ACE-Step/Ace-Step1.5 -> /kaggle/tmp/ace/checkpoints
+ 2026-10-25 13:04:30.280 | INFO     | __main__:_smart_download:249 - [Model Download] Auto-detected: HuggingFace Hub
+2026-10-25 13:04:30.280 | INFO     | __main__:_smart_download:252 - [Model Download] Using HuggingFace Hub...
+2026-10-25 13:04:30.890 | INFO     | __main__:_download_from_huggingface_internal:180 - [Model Download] Downloading from HuggingFace: ACE-Step/Ace-Step1.5 -> /kaggle/tmp/ace/checkpoints
 
 Fetching 28 files:   0%|          | 0/28 [00:00<?, ?it/s]
-Fetching 28 files:  29%|██▊       | 8/28 [00:00<00:00, 20.19it/s]
-Fetching 28 files:  57%|█████▋    | 16/28 [00:00<00:00, 27.53it/s]
-Fetching 28 files:  86%|████████▌ | 24/28 [00:05<00:00,  4.55it/s]
+Fetching 28 files:  29%|██▊       | 8/28 [00:00<00:01, 19.42it/s]
+Fetching 28 files:  57%|█████▋    | 16/28 [00:00<00:00, 27.02it/s]
+Fetching 28 files:  86%|████████▌ | 24/28 [00:06<00:01,  3.79it/s]
 Fetching 28 files:  93%|█████████▎| 26/28 [00:20<00:01,  1.30it/s]
-Fetching 28 files:  96%|█████████▋| 27/28 [00:30<00:01,  1.14s/it]
-Fetching 28 files: 100%|██████████| 28/28 [00:30<00:00,  1.10s/it]
-Fetching 28 files: 100%|██████████| 28/28 [00:30<00:00,  1.10s/it]
-2026-10-25 12:05:35.363 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced modeling_acestep_v15_turbo.py -> /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/modeling_acestep_v15_turbo.py
-2026-10-25 12:05:35.364 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced configuration_acestep_v15.py -> /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/configuration_acestep_v15.py
-2026-10-25 12:05:35.364 | INFO     | __main__:download_main_model:489 - [Model Download] Synced code files for acestep-v15-turbo: ['modeling_acestep_v15_turbo.py', 'configuration_acestep_v15.py']
+Fetching 28 files:  96%|█████████▋| 27/28 [00:39<00:01,  1.44s/it]
+Fetching 28 files: 100%|██████████| 28/28 [00:57<00:00,  2.04s/it]
+Fetching 28 files: 100%|██████████| 28/28 [00:57<00:00,  2.04s/it]
+2026-10-25 13:05:28.344 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced modeling_acestep_v15_turbo.py -> /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/modeling_acestep_v15_turbo.py
+2026-10-25 13:05:28.345 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced configuration_acestep_v15.py -> /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/configuration_acestep_v15.py
+2026-10-25 13:05:28.345 | INFO     | __main__:download_main_model:489 - [Model Download] Synced code files for acestep-v15-turbo: ['modeling_acestep_v15_turbo.py', 'configuration_acestep_v15.py']
 
 gen exit 0
 done

@@ -1,554 +1,554 @@
-[{"stream_name":"stdout","time":1.055193189,"data":"$ nvidia-smi -L\n"}
-,{"stream_name":"stdout","time":1.093433504,"data":"GPU 0: Tesla T4 (UUID: GPU-425a3657-a9eb-17d9-2ebe-68d0febd22a8)\n"}
-,{"stream_name":"stdout","time":1.093457242,"data":"GPU 1: Tesla T4 (UUID: GPU-34a12244-395b-95fa-85d3-5487d149057f)\n"}
-,{"stream_name":"stdout","time":1.093467792,"data":" \n"}
-,{"stream_name":"stdout","time":1.093470438,"data":"$ git clone --depth 1 https://github.com/ace-step/ACE-Step-1.5 /kaggle/tmp/ace\n"}
-,{"stream_name":"stdout","time":2.402414832,"data":" Cloning into '/kaggle/tmp/ace'...\n"}
-,{"stream_name":"stdout","time":2.402456138,"data":"\n"}
-,{"stream_name":"stdout","time":2.402460725,"data":"$ pip install -q uv\n"}
-,{"stream_name":"stdout","time":6.150035521,"data":" \n"}
-,{"stream_name":"stdout","time":6.150061791,"data":"$ uv venv -p 3.12 /kaggle/tmp/venv\n"}
-,{"stream_name":"stdout","time":6.649243336,"data":" warning: The `--system` flag has no effect, `uv venv` always ignores virtual environments when finding a Python interpreter; did you mean `--no-managed-python`?\n"}
-,{"stream_name":"stdout","time":6.649269593,"data":"Using CPython 3.12.3 interpreter at: /usr/bin/python3.12\n"}
-,{"stream_name":"stdout","time":6.649274591,"data":"Creating virtual environment at: /kaggle/tmp/venv\n"}
-,{"stream_name":"stdout","time":6.649278367,"data":"Activate with: source /kaggle/tmp/venv/bin/activate\n"}
-,{"stream_name":"stdout","time":6.64928399,"data":"\n"}
-,{"stream_name":"stdout","time":6.649290743,"data":"$ uv pip install --python /kaggle/tmp/venv/bin/python -e .\n"}
-,{"stream_name":"stdout","time":225.72265908,"data":"  certifi==2026.10.23\n"}
-,{"stream_name":"stdout","time":225.72269078,"data":" + cffi==2.1.1\n"}
-,{"stream_name":"stdout","time":225.722697006,"data":" + charset-normalizer==3.5.2\n"}
-,{"stream_name":"stdout","time":225.722702561,"data":" + click==8.5.0\n"}
-,{"stream_name":"stdout","time":225.722707787,"data":" + contourpy==1.4.0\n"}
-,{"stream_name":"stdout","time":225.722711865,"data":" + cryptography==50.0.2\n"}
-,{"stream_name":"stdout","time":225.72271604,"data":" + cuda-bindings==12.9.4\n"}
-,{"stream_name":"stdout","time":225.722720034,"data":" + cuda-pathfinder==1.8.4\n"}
-,{"stream_name":"stdout","time":225.722724065,"data":" + cycler==0.12.1\n"}
-,{"stream_name":"stdout","time":225.722739028,"data":" + diffusers==0.39.0\n"}
-,{"stream_name":"stdout","time":225.722744605,"data":" + diskcache==5.6.3\n"}
-,{"stream_name":"stdout","time":225.72275182,"data":" + einops==0.8.2\n"}
-,{"stream_name":"stdout","time":225.722754663,"data":" + einx==0.4.3\n"}
-,{"stream_name":"stdout","time":225.722757386,"data":" + fastapi==0.162.0\n"}
-,{"stream_name":"stdout","time":225.722760131,"data":" + ffmpy==1.0.0\n"}
-,{"stream_name":"stdout","time":225.722767881,"data":" + filelock==4.2.4\n"}
-,{"stream_name":"stdout","time":225.722770688,"data":" + fonttools==4.67.0\n"}
-,{"stream_name":"stdout","time":225.72278808,"data":" + frozendict==2.4.7\n"}
-,{"stream_name":"stdout","time":225.72279356,"data":" + frozenlist==1.8.0\n"}
-,{"stream_name":"stdout","time":225.722798558,"data":" + fsspec==2026.9.0\n"}
-,{"stream_name":"stdout","time":225.722803196,"data":" + gradio==6.2.0\n"}
-,{"stream_name":"stdout","time":225.722807636,"data":" + gradio-client==2.0.2\n"}
-,{"stream_name":"stdout","time":225.722811698,"data":" + groovy==0.1.2\n"}
-,{"stream_name":"stdout","time":225.722815854,"data":" + grpcio==1.84.1\n"}
-,{"stream_name":"stdout","time":225.722819831,"data":" + h11==0.16.0\n"}
-,{"stream_name":"stdout","time":225.722823928,"data":" + hf-xet==1.7.0\n"}
-,{"stream_name":"stdout","time":225.722836555,"data":" + httpcore==1.0.9\n"}
-,{"stream_name":"stdout","time":225.722839898,"data":" + httptools==0.9.0\n"}
-,{"stream_name":"stdout","time":225.722843051,"data":" + httpx==0.28.1\n"}
-,{"stream_name":"stdout","time":225.72284618,"data":" + huggingface-hub==0.36.2\n"}
-,{"stream_name":"stdout","time":225.722849453,"data":" + idna==3.20\n"}
-,{"stream_name":"stdout","time":225.722858193,"data":" + importlib-metadata==10.1.0\n"}
-,{"stream_name":"stdout","time":225.722860629,"data":" + jinja2==3.1.6\n"}
-,{"stream_name":"stdout","time":225.722862777,"data":" + kiwisolver==1.5.1\n"}
-,{"stream_name":"stdout","time":225.722864938,"data":" + lightning==2.6.6\n"}
-,{"stream_name":"stdout","time":225.722867161,"data":" + lightning-utilities==0.15.3\n"}
-,{"stream_name":"stdout","time":225.722869319,"data":" + llvmlite==0.50.0\n"}
-,{"stream_name":"stdout","time":225.722872291,"data":" + loguru==0.7.3\n"}
-,{"stream_name":"stdout","time":225.722886279,"data":" + lycoris-lora==4.1.3\n"}
-,{"stream_name":"stdout","time":225.722890154,"data":" + markdown==3.11.2\n"}
-,{"stream_name":"stdout","time":225.722893945,"data":" + markdown-it-py==4.2.0\n"}
-,{"stream_name":"stdout","time":225.722897818,"data":" + markupsafe==3.0.4\n"}
-,{"stream_name":"stdout","time":225.722901537,"data":" + matplotlib==3.11.2\n"}
-,{"stream_name":"stdout","time":225.722904844,"data":" + mdurl==0.1.2\n"}
-,{"stream_name":"stdout","time":225.722907994,"data":" + modelscope==1.40.2\n"}
-,{"stream_name":"stdout","time":225.722911233,"data":" + modelscope-hub==0.5.0\n"}
-,{"stream_name":"stdout","time":225.722914392,"data":" + mpmath==1.3.0\n"}
-,{"stream_name":"stdout","time":225.72291758,"data":" + multidict==7.2.1\n"}
-,{"stream_name":"stdout","time":225.722920838,"data":" + nano-vllm==0.2.0 (from file:///kaggle/tmp/ace/acestep/third_parts/nano-vllm)\n"}
-,{"stream_name":"stdout","time":225.722924329,"data":" + networkx==3.7\n"}
-,{"stream_name":"stdout","time":225.72292747,"data":" + numba==0.68.0\n"}
-,{"stream_name":"stdout","time":225.72293067,"data":" + numpy==2.5.4\n"}
-,{"stream_name":"stdout","time":225.722933802,"data":" + nvidia-cublas-cu12==12.8.4.1\n"}
-,{"stream_name":"stdout","time":225.722937022,"data":" + nvidia-cuda-cupti-cu12==12.8.90\n"}
-,{"stream_name":"stdout","time":225.722940283,"data":" + nvidia-cuda-nvrtc-cu12==12.8.93\n"}
-,{"stream_name":"stdout","time":225.72294348,"data":" + nvidia-cuda-runtime-cu12==12.8.90\n"}
-,{"stream_name":"stdout","time":225.72294676,"data":" + nvidia-cudnn-cu12==9.10.2.21\n"}
-,{"stream_name":"stdout","time":225.722949954,"data":" + nvidia-cufft-cu12==11.3.3.83\n"}
-,{"stream_name":"stdout","time":225.72295316700001,"data":" + nvidia-cufile-cu12==1.13.1.3\n"}
-,{"stream_name":"stdout","time":225.722958323,"data":" + nvidia-curand-cu12==10.3.9.90\n"}
-,{"stream_name":"stdout","time":225.722964922,"data":" + nvidia-cusolver-cu12==11.7.3.90\n"}
-,{"stream_name":"stdout","time":225.722968055,"data":" + nvidia-cusparse-cu12==12.5.8.93\n"}
-,{"stream_name":"stdout","time":225.722981809,"data":" + nvidia-cusparselt-cu12==0.7.1\n"}
-,{"stream_name":"stdout","time":225.722985815,"data":" + nvidia-nccl-cu12==2.27.5\n"}
-,{"stream_name":"stdout","time":225.722989486,"data":" + nvidia-nvjitlink-cu12==12.8.93\n"}
-,{"stream_name":"stdout","time":225.722993545,"data":" + nvidia-nvshmem-cu12==3.4.5\n"}
-,{"stream_name":"stdout","time":225.722997351,"data":" + nvidia-nvtx-cu12==12.8.90\n"}
-,{"stream_name":"stdout","time":225.723000583,"data":" + opentelemetry-api==1.45.1\n"}
-,{"stream_name":"stdout","time":225.723008051,"data":" + orjson==3.13.0\n"}
-,{"stream_name":"stdout","time":225.723011275,"data":" + packaging==26.3\n"}
-,{"stream_name":"stdout","time":225.723014606,"data":" + pandas==2.3.3\n"}
-,{"stream_name":"stdout","time":225.723017871,"data":" + peft==0.21.2\n"}
-,{"stream_name":"stdout","time":225.723020991,"data":" + pillow==12.3.0\n"}
-,{"stream_name":"stdout","time":225.72302418,"data":" + propcache==0.5.4\n"}
-,{"stream_name":"stdout","time":225.723027416,"data":" + protobuf==7.36.2\n"}
-,{"stream_name":"stdout","time":225.723030625,"data":" + psutil==7.2.2\n"}
-,{"stream_name":"stdout","time":225.723033809,"data":" + pycparser==3.12\n"}
-,{"stream_name":"stdout","time":225.723037043,"data":" + pydantic==2.14.1\n"}
-,{"stream_name":"stdout","time":225.723040156,"data":" + pydantic-core==2.50.1\n"}
-,{"stream_name":"stdout","time":225.723043437,"data":" + pydub==0.25.1\n"}
-,{"stream_name":"stdout","time":225.723046555,"data":" + pygments==2.21.0\n"}
-,{"stream_name":"stdout","time":225.723049806,"data":" + pyparsing==3.3.3\n"}
-,{"stream_name":"stdout","time":225.723054418,"data":" + python-dateutil==3.0.0\n"}
-,{"stream_name":"stdout","time":225.72306154,"data":" + python-dotenv==1.2.4\n"}
-,{"stream_name":"stdout","time":225.723075213,"data":" + python-multipart==0.0.32\n"}
-,{"stream_name":"stdout","time":225.723078894,"data":" + pytorch-lightning==2.6.6\n"}
-,{"stream_name":"stdout","time":225.723082738,"data":" + pytorch-wavelets==1.3.0\n"}
-,{"stream_name":"stdout","time":225.72308645,"data":" + pytz==2026.5\n"}
-,{"stream_name":"stdout","time":225.723092096,"data":" + pywavelets==1.10.0\n"}
-,{"stream_name":"stdout","time":225.72309553,"data":" + pyyaml==6.0.3\n"}
-,{"stream_name":"stdout","time":225.723098699,"data":" + regex==2026.9.29\n"}
-,{"stream_name":"stdout","time":225.723101833,"data":" + requests==2.34.2\n"}
-,{"stream_name":"stdout","time":225.723105013,"data":" + rich==15.0.0\n"}
-,{"stream_name":"stdout","time":225.72310816,"data":" + safehttpx==0.1.7\n"}
-,{"stream_name":"stdout","time":225.723111368,"data":" + safetensors==0.8.0\n"}
-,{"stream_name":"stdout","time":225.723114578,"data":" + scipy==1.18.1\n"}
-,{"stream_name":"stdout","time":225.723117759,"data":" + semantic-version==2.10.0\n"}
-,{"stream_name":"stdout","time":225.723120933,"data":" + setuptools==71.1.0\n"}
-,{"stream_name":"stdout","time":225.723124191,"data":" + shellingham==1.5.4\n"}
-,{"stream_name":"stdout","time":225.723127329,"data":" + six==1.17.0\n"}
-,{"stream_name":"stdout","time":225.723130508,"data":" + soundfile==0.14.0\n"}
-,{"stream_name":"stdout","time":225.72313364,"data":" + starlette==0.52.1\n"}
-,{"stream_name":"stdout","time":225.72313684,"data":" + sympy==1.14.0\n"}
-,{"stream_name":"stdout","time":225.723139943,"data":" + tensorboard==2.21.0\n"}
-,{"stream_name":"stdout","time":225.723143153,"data":" + tensorboard-data-server==0.7.2\n"}
-,{"stream_name":"stdout","time":225.723146451,"data":" + tokenizers==0.22.2\n"}
-,{"stream_name":"stdout","time":225.72315498,"data":" + toml==0.10.2\n"}
-,{"stream_name":"stdout","time":225.723157923,"data":" + tomlkit==0.13.3\n"}
-,{"stream_name":"stdout","time":225.72317285,"data":" + torch==2.10.0+cu128\n"}
-,{"stream_name":"stdout","time":225.723176838,"data":" + torch-einops-utils==0.1.44\n"}
-,{"stream_name":"stdout","time":225.723180581,"data":" + torchao==0.16.0\n"}
-,{"stream_name":"stdout","time":225.723184417,"data":" + torchaudio==2.10.0+cu128\n"}
-,{"stream_name":"stdout","time":225.72318811,"data":" + torchcodec==0.17.0\n"}
-,{"stream_name":"stdout","time":225.723195071,"data":" + torchmetrics==1.9.0\n"}
-,{"stream_name":"stdout","time":225.723198285,"data":" + torchvision==0.25.0+cu128\n"}
-,{"stream_name":"stdout","time":225.723201531,"data":" + tqdm==4.70.1\n"}
-,{"stream_name":"stdout","time":225.723204667,"data":" + transformers==4.57.6\n"}
-,{"stream_name":"stdout","time":225.723207807,"data":" + triton==3.6.0\n"}
-,{"stream_name":"stdout","time":225.723210933,"data":" + typer==0.27.3\n"}
-,{"stream_name":"stdout","time":225.723214095,"data":" + typer-slim==0.24.0\n"}
-,{"stream_name":"stdout","time":225.723217266,"data":" + typing-extensions==4.16.0\n"}
-,{"stream_name":"stdout","time":225.723220502,"data":" + typing-inspection==0.4.4\n"}
-,{"stream_name":"stdout","time":225.72322367,"data":" + tzdata==2026.5\n"}
-,{"stream_name":"stdout","time":225.723226899,"data":" + urllib3==2.8.0\n"}
-,{"stream_name":"stdout","time":225.723230104,"data":" + uvicorn==0.54.0\n"}
-,{"stream_name":"stdout","time":225.723233362,"data":" + uvloop==0.23.0\n"}
-,{"stream_name":"stdout","time":225.723236501,"data":" + vector-quantize-pytorch==1.32.0\n"}
-,{"stream_name":"stdout","time":225.723239742,"data":" + watchfiles==1.3.0\n"}
-,{"stream_name":"stdout","time":225.723243033,"data":" + websockets==17.3\n"}
-,{"stream_name":"stdout","time":225.72325139,"data":" + werkzeug==3.1.9\n"}
-,{"stream_name":"stdout","time":225.72325418,"data":" + xxhash==4.0.2\n"}
-,{"stream_name":"stdout","time":225.723272243,"data":" + yarl==1.25.1\n"}
-,{"stream_name":"stdout","time":225.723276597,"data":" + zipp==4.1.2\n"}
-,{"stream_name":"stdout","time":225.723280262,"data":"\n"}
-,{"stream_name":"stdout","time":225.723283762,"data":"$ /kaggle/tmp/venv/bin/python -m acestep.model_downloader\n"}
-,{"stream_name":"stdout","time":257.535381057,"data":"Checkpoints directory: /kaggle/tmp/ace/checkpoints\n"}
-,{"stream_name":"stdout","time":257.535417379,"data":"Downloading main model (includes vae, text encoder, DiT, and LM 1.7B)...\n"}
-,{"stream_name":"stdout","time":257.535424049,"data":"Downloading main model from ACE-Step/Ace-Step1.5...\n"}
-,{"stream_name":"stdout","time":257.535430415,"data":"Destination: /kaggle/tmp/ace/checkpoints\n"}
-,{"stream_name":"stdout","time":257.535436149,"data":"This may take a while depending on your internet connection...\n"}
-,{"stream_name":"stdout","time":257.535441196,"data":"Successfully downloaded from HuggingFace: ACE-Step/Ace-Step1.5\n"}
-,{"stream_name":"stdout","time":257.535446574,"data":"\n"}
-,{"stream_name":"stdout","time":257.535451431,"data":"Download complete!\n"}
-,{"stream_name":"stdout","time":257.535516332,"data":"Models are available at: /kaggle/tmp/ace/checkpoints\n"}
-,{"stream_name":"stdout","time":257.53552405,"data":" 2026-10-25 12:05:03.821 | INFO     | __main__:_smart_download:249 - [Model Download] Auto-detected: HuggingFace Hub\n"}
-,{"stream_name":"stdout","time":257.535530063,"data":"2026-10-25 12:05:03.821 | INFO     | __main__:_smart_download:252 - [Model Download] Using HuggingFace Hub...\n"}
-,{"stream_name":"stdout","time":257.535535439,"data":"2026-10-25 12:05:04.363 | INFO     | __main__:_download_from_huggingface_internal:180 - [Model Download] Downloading from HuggingFace: ACE-Step/Ace-Step1.5 -\u003e /kaggle/tmp/ace/checkpoints\n"}
-,{"stream_name":"stdout","time":257.535573513,"data":"\n"}
-,{"stream_name":"stdout","time":257.535579328,"data":"Fetching 28 files:   0%|          | 0/28 [00:00\u003c?, ?it/s]\n"}
-,{"stream_name":"stdout","time":257.535584862,"data":"Fetching 28 files:  29%|██▊       | 8/28 [00:00\u003c00:00, 20.19it/s]\n"}
-,{"stream_name":"stdout","time":257.535590951,"data":"Fetching 28 files:  57%|█████▋    | 16/28 [00:00\u003c00:00, 27.53it/s]\n"}
-,{"stream_name":"stdout","time":257.535604124,"data":"Fetching 28 files:  86%|████████▌ | 24/28 [00:05\u003c00:00,  4.55it/s]\n"}
-,{"stream_name":"stdout","time":257.535609505,"data":"Fetching 28 files:  93%|█████████▎| 26/28 [00:20\u003c00:01,  1.30it/s]\n"}
-,{"stream_name":"stdout","time":257.53561377,"data":"Fetching 28 files:  96%|█████████▋| 27/28 [00:30\u003c00:01,  1.14s/it]\n"}
-,{"stream_name":"stdout","time":257.535617881,"data":"Fetching 28 files: 100%|██████████| 28/28 [00:30\u003c00:00,  1.10s/it]\n"}
-,{"stream_name":"stdout","time":257.535621927,"data":"Fetching 28 files: 100%|██████████| 28/28 [00:30\u003c00:00,  1.10s/it]\n"}
-,{"stream_name":"stdout","time":257.535626587,"data":"2026-10-25 12:05:35.363 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced modeling_acestep_v15_turbo.py -\u003e /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/modeling_acestep_v15_turbo.py\n"}
-,{"stream_name":"stdout","time":257.535631488,"data":"2026-10-25 12:05:35.364 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced configuration_acestep_v15.py -\u003e /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/configuration_acestep_v15.py\n"}
-,{"stream_name":"stdout","time":257.535640155,"data":"2026-10-25 12:05:35.364 | INFO     | __main__:download_main_model:489 - [Model Download] Synced code files for acestep-v15-turbo: ['modeling_acestep_v15_turbo.py', 'configuration_acestep_v15.py']\n"}
-,{"stream_name":"stdout","time":257.535644519,"data":"\n"}
-,{"stream_name":"stderr","time":283.731836731,"data":"2026-10-25 12:06:01.645 | DEBUG    | acestep.core.generation.handler.init_service_memory_basic:_apply_malloc_mmap_threshold:50 - [memory] Set M_MMAP_THRESHOLD=131072 for immediate OS reclaim of large frees\n"}
-,{"stream_name":"stderr","time":294.516758589,"data":"/kaggle/tmp/venv/lib/python3.12/site-packages/torchao/quantization/quant_api.py:1811: SyntaxWarning: invalid escape sequence '\\.'\n"}
-,{"stream_name":"stderr","time":294.51680036,"data":"  \"\"\"Configuration class for applying different quantization configs to modules or parameters based on their fully qualified names (FQNs).\n"}
-,{"stream_name":"stderr","time":300.390848362,"data":"2026-10-25 12:06:18.304 | WARNING  | acestep.training.trainer:\u003cmodule\u003e:40 - bitsandbytes not installed. Using standard AdamW.\n"}
-,{"stream_name":"stderr","time":300.709928021,"data":"2026-10-25 12:06:18.623 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
-,{"stream_name":"stderr","time":300.710104664,"data":"2026-10-25 12:06:18.624 | INFO     | acestep.core.generation.handler.init_service_orchestrator:initialize_service:96 - [initialize_service] Pre-Ampere CUDA detected: using float16 instead of bfloat16.\n"}
-,{"stream_name":"stderr","time":300.95961731,"data":"2026-10-25 12:06:18.873 | INFO     | acestep.core.generation.handler.init_service_loader:_load_main_model_from_checkpoint:151 - [initialize_service] Pre-Ampere CUDA detected: using eager attention for float16 numerical stability.\n"}
-,{"stream_name":"stderr","time":300.959652892,"data":"2026-10-25 12:06:18.873 | INFO     | acestep.core.generation.handler.init_service_loader:_load_main_model_from_checkpoint:174 - [initialize_service] Attempting to load model with attention implementation: eager\n"}
-,{"stream_name":"stderr","time":308.746053607,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
-,{"stream_name":"stdout","time":310.915297576,"data":"dit True [OK] Model initialized successfully on cuda\n"}
-,{"stream_name":"stdout","time":310.915417661,"data":"Main model: /kaggle/tmp/ace/checkpoints/acestep-v15-turbo\n"}
-,{"stream_name":"stdout","time":310.915429579,"data":"VAE: /kaggle/tmp/ace/checkpoints/vae\n"}
-,{"stream_name":"stdout","time":310.915434064,"data":"Text encoder: /kaggle/tmp/ace/checkpoints/Qwen3-Embedding-0.6B\n"}
-,{"stream_name":"stdout","time":310.915437602,"data":"Dtype: torch.float16\n"}
-,{"stream_name":"stdout","time":310.915440936,"data":"Attention: eager\n"}
-,{"stream_name":"stdout","time":310.915444112,"data":"Compiled: False\n"}
-,{"stream_name":"stdout","time":310.915447332,"data":"Quantization: Disabled\n"}
-,{"stream_name":"stdout","time":310.915450639,"data":"Offload to CPU: False\n"}
-,{"stream_name":"stdout","time":310.915453912,"data":"Offload DiT to CPU: False\n"}
-,{"stream_name":"stdout","time":310.915457122,"data":"MLX DiT: Disabled\n"}
-,{"stream_name":"stdout","time":310.915460418,"data":"MLX VAE: Disabled\n"}
-,{"stream_name":"stdout","time":310.915469157,"data":"llm False ❌ 5Hz LM model not found at /kaggle/tmp/ace/checkpoints/acestep-5Hz-lm-0.6B\n"}
-,{"stream_name":"stderr","time":311.179265026,"data":"2026-10-25 12:06:29.093 | INFO     | acestep.inference:generate_music:660 - Skipping LM for task_type='cover' - using DiT directly\n"}
-,{"stream_name":"stderr","time":311.179320667,"data":"2026-10-25 12:06:29.093 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=True, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
-,{"stream_name":"stderr","time":311.179433522,"data":"2026-10-25 12:06:29.093 | INFO     | acestep.inference:generate_music:834 - [generate_music] cover task: using params.caption='children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby', params.lyrics='[verse]\n"}
-,{"stream_name":"stderr","time":311.179442118,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":311.179446696,"data":"滿天都是小星星\n"}
-,{"stream_name":"stderr","time":311.179450149,"data":"掛在天上放光明\n"}
-,{"stream_name":"stderr","time":311.179453407,"data":"好像許多小眼睛\n"}
-,{"stream_name":"stderr","time":311.179456639,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":311.179459858,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":311.179463114,"data":"滿天都是小星星'\n"}
-,{"stream_name":"stderr","time":311.179496824,"data":"2026-10-25 12:06:29.093 | INFO     | acestep.inference:generate_music:835 - [generate_music] Final inputs: dit_input_caption='children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby', dit_input_lyrics='[verse]\n"}
-,{"stream_name":"stderr","time":311.179503444,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":311.179506968,"data":"滿天都是小星星\n"}
-,{"stream_name":"stderr","time":311.179510229,"data":"掛在天上放光明\n"}
-,{"stream_name":"stderr","time":311.179513533,"data":"好像許多小眼睛\n"}
-,{"stream_name":"stderr","time":311.179516884,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":311.179520157,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":311.179529217,"data":"滿天都是小星星'\n"}
-,{"stream_name":"stderr","time":311.180040487,"data":"2026-10-25 12:06:29.094 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
-,{"stream_name":"stderr","time":311.180102503,"data":"2026-10-25 12:06:29.094 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
-,{"stream_name":"stderr","time":311.180200398,"data":"2026-10-25 12:06:29.094 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
-,{"stream_name":"stderr","time":311.181281112,"data":"2026-10-25 12:06:29.095 | INFO     | acestep.core.generation.handler.generate_music_request:_prepare_reference_and_source_audio:188 - [generate_music] Processing source audio...\n"}
-,{"stream_name":"stderr","time":311.64699483,"data":"2026-10-25 12:06:29.560 | INFO     | acestep.core.generation.handler.generate_music:_vram_preflight_check:157 - [generate_music] VRAM pre-flight: 8.55 GB free, ~0.80 GB needed (batch=1, duration=38s, mode=turbo).\n"}
-,{"stream_name":"stderr","time":311.647026989,"data":"2026-10-25 12:06:29.561 | INFO     | acestep.core.generation.handler.progress:_start_diffusion_progress_estimator:179 - [progress] No timing history — using fallback estimate (2.5s/step for batch_size=1).  This will self-calibrate after the first generation.\n"}
-,{"stream_name":"stderr","time":311.731323397,"data":"2026-10-25 12:06:29.645 | INFO     | acestep.core.generation.handler.conditioning_target:_prepare_target_latents_and_wavs:104 - [generate_music] Encoding target audio to latents for item 0...\n"}
-,{"stream_name":"stderr","time":311.731660384,"data":"2026-10-25 12:06:29.645 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
-,{"stream_name":"stderr","time":313.540970607,"data":"2026-10-25 12:06:31.454 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:119 - \n"}
-,{"stream_name":"stderr","time":313.541003067,"data":"======================================================================\n"}
-,{"stream_name":"stderr","time":313.541008508,"data":"2026-10-25 12:06:31.455 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:120 - 🔍 [DEBUG] DiT TEXT ENCODER INPUT (Inference)\n"}
-,{"stream_name":"stderr","time":313.541090613,"data":"2026-10-25 12:06:31.455 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:121 - ======================================================================\n"}
-,{"stream_name":"stderr","time":313.541179133,"data":"2026-10-25 12:06:31.455 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:122 - text_prompt:\n"}
-,{"stream_name":"stderr","time":313.541185718,"data":"# Instruction\n"}
-,{"stream_name":"stderr","time":313.54118887,"data":"Fill the audio semantic mask based on the given conditions:\n"}
-,{"stream_name":"stderr","time":313.54119191,"data":"\n"}
-,{"stream_name":"stderr","time":313.541194823,"data":"# Caption\n"}
-,{"stream_name":"stderr","time":313.541197845,"data":"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby\n"}
-,{"stream_name":"stderr","time":313.541209974,"data":"\n"}
-,{"stream_name":"stderr","time":313.54121299,"data":"# Metas\n"}
-,{"stream_name":"stderr","time":313.541216148,"data":"- bpm: N/A\n"}
-,{"stream_name":"stderr","time":313.541219004,"data":"- timesignature: N/A\n"}
-,{"stream_name":"stderr","time":313.541221988,"data":"- keyscale: N/A\n"}
-,{"stream_name":"stderr","time":313.541224814,"data":"- duration: 37 seconds\n"}
-,{"stream_name":"stderr","time":313.541227692,"data":"\u003c|endoftext|\u003e\n"}
-,{"stream_name":"stderr","time":313.541230889,"data":"\n"}
-,{"stream_name":"stderr","time":313.541233887,"data":"2026-10-25 12:06:31.455 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:123 - ======================================================================\n"}
-,{"stream_name":"stderr","time":313.541350063,"data":"2026-10-25 12:06:31.455 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:124 - lyrics_text:\n"}
-,{"stream_name":"stderr","time":313.541360991,"data":"# Languages\n"}
-,{"stream_name":"stderr","time":313.541364537,"data":"zh\n"}
-,{"stream_name":"stderr","time":313.541367795,"data":"\n"}
-,{"stream_name":"stderr","time":313.541370933,"data":"# Lyric\n"}
-,{"stream_name":"stderr","time":313.541373876,"data":"[verse]\n"}
-,{"stream_name":"stderr","time":313.541376756,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":313.541380407,"data":"滿天都是小星星\n"}
-,{"stream_name":"stderr","time":313.541383548,"data":"掛在天上放光明\n"}
-,{"stream_name":"stderr","time":313.5413869,"data":"好像許多小眼睛\n"}
-,{"stream_name":"stderr","time":313.54139022,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":313.541393478,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":313.541396767,"data":"滿天都是小星星\u003c|endoftext|\u003e\n"}
-,{"stream_name":"stderr","time":313.541400436,"data":"2026-10-25 12:06:31.455 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:125 - ======================================================================\n"}
-,{"stream_name":"stderr","time":313.541403779,"data":"\n"}
-,{"stream_name":"stderr","time":313.583841312,"data":"2026-10-25 12:06:31.497 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:110 - [preprocess_batch] Inferring prompt embeddings...\n"}
-,{"stream_name":"stderr","time":313.922739933,"data":"2026-10-25 12:06:31.836 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:113 - [preprocess_batch] Inferring lyric embeddings...\n"}
-,{"stream_name":"stderr","time":313.922910548,"data":"2026-10-25 12:06:31.836 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:122 - [preprocess_batch] Inferring non-cover text embeddings...\n"}
-,{"stream_name":"stderr","time":313.969267427,"data":"2026-10-25 12:06:31.883 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:173 - [service_generate] Generating audio... (DiT backend: PyTorch (cuda))\n"}
-,{"stream_name":"stderr","time":314.393970523,"data":"2026-10-25 12:06:32.307 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:276 - [service_generate] DiT diffusion via PyTorch (cuda)...\n"}
-,{"stream_name":"stderr","time":314.503921454,"data":"2026-10-25 12:06:32.417 | INFO     | acestep.models.common.dcw_correction:__init__:98 - [DCW] Active — mode=double, scaler=0.0500, high_scaler=0.0200, wavelet='haar'\n"}
-,{"stream_name":"stderr","time":314.881441748,"data":"2026-10-25 12:06:32.795 | INFO     | acestep.models.common.dcw_loader:get:84 - [DCW] Built DWT1D for wavelet='haar' (low-pass filter taps=2, device=cuda:0, dtype=torch.float16).\n"}
-,{"stream_name":"stderr","time":315.644626108,"data":"2026-10-25 12:06:33.558 | INFO     | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:42 - [generate_music] Model generation completed. Decoding latents...\n"}
-,{"stream_name":"stderr","time":315.645172259,"data":"2026-10-25 12:06:33.559 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:64 - [generate_music] pred_latents: torch.Size([1, 939, 64]), dtype=torch.float16\n"}
-,{"stream_name":"stderr","time":315.64524919,"data":"2026-10-25 12:06:33.559 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:65 - [generate_music] time_costs: {'encoder_time_cost': 0.09321784973144531, 'diffusion_time_cost': 1.1565532684326172, 'diffusion_per_step_time_cost': 0.14456915855407715, 'total_time_cost': 1.2497711181640625, 'offload_time_cost': 0.0}\n"}
-,{"stream_name":"stderr","time":315.68724349,"data":"2026-10-25 12:06:33.600 | ERROR    | acestep.core.generation.handler.generate_music:generate_music:522 - [generate_music] Generation failed\n"}
-,{"stream_name":"stderr","time":315.687270431,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":315.687275409,"data":"\n"}
-,{"stream_name":"stderr","time":315.687278608,"data":"  File \"/kaggle/tmp/gen.py\", line 40, in \u003cmodule\u003e\n"}
-,{"stream_name":"stderr","time":315.687282799,"data":"    res = generate_music(dit, llm, params=GenerationParams(**kw),\n"}
-,{"stream_name":"stderr","time":315.687286173,"data":"          │              │    │           │                  └ {'task_type': 'cover', 'caption': \"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chin...\n"}
-,{"stream_name":"stdout","time":315.687286176,"data":"acestep-little-star-cover FAILED 5s Error: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
-,{"stream_name":"stderr","time":315.687290557,"data":"          │              │    │           └ \u003cclass 'acestep.inference.GenerationParams'\u003e\n"}
-,{"stream_name":"stdout","time":315.687294927,"data":"Common causes and fixes:\n"}
-,{"stream_name":"stderr","time":315.687297559,"data":"          │              │    └ \u003cacestep.llm_inference.LLMHandler object at 0x7c6b971005c0\u003e\n"}
-,{"stream_name":"stdout","time":315.687300491,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
-,{"stream_name":"stderr","time":315.687303232,"data":"          │              └ \u003cacestep.handler.AceStepHandler object at 0x7c6ba32cb500\u003e\n"}
-,{"stream_name":"stdout","time":315.687306326,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
-,{"stream_name":"stderr","time":315.687308821,"data":"          └ \u003cfunction generate_music at 0x7c6ba28d1620\u003e\n"}
-,{"stream_name":"stderr","time":315.687315528,"data":"\n"}
-,{"stream_name":"stderr","time":315.687318518,"data":"  File \"/kaggle/tmp/ace/acestep/inference.py\", line 916, in generate_music\n"}
-,{"stream_name":"stderr","time":315.687322668,"data":"    result = dit_handler.generate_music(**filtered_generate_kwargs)\n"}
-,{"stream_name":"stderr","time":315.687326282,"data":"             │           │                └ {'captions': \"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glock...\n"}
-,{"stream_name":"stderr","time":315.687330984,"data":"             │           └ \u003cfunction GenerateMusicMixin.generate_music at 0x7c6bd33c7ec0\u003e\n"}
-,{"stream_name":"stderr","time":315.687334774,"data":"             └ \u003cacestep.handler.AceStepHandler object at 0x7c6ba32cb500\u003e\n"}
-,{"stream_name":"stderr","time":315.687338555,"data":"\n"}
-,{"stream_name":"stdout","time":315.687312018,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
-,{"stream_name":"stderr","time":315.687341407,"data":"\u003e File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
-,{"stream_name":"stderr","time":315.687347177,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
-,{"stream_name":"stderr","time":315.687360968,"data":"                               │    └ \u003cfunction GenerateMusicDecodeMixin._prepare_generate_music_decode_state at 0x7c6bd31540e0\u003e\n"}
-,{"stream_name":"stderr","time":315.687365981,"data":"                               └ \u003cacestep.handler.AceStepHandler object at 0x7c6ba32cb500\u003e\n"}
-,{"stream_name":"stderr","time":315.687370034,"data":"\n"}
-,{"stream_name":"stderr","time":315.687373236,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
-,{"stream_name":"stderr","time":315.687376867,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
-,{"stream_name":"stderr","time":315.687381272,"data":"                                 └ ['Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).', 'Commo...\n"}
-,{"stream_name":"stderr","time":315.687385743,"data":"\n"}
-,{"stream_name":"stderr","time":315.68738953,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
-,{"stream_name":"stderr","time":315.687393834,"data":"Common causes and fixes:\n"}
-,{"stream_name":"stderr","time":315.687397332,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
-,{"stream_name":"stderr","time":315.687401134,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
-,{"stream_name":"stdout","time":315.687347454,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
-,{"stream_name":"stderr","time":315.687404265,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
-,{"stream_name":"stdout","time":315.687408731,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
-,{"stream_name":"stdout","time":315.687413374,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":315.687411228,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
-,{"stream_name":"stderr","time":315.687418696,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
-,{"stream_name":"stdout","time":315.687416526,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
-,{"stream_name":"stdout","time":315.687425746,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
-,{"stream_name":"stdout","time":315.687430076,"data":"                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":315.687433939,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
-,{"stream_name":"stdout","time":315.687438163,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
-,{"stream_name":"stdout","time":315.687442054,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
-,{"stream_name":"stdout","time":315.687446164,"data":"Common causes and fixes:\n"}
-,{"stream_name":"stdout","time":315.687449531,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
-,{"stream_name":"stdout","time":315.687454657,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
-,{"stream_name":"stdout","time":315.687461625,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
-,{"stream_name":"stdout","time":315.687463976,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
-,{"stream_name":"stdout","time":315.687472214,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
-,{"stream_name":"stdout","time":315.687474701,"data":"\n"}
-,{"stream_name":"stderr","time":315.849332661,"data":"2026-10-25 12:06:33.763 | INFO     | acestep.inference:generate_music:660 - Skipping LM for task_type='cover' - using DiT directly\n"}
-,{"stream_name":"stderr","time":315.849351428,"data":"2026-10-25 12:06:33.763 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=True, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
-,{"stream_name":"stderr","time":315.849402833,"data":"2026-10-25 12:06:33.763 | INFO     | acestep.inference:generate_music:834 - [generate_music] cover task: using params.caption='classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm', params.lyrics='[verse]\n"}
-,{"stream_name":"stderr","time":315.849440197,"data":"Twinkle, twinkle, little star\n"}
-,{"stream_name":"stderr","time":315.849444895,"data":"How I wonder what you are\n"}
-,{"stream_name":"stderr","time":315.849448676,"data":"Up above the world so high\n"}
-,{"stream_name":"stderr","time":315.849452051,"data":"Like a diamond in the sky\n"}
-,{"stream_name":"stderr","time":315.849455556,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":315.849463252,"data":"Twinkle, twinkle, little star\n"}
-,{"stream_name":"stderr","time":315.84946719,"data":"How I wonder what you are'\n"}
-,{"stream_name":"stderr","time":315.849493015,"data":"2026-10-25 12:06:33.763 | INFO     | acestep.inference:generate_music:835 - [generate_music] Final inputs: dit_input_caption='classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm', dit_input_lyrics='[verse]\n"}
-,{"stream_name":"stderr","time":315.849500716,"data":"Twinkle, twinkle, little star\n"}
-,{"stream_name":"stderr","time":315.849504607,"data":"How I wonder what you are\n"}
-,{"stream_name":"stderr","time":315.84950788,"data":"Up above the world so high\n"}
-,{"stream_name":"stderr","time":315.849523447,"data":"Like a diamond in the sky\n"}
-,{"stream_name":"stderr","time":315.849527428,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":315.849530725,"data":"Twinkle, twinkle, little star\n"}
-,{"stream_name":"stderr","time":315.849533942,"data":"How I wonder what you are'\n"}
-,{"stream_name":"stderr","time":315.849954022,"data":"2026-10-25 12:06:33.764 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
-,{"stream_name":"stderr","time":315.850022975,"data":"2026-10-25 12:06:33.764 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
-,{"stream_name":"stderr","time":315.850091339,"data":"2026-10-25 12:06:33.764 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
-,{"stream_name":"stderr","time":315.851293027,"data":"2026-10-25 12:06:33.765 | INFO     | acestep.core.generation.handler.generate_music_request:_prepare_reference_and_source_audio:188 - [generate_music] Processing source audio...\n"}
-,{"stream_name":"stderr","time":316.209775086,"data":"2026-10-25 12:06:34.123 | INFO     | acestep.core.generation.handler.generate_music:_vram_preflight_check:157 - [generate_music] VRAM pre-flight: 8.37 GB free, ~0.80 GB needed (batch=1, duration=38s, mode=turbo).\n"}
-,{"stream_name":"stderr","time":316.2337236,"data":"2026-10-25 12:06:34.147 | INFO     | acestep.core.generation.handler.conditioning_target:_prepare_target_latents_and_wavs:104 - [generate_music] Encoding target audio to latents for item 0...\n"}
-,{"stream_name":"stderr","time":316.233920138,"data":"2026-10-25 12:06:34.148 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
-,{"stream_name":"stderr","time":316.976280863,"data":"2026-10-25 12:06:34.890 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:119 - \n"}
-,{"stream_name":"stderr","time":316.976322128,"data":"======================================================================\n"}
-,{"stream_name":"stderr","time":316.976328469,"data":"2026-10-25 12:06:34.890 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:120 - 🔍 [DEBUG] DiT TEXT ENCODER INPUT (Inference)\n"}
-,{"stream_name":"stderr","time":316.976347471,"data":"2026-10-25 12:06:34.890 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:121 - ======================================================================\n"}
-,{"stream_name":"stderr","time":316.976998204,"data":"2026-10-25 12:06:34.891 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:122 - text_prompt:\n"}
-,{"stream_name":"stderr","time":316.977020684,"data":"# Instruction\n"}
-,{"stream_name":"stderr","time":316.977024418,"data":"Fill the audio semantic mask based on the given conditions:\n"}
-,{"stream_name":"stderr","time":316.977027482,"data":"\n"}
-,{"stream_name":"stderr","time":316.977030254,"data":"# Caption\n"}
-,{"stream_name":"stderr","time":316.977033108,"data":"classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm\n"}
-,{"stream_name":"stderr","time":316.977036219,"data":"\n"}
-,{"stream_name":"stderr","time":316.97703898,"data":"# Metas\n"}
-,{"stream_name":"stderr","time":316.977041848,"data":"- bpm: N/A\n"}
-,{"stream_name":"stderr","time":316.977044792,"data":"- timesignature: N/A\n"}
-,{"stream_name":"stderr","time":316.977047705,"data":"- keyscale: N/A\n"}
-,{"stream_name":"stderr","time":316.977050499,"data":"- duration: 37 seconds\n"}
-,{"stream_name":"stderr","time":316.977061624,"data":"\u003c|endoftext|\u003e\n"}
-,{"stream_name":"stderr","time":316.977064989,"data":"\n"}
-,{"stream_name":"stderr","time":316.977075975,"data":"2026-10-25 12:06:34.891 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:123 - ======================================================================\n"}
-,{"stream_name":"stderr","time":316.977079292,"data":"2026-10-25 12:06:34.891 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:124 - lyrics_text:\n"}
-,{"stream_name":"stderr","time":316.977082355,"data":"# Languages\n"}
-,{"stream_name":"stderr","time":316.97708525,"data":"en\n"}
-,{"stream_name":"stderr","time":316.977087976,"data":"\n"}
-,{"stream_name":"stderr","time":316.977090718,"data":"# Lyric\n"}
-,{"stream_name":"stderr","time":316.977093436,"data":"[verse]\n"}
-,{"stream_name":"stderr","time":316.97709635,"data":"Twinkle, twinkle, little star\n"}
-,{"stream_name":"stderr","time":316.977099112,"data":"How I wonder what you are\n"}
-,{"stream_name":"stderr","time":316.977102094,"data":"Up above the world so high\n"}
-,{"stream_name":"stderr","time":316.977104868,"data":"Like a diamond in the sky\n"}
-,{"stream_name":"stderr","time":316.977107761,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":316.977126869,"data":"Twinkle, twinkle, little star\n"}
-,{"stream_name":"stderr","time":316.977130117,"data":"How I wonder what you are\u003c|endoftext|\u003e\n"}
-,{"stream_name":"stderr","time":316.977207694,"data":"2026-10-25 12:06:34.891 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:125 - ======================================================================\n"}
-,{"stream_name":"stderr","time":316.977221346,"data":"\n"}
-,{"stream_name":"stderr","time":316.985048566,"data":"2026-10-25 12:06:34.899 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:110 - [preprocess_batch] Inferring prompt embeddings...\n"}
-,{"stream_name":"stderr","time":317.036603039,"data":"2026-10-25 12:06:34.950 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:113 - [preprocess_batch] Inferring lyric embeddings...\n"}
-,{"stream_name":"stderr","time":317.036724369,"data":"2026-10-25 12:06:34.950 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:122 - [preprocess_batch] Inferring non-cover text embeddings...\n"}
-,{"stream_name":"stderr","time":317.082197262,"data":"2026-10-25 12:06:34.996 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:173 - [service_generate] Generating audio... (DiT backend: PyTorch (cuda))\n"}
-,{"stream_name":"stderr","time":317.126964735,"data":"2026-10-25 12:06:35.040 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:276 - [service_generate] DiT diffusion via PyTorch (cuda)...\n"}
-,{"stream_name":"stderr","time":317.250713061,"data":"2026-10-25 12:06:35.164 | INFO     | acestep.models.common.dcw_correction:__init__:98 - [DCW] Active — mode=double, scaler=0.0500, high_scaler=0.0200, wavelet='haar'\n"}
-,{"stream_name":"stderr","time":318.100449969,"data":"2026-10-25 12:06:36.014 | INFO     | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:42 - [generate_music] Model generation completed. Decoding latents...\n"}
-,{"stream_name":"stderr","time":318.100995157,"data":"2026-10-25 12:06:36.015 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:64 - [generate_music] pred_latents: torch.Size([1, 939, 64]), dtype=torch.float16\n"}
-,{"stream_name":"stderr","time":318.101067509,"data":"2026-10-25 12:06:36.015 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:65 - [generate_music] time_costs: {'encoder_time_cost': 0.10916924476623535, 'diffusion_time_cost': 0.8637661933898926, 'diffusion_per_step_time_cost': 0.10797077417373657, 'total_time_cost': 0.9729354381561279, 'offload_time_cost': 0.0}\n"}
-,{"stream_name":"stdout","time":318.141241767,"data":"acestep-twinkle-cover FAILED 2s Error: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
-,{"stream_name":"stdout","time":318.141256926,"data":"Common causes and fixes:\n"}
-,{"stream_name":"stderr","time":318.141257685,"data":"2026-10-25 12:06:36.054 | ERROR    | acestep.core.generation.handler.generate_music:generate_music:522 - [generate_music] Generation failed\n"}
-,{"stream_name":"stdout","time":318.14126079,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
-,{"stream_name":"stdout","time":318.141272261,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
-,{"stream_name":"stdout","time":318.141275727,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
-,{"stream_name":"stdout","time":318.141280776,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
-,{"stream_name":"stdout","time":318.141293133,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
-,{"stream_name":"stdout","time":318.141297135,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stdout","time":318.141300705,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
-,{"stream_name":"stdout","time":318.141304373,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
-,{"stream_name":"stdout","time":318.141307819,"data":"                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":318.141322807,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
-,{"stream_name":"stdout","time":318.141326604,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
-,{"stream_name":"stdout","time":318.141329979,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
-,{"stream_name":"stdout","time":318.141333453,"data":"Common causes and fixes:\n"}
-,{"stream_name":"stdout","time":318.141336537,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
-,{"stream_name":"stdout","time":318.141339938,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
-,{"stream_name":"stdout","time":318.141343465,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
-,{"stream_name":"stdout","time":318.141346855,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
-,{"stream_name":"stdout","time":318.141350443,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
-,{"stream_name":"stdout","time":318.141354045,"data":"\n"}
-,{"stream_name":"stderr","time":318.141270041,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":318.141363965,"data":"\n"}
-,{"stream_name":"stderr","time":318.141367429,"data":"  File \"/kaggle/tmp/gen.py\", line 40, in \u003cmodule\u003e\n"}
-,{"stream_name":"stderr","time":318.141371605,"data":"    res = generate_music(dit, llm, params=GenerationParams(**kw),\n"}
-,{"stream_name":"stderr","time":318.141375334,"data":"          │              │    │           │                  └ {'task_type': 'cover', 'caption': 'classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glo...\n"}
-,{"stream_name":"stderr","time":318.141379673,"data":"          │              │    │           └ \u003cclass 'acestep.inference.GenerationParams'\u003e\n"}
-,{"stream_name":"stderr","time":318.141383635,"data":"          │              │    └ \u003cacestep.llm_inference.LLMHandler object at 0x7c6b971005c0\u003e\n"}
-,{"stream_name":"stderr","time":318.141387304,"data":"          │              └ \u003cacestep.handler.AceStepHandler object at 0x7c6ba32cb500\u003e\n"}
-,{"stream_name":"stderr","time":318.141391311,"data":"          └ \u003cfunction generate_music at 0x7c6ba28d1620\u003e\n"}
-,{"stream_name":"stderr","time":318.141395127,"data":"\n"}
-,{"stream_name":"stderr","time":318.141398396,"data":"  File \"/kaggle/tmp/ace/acestep/inference.py\", line 916, in generate_music\n"}
-,{"stream_name":"stderr","time":318.141402169,"data":"    result = dit_handler.generate_music(**filtered_generate_kwargs)\n"}
-,{"stream_name":"stderr","time":318.141405779,"data":"             │           │                └ {'captions': 'classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano...\n"}
-,{"stream_name":"stderr","time":318.141414136,"data":"             │           └ \u003cfunction GenerateMusicMixin.generate_music at 0x7c6bd33c7ec0\u003e\n"}
-,{"stream_name":"stderr","time":318.141418381,"data":"             └ \u003cacestep.handler.AceStepHandler object at 0x7c6ba32cb500\u003e\n"}
-,{"stream_name":"stderr","time":318.14142232,"data":"\n"}
-,{"stream_name":"stderr","time":318.141425619,"data":"\u003e File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
-,{"stream_name":"stderr","time":318.141429404,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
-,{"stream_name":"stderr","time":318.141433205,"data":"                               │    └ \u003cfunction GenerateMusicDecodeMixin._prepare_generate_music_decode_state at 0x7c6bd31540e0\u003e\n"}
-,{"stream_name":"stderr","time":318.141437106,"data":"                               └ \u003cacestep.handler.AceStepHandler object at 0x7c6ba32cb500\u003e\n"}
-,{"stream_name":"stderr","time":318.141440735,"data":"\n"}
-,{"stream_name":"stderr","time":318.141444015,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
-,{"stream_name":"stderr","time":318.141447988,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
-,{"stream_name":"stderr","time":318.141453237,"data":"                                 └ ['Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).', 'Commo...\n"}
-,{"stream_name":"stderr","time":318.1414573,"data":"\n"}
-,{"stream_name":"stderr","time":318.141460495,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
-,{"stream_name":"stderr","time":318.14146434,"data":"Common causes and fixes:\n"}
-,{"stream_name":"stderr","time":318.141467654,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
-,{"stream_name":"stderr","time":318.141471424,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
-,{"stream_name":"stderr","time":318.14147515,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
-,{"stream_name":"stderr","time":318.141478942,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
-,{"stream_name":"stderr","time":318.1414827,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
-,{"stream_name":"stderr","time":318.141602307,"data":"2026-10-25 12:06:36.055 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=True, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
-,{"stream_name":"stderr","time":318.141895325,"data":"2026-10-25 12:06:36.056 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
-,{"stream_name":"stderr","time":318.141985099,"data":"2026-10-25 12:06:36.056 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
-,{"stream_name":"stderr","time":318.14203475,"data":"2026-10-25 12:06:36.056 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
-,{"stream_name":"stderr","time":318.415949971,"data":"2026-10-25 12:06:36.329 | INFO     | acestep.core.generation.handler.generate_music:_vram_preflight_check:157 - [generate_music] VRAM pre-flight: 8.37 GB free, ~0.80 GB needed (batch=1, duration=45s, mode=turbo).\n"}
-,{"stream_name":"stderr","time":318.456369985,"data":"2026-10-25 12:06:36.370 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:119 - \n"}
-,{"stream_name":"stderr","time":318.456399354,"data":"======================================================================\n"}
-,{"stream_name":"stderr","time":318.456707885,"data":"2026-10-25 12:06:36.370 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:120 - 🔍 [DEBUG] DiT TEXT ENCODER INPUT (Inference)\n"}
-,{"stream_name":"stderr","time":318.456731783,"data":"2026-10-25 12:06:36.370 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:121 - ======================================================================\n"}
-,{"stream_name":"stderr","time":318.456737779,"data":"2026-10-25 12:06:36.370 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:122 - text_prompt:\n"}
-,{"stream_name":"stderr","time":318.456742107,"data":"# Instruction\n"}
-,{"stream_name":"stderr","time":318.456745857,"data":"Fill the audio semantic mask based on the given conditions:\n"}
-,{"stream_name":"stderr","time":318.456749072,"data":"\n"}
-,{"stream_name":"stderr","time":318.456752109,"data":"# Caption\n"}
-,{"stream_name":"stderr","time":318.456755526,"data":"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby\n"}
-,{"stream_name":"stderr","time":318.456759107,"data":"\n"}
-,{"stream_name":"stderr","time":318.456762514,"data":"# Metas\n"}
-,{"stream_name":"stderr","time":318.456766118,"data":"- bpm: 88\n"}
-,{"stream_name":"stderr","time":318.456769091,"data":"- timesignature: N/A\n"}
-,{"stream_name":"stderr","time":318.456772333,"data":"- keyscale: N/A\n"}
-,{"stream_name":"stderr","time":318.456775696,"data":"- duration: 45 seconds\n"}
-,{"stream_name":"stderr","time":318.456778679,"data":"\u003c|endoftext|\u003e\n"}
-,{"stream_name":"stderr","time":318.456782004,"data":"\n"}
-,{"stream_name":"stderr","time":318.456785185,"data":"2026-10-25 12:06:36.370 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:123 - ======================================================================\n"}
-,{"stream_name":"stderr","time":318.456789086,"data":"2026-10-25 12:06:36.370 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:124 - lyrics_text:\n"}
-,{"stream_name":"stderr","time":318.456792497,"data":"# Languages\n"}
-,{"stream_name":"stderr","time":318.456795679,"data":"zh\n"}
-,{"stream_name":"stderr","time":318.456798919,"data":"\n"}
-,{"stream_name":"stderr","time":318.456802004,"data":"# Lyric\n"}
-,{"stream_name":"stderr","time":318.456805009,"data":"[verse]\n"}
-,{"stream_name":"stderr","time":318.456808099,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":318.456811636,"data":"滿天都是小星星\n"}
-,{"stream_name":"stderr","time":318.456814746,"data":"掛在天上放光明\n"}
-,{"stream_name":"stderr","time":318.456825222,"data":"好像許多小眼睛\n"}
-,{"stream_name":"stderr","time":318.456828754,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":318.456831842,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":318.456834867,"data":"滿天都是小星星\u003c|endoftext|\u003e\n"}
-,{"stream_name":"stderr","time":318.456843617,"data":"2026-10-25 12:06:36.370 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:125 - ======================================================================\n"}
-,{"stream_name":"stderr","time":318.456861568,"data":"\n"}
-,{"stream_name":"stderr","time":318.463645286,"data":"2026-10-25 12:06:36.377 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:110 - [preprocess_batch] Inferring prompt embeddings...\n"}
-,{"stream_name":"stderr","time":318.511892526,"data":"2026-10-25 12:06:36.425 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:113 - [preprocess_batch] Inferring lyric embeddings...\n"}
-,{"stream_name":"stderr","time":318.512176941,"data":"2026-10-25 12:06:36.426 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:173 - [service_generate] Generating audio... (DiT backend: PyTorch (cuda))\n"}
-,{"stream_name":"stderr","time":318.5543836,"data":"2026-10-25 12:06:36.468 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:276 - [service_generate] DiT diffusion via PyTorch (cuda)...\n"}
-,{"stream_name":"stderr","time":318.629598721,"data":"2026-10-25 12:06:36.543 | INFO     | acestep.models.common.dcw_correction:__init__:98 - [DCW] Active — mode=double, scaler=0.0500, high_scaler=0.0200, wavelet='haar'\n"}
-,{"stream_name":"stderr","time":319.84087699,"data":"2026-10-25 12:06:37.754 | INFO     | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:42 - [generate_music] Model generation completed. Decoding latents...\n"}
-,{"stream_name":"stderr","time":319.841448608,"data":"2026-10-25 12:06:37.755 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:64 - [generate_music] pred_latents: torch.Size([1, 1125, 64]), dtype=torch.float16\n"}
-,{"stream_name":"stderr","time":319.841516258,"data":"2026-10-25 12:06:37.755 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:65 - [generate_music] time_costs: {'encoder_time_cost': 0.054059505462646484, 'diffusion_time_cost': 1.2317821979522705, 'diffusion_per_step_time_cost': 0.1539727747440338, 'total_time_cost': 1.285841703414917, 'offload_time_cost': 0.0}\n"}
-,{"stream_name":"stdout","time":319.904911956,"data":"acestep-little-star-new FAILED 2s Error: Generation produced NaN or Inf latents (shape=[1, 1125, 64], dtype=torch.float16, device=cuda:0, nan=72000, inf=0).\n"}
-,{"stream_name":"stdout","time":319.904932369,"data":"Common causes and fixes:\n"}
-,{"stream_name":"stdout","time":319.904937122,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
-,{"stream_name":"stderr","time":319.904932255,"data":"2026-10-25 12:06:37.818 | ERROR    | acestep.core.generation.handler.generate_music:generate_music:522 - [generate_music] Generation failed\n"}
-,{"stream_name":"stdout","time":319.90494206,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
-,{"stream_name":"stderr","time":319.904952209,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stdout","time":319.904953586,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
-,{"stream_name":"stderr","time":319.904956907,"data":"\n"}
-,{"stream_name":"stdout","time":319.904959815,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
-,{"stream_name":"stderr","time":319.904963678,"data":"  File \"/kaggle/tmp/gen.py\", line 40, in \u003cmodule\u003e\n"}
-,{"stream_name":"stdout","time":319.904966635,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
-,{"stream_name":"stderr","time":319.904969588,"data":"    res = generate_music(dit, llm, params=GenerationParams(**kw),\n"}
-,{"stream_name":"stderr","time":319.904995882,"data":"          │              │    │           │                  └ {'task_type': 'text2music', 'caption': \"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin...\n"}
-,{"stream_name":"stderr","time":319.905000927,"data":"          │              │    │           └ \u003cclass 'acestep.inference.GenerationParams'\u003e\n"}
-,{"stream_name":"stderr","time":319.905004726,"data":"          │              │    └ \u003cacestep.llm_inference.LLMHandler object at 0x7c6b971005c0\u003e\n"}
-,{"stream_name":"stderr","time":319.905008247,"data":"          │              └ \u003cacestep.handler.AceStepHandler object at 0x7c6ba32cb500\u003e\n"}
-,{"stream_name":"stderr","time":319.905011567,"data":"          └ \u003cfunction generate_music at 0x7c6ba28d1620\u003e\n"}
-,{"stream_name":"stderr","time":319.90501503,"data":"\n"}
-,{"stream_name":"stderr","time":319.905018076,"data":"  File \"/kaggle/tmp/ace/acestep/inference.py\", line 916, in generate_music\n"}
-,{"stream_name":"stderr","time":319.905021534,"data":"    result = dit_handler.generate_music(**filtered_generate_kwargs)\n"}
-,{"stream_name":"stderr","time":319.905024911,"data":"             │           │                └ {'captions': \"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glock...\n"}
-,{"stream_name":"stderr","time":319.905028574,"data":"             │           └ \u003cfunction GenerateMusicMixin.generate_music at 0x7c6bd33c7ec0\u003e\n"}
-,{"stream_name":"stdout","time":319.90497219,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":319.905031842,"data":"             └ \u003cacestep.handler.AceStepHandler object at 0x7c6ba32cb500\u003e\n"}
-,{"stream_name":"stdout","time":319.905038781,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
-,{"stream_name":"stderr","time":319.9050422,"data":"\n"}
-,{"stream_name":"stdout","time":319.905045826,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
-,{"stream_name":"stderr","time":319.905048786,"data":"\u003e File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
-,{"stream_name":"stdout","time":319.905051779,"data":"                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":319.905054344,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
-,{"stream_name":"stdout","time":319.905057284,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
-,{"stream_name":"stderr","time":319.905061022,"data":"                               │    └ \u003cfunction GenerateMusicDecodeMixin._prepare_generate_music_decode_state at 0x7c6bd31540e0\u003e\n"}
-,{"stream_name":"stdout","time":319.90506438,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
-,{"stream_name":"stderr","time":319.905068401,"data":"                               └ \u003cacestep.handler.AceStepHandler object at 0x7c6ba32cb500\u003e\n"}
-,{"stream_name":"stdout","time":319.905071217,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 1125, 64], dtype=torch.float16, device=cuda:0, nan=72000, inf=0).\n"}
-,{"stream_name":"stderr","time":319.905073998,"data":"\n"}
-,{"stream_name":"stderr","time":319.90508193,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
-,{"stream_name":"stderr","time":319.905085427,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
-,{"stream_name":"stderr","time":319.905095701,"data":"                                 └ ['Generation produced NaN or Inf latents (shape=[1, 1125, 64], dtype=torch.float16, device=cuda:0, nan=72000, inf=0).', 'Comm...\n"}
-,{"stream_name":"stderr","time":319.905100119,"data":"\n"}
-,{"stream_name":"stderr","time":319.905103666,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 1125, 64], dtype=torch.float16, device=cuda:0, nan=72000, inf=0).\n"}
-,{"stream_name":"stderr","time":319.905107574,"data":"Common causes and fixes:\n"}
-,{"stream_name":"stderr","time":319.905110852,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
-,{"stream_name":"stderr","time":319.905114181,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
-,{"stream_name":"stderr","time":319.905117766,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
-,{"stream_name":"stdout","time":319.905078581,"data":"Common causes and fixes:\n"}
-,{"stream_name":"stderr","time":319.905121887,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
-,{"stream_name":"stdout","time":319.905127074,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
-,{"stream_name":"stderr","time":319.90513025,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
-,{"stream_name":"stdout","time":319.905134465,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
-,{"stream_name":"stdout","time":319.905141114,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
-,{"stream_name":"stdout","time":319.905144274,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
-,{"stream_name":"stdout","time":319.905147809,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
-,{"stream_name":"stdout","time":319.905151112,"data":"\n"}
-,{"stream_name":"stdout","time":324.397687842,"data":"gen exit 0\n"}
-,{"stream_name":"stdout","time":324.397719228,"data":"done\n"}
-,{"stream_name":"stderr","time":326.571959004,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":326.571990167,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":326.93290196,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":326.932928478,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":327.963077405,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
-,{"stream_name":"stderr","time":329.001350551,"data":"[NbConvertApp] Writing 293919 bytes to __results__.html\n"}
+[{"stream_name":"stdout","time":1.175760963,"data":"$ nvidia-smi -L\n"}
+,{"stream_name":"stdout","time":1.222518006,"data":"GPU 0: Tesla T4 (UUID: GPU-a473065e-c19d-2c23-1af2-56203f681c47)\n"}
+,{"stream_name":"stdout","time":1.222559475,"data":"GPU 1: Tesla T4 (UUID: GPU-6a22c459-0e72-7d4d-c19b-68115597a8cd)\n"}
+,{"stream_name":"stdout","time":1.222562838,"data":" \n"}
+,{"stream_name":"stdout","time":1.222570852,"data":"$ git clone --depth 1 https://github.com/ace-step/ACE-Step-1.5 /kaggle/tmp/ace\n"}
+,{"stream_name":"stdout","time":2.474510581,"data":" Cloning into '/kaggle/tmp/ace'...\n"}
+,{"stream_name":"stdout","time":2.474537327,"data":"\n"}
+,{"stream_name":"stdout","time":2.474541684,"data":"$ pip install -q uv\n"}
+,{"stream_name":"stdout","time":6.505645788,"data":" \n"}
+,{"stream_name":"stdout","time":6.505682856,"data":"$ uv venv -p 3.12 /kaggle/tmp/venv\n"}
+,{"stream_name":"stdout","time":7.065717952,"data":" warning: The `--system` flag has no effect, `uv venv` always ignores virtual environments when finding a Python interpreter; did you mean `--no-managed-python`?\n"}
+,{"stream_name":"stdout","time":7.065771719,"data":"Using CPython 3.12.3 interpreter at: /usr/bin/python3.12\n"}
+,{"stream_name":"stdout","time":7.065777187,"data":"Creating virtual environment at: /kaggle/tmp/venv\n"}
+,{"stream_name":"stdout","time":7.065781468,"data":"Activate with: source /kaggle/tmp/venv/bin/activate\n"}
+,{"stream_name":"stdout","time":7.06578598,"data":"\n"}
+,{"stream_name":"stdout","time":7.065789819,"data":"$ uv pip install --python /kaggle/tmp/venv/bin/python -e .\n"}
+,{"stream_name":"stdout","time":66.09028657,"data":"  certifi==2026.10.23\n"}
+,{"stream_name":"stdout","time":66.090322569,"data":" + cffi==2.1.1\n"}
+,{"stream_name":"stdout","time":66.090329611,"data":" + charset-normalizer==3.5.2\n"}
+,{"stream_name":"stdout","time":66.090335485,"data":" + click==8.5.0\n"}
+,{"stream_name":"stdout","time":66.090340798,"data":" + contourpy==1.4.0\n"}
+,{"stream_name":"stdout","time":66.090346417,"data":" + cryptography==50.0.2\n"}
+,{"stream_name":"stdout","time":66.09035294,"data":" + cuda-bindings==12.9.4\n"}
+,{"stream_name":"stdout","time":66.090358723,"data":" + cuda-pathfinder==1.8.4\n"}
+,{"stream_name":"stdout","time":66.090364197,"data":" + cycler==0.12.1\n"}
+,{"stream_name":"stdout","time":66.090368956,"data":" + diffusers==0.39.0\n"}
+,{"stream_name":"stdout","time":66.090373748,"data":" + diskcache==5.6.3\n"}
+,{"stream_name":"stdout","time":66.090378521,"data":" + einops==0.8.2\n"}
+,{"stream_name":"stdout","time":66.09038332,"data":" + einx==0.4.3\n"}
+,{"stream_name":"stdout","time":66.090388074,"data":" + fastapi==0.162.0\n"}
+,{"stream_name":"stdout","time":66.090392866,"data":" + ffmpy==1.0.0\n"}
+,{"stream_name":"stdout","time":66.090397578,"data":" + filelock==4.2.4\n"}
+,{"stream_name":"stdout","time":66.090402288,"data":" + fonttools==4.67.0\n"}
+,{"stream_name":"stdout","time":66.090409098,"data":" + frozendict==2.4.7\n"}
+,{"stream_name":"stdout","time":66.090418153,"data":" + frozenlist==1.8.0\n"}
+,{"stream_name":"stdout","time":66.090421501,"data":" + fsspec==2026.9.0\n"}
+,{"stream_name":"stdout","time":66.090424731,"data":" + gradio==6.2.0\n"}
+,{"stream_name":"stdout","time":66.090443731,"data":" + gradio-client==2.0.2\n"}
+,{"stream_name":"stdout","time":66.090450043,"data":" + groovy==0.1.2\n"}
+,{"stream_name":"stdout","time":66.09045582,"data":" + grpcio==1.84.1\n"}
+,{"stream_name":"stdout","time":66.090461485,"data":" + h11==0.16.0\n"}
+,{"stream_name":"stdout","time":66.09046674,"data":" + hf-xet==1.7.0\n"}
+,{"stream_name":"stdout","time":66.090481589,"data":" + httpcore==1.0.9\n"}
+,{"stream_name":"stdout","time":66.090485595,"data":" + httptools==0.9.0\n"}
+,{"stream_name":"stdout","time":66.090489414,"data":" + httpx==0.28.1\n"}
+,{"stream_name":"stdout","time":66.09049323,"data":" + huggingface-hub==0.36.2\n"}
+,{"stream_name":"stdout","time":66.090497027,"data":" + idna==3.20\n"}
+,{"stream_name":"stdout","time":66.090500772,"data":" + importlib-metadata==10.1.0\n"}
+,{"stream_name":"stdout","time":66.090504517,"data":" + jinja2==3.1.6\n"}
+,{"stream_name":"stdout","time":66.090508185,"data":" + kiwisolver==1.5.1\n"}
+,{"stream_name":"stdout","time":66.090511937,"data":" + lightning==2.6.6\n"}
+,{"stream_name":"stdout","time":66.090515583,"data":" + lightning-utilities==0.15.3\n"}
+,{"stream_name":"stdout","time":66.090519375,"data":" + llvmlite==0.50.0\n"}
+,{"stream_name":"stdout","time":66.090529557,"data":" + loguru==0.7.3\n"}
+,{"stream_name":"stdout","time":66.090546946,"data":" + lycoris-lora==4.1.3\n"}
+,{"stream_name":"stdout","time":66.0905517,"data":" + markdown==3.11.2\n"}
+,{"stream_name":"stdout","time":66.090556004,"data":" + markdown-it-py==4.2.0\n"}
+,{"stream_name":"stdout","time":66.090560359,"data":" + markupsafe==3.0.4\n"}
+,{"stream_name":"stdout","time":66.090564728,"data":" + matplotlib==3.11.2\n"}
+,{"stream_name":"stdout","time":66.090568572,"data":" + mdurl==0.1.2\n"}
+,{"stream_name":"stdout","time":66.090572229,"data":" + modelscope==1.40.2\n"}
+,{"stream_name":"stdout","time":66.090575914,"data":" + modelscope-hub==0.5.0\n"}
+,{"stream_name":"stdout","time":66.090579736,"data":" + mpmath==1.3.0\n"}
+,{"stream_name":"stdout","time":66.090583459,"data":" + multidict==7.2.1\n"}
+,{"stream_name":"stdout","time":66.090587213,"data":" + nano-vllm==0.2.0 (from file:///kaggle/tmp/ace/acestep/third_parts/nano-vllm)\n"}
+,{"stream_name":"stdout","time":66.090591095,"data":" + networkx==3.7\n"}
+,{"stream_name":"stdout","time":66.090594732,"data":" + numba==0.68.0\n"}
+,{"stream_name":"stdout","time":66.090598388,"data":" + numpy==2.5.4\n"}
+,{"stream_name":"stdout","time":66.090602171,"data":" + nvidia-cublas-cu12==12.8.4.1\n"}
+,{"stream_name":"stdout","time":66.090605999,"data":" + nvidia-cuda-cupti-cu12==12.8.90\n"}
+,{"stream_name":"stdout","time":66.090609768,"data":" + nvidia-cuda-nvrtc-cu12==12.8.93\n"}
+,{"stream_name":"stdout","time":66.090613456,"data":" + nvidia-cuda-runtime-cu12==12.8.90\n"}
+,{"stream_name":"stdout","time":66.090617252,"data":" + nvidia-cudnn-cu12==9.10.2.21\n"}
+,{"stream_name":"stdout","time":66.090631381,"data":" + nvidia-cufft-cu12==11.3.3.83\n"}
+,{"stream_name":"stdout","time":66.090635218,"data":" + nvidia-cufile-cu12==1.13.1.3\n"}
+,{"stream_name":"stdout","time":66.090641075,"data":" + nvidia-curand-cu12==10.3.9.90\n"}
+,{"stream_name":"stdout","time":66.090644917,"data":" + nvidia-cusolver-cu12==11.7.3.90\n"}
+,{"stream_name":"stdout","time":66.090649307,"data":" + nvidia-cusparse-cu12==12.5.8.93\n"}
+,{"stream_name":"stdout","time":66.090653817,"data":" + nvidia-cusparselt-cu12==0.7.1\n"}
+,{"stream_name":"stdout","time":66.090658681,"data":" + nvidia-nccl-cu12==2.27.5\n"}
+,{"stream_name":"stdout","time":66.090663078,"data":" + nvidia-nvjitlink-cu12==12.8.93\n"}
+,{"stream_name":"stdout","time":66.090666824,"data":" + nvidia-nvshmem-cu12==3.4.5\n"}
+,{"stream_name":"stdout","time":66.090676728,"data":" + nvidia-nvtx-cu12==12.8.90\n"}
+,{"stream_name":"stdout","time":66.090680508,"data":" + opentelemetry-api==1.45.1\n"}
+,{"stream_name":"stdout","time":66.090688676,"data":" + orjson==3.13.0\n"}
+,{"stream_name":"stdout","time":66.090692667,"data":" + packaging==26.3\n"}
+,{"stream_name":"stdout","time":66.090696288,"data":" + pandas==2.3.3\n"}
+,{"stream_name":"stdout","time":66.090699937,"data":" + peft==0.21.2\n"}
+,{"stream_name":"stdout","time":66.090703592,"data":" + pillow==12.3.0\n"}
+,{"stream_name":"stdout","time":66.090707304,"data":" + propcache==0.5.4\n"}
+,{"stream_name":"stdout","time":66.090710899,"data":" + protobuf==7.36.2\n"}
+,{"stream_name":"stdout","time":66.090714669,"data":" + psutil==7.2.2\n"}
+,{"stream_name":"stdout","time":66.09071849,"data":" + pycparser==3.12\n"}
+,{"stream_name":"stdout","time":66.090729372,"data":" + pydantic==2.14.1\n"}
+,{"stream_name":"stdout","time":66.090745691,"data":" + pydantic-core==2.50.1\n"}
+,{"stream_name":"stdout","time":66.090750296,"data":" + pydub==0.25.1\n"}
+,{"stream_name":"stdout","time":66.090754406,"data":" + pygments==2.21.0\n"}
+,{"stream_name":"stdout","time":66.090758155,"data":" + pyparsing==3.3.3\n"}
+,{"stream_name":"stdout","time":66.090762669,"data":" + python-dateutil==3.0.0\n"}
+,{"stream_name":"stdout","time":66.090766744,"data":" + python-dotenv==1.2.4\n"}
+,{"stream_name":"stdout","time":66.090770498,"data":" + python-multipart==0.0.32\n"}
+,{"stream_name":"stdout","time":66.090774178,"data":" + pytorch-lightning==2.6.6\n"}
+,{"stream_name":"stdout","time":66.090777885,"data":" + pytorch-wavelets==1.3.0\n"}
+,{"stream_name":"stdout","time":66.090781576,"data":" + pytz==2026.5\n"}
+,{"stream_name":"stdout","time":66.090787232,"data":" + pywavelets==1.10.0\n"}
+,{"stream_name":"stdout","time":66.090790941,"data":" + pyyaml==6.0.3\n"}
+,{"stream_name":"stdout","time":66.090794592,"data":" + regex==2026.9.29\n"}
+,{"stream_name":"stdout","time":66.090798183,"data":" + requests==2.34.2\n"}
+,{"stream_name":"stdout","time":66.09080181,"data":" + rich==15.0.0\n"}
+,{"stream_name":"stdout","time":66.090805403,"data":" + safehttpx==0.1.7\n"}
+,{"stream_name":"stdout","time":66.090809049,"data":" + safetensors==0.8.0\n"}
+,{"stream_name":"stdout","time":66.090812797,"data":" + scipy==1.18.1\n"}
+,{"stream_name":"stdout","time":66.090816467,"data":" + semantic-version==2.10.0\n"}
+,{"stream_name":"stdout","time":66.090822026,"data":" + setuptools==71.1.0\n"}
+,{"stream_name":"stdout","time":66.090829837,"data":" + shellingham==1.5.4\n"}
+,{"stream_name":"stdout","time":66.090845872,"data":" + six==1.17.0\n"}
+,{"stream_name":"stdout","time":66.090850512,"data":" + soundfile==0.14.0\n"}
+,{"stream_name":"stdout","time":66.090854676,"data":" + starlette==0.52.1\n"}
+,{"stream_name":"stdout","time":66.090859304,"data":" + sympy==1.14.0\n"}
+,{"stream_name":"stdout","time":66.090863638,"data":" + tensorboard==2.21.0\n"}
+,{"stream_name":"stdout","time":66.090867387,"data":" + tensorboard-data-server==0.7.2\n"}
+,{"stream_name":"stdout","time":66.090871144,"data":" + tokenizers==0.22.2\n"}
+,{"stream_name":"stdout","time":66.090874852,"data":" + toml==0.10.2\n"}
+,{"stream_name":"stdout","time":66.09087846,"data":" + tomlkit==0.13.3\n"}
+,{"stream_name":"stdout","time":66.09088205,"data":" + torch==2.10.0+cu128\n"}
+,{"stream_name":"stdout","time":66.09088568,"data":" + torch-einops-utils==0.1.44\n"}
+,{"stream_name":"stdout","time":66.090889438,"data":" + torchao==0.16.0\n"}
+,{"stream_name":"stdout","time":66.090893119,"data":" + torchaudio==2.10.0+cu128\n"}
+,{"stream_name":"stdout","time":66.090896734,"data":" + torchcodec==0.17.0\n"}
+,{"stream_name":"stdout","time":66.090904129,"data":" + torchmetrics==1.9.0\n"}
+,{"stream_name":"stdout","time":66.090907983,"data":" + torchvision==0.25.0+cu128\n"}
+,{"stream_name":"stdout","time":66.090911662,"data":" + tqdm==4.70.1\n"}
+,{"stream_name":"stdout","time":66.090915345,"data":" + transformers==4.57.6\n"}
+,{"stream_name":"stdout","time":66.090919176,"data":" + triton==3.6.0\n"}
+,{"stream_name":"stdout","time":66.090929454,"data":" + typer==0.27.3\n"}
+,{"stream_name":"stdout","time":66.090946846,"data":" + typer-slim==0.24.0\n"}
+,{"stream_name":"stdout","time":66.090951602,"data":" + typing-extensions==4.16.0\n"}
+,{"stream_name":"stdout","time":66.090955902,"data":" + typing-inspection==0.4.4\n"}
+,{"stream_name":"stdout","time":66.090960522,"data":" + tzdata==2026.5\n"}
+,{"stream_name":"stdout","time":66.090964804,"data":" + urllib3==2.8.0\n"}
+,{"stream_name":"stdout","time":66.090968484,"data":" + uvicorn==0.54.0\n"}
+,{"stream_name":"stdout","time":66.090972142,"data":" + uvloop==0.23.0\n"}
+,{"stream_name":"stdout","time":66.090975735,"data":" + vector-quantize-pytorch==1.32.0\n"}
+,{"stream_name":"stdout","time":66.09097946,"data":" + watchfiles==1.3.0\n"}
+,{"stream_name":"stdout","time":66.090983132,"data":" + websockets==17.3\n"}
+,{"stream_name":"stdout","time":66.090986906,"data":" + werkzeug==3.1.9\n"}
+,{"stream_name":"stdout","time":66.090990572,"data":" + xxhash==4.0.2\n"}
+,{"stream_name":"stdout","time":66.09099418,"data":" + yarl==1.25.1\n"}
+,{"stream_name":"stdout","time":66.090997785,"data":" + zipp==4.1.2\n"}
+,{"stream_name":"stdout","time":66.09100144,"data":"\n"}
+,{"stream_name":"stdout","time":66.091004989,"data":"$ /kaggle/tmp/venv/bin/python -m acestep.model_downloader\n"}
+,{"stream_name":"stdout","time":124.437654458,"data":"Checkpoints directory: /kaggle/tmp/ace/checkpoints\n"}
+,{"stream_name":"stdout","time":124.437701014,"data":"Downloading main model (includes vae, text encoder, DiT, and LM 1.7B)...\n"}
+,{"stream_name":"stdout","time":124.437707578,"data":"Downloading main model from ACE-Step/Ace-Step1.5...\n"}
+,{"stream_name":"stdout","time":124.437713334,"data":"Destination: /kaggle/tmp/ace/checkpoints\n"}
+,{"stream_name":"stdout","time":124.437718306,"data":"This may take a while depending on your internet connection...\n"}
+,{"stream_name":"stdout","time":124.437722751,"data":"Successfully downloaded from HuggingFace: ACE-Step/Ace-Step1.5\n"}
+,{"stream_name":"stdout","time":124.437727248,"data":"\n"}
+,{"stream_name":"stdout","time":124.437731408,"data":"Download complete!\n"}
+,{"stream_name":"stdout","time":124.437735698,"data":"Models are available at: /kaggle/tmp/ace/checkpoints\n"}
+,{"stream_name":"stdout","time":124.437740018,"data":" 2026-10-25 13:04:30.280 | INFO     | __main__:_smart_download:249 - [Model Download] Auto-detected: HuggingFace Hub\n"}
+,{"stream_name":"stdout","time":124.437744642,"data":"2026-10-25 13:04:30.280 | INFO     | __main__:_smart_download:252 - [Model Download] Using HuggingFace Hub...\n"}
+,{"stream_name":"stdout","time":124.43774924,"data":"2026-10-25 13:04:30.890 | INFO     | __main__:_download_from_huggingface_internal:180 - [Model Download] Downloading from HuggingFace: ACE-Step/Ace-Step1.5 -\u003e /kaggle/tmp/ace/checkpoints\n"}
+,{"stream_name":"stdout","time":124.437755317,"data":"\n"}
+,{"stream_name":"stdout","time":124.437759632,"data":"Fetching 28 files:   0%|          | 0/28 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":124.437768094,"data":"Fetching 28 files:  29%|██▊       | 8/28 [00:00\u003c00:01, 19.42it/s]\n"}
+,{"stream_name":"stdout","time":124.437771987,"data":"Fetching 28 files:  57%|█████▋    | 16/28 [00:00\u003c00:00, 27.02it/s]\n"}
+,{"stream_name":"stdout","time":124.437802727,"data":"Fetching 28 files:  86%|████████▌ | 24/28 [00:06\u003c00:01,  3.79it/s]\n"}
+,{"stream_name":"stdout","time":124.437807869,"data":"Fetching 28 files:  93%|█████████▎| 26/28 [00:20\u003c00:01,  1.30it/s]\n"}
+,{"stream_name":"stdout","time":124.43781214,"data":"Fetching 28 files:  96%|█████████▋| 27/28 [00:39\u003c00:01,  1.44s/it]\n"}
+,{"stream_name":"stdout","time":124.437816495,"data":"Fetching 28 files: 100%|██████████| 28/28 [00:57\u003c00:00,  2.04s/it]\n"}
+,{"stream_name":"stdout","time":124.437820936,"data":"Fetching 28 files: 100%|██████████| 28/28 [00:57\u003c00:00,  2.04s/it]\n"}
+,{"stream_name":"stdout","time":124.437825348,"data":"2026-10-25 13:05:28.344 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced modeling_acestep_v15_turbo.py -\u003e /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/modeling_acestep_v15_turbo.py\n"}
+,{"stream_name":"stdout","time":124.437829512,"data":"2026-10-25 13:05:28.345 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced configuration_acestep_v15.py -\u003e /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/configuration_acestep_v15.py\n"}
+,{"stream_name":"stdout","time":124.437834706,"data":"2026-10-25 13:05:28.345 | INFO     | __main__:download_main_model:489 - [Model Download] Synced code files for acestep-v15-turbo: ['modeling_acestep_v15_turbo.py', 'configuration_acestep_v15.py']\n"}
+,{"stream_name":"stdout","time":124.437838751,"data":"\n"}
+,{"stream_name":"stderr","time":133.552625187,"data":"2026-10-25 13:05:37.534 | DEBUG    | acestep.core.generation.handler.init_service_memory_basic:_apply_malloc_mmap_threshold:50 - [memory] Set M_MMAP_THRESHOLD=131072 for immediate OS reclaim of large frees\n"}
+,{"stream_name":"stderr","time":145.672472189,"data":"/kaggle/tmp/venv/lib/python3.12/site-packages/torchao/quantization/quant_api.py:1811: SyntaxWarning: invalid escape sequence '\\.'\n"}
+,{"stream_name":"stderr","time":145.672502981,"data":"  \"\"\"Configuration class for applying different quantization configs to modules or parameters based on their fully qualified names (FQNs).\n"}
+,{"stream_name":"stderr","time":152.391246473,"data":"2026-10-25 13:05:56.373 | WARNING  | acestep.training.trainer:\u003cmodule\u003e:40 - bitsandbytes not installed. Using standard AdamW.\n"}
+,{"stream_name":"stderr","time":152.745377223,"data":"2026-10-25 13:05:56.727 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
+,{"stream_name":"stderr","time":152.745608573,"data":"2026-10-25 13:05:56.727 | INFO     | acestep.core.generation.handler.init_service_orchestrator:initialize_service:96 - [initialize_service] Pre-Ampere CUDA detected: using float16 instead of bfloat16.\n"}
+,{"stream_name":"stderr","time":153.002687126,"data":"2026-10-25 13:05:56.984 | INFO     | acestep.core.generation.handler.init_service_loader:_load_main_model_from_checkpoint:151 - [initialize_service] Pre-Ampere CUDA detected: using eager attention for float16 numerical stability.\n"}
+,{"stream_name":"stderr","time":153.002720558,"data":"2026-10-25 13:05:56.984 | INFO     | acestep.core.generation.handler.init_service_loader:_load_main_model_from_checkpoint:174 - [initialize_service] Attempting to load model with attention implementation: eager\n"}
+,{"stream_name":"stderr","time":161.748313489,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stdout","time":164.297440163,"data":"dit True [OK] Model initialized successfully on cuda\n"}
+,{"stream_name":"stdout","time":164.297486976,"data":"Main model: /kaggle/tmp/ace/checkpoints/acestep-v15-turbo\n"}
+,{"stream_name":"stdout","time":164.297492452,"data":"VAE: /kaggle/tmp/ace/checkpoints/vae\n"}
+,{"stream_name":"stdout","time":164.297496402,"data":"Text encoder: /kaggle/tmp/ace/checkpoints/Qwen3-Embedding-0.6B\n"}
+,{"stream_name":"stdout","time":164.29750006,"data":"Dtype: torch.float16\n"}
+,{"stream_name":"stdout","time":164.29750401,"data":"Attention: eager\n"}
+,{"stream_name":"stdout","time":164.297507607,"data":"Compiled: False\n"}
+,{"stream_name":"stdout","time":164.297510894,"data":"Quantization: Disabled\n"}
+,{"stream_name":"stdout","time":164.297515048,"data":"Offload to CPU: False\n"}
+,{"stream_name":"stdout","time":164.297536175,"data":"Offload DiT to CPU: False\n"}
+,{"stream_name":"stdout","time":164.297539756,"data":"MLX DiT: Disabled\n"}
+,{"stream_name":"stdout","time":164.29754358,"data":"MLX VAE: Disabled\n"}
+,{"stream_name":"stdout","time":164.297547392,"data":"llm False ❌ 5Hz LM model not found at /kaggle/tmp/ace/checkpoints/acestep-5Hz-lm-0.6B\n"}
+,{"stream_name":"stderr","time":164.458203252,"data":"2026-10-25 13:06:08.440 | INFO     | acestep.inference:generate_music:660 - Skipping LM for task_type='cover' - using DiT directly\n"}
+,{"stream_name":"stderr","time":164.458227743,"data":"2026-10-25 13:06:08.440 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=True, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
+,{"stream_name":"stderr","time":164.458257438,"data":"2026-10-25 13:06:08.440 | INFO     | acestep.inference:generate_music:834 - [generate_music] cover task: using params.caption='children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby', params.lyrics='[verse]\n"}
+,{"stream_name":"stderr","time":164.458263204,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":164.458267434,"data":"滿天都是小星星\n"}
+,{"stream_name":"stderr","time":164.458270978,"data":"掛在天上放光明\n"}
+,{"stream_name":"stderr","time":164.458274416,"data":"好像許多小眼睛\n"}
+,{"stream_name":"stderr","time":164.458277992,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":164.45828138,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":164.458285083,"data":"滿天都是小星星'\n"}
+,{"stream_name":"stderr","time":164.458389791,"data":"2026-10-25 13:06:08.440 | INFO     | acestep.inference:generate_music:835 - [generate_music] Final inputs: dit_input_caption='children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby', dit_input_lyrics='[verse]\n"}
+,{"stream_name":"stderr","time":164.458404894,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":164.458409448,"data":"滿天都是小星星\n"}
+,{"stream_name":"stderr","time":164.458412969,"data":"掛在天上放光明\n"}
+,{"stream_name":"stderr","time":164.458416514,"data":"好像許多小眼睛\n"}
+,{"stream_name":"stderr","time":164.458421882,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":164.458428975,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":164.458431632,"data":"滿天都是小星星'\n"}
+,{"stream_name":"stderr","time":164.458853539,"data":"2026-10-25 13:06:08.441 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
+,{"stream_name":"stderr","time":164.458938321,"data":"2026-10-25 13:06:08.441 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
+,{"stream_name":"stderr","time":164.458986439,"data":"2026-10-25 13:06:08.441 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
+,{"stream_name":"stderr","time":164.460051282,"data":"2026-10-25 13:06:08.442 | INFO     | acestep.core.generation.handler.generate_music_request:_prepare_reference_and_source_audio:188 - [generate_music] Processing source audio...\n"}
+,{"stream_name":"stderr","time":164.997880315,"data":"2026-10-25 13:06:08.979 | INFO     | acestep.core.generation.handler.generate_music:_vram_preflight_check:157 - [generate_music] VRAM pre-flight: 8.55 GB free, ~0.80 GB needed (batch=1, duration=38s, mode=turbo).\n"}
+,{"stream_name":"stderr","time":164.997921474,"data":"2026-10-25 13:06:08.980 | INFO     | acestep.core.generation.handler.progress:_start_diffusion_progress_estimator:179 - [progress] No timing history — using fallback estimate (2.5s/step for batch_size=1).  This will self-calibrate after the first generation.\n"}
+,{"stream_name":"stderr","time":165.084139896,"data":"2026-10-25 13:06:09.066 | INFO     | acestep.core.generation.handler.conditioning_target:_prepare_target_latents_and_wavs:104 - [generate_music] Encoding target audio to latents for item 0...\n"}
+,{"stream_name":"stderr","time":165.084383737,"data":"2026-10-25 13:06:09.066 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
+,{"stream_name":"stderr","time":166.959177395,"data":"2026-10-25 13:06:10.941 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:119 - \n"}
+,{"stream_name":"stderr","time":166.959271664,"data":"======================================================================\n"}
+,{"stream_name":"stderr","time":166.959280917,"data":"2026-10-25 13:06:10.941 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:120 - 🔍 [DEBUG] DiT TEXT ENCODER INPUT (Inference)\n"}
+,{"stream_name":"stderr","time":166.959451195,"data":"2026-10-25 13:06:10.941 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:121 - ======================================================================\n"}
+,{"stream_name":"stderr","time":166.959468907,"data":"2026-10-25 13:06:10.941 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:122 - text_prompt:\n"}
+,{"stream_name":"stderr","time":166.959474146,"data":"# Instruction\n"}
+,{"stream_name":"stderr","time":166.959478395,"data":"Fill the audio semantic mask based on the given conditions:\n"}
+,{"stream_name":"stderr","time":166.959528375,"data":"\n"}
+,{"stream_name":"stderr","time":166.959534479,"data":"# Caption\n"}
+,{"stream_name":"stderr","time":166.959538632,"data":"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby\n"}
+,{"stream_name":"stderr","time":166.959542992,"data":"\n"}
+,{"stream_name":"stderr","time":166.959546843,"data":"# Metas\n"}
+,{"stream_name":"stderr","time":166.959550799,"data":"- bpm: N/A\n"}
+,{"stream_name":"stderr","time":166.959554683,"data":"- timesignature: N/A\n"}
+,{"stream_name":"stderr","time":166.959558351,"data":"- keyscale: N/A\n"}
+,{"stream_name":"stderr","time":166.959562281,"data":"- duration: 37 seconds\n"}
+,{"stream_name":"stderr","time":166.959566378,"data":"\u003c|endoftext|\u003e\n"}
+,{"stream_name":"stderr","time":166.959570557,"data":"\n"}
+,{"stream_name":"stderr","time":166.959580084,"data":"2026-10-25 13:06:10.941 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:123 - ======================================================================\n"}
+,{"stream_name":"stderr","time":166.959644886,"data":"2026-10-25 13:06:10.941 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:124 - lyrics_text:\n"}
+,{"stream_name":"stderr","time":166.959652212,"data":"# Languages\n"}
+,{"stream_name":"stderr","time":166.95965551,"data":"zh\n"}
+,{"stream_name":"stderr","time":166.959662388,"data":"\n"}
+,{"stream_name":"stderr","time":166.9596656,"data":"# Lyric\n"}
+,{"stream_name":"stderr","time":166.959668789,"data":"[verse]\n"}
+,{"stream_name":"stderr","time":166.959709106,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":166.959712828,"data":"滿天都是小星星\n"}
+,{"stream_name":"stderr","time":166.959716149,"data":"掛在天上放光明\n"}
+,{"stream_name":"stderr","time":166.959719548,"data":"好像許多小眼睛\n"}
+,{"stream_name":"stderr","time":166.959722761,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":166.959726,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":166.959729213,"data":"滿天都是小星星\u003c|endoftext|\u003e\n"}
+,{"stream_name":"stderr","time":166.959734919,"data":"2026-10-25 13:06:10.941 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:125 - ======================================================================\n"}
+,{"stream_name":"stderr","time":166.959738695,"data":"\n"}
+,{"stream_name":"stderr","time":167.009627783,"data":"2026-10-25 13:06:10.991 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:110 - [preprocess_batch] Inferring prompt embeddings...\n"}
+,{"stream_name":"stderr","time":167.334604085,"data":"2026-10-25 13:06:11.316 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:113 - [preprocess_batch] Inferring lyric embeddings...\n"}
+,{"stream_name":"stderr","time":167.3346534,"data":"2026-10-25 13:06:11.316 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:122 - [preprocess_batch] Inferring non-cover text embeddings...\n"}
+,{"stream_name":"stderr","time":167.388675788,"data":"2026-10-25 13:06:11.370 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:173 - [service_generate] Generating audio... (DiT backend: PyTorch (cuda))\n"}
+,{"stream_name":"stderr","time":167.791962537,"data":"2026-10-25 13:06:11.773 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:276 - [service_generate] DiT diffusion via PyTorch (cuda)...\n"}
+,{"stream_name":"stderr","time":167.910098798,"data":"2026-10-25 13:06:11.892 | INFO     | acestep.models.common.dcw_correction:__init__:98 - [DCW] Active — mode=double, scaler=0.0500, high_scaler=0.0200, wavelet='haar'\n"}
+,{"stream_name":"stderr","time":168.326514587,"data":"2026-10-25 13:06:12.308 | INFO     | acestep.models.common.dcw_loader:get:84 - [DCW] Built DWT1D for wavelet='haar' (low-pass filter taps=2, device=cuda:0, dtype=torch.float16).\n"}
+,{"stream_name":"stderr","time":169.115492159,"data":"2026-10-25 13:06:13.097 | INFO     | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:42 - [generate_music] Model generation completed. Decoding latents...\n"}
+,{"stream_name":"stderr","time":169.116066962,"data":"2026-10-25 13:06:13.098 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:64 - [generate_music] pred_latents: torch.Size([1, 939, 64]), dtype=torch.float16\n"}
+,{"stream_name":"stderr","time":169.11620239,"data":"2026-10-25 13:06:13.098 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:65 - [generate_music] time_costs: {'encoder_time_cost': 0.10179948806762695, 'diffusion_time_cost': 1.220963716506958, 'diffusion_per_step_time_cost': 0.15262046456336975, 'total_time_cost': 1.322763204574585, 'offload_time_cost': 0.0}\n"}
+,{"stream_name":"stderr","time":169.159950443,"data":"2026-10-25 13:06:13.140 | ERROR    | acestep.core.generation.handler.generate_music:generate_music:522 - [generate_music] Generation failed\n"}
+,{"stream_name":"stderr","time":169.159967183,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":169.159970541,"data":"\n"}
+,{"stream_name":"stderr","time":169.159973173,"data":"  File \"/kaggle/tmp/gen.py\", line 40, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":169.159994458,"data":"    res = generate_music(dit, llm, params=GenerationParams(**kw),\n"}
+,{"stream_name":"stderr","time":169.159999231,"data":"          │              │    │           │                  └ {'task_type': 'cover', 'caption': \"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chin...\n"}
+,{"stream_name":"stderr","time":169.160004696,"data":"          │              │    │           └ \u003cclass 'acestep.inference.GenerationParams'\u003e\n"}
+,{"stream_name":"stderr","time":169.160009635,"data":"          │              │    └ \u003cacestep.llm_inference.LLMHandler object at 0x7d7b214185c0\u003e\n"}
+,{"stream_name":"stderr","time":169.160013921,"data":"          │              └ \u003cacestep.handler.AceStepHandler object at 0x7d7b2de44ce0\u003e\n"}
+,{"stream_name":"stderr","time":169.160017981,"data":"          └ \u003cfunction generate_music at 0x7d7b2d5618a0\u003e\n"}
+,{"stream_name":"stderr","time":169.160022755,"data":"\n"}
+,{"stream_name":"stdout","time":169.160018074,"data":"acestep-little-star-cover FAILED 5s Error: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
+,{"stream_name":"stdout","time":169.160053674,"data":"Common causes and fixes:\n"}
+,{"stream_name":"stdout","time":169.160064378,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
+,{"stream_name":"stderr","time":169.160028313,"data":"  File \"/kaggle/tmp/ace/acestep/inference.py\", line 916, in generate_music\n"}
+,{"stream_name":"stdout","time":169.160068912,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
+,{"stream_name":"stdout","time":169.160076805,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
+,{"stream_name":"stderr","time":169.160074165,"data":"    result = dit_handler.generate_music(**filtered_generate_kwargs)\n"}
+,{"stream_name":"stdout","time":169.160081048,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
+,{"stream_name":"stderr","time":169.160084714,"data":"             │           │                └ {'captions': \"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glock...\n"}
+,{"stream_name":"stderr","time":169.160092767,"data":"             │           └ \u003cfunction GenerateMusicMixin.generate_music at 0x7d7b5e0cfec0\u003e\n"}
+,{"stream_name":"stderr","time":169.160097062,"data":"             └ \u003cacestep.handler.AceStepHandler object at 0x7d7b2de44ce0\u003e\n"}
+,{"stream_name":"stderr","time":169.160117237,"data":"\n"}
+,{"stream_name":"stderr","time":169.160121383,"data":"\u003e File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
+,{"stream_name":"stdout","time":169.160088668,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
+,{"stream_name":"stderr","time":169.160137403,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
+,{"stream_name":"stdout","time":169.160142958,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":169.160147428,"data":"                               │    └ \u003cfunction GenerateMusicDecodeMixin._prepare_generate_music_decode_state at 0x7d7b5de4c0e0\u003e\n"}
+,{"stream_name":"stdout","time":169.160151612,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
+,{"stream_name":"stderr","time":169.160154965,"data":"                               └ \u003cacestep.handler.AceStepHandler object at 0x7d7b2de44ce0\u003e\n"}
+,{"stream_name":"stdout","time":169.160158393,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
+,{"stream_name":"stderr","time":169.160161769,"data":"\n"}
+,{"stream_name":"stdout","time":169.160164472,"data":"                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":169.160168156,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
+,{"stream_name":"stdout","time":169.160172337,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
+,{"stream_name":"stderr","time":169.160176198,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
+,{"stream_name":"stdout","time":169.160180519,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
+,{"stream_name":"stderr","time":169.160184895,"data":"                                 └ ['Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).', 'Commo...\n"}
+,{"stream_name":"stderr","time":169.160191288,"data":"\n"}
+,{"stream_name":"stderr","time":169.160194768,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
+,{"stream_name":"stdout","time":169.160187167,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
+,{"stream_name":"stderr","time":169.160199487,"data":"Common causes and fixes:\n"}
+,{"stream_name":"stdout","time":169.160204817,"data":"Common causes and fixes:\n"}
+,{"stream_name":"stderr","time":169.160209983,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
+,{"stream_name":"stdout","time":169.160213325,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
+,{"stream_name":"stderr","time":169.160216858,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
+,{"stream_name":"stdout","time":169.160219949,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
+,{"stream_name":"stderr","time":169.160222839,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
+,{"stream_name":"stdout","time":169.160226781,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
+,{"stream_name":"stderr","time":169.160230432,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
+,{"stream_name":"stdout","time":169.160233777,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
+,{"stream_name":"stderr","time":169.160236345,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
+,{"stream_name":"stdout","time":169.160240039,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
+,{"stream_name":"stdout","time":169.160252034,"data":"\n"}
+,{"stream_name":"stderr","time":169.362651524,"data":"2026-10-25 13:06:13.344 | INFO     | acestep.inference:generate_music:660 - Skipping LM for task_type='cover' - using DiT directly\n"}
+,{"stream_name":"stderr","time":169.362679196,"data":"2026-10-25 13:06:13.344 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=True, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
+,{"stream_name":"stderr","time":169.362803088,"data":"2026-10-25 13:06:13.345 | INFO     | acestep.inference:generate_music:834 - [generate_music] cover task: using params.caption='classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm', params.lyrics='[verse]\n"}
+,{"stream_name":"stderr","time":169.362819207,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":169.362824364,"data":"How I wonder what you are\n"}
+,{"stream_name":"stderr","time":169.362828425,"data":"Up above the world so high\n"}
+,{"stream_name":"stderr","time":169.362832293,"data":"Like a diamond in the sky\n"}
+,{"stream_name":"stderr","time":169.362836151,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":169.362839805,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":169.362843788,"data":"How I wonder what you are'\n"}
+,{"stream_name":"stderr","time":169.362908638,"data":"2026-10-25 13:06:13.345 | INFO     | acestep.inference:generate_music:835 - [generate_music] Final inputs: dit_input_caption='classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm', dit_input_lyrics='[verse]\n"}
+,{"stream_name":"stderr","time":169.362919353,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":169.362935216,"data":"How I wonder what you are\n"}
+,{"stream_name":"stderr","time":169.362939237,"data":"Up above the world so high\n"}
+,{"stream_name":"stderr","time":169.362943002,"data":"Like a diamond in the sky\n"}
+,{"stream_name":"stderr","time":169.362947099,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":169.362950882,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":169.362954841,"data":"How I wonder what you are'\n"}
+,{"stream_name":"stderr","time":169.363466278,"data":"2026-10-25 13:06:13.345 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
+,{"stream_name":"stderr","time":169.363537153,"data":"2026-10-25 13:06:13.345 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
+,{"stream_name":"stderr","time":169.363607917,"data":"2026-10-25 13:06:13.345 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
+,{"stream_name":"stderr","time":169.364707468,"data":"2026-10-25 13:06:13.346 | INFO     | acestep.core.generation.handler.generate_music_request:_prepare_reference_and_source_audio:188 - [generate_music] Processing source audio...\n"}
+,{"stream_name":"stderr","time":169.761482232,"data":"2026-10-25 13:06:13.743 | INFO     | acestep.core.generation.handler.generate_music:_vram_preflight_check:157 - [generate_music] VRAM pre-flight: 8.37 GB free, ~0.80 GB needed (batch=1, duration=38s, mode=turbo).\n"}
+,{"stream_name":"stderr","time":169.783801991,"data":"2026-10-25 13:06:13.765 | INFO     | acestep.core.generation.handler.conditioning_target:_prepare_target_latents_and_wavs:104 - [generate_music] Encoding target audio to latents for item 0...\n"}
+,{"stream_name":"stderr","time":169.784020702,"data":"2026-10-25 13:06:13.766 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
+,{"stream_name":"stderr","time":170.55503031,"data":"2026-10-25 13:06:14.537 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:119 - \n"}
+,{"stream_name":"stderr","time":170.555073599,"data":"======================================================================\n"}
+,{"stream_name":"stderr","time":170.555078027,"data":"2026-10-25 13:06:14.537 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:120 - 🔍 [DEBUG] DiT TEXT ENCODER INPUT (Inference)\n"}
+,{"stream_name":"stderr","time":170.555200944,"data":"2026-10-25 13:06:14.537 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:121 - ======================================================================\n"}
+,{"stream_name":"stderr","time":170.555269767,"data":"2026-10-25 13:06:14.537 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:122 - text_prompt:\n"}
+,{"stream_name":"stderr","time":170.555276996,"data":"# Instruction\n"}
+,{"stream_name":"stderr","time":170.555280309,"data":"Fill the audio semantic mask based on the given conditions:\n"}
+,{"stream_name":"stderr","time":170.555283664,"data":"\n"}
+,{"stream_name":"stderr","time":170.555286894,"data":"# Caption\n"}
+,{"stream_name":"stderr","time":170.555290204,"data":"classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm\n"}
+,{"stream_name":"stderr","time":170.555293704,"data":"\n"}
+,{"stream_name":"stderr","time":170.555296697,"data":"# Metas\n"}
+,{"stream_name":"stderr","time":170.555300225,"data":"- bpm: N/A\n"}
+,{"stream_name":"stderr","time":170.555303485,"data":"- timesignature: N/A\n"}
+,{"stream_name":"stderr","time":170.555306669,"data":"- keyscale: N/A\n"}
+,{"stream_name":"stderr","time":170.555309882,"data":"- duration: 37 seconds\n"}
+,{"stream_name":"stderr","time":170.555313074,"data":"\u003c|endoftext|\u003e\n"}
+,{"stream_name":"stderr","time":170.555316621,"data":"\n"}
+,{"stream_name":"stderr","time":170.555319802,"data":"2026-10-25 13:06:14.537 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:123 - ======================================================================\n"}
+,{"stream_name":"stderr","time":170.555487275,"data":"2026-10-25 13:06:14.537 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:124 - lyrics_text:\n"}
+,{"stream_name":"stderr","time":170.555499917,"data":"# Languages\n"}
+,{"stream_name":"stderr","time":170.555504273,"data":"en\n"}
+,{"stream_name":"stderr","time":170.555508022,"data":"\n"}
+,{"stream_name":"stderr","time":170.555511573,"data":"# Lyric\n"}
+,{"stream_name":"stderr","time":170.555515215,"data":"[verse]\n"}
+,{"stream_name":"stderr","time":170.555518822,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":170.555522465,"data":"How I wonder what you are\n"}
+,{"stream_name":"stderr","time":170.555544332,"data":"Up above the world so high\n"}
+,{"stream_name":"stderr","time":170.555548625,"data":"Like a diamond in the sky\n"}
+,{"stream_name":"stderr","time":170.555552635,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":170.555571501,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":170.555575391,"data":"How I wonder what you are\u003c|endoftext|\u003e\n"}
+,{"stream_name":"stderr","time":170.555583109,"data":"2026-10-25 13:06:14.537 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:125 - ======================================================================\n"}
+,{"stream_name":"stderr","time":170.555587575,"data":"\n"}
+,{"stream_name":"stderr","time":170.563348669,"data":"2026-10-25 13:06:14.545 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:110 - [preprocess_batch] Inferring prompt embeddings...\n"}
+,{"stream_name":"stderr","time":170.617472972,"data":"2026-10-25 13:06:14.599 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:113 - [preprocess_batch] Inferring lyric embeddings...\n"}
+,{"stream_name":"stderr","time":170.617640682,"data":"2026-10-25 13:06:14.599 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:122 - [preprocess_batch] Inferring non-cover text embeddings...\n"}
+,{"stream_name":"stderr","time":170.667192856,"data":"2026-10-25 13:06:14.649 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:173 - [service_generate] Generating audio... (DiT backend: PyTorch (cuda))\n"}
+,{"stream_name":"stderr","time":170.713066376,"data":"2026-10-25 13:06:14.695 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:276 - [service_generate] DiT diffusion via PyTorch (cuda)...\n"}
+,{"stream_name":"stderr","time":170.834942217,"data":"2026-10-25 13:06:14.816 | INFO     | acestep.models.common.dcw_correction:__init__:98 - [DCW] Active — mode=double, scaler=0.0500, high_scaler=0.0200, wavelet='haar'\n"}
+,{"stream_name":"stderr","time":171.722647357,"data":"2026-10-25 13:06:15.704 | INFO     | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:42 - [generate_music] Model generation completed. Decoding latents...\n"}
+,{"stream_name":"stderr","time":171.723273218,"data":"2026-10-25 13:06:15.705 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:64 - [generate_music] pred_latents: torch.Size([1, 939, 64]), dtype=torch.float16\n"}
+,{"stream_name":"stderr","time":171.723333766,"data":"2026-10-25 13:06:15.705 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:65 - [generate_music] time_costs: {'encoder_time_cost': 0.10484766960144043, 'diffusion_time_cost': 0.9040906429290771, 'diffusion_per_step_time_cost': 0.11301133036613464, 'total_time_cost': 1.0089383125305176, 'offload_time_cost': 0.0}\n"}
+,{"stream_name":"stdout","time":171.764770796,"data":"acestep-twinkle-cover FAILED 2s Error: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
+,{"stream_name":"stdout","time":171.764796685,"data":"Common causes and fixes:\n"}
+,{"stream_name":"stdout","time":171.764803086,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
+,{"stream_name":"stderr","time":171.764770685,"data":"2026-10-25 13:06:15.746 | ERROR    | acestep.core.generation.handler.generate_music:generate_music:522 - [generate_music] Generation failed\n"}
+,{"stream_name":"stdout","time":171.76480846,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
+,{"stream_name":"stderr","time":171.764813458,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":171.764820265,"data":"\n"}
+,{"stream_name":"stdout","time":171.76481635,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
+,{"stream_name":"stdout","time":171.764838888,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
+,{"stream_name":"stdout","time":171.764845071,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
+,{"stream_name":"stdout","time":171.76484929,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":171.764853735,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
+,{"stream_name":"stdout","time":171.764858417,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
+,{"stream_name":"stdout","time":171.76486281,"data":"                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stdout","time":171.764867485,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
+,{"stream_name":"stdout","time":171.764872186,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
+,{"stream_name":"stdout","time":171.76487656,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
+,{"stream_name":"stdout","time":171.76488033,"data":"Common causes and fixes:\n"}
+,{"stream_name":"stderr","time":171.76482377,"data":"  File \"/kaggle/tmp/gen.py\", line 40, in \u003cmodule\u003e\n"}
+,{"stream_name":"stdout","time":171.764884587,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
+,{"stream_name":"stdout","time":171.764893522,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
+,{"stream_name":"stderr","time":171.764895585,"data":"    res = generate_music(dit, llm, params=GenerationParams(**kw),\n"}
+,{"stream_name":"stdout","time":171.764897308,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
+,{"stream_name":"stderr","time":171.764901494,"data":"          │              │    │           │                  └ {'task_type': 'cover', 'caption': 'classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glo...\n"}
+,{"stream_name":"stdout","time":171.764904918,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
+,{"stream_name":"stdout","time":171.764910912,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
+,{"stream_name":"stdout","time":171.764914463,"data":"\n"}
+,{"stream_name":"stderr","time":171.764908013,"data":"          │              │    │           └ \u003cclass 'acestep.inference.GenerationParams'\u003e\n"}
+,{"stream_name":"stderr","time":171.764920663,"data":"          │              │    └ \u003cacestep.llm_inference.LLMHandler object at 0x7d7b214185c0\u003e\n"}
+,{"stream_name":"stderr","time":171.764925472,"data":"          │              └ \u003cacestep.handler.AceStepHandler object at 0x7d7b2de44ce0\u003e\n"}
+,{"stream_name":"stderr","time":171.764929961,"data":"          └ \u003cfunction generate_music at 0x7d7b2d5618a0\u003e\n"}
+,{"stream_name":"stderr","time":171.764934277,"data":"\n"}
+,{"stream_name":"stderr","time":171.764938589,"data":"  File \"/kaggle/tmp/ace/acestep/inference.py\", line 916, in generate_music\n"}
+,{"stream_name":"stderr","time":171.764943433,"data":"    result = dit_handler.generate_music(**filtered_generate_kwargs)\n"}
+,{"stream_name":"stderr","time":171.764947946,"data":"             │           │                └ {'captions': 'classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano...\n"}
+,{"stream_name":"stderr","time":171.764959403,"data":"             │           └ \u003cfunction GenerateMusicMixin.generate_music at 0x7d7b5e0cfec0\u003e\n"}
+,{"stream_name":"stderr","time":171.764963692,"data":"             └ \u003cacestep.handler.AceStepHandler object at 0x7d7b2de44ce0\u003e\n"}
+,{"stream_name":"stderr","time":171.764967726,"data":"\n"}
+,{"stream_name":"stderr","time":171.764971111,"data":"\u003e File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
+,{"stream_name":"stderr","time":171.764976962,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
+,{"stream_name":"stderr","time":171.764981113,"data":"                               │    └ \u003cfunction GenerateMusicDecodeMixin._prepare_generate_music_decode_state at 0x7d7b5de4c0e0\u003e\n"}
+,{"stream_name":"stderr","time":171.764987115,"data":"                               └ \u003cacestep.handler.AceStepHandler object at 0x7d7b2de44ce0\u003e\n"}
+,{"stream_name":"stderr","time":171.764991143,"data":"\n"}
+,{"stream_name":"stderr","time":171.764995167,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
+,{"stream_name":"stderr","time":171.764999695,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
+,{"stream_name":"stderr","time":171.765006188,"data":"                                 └ ['Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).', 'Commo...\n"}
+,{"stream_name":"stderr","time":171.765010903,"data":"\n"}
+,{"stream_name":"stderr","time":171.765014858,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 939, 64], dtype=torch.float16, device=cuda:0, nan=60096, inf=0).\n"}
+,{"stream_name":"stderr","time":171.765018925,"data":"Common causes and fixes:\n"}
+,{"stream_name":"stderr","time":171.765022577,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
+,{"stream_name":"stderr","time":171.765026394,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
+,{"stream_name":"stderr","time":171.76503249,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
+,{"stream_name":"stderr","time":171.765078281,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
+,{"stream_name":"stderr","time":171.765082815,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
+,{"stream_name":"stderr","time":171.765087231,"data":"2026-10-25 13:06:15.747 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=True, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
+,{"stream_name":"stderr","time":171.765488715,"data":"2026-10-25 13:06:15.747 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
+,{"stream_name":"stderr","time":171.765502341,"data":"2026-10-25 13:06:15.747 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
+,{"stream_name":"stderr","time":171.76619721,"data":"2026-10-25 13:06:15.747 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
+,{"stream_name":"stderr","time":172.054824522,"data":"2026-10-25 13:06:16.036 | INFO     | acestep.core.generation.handler.generate_music:_vram_preflight_check:157 - [generate_music] VRAM pre-flight: 8.37 GB free, ~0.80 GB needed (batch=1, duration=45s, mode=turbo).\n"}
+,{"stream_name":"stderr","time":172.096732218,"data":"2026-10-25 13:06:16.078 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:119 - \n"}
+,{"stream_name":"stderr","time":172.096766029,"data":"======================================================================\n"}
+,{"stream_name":"stderr","time":172.096771618,"data":"2026-10-25 13:06:16.078 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:120 - 🔍 [DEBUG] DiT TEXT ENCODER INPUT (Inference)\n"}
+,{"stream_name":"stderr","time":172.096803299,"data":"2026-10-25 13:06:16.079 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:121 - ======================================================================\n"}
+,{"stream_name":"stderr","time":172.096917609,"data":"2026-10-25 13:06:16.079 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:122 - text_prompt:\n"}
+,{"stream_name":"stderr","time":172.09692721,"data":"# Instruction\n"}
+,{"stream_name":"stderr","time":172.096931356,"data":"Fill the audio semantic mask based on the given conditions:\n"}
+,{"stream_name":"stderr","time":172.096935088,"data":"\n"}
+,{"stream_name":"stderr","time":172.096938737,"data":"# Caption\n"}
+,{"stream_name":"stderr","time":172.096942574,"data":"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby\n"}
+,{"stream_name":"stderr","time":172.096947347,"data":"\n"}
+,{"stream_name":"stderr","time":172.096950971,"data":"# Metas\n"}
+,{"stream_name":"stderr","time":172.096954748,"data":"- bpm: 88\n"}
+,{"stream_name":"stderr","time":172.096958558,"data":"- timesignature: N/A\n"}
+,{"stream_name":"stderr","time":172.096983665,"data":"- keyscale: N/A\n"}
+,{"stream_name":"stderr","time":172.096988802,"data":"- duration: 45 seconds\n"}
+,{"stream_name":"stderr","time":172.096992846,"data":"\u003c|endoftext|\u003e\n"}
+,{"stream_name":"stderr","time":172.096997192,"data":"\n"}
+,{"stream_name":"stderr","time":172.097004493,"data":"2026-10-25 13:06:16.079 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:123 - ======================================================================\n"}
+,{"stream_name":"stderr","time":172.097093717,"data":"2026-10-25 13:06:16.079 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:124 - lyrics_text:\n"}
+,{"stream_name":"stderr","time":172.097114916,"data":"# Languages\n"}
+,{"stream_name":"stderr","time":172.097118698,"data":"zh\n"}
+,{"stream_name":"stderr","time":172.097121995,"data":"\n"}
+,{"stream_name":"stderr","time":172.097125076,"data":"# Lyric\n"}
+,{"stream_name":"stderr","time":172.097128322,"data":"[verse]\n"}
+,{"stream_name":"stderr","time":172.097131336,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":172.097134926,"data":"滿天都是小星星\n"}
+,{"stream_name":"stderr","time":172.09719521,"data":"掛在天上放光明\n"}
+,{"stream_name":"stderr","time":172.097199535,"data":"好像許多小眼睛\n"}
+,{"stream_name":"stderr","time":172.097202889,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":172.097206211,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":172.097209967,"data":"滿天都是小星星\u003c|endoftext|\u003e\n"}
+,{"stream_name":"stderr","time":172.097216288,"data":"2026-10-25 13:06:16.079 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:125 - ======================================================================\n"}
+,{"stream_name":"stderr","time":172.097232529,"data":"\n"}
+,{"stream_name":"stderr","time":172.104518717,"data":"2026-10-25 13:06:16.086 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:110 - [preprocess_batch] Inferring prompt embeddings...\n"}
+,{"stream_name":"stderr","time":172.161688687,"data":"2026-10-25 13:06:16.143 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:113 - [preprocess_batch] Inferring lyric embeddings...\n"}
+,{"stream_name":"stderr","time":172.161922561,"data":"2026-10-25 13:06:16.144 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:173 - [service_generate] Generating audio... (DiT backend: PyTorch (cuda))\n"}
+,{"stream_name":"stderr","time":172.207598068,"data":"2026-10-25 13:06:16.189 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:276 - [service_generate] DiT diffusion via PyTorch (cuda)...\n"}
+,{"stream_name":"stderr","time":172.285880631,"data":"2026-10-25 13:06:16.267 | INFO     | acestep.models.common.dcw_correction:__init__:98 - [DCW] Active — mode=double, scaler=0.0500, high_scaler=0.0200, wavelet='haar'\n"}
+,{"stream_name":"stderr","time":173.534117951,"data":"2026-10-25 13:06:17.516 | INFO     | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:42 - [generate_music] Model generation completed. Decoding latents...\n"}
+,{"stream_name":"stderr","time":173.534684248,"data":"2026-10-25 13:06:17.516 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:64 - [generate_music] pred_latents: torch.Size([1, 1125, 64]), dtype=torch.float16\n"}
+,{"stream_name":"stderr","time":173.534763732,"data":"2026-10-25 13:06:17.516 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:65 - [generate_music] time_costs: {'encoder_time_cost': 0.056737422943115234, 'diffusion_time_cost': 1.2690942287445068, 'diffusion_per_step_time_cost': 0.15863677859306335, 'total_time_cost': 1.325831651687622, 'offload_time_cost': 0.0}\n"}
+,{"stream_name":"stderr","time":173.599971425,"data":"2026-10-25 13:06:17.581 | ERROR    | acestep.core.generation.handler.generate_music:generate_music:522 - [generate_music] Generation failed\n"}
+,{"stream_name":"stderr","time":173.599991869,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":173.599997228,"data":"\n"}
+,{"stream_name":"stdout","time":173.599997426,"data":"acestep-little-star-new FAILED 2s Error: Generation produced NaN or Inf latents (shape=[1, 1125, 64], dtype=torch.float16, device=cuda:0, nan=72000, inf=0).\n"}
+,{"stream_name":"stderr","time":173.600001329,"data":"  File \"/kaggle/tmp/gen.py\", line 40, in \u003cmodule\u003e\n"}
+,{"stream_name":"stdout","time":173.600010129,"data":"Common causes and fixes:\n"}
+,{"stream_name":"stderr","time":173.600014448,"data":"    res = generate_music(dit, llm, params=GenerationParams(**kw),\n"}
+,{"stream_name":"stdout","time":173.600019061,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
+,{"stream_name":"stderr","time":173.600023163,"data":"          │              │    │           │                  └ {'task_type': 'text2music', 'caption': \"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin...\n"}
+,{"stream_name":"stdout","time":173.600027286,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
+,{"stream_name":"stdout","time":173.600056858,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
+,{"stream_name":"stdout","time":173.600073254,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
+,{"stream_name":"stdout","time":173.600083364,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
+,{"stream_name":"stdout","time":173.600087906,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":173.600091995,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
+,{"stream_name":"stdout","time":173.600096442,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
+,{"stream_name":"stdout","time":173.600111046,"data":"                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stdout","time":173.600115378,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
+,{"stream_name":"stdout","time":173.600119683,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
+,{"stream_name":"stdout","time":173.60012349,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 1125, 64], dtype=torch.float16, device=cuda:0, nan=72000, inf=0).\n"}
+,{"stream_name":"stdout","time":173.600127595,"data":"Common causes and fixes:\n"}
+,{"stream_name":"stdout","time":173.600131275,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
+,{"stream_name":"stdout","time":173.600135163,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
+,{"stream_name":"stdout","time":173.600138892,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
+,{"stream_name":"stdout","time":173.600144753,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
+,{"stream_name":"stdout","time":173.60014874,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
+,{"stream_name":"stdout","time":173.60015448,"data":"\n"}
+,{"stream_name":"stderr","time":173.600030913,"data":"          │              │    │           └ \u003cclass 'acestep.inference.GenerationParams'\u003e\n"}
+,{"stream_name":"stderr","time":173.600166472,"data":"          │              │    └ \u003cacestep.llm_inference.LLMHandler object at 0x7d7b214185c0\u003e\n"}
+,{"stream_name":"stderr","time":173.600173322,"data":"          │              └ \u003cacestep.handler.AceStepHandler object at 0x7d7b2de44ce0\u003e\n"}
+,{"stream_name":"stderr","time":173.600177872,"data":"          └ \u003cfunction generate_music at 0x7d7b2d5618a0\u003e\n"}
+,{"stream_name":"stderr","time":173.600182257,"data":"\n"}
+,{"stream_name":"stderr","time":173.600186158,"data":"  File \"/kaggle/tmp/ace/acestep/inference.py\", line 916, in generate_music\n"}
+,{"stream_name":"stderr","time":173.60019043,"data":"    result = dit_handler.generate_music(**filtered_generate_kwargs)\n"}
+,{"stream_name":"stderr","time":173.600194912,"data":"             │           │                └ {'captions': \"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glock...\n"}
+,{"stream_name":"stderr","time":173.600199827,"data":"             │           └ \u003cfunction GenerateMusicMixin.generate_music at 0x7d7b5e0cfec0\u003e\n"}
+,{"stream_name":"stderr","time":173.600203708,"data":"             └ \u003cacestep.handler.AceStepHandler object at 0x7d7b2de44ce0\u003e\n"}
+,{"stream_name":"stderr","time":173.600207973,"data":"\n"}
+,{"stream_name":"stderr","time":173.600212284,"data":"\u003e File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 465, in generate_music\n"}
+,{"stream_name":"stderr","time":173.600226189,"data":"    pred_latents, time_costs = self._prepare_generate_music_decode_state(\n"}
+,{"stream_name":"stderr","time":173.600230668,"data":"                               │    └ \u003cfunction GenerateMusicDecodeMixin._prepare_generate_music_decode_state at 0x7d7b5de4c0e0\u003e\n"}
+,{"stream_name":"stderr","time":173.60023482,"data":"                               └ \u003cacestep.handler.AceStepHandler object at 0x7d7b2de44ce0\u003e\n"}
+,{"stream_name":"stderr","time":173.600238892,"data":"\n"}
+,{"stream_name":"stderr","time":173.600244286,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_decode.py\", line 81, in _prepare_generate_music_decode_state\n"}
+,{"stream_name":"stderr","time":173.600252796,"data":"    raise RuntimeError(\"\\n\".join(hints))\n"}
+,{"stream_name":"stderr","time":173.60025741,"data":"                                 └ ['Generation produced NaN or Inf latents (shape=[1, 1125, 64], dtype=torch.float16, device=cuda:0, nan=72000, inf=0).', 'Comm...\n"}
+,{"stream_name":"stderr","time":173.600260495,"data":"\n"}
+,{"stream_name":"stderr","time":173.60026286,"data":"RuntimeError: Generation produced NaN or Inf latents (shape=[1, 1125, 64], dtype=torch.float16, device=cuda:0, nan=72000, inf=0).\n"}
+,{"stream_name":"stderr","time":173.600266015,"data":"Common causes and fixes:\n"}
+,{"stream_name":"stderr","time":173.60026864,"data":"  1. LoRA/adapter trained on an older model version — retrain or update the adapter.\n"}
+,{"stream_name":"stderr","time":173.600271365,"data":"  2. Checkpoint/config mismatch — verify model checkpoints match this release.\n"}
+,{"stream_name":"stderr","time":173.600273977,"data":"  3. Unsupported quantization/backend — try running with --backend pt.\n"}
+,{"stream_name":"stderr","time":173.600276587,"data":"  4. CPU offload left parameters on wrong device — restart and regenerate.\n"}
+,{"stream_name":"stderr","time":173.600279323,"data":"  5. Float16 overflow on pre-Ampere GPU — set ACESTEP_DTYPE=float32.\n"}
+,{"stream_name":"stdout","time":178.504432491,"data":"gen exit 0\n"}
+,{"stream_name":"stdout","time":178.504467811,"data":"done\n"}
+,{"stream_name":"stderr","time":180.993686945,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":180.993726053,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":181.381269962,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":181.381295787,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":182.441019333,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":183.585212312,"data":"[NbConvertApp] Writing 294311 bytes to __results__.html\n"}
 ]
