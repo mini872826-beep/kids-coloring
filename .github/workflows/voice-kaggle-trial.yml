@@ -1,0 +1,31 @@
+# 試跑：Kaggle GPU 上用 BreezyVoice（志工 1 的聲音）錄 20 句（只在 voice-trial 分支）
+name: 試跑志工聲音
+on:
+  push:
+    branches: [voice-trial]
+    paths: ['tools/kaggle_voice/**', 'tools/voice/**', '.github/workflows/voice-kaggle-trial.yml']
+permissions:
+  contents: write
+concurrency:
+  group: voice-kaggle-trial
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q "kaggle>=1.8"
+      - name: Kaggle GPU 錄音
+        env:
+          KAGGLE_USERNAME: pacokids
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
+        run: tools/kaggle_voice/kaggle.sh tools/kaggle_voice/test-jobs.json voice-trial trial/kv
+      - name: 推回 voice-trial 分支
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add trial
+          git commit -m "Kaggle BreezyVoice trial" || exit 0
+          for i in 1 2 3; do git pull --rebase -q origin voice-trial && git push origin HEAD:voice-trial && break; sleep 5; done
