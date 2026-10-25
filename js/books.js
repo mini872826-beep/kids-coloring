@@ -93,6 +93,68 @@
       ],
     },
 
+    /* ======== 生活好習慣 ======== */
+    {
+      id: 'brush-teeth', tag: '習慣', title: '小熊刷牙',
+      cover: svg(scene.day() + scene.grass() + put('bear', 120, 120, 320) + scene.toothbrush(560, 230) + scene.tooth(620, 330, true, 50)),
+      pages: [
+        { text: '小熊最喜歡吃甜甜的蜂蜜和糖果。', art: svg(scene.day() + scene.sun() + scene.grass() + put('bear', 200, 110, 380, 'jump', 'pop')) },
+        { text: '晚上睡覺前，小熊說：「我不想刷牙！」', art: svg(scene.night() + put('bear', 120, 130, 330, 'wiggle', 'boing') + scene.bubble(470, 140, '不想刷牙！', 260)) },
+        { text: '第二天，小熊的牙齒好痛，牙齒寶寶都哭了。', art: svg(scene.day() + scene.grass() + put('bear', 60, 140, 300) + scene.tooth(560, 250, false, 80)) },
+        { text: '熊媽媽說：「每天早晚刷牙，蛀牙蟲就不見了。」', art: svg(scene.day() + scene.grass() + put('bear', 60, 140, 300) + scene.toothbrush(520, 230) + scene.germ(640, 140) + scene.germ(700, 260, 26)) },
+        { text: '小熊拿起牙刷，上刷刷、下刷刷，刷得好乾淨。', art: svg(scene.day() + scene.grass() + put('bear', 120, 120, 330, 'wiggle', 'splash') + scene.toothbrush(560, 240, -10) + scene.soap(640, 400)) },
+        { text: '牙齒寶寶笑了！記得每天早晚都要刷牙喔！', art: svg(scene.day() + scene.sun() + scene.grass() + put('bear', 60, 130, 310) + scene.tooth(560, 270, true, 80) + scene.stars()) },
+      ],
+    },
+    {
+      id: 'wash-hands', tag: '習慣', title: '洗洗小手',
+      cover: svg(scene.day() + scene.grass() + put('bunny', 120, 110, 320) + scene.soap(560, 330)),
+      pages: [
+        { text: '小兔子在外面玩得好開心，手變得髒髒的。', art: svg(scene.day() + scene.sun() + scene.grass() + scene.tree(650) + put('bunny', 150, 110, 360, 'jump', 'boing')) },
+        { text: '看不見的細菌，偷偷躲在小手上。', art: svg(scene.day() + scene.grass() + put('bunny', 60, 120, 330) + scene.germ(530, 200) + scene.germ(640, 290, 28) + scene.germ(560, 380, 22)) },
+        { text: '吃點心以前，要先去洗手。', art: svg(scene.day() + scene.grass() + put('bunny', 40, 120, 320) + scene.faucet(560, 260)) },
+        { text: '打開水，抹上肥皂，搓出好多泡泡。', art: svg(scene.day() + scene.grass() + put('bunny', 40, 120, 320, 'wiggle', 'splash') + scene.faucet(560, 260) + scene.soap(560, 430) + scene.bubbles()) },
+        { text: '手心、手背、手指頭，都要搓一搓，再用水沖乾淨。', art: svg(scene.day() + scene.grass() + put('bunny', 200, 110, 360, 'boing', 'splash') + scene.bubbles()) },
+        { text: '細菌都跑光了！洗乾淨的小手，香香的！', art: svg(scene.day() + scene.sun() + scene.grass() + put('bunny', 200, 110, 360) + scene.heart(620, 160) + scene.stars()) },
+      ],
+    },
+    {
+      id: 'tidy-up', tag: '習慣', title: '玩具回家囉',
+      cover: svg(scene.day() + scene.grass() + put('dog', 80, 140, 300) + scene.toybox(560, 330)),
+      pages: [
+        { text: '小狗把好多玩具拿出來玩。', art: svg(scene.day() + scene.grass() + put('dog', 60, 130, 310, 'jump', 'woof') + scene.ball(520, 410) + scene.blocks(600, 210, true)) },
+        { text: '玩完了，玩具丟得滿地都是。', art: svg(scene.day() + scene.grass() + scene.ball(160, 420) + scene.blocks(300, 230, true) + scene.ball(650, 430, 26) + put('dog', 560, 160, 220)) },
+        { text: '哎呀！小狗踩到積木，好痛喔！', art: svg(scene.day() + scene.grass() + put('dog', 200, 120, 340, 'wiggle', 'woof') + scene.blocks(520, 230, true)) },
+        { text: '小狗說：「玩具也想回家睡覺。」', art: svg(scene.day() + scene.grass() + put('dog', 60, 140, 300) + scene.toybox(560, 330, false) + scene.bubble(380, 50, '玩具回家囉！', 300)) },
+        { text: '一個一個收進玩具箱，房間變得好整齊。', art: svg(scene.day() + scene.grass() + put('dog', 60, 140, 300, 'jump', 'pop') + scene.toybox(560, 330)) },
+        { text: '自己的玩具自己收，小狗真棒！', art: svg(scene.day() + scene.sun() + scene.grass() + put('dog', 60, 140, 300) + scene.toybox(560, 330) + scene.heart(400, 90) + scene.stars()) },
+      ],
+    },
+    {
+      id: 'eat-veggies', tag: '習慣', title: '小豬不挑食',
+      cover: svg(scene.day() + scene.grass() + put('pig', 120, 120, 320) + scene.veggies(580, 380)),
+      pages: [
+        { text: '吃飯時間到了，盤子裡有綠綠的花椰菜。', art: svg(scene.day() + scene.grass() + put('pig', 60, 130, 310) + scene.veggies(560, 380)) },
+        { text: '小豬嘟著嘴說：「我不要吃青菜！」', art: svg(scene.day() + scene.grass() + put('pig', 100, 130, 320, 'wiggle', 'boing') + scene.bubble(440, 60, '不要吃青菜！', 300)) },
+        { text: '豬媽媽說：「青菜會讓你長得高高、壯壯的喔。」', art: svg(scene.day() + scene.grass() + put('pig', 60, 130, 310) + scene.veggies(560, 380) + scene.heart(560, 170)) },
+        { text: '小豬咬了一口，咦？脆脆的，好像還不錯！', art: svg(scene.day() + scene.grass() + put('pig', 200, 110, 360, 'jump', 'pop') + scene.stars()) },
+        { text: '紅蘿蔔、玉米、番茄，小豬每一樣都吃一點。', art: svg(scene.day() + scene.grass() + put('pig', 60, 130, 310, 'boing', 'pop') + scene.veggies(560, 380) + scene.carrot(470, 210, -20)) },
+        { text: '小豬變得好有力氣！不挑食的小朋友最健康。', art: svg(scene.day() + scene.sun() + scene.grass() + put('pig', 200, 100, 380, 'jump', 'yay') + scene.stars()) },
+      ],
+    },
+    {
+      id: 'bedtime', tag: '習慣', title: '早睡早起',
+      cover: svg(scene.night() + scene.bed(400, 380) + put('bunny', 160, 210, 190)),
+      pages: [
+        { text: '天黑了，月亮出來了，小兔子還想玩。', art: svg(scene.night() + put('bunny', 230, 120, 340, 'jump', 'boing') + scene.ball(620, 420)) },
+        { text: '兔媽媽說：「早點睡覺，身體才會長大喔。」', art: svg(scene.night() + put('bunny', 200, 120, 340) + scene.heart(620, 230)) },
+        { text: '小兔子刷好牙，換上睡衣，爬上床。', art: svg(scene.night() + scene.toothbrush(150, 250) + scene.bed(470, 380)) },
+        { text: '蓋好被子，閉上眼睛，晚安！', art: svg(scene.night() + scene.bed(400, 380) + put('bunny', 200, 230, 170, 'wiggle', 'twinkle') + scene.zzz(480, 230)) },
+        { text: '太陽公公起床了，小兔子也起床了！', art: svg(scene.day() + scene.sun(400, 110) + scene.grass() + put('bunny', 220, 150, 330, 'jump', 'yay')) },
+        { text: '睡得飽飽的，今天又是開心的一天！', art: svg(scene.day() + scene.sun() + scene.grass() + put('bunny', 220, 140, 330) + scene.stars()) },
+      ],
+    },
+
     /* ======== 經典故事（兒童版） ======== */
     {
       id: 'three-pigs', tag: '經典', title: '三隻小豬',

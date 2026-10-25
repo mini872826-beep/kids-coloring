@@ -848,12 +848,12 @@
           : type === 'brick'
             ? [130, 160, 190, 220].map((t, i) => `<path d="M12 ${t} L208 ${t}" stroke="#8c2f20" stroke-width="3"/>${[40, 100, 160].map(u => `<path d="M${u + (i % 2) * 30} ${t - 30} L${u + (i % 2) * 30} ${t}" stroke="#8c2f20" stroke-width="3"/>`).join('')}`).join('')
             : '';
-      return `<g class="tap" data-anim="boing" data-sound="pop" transform="translate(${x} ${y}) scale(${k})">
+      return `<g class="tap" data-anim="boing" data-sound="pop"><g transform="translate(${x} ${y}) scale(${k})">
         <rect x="12" y="100" width="196" height="140" fill="${col[0]}" ${L}/>${deco}
         <path d="M-10 110 L110 20 L230 110 Z" fill="${col[1]}" ${L}/>
         <path d="M85 240 L85 175 Q85 150 110 150 Q135 150 135 175 L135 240 Z" fill="#7a4a22" ${L}/>
         <rect x="150" y="135" width="44" height="40" rx="5" fill="#fff3a0" ${L}/>
-        <rect x="26" y="135" width="44" height="40" rx="5" fill="#fff3a0" ${L}/></g>`;
+        <rect x="26" y="135" width="44" height="40" rx="5" fill="#fff3a0" ${L}/></g></g>`;
     },
     blocks: (x, y, fallen) => {
       const L = 'stroke="#222" stroke-width="5" stroke-linejoin="round"';
@@ -874,9 +874,41 @@
       <path d="M${x + 40} ${y + 68} L${x + 30} ${y + 100} L${x + 70} ${y + 68}" fill="#fff" stroke="#222" stroke-width="4" stroke-linejoin="round"/>
       <rect x="${x + 34}" y="${y + 60}" width="40" height="12" fill="#fff"/>
       <text x="${x + w / 2}" y="${y + 47}" text-anchor="middle" font-size="34" font-weight="700" fill="#e8590c" font-family="Chiron GoRound TC, PingFang TC, sans-serif">${text}</text></g>`,
-    carrot: (x, y, rot = 0) => `<g class="tap" data-anim="jump" data-sound="pop" transform="rotate(${rot} ${x} ${y})"><path d="M${x - 12} ${y} Q${x} ${y - 6} ${x + 12} ${y} L${x} ${y + 60} Z" fill="#ff8c1a" stroke="#222" stroke-width="4" stroke-linejoin="round"/><path d="M${x} ${y - 2} Q${x - 14} ${y - 26} ${x - 4} ${y - 34} Q${x} ${y - 18} ${x + 2} ${y - 4} Q${x + 10} ${y - 28} ${x + 22} ${y - 30} Q${x + 14} ${y - 12} ${x + 4} ${y}" fill="#6cc551" stroke="#222" stroke-width="4" stroke-linejoin="round"/></g>`,
+    carrot: (x, y, rot = 0) => `<g class="tap" data-anim="jump" data-sound="pop"><g transform="rotate(${rot} ${x} ${y})"><path d="M${x - 12} ${y} Q${x} ${y - 6} ${x + 12} ${y} L${x} ${y + 60} Z" fill="#ff8c1a" stroke="#222" stroke-width="4" stroke-linejoin="round"/><path d="M${x} ${y - 2} Q${x - 14} ${y - 26} ${x - 4} ${y - 34} Q${x} ${y - 18} ${x + 2} ${y - 4} Q${x + 10} ${y - 28} ${x + 22} ${y - 30} Q${x + 14} ${y - 12} ${x + 4} ${y}" fill="#6cc551" stroke="#222" stroke-width="4" stroke-linejoin="round"/></g></g>`,
     zzz: (x, y) => `<text class="float" x="${x}" y="${y}" font-size="46" font-weight="900" fill="#4dabf7" stroke="#fff" stroke-width="3" paint-order="stroke" font-family="Chiron GoRound TC, sans-serif">Z z z</text>`,
     stars: () => [[120, 90], [680, 120], [400, 60], [220, 200], [600, 230]].map(([x, y], i) => `<path class="twinkle" style="animation-delay:${i * .3}s" d="M${x} ${y - 16} L${x + 5} ${y - 5} L${x + 16} ${y} L${x + 5} ${y + 5} L${x} ${y + 16} L${x - 5} ${y + 5} L${x - 16} ${y} L${x - 5} ${y - 5} Z" fill="#ffd43b" stroke="#222" stroke-width="3"/>`).join(''),
+    toothbrush: (x, y, rot = -30) => `<g class="tap" data-anim="wiggle" data-sound="pop"><g transform="rotate(${rot} ${x} ${y})" stroke="#222" stroke-width="4" stroke-linejoin="round">
+      <rect x="${x - 90}" y="${y - 9}" width="130" height="18" rx="9" fill="#4dabf7"/><rect x="${x + 36}" y="${y - 14}" width="54" height="16" rx="4" fill="#fff"/>
+      ${[0, 1, 2, 3, 4].map(i => `<path d="M${x + 42 + i * 10} ${y - 14} L${x + 42 + i * 10} ${y - 30}" stroke="#74c0fc" stroke-width="5"/>`).join('')}
+      <circle cx="${x + 70}" cy="${y - 36}" r="12" fill="#fff"/><circle cx="${x + 52}" cy="${y - 40}" r="9" fill="#fff"/></g></g>`,
+    tooth: (x, y, happy = true, r = 60) => `<g class="tap" data-anim="${happy ? 'jump' : 'wiggle'}" data-sound="${happy ? 'twinkle' : 'boing'}" stroke="#222" stroke-width="4" stroke-linejoin="round">
+      <path d="M${x - r} ${y - r * .4} Q${x - r} ${y - r * 1.1} ${x - r * .4} ${y - r * 1.05} Q${x} ${y - r * .9} ${x + r * .4} ${y - r * 1.05} Q${x + r} ${y - r * 1.1} ${x + r} ${y - r * .4} Q${x + r} ${y + r * .4} ${x + r * .6} ${y + r * 1.1} Q${x + r * .4} ${y + r * 1.3} ${x + r * .25} ${y + r * .8} Q${x} ${y + r * .45} ${x - r * .25} ${y + r * .8} Q${x - r * .4} ${y + r * 1.3} ${x - r * .6} ${y + r * 1.1} Q${x - r} ${y + r * .4} ${x - r} ${y - r * .4} Z" fill="${happy ? '#fff' : '#f1e3b0'}"/>
+      ${happy ? '' : `<circle cx="${x + r * .35}" cy="${y - r * .55}" r="${r * .14}" fill="#8a5a2b" stroke="none"/><circle cx="${x - r * .45}" cy="${y + r * .2}" r="${r * .1}" fill="#8a5a2b" stroke="none"/>`}
+      <circle cx="${x - r * .32}" cy="${y - r * .3}" r="${r * .11}" fill="#222"/><circle cx="${x + r * .32}" cy="${y - r * .3}" r="${r * .11}" fill="#222"/>
+      <path d="${happy ? `M${x - r * .25} ${y} Q${x} ${y + r * .3} ${x + r * .25} ${y}` : `M${x - r * .25} ${y + r * .15} Q${x} ${y - r * .1} ${x + r * .25} ${y + r * .15}`}" fill="none"/>
+      ${happy ? `<circle cx="${x - r * .55}" cy="${y - r * .05}" r="${r * .12}" fill="#ffb3b3" stroke="none"/><circle cx="${x + r * .55}" cy="${y - r * .05}" r="${r * .12}" fill="#ffb3b3" stroke="none"/>` : ''}</g>`,
+    germ: (x, y, r = 34) => `<g class="tap float" data-anim="spin" data-sound="pop" stroke="#222" stroke-width="4">
+      ${Array.from({ length: 8 }, (_, i) => { const a = i * Math.PI / 4; return `<path d="M${x + r * Math.cos(a)} ${y + r * Math.sin(a)} L${x + (r + 14) * Math.cos(a)} ${y + (r + 14) * Math.sin(a)}"/><circle cx="${x + (r + 16) * Math.cos(a)}" cy="${y + (r + 16) * Math.sin(a)}" r="5" fill="#69db7c"/>`; }).join('')}
+      <circle cx="${x}" cy="${y}" r="${r}" fill="#8ce99a"/><circle cx="${x - r * .3}" cy="${y - r * .15}" r="${r * .15}" fill="#222"/><circle cx="${x + r * .3}" cy="${y - r * .15}" r="${r * .15}" fill="#222"/>
+      <path d="M${x - r * .3} ${y + r * .35} Q${x} ${y + r * .15} ${x + r * .3} ${y + r * .35}" fill="none"/></g>`,
+    soap: (x, y) => `<g class="tap" data-anim="boing" data-sound="splash" stroke="#222" stroke-width="4" stroke-linejoin="round">
+      <rect x="${x - 60}" y="${y - 30}" width="120" height="60" rx="26" fill="#ffc9de"/><rect x="${x - 40}" y="${y - 20}" width="50" height="10" rx="5" fill="#fff" stroke="none" opacity=".7"/>
+      ${[[-50, -50, 16], [-10, -62, 22], [35, -52, 14], [60, -78, 10]].map(([dx, dy, r]) => `<circle cx="${x + dx}" cy="${y + dy}" r="${r}" fill="rgba(255,255,255,.7)" stroke="#74c0fc" stroke-width="3"/>`).join('')}</g>`,
+    faucet: (x, y) => `<g stroke="#222" stroke-width="4" stroke-linejoin="round"><rect x="${x - 160}" y="${y + 40}" width="320" height="70" rx="16" fill="#e7f5ff"/>
+      <path d="M${x - 10} ${y + 40} L${x - 10} ${y - 40} Q${x - 10} ${y - 70} ${x + 30} ${y - 70} L${x + 60} ${y - 70} L${x + 60} ${y - 40}" fill="none" stroke="#adb5bd" stroke-width="18" stroke-linecap="round"/>
+      <g class="fall"><path d="M${x + 60} ${y - 20} Q${x + 50} ${y} ${x + 60} ${y + 10} Q${x + 70} ${y} ${x + 60} ${y - 20} Z" fill="#74c0fc"/></g></g>`,
+    toybox: (x, y, full = true) => `<g class="tap" data-anim="boing" data-sound="pop" stroke="#222" stroke-width="5" stroke-linejoin="round">
+      ${full ? `<circle cx="${x - 40}" cy="${y - 20}" r="34" fill="#ff6b6b"/><path d="M${x - 74} ${y - 20} L${x - 6} ${y - 20}" stroke-width="4"/><rect x="${x + 10}" y="${y - 60}" width="50" height="50" rx="6" fill="#ffd43b"/><path d="M${x + 60} ${y - 30} L${x + 80} ${y - 90} L${x + 100} ${y - 30} Z" fill="#69db7c"/>` : ''}
+      <rect x="${x - 110}" y="${y - 10}" width="220" height="120" rx="12" fill="#4dabf7"/><rect x="${x - 120}" y="${y - 20}" width="240" height="30" rx="10" fill="#228be6"/>
+      <path fill="#ffd43b" d="M${x} ${y + 30} L${x + 9} ${y + 50} L${x + 30} ${y + 52} L${x + 14} ${y + 66} L${x + 19} ${y + 88} L${x} ${y + 76} L${x - 19} ${y + 88} L${x - 14} ${y + 66} L${x - 30} ${y + 52} L${x - 9} ${y + 50} Z"/></g>`,
+    ball: (x, y, r = 34) => `<g class="tap" data-anim="jump" data-sound="boing" stroke="#222" stroke-width="4"><circle cx="${x}" cy="${y}" r="${r}" fill="#ff6b6b"/><path d="M${x - r} ${y} L${x + r} ${y}" /><path d="M${x} ${y - r} Q${x + r * .6} ${y} ${x} ${y + r}" fill="#fff"/></g>`,
+    veggies: (x, y) => `<g class="tap" data-anim="jump" data-sound="pop" stroke="#222" stroke-width="4" stroke-linejoin="round">
+      <ellipse cx="${x}" cy="${y + 30}" rx="130" ry="34" fill="#fff"/>
+      <rect x="${x - 72}" y="${y - 10}" width="16" height="40" fill="#8ce99a"/><circle cx="${x - 78}" cy="${y - 20}" r="18" fill="#2f9e44"/><circle cx="${x - 52}" cy="${y - 22}" r="20" fill="#2f9e44"/><circle cx="${x - 64}" cy="${y - 38}" r="18" fill="#37b24d"/>
+      <path d="M${x - 10} ${y + 25} L${x + 30} ${y - 40} Q${x + 40} ${y - 45} ${x + 42} ${y - 30} Z" fill="#ff8c1a"/>
+      <circle cx="${x + 75}" cy="${y + 5}" r="22" fill="#ffd43b"/><circle cx="${x + 92}" cy="${y + 18}" r="16" fill="#e03131"/></g>`,
+    bed: (x, y) => `<g stroke="#222" stroke-width="5" stroke-linejoin="round"><rect x="${x - 200}" y="${y - 120}" width="30" height="200" rx="10" fill="#c98a4b"/><rect x="${x + 170}" y="${y - 60}" width="30" height="140" rx="10" fill="#c98a4b"/>
+      <rect x="${x - 175}" y="${y - 20}" width="350" height="70" rx="14" fill="#a5d8ff"/><ellipse cx="${x - 120}" cy="${y - 30}" rx="50" ry="26" fill="#fff"/></g>`,
     forest: () => `<rect width="800" height="500" fill="#d3f9d8"/><rect y="380" width="800" height="120" fill="#8ce99a"/>`,
     bubbles: () => [[100, 300], [700, 250], [400, 120], [600, 380]].map(([x, y], i) =>
       `<circle class="float tap" data-anim="boing" data-sound="pop" style="animation-delay:${i * .7}s" cx="${x}" cy="${y}" r="${10 + i * 3}" fill="rgba(255,255,255,.6)" stroke="#fff" stroke-width="3"/>`).join(''),
