@@ -280,6 +280,19 @@
     setTimeout(() => { box.innerHTML = ''; }, 4000);
   }
 
+  /* ---------------- 背景音樂開關 ---------------- */
+  function showMusic() {
+    const on = Music.enabled();
+    $('musicBtn').textContent = on ? '🎵' : '🔇';
+    $('musicBtn').classList.toggle('on', on);
+  }
+  $('musicBtn').addEventListener('click', () => {
+    const on = Music.toggle();
+    showMusic();
+    Voice.say(on ? '音樂開' : '音樂關');
+  });
+  showMusic();
+
   /* ---------------- 安裝 & 離線 ---------------- */
   let installEvt;
   window.addEventListener('beforeinstallprompt', e => {

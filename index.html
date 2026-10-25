@@ -33,6 +33,7 @@
         <button class="tab" data-tab="paint">🖍️ 塗顏色</button>
         <button class="tab" data-tab="story">📖 聽故事</button>
       </nav>
+      <button id="musicBtn" class="music-btn" aria-label="背景音樂">🎵</button>
       <button id="installBtn" class="pill" hidden>⬇️ 安裝</button>
     </header>
     <div id="cats" class="cats"></div>
@@ -42,6 +43,7 @@
   <!-- 塗色 -->
   <section id="paint" class="screen" hidden>
     <div id="board" class="board">
+      <button id="nameChip" class="name-chip" aria-label="念名字"></button>
       <div id="stage" class="stage">
         <canvas id="cPaint"></canvas>
         <canvas id="cStroke"></canvas>
@@ -51,15 +53,28 @@
 
     <aside class="toolbar">
       <div class="pair">
-        <button id="doneBtn" class="sq green" aria-label="畫好了">✔</button>
-        <button id="photoBtn" class="sq blue" aria-label="存到相簿">📷</button>
+        <button id="doneBtn" class="sq green" aria-label="畫好了">
+          <svg viewBox="0 0 48 48"><path d="M11 25 L20 34 L37 14" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="photoBtn" class="sq blue" aria-label="存到相簿">
+          <svg viewBox="0 0 48 48"><path d="M8 17 Q8 13 12 13 L17 13 L20 9 L28 9 L31 13 L36 13 Q40 13 40 17 L40 35 Q40 39 36 39 L12 39 Q8 39 8 35 Z" fill="#fff"/><circle cx="24" cy="26" r="8" fill="#4d8ff0"/><circle cx="24" cy="26" r="4.5" fill="#fff"/><circle cx="34" cy="18" r="2" fill="#4d8ff0"/></svg>
+        </button>
       </div>
-      <button id="brushBtn" class="bigbtn" aria-label="選筆"></button>
-      <button id="colorBtn" class="bigbtn" aria-label="選顏色"><span id="colorDot" class="dot"></span></button>
-      <button id="eraserBtn" class="bigbtn" aria-label="橡皮擦"></button>
+      <div class="tools">
+        <div class="tool"><button id="brushBtn" class="bigbtn" aria-label="選筆"></button><span class="lbl">畫筆</span></div>
+        <div class="tool">
+          <button id="colorBtn" class="bigbtn" aria-label="選顏色"><span id="colorDot" class="dot"></span></button><span class="lbl">顏色</span>
+          <div id="recent" class="recent"></div>
+        </div>
+        <div class="tool"><button id="eraserBtn" class="bigbtn" aria-label="橡皮擦"></button><span class="lbl">橡皮擦</span></div>
+      </div>
       <div class="pair">
-        <button id="undoBtn" class="sq orange" aria-label="上一步">↩</button>
-        <button id="clearBtn" class="sq yellow" aria-label="全部擦掉">🗑</button>
+        <button id="undoBtn" class="sq orange" aria-label="上一步">
+          <svg viewBox="0 0 48 48"><path d="M17 20 L31 20 Q39 20 39 28 Q39 36 31 36 L20 36" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M8 20 L19 10 L19 30 Z" fill="#fff" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="clearBtn" class="sq yellow" aria-label="全部擦掉">
+          <svg viewBox="0 0 48 48"><rect x="9" y="12" width="30" height="5" rx="2.5" fill="#fff"/><rect x="19" y="7" width="10" height="6" rx="2" fill="#fff"/><path d="M12 19 L36 19 L33.5 40 Q33 42 31 42 L17 42 Q15 42 14.5 40 Z" fill="#fff"/><path d="M20 24 L20.5 37 M28 24 L27.5 37" stroke="#f4c234" stroke-width="3" stroke-linecap="round"/></svg>
+        </button>
       </div>
     </aside>
 
@@ -68,6 +83,7 @@
     <div id="brushPop" class="pop" hidden>
       <div id="brushList" class="brush-list"></div>
       <div id="sizes" class="sizes"></div>
+      <button id="insideBtn" class="inside-toggle"></button>
     </div>
     <div id="colorPop" class="pop" hidden>
       <div id="colorGrid" class="color-grid"></div>

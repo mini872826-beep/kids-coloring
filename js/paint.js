@@ -47,6 +47,99 @@
     return { play: name => sounds[name] && sounds[name]() };
   })();
 
+  /* ---------------- 背景音樂：八音盒風格的原創小曲，現場合成，不用音樂檔 ---------------- */
+  const Music = (() => {
+    const BEAT = .42;
+    const n = m => 440 * 2 ** ((m - 69) / 12);
+    // 每小節 4 拍的琶音：C G Am F C F G C
+    const MELODY = [
+      76, 79, 84, 79, 74, 79, 83, 79, 72, 76, 81, 76, 72, 77, 81, 79,
+      76, 79, 88, 86, 84, 81, 77, 81, 79, 83, 86, 83, 84, 79, 76, 72,
+    ];
+    const BASS = [48, 43, 45, 41, 48, 41, 43, 48];
+    let ac, master, timer, step = 0, next = 0, on = false, duckTimer;
+
+    function note(freq, t, vol, dur) {
+      const g = ac.createGain();
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(vol, t + .01);
+      g.gain.exponentialRampToValueAtTime(.0005, t + dur);
+      g.connect(master);
+      // 八音盒音色：基音 + 一點點泛音
+      [[1, 1], [2, .25], [3.01, .08]].forEach(([k, a]) => {
+        const o = ac.createOscillator(), og = ac.createGain();
+        o.type = 'sine';
+        o.frequency.value = freq * k;
+        og.gain.value = a;
+        o.connect(og).connect(g);
+        o.start(t);
+        o.stop(t + dur + .05);
+      });
+    }
+
+    function schedule() {
+      while (next < ac.currentTime + .4) {
+        note(n(MELODY[step % MELODY.length]), next, .5, 1.4);
+        if (step % 4 === 0) note(n(BASS[(step / 4) % BASS.length]), next, .35, 2.2);
+        if (step % 4 === 2) note(n(BASS[Math.floor(step / 4) % BASS.length] + 7), next, .15, 1.2);
+        next += BEAT;
+        step++;
+      }
+    }
+
+    function start() {
+      if (on) return;
+      try {
+        ac ||= new (window.AudioContext || window.webkitAudioContext)();
+        if (!master) {
+          master = ac.createGain();
+          const lp = ac.createBiquadFilter();
+          lp.type = 'lowpass';
+          lp.frequency.value = 2600;
+          master.connect(lp).connect(ac.destination);
+        }
+        ac.resume();
+        master.gain.cancelScheduledValues(ac.currentTime);
+        master.gain.setValueAtTime(0, ac.currentTime);
+        master.gain.linearRampToValueAtTime(.07, ac.currentTime + 1.5);
+        next = ac.currentTime + .1;
+        on = true;
+        timer = setInterval(schedule, 100);
+        // 念字、講故事的時候把音樂調小聲
+        duckTimer = setInterval(() => {
+          const talking = 'speechSynthesis' in window && speechSynthesis.speaking;
+          master.gain.setTargetAtTime(talking ? .02 : .07, ac.currentTime, .25);
+        }, 250);
+      } catch (e) { /* 沒有聲音也不影響 */ }
+    }
+
+    function stop() {
+      if (!on) return;
+      on = false;
+      clearInterval(timer);
+      clearInterval(duckTimer);
+      master.gain.setTargetAtTime(0, ac.currentTime, .2);
+    }
+
+    const enabled = () => localStorage.getItem('music') !== 'off';
+    // iPad 規定要手指點過才能出聲，所以第一次點畫面時開始播
+    document.addEventListener('pointerdown', () => { if (enabled()) start(); }, { once: true });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (enabled() && ac) start();
+    });
+
+    return {
+      enabled,
+      toggle() {
+        const want = !enabled();
+        localStorage.setItem('music', want ? 'on' : 'off');
+        want ? start() : stop();
+        return want;
+      },
+    };
+  })();
+
   /* ---------------- 念出文字（幫小朋友認字） ---------------- */
   const Voice = (() => {
     const ok = 'speechSynthesis' in window;
@@ -136,16 +229,77 @@
   ];
 
   /* ---------------- 筆刷圖標（會跟著當前顏色變色） ---------------- */
+  // 每支笔都有描边、亮面、暗面，看起来立体一点
+  const O = 'stroke="#3d2f1f" stroke-width="2.2" stroke-linejoin="round"';
+  const HI = 'fill="#fff" fill-opacity=".45" stroke="none"';
+  const SH = 'fill="#000" fill-opacity=".14" stroke="none"';
   const ICON = {
-    bucket: c => `<path d="M30 8 L60 8 L56 36 L34 36 Z" fill="${c}" stroke="#555" stroke-width="2.5"/><ellipse cx="45" cy="8" rx="15" ry="4" fill="${shade(c, -.25)}" stroke="#555" stroke-width="2.5"/><path d="M30 10 Q20 10 22 24" fill="none" stroke="#777" stroke-width="3"/><path d="M60 14 Q72 18 70 30 Q66 38 64 30 Q64 22 58 22" fill="${c}" stroke="#555" stroke-width="2"/><rect x="78" y="14" width="40" height="18" rx="5" fill="#d9d9d9" stroke="#999" stroke-width="2"/>`,
-    marker: c => `<path d="M6 23 L22 14 L22 32 Z" fill="${c}" stroke="#555" stroke-width="2"/><rect x="22" y="11" width="22" height="24" rx="3" fill="#9e9e9e"/><rect x="44" y="8" width="72" height="30" rx="5" fill="${c}"/><rect x="48" y="12" width="64" height="6" rx="3" fill="#fff" opacity=".35"/>`,
-    crayon: c => `<path d="M6 23 Q10 15 24 14 L24 32 Q10 31 6 23 Z" fill="${c}"/><rect x="24" y="12" width="92" height="22" rx="6" fill="${c}"/><rect x="40" y="12" width="60" height="22" fill="#fff" opacity=".85"/><path d="M48 18 L92 18 M48 28 L92 28" stroke="${c}" stroke-width="3"/>`,
-    pencil: c => `<path d="M6 23 L16 19 L16 27 Z" fill="#444"/><path d="M16 19 L38 11 L38 35 L16 27 Z" fill="#f2d3a0"/><rect x="38" y="11" width="78" height="24" fill="${c}"/><rect x="38" y="11" width="78" height="8" fill="#fff" opacity=".3"/>`,
-    water: c => `<path d="M4 23 Q18 8 36 16 L36 30 Q18 38 4 23 Z" fill="${c}"/><rect x="36" y="15" width="18" height="16" fill="#cfcfcf"/><path d="M54 17 L114 20 Q118 23 114 26 L54 29 Z" fill="#c98a4b"/>`,
-    spray: c => `<rect x="10" y="17" width="10" height="12" rx="2" fill="#777"/><path d="M20 13 Q28 9 34 11 L34 35 Q28 37 20 33 Z" fill="#bbb"/><rect x="34" y="9" width="82" height="28" rx="6" fill="${c}"/><circle cx="6" cy="16" r="2" fill="${c}"/><circle cx="3" cy="24" r="2" fill="${c}"/><circle cx="7" cy="31" r="2" fill="${c}"/>`,
-    glitter: c => `<path d="M6 23 L30 12 L30 34 Z" fill="${shade(c, -.2)}"/><rect x="30" y="9" width="86" height="28" rx="6" fill="${c}"/>${[[44, 17], [58, 28], [72, 15], [86, 26], [100, 18], [64, 21], [94, 31]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.2" fill="#fff"/>`).join('')}`,
-    rainbow: () => `<path d="M6 23 L24 13 L24 33 Z" fill="#ff1f1f"/>${['#ff1f1f', '#ff9d1f', '#ffee00', '#33c41f', '#29b6f6', '#7b1fd6'].map((k, i) => `<rect x="24" y="${10 + i * 4.4}" width="92" height="4.6" fill="${k}"/>`).join('')}`,
-    pattern: c => `<rect x="10" y="7" width="106" height="32" rx="6" fill="${shade(c, .55)}"/><path d="M12 15 q8 -6 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t8 0 M12 26 q8 -6 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t8 0 M12 37 q8 -6 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t8 0" fill="none" stroke="${c}" stroke-width="4"/>`,
+    bucket: c => `<g ${O}>
+      <path d="M38 13 L82 13 L77 42 L43 42 Z" fill="#dfe5ec"/>
+      <path d="M40 22 L80 22 L78.5 30 L41.5 30 Z" fill="${c}"/>
+      <path d="M38 13 Q60 -10 82 13" fill="none" stroke-width="3"/>
+      <ellipse cx="60" cy="13" rx="22" ry="5.5" fill="${c}"/>
+      <path d="M43 15 Q41 30 46 32 Q51 30 49 16 Z" fill="${c}"/>
+      <rect x="66" y="16" width="5" height="22" rx="2.5" ${HI}/>
+      <path d="M88 30 Q92 22 96 30 Q96 35 92 35 Q88 35 88 30 Z" fill="${c}"/></g>`,
+    marker: c => `<g ${O}>
+      <path d="M4 23 L20 13 L20 33 Z" fill="${shade(c, -.25)}"/>
+      <rect x="20" y="12" width="14" height="22" rx="2" fill="#c7cdd6"/>
+      <path d="M25 12 L25 34 M29 12 L29 34" stroke="#8b94a1" stroke-width="1.5"/>
+      <rect x="34" y="7" width="62" height="32" rx="7" fill="${c}"/>
+      <rect x="94" y="9" width="22" height="28" rx="7" fill="${shade(c, -.25)}"/>
+      <rect x="39" y="11" width="52" height="7" rx="3.5" ${HI}/>
+      <rect x="39" y="31" width="52" height="4" rx="2" ${SH}/></g>`,
+    crayon: c => `<g ${O}>
+      <path d="M4 23 Q7 14 23 12.5 L23 33.5 Q7 32 4 23 Z" fill="${c}"/>
+      <rect x="22" y="11" width="94" height="24" rx="7" fill="${c}"/>
+      <path d="M36 11 L104 11 L100 15 L104 19 L100 23 L104 27 L100 31 L104 35 L36 35 L40 31 L36 27 L40 23 L36 19 L40 15 Z" fill="#fff8e6"/>
+      <rect x="48" y="16" width="44" height="4" rx="2" fill="${c}" stroke="none"/>
+      <rect x="48" y="26" width="44" height="4" rx="2" fill="${c}" stroke="none"/>
+      <path d="M9 19 Q13 15 20 15" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.5"/></g>`,
+    pencil: c => `<g ${O}>
+      <path d="M14 19 L34 10 L34 36 L14 27 Z" fill="#f6d5a3"/>
+      <path d="M4 23 L14 19 L14 27 Z" fill="${shade(c, -.2)}"/>
+      <rect x="34" y="10" width="68" height="26" fill="${c}"/>
+      <rect x="34" y="10" width="68" height="8" ${HI}/>
+      <rect x="34" y="28" width="68" height="8" ${SH}/>
+      <rect x="102" y="10" width="8" height="26" fill="#cdd3db"/>
+      <rect x="110" y="11" width="9" height="24" rx="4" fill="#ff9fb6"/></g>`,
+    water: c => `<g ${O}>
+      <path d="M52 15 L110 18 Q118 23 110 28 L52 31 Z" fill="#d68d4e"/>
+      <path d="M56 18 L106 20" stroke="#fff" stroke-opacity=".45" stroke-width="2.5"/>
+      <rect x="34" y="13" width="18" height="20" rx="2" fill="#d9dee6"/>
+      <path d="M40 13 L40 33 M46 13 L46 33" stroke="#9aa3b0" stroke-width="1.5"/>
+      <path d="M2 23 Q10 9 34 14 L34 32 Q10 37 2 23 Z" fill="${c}"/>
+      <path d="M10 19 Q18 14 28 16" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.5"/>
+      <path d="M12 31 Q11 39 15 40 Q19 39 17 31 Z" fill="${c}"/></g>`,
+    spray: c => `<g ${O}>
+      ${[[8, 14, 2.4], [4, 22, 2.8], [9, 31, 2.2], [14, 22, 1.8], [2, 30, 1.6]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" stroke="none"/>`).join('')}
+      <rect x="18" y="18" width="10" height="10" rx="2" fill="#9aa3ad"/>
+      <path d="M28 12 Q35 8 42 10 L42 36 Q35 38 28 34 Z" fill="#e3e7ec"/>
+      <rect x="42" y="7" width="74" height="32" rx="9" fill="${c}"/>
+      <rect x="60" y="7" width="34" height="32" fill="${shade(c, .5)}"/>
+      <rect x="47" y="11" width="64" height="6" rx="3" ${HI}/></g>`,
+    glitter: c => `<g ${O}>
+      <path d="M4 23 L22 15 L22 31 Z" fill="${shade(c, -.25)}"/>
+      <rect x="22" y="14" width="12" height="18" rx="2" fill="#e3e7ec"/>
+      <path d="M34 9 L108 7 Q117 7 117 16 L117 30 Q117 39 108 39 L34 37 Z" fill="${c}"/>
+      <rect x="38" y="12" width="70" height="6" rx="3" ${HI}/>
+      ${[[50, 26, 5], [70, 22, 4], [88, 28, 5.5], [104, 20, 3.5], [60, 32, 3]].map(([x, y, r]) => `<path d="M${x} ${y - r} L${x + r * .3} ${y - r * .3} L${x + r} ${y} L${x + r * .3} ${y + r * .3} L${x} ${y + r} L${x - r * .3} ${y + r * .3} L${x - r} ${y} L${x - r * .3} ${y - r * .3} Z" fill="#fff" stroke="none"/>`).join('')}</g>`,
+    rainbow: () => `<g ${O}>
+      <path d="M14 19 L34 10 L34 36 L14 27 Z" fill="#f6d5a3"/>
+      <path d="M4 23 L14 19 L14 27 Z" fill="#ff3b3b"/>
+      ${['#ff3b3b', '#ff9d1f', '#ffe14d', '#3fc24f', '#2aa8f2', '#8a4fe0'].map((k, i) => `<rect x="34" y="${10 + i * 26 / 6}" width="76" height="${26 / 6 + .3}" fill="${k}" stroke="none"/>`).join('')}
+      <rect x="34" y="10" width="76" height="26" fill="none"/>
+      <rect x="34" y="10" width="76" height="6" ${HI}/>
+      <rect x="110" y="11" width="9" height="24" rx="4" fill="#ff9fb6"/></g>`,
+    pattern: c => `<g ${O}>
+      <rect x="4" y="6" width="50" height="34" rx="9" fill="${shade(c, .6)}"/>
+      <path d="M6 15 q6 -5 12 0 t12 0 t12 0 t10 0 M6 25 q6 -5 12 0 t12 0 t12 0 t10 0 M6 35 q6 -5 12 0 t12 0 t12 0 t10 0" fill="none" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/>
+      <rect x="4" y="6" width="50" height="34" rx="9" fill="none"/>
+      <path d="M54 23 L68 23" stroke-width="4"/>
+      <rect x="66" y="15" width="50" height="16" rx="8" fill="#6c7a89"/>
+      <rect x="70" y="18" width="42" height="4" rx="2" ${HI}/></g>`,
   };
   const BRUSHES = [
     { id: 'bucket', name: '油漆桶' },
@@ -158,7 +312,13 @@
     { id: 'rainbow', name: '彩虹筆' },
     { id: 'pattern', name: '花紋筆' },
   ];
-  const ERASER_ICON = `<svg viewBox="0 0 100 100"><g transform="rotate(-35 50 50)"><rect x="14" y="32" width="72" height="36" rx="8" fill="#fff" stroke="#8a8fd6" stroke-width="4"/><rect x="50" y="32" width="36" height="36" rx="6" fill="#6b6fd6"/></g></svg>`;
+  const ERASER_ICON = `<svg viewBox="0 0 100 100"><g transform="rotate(-32 50 50)" stroke="#3d2f1f" stroke-width="3" stroke-linejoin="round">
+    <path d="M14 46 L86 46 L86 70 Q86 76 80 76 L20 76 Q14 76 14 70 Z" fill="#c2577a"/>
+    <path d="M50 46 L86 46 L86 70 Q86 76 80 76 L50 76 Z" fill="#3f5bc4"/>
+    <rect x="14" y="30" width="72" height="34" rx="8" fill="#ff8fb1"/>
+    <path d="M50 30 L80 30 Q86 30 86 36 L86 58 Q86 64 80 64 L50 64 Z" fill="#6b8cff"/>
+    <rect x="20" y="35" width="24" height="7" rx="3.5" fill="#fff" fill-opacity=".55" stroke="none"/>
+    <rect x="55" y="35" width="25" height="7" rx="3.5" fill="#fff" fill-opacity=".4" stroke="none"/></g></svg>`;
 
   const iconSVG = (id, c) => `<svg viewBox="0 0 120 46">${ICON[id](c)}</svg>`;
 
@@ -188,14 +348,17 @@
     barrier: new Uint8Array(W * H),
     undo: [],
     dirty: false,
+    inside: localStorage.getItem('inside') !== 'off',   // 不出界，預設打開
+    recent: (() => { try { return JSON.parse(localStorage.getItem('recent')) || []; } catch (e) { return []; } })(),
   };
   let lastTool = state.tool !== 'eraser' ? state.tool : 'bucket';
 
   /* 畫布大小：在可用空間裡保持 4:3 */
   function fit() {
-    const r = board.getBoundingClientRect();
-    const pad = 20;
-    const w = Math.min(r.width - pad, (r.height - pad) * W / H);
+    const cs = getComputedStyle(board);
+    const aw = board.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const ah = board.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const w = Math.max(100, Math.min(aw, ah * W / H));
     stage.style.width = w + 'px';
     stage.style.height = (w * H / W) + 'px';
   }
@@ -230,6 +393,10 @@
   async function open(drawing) {
     state.drawing = drawing;
     state.undo = [];
+    const cat = ART.CATEGORIES.find(c => c.id === drawing.cat) || ART.CATEGORIES[0];
+    const chip = $('nameChip');
+    chip.innerHTML = `<span class="ic">${cat.icon}</span>${drawing.name}`;
+    chip.style.cssText = `--c:${cat.color};--cd:${cat.dark}`;
     pctx.globalAlpha = 1;
     pctx.globalCompositeOperation = 'source-over';
     pctx.fillStyle = '#fff';
@@ -307,13 +474,14 @@
   }
 
   /* ---------- 油漆桶：按線稿邊界填滿一塊 ---------- */
-  function bucket(sx, sy) {
+  // 從 (sx, sy) 開始，找出被線稿圍起來的那一塊。回傳 mask 和外框
+  function region(sx, sy) {
     sx = Math.floor(sx); sy = Math.floor(sy);
-    if (sx < 0 || sy < 0 || sx >= W || sy >= H) return;
+    if (sx < 0 || sy < 0 || sx >= W || sy >= H) return null;
     const bar = state.barrier;
-    if (bar[sy * W + sx]) return;   // 點到線上了
-    snapshot();
+    if (bar[sy * W + sx]) return null;   // 點到線上了
     const mask = new Uint8Array(W * H);
+    let x0 = sx, x1 = sx, y0 = sy, y1 = sy;
     const open = i => !mask[i] && !bar[i];
     const stack = [sx, sy];
     while (stack.length) {
@@ -322,6 +490,9 @@
       let i = y * W + x;
       while (x >= 0 && open(i)) { x--; i--; }
       x++; i++;
+      if (x < x0) x0 = x;
+      if (y < y0) y0 = y;
+      if (y > y1) y1 = y;
       let up = false, down = false;
       while (x < W && open(i)) {
         mask[i] = 1;
@@ -335,27 +506,80 @@
         }
         x++; i++;
       }
+      if (x - 1 > x1) x1 = x - 1;
     }
     // 往線條下面多塗 3 像素，避免邊緣留白
-    for (let pass = 0; pass < 3; pass++) {
+    const D = 3;
+    x0 = Math.max(1, x0 - D); y0 = Math.max(1, y0 - D);
+    x1 = Math.min(W - 2, x1 + D); y1 = Math.min(H - 2, y1 + D);
+    for (let pass = 0; pass < D; pass++) {
       const add = [];
-      for (let i = W; i < W * H - W; i++) {
-        if (mask[i] || !bar[i]) continue;
-        if (mask[i - 1] === 1 || mask[i + 1] === 1 || mask[i - W] === 1 || mask[i + W] === 1) add.push(i);
+      for (let y = y0; y <= y1; y++) {
+        for (let i = y * W + x0, e = y * W + x1; i <= e; i++) {
+          if (mask[i] || !bar[i]) continue;
+          if (mask[i - 1] === 1 || mask[i + 1] === 1 || mask[i - W] === 1 || mask[i + W] === 1) add.push(i);
+        }
       }
       for (const i of add) mask[i] = 2;
       for (const i of add) mask[i] = 1;
     }
+    return { mask, x0, y0, x1, y1 };
+  }
+
+  function bucket(sx, sy) {
+    const r = region(sx, sy);
+    if (!r) return;
+    snapshot();
+    const { mask } = r;
     const img = pctx.getImageData(0, 0, W, H), d = img.data;
-    const [r, g, b] = hexToRgb(state.color);
+    const [cr, cg, cb] = hexToRgb(state.color);
     for (let i = 0; i < mask.length; i++) {
       if (!mask[i]) continue;
       const k = i * 4;
-      d[k] = r; d[k + 1] = g; d[k + 2] = b; d[k + 3] = 255;
+      d[k] = cr; d[k + 1] = cg; d[k + 2] = cb; d[k + 3] = 255;
     }
     pctx.putImageData(img, 0, 0);
     Sound.play('fill');
     scheduleSave();
+  }
+
+  /* ---------- 不出界：筆畫只留在開始的那一格裡 ---------- */
+  let clip = null;   // { canvas, x0, y0, w, h }
+  function makeClip(p) {
+    clip = null;
+    if (!state.inside || !state.drawing || !state.drawing.svg) return;
+    // 點在線上的話，找附近最近的一格
+    let r = null;
+    for (let d = 0; d <= 15 && !r; d += 3) {
+      for (const [dx, dy] of [[0, 0], [d, 0], [-d, 0], [0, d], [0, -d], [d, d], [-d, -d], [d, -d], [-d, d]]) {
+        r = region(p.x + dx, p.y + dy);
+        if (r) break;
+      }
+    }
+    if (!r) return;
+    const w = r.x1 - r.x0 + 1, h = r.y1 - r.y0 + 1;
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    const cx = c.getContext('2d'), img = cx.createImageData(w, h), d = img.data;
+    for (let y = 0; y < h; y++) {
+      for (let x = 0, i = (y + r.y0) * W + r.x0; x < w; x++, i++) {
+        if (r.mask[i]) d[(y * w + x) * 4 + 3] = 255;
+      }
+    }
+    cx.putImageData(img, 0, 0);
+    clip = { canvas: c, x0: r.x0, y0: r.y0, w, h };
+  }
+  function applyClip() {
+    if (!clip) return;
+    sctx.save();
+    sctx.globalCompositeOperation = 'destination-in';
+    sctx.drawImage(clip.canvas, clip.x0, clip.y0);
+    sctx.restore();
+    // 外框以外的也清掉
+    sctx.clearRect(0, 0, W, clip.y0);
+    sctx.clearRect(0, clip.y0 + clip.h, W, H);
+    sctx.clearRect(0, clip.y0, clip.x0, clip.h);
+    sctx.clearRect(clip.x0 + clip.w, clip.y0, W, clip.h);
   }
 
   /* ---------- 各種筆 ---------- */
@@ -447,53 +671,44 @@
   const stroke = { last: null, carry: 0, hue: 0, sprayTimer: 0, pos: null };
 
   const TOOLS = {
-    pencil: { move: (a, b, s) => line(pctx, a, b, s * .45, state.color) },
-    crayon: { move: (a, b, s) => line(pctx, a, b, s * 1.1, patterns().crayon) },
-    marker: {
-      start: () => { cStroke.style.opacity = .65; },
-      move: (a, b, s) => line(sctx, a, b, s * 1.6, state.color),
-      end: () => {
-        pctx.globalAlpha = .65;
-        pctx.drawImage(cStroke, 0, 0);
-        pctx.globalAlpha = 1;
-        sctx.clearRect(0, 0, W, H);
-      },
-    },
+    pencil: { move: (a, b, s) => line(sctx, a, b, s * .45, state.color) },
+    crayon: { move: (a, b, s) => line(sctx, a, b, s * 1.1, patterns().crayon) },
+    marker: { alpha: .65, move: (a, b, s) => line(sctx, a, b, s * 1.6, state.color) },
     water: {
       move: (a, b, s) => {
         const r = Math.round(s * 1.5), img = waterDab(r);
-        along(a, b, Math.max(2, r * .25), (x, y) => pctx.drawImage(img, x - r, y - r));
+        along(a, b, Math.max(2, r * .25), (x, y) => sctx.drawImage(img, x - r, y - r));
       },
     },
     spray: {
-      start: () => { stroke.sprayTimer = setInterval(() => stroke.pos && spray(stroke.pos), 30); },
+      start: () => { stroke.sprayTimer = setInterval(() => { if (stroke.pos) { spray(stroke.pos); applyClip(); } }, 30); },
       move: (a, b) => spray(b),
       end: () => clearInterval(stroke.sprayTimer),
     },
     glitter: {
       move: (a, b, s) => along(a, b, s * 1.1, (x, y) => {
         const hue = Math.random() * 360;
-        star(pctx, x + rnd(-s, s), y + rnd(-s, s), rnd(s * .4, s * .9), Math.random() * 6, Math.random() < .5 ? state.color : `hsl(${hue},90%,65%)`);
-        pctx.fillStyle = '#fff';
-        pctx.fillRect(x + rnd(-s, s), y + rnd(-s, s), 3, 3);
+        star(sctx, x + rnd(-s, s), y + rnd(-s, s), rnd(s * .4, s * .9), Math.random() * 6, Math.random() < .5 ? state.color : `hsl(${hue},90%,65%)`);
+        sctx.fillStyle = '#fff';
+        sctx.fillRect(x + rnd(-s, s), y + rnd(-s, s), 3, 3);
       }),
     },
     rainbow: {
       move: (a, b, s) => {
         stroke.hue = (stroke.hue + 3) % 360;
-        line(pctx, a, b, s * 1.2, `hsl(${stroke.hue},95%,55%)`);
+        line(sctx, a, b, s * 1.2, `hsl(${stroke.hue},95%,55%)`);
       },
     },
-    pattern: { move: (a, b, s) => line(pctx, a, b, s * 1.8, patterns().pattern) },
-    eraser: { move: (a, b, s) => line(pctx, a, b, s * 2, '#fff') },
+    pattern: { move: (a, b, s) => line(sctx, a, b, s * 1.8, patterns().pattern) },
+    eraser: { move: (a, b, s) => line(sctx, a, b, s * 2, '#fff') },
   };
 
   function spray(p) {
     const s = SIZES[state.size] * 1.8;
-    pctx.fillStyle = state.color;
+    sctx.fillStyle = state.color;
     for (let i = 0; i < 26; i++) {
       const a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random()) * s;
-      pctx.fillRect(p.x + r * Math.cos(a), p.y + r * Math.sin(a), 2.2, 2.2);
+      sctx.fillRect(p.x + r * Math.cos(a), p.y + r * Math.sin(a), 2.2, 2.2);
     }
   }
 
@@ -513,9 +728,12 @@
     stage.setPointerCapture(e.pointerId);
     snapshot();
     const t = TOOLS[state.tool];
+    makeClip(p);
+    cStroke.style.opacity = t.alpha || 1;
     stroke.last = p; stroke.pos = p; stroke.carry = 0;
     t.start && t.start(p);
     t.move(p, { x: p.x + .1, y: p.y + .1 }, SIZES[state.size]);   // 點一下也有一個點
+    applyClip();
   });
 
   stage.addEventListener('pointermove', e => {
@@ -527,6 +745,7 @@
       t.move(stroke.last, p, s);
       stroke.last = stroke.pos = p;
     }
+    applyClip();
   });
 
   function endStroke(e) {
@@ -534,6 +753,12 @@
     active = null;
     const t = TOOLS[state.tool];
     t.end && t.end();
+    applyClip();
+    pctx.globalAlpha = t.alpha || 1;
+    pctx.drawImage(cStroke, 0, 0);
+    pctx.globalAlpha = 1;
+    sctx.clearRect(0, 0, W, H);
+    clip = null;
     stroke.pos = null;
     scheduleSave();
   }
@@ -572,6 +797,10 @@
     updateUI();
   }
   function setColor(c) {
+    if (c === state.color) { if (state.tool === 'eraser') state.tool = lastTool; updateUI(); return; }
+    // 記住最近用過的 4 個顏色
+    state.recent = [state.color, ...state.recent.filter(x => x !== state.color && x !== c)].slice(0, 4);
+    localStorage.setItem('recent', JSON.stringify(state.recent));
     state.color = c;
     localStorage.setItem('color', c);
     if (state.tool === 'eraser') state.tool = lastTool;
@@ -580,11 +809,15 @@
 
   function updateUI() {
     const toolForIcon = state.tool === 'eraser' ? lastTool : state.tool;
-    $('brushBtn').innerHTML = `<svg viewBox="18 18 84 84"><g transform="translate(60 60) rotate(-40) translate(-62 -23)">${ICON[toolForIcon](state.color)}</g></svg>`;
+    $('brushBtn').innerHTML = `<svg viewBox="18 18 84 84"><g transform="translate(60 60) rotate(${toolForIcon === 'bucket' ? 0 : -40}) translate(-62 -23)">${ICON[toolForIcon](state.color)}</g></svg>`;
     $('brushBtn').classList.toggle('on', state.tool !== 'eraser');
     $('eraserBtn').classList.toggle('on', state.tool === 'eraser');
     $('colorDot').style.background = state.color;
     $('undoBtn').disabled = !state.undo.length;
+    $('insideBtn').classList.toggle('on', state.inside);
+    $('insideBtn').innerHTML = `<span class="sw"><i></i></span>不畫出線外`;
+    $('recent').innerHTML = state.recent.map(c =>
+      `<button data-c="${c}" style="background:${c}" aria-label="${colorName(c)}"></button>`).join('');
 
     $('brushList').innerHTML = BRUSHES.map(b =>
       `<button class="brush${b.id === state.tool ? ' on' : ''}" data-id="${b.id}">${iconSVG(b.id, state.color)}<span>${b.name}</span></button>`).join('');
@@ -620,6 +853,21 @@
     setColor(b.dataset.c);
     setTimeout(() => showPop(null), 150);
   });
+  $('recent').addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    Sound.play('pop');
+    Voice.say(colorName(b.dataset.c));
+    setColor(b.dataset.c);
+  });
+  $('insideBtn').addEventListener('click', () => {
+    state.inside = !state.inside;
+    localStorage.setItem('inside', state.inside ? 'on' : 'off');
+    Sound.play('click');
+    Voice.say(state.inside ? '不畫出線外，打開' : '不畫出線外，關掉');
+    updateUI();
+  });
+  $('nameChip').addEventListener('click', () => { Sound.play('click'); Voice.say(state.drawing.name); });
   $('customColor').addEventListener('input', e => setColor(e.target.value));
 
   $('brushBtn').addEventListener('click', () => {
@@ -655,6 +903,7 @@
 
   window.Sound = Sound;
   window.Voice = Voice;
+  window.Music = Music;
   window.Store = Store;
   window.Painter = { open, save };
 })();
