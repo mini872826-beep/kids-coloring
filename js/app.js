@@ -320,5 +320,27 @@
   }
   localStorage.setItem('version', window.APP_VERSION);
 
+  // 主畫面上的 App 切到背景再回來不會重新載入，所以自己定期問一下有沒有新版
+  let updateReady = false;
+  async function checkUpdate() {
+    try {
+      const r = await fetch('js/version.js?t=' + Date.now(), { cache: 'no-store' });
+      const m = (await r.text()).match(/APP_VERSION = '([^']+)'/);
+      if (m && m[1] !== window.APP_VERSION && sessionStorage.getItem('reloadFor') !== m[1]) {
+        sessionStorage.setItem('reloadFor', m[1]);   // 同一個新版只重新載入一次，避免一直重整
+        updateReady = true;
+        applyUpdate();
+      }
+    } catch (e) { /* 沒網路就下次再問 */ }
+  }
+  // 只在首頁換新版，不打斷畫畫和聽故事（畫的作品都已經自動存好了）
+  function applyUpdate() {
+    if (updateReady && (current === '' || current === undefined || current === 'done')) location.reload();
+  }
+  window.addEventListener('hashchange', applyUpdate);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) checkUpdate(); });
+  setInterval(checkUpdate, 3 * 60 * 1000);
+  setTimeout(checkUpdate, 5000);
+
   route();
 })();
