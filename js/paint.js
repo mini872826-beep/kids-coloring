@@ -166,11 +166,15 @@
       else if (enabled() && ac) start();
     });
 
+    // 唱歌的錄音在播時，背景音樂先停；唱完再接回來
+    let held = false;
     return {
       enabled,
       playMelody,
       stopMelody,
-      playing: () => !!song,
+      hold() { held = true; stop(); },
+      release() { if (held) { held = false; if (enabled() && !song) start(); } },
+      playing: () => !!song || held,
       toggle() {
         const want = !enabled();
         localStorage.setItem('music', want ? 'on' : 'off');

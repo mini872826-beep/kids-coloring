@@ -30,6 +30,15 @@ jobs:
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: node tools/phrases.js > "$RUNNER_TEMP/phrases.json"
       - run: python tools/gen_voice.py "$RUNNER_TEMP/phrases.json"
+      # 兒歌：AI 一個字一個字錄，再照歌譜改音高，變成真的在唱（每個字的錄音存在 cache）
+      - uses: actions/cache@v4
+        with:
+          path: .sing-cache
+          key: sing-${{ hashFiles('js/songs.js') }}
+          restore-keys: sing-
+      - run: pip install pyworld soundfile numpy
+      - run: node tools/songs.js > "$RUNNER_TEMP/songs.json"
+      - run: python tools/sing.py "$RUNNER_TEMP/songs.json"
       - name: 推回 main
         run: |
           git config user.name "github-actions[bot]"

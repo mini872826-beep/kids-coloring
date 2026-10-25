@@ -411,6 +411,46 @@
 
   /* ---------------- 兒歌唐詩 ---------------- */
   let song = null, songToken = 0;
+  // 兒歌有 AI 唱好的錄音（tools/sing.py 產生）就放錄音，沒有才用八音盒彈旋律
+  let SUNG = {};
+  fetch('audio/sing/index.json').then(r => r.ok ? r.json() : {}).then(j => { SUNG = j; }).catch(() => {});
+  const singer = new Audio();
+  singer.preload = 'auto';
+  document.addEventListener('pointerdown', () => {
+    // iPad 要手指點過才能出聲：先用無聲的解鎖
+    if (singer.src) return;
+    singer.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+    singer.play().catch(() => {});
+  }, { once: true });
+  let singRaf = 0;
+  function playSung(my, from = 0) {
+    const info = SUNG[song.id];
+    const url = 'audio/sing/' + info.file;
+    Music.hold();
+    if (!singer.src.endsWith(url)) singer.src = url;
+    const start = () => {
+      singer.currentTime = from > 0 ? Math.max(0, info.times[from] - .25) : 0;
+      singer.play().catch(() => { if (my === songToken) { Music.release(); setPlaying(false); } });
+    };
+    singer.readyState >= 1 ? start() : singer.addEventListener('loadedmetadata', start, { once: true });
+    let line = -1;
+    const tick = () => {
+      if (my !== songToken) return;
+      let i = -1;
+      info.times.forEach((t0, k) => { if (singer.currentTime >= t0 - .1) i = k; });
+      if (i !== line) { line = i; highlight(i); }
+      singRaf = requestAnimationFrame(tick);
+    };
+    cancelAnimationFrame(singRaf);
+    singRaf = requestAnimationFrame(tick);
+    singer.onended = () => {
+      if (my !== songToken) return;
+      cancelAnimationFrame(singRaf);
+      highlight(-1);
+      setPlaying(false);
+      Music.release();
+    };
+  }
   const PLAY_ICON = '<svg viewBox="0 0 48 48"><path d="M15 10 L38 24 L15 38 Z" fill="currentColor" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></svg>';
   const STOP_ICON = '<svg viewBox="0 0 48 48"><rect x="13" y="13" width="22" height="22" rx="4" fill="currentColor"/></svg>';
   function setPlaying(on) {
@@ -438,6 +478,7 @@
     $('lyrics').className = 'lyrics ' + sg.kind;
     $('lyrics').innerHTML = sg.lines.map((l, i) => `<li>${l}${sg.sub ? `<small>${sg.sub[i]}</small>` : ''}</li>`).join('');
     setPlaying(false);
+    if (SUNG[sg.id]) { singer.src = 'audio/sing/' + SUNG[sg.id].file; singer.load(); }
     // 一打開就先把題目和前幾句的聲音抓好
     Voice.warm([sg.title, sg.author].filter(Boolean).concat(sg.lines.slice(0, 4)));
     // 點進來就開始：兒歌彈旋律，唐詩念出來
@@ -446,6 +487,10 @@
   }
   function stopSong() {
     songToken++;
+    cancelAnimationFrame(singRaf);
+    singer.onended = null;
+    singer.pause();
+    Music.release();
     Music.stopMelody();
     Voice.cancel();
     highlight(-1);
@@ -455,7 +500,9 @@
     stopSong();
     setPlaying(true);
     const my = songToken;
-    if (song.notes) {
+    if (SUNG[song.id]) {
+      playSung(my);
+    } else if (song.notes) {
       Music.playMelody(song.notes, song.bpm, i => my === songToken && highlight(i), () => {
         if (my === songToken) { highlight(-1); setPlaying(false); }
       });
@@ -482,9 +529,12 @@
   $('lyrics').addEventListener('click', e => {
     const li = e.target.closest('li');
     if (!li || !song) return;
+    const i = [...$('lyrics').children].indexOf(li);
     stopSong();
     setPlaying(true);
-    readLines(songToken, false, [...$('lyrics').children].indexOf(li));
+    // 有唱的錄音：跳到那一句接著唱；沒有就從那一句開始念
+    if (SUNG[song.id]) playSung(songToken, i);
+    else readLines(songToken, false, i);
   });
   function songStep(d) {
     const list = SONGS.filter(x => x.kind === song.kind);
