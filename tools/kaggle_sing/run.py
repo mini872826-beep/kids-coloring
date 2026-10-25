@@ -35,46 +35,21 @@ JOBS = [
      'lyrics': '[verse]\n一閃一閃亮晶晶\n滿天都是小星星\n掛在天上放光明\n好像許多小眼睛\n[outro]\n一閃一閃亮晶晶\n滿天都是小星星'},
 ]
 
-try:
-    sh('nvidia-smi')
-    sh(f'git clone --depth 1 https://github.com/ace-step/ACE-Step-1.5 {ACE}')
-    sh('pip install -q -e .', cwd=ACE)
-    sh(f'{sys.executable} -m acestep.model_downloader', cwd=ACE)
-    sys.path.insert(0, ACE)
-    os.chdir(ACE)
-    from acestep.handler import AceStepHandler
-    from acestep.llm_inference import LLMHandler
-    from acestep.inference import GenerationParams, GenerationConfig, generate_music
+GEN = 'import json, os, sys, time, traceback, urllib.request, subprocess\nsys.path.insert(0, \'/kaggle/tmp/ace\')\nos.chdir(\'/kaggle/tmp/ace\')\nLOG = open(\'/kaggle/working/log.txt\', \'a\')\ndef log(*a):\n    s = \' \'.join(str(x) for x in a)\n    print(s, flush=True)\n    LOG.write(s + \'\\n\')\n    LOG.flush()\ndef sh(cmd):\n    subprocess.run(cmd, shell=True)\nRAW = \'https://raw.githubusercontent.com/mini872826-beep/kids-coloring/main/\'\nACE = \'/kaggle/tmp/ace\'\nOUT = \'/kaggle/working\'\nJOBS = json.load(open(\'/kaggle/tmp/jobs.json\', encoding=\'utf-8\'))\ntry:\n    from acestep.handler import AceStepHandler\n    from acestep.llm_inference import LLMHandler\n    from acestep.inference import GenerationParams, GenerationConfig, generate_music\n\n    index = json.loads(urllib.request.urlopen(RAW + \'audio/sing/index.json\').read())\n    dit = AceStepHandler()\n    msg, ok = dit.initialize_service(project_root=ACE, config_path=\'acestep-v15-turbo\', device=\'auto\', offload_to_cpu=False)\n    log(\'dit\', ok, msg)\n    llm = LLMHandler()\n    msg, ok = llm.initialize(checkpoint_dir=os.path.join(ACE, \'checkpoints\'), lm_model_path=\'acestep-5Hz-lm-0.6B\',\n                             backend=\'pt\', device=\'auto\', offload_to_cpu=False, dtype=None)\n    log(\'llm\', ok, msg)\n    for job in JOBS:\n        try:\n            kw = dict(task_type=job[\'task\'], caption=job[\'caption\'], lyrics=job[\'lyrics\'], vocal_language=job[\'lang\'],\n                      inference_steps=8, shift=3.0, seed=42)\n            if job[\'task\'] == \'cover\':\n                src = f\'/kaggle/tmp/{job["id"]}.mp3\'\n                urllib.request.urlretrieve(RAW + \'audio/sing/\' + index[job[\'id\']][\'file\'], src)\n                kw.update(src_audio=src, audio_cover_strength=0.8)\n            else:\n                kw.update(thinking=True, bpm=88, duration=45)\n            t = time.time()\n            res = generate_music(dit, llm, params=GenerationParams(**kw),\n                                 config=GenerationConfig(batch_size=1, audio_format=\'mp3\'), save_dir=f\'/kaggle/tmp/{job["name"]}\')\n            log(job[\'name\'], \'ok\' if res.success else \'FAILED\', \'%.0fs\' % (time.time() - t), getattr(res, \'status_message\', \'\'))\n            for a in (res.audios or []):\n                p = a.get(\'path\')\n                if p and os.path.exists(p):\n                    sh(f\'cp "{p}" {OUT}/{job["name"]}.mp3\')\n                    break\n        except Exception:\n            log(job[\'name\'], \'EXCEPTION\', traceback.format_exc()[-2000:])\nexcept Exception:\n    log(\'GEN EXCEPTION\', traceback.format_exc()[-3000:])\n'
 
-    index = json.loads(urllib.request.urlopen(RAW + 'audio/sing/index.json').read())
-    dit = AceStepHandler()
-    msg, ok = dit.initialize_service(project_root=ACE, config_path='acestep-v15-turbo', device='auto', offload_to_cpu=False)
-    log('dit', ok, msg)
-    llm = LLMHandler()
-    msg, ok = llm.initialize(checkpoint_dir=os.path.join(ACE, 'checkpoints'), lm_model_path='acestep-5Hz-lm-0.6B',
-                             backend='pt', device='auto', offload_to_cpu=False, dtype=None)
-    log('llm', ok, msg)
-    for job in JOBS:
-        try:
-            kw = dict(task_type=job['task'], caption=job['caption'], lyrics=job['lyrics'], vocal_language=job['lang'],
-                      inference_steps=8, shift=3.0, seed=42)
-            if job['task'] == 'cover':
-                src = f'/kaggle/tmp/{job["id"]}.mp3'
-                urllib.request.urlretrieve(RAW + 'audio/sing/' + index[job['id']]['file'], src)
-                kw.update(src_audio=src, audio_cover_strength=0.8)
-            else:
-                kw.update(thinking=True, bpm=88, duration=45)
-            t = time.time()
-            res = generate_music(dit, llm, params=GenerationParams(**kw),
-                                 config=GenerationConfig(batch_size=1, audio_format='mp3'), save_dir=f'/kaggle/tmp/{job["name"]}')
-            log(job['name'], 'ok' if res.success else 'FAILED', '%.0fs' % (time.time() - t), getattr(res, 'status_message', ''))
-            for a in (res.audios or []):
-                p = a.get('path')
-                if p and os.path.exists(p):
-                    sh(f'cp "{p}" {OUT}/{job["name"]}.mp3')
-                    break
-        except Exception:
-            log(job['name'], 'EXCEPTION', traceback.format_exc()[-2000:])
+try:
+    sh('nvidia-smi -L')
+    sh(f'git clone --depth 1 https://github.com/ace-step/ACE-Step-1.5 {ACE}')
+    # ACE-Step 要 Python 3.11～3.12，Kaggle 是 3.13：用 uv 另外建一個 3.12 的環境
+    sh('pip install -q uv')
+    sh('uv venv -p 3.12 /kaggle/tmp/venv')
+    sh('uv pip install --python /kaggle/tmp/venv/bin/python -e .', cwd=ACE)
+    sh('/kaggle/tmp/venv/bin/python -m acestep.model_downloader', cwd=ACE)
+    json.dump(JOBS, open('/kaggle/tmp/jobs.json', 'w', encoding='utf-8'), ensure_ascii=False)
+    open('/kaggle/tmp/gen.py', 'w', encoding='utf-8').write(GEN)
+    LOG.flush()
+    r = subprocess.run('/kaggle/tmp/venv/bin/python /kaggle/tmp/gen.py', shell=True, cwd=ACE)
+    log('gen exit', r.returncode)
 except Exception:
     log('SETUP EXCEPTION', traceback.format_exc()[-3000:])
 log('done')
