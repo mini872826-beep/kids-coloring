@@ -1141,5 +1141,21 @@
     return `<g class="tap" data-anim="${anim}" data-sound="${sound}"><svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="0 0 800 600" overflow="visible">${outlined(d.svg)}</svg></g>`;
   }
 
+  // 英文名字（學英文、畫完教念英文用）
+  const EN = {
+    car: 'car', firetruck: 'fire truck', bus: 'bus', digger: 'digger', train: 'train', plane: 'airplane', police: 'police car', heli: 'helicopter',
+    cat: 'cat', dog: 'dog', bunny: 'rabbit', lion: 'lion', pig: 'pig', elephant: 'elephant', bear: 'bear', chick: 'chick', wolf: 'wolf',
+    sheep: 'sheep', redhood: 'Little Red Riding Hood', shepherd: 'shepherd boy', tiger: 'tiger', giraffe: 'giraffe',
+    trex: 'T-rex', trike: 'triceratops', longneck: 'long-neck dinosaur', stego: 'stegosaurus', ptero: 'pterosaur', dinoegg: 'baby dinosaur', anky: 'ankylosaurus',
+    fish: 'clownfish', octopus: 'octopus', whale: 'whale', turtle: 'turtle', crab: 'crab', starfish: 'starfish', jelly: 'jellyfish', seahorse: 'seahorse', shark: 'shark', dolphin: 'dolphin',
+    grandma: 'grandma', 'grandma-house': "grandma's house", basket: 'basket', 'straw-house': 'straw house', 'wood-house': 'wooden house', 'brick-house': 'brick house',
+    trophy: 'trophy', mouse: 'mouse', crow: 'crow', duckling: 'duckling', swan: 'swan', jar: 'jar', 'giant-carrot': 'carrot',
+    hospital: 'hospital', 'police-station': 'police station', 'fire-station': 'fire station', 'post-office': 'post office', school: 'school', supermarket: 'supermarket',
+    pumpkin: 'pumpkin', ghost: 'ghost', bat: 'bat', witchhat: 'witch hat', monster: 'monster', mummy: 'mummy', haunted: 'haunted house',
+  };
+  DRAWINGS.forEach(d => { d.en = EN[d.id]; });
+  const CAT_EN = { car: 'Vehicles', animal: 'Animals', dino: 'Dinosaurs', sea: 'Ocean', building: 'Buildings', halloween: 'Halloween', free: 'Free drawing' };
+  CATEGORIES.forEach(c => { c.en = CAT_EN[c.id]; });
+
   window.ART = { DRAWINGS, CATEGORIES, lineArt, svgDoc, scene, put };
 })();

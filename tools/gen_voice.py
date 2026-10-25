@@ -13,21 +13,30 @@ import sys
 import edge_tts
 
 VOICE = 'zh-TW-HsiaoYuNeural'   # 台灣口音、溫柔的女生聲音
+VOICE_EN = 'en-US-AnaNeural'    # 英文：美國小朋友的聲音
 RATE = '-8%'                     # 講慢一點，小朋友比較聽得懂
 PITCH = '+6Hz'
 OUT = 'audio'
 
 
+def is_english(text):
+    return all(ord(ch) < 128 for ch in text)
+
+
+def voice_for(text):
+    return VOICE_EN if is_english(text) else VOICE
+
+
 def file_name(text):
     # 聲音設定也算進去，換聲音時會全部重錄
-    key = f'{VOICE}|{RATE}|{PITCH}|{text}'
+    key = f'{voice_for(text)}|{RATE}|{PITCH}|{text}'
     return hashlib.sha1(key.encode('utf-8')).hexdigest()[:12] + '.mp3'
 
 
 async def record(text, path):
     for attempt in range(4):
         try:
-            await edge_tts.Communicate(text, VOICE, rate=RATE, pitch=PITCH).save(path)
+            await edge_tts.Communicate(text, voice_for(text), rate=RATE, pitch='+0Hz' if is_english(text) else PITCH).save(path)
             if os.path.getsize(path) > 0:
                 return
         except Exception as e:  # 網路不穩就再試

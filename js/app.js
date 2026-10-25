@@ -87,6 +87,7 @@
     cat: localStorage.getItem('cat') || 'car',
     tag: localStorage.getItem('tag') || 'all',
     songKind: localStorage.getItem('songKind') || 'song',
+    enCat: localStorage.getItem('enCat') || 'animal',
   };
   if (!CATEGORIES.some(c => c.id === pref.cat)) pref.cat = 'car';
   let thumbURLs = [];
@@ -160,6 +161,18 @@
       $('grid').style.cssText = `--c:${kind.color};--cd:${kind.dark}`;
       $('grid').innerHTML = SONGS.filter(x => x.kind === kind.id).map((x, i) =>
         `<div class="card story" role="button" data-go="#/song/${x.id}" data-say="${x.title}" style="--i:${i}"><span class="thumb">${x.art}${x.author ? `<span class="tag">${x.author}</span>` : ''}</span><div class="name">${kind.icon} ${x.title}</div></div>`).join('');
+    } else if (pref.tab === 'english') {
+      const cats = CATEGORIES.filter(c => c.en && c.id !== 'free');
+      if (!cats.some(c => c.id === pref.enCat)) pref.enCat = cats[0].id;
+      $('cats').hidden = false;
+      $('cats').innerHTML = `<div class="cat-row main-row">${cats.map(c =>
+        `<button class="cat${c.id === pref.enCat ? ' on' : ''}" data-encat="${c.id}" style="--c:${c.color};--cd:${c.dark}"><span class="cat-icon">${c.icon}</span>${c.en}</button>`).join('')}</div>`;
+      const cat = cats.find(c => c.id === pref.enCat);
+      $('grid').style.cssText = `--c:${cat.color};--cd:${cat.dark}`;
+      $('grid').innerHTML = DRAWINGS.filter(d => d.en && (d.cat === cat.id || (d.also || []).includes(cat.id))).map((d, i) =>
+        `<div class="card word" role="button" data-word="${d.id}" style="--i:${i}"><span class="thumb">${svgDoc(d.svg)}
+          <span class="go-paint" data-go="#/paint/${d.id}" role="button" aria-label="去畫畫">🖍️</span></span>
+          <div class="name"><b>${d.en}</b><small>${d.name}</small></div></div>`).join('');
     } else if (pref.tab === 'math') {
       $('cats').hidden = true;
       $('grid').style.cssText = '--c:#ff922b;--cd:#e8590c';
@@ -186,6 +199,21 @@
       Sound.play('pop');
       Voice.say(tab.textContent.replace(/[^\u4e00-\u9fff]/g, ''));
       renderHome();
+    } else if (cat && cat.dataset.encat) {
+      pref.enCat = cat.dataset.encat;
+      localStorage.setItem('enCat', pref.enCat);
+      Sound.play('pop');
+      const c = CATEGORIES.find(x => x.id === pref.enCat);
+      Voice.speak([c.en, c.name]);
+      renderHome();
+    } else if (e.target.closest('[data-word]') && !e.target.closest('.go-paint')) {
+      // 單字卡：念英文、中文，再念一次英文
+      const w = e.target.closest('[data-word]'), d = DRAWINGS.find(x => x.id === w.dataset.word);
+      Sound.play('pop');
+      w.classList.remove('said');
+      void w.offsetWidth;
+      w.classList.add('said');
+      Voice.speak([d.en, d.name, d.en]);
     } else if (cat && cat.dataset.kind) {
       pref.songKind = cat.dataset.kind;
       localStorage.setItem('songKind', pref.songKind);
@@ -234,7 +262,10 @@
     const { cover, done } = await window.Painter.finish();
     if (done) {
       Sound.play('yay');
-      Voice.say(cover === null ? '畫好了，好棒！' : '全部塗好了，好棒！');
+      // 畫完順便教英文：「小汽車的英文是 car，跟我念，car」
+      const d = window.Painter.current();
+      Voice.speak([cover === null ? '畫好了，好棒！' : '全部塗好了，好棒！',
+        ...(d && d.en ? [d.name, '的英文是', d.en, '跟我念', d.en] : [])]);
       confetti();
     } else {
       Sound.play('pop');

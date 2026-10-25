@@ -788,6 +788,23 @@ button {
 #math .modal { position: fixed; }
 .math-card .thumb { background: linear-gradient(135deg, var(--c), var(--cd)); display: grid; place-items: center; }
 .math-show { position: static !important; font-family: "Chiron GoRound TC", "PingFang TC", sans-serif; font-weight: 900; font-size: 46px; color: #fff; text-shadow: 0 4px 0 rgba(0, 0, 0, .2); }
+.name-chip .en { margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: var(--c, #ffc94d); color: #fff; font-family: "Nunito", "Chiron GoRound TC", sans-serif; font-size: 18px; }
+.card.word .name { display: flex; flex-direction: column; align-items: center; line-height: 1.15; padding: 8px 6px 10px; }
+.card.word .name b { font-family: "Nunito", "Chiron GoRound TC", sans-serif; font-weight: 900; font-size: 26px; letter-spacing: .02em; }
+.card.word .name small { font-size: 16px; opacity: .9; }
+.card.word.said { animation: wob .5s ease; }
+.go-paint {
+  position: absolute !important;
+  inset: auto 8px 8px auto !important;
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .2);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+}
 .chip-sep { width: 3px; height: 34px; border-radius: 2px; background: rgba(255, 255, 255, .8); margin: 0 4px; }
 .song-sub { font-size: 15px; font-weight: 700; color: #fff; opacity: .9; }
 
@@ -816,6 +833,36 @@ button {
 #songRead { color: #fff; background: #4dabf7; }
 @media (orientation: landscape) and (min-width: 700px) {
   .song-page .lyrics { flex: 1; }
+  .song-page .art { flex: 2.2; }
+}
+
+/* 插畫放大：故事頁一律「圖在上、字在下」，圖保持 8:5 盡量撐滿 */
+#reader .page, #reader .page.turn-next, #reader .page.turn-prev { flex-direction: column; }
+#reader .art, #song .art {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 0;
+  background: transparent;
+}
+#reader .art svg, #song .art svg {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 8 / 5;
+  border-radius: 20px;
+}
+@media (orientation: landscape) and (min-width: 700px) {
+  #song .art { flex: 2.2; }
+}
+#reader .text {
+  flex: none;
+  align-self: stretch;
+  text-align: center;
+  padding: 10px 24px 14px;
+  font-size: clamp(22px, 3.3vw, 34px);
 }
 .reader-title { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .reader-title h2 {

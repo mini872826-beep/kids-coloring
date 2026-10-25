@@ -198,6 +198,14 @@
     }
     function utter(text) {
       const u = new SpeechSynthesisUtterance(text);
+      if (/^[\x00-\x7F]+$/.test(text)) {
+        // 英文：用英文聲音
+        const en = speechSynthesis.getVoices().find(v => /^en[-_]US/i.test(v.lang));
+        u.lang = 'en-US';
+        if (en) u.voice = en;
+        u.rate = .8;
+        return u;
+      }
       u.lang = voice ? voice.lang : 'zh-TW';
       if (voice) u.voice = voice;
       u.rate = .85;
@@ -516,7 +524,7 @@
     state.undo = [];
     const cat = ART.CATEGORIES.find(c => c.id === drawing.cat) || ART.CATEGORIES[0];
     const chip = $('nameChip');
-    chip.innerHTML = `<span class="ic">${cat.icon}</span>${drawing.name}`;
+    chip.innerHTML = `<span class="ic">${cat.icon}</span>${drawing.name}${drawing.en ? `<span class="en">${drawing.en}</span>` : ''}`;
     chip.style.cssText = `--c:${cat.color};--cd:${cat.dark}`;
     pctx.globalAlpha = 1;
     pctx.globalCompositeOperation = 'source-over';
@@ -1103,7 +1111,10 @@
     Voice.say(state.inside ? '不畫出線外，打開' : '不畫出線外，關掉');
     updateUI();
   });
-  $('nameChip').addEventListener('click', () => { Sound.play('click'); Voice.say(state.drawing.name); });
+  $('nameChip').addEventListener('click', () => {
+    Sound.play('click');
+    Voice.speak([state.drawing.name, state.drawing.en].filter(Boolean));
+  });
   $('patternRow').addEventListener('click', e => {
     const b = e.target.closest('.pat');
     if (!b) return;
@@ -1156,5 +1167,5 @@
   window.Voice = Voice;
   window.Music = Music;
   window.Store = Store;
-  window.Painter = { open, save, finish };
+  window.Painter = { open, save, finish, current: () => state.drawing };
 })();

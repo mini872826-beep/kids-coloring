@@ -13,6 +13,8 @@ const { ART, BOOKS, SONGS, WORDS } = ctx.window;
 const all = new Set([
   ...ART.CATEGORIES.map(c => c.name),
   ...ART.DRAWINGS.map(d => d.name),
+  ...ART.DRAWINGS.map(d => d.en).filter(Boolean),
+  ...ART.CATEGORIES.map(c => c.en).filter(Boolean),
   ...BOOKS.flatMap(b => [b.title, ...b.pages.map(p => p.text)]),
   ...WORDS.BRUSHES.map(b => b.name),
   ...SONGS.flatMap(s => [s.title, ...(s.author ? [s.author] : []), ...s.lines]),
