@@ -1,943 +1,420 @@
-[{"stream_name":"stdout","time":0.865251058,"data":"$ nvidia-smi -L\n"}
-,{"stream_name":"stdout","time":0.910527555,"data":"GPU 0: Tesla T4 (UUID: GPU-63923501-32d8-37e5-dc5c-a2f90098d264)\n"}
-,{"stream_name":"stdout","time":0.910554519,"data":"GPU 1: Tesla T4 (UUID: GPU-91fb1550-4765-4a0a-4a75-75a1cd39deee)\n"}
-,{"stream_name":"stdout","time":0.910559587,"data":" \n"}
-,{"stream_name":"stdout","time":0.910563571,"data":"$ git clone --depth 1 https://github.com/ace-step/ACE-Step-1.5 /kaggle/tmp/ace\n"}
-,{"stream_name":"stdout","time":2.064304343,"data":" Cloning into '/kaggle/tmp/ace'...\n"}
-,{"stream_name":"stdout","time":2.0643390090000002,"data":"\n"}
-,{"stream_name":"stdout","time":2.064342879,"data":"$ pip install -q uv\n"}
-,{"stream_name":"stdout","time":5.742418515,"data":" \n"}
-,{"stream_name":"stdout","time":5.742449977,"data":"$ uv venv -p 3.12 /kaggle/tmp/venv\n"}
-,{"stream_name":"stdout","time":6.208846702,"data":" warning: The `--system` flag has no effect, `uv venv` always ignores virtual environments when finding a Python interpreter; did you mean `--no-managed-python`?\n"}
-,{"stream_name":"stdout","time":6.208872158,"data":"Using CPython 3.12.3 interpreter at: /usr/bin/python3.12\n"}
-,{"stream_name":"stdout","time":6.208877142,"data":"Creating virtual environment at: /kaggle/tmp/venv\n"}
-,{"stream_name":"stdout","time":6.208881148,"data":"Activate with: source /kaggle/tmp/venv/bin/activate\n"}
-,{"stream_name":"stdout","time":6.208890156,"data":"\n"}
-,{"stream_name":"stdout","time":6.208893666,"data":"$ uv pip install --python /kaggle/tmp/venv/bin/python -e .\n"}
-,{"stream_name":"stdout","time":59.114314928,"data":"  certifi==2026.10.23\n"}
-,{"stream_name":"stdout","time":59.114347499,"data":" + cffi==2.1.1\n"}
-,{"stream_name":"stdout","time":59.11435982,"data":" + charset-normalizer==3.5.2\n"}
-,{"stream_name":"stdout","time":59.114363674,"data":" + click==8.5.0\n"}
-,{"stream_name":"stdout","time":59.11436712,"data":" + contourpy==1.4.0\n"}
-,{"stream_name":"stdout","time":59.114370524,"data":" + cryptography==50.0.2\n"}
-,{"stream_name":"stdout","time":59.114374012,"data":" + cuda-bindings==12.9.4\n"}
-,{"stream_name":"stdout","time":59.114377282,"data":" + cuda-pathfinder==1.8.4\n"}
-,{"stream_name":"stdout","time":59.114380559,"data":" + cycler==0.12.1\n"}
-,{"stream_name":"stdout","time":59.114383888,"data":" + diffusers==0.39.0\n"}
-,{"stream_name":"stdout","time":59.114387147,"data":" + diskcache==5.6.3\n"}
-,{"stream_name":"stdout","time":59.114390427,"data":" + einops==0.8.2\n"}
-,{"stream_name":"stdout","time":59.114393709,"data":" + einx==0.4.3\n"}
-,{"stream_name":"stdout","time":59.114397069,"data":" + fastapi==0.162.0\n"}
-,{"stream_name":"stdout","time":59.114400367,"data":" + ffmpy==1.0.0\n"}
-,{"stream_name":"stdout","time":59.114403637,"data":" + filelock==4.2.4\n"}
-,{"stream_name":"stdout","time":59.114406898,"data":" + fonttools==4.67.0\n"}
-,{"stream_name":"stdout","time":59.114410254,"data":" + frozendict==2.4.7\n"}
-,{"stream_name":"stdout","time":59.114413507,"data":" + frozenlist==1.8.0\n"}
-,{"stream_name":"stdout","time":59.114416782,"data":" + fsspec==2026.9.0\n"}
-,{"stream_name":"stdout","time":59.114420046,"data":" + gradio==6.2.0\n"}
-,{"stream_name":"stdout","time":59.114423324,"data":" + gradio-client==2.0.2\n"}
-,{"stream_name":"stdout","time":59.114426621,"data":" + groovy==0.1.2\n"}
-,{"stream_name":"stdout","time":59.114430012,"data":" + grpcio==1.84.1\n"}
-,{"stream_name":"stdout","time":59.114433282,"data":" + h11==0.16.0\n"}
-,{"stream_name":"stdout","time":59.114436563,"data":" + hf-xet==1.7.0\n"}
-,{"stream_name":"stdout","time":59.114450647,"data":" + httpcore==1.0.9\n"}
-,{"stream_name":"stdout","time":59.114453613,"data":" + httptools==0.9.0\n"}
-,{"stream_name":"stdout","time":59.114456257,"data":" + httpx==0.28.1\n"}
-,{"stream_name":"stdout","time":59.114458864,"data":" + huggingface-hub==0.36.2\n"}
-,{"stream_name":"stdout","time":59.114461519,"data":" + idna==3.20\n"}
-,{"stream_name":"stdout","time":59.114464136,"data":" + importlib-metadata==10.1.0\n"}
-,{"stream_name":"stdout","time":59.114466787,"data":" + jinja2==3.1.6\n"}
-,{"stream_name":"stdout","time":59.114469403,"data":" + kiwisolver==1.5.1\n"}
-,{"stream_name":"stdout","time":59.114472007,"data":" + lightning==2.6.6\n"}
-,{"stream_name":"stdout","time":59.114474852,"data":" + lightning-utilities==0.15.3\n"}
-,{"stream_name":"stdout","time":59.114477474,"data":" + llvmlite==0.50.0\n"}
-,{"stream_name":"stdout","time":59.11448012,"data":" + loguru==0.7.3\n"}
-,{"stream_name":"stdout","time":59.114483659,"data":" + lycoris-lora==4.1.3\n"}
-,{"stream_name":"stdout","time":59.114486334,"data":" + markdown==3.11.2\n"}
-,{"stream_name":"stdout","time":59.114488942,"data":" + markdown-it-py==4.2.0\n"}
-,{"stream_name":"stdout","time":59.114491583,"data":" + markupsafe==3.0.4\n"}
-,{"stream_name":"stdout","time":59.114494197,"data":" + matplotlib==3.11.2\n"}
-,{"stream_name":"stdout","time":59.114496824,"data":" + mdurl==0.1.2\n"}
-,{"stream_name":"stdout","time":59.11449944,"data":" + modelscope==1.40.2\n"}
-,{"stream_name":"stdout","time":59.114502203,"data":" + modelscope-hub==0.5.0\n"}
-,{"stream_name":"stdout","time":59.114504831,"data":" + mpmath==1.3.0\n"}
-,{"stream_name":"stdout","time":59.114507442,"data":" + multidict==7.2.1\n"}
-,{"stream_name":"stdout","time":59.114510131,"data":" + nano-vllm==0.2.0 (from file:///kaggle/tmp/ace/acestep/third_parts/nano-vllm)\n"}
-,{"stream_name":"stdout","time":59.114513044,"data":" + networkx==3.7\n"}
-,{"stream_name":"stdout","time":59.114515652,"data":" + numba==0.68.0\n"}
-,{"stream_name":"stdout","time":59.114518237,"data":" + numpy==2.5.4\n"}
-,{"stream_name":"stdout","time":59.114520862,"data":" + nvidia-cublas-cu12==12.8.4.1\n"}
-,{"stream_name":"stdout","time":59.114523641,"data":" + nvidia-cuda-cupti-cu12==12.8.90\n"}
-,{"stream_name":"stdout","time":59.114526487,"data":" + nvidia-cuda-nvrtc-cu12==12.8.93\n"}
-,{"stream_name":"stdout","time":59.114529228,"data":" + nvidia-cuda-runtime-cu12==12.8.90\n"}
-,{"stream_name":"stdout","time":59.114531908,"data":" + nvidia-cudnn-cu12==9.10.2.21\n"}
-,{"stream_name":"stdout","time":59.114534544,"data":" + nvidia-cufft-cu12==11.3.3.83\n"}
-,{"stream_name":"stdout","time":59.114537156,"data":" + nvidia-cufile-cu12==1.13.1.3\n"}
-,{"stream_name":"stdout","time":59.114539915,"data":" + nvidia-curand-cu12==10.3.9.90\n"}
-,{"stream_name":"stdout","time":59.114542592,"data":" + nvidia-cusolver-cu12==11.7.3.90\n"}
-,{"stream_name":"stdout","time":59.114545265,"data":" + nvidia-cusparse-cu12==12.5.8.93\n"}
-,{"stream_name":"stdout","time":59.114547906,"data":" + nvidia-cusparselt-cu12==0.7.1\n"}
-,{"stream_name":"stdout","time":59.114550543,"data":" + nvidia-nccl-cu12==2.27.5\n"}
-,{"stream_name":"stdout","time":59.114553195,"data":" + nvidia-nvjitlink-cu12==12.8.93\n"}
-,{"stream_name":"stdout","time":59.11455591,"data":" + nvidia-nvshmem-cu12==3.4.5\n"}
-,{"stream_name":"stdout","time":59.114558588,"data":" + nvidia-nvtx-cu12==12.8.90\n"}
-,{"stream_name":"stdout","time":59.114561257,"data":" + opentelemetry-api==1.45.1\n"}
-,{"stream_name":"stdout","time":59.114567043,"data":" + orjson==3.13.0\n"}
-,{"stream_name":"stdout","time":59.114569833,"data":" + packaging==26.3\n"}
-,{"stream_name":"stdout","time":59.114572468,"data":" + pandas==2.3.3\n"}
-,{"stream_name":"stdout","time":59.114575074,"data":" + peft==0.21.2\n"}
-,{"stream_name":"stdout","time":59.11457767,"data":" + pillow==12.3.0\n"}
-,{"stream_name":"stdout","time":59.114580433,"data":" + propcache==0.5.4\n"}
-,{"stream_name":"stdout","time":59.114583037,"data":" + protobuf==7.36.2\n"}
-,{"stream_name":"stdout","time":59.114585663,"data":" + psutil==7.2.2\n"}
-,{"stream_name":"stdout","time":59.114588264,"data":" + pycparser==3.12\n"}
-,{"stream_name":"stdout","time":59.114590872,"data":" + pydantic==2.14.1\n"}
-,{"stream_name":"stdout","time":59.114593467,"data":" + pydantic-core==2.50.1\n"}
-,{"stream_name":"stdout","time":59.114596102,"data":" + pydub==0.25.1\n"}
-,{"stream_name":"stdout","time":59.114598698,"data":" + pygments==2.21.0\n"}
-,{"stream_name":"stdout","time":59.114601303,"data":" + pyparsing==3.3.3\n"}
-,{"stream_name":"stdout","time":59.114603926,"data":" + python-dateutil==3.0.0\n"}
-,{"stream_name":"stdout","time":59.114606547,"data":" + python-dotenv==1.2.4\n"}
-,{"stream_name":"stdout","time":59.114609178,"data":" + python-multipart==0.0.32\n"}
-,{"stream_name":"stdout","time":59.114611821,"data":" + pytorch-lightning==2.6.6\n"}
-,{"stream_name":"stdout","time":59.114614449,"data":" + pytorch-wavelets==1.3.0\n"}
-,{"stream_name":"stdout","time":59.114617097,"data":" + pytz==2026.5\n"}
-,{"stream_name":"stdout","time":59.114620764,"data":" + pywavelets==1.10.0\n"}
-,{"stream_name":"stdout","time":59.114623454,"data":" + pyyaml==6.0.3\n"}
-,{"stream_name":"stdout","time":59.114626057,"data":" + regex==2026.9.29\n"}
-,{"stream_name":"stdout","time":59.114633787,"data":" + requests==2.34.2\n"}
-,{"stream_name":"stdout","time":59.114636474,"data":" + rich==15.0.0\n"}
-,{"stream_name":"stdout","time":59.114639059,"data":" + safehttpx==0.1.7\n"}
-,{"stream_name":"stdout","time":59.114641662,"data":" + safetensors==0.8.0\n"}
-,{"stream_name":"stdout","time":59.114644284,"data":" + scipy==1.18.1\n"}
-,{"stream_name":"stdout","time":59.114646872,"data":" + semantic-version==2.10.0\n"}
-,{"stream_name":"stdout","time":59.114649575,"data":" + setuptools==71.1.0\n"}
-,{"stream_name":"stdout","time":59.114652337,"data":" + shellingham==1.5.4\n"}
-,{"stream_name":"stdout","time":59.114654972,"data":" + six==1.17.0\n"}
-,{"stream_name":"stdout","time":59.114657641,"data":" + soundfile==0.14.0\n"}
-,{"stream_name":"stdout","time":59.114660252,"data":" + starlette==0.52.1\n"}
-,{"stream_name":"stdout","time":59.114662884,"data":" + sympy==1.14.0\n"}
-,{"stream_name":"stdout","time":59.11466548,"data":" + tensorboard==2.21.0\n"}
-,{"stream_name":"stdout","time":59.114668344,"data":" + tensorboard-data-server==0.7.2\n"}
-,{"stream_name":"stdout","time":59.114670989,"data":" + tokenizers==0.22.2\n"}
-,{"stream_name":"stdout","time":59.114673618,"data":" + toml==0.10.2\n"}
-,{"stream_name":"stdout","time":59.114676232,"data":" + tomlkit==0.13.3\n"}
-,{"stream_name":"stdout","time":59.114678909,"data":" + torch==2.10.0+cu128\n"}
-,{"stream_name":"stdout","time":59.114681564,"data":" + torch-einops-utils==0.1.44\n"}
-,{"stream_name":"stdout","time":59.114684418,"data":" + torchao==0.16.0\n"}
-,{"stream_name":"stdout","time":59.114687031,"data":" + torchaudio==2.10.0+cu128\n"}
-,{"stream_name":"stdout","time":59.114689659,"data":" + torchcodec==0.17.0\n"}
-,{"stream_name":"stdout","time":59.114695259,"data":" + torchmetrics==1.9.0\n"}
-,{"stream_name":"stdout","time":59.114698138,"data":" + torchvision==0.25.0+cu128\n"}
-,{"stream_name":"stdout","time":59.114700801,"data":" + tqdm==4.70.1\n"}
-,{"stream_name":"stdout","time":59.11470341,"data":" + transformers==4.57.6\n"}
-,{"stream_name":"stdout","time":59.11470604,"data":" + triton==3.6.0\n"}
-,{"stream_name":"stdout","time":59.114708665,"data":" + typer==0.27.3\n"}
-,{"stream_name":"stdout","time":59.11471125,"data":" + typer-slim==0.24.0\n"}
-,{"stream_name":"stdout","time":59.114713874,"data":" + typing-extensions==4.16.0\n"}
-,{"stream_name":"stdout","time":59.114716529,"data":" + typing-inspection==0.4.4\n"}
-,{"stream_name":"stdout","time":59.114719147,"data":" + tzdata==2026.5\n"}
-,{"stream_name":"stdout","time":59.114721753,"data":" + urllib3==2.8.0\n"}
-,{"stream_name":"stdout","time":59.114724372,"data":" + uvicorn==0.54.0\n"}
-,{"stream_name":"stdout","time":59.114726979,"data":" + uvloop==0.23.0\n"}
-,{"stream_name":"stdout","time":59.114729615,"data":" + vector-quantize-pytorch==1.32.0\n"}
-,{"stream_name":"stdout","time":59.114732261,"data":" + watchfiles==1.3.0\n"}
-,{"stream_name":"stdout","time":59.114734894,"data":" + websockets==17.3\n"}
-,{"stream_name":"stdout","time":59.1147375,"data":" + werkzeug==3.1.9\n"}
-,{"stream_name":"stdout","time":59.114740114,"data":" + xxhash==4.0.2\n"}
-,{"stream_name":"stdout","time":59.114742725,"data":" + yarl==1.25.1\n"}
-,{"stream_name":"stdout","time":59.114745329,"data":" + zipp==4.1.2\n"}
-,{"stream_name":"stdout","time":59.114747931,"data":"\n"}
-,{"stream_name":"stdout","time":59.114750554,"data":"$ /kaggle/tmp/venv/bin/python -m acestep.model_downloader\n"}
-,{"stream_name":"stdout","time":108.322223651,"data":"Checkpoints directory: /kaggle/tmp/ace/checkpoints\n"}
-,{"stream_name":"stdout","time":108.322256816,"data":"Downloading main model (includes vae, text encoder, DiT, and LM 1.7B)...\n"}
-,{"stream_name":"stdout","time":108.322264145,"data":"Downloading main model from ACE-Step/Ace-Step1.5...\n"}
-,{"stream_name":"stdout","time":108.322288689,"data":"Destination: /kaggle/tmp/ace/checkpoints\n"}
-,{"stream_name":"stdout","time":108.322296846,"data":"This may take a while depending on your internet connection...\n"}
-,{"stream_name":"stdout","time":108.322302571,"data":"Successfully downloaded from HuggingFace: ACE-Step/Ace-Step1.5\n"}
-,{"stream_name":"stdout","time":108.322308339,"data":"\n"}
-,{"stream_name":"stdout","time":108.322313314,"data":"Download complete!\n"}
-,{"stream_name":"stdout","time":108.322318816,"data":"Models are available at: /kaggle/tmp/ace/checkpoints\n"}
-,{"stream_name":"stdout","time":108.322324104,"data":" 2026-10-25 14:07:09.317 | INFO     | __main__:_smart_download:249 - [Model Download] Auto-detected: HuggingFace Hub\n"}
-,{"stream_name":"stdout","time":108.322329681,"data":"2026-10-25 14:07:09.317 | INFO     | __main__:_smart_download:252 - [Model Download] Using HuggingFace Hub...\n"}
-,{"stream_name":"stdout","time":108.322335643,"data":"2026-10-25 14:07:09.898 | INFO     | __main__:_download_from_huggingface_internal:180 - [Model Download] Downloading from HuggingFace: ACE-Step/Ace-Step1.5 -\u003e /kaggle/tmp/ace/checkpoints\n"}
-,{"stream_name":"stdout","time":108.322343406,"data":"\n"}
-,{"stream_name":"stdout","time":108.322348911,"data":"Fetching 28 files:   0%|          | 0/28 [00:00\u003c?, ?it/s]\n"}
-,{"stream_name":"stdout","time":108.322355027,"data":"Fetching 28 files:  29%|██▊       | 8/28 [00:00\u003c00:00, 23.32it/s]\n"}
-,{"stream_name":"stdout","time":108.322360776,"data":"Fetching 28 files:  57%|█████▋    | 16/28 [00:00\u003c00:00, 34.52it/s]\n"}
-,{"stream_name":"stdout","time":108.322419341,"data":"Fetching 28 files:  86%|████████▌ | 24/28 [00:05\u003c00:00,  4.39it/s]\n"}
-,{"stream_name":"stdout","time":108.322430424,"data":"Fetching 28 files:  86%|████████▌ | 24/28 [00:20\u003c00:03,  1.20it/s]\n"}
-,{"stream_name":"stdout","time":108.322434363,"data":"Fetching 28 files:  89%|████████▉ | 25/28 [00:26\u003c00:03,  1.07s/it]\n"}
-,{"stream_name":"stdout","time":108.322437121,"data":"Fetching 28 files:  93%|█████████▎| 26/28 [00:26\u003c00:02,  1.04s/it]\n"}
-,{"stream_name":"stdout","time":108.322439961,"data":"Fetching 28 files:  96%|█████████▋| 27/28 [00:27\u003c00:01,  1.01s/it]\n"}
-,{"stream_name":"stdout","time":108.322442739,"data":"Fetching 28 files: 100%|██████████| 28/28 [00:45\u003c00:00,  1.63s/it]\n"}
-,{"stream_name":"stdout","time":108.322449435,"data":"Fetching 28 files: 100%|██████████| 28/28 [00:45\u003c00:00,  1.63s/it]\n"}
-,{"stream_name":"stdout","time":108.322452493,"data":"2026-10-25 14:07:55.752 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced modeling_acestep_v15_turbo.py -\u003e /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/modeling_acestep_v15_turbo.py\n"}
-,{"stream_name":"stdout","time":108.322457984,"data":"2026-10-25 14:07:55.753 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced configuration_acestep_v15.py -\u003e /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/configuration_acestep_v15.py\n"}
-,{"stream_name":"stdout","time":108.322461056,"data":"2026-10-25 14:07:55.753 | INFO     | __main__:download_main_model:489 - [Model Download] Synced code files for acestep-v15-turbo: ['modeling_acestep_v15_turbo.py', 'configuration_acestep_v15.py']\n"}
-,{"stream_name":"stdout","time":108.322464152,"data":"\n"}
-,{"stream_name":"stderr","time":127.43135286,"data":"2026-10-25 14:08:15.001 | DEBUG    | acestep.core.generation.handler.init_service_memory_basic:_apply_malloc_mmap_threshold:50 - [memory] Set M_MMAP_THRESHOLD=131072 for immediate OS reclaim of large frees\n"}
-,{"stream_name":"stderr","time":139.271880385,"data":"/kaggle/tmp/venv/lib/python3.12/site-packages/torchao/quantization/quant_api.py:1811: SyntaxWarning: invalid escape sequence '\\.'\n"}
-,{"stream_name":"stderr","time":139.271918054,"data":"  \"\"\"Configuration class for applying different quantization configs to modules or parameters based on their fully qualified names (FQNs).\n"}
-,{"stream_name":"stderr","time":145.593469125,"data":"2026-10-25 14:08:33.162 | WARNING  | acestep.training.trainer:\u003cmodule\u003e:40 - bitsandbytes not installed. Using standard AdamW.\n"}
-,{"stream_name":"stderr","time":145.877305399,"data":"2026-10-25 14:08:33.446 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
-,{"stream_name":"stderr","time":145.877354412,"data":"2026-10-25 14:08:33.447 | INFO     | acestep.core.generation.handler.init_service_orchestrator:initialize_service:96 - [initialize_service] Pre-Ampere CUDA detected: using float16 instead of bfloat16.\n"}
-,{"stream_name":"stderr","time":146.127423426,"data":"2026-10-25 14:08:33.697 | INFO     | acestep.core.generation.handler.init_service_loader:_load_main_model_from_checkpoint:151 - [initialize_service] Pre-Ampere CUDA detected: using eager attention for float16 numerical stability.\n"}
-,{"stream_name":"stderr","time":146.127473464,"data":"2026-10-25 14:08:33.697 | INFO     | acestep.core.generation.handler.init_service_loader:_load_main_model_from_checkpoint:174 - [initialize_service] Attempting to load model with attention implementation: eager\n"}
-,{"stream_name":"stderr","time":158.67686213,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
-,{"stream_name":"stdout","time":161.475701716,"data":"dit True [OK] Model initialized successfully on cuda\n"}
-,{"stream_name":"stdout","time":161.47572835,"data":"Main model: /kaggle/tmp/ace/checkpoints/acestep-v15-turbo\n"}
-,{"stream_name":"stdout","time":161.475732995,"data":"VAE: /kaggle/tmp/ace/checkpoints/vae\n"}
-,{"stream_name":"stdout","time":161.475736558,"data":"Text encoder: /kaggle/tmp/ace/checkpoints/Qwen3-Embedding-0.6B\n"}
-,{"stream_name":"stdout","time":161.4757402,"data":"Dtype: torch.float32\n"}
-,{"stream_name":"stdout","time":161.475743809,"data":"Attention: eager\n"}
-,{"stream_name":"stdout","time":161.475747552,"data":"Compiled: False\n"}
-,{"stream_name":"stdout","time":161.475751116,"data":"Quantization: Disabled\n"}
-,{"stream_name":"stdout","time":161.475754935,"data":"Offload to CPU: False\n"}
-,{"stream_name":"stdout","time":161.475758327,"data":"Offload DiT to CPU: False\n"}
-,{"stream_name":"stdout","time":161.475761934,"data":"MLX DiT: Disabled\n"}
-,{"stream_name":"stdout","time":161.475765699,"data":"MLX VAE: Disabled\n"}
-,{"stream_name":"stdout","time":161.475769508,"data":"llm False ❌ 5Hz LM model not found at /kaggle/tmp/ace/checkpoints/acestep-5Hz-lm-0.6B\n"}
-,{"stream_name":"stderr","time":161.575171385,"data":"2026-10-25 14:08:49.144 | INFO     | acestep.inference:generate_music:660 - Skipping LM for task_type='cover' - using DiT directly\n"}
-,{"stream_name":"stderr","time":161.575197337,"data":"2026-10-25 14:08:49.145 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=True, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
-,{"stream_name":"stderr","time":161.575326265,"data":"2026-10-25 14:08:49.145 | INFO     | acestep.inference:generate_music:834 - [generate_music] cover task: using params.caption='children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby', params.lyrics='[verse]\n"}
-,{"stream_name":"stderr","time":161.575351759,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":161.575357695,"data":"滿天都是小星星\n"}
-,{"stream_name":"stderr","time":161.575361365,"data":"掛在天上放光明\n"}
-,{"stream_name":"stderr","time":161.575364857,"data":"好像許多小眼睛\n"}
-,{"stream_name":"stderr","time":161.575368553,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":161.57537197,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":161.575375625,"data":"滿天都是小星星'\n"}
-,{"stream_name":"stderr","time":161.575400655,"data":"2026-10-25 14:08:49.145 | INFO     | acestep.inference:generate_music:835 - [generate_music] Final inputs: dit_input_caption='children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby', dit_input_lyrics='[verse]\n"}
-,{"stream_name":"stderr","time":161.575410605,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":161.575415071,"data":"滿天都是小星星\n"}
-,{"stream_name":"stderr","time":161.57541874,"data":"掛在天上放光明\n"}
-,{"stream_name":"stderr","time":161.575422543,"data":"好像許多小眼睛\n"}
-,{"stream_name":"stderr","time":161.575467909,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":161.575473051,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":161.57547695,"data":"滿天都是小星星'\n"}
-,{"stream_name":"stderr","time":161.575893115,"data":"2026-10-25 14:08:49.145 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
-,{"stream_name":"stderr","time":161.575906103,"data":"2026-10-25 14:08:49.145 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
-,{"stream_name":"stderr","time":161.575983648,"data":"2026-10-25 14:08:49.145 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
-,{"stream_name":"stderr","time":161.577091985,"data":"2026-10-25 14:08:49.146 | INFO     | acestep.core.generation.handler.generate_music_request:_prepare_reference_and_source_audio:188 - [generate_music] Processing source audio...\n"}
-,{"stream_name":"stderr","time":162.112537422,"data":"2026-10-25 14:08:49.682 | INFO     | acestep.core.generation.handler.generate_music:_vram_preflight_check:157 - [generate_music] VRAM pre-flight: 2.68 GB free, ~0.80 GB needed (batch=1, duration=38s, mode=turbo).\n"}
-,{"stream_name":"stderr","time":162.112612276,"data":"2026-10-25 14:08:49.682 | INFO     | acestep.core.generation.handler.progress:_start_diffusion_progress_estimator:179 - [progress] No timing history — using fallback estimate (2.5s/step for batch_size=1).  This will self-calibrate after the first generation.\n"}
-,{"stream_name":"stderr","time":162.189368837,"data":"2026-10-25 14:08:49.758 | INFO     | acestep.core.generation.handler.conditioning_target:_prepare_target_latents_and_wavs:104 - [generate_music] Encoding target audio to latents for item 0...\n"}
-,{"stream_name":"stderr","time":162.189582163,"data":"2026-10-25 14:08:49.759 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
-,{"stream_name":"stderr","time":162.975427315,"data":"2026-10-25 14:08:50.351 | ERROR    | acestep.core.generation.handler.generate_music:generate_music:522 - [generate_music] Generation failed\n"}
-,{"stream_name":"stderr","time":162.975459341,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":162.975464689,"data":"\n"}
-,{"stream_name":"stderr","time":162.975468412,"data":"  File \"/kaggle/tmp/gen.py\", line 46, in \u003cmodule\u003e\n"}
-,{"stream_name":"stdout","time":162.975467577,"data":"acestep-little-star-cover FAILED 1s Error: CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 610.81 MiB is free. Including non-PyTorch memory, this process has 13.96 GiB memory in use. Of the allocated memory 13.74 GiB is allocated by PyTorch, and 109.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n"}
-,{"stream_name":"stderr","time":162.975472854,"data":"    res = generate_music(dit, llm, params=GenerationParams(**kw),\n"}
-,{"stream_name":"stdout","time":162.975478168,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":162.975481966,"data":"          │              │    │           │                  └ {'task_type': 'cover', 'caption': \"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chin...\n"}
-,{"stream_name":"stdout","time":162.97548585,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 424, in generate_music\n"}
-,{"stream_name":"stderr","time":162.975489079,"data":"          │              │    │           └ \u003cclass 'acestep.inference.GenerationParams'\u003e\n"}
-,{"stream_name":"stderr","time":162.97551013,"data":"          │              │    └ \u003cacestep.llm_inference.LLMHandler object at 0x7dd67f19d4f0\u003e\n"}
-,{"stream_name":"stderr","time":162.97551587,"data":"          │              └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":162.97552007,"data":"          └ \u003cfunction generate_music at 0x7dd68b2098a0\u003e\n"}
-,{"stream_name":"stdout","time":162.975492052,"data":"    service_run = self._run_generate_music_service_with_progress(\n"}
-,{"stream_name":"stderr","time":162.975524456,"data":"\n"}
-,{"stream_name":"stdout","time":162.975528538,"data":"                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":162.975531288,"data":"  File \"/kaggle/tmp/ace/acestep/inference.py\", line 916, in generate_music\n"}
-,{"stream_name":"stderr","time":162.975538944,"data":"    result = dit_handler.generate_music(**filtered_generate_kwargs)\n"}
-,{"stream_name":"stdout","time":162.975535197,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py\", line 160, in _run_generate_music_service_with_progress\n"}
-,{"stream_name":"stderr","time":162.97554244,"data":"             │           │                └ {'captions': \"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glock...\n"}
-,{"stream_name":"stdout","time":162.97554481,"data":"    raise _error[\"exc\"]\n"}
-,{"stream_name":"stderr","time":162.97554726,"data":"             │           └ \u003cfunction GenerateMusicMixin.generate_music at 0x7dd6bfe8fec0\u003e\n"}
-,{"stream_name":"stdout","time":162.975550955,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py\", line 79, in _service_target\n"}
-,{"stream_name":"stderr","time":162.975554524,"data":"             └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":162.975561703,"data":"\n"}
-,{"stream_name":"stderr","time":162.97556488,"data":"\u003e File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 424, in generate_music\n"}
-,{"stream_name":"stderr","time":162.975570538,"data":"    service_run = self._run_generate_music_service_with_progress(\n"}
-,{"stream_name":"stderr","time":162.975574592,"data":"                  │    └ \u003cfunction GenerateMusicExecuteMixin._run_generate_music_service_with_progress at 0x7dd6bfe48180\u003e\n"}
-,{"stream_name":"stderr","time":162.975579428,"data":"                  └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":162.975584061,"data":"\n"}
-,{"stream_name":"stderr","time":162.975587517,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py\", line 160, in _run_generate_music_service_with_progress\n"}
-,{"stream_name":"stderr","time":162.97559149,"data":"    raise _error[\"exc\"]\n"}
-,{"stream_name":"stderr","time":162.975595197,"data":"          └ {'exc': OutOfMemoryError('CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which ...\n"}
-,{"stream_name":"stderr","time":162.975600936,"data":"\n"}
-,{"stream_name":"stderr","time":162.975610514,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py\", line 79, in _service_target\n"}
-,{"stream_name":"stderr","time":162.97561356,"data":"    _result[\"outputs\"] = self.service_generate(\n"}
-,{"stream_name":"stderr","time":162.97562399,"data":"    │                    │    └ \u003cfunction ServiceGenerateMixin.service_generate at 0x7dd68b25a7a0\u003e\n"}
-,{"stream_name":"stderr","time":162.97564595,"data":"    │                    └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":162.97565105,"data":"    └ {}\n"}
-,{"stream_name":"stderr","time":162.975655552,"data":"\n"}
-,{"stream_name":"stderr","time":162.975659352,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n"}
-,{"stream_name":"stdout","time":162.975558118,"data":"    _result[\"outputs\"] = self.service_generate(\n"}
-,{"stream_name":"stderr","time":162.975663847,"data":"    return func(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":162.97566934,"data":"                         ^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":162.975672418,"data":"           │     │       └ {'captions': [\"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, gloc...\n"}
-,{"stream_name":"stdout","time":162.975676419,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n"}
-,{"stream_name":"stderr","time":162.975680157,"data":"           │     └ (\u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e,)\n"}
-,{"stream_name":"stdout","time":162.975683717,"data":"    return func(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":162.97568964,"data":"           ^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975692992,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/service_generate.py\", line 102, in service_generate\n"}
-,{"stream_name":"stdout","time":162.975696778,"data":"    batch = self._prepare_batch(\n"}
-,{"stream_name":"stdout","time":162.975700888,"data":"            ^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975705048,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_batch.py\", line 83, in _prepare_batch\n"}
-,{"stream_name":"stdout","time":162.975709575,"data":"    self._prepare_target_latents_and_wavs(\n"}
-,{"stream_name":"stdout","time":162.975713734,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_target.py\", line 105, in _prepare_target_latents_and_wavs\n"}
-,{"stream_name":"stdout","time":162.975717972,"data":"    target_latent = self._encode_audio_to_latents(current_wav.squeeze(0))\n"}
-,{"stream_name":"stdout","time":162.975726483,"data":"                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.9757312,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/batch_prep.py\", line 70, in _encode_audio_to_latents\n"}
-,{"stream_name":"stdout","time":162.975733945,"data":"    latents = self.tiled_encode(audio, offload_latent_to_cpu=True)\n"}
-,{"stream_name":"stdout","time":162.975736469,"data":"              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.97573894800001,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode.py\", line 76, in tiled_encode\n"}
-,{"stream_name":"stdout","time":162.975741554,"data":"    result = self._tiled_encode_offload_cpu(audio, batch_size, samples, stride, overlap, num_steps, chunk_size)\n"}
-,{"stream_name":"stdout","time":162.975744226,"data":"             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975746882,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode_chunks.py\", line 50, in _tiled_encode_offload_cpu\n"}
-,{"stream_name":"stdout","time":162.975749572,"data":"    first_latent_chunk = self.vae.encode(first_audio_chunk).latent_dist.sample()\n"}
-,{"stream_name":"stdout","time":162.975783714,"data":"                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975788469,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/utils/accelerate_utils.py\", line 46, in wrapper\n"}
-,{"stream_name":"stdout","time":162.975792972,"data":"    return method(self, *args, **kwargs)\n"}
-,{"stream_name":"stdout","time":162.975797312,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":162.975686052,"data":"           └ \u003cfunction ServiceGenerateMixin.service_generate at 0x7dd68b25a700\u003e\n"}
-,{"stream_name":"stdout","time":162.975800567,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 397, in encode\n"}
-,{"stream_name":"stderr","time":162.975805422,"data":"\n"}
-,{"stream_name":"stdout","time":162.975808146,"data":"    h = self._encode(x)\n"}
-,{"stream_name":"stderr","time":162.975810715,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/service_generate.py\", line 102, in service_generate\n"}
-,{"stream_name":"stdout","time":162.975814064,"data":"        ^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":162.975816669,"data":"    batch = self._prepare_batch(\n"}
-,{"stream_name":"stdout","time":162.975819872,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 375, in _encode\n"}
-,{"stream_name":"stderr","time":162.975822359,"data":"            │    └ \u003cfunction ConditioningBatchMixin._prepare_batch at 0x7dd6bfe8c5e0\u003e\n"}
-,{"stream_name":"stdout","time":162.975825974,"data":"    return self.encoder(x)\n"}
-,{"stream_name":"stderr","time":162.975828524,"data":"            └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stdout","time":162.97583186,"data":"           ^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":162.975834416,"data":"\n"}
-,{"stream_name":"stdout","time":162.975837609,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stdout","time":162.975844716,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":162.975841211,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_batch.py\", line 83, in _prepare_batch\n"}
-,{"stream_name":"stdout","time":162.97584793,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":162.975850429,"data":"    self._prepare_target_latents_and_wavs(\n"}
-,{"stream_name":"stdout","time":162.975853576,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":162.975856043,"data":"    │    └ \u003cfunction ConditioningTargetMixin._prepare_target_latents_and_wavs at 0x7dd6bfe8cae0\u003e\n"}
-,{"stream_name":"stdout","time":162.975859676,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":162.975865618,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975869031,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 246, in forward\n"}
-,{"stream_name":"stdout","time":162.975872843,"data":"    hidden_state = module(hidden_state)\n"}
-,{"stream_name":"stdout","time":162.975877323,"data":"                   ^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975882113,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stdout","time":162.975890237,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":162.97589419,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975899621,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stdout","time":162.975907161,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":162.975909694,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975912204,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 108, in forward\n"}
-,{"stream_name":"stdout","time":162.975914884,"data":"    hidden_state = self.res_unit1(hidden_state)\n"}
-,{"stream_name":"stdout","time":162.975917364,"data":"                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975919846,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stdout","time":162.975922459,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":162.975924884,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975927435,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stdout","time":162.975930948,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":162.975947306,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975951794,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 84, in forward\n"}
-,{"stream_name":"stdout","time":162.975956308,"data":"    output_tensor = self.conv2(self.snake2(output_tensor))\n"}
-,{"stream_name":"stdout","time":162.97595956,"data":"                               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975963256,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stdout","time":162.975967176,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":162.975970694,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975974166,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stdout","time":162.975978071,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":162.975981514,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975984668,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 51, in forward\n"}
-,{"stream_name":"stdout","time":162.975988265,"data":"    hidden_states = hidden_states + (beta + 1e-9).reciprocal() * torch.sin(alpha * hidden_states).pow(2)\n"}
-,{"stream_name":"stdout","time":162.975992012,"data":"                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":162.975996319,"data":"torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 610.81 MiB is free. Including non-PyTorch memory, this process has 13.96 GiB memory in use. Of the allocated memory 13.74 GiB is allocated by PyTorch, and 109.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n"}
-,{"stream_name":"stdout","time":162.976005713,"data":"\n"}
-,{"stream_name":"stderr","time":162.97586192,"data":"    └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":162.976014714,"data":"\n"}
-,{"stream_name":"stderr","time":162.97601867,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_target.py\", line 105, in _prepare_target_latents_and_wavs\n"}
-,{"stream_name":"stderr","time":162.97602283,"data":"    target_latent = self._encode_audio_to_latents(current_wav.squeeze(0))\n"}
-,{"stream_name":"stderr","time":162.976026744,"data":"                    │    │                        │           └ \u003cmethod 'squeeze' of 'torch._C.TensorBase' objects\u003e\n"}
-,{"stream_name":"stderr","time":162.976031636,"data":"                    │    │                        └ tensor([[[0., 0., 0.,  ..., 0., 0., 0.],\n"}
-,{"stream_name":"stderr","time":162.97603566,"data":"                    │    │                                   [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0')\n"}
-,{"stream_name":"stderr","time":162.976040445,"data":"                    │    └ \u003cfunction BatchPrepMixin._encode_audio_to_latents at 0x7dd6bfe8c400\u003e\n"}
-,{"stream_name":"stderr","time":162.976044752,"data":"                    └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":162.976048479,"data":"\n"}
-,{"stream_name":"stderr","time":162.976052136,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/batch_prep.py\", line 70, in _encode_audio_to_latents\n"}
-,{"stream_name":"stderr","time":162.976056809,"data":"    latents = self.tiled_encode(audio, offload_latent_to_cpu=True)\n"}
-,{"stream_name":"stderr","time":162.976061088,"data":"              │    │            └ tensor([[[0., 0., 0.,  ..., 0., 0., 0.],\n"}
-,{"stream_name":"stderr","time":162.976065159,"data":"              │    │                       [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0')\n"}
-,{"stream_name":"stderr","time":162.976069405,"data":"              │    └ \u003cfunction VaeEncodeMixin.tiled_encode at 0x7dd68b25b1a0\u003e\n"}
-,{"stream_name":"stderr","time":162.976073572,"data":"              └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":162.976077584,"data":"\n"}
-,{"stream_name":"stderr","time":162.976081246,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode.py\", line 76, in tiled_encode\n"}
-,{"stream_name":"stderr","time":162.976084982,"data":"    result = self._tiled_encode_offload_cpu(audio, batch_size, samples, stride, overlap, num_steps, chunk_size)\n"}
-,{"stream_name":"stderr","time":162.976088707,"data":"             │    │                         │      │           │        │       │        │          └ 1440000\n"}
-,{"stream_name":"stderr","time":162.9760927,"data":"             │    │                         │      │           │        │       │        └ 2\n"}
-,{"stream_name":"stderr","time":162.976097028,"data":"             │    │                         │      │           │        │       └ 96000\n"}
-,{"stream_name":"stderr","time":162.976101132,"data":"             │    │                         │      │           │        └ 1248000\n"}
-,{"stream_name":"stderr","time":162.976105501,"data":"             │    │                         │      │           └ 1804798\n"}
-,{"stream_name":"stderr","time":162.976121481,"data":"             │    │                         │      └ 1\n"}
-,{"stream_name":"stderr","time":162.976126143,"data":"             │    │                         └ tensor([[[0., 0., 0.,  ..., 0., 0., 0.],\n"}
-,{"stream_name":"stderr","time":162.976130037,"data":"             │    │                                    [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0')\n"}
-,{"stream_name":"stderr","time":162.97613443,"data":"             │    └ \u003cfunction VaeEncodeChunksMixin._tiled_encode_offload_cpu at 0x7dd68b25b2e0\u003e\n"}
-,{"stream_name":"stderr","time":162.976138862,"data":"             └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":162.976142776,"data":"\n"}
-,{"stream_name":"stderr","time":162.976146961,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode_chunks.py\", line 50, in _tiled_encode_offload_cpu\n"}
-,{"stream_name":"stderr","time":162.976151502,"data":"    first_latent_chunk = self.vae.encode(first_audio_chunk).latent_dist.sample()\n"}
-,{"stream_name":"stderr","time":162.976157185,"data":"                         │    │   │      └ tensor([[[0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.0337],\n"}
-,{"stream_name":"stderr","time":162.976160869,"data":"                         │    │   │                 [0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.03...\n"}
-,{"stream_name":"stderr","time":162.976164343,"data":"                         │    │   └ \u003cfunction apply_forward_hook.\u003clocals\u003e.wrapper at 0x7dd6bb70a480\u003e\n"}
-,{"stream_name":"stderr","time":162.976168238,"data":"                         │    └ AutoencoderOobleck(\n"}
-,{"stream_name":"stderr","time":162.976172099,"data":"                         │        (encoder): OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":162.976176338,"data":"                         │          (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":162.976180361,"data":"                         │         ...\n"}
-,{"stream_name":"stderr","time":162.976184423,"data":"                         └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":162.976188616,"data":"\n"}
-,{"stream_name":"stderr","time":162.97619274,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/utils/accelerate_utils.py\", line 46, in wrapper\n"}
-,{"stream_name":"stderr","time":162.97619678,"data":"    return method(self, *args, **kwargs)\n"}
-,{"stream_name":"stderr","time":162.976200649,"data":"           │      │      │       └ {}\n"}
-,{"stream_name":"stderr","time":162.976204818,"data":"           │      │      └ (tensor([[[0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.0337],\n"}
-,{"stream_name":"stderr","time":162.976208781,"data":"           │      │                 [0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.0...\n"}
-,{"stream_name":"stderr","time":162.976212758,"data":"           │      └ AutoencoderOobleck(\n"}
-,{"stream_name":"stderr","time":162.976216628,"data":"           │          (encoder): OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":162.976220391,"data":"           │            (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":162.976224305,"data":"           │           ...\n"}
-,{"stream_name":"stderr","time":162.97622819,"data":"           └ \u003cfunction AutoencoderOobleck.encode at 0x7dd6bb70a3e0\u003e\n"}
-,{"stream_name":"stderr","time":162.976232584,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 397, in encode\n"}
-,{"stream_name":"stderr","time":162.976241608,"data":"    h = self._encode(x)\n"}
-,{"stream_name":"stderr","time":162.976245304,"data":"        │    │       └ tensor([[[0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.0337],\n"}
-,{"stream_name":"stderr","time":162.976249129,"data":"        │    │                  [0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.03...\n"}
-,{"stream_name":"stderr","time":162.976254372,"data":"        │    └ \u003cfunction AutoencoderOobleck._encode at 0x7dd6bb70a340\u003e\n"}
-,{"stream_name":"stderr","time":162.976261594,"data":"        └ AutoencoderOobleck(\n"}
-,{"stream_name":"stderr","time":162.976265432,"data":"            (encoder): OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":162.976287226,"data":"              (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":162.976297602,"data":"             ...\n"}
-,{"stream_name":"stderr","time":162.976301392,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 375, in _encode\n"}
-,{"stream_name":"stderr","time":162.976305876,"data":"    return self.encoder(x)\n"}
-,{"stream_name":"stderr","time":162.976309496,"data":"           │            └ tensor([[[0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.0337],\n"}
-,{"stream_name":"stderr","time":162.97631331,"data":"           │                       [0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.03...\n"}
-,{"stream_name":"stderr","time":162.97631709,"data":"           └ AutoencoderOobleck(\n"}
-,{"stream_name":"stderr","time":162.976322245,"data":"               (encoder): OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":162.976338256,"data":"                 (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":162.976341968,"data":"                ...\n"}
-,{"stream_name":"stderr","time":162.976362882,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stderr","time":162.976367359,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":162.976371218,"data":"           │    │           │       └ {}\n"}
-,{"stream_name":"stderr","time":162.97637493,"data":"           │    │           └ (tensor([[[0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.0337],\n"}
-,{"stream_name":"stderr","time":162.976378794,"data":"           │    │                      [0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.0...\n"}
-,{"stream_name":"stderr","time":162.976382459,"data":"           │    └ \u003cfunction Module._call_impl at 0x7dd6c1e44d60\u003e\n"}
-,{"stream_name":"stderr","time":162.976386334,"data":"           └ OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":162.976389953,"data":"               (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":162.976393716,"data":"               (block): ModuleList(\n"}
-,{"stream_name":"stderr","time":162.976397333,"data":"                 (0): Ooblec...\n"}
-,{"stream_name":"stderr","time":162.976401001,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":162.976404884,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":162.976408421,"data":"           │             │       └ {}\n"}
-,{"stream_name":"stderr","time":162.976412172,"data":"           │             └ (tensor([[[0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.0337],\n"}
-,{"stream_name":"stderr","time":162.976424656,"data":"           │                        [0.0000, 0.0000, 0.0000,  ..., 0.0374, 0.0355, 0.0...\n"}
-,{"stream_name":"stderr","time":162.976427599,"data":"           └ \u003cbound method OobleckEncoder.forward of OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":162.976430234,"data":"               (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,)...\n"}
-,{"stream_name":"stderr","time":162.976432843,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 246, in forward\n"}
-,{"stream_name":"stderr","time":162.976435528,"data":"    hidden_state = module(hidden_state)\n"}
-,{"stream_name":"stderr","time":162.976438047,"data":"                   │      └ tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.1809, -0.1917, -0.1904],\n"}
-,{"stream_name":"stderr","time":162.976440744,"data":"                   │                 [ 0.2432,  0.2432,  0.2432,  ...,  0.2391,  0...\n"}
-,{"stream_name":"stderr","time":162.976443284,"data":"                   └ OobleckEncoderBlock(\n"}
-,{"stream_name":"stderr","time":162.97644577,"data":"                       (res_unit1): OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":162.976448559,"data":"                         (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":162.976451068,"data":"                         (conv1): Conv1d(128, 128, kernel_size=(7...\n"}
-,{"stream_name":"stderr","time":162.976453578,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stderr","time":162.97645621,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":162.976458677,"data":"           │    │           │       └ {}\n"}
-,{"stream_name":"stderr","time":162.97646119,"data":"           │    │           └ (tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.1809, -0.1917, -0.1904],\n"}
-,{"stream_name":"stderr","time":162.976463792,"data":"           │    │                      [ 0.2432,  0.2432,  0.2432,  ...,  0.2391,  ...\n"}
-,{"stream_name":"stderr","time":162.976466353,"data":"           │    └ \u003cfunction Module._call_impl at 0x7dd6c1e44d60\u003e\n"}
-,{"stream_name":"stderr","time":162.976468949,"data":"           └ OobleckEncoderBlock(\n"}
-,{"stream_name":"stderr","time":162.976474075,"data":"               (res_unit1): OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":162.976476652,"data":"                 (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":162.976479098,"data":"                 (conv1): Conv1d(128, 128, kernel_size=(7...\n"}
-,{"stream_name":"stderr","time":162.976481632,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":162.976484362,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":162.976486788,"data":"           │             │       └ {}\n"}
-,{"stream_name":"stderr","time":162.976489368,"data":"           │             └ (tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.1809, -0.1917, -0.1904],\n"}
-,{"stream_name":"stderr","time":162.976492041,"data":"           │                        [ 0.2432,  0.2432,  0.2432,  ...,  0.2391,  ...\n"}
-,{"stream_name":"stderr","time":162.976494584,"data":"           └ \u003cbound method OobleckEncoderBlock.forward of OobleckEncoderBlock(\n"}
-,{"stream_name":"stderr","time":162.976497174,"data":"               (res_unit1): OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":162.9765018,"data":"                 (snake1): Snake1d()...\n"}
-,{"stream_name":"stderr","time":162.976504488,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 108, in forward\n"}
-,{"stream_name":"stderr","time":162.976507187,"data":"    hidden_state = self.res_unit1(hidden_state)\n"}
-,{"stream_name":"stderr","time":162.976509901,"data":"                   │              └ tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.1809, -0.1917, -0.1904],\n"}
-,{"stream_name":"stderr","time":162.97651253,"data":"                   │                         [ 0.2432,  0.2432,  0.2432,  ...,  0.2391,  0...\n"}
-,{"stream_name":"stderr","time":162.976515113,"data":"                   └ OobleckEncoderBlock(\n"}
-,{"stream_name":"stderr","time":162.976517584,"data":"                       (res_unit1): OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":162.976520082,"data":"                         (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":162.976522587,"data":"                         (conv1): Conv1d(128, 128, kernel_size=(7...\n"}
-,{"stream_name":"stderr","time":162.976525162,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stderr","time":162.976528018,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":162.976530492,"data":"           │    │           │       └ {}\n"}
-,{"stream_name":"stderr","time":162.976533015,"data":"           │    │           └ (tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.1809, -0.1917, -0.1904],\n"}
-,{"stream_name":"stderr","time":162.97653561,"data":"           │    │                      [ 0.2432,  0.2432,  0.2432,  ...,  0.2391,  ...\n"}
-,{"stream_name":"stderr","time":162.976538178,"data":"           │    └ \u003cfunction Module._call_impl at 0x7dd6c1e44d60\u003e\n"}
-,{"stream_name":"stderr","time":162.976540764,"data":"           └ OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":162.976543252,"data":"               (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":162.976545714,"data":"               (conv1): Conv1d(128, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":162.976548255,"data":"               (snake2...\n"}
-,{"stream_name":"stderr","time":162.976550702,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":162.976553457,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":162.97655591,"data":"           │             │       └ {}\n"}
-,{"stream_name":"stderr","time":162.976558428,"data":"           │             └ (tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.1809, -0.1917, -0.1904],\n"}
-,{"stream_name":"stderr","time":162.976561004,"data":"           │                        [ 0.2432,  0.2432,  0.2432,  ...,  0.2391,  ...\n"}
-,{"stream_name":"stderr","time":162.976563544,"data":"           └ \u003cbound method OobleckResidualUnit.forward of OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":162.976566141,"data":"               (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":162.976568631,"data":"               (conv1): Conv1d(128, 128, kernel_si...\n"}
-,{"stream_name":"stderr","time":162.976571185,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 84, in forward\n"}
-,{"stream_name":"stderr","time":162.976573849,"data":"    output_tensor = self.conv2(self.snake2(output_tensor))\n"}
-,{"stream_name":"stderr","time":162.976576381,"data":"                    │          │           └ tensor([[[-0.5468, -0.5870, -0.5817,  ..., -0.5361, -0.4539, -0.4309],\n"}
-,{"stream_name":"stderr","time":162.97658105,"data":"                    │          │                      [ 0.2608,  0.2754,  0.2392,  ...,  0.1877,  0...\n"}
-,{"stream_name":"stderr","time":162.976583872,"data":"                    │          └ OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":162.976586405,"data":"                    │              (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":162.976588925,"data":"                    │              (conv1): Conv1d(128, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":162.976591515,"data":"                    │              (snake2...\n"}
-,{"stream_name":"stderr","time":162.976594022,"data":"                    └ OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":162.976596495,"data":"                        (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":162.976598986,"data":"                        (conv1): Conv1d(128, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":162.976601631,"data":"                        (snake2...\n"}
-,{"stream_name":"stderr","time":162.976604938,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stderr","time":162.976607686,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":162.976610136,"data":"           │    │           │       └ {}\n"}
-,{"stream_name":"stderr","time":162.976612666,"data":"           │    │           └ (tensor([[[-0.5468, -0.5870, -0.5817,  ..., -0.5361, -0.4539, -0.4309],\n"}
-,{"stream_name":"stderr","time":162.976615645,"data":"           │    │                      [ 0.2608,  0.2754,  0.2392,  ...,  0.1877,  ...\n"}
-,{"stream_name":"stderr","time":162.976619688,"data":"           │    └ \u003cfunction Module._call_impl at 0x7dd6c1e44d60\u003e\n"}
-,{"stream_name":"stderr","time":162.976622838,"data":"           └ Snake1d()\n"}
-,{"stream_name":"stderr","time":162.97662528,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":162.97662794,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":162.976630477,"data":"           │             │       └ {}\n"}
-,{"stream_name":"stderr","time":162.976632941,"data":"           │             └ (tensor([[[-0.5468, -0.5870, -0.5817,  ..., -0.5361, -0.4539, -0.4309],\n"}
-,{"stream_name":"stderr","time":162.976635521,"data":"           │                        [ 0.2608,  0.2754,  0.2392,  ...,  0.1877,  ...\n"}
-,{"stream_name":"stderr","time":162.97663807,"data":"           └ \u003cbound method Snake1d.forward of Snake1d()\u003e\n"}
-,{"stream_name":"stderr","time":162.976640679,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 51, in forward\n"}
-,{"stream_name":"stderr","time":162.976643351,"data":"    hidden_states = hidden_states + (beta + 1e-9).reciprocal() * torch.sin(alpha * hidden_states).pow(2)\n"}
-,{"stream_name":"stderr","time":162.976645979,"data":"                    │                │                           │     │   │       └ tensor([[[-0.5468, -0.5870, -0.5817,  ..., -0.5361, -0.4539, -0.4309],\n"}
-,{"stream_name":"stderr","time":162.976648784,"data":"                    │                │                           │     │   │                  [ 0.2608,  0.2754,  0.2392,  ...,  0.1877,  0...\n"}
-,{"stream_name":"stderr","time":162.976653576,"data":"                    │                │                           │     │   └ tensor([[[1.0482],\n"}
-,{"stream_name":"stderr","time":162.976656386,"data":"                    │                │                           │     │              [1.0340],\n"}
-,{"stream_name":"stderr","time":162.976658997,"data":"                    │                │                           │     │              [1.0260],\n"}
-,{"stream_name":"stderr","time":162.976661588,"data":"                    │                │                           │     │              [1.0919],\n"}
-,{"stream_name":"stderr","time":162.976664152,"data":"                    │                │                           │     │              [1.0257],\n"}
-,{"stream_name":"stderr","time":162.976667279,"data":"                    │                │                           │     │              [1.0580],\n"}
-,{"stream_name":"stderr","time":162.976669885,"data":"                    │                │                           │     │              [1...\n"}
-,{"stream_name":"stderr","time":162.976672494,"data":"                    │                │                           │     └ \u003cbuilt-in method sin of type object at 0x7dd722ce4b40\u003e\n"}
-,{"stream_name":"stderr","time":162.97667527,"data":"                    │                │                           └ \u003cmodule 'torch' from '/kaggle/tmp/venv/lib/python3.12/site-packages/torch/__init__.py'\u003e\n"}
-,{"stream_name":"stderr","time":162.97667805,"data":"                    │                └ tensor([[[0.9371],\n"}
-,{"stream_name":"stderr","time":162.976680582,"data":"                    │                           [0.9136],\n"}
-,{"stream_name":"stderr","time":162.976683117,"data":"                    │                           [0.9362],\n"}
-,{"stream_name":"stderr","time":162.976685646,"data":"                    │                           [0.9154],\n"}
-,{"stream_name":"stderr","time":162.976688142,"data":"                    │                           [0.9436],\n"}
-,{"stream_name":"stderr","time":162.97669061,"data":"                    │                           [0.8487],\n"}
-,{"stream_name":"stderr","time":162.976693092,"data":"                    │                           [0...\n"}
-,{"stream_name":"stderr","time":162.976695605,"data":"                    └ tensor([[[-0.5468, -0.5870, -0.5817,  ..., -0.5361, -0.4539, -0.4309],\n"}
-,{"stream_name":"stderr","time":162.976698197,"data":"                               [ 0.2608,  0.2754,  0.2392,  ...,  0.1877,  0...\n"}
-,{"stream_name":"stderr","time":162.976700761,"data":"\n"}
-,{"stream_name":"stderr","time":162.976703206,"data":"torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 610.81 MiB is free. Including non-PyTorch memory, this process has 13.96 GiB memory in use. Of the allocated memory 13.74 GiB is allocated by PyTorch, and 109.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n"}
-,{"stream_name":"stderr","time":163.083993904,"data":"2026-10-25 14:08:50.653 | INFO     | acestep.inference:generate_music:660 - Skipping LM for task_type='cover' - using DiT directly\n"}
-,{"stream_name":"stderr","time":163.084019175,"data":"2026-10-25 14:08:50.653 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=True, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
-,{"stream_name":"stderr","time":163.084034885,"data":"2026-10-25 14:08:50.653 | INFO     | acestep.inference:generate_music:834 - [generate_music] cover task: using params.caption='classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm', params.lyrics='[verse]\n"}
-,{"stream_name":"stderr","time":163.084040335,"data":"Twinkle, twinkle, little star\n"}
-,{"stream_name":"stderr","time":163.084044196,"data":"How I wonder what you are\n"}
-,{"stream_name":"stderr","time":163.084048083,"data":"Up above the world so high\n"}
-,{"stream_name":"stderr","time":163.084051877,"data":"Like a diamond in the sky\n"}
-,{"stream_name":"stderr","time":163.084055624,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":163.084059267,"data":"Twinkle, twinkle, little star\n"}
-,{"stream_name":"stderr","time":163.084063177,"data":"How I wonder what you are'\n"}
-,{"stream_name":"stderr","time":163.084067082,"data":"2026-10-25 14:08:50.653 | INFO     | acestep.inference:generate_music:835 - [generate_music] Final inputs: dit_input_caption='classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm', dit_input_lyrics='[verse]\n"}
-,{"stream_name":"stderr","time":163.084071936,"data":"Twinkle, twinkle, little star\n"}
-,{"stream_name":"stderr","time":163.084075803,"data":"How I wonder what you are\n"}
-,{"stream_name":"stderr","time":163.084079585,"data":"Up above the world so high\n"}
-,{"stream_name":"stderr","time":163.084083361,"data":"Like a diamond in the sky\n"}
-,{"stream_name":"stderr","time":163.084087163,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":163.084090907,"data":"Twinkle, twinkle, little star\n"}
-,{"stream_name":"stderr","time":163.084094818,"data":"How I wonder what you are'\n"}
-,{"stream_name":"stderr","time":163.084549707,"data":"2026-10-25 14:08:50.654 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
-,{"stream_name":"stderr","time":163.08456708,"data":"2026-10-25 14:08:50.654 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
-,{"stream_name":"stderr","time":163.084620208,"data":"2026-10-25 14:08:50.654 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
-,{"stream_name":"stderr","time":163.090649766,"data":"2026-10-25 14:08:50.660 | INFO     | acestep.core.generation.handler.generate_music_request:_prepare_reference_and_source_audio:188 - [generate_music] Processing source audio...\n"}
-,{"stream_name":"stderr","time":163.485631569,"data":"2026-10-25 14:08:51.055 | INFO     | acestep.core.generation.handler.generate_music:_vram_preflight_check:157 - [generate_music] VRAM pre-flight: 2.66 GB free, ~0.80 GB needed (batch=1, duration=38s, mode=turbo).\n"}
-,{"stream_name":"stderr","time":163.485942361,"data":"2026-10-25 14:08:51.055 | INFO     | acestep.core.generation.handler.progress:_start_diffusion_progress_estimator:179 - [progress] No timing history — using fallback estimate (2.5s/step for batch_size=1).  This will self-calibrate after the first generation.\n"}
-,{"stream_name":"stderr","time":163.518628818,"data":"2026-10-25 14:08:51.088 | INFO     | acestep.core.generation.handler.conditioning_target:_prepare_target_latents_and_wavs:104 - [generate_music] Encoding target audio to latents for item 0...\n"}
-,{"stream_name":"stderr","time":163.518661615,"data":"2026-10-25 14:08:51.088 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
-,{"stream_name":"stdout","time":163.762376442,"data":"acestep-twinkle-cover FAILED 1s Error: CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 610.81 MiB is free. Including non-PyTorch memory, this process has 13.96 GiB memory in use. Of the allocated memory 13.74 GiB is allocated by PyTorch, and 109.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n"}
-,{"stream_name":"stdout","time":163.762436109,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stdout","time":163.762442563,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 424, in generate_music\n"}
-,{"stream_name":"stdout","time":163.762447736,"data":"    service_run = self._run_generate_music_service_with_progress(\n"}
-,{"stream_name":"stdout","time":163.762451835,"data":"                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.762455879,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py\", line 160, in _run_generate_music_service_with_progress\n"}
-,{"stream_name":"stdout","time":163.762460471,"data":"    raise _error[\"exc\"]\n"}
-,{"stream_name":"stdout","time":163.762464661,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py\", line 79, in _service_target\n"}
-,{"stream_name":"stdout","time":163.762468662,"data":"    _result[\"outputs\"] = self.service_generate(\n"}
-,{"stream_name":"stdout","time":163.762472774,"data":"                         ^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.76247703,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n"}
-,{"stream_name":"stdout","time":163.762480928,"data":"    return func(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":163.762485228,"data":"           ^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.762489355,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/service_generate.py\", line 102, in service_generate\n"}
-,{"stream_name":"stdout","time":163.76249375,"data":"    batch = self._prepare_batch(\n"}
-,{"stream_name":"stderr","time":163.762493542,"data":"2026-10-25 14:08:51.263 | ERROR    | acestep.core.generation.handler.generate_music:generate_music:522 - [generate_music] Generation failed\n"}
-,{"stream_name":"stderr","time":163.762511922,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":163.762516657,"data":"\n"}
-,{"stream_name":"stderr","time":163.762520428,"data":"  File \"/kaggle/tmp/gen.py\", line 46, in \u003cmodule\u003e\n"}
-,{"stream_name":"stderr","time":163.762524716,"data":"    res = generate_music(dit, llm, params=GenerationParams(**kw),\n"}
-,{"stream_name":"stderr","time":163.762528536,"data":"          │              │    │           │                  └ {'task_type': 'cover', 'caption': 'classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glo...\n"}
-,{"stream_name":"stderr","time":163.762534097,"data":"          │              │    │           └ \u003cclass 'acestep.inference.GenerationParams'\u003e\n"}
-,{"stream_name":"stderr","time":163.762538111,"data":"          │              │    └ \u003cacestep.llm_inference.LLMHandler object at 0x7dd67f19d4f0\u003e\n"}
-,{"stream_name":"stderr","time":163.762542396,"data":"          │              └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":163.762546541,"data":"          └ \u003cfunction generate_music at 0x7dd68b2098a0\u003e\n"}
-,{"stream_name":"stderr","time":163.762594902,"data":"\n"}
-,{"stream_name":"stderr","time":163.762599968,"data":"  File \"/kaggle/tmp/ace/acestep/inference.py\", line 916, in generate_music\n"}
-,{"stream_name":"stderr","time":163.762604381,"data":"    result = dit_handler.generate_music(**filtered_generate_kwargs)\n"}
-,{"stream_name":"stderr","time":163.762608864,"data":"             │           │                └ {'captions': 'classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano...\n"}
-,{"stream_name":"stderr","time":163.762613712,"data":"             │           └ \u003cfunction GenerateMusicMixin.generate_music at 0x7dd6bfe8fec0\u003e\n"}
-,{"stream_name":"stderr","time":163.762618877,"data":"             └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":163.762623549,"data":"\n"}
-,{"stream_name":"stderr","time":163.762627399,"data":"\u003e File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music.py\", line 424, in generate_music\n"}
-,{"stream_name":"stderr","time":163.762632019,"data":"    service_run = self._run_generate_music_service_with_progress(\n"}
-,{"stream_name":"stderr","time":163.762636351,"data":"                  │    └ \u003cfunction GenerateMusicExecuteMixin._run_generate_music_service_with_progress at 0x7dd6bfe48180\u003e\n"}
-,{"stream_name":"stderr","time":163.76264098,"data":"                  └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":163.762645478,"data":"\n"}
-,{"stream_name":"stderr","time":163.762649422,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py\", line 160, in _run_generate_music_service_with_progress\n"}
-,{"stream_name":"stderr","time":163.762654069,"data":"    raise _error[\"exc\"]\n"}
-,{"stream_name":"stderr","time":163.762658559,"data":"          └ {'exc': OutOfMemoryError('CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which ...\n"}
-,{"stream_name":"stderr","time":163.762663206,"data":"\n"}
-,{"stream_name":"stderr","time":163.762669207,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/generate_music_execute.py\", line 79, in _service_target\n"}
-,{"stream_name":"stderr","time":163.762673931,"data":"    _result[\"outputs\"] = self.service_generate(\n"}
-,{"stream_name":"stderr","time":163.762678339,"data":"    │                    │    └ \u003cfunction ServiceGenerateMixin.service_generate at 0x7dd68b25a7a0\u003e\n"}
-,{"stream_name":"stderr","time":163.762682967,"data":"    │                    └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":163.762687525,"data":"    └ {}\n"}
-,{"stream_name":"stderr","time":163.762691493,"data":"\n"}
-,{"stream_name":"stderr","time":163.762695401,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n"}
-,{"stream_name":"stderr","time":163.762699979,"data":"    return func(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.762704213,"data":"           │     │       └ {'captions': ['classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft pian...\n"}
-,{"stream_name":"stderr","time":163.762709061,"data":"           │     └ (\u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e,)\n"}
-,{"stream_name":"stderr","time":163.762713704,"data":"           └ \u003cfunction ServiceGenerateMixin.service_generate at 0x7dd68b25a700\u003e\n"}
-,{"stream_name":"stderr","time":163.762723378,"data":"\n"}
-,{"stream_name":"stderr","time":163.762727569,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/service_generate.py\", line 102, in service_generate\n"}
-,{"stream_name":"stderr","time":163.762732293,"data":"    batch = self._prepare_batch(\n"}
-,{"stream_name":"stderr","time":163.762736398,"data":"            │    └ \u003cfunction ConditioningBatchMixin._prepare_batch at 0x7dd6bfe8c5e0\u003e\n"}
-,{"stream_name":"stderr","time":163.762741129,"data":"            └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":163.76274552,"data":"\n"}
-,{"stream_name":"stderr","time":163.762749408,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_batch.py\", line 83, in _prepare_batch\n"}
-,{"stream_name":"stderr","time":163.762753871,"data":"    self._prepare_target_latents_and_wavs(\n"}
-,{"stream_name":"stderr","time":163.762758101,"data":"    │    └ \u003cfunction ConditioningTargetMixin._prepare_target_latents_and_wavs at 0x7dd6bfe8cae0\u003e\n"}
-,{"stream_name":"stderr","time":163.762762651,"data":"    └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":163.762767091,"data":"\n"}
-,{"stream_name":"stderr","time":163.762770769,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_target.py\", line 105, in _prepare_target_latents_and_wavs\n"}
-,{"stream_name":"stderr","time":163.762775089,"data":"    target_latent = self._encode_audio_to_latents(current_wav.squeeze(0))\n"}
-,{"stream_name":"stderr","time":163.762778841,"data":"                    │    │                        │           └ \u003cmethod 'squeeze' of 'torch._C.TensorBase' objects\u003e\n"}
-,{"stream_name":"stderr","time":163.762783601,"data":"                    │    │                        └ tensor([[[0., 0., 0.,  ..., 0., 0., 0.],\n"}
-,{"stream_name":"stderr","time":163.762787946,"data":"                    │    │                                   [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0')\n"}
-,{"stream_name":"stderr","time":163.762793147,"data":"                    │    └ \u003cfunction BatchPrepMixin._encode_audio_to_latents at 0x7dd6bfe8c400\u003e\n"}
-,{"stream_name":"stderr","time":163.762797643,"data":"                    └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":163.762801599,"data":"\n"}
-,{"stream_name":"stderr","time":163.762805234,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/batch_prep.py\", line 70, in _encode_audio_to_latents\n"}
-,{"stream_name":"stderr","time":163.762809809,"data":"    latents = self.tiled_encode(audio, offload_latent_to_cpu=True)\n"}
-,{"stream_name":"stderr","time":163.762813943,"data":"              │    │            └ tensor([[[0., 0., 0.,  ..., 0., 0., 0.],\n"}
-,{"stream_name":"stderr","time":163.762818144,"data":"              │    │                       [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0')\n"}
-,{"stream_name":"stderr","time":163.762822239,"data":"              │    └ \u003cfunction VaeEncodeMixin.tiled_encode at 0x7dd68b25b1a0\u003e\n"}
-,{"stream_name":"stderr","time":163.762826132,"data":"              └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":163.762830471,"data":"\n"}
-,{"stream_name":"stderr","time":163.762834253,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode.py\", line 76, in tiled_encode\n"}
-,{"stream_name":"stderr","time":163.762838116,"data":"    result = self._tiled_encode_offload_cpu(audio, batch_size, samples, stride, overlap, num_steps, chunk_size)\n"}
-,{"stream_name":"stderr","time":163.762846172,"data":"             │    │                         │      │           │        │       │        │          └ 1440000\n"}
-,{"stream_name":"stderr","time":163.762850931,"data":"             │    │                         │      │           │        │       │        └ 2\n"}
-,{"stream_name":"stderr","time":163.762855472,"data":"             │    │                         │      │           │        │       └ 96000\n"}
-,{"stream_name":"stderr","time":163.762859779,"data":"             │    │                         │      │           │        └ 1248000\n"}
-,{"stream_name":"stderr","time":163.762864181,"data":"             │    │                         │      │           └ 1804798\n"}
-,{"stream_name":"stderr","time":163.762868469,"data":"             │    │                         │      └ 1\n"}
-,{"stream_name":"stderr","time":163.762872668,"data":"             │    │                         └ tensor([[[0., 0., 0.,  ..., 0., 0., 0.],\n"}
-,{"stream_name":"stderr","time":163.762876881,"data":"             │    │                                    [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0')\n"}
-,{"stream_name":"stderr","time":163.762881203,"data":"             │    └ \u003cfunction VaeEncodeChunksMixin._tiled_encode_offload_cpu at 0x7dd68b25b2e0\u003e\n"}
-,{"stream_name":"stderr","time":163.762885623,"data":"             └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":163.762889799,"data":"\n"}
-,{"stream_name":"stderr","time":163.762893582,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode_chunks.py\", line 50, in _tiled_encode_offload_cpu\n"}
-,{"stream_name":"stderr","time":163.762897931,"data":"    first_latent_chunk = self.vae.encode(first_audio_chunk).latent_dist.sample()\n"}
-,{"stream_name":"stderr","time":163.762902971,"data":"                         │    │   │      └ tensor([[[ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -0.0319, -0.0393],\n"}
-,{"stream_name":"stderr","time":163.762907207,"data":"                         │    │   │                 [ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -0...\n"}
-,{"stream_name":"stderr","time":163.762911495,"data":"                         │    │   └ \u003cfunction apply_forward_hook.\u003clocals\u003e.wrapper at 0x7dd6bb70a480\u003e\n"}
-,{"stream_name":"stderr","time":163.762915967,"data":"                         │    └ AutoencoderOobleck(\n"}
-,{"stream_name":"stderr","time":163.762920167,"data":"                         │        (encoder): OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":163.762924349,"data":"                         │          (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":163.762928609,"data":"                         │         ...\n"}
-,{"stream_name":"stderr","time":163.762932711,"data":"                         └ \u003cacestep.handler.AceStepHandler object at 0x7dd690b08da0\u003e\n"}
-,{"stream_name":"stderr","time":163.762937009,"data":"\n"}
-,{"stream_name":"stderr","time":163.762940711,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/utils/accelerate_utils.py\", line 46, in wrapper\n"}
-,{"stream_name":"stderr","time":163.76294506,"data":"    return method(self, *args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.762949094,"data":"           │      │      │       └ {}\n"}
-,{"stream_name":"stderr","time":163.762953056,"data":"           │      │      └ (tensor([[[ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -0.0319, -0.0393],\n"}
-,{"stream_name":"stderr","time":163.76295699,"data":"           │      │                 [ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -...\n"}
-,{"stream_name":"stderr","time":163.762965255,"data":"           │      └ AutoencoderOobleck(\n"}
-,{"stream_name":"stderr","time":163.762969304,"data":"           │          (encoder): OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":163.762973106,"data":"           │            (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":163.762976884,"data":"           │           ...\n"}
-,{"stream_name":"stderr","time":163.762980674,"data":"           └ \u003cfunction AutoencoderOobleck.encode at 0x7dd6bb70a3e0\u003e\n"}
-,{"stream_name":"stderr","time":163.762984676,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 397, in encode\n"}
-,{"stream_name":"stderr","time":163.762988843,"data":"    h = self._encode(x)\n"}
-,{"stream_name":"stderr","time":163.76299275,"data":"        │    │       └ tensor([[[ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -0.0319, -0.0393],\n"}
-,{"stream_name":"stderr","time":163.76299665,"data":"        │    │                  [ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -0...\n"}
-,{"stream_name":"stderr","time":163.763000741,"data":"        │    └ \u003cfunction AutoencoderOobleck._encode at 0x7dd6bb70a340\u003e\n"}
-,{"stream_name":"stderr","time":163.763004571,"data":"        └ AutoencoderOobleck(\n"}
-,{"stream_name":"stderr","time":163.76300844,"data":"            (encoder): OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":163.76301233,"data":"              (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":163.763016256,"data":"             ...\n"}
-,{"stream_name":"stderr","time":163.763020065,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 375, in _encode\n"}
-,{"stream_name":"stderr","time":163.763024991,"data":"    return self.encoder(x)\n"}
-,{"stream_name":"stderr","time":163.763028949,"data":"           │            └ tensor([[[ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -0.0319, -0.0393],\n"}
-,{"stream_name":"stderr","time":163.763032814,"data":"           │                       [ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -0...\n"}
-,{"stream_name":"stderr","time":163.763036623,"data":"           └ AutoencoderOobleck(\n"}
-,{"stream_name":"stderr","time":163.763040415,"data":"               (encoder): OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":163.763044204,"data":"                 (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":163.763048243,"data":"                ...\n"}
-,{"stream_name":"stderr","time":163.763052199,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stderr","time":163.76305627,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763059971,"data":"           │    │           │       └ {}\n"}
-,{"stream_name":"stderr","time":163.763064128,"data":"           │    │           └ (tensor([[[ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -0.0319, -0.0393],\n"}
-,{"stream_name":"stderr","time":163.763068008,"data":"           │    │                      [ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -...\n"}
-,{"stream_name":"stderr","time":163.763072252,"data":"           │    └ \u003cfunction Module._call_impl at 0x7dd6c1e44d60\u003e\n"}
-,{"stream_name":"stderr","time":163.763076101,"data":"           └ OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":163.763084423,"data":"               (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":163.763088566,"data":"               (block): ModuleList(\n"}
-,{"stream_name":"stderr","time":163.763092616,"data":"                 (0): Ooblec...\n"}
-,{"stream_name":"stderr","time":163.763096311,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":163.763100559,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.76310437,"data":"           │             │       └ {}\n"}
-,{"stream_name":"stderr","time":163.76310846,"data":"           │             └ (tensor([[[ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -0.0319, -0.0393],\n"}
-,{"stream_name":"stderr","time":163.763112489,"data":"           │                        [ 0.0000,  0.0000,  0.0000,  ..., -0.0261, -...\n"}
-,{"stream_name":"stderr","time":163.763116681,"data":"           └ \u003cbound method OobleckEncoder.forward of OobleckEncoder(\n"}
-,{"stream_name":"stderr","time":163.763121099,"data":"               (conv1): Conv1d(2, 128, kernel_size=(7,), stride=(1,), padding=(3,)...\n"}
-,{"stream_name":"stderr","time":163.763125329,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 246, in forward\n"}
-,{"stream_name":"stderr","time":163.763129683,"data":"    hidden_state = module(hidden_state)\n"}
-,{"stream_name":"stderr","time":163.763133551,"data":"                   │      └ tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.2469, -0.2410, -0.2496],\n"}
-,{"stream_name":"stderr","time":163.763138116,"data":"                   │                 [ 0.2432,  0.2432,  0.2432,  ...,  0.2464,  0...\n"}
-,{"stream_name":"stderr","time":163.763144852,"data":"                   └ OobleckEncoderBlock(\n"}
-,{"stream_name":"stderr","time":163.763148381,"data":"                       (res_unit1): OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":163.763153156,"data":"                         (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":163.763157001,"data":"                         (conv1): Conv1d(128, 128, kernel_size=(7...\n"}
-,{"stream_name":"stderr","time":163.7631609,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stderr","time":163.763165331,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763169279,"data":"           │    │           │       └ {}\n"}
-,{"stream_name":"stderr","time":163.763173256,"data":"           │    │           └ (tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.2469, -0.2410, -0.2496],\n"}
-,{"stream_name":"stderr","time":163.763177573,"data":"           │    │                      [ 0.2432,  0.2432,  0.2432,  ...,  0.2464,  ...\n"}
-,{"stream_name":"stderr","time":163.763181928,"data":"           │    └ \u003cfunction Module._call_impl at 0x7dd6c1e44d60\u003e\n"}
-,{"stream_name":"stderr","time":163.763186146,"data":"           └ OobleckEncoderBlock(\n"}
-,{"stream_name":"stderr","time":163.763190254,"data":"               (res_unit1): OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":163.763194702,"data":"                 (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":163.763198759,"data":"                 (conv1): Conv1d(128, 128, kernel_size=(7...\n"}
-,{"stream_name":"stderr","time":163.763202674,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":163.763211653,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763215889,"data":"           │             │       └ {}\n"}
-,{"stream_name":"stderr","time":163.763219987,"data":"           │             └ (tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.2469, -0.2410, -0.2496],\n"}
-,{"stream_name":"stderr","time":163.763224611,"data":"           │                        [ 0.2432,  0.2432,  0.2432,  ...,  0.2464,  ...\n"}
-,{"stream_name":"stderr","time":163.763228992,"data":"           └ \u003cbound method OobleckEncoderBlock.forward of OobleckEncoderBlock(\n"}
-,{"stream_name":"stderr","time":163.763233355,"data":"               (res_unit1): OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":163.763237223,"data":"                 (snake1): Snake1d()...\n"}
-,{"stream_name":"stderr","time":163.763241183,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 108, in forward\n"}
-,{"stream_name":"stderr","time":163.76324563,"data":"    hidden_state = self.res_unit1(hidden_state)\n"}
-,{"stream_name":"stderr","time":163.763249744,"data":"                   │              └ tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.2469, -0.2410, -0.2496],\n"}
-,{"stream_name":"stderr","time":163.763254136,"data":"                   │                         [ 0.2432,  0.2432,  0.2432,  ...,  0.2464,  0...\n"}
-,{"stream_name":"stderr","time":163.763258469,"data":"                   └ OobleckEncoderBlock(\n"}
-,{"stream_name":"stderr","time":163.763262504,"data":"                       (res_unit1): OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":163.763266792,"data":"                         (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":163.763271137,"data":"                         (conv1): Conv1d(128, 128, kernel_size=(7...\n"}
-,{"stream_name":"stderr","time":163.763275504,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stderr","time":163.763301024,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763306649,"data":"           │    │           │       └ {}\n"}
-,{"stream_name":"stderr","time":163.763310577,"data":"           │    │           └ (tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.2469, -0.2410, -0.2496],\n"}
-,{"stream_name":"stderr","time":163.763314899,"data":"           │    │                      [ 0.2432,  0.2432,  0.2432,  ...,  0.2464,  ...\n"}
-,{"stream_name":"stderr","time":163.763320159,"data":"           │    └ \u003cfunction Module._call_impl at 0x7dd6c1e44d60\u003e\n"}
-,{"stream_name":"stderr","time":163.763324492,"data":"           └ OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":163.763328865,"data":"               (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":163.763333348,"data":"               (conv1): Conv1d(128, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":163.763338116,"data":"               (snake2...\n"}
-,{"stream_name":"stderr","time":163.763342354,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":163.763346801,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763351049,"data":"           │             │       └ {}\n"}
-,{"stream_name":"stderr","time":163.763355664,"data":"           │             └ (tensor([[[-0.2227, -0.2227, -0.2227,  ..., -0.2469, -0.2410, -0.2496],\n"}
-,{"stream_name":"stderr","time":163.763359582,"data":"           │                        [ 0.2432,  0.2432,  0.2432,  ...,  0.2464,  ...\n"}
-,{"stream_name":"stdout","time":163.762497475,"data":"            ^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.763399819,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_batch.py\", line 83, in _prepare_batch\n"}
-,{"stream_name":"stdout","time":163.763407103,"data":"    self._prepare_target_latents_and_wavs(\n"}
-,{"stream_name":"stdout","time":163.763411545,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/conditioning_target.py\", line 105, in _prepare_target_latents_and_wavs\n"}
-,{"stream_name":"stdout","time":163.763416431,"data":"    target_latent = self._encode_audio_to_latents(current_wav.squeeze(0))\n"}
-,{"stream_name":"stdout","time":163.763421052,"data":"                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.763428441,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/batch_prep.py\", line 70, in _encode_audio_to_latents\n"}
-,{"stream_name":"stdout","time":163.76343352,"data":"    latents = self.tiled_encode(audio, offload_latent_to_cpu=True)\n"}
-,{"stream_name":"stdout","time":163.763437686,"data":"              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.763441739,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode.py\", line 76, in tiled_encode\n"}
-,{"stream_name":"stdout","time":163.763446314,"data":"    result = self._tiled_encode_offload_cpu(audio, batch_size, samples, stride, overlap, num_steps, chunk_size)\n"}
-,{"stream_name":"stdout","time":163.763450267,"data":"             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.76345455,"data":"  File \"/kaggle/tmp/ace/acestep/core/generation/handler/vae_encode_chunks.py\", line 50, in _tiled_encode_offload_cpu\n"}
-,{"stream_name":"stdout","time":163.76345851,"data":"    first_latent_chunk = self.vae.encode(first_audio_chunk).latent_dist.sample()\n"}
-,{"stream_name":"stdout","time":163.763462276,"data":"                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.763465996,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/utils/accelerate_utils.py\", line 46, in wrapper\n"}
-,{"stream_name":"stdout","time":163.763469958,"data":"    return method(self, *args, **kwargs)\n"}
-,{"stream_name":"stdout","time":163.76347375,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.763477696,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 397, in encode\n"}
-,{"stream_name":"stdout","time":163.763482661,"data":"    h = self._encode(x)\n"}
-,{"stream_name":"stdout","time":163.763486933,"data":"        ^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.763491226,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 375, in _encode\n"}
-,{"stream_name":"stdout","time":163.763496036,"data":"    return self.encoder(x)\n"}
-,{"stream_name":"stdout","time":163.763499935,"data":"           ^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":163.763369056,"data":"           └ \u003cbound method OobleckResidualUnit.forward of OobleckResidualUnit(\n"}
-,{"stream_name":"stdout","time":163.763503211,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stdout","time":163.763510911,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":163.763515071,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.763530328,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stdout","time":163.763535275,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":163.763539121,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.763543401,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 246, in forward\n"}
-,{"stream_name":"stdout","time":163.76354781,"data":"    hidden_state = module(hidden_state)\n"}
-,{"stream_name":"stdout","time":163.763551861,"data":"                   ^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.76355617,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stdout","time":163.763560106,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stdout","time":163.763571235,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.763576099,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":163.76351108,"data":"               (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":163.763592955,"data":"               (conv1): Conv1d(128, 128, kernel_si...\n"}
-,{"stream_name":"stderr","time":163.763611613,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 84, in forward\n"}
-,{"stream_name":"stderr","time":163.763616563,"data":"    output_tensor = self.conv2(self.snake2(output_tensor))\n"}
-,{"stream_name":"stderr","time":163.763621187,"data":"                    │          │           └ tensor([[[-0.5468, -0.5870, -0.5817,  ..., -0.5370, -0.4720, -0.4152],\n"}
-,{"stream_name":"stderr","time":163.763627028,"data":"                    │          │                      [ 0.2608,  0.2754,  0.2392,  ...,  0.2136,  0...\n"}
-,{"stream_name":"stderr","time":163.763631732,"data":"                    │          └ OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":163.763636214,"data":"                    │              (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":163.763640741,"data":"                    │              (conv1): Conv1d(128, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":163.763645638,"data":"                    │              (snake2...\n"}
-,{"stream_name":"stderr","time":163.763650439,"data":"                    └ OobleckResidualUnit(\n"}
-,{"stream_name":"stderr","time":163.763654856,"data":"                        (snake1): Snake1d()\n"}
-,{"stream_name":"stderr","time":163.763659204,"data":"                        (conv1): Conv1d(128, 128, kernel_size=(7,), stride=(1,), padding=(3,))\n"}
-,{"stream_name":"stderr","time":163.763664082,"data":"                        (snake2...\n"}
-,{"stream_name":"stderr","time":163.763671247,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stderr","time":163.763675448,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763679889,"data":"           │    │           │       └ {}\n"}
-,{"stream_name":"stdout","time":163.763581095,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763684294,"data":"           │    │           └ (tensor([[[-0.5468, -0.5870, -0.5817,  ..., -0.5370, -0.4720, -0.4152],\n"}
-,{"stream_name":"stderr","time":163.763723659,"data":"           │    │                      [ 0.2608,  0.2754,  0.2392,  ...,  0.2136,  ...\n"}
-,{"stream_name":"stderr","time":163.763729107,"data":"           │    └ \u003cfunction Module._call_impl at 0x7dd6c1e44d60\u003e\n"}
-,{"stream_name":"stderr","time":163.763733958,"data":"           └ Snake1d()\n"}
-,{"stream_name":"stderr","time":163.763738595,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":163.763743399,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763747719,"data":"           │             │       └ {}\n"}
-,{"stream_name":"stderr","time":163.763752589,"data":"           │             └ (tensor([[[-0.5468, -0.5870, -0.5817,  ..., -0.5370, -0.4720, -0.4152],\n"}
-,{"stream_name":"stderr","time":163.763757702,"data":"           │                        [ 0.2608,  0.2754,  0.2392,  ...,  0.2136,  ...\n"}
-,{"stream_name":"stderr","time":163.763762607,"data":"           └ \u003cbound method Snake1d.forward of Snake1d()\u003e\n"}
-,{"stream_name":"stderr","time":163.76376779,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 51, in forward\n"}
-,{"stream_name":"stderr","time":163.763772682,"data":"    hidden_states = hidden_states + (beta + 1e-9).reciprocal() * torch.sin(alpha * hidden_states).pow(2)\n"}
-,{"stream_name":"stderr","time":163.763776876,"data":"                    │                │                           │     │   │       └ tensor([[[-0.5468, -0.5870, -0.5817,  ..., -0.5370, -0.4720, -0.4152],\n"}
-,{"stream_name":"stderr","time":163.763782038,"data":"                    │                │                           │     │   │                  [ 0.2608,  0.2754,  0.2392,  ...,  0.2136,  0...\n"}
-,{"stream_name":"stderr","time":163.763786655,"data":"                    │                │                           │     │   └ tensor([[[1.0482],\n"}
-,{"stream_name":"stderr","time":163.763791374,"data":"                    │                │                           │     │              [1.0340],\n"}
-,{"stream_name":"stderr","time":163.763796368,"data":"                    │                │                           │     │              [1.0260],\n"}
-,{"stream_name":"stderr","time":163.763801189,"data":"                    │                │                           │     │              [1.0919],\n"}
-,{"stream_name":"stderr","time":163.763806163,"data":"                    │                │                           │     │              [1.0257],\n"}
-,{"stream_name":"stderr","time":163.763811374,"data":"                    │                │                           │     │              [1.0580],\n"}
-,{"stream_name":"stdout","time":163.763690877,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":163.763816389,"data":"                    │                │                           │     │              [1...\n"}
-,{"stream_name":"stdout","time":163.763822497,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 108, in forward\n"}
-,{"stream_name":"stderr","time":163.763826867,"data":"                    │                │                           │     └ \u003cbuilt-in method sin of type object at 0x7dd722ce4b40\u003e\n"}
-,{"stream_name":"stdout","time":163.763830779,"data":"    hidden_state = self.res_unit1(hidden_state)\n"}
-,{"stream_name":"stderr","time":163.763834726,"data":"                    │                │                           └ \u003cmodule 'torch' from '/kaggle/tmp/venv/lib/python3.12/site-packages/torch/__init__.py'\u003e\n"}
-,{"stream_name":"stdout","time":163.763839478,"data":"                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":163.763848102,"data":"                    │                └ tensor([[[0.9371],\n"}
-,{"stream_name":"stdout","time":163.763852786,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stderr","time":163.763856474,"data":"                    │                           [0.9136],\n"}
-,{"stream_name":"stdout","time":163.763860722,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763865577,"data":"                    │                           [0.9362],\n"}
-,{"stream_name":"stdout","time":163.763869323,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":163.763874517,"data":"                    │                           [0.9154],\n"}
-,{"stream_name":"stdout","time":163.763879473,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":163.763882939,"data":"                    │                           [0.9436],\n"}
-,{"stream_name":"stdout","time":163.763886188,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763890082,"data":"                    │                           [0.8487],\n"}
-,{"stream_name":"stdout","time":163.763894635,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":163.763898534,"data":"                    │                           [0...\n"}
-,{"stream_name":"stdout","time":163.763903052,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 84, in forward\n"}
-,{"stream_name":"stderr","time":163.763906931,"data":"                    └ tensor([[[-0.5468, -0.5870, -0.5817,  ..., -0.5370, -0.4720, -0.4152],\n"}
-,{"stream_name":"stdout","time":163.763910671,"data":"    output_tensor = self.conv2(self.snake2(output_tensor))\n"}
-,{"stream_name":"stderr","time":163.763915106,"data":"                               [ 0.2608,  0.2754,  0.2392,  ...,  0.2136,  0...\n"}
-,{"stream_name":"stdout","time":163.763919604,"data":"                               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":163.76392383,"data":"\n"}
-,{"stream_name":"stdout","time":163.76392851,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1776, in _wrapped_call_impl\n"}
-,{"stream_name":"stdout","time":163.76393648,"data":"    return self._call_impl(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763935985,"data":"torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 610.81 MiB is free. Including non-PyTorch memory, this process has 13.96 GiB memory in use. Of the allocated memory 13.74 GiB is allocated by PyTorch, and 109.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n"}
-,{"stream_name":"stdout","time":163.763940879,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":163.763945104,"data":"2026-10-25 14:08:51.332 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=False, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
-,{"stream_name":"stdout","time":163.763949495,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1787, in _call_impl\n"}
-,{"stream_name":"stderr","time":163.763957684,"data":"2026-10-25 14:08:51.332 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
-,{"stream_name":"stdout","time":163.763961195,"data":"    return forward_call(*args, **kwargs)\n"}
-,{"stream_name":"stderr","time":163.763965794,"data":"2026-10-25 14:08:51.333 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
-,{"stream_name":"stdout","time":163.763969422,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":163.763972964,"data":"2026-10-25 14:08:51.333 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
-,{"stream_name":"stdout","time":163.763978069,"data":"  File \"/kaggle/tmp/venv/lib/python3.12/site-packages/diffusers/models/autoencoders/autoencoder_oobleck.py\", line 51, in forward\n"}
-,{"stream_name":"stdout","time":163.763985712,"data":"    hidden_states = hidden_states + (beta + 1e-9).reciprocal() * torch.sin(alpha * hidden_states).pow(2)\n"}
-,{"stream_name":"stdout","time":163.763990485,"data":"                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stdout","time":163.763997424,"data":"torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 658.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 610.81 MiB is free. Including non-PyTorch memory, this process has 13.96 GiB memory in use. Of the allocated memory 13.74 GiB is allocated by PyTorch, and 109.93 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n"}
-,{"stream_name":"stdout","time":163.764003905,"data":"\n"}
-,{"stream_name":"stderr","time":164.055826123,"data":"2026-10-25 14:08:51.625 | INFO     | acestep.core.generation.handler.generate_music:_vram_preflight_check:157 - [generate_music] VRAM pre-flight: 2.66 GB free, ~0.80 GB needed (batch=1, duration=45s, mode=turbo).\n"}
-,{"stream_name":"stderr","time":164.055872174,"data":"2026-10-25 14:08:51.625 | INFO     | acestep.core.generation.handler.progress:_start_diffusion_progress_estimator:179 - [progress] No timing history — using fallback estimate (2.5s/step for batch_size=1).  This will self-calibrate after the first generation.\n"}
-,{"stream_name":"stderr","time":164.122831472,"data":"2026-10-25 14:08:51.692 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:119 - \n"}
-,{"stream_name":"stderr","time":164.122862066,"data":"======================================================================\n"}
-,{"stream_name":"stderr","time":164.1229043,"data":"2026-10-25 14:08:51.692 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:120 - 🔍 [DEBUG] DiT TEXT ENCODER INPUT (Inference)\n"}
-,{"stream_name":"stderr","time":164.123056071,"data":"2026-10-25 14:08:51.692 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:121 - ======================================================================\n"}
-,{"stream_name":"stderr","time":164.123175475,"data":"2026-10-25 14:08:51.693 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:122 - text_prompt:\n"}
-,{"stream_name":"stderr","time":164.123202545,"data":"# Instruction\n"}
-,{"stream_name":"stderr","time":164.123260519,"data":"Fill the audio semantic mask based on the given conditions:\n"}
-,{"stream_name":"stderr","time":164.123264811,"data":"\n"}
-,{"stream_name":"stderr","time":164.123268604,"data":"# Caption\n"}
-,{"stream_name":"stderr","time":164.123311767,"data":"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby\n"}
-,{"stream_name":"stderr","time":164.123316691,"data":"\n"}
-,{"stream_name":"stderr","time":164.123320537,"data":"# Metas\n"}
-,{"stream_name":"stderr","time":164.123324371,"data":"- bpm: 88\n"}
-,{"stream_name":"stderr","time":164.123328943,"data":"- timesignature: N/A\n"}
-,{"stream_name":"stderr","time":164.123332731,"data":"- keyscale: N/A\n"}
-,{"stream_name":"stderr","time":164.123354365,"data":"- duration: 45 seconds\n"}
-,{"stream_name":"stderr","time":164.123359491,"data":"\u003c|endoftext|\u003e\n"}
-,{"stream_name":"stderr","time":164.123363684,"data":"\n"}
-,{"stream_name":"stderr","time":164.123372876,"data":"2026-10-25 14:08:51.693 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:123 - ======================================================================\n"}
-,{"stream_name":"stderr","time":164.123379421,"data":"2026-10-25 14:08:51.693 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:124 - lyrics_text:\n"}
-,{"stream_name":"stderr","time":164.123384119,"data":"# Languages\n"}
-,{"stream_name":"stderr","time":164.123388124,"data":"zh\n"}
-,{"stream_name":"stderr","time":164.123391885,"data":"\n"}
-,{"stream_name":"stderr","time":164.123395377,"data":"# Lyric\n"}
-,{"stream_name":"stderr","time":164.123399021,"data":"[verse]\n"}
-,{"stream_name":"stderr","time":164.123402722,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":164.123407622,"data":"滿天都是小星星\n"}
-,{"stream_name":"stderr","time":164.123411649,"data":"掛在天上放光明\n"}
-,{"stream_name":"stderr","time":164.12343626,"data":"好像許多小眼睛\n"}
-,{"stream_name":"stderr","time":164.123441377,"data":"[outro]\n"}
-,{"stream_name":"stderr","time":164.1234449,"data":"一閃一閃亮晶晶\n"}
-,{"stream_name":"stderr","time":164.123448406,"data":"滿天都是小星星\u003c|endoftext|\u003e\n"}
-,{"stream_name":"stderr","time":164.123454255,"data":"2026-10-25 14:08:51.693 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:125 - ======================================================================\n"}
-,{"stream_name":"stderr","time":164.123458575,"data":"\n"}
-,{"stream_name":"stderr","time":164.139496817,"data":"2026-10-25 14:08:51.709 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:110 - [preprocess_batch] Inferring prompt embeddings...\n"}
-,{"stream_name":"stderr","time":164.403430342,"data":"2026-10-25 14:08:51.973 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:113 - [preprocess_batch] Inferring lyric embeddings...\n"}
-,{"stream_name":"stderr","time":164.403743284,"data":"2026-10-25 14:08:51.973 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:173 - [service_generate] Generating audio... (DiT backend: PyTorch (cuda))\n"}
-,{"stream_name":"stderr","time":164.758803317,"data":"2026-10-25 14:08:52.328 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:276 - [service_generate] DiT diffusion via PyTorch (cuda)...\n"}
-,{"stream_name":"stderr","time":165.05404962,"data":"2026-10-25 14:08:52.623 | INFO     | acestep.models.common.dcw_correction:__init__:98 - [DCW] Active — mode=double, scaler=0.0500, high_scaler=0.0200, wavelet='haar'\n"}
-,{"stream_name":"stderr","time":165.800543685,"data":"2026-10-25 14:08:53.370 | INFO     | acestep.models.common.dcw_loader:get:84 - [DCW] Built DWT1D for wavelet='haar' (low-pass filter taps=2, device=cuda:0, dtype=torch.float32).\n"}
-,{"stream_name":"stderr","time":169.186878631,"data":"2026-10-25 14:08:56.756 | INFO     | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:42 - [generate_music] Model generation completed. Decoding latents...\n"}
-,{"stream_name":"stderr","time":169.187576301,"data":"2026-10-25 14:08:56.757 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:64 - [generate_music] pred_latents: torch.Size([1, 1125, 64]), dtype=torch.float32\n"}
-,{"stream_name":"stderr","time":169.187638707,"data":"2026-10-25 14:08:56.757 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:65 - [generate_music] time_costs: {'encoder_time_cost': 0.1686694622039795, 'diffusion_time_cost': 4.2587244510650635, 'diffusion_per_step_time_cost': 0.5323405563831329, 'total_time_cost': 4.427393913269043, 'offload_time_cost': 0.0}\n"}
-,{"stream_name":"stderr","time":169.415989234,"data":"2026-10-25 14:08:56.985 | INFO     | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:127 - [generate_music] Decoding latents with VAE...\n"}
-,{"stream_name":"stderr","time":169.427899799,"data":"2026-10-25 14:08:56.997 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:136 - [generate_music] Before VAE decode: allocated=11.80GB, max=13.74GB\n"}
-,{"stream_name":"stderr","time":169.428529824,"data":"2026-10-25 14:08:56.998 | INFO     | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:154 - [generate_music] Effective free VRAM before VAE decode: 2.63 GB\n"}
-,{"stream_name":"stderr","time":169.428571676,"data":"2026-10-25 14:08:56.998 | INFO     | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:172 - [generate_music] Using tiled VAE decode to reduce VRAM usage...\n"}
-,{"stream_name":"stderr","time":169.429181077,"data":"2026-10-25 14:08:56.998 | DEBUG    | acestep.core.generation.handler.memory_utils:_get_auto_decode_chunk_size:108 - [_get_auto_decode_chunk_size] Effective free VRAM: 2.63 GB\n"}
-,{"stream_name":"stderr","time":169.429787857,"data":"2026-10-25 14:08:56.999 | DEBUG    | acestep.core.generation.handler.memory_utils:_should_offload_wav_to_cpu:131 - [_should_offload_wav_to_cpu] Effective free VRAM: 2.63 GB\n"}
-,{"stream_name":"stderr","time":169.429849803,"data":"2026-10-25 14:08:56.999 | INFO     | acestep.core.generation.handler.vae_decode:tiled_decode:56 - [tiled_decode] chunk_size=128, offload_wav_to_cpu=True, latents_shape=torch.Size([1, 64, 1125])\n"}
-,{"stream_name":"stderr","time":169.42999757,"data":"2026-10-25 14:08:56.999 | WARNING  | acestep.core.generation.handler.vae_decode_chunks:_tiled_decode_inner:39 - [tiled_decode] Reduced overlap from 64 to 32 for chunk_size=128\n"}
-,{"stream_name":"stderr","time":174.233850872,"data":"2026-10-25 14:09:01.803 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:193 - [generate_music] After VAE decode: allocated=12.11GB, max=13.74GB\n"}
-,{"stream_name":"stderr","time":174.522974533,"data":"2026-10-25 14:09:02.092 | INFO     | acestep.core.generation.handler.generate_music_payload:_build_generate_music_success_payload:38 - [generate_music] VAE decode completed. Preparing audio tensors...\n"}
-,{"stream_name":"stderr","time":174.52311597,"data":"2026-10-25 14:09:02.092 | INFO     | acestep.core.generation.handler.generate_music_payload:_build_generate_music_success_payload:50 - [generate_music] Done! Generated 1 audio tensors.\n"}
-,{"stream_name":"stderr","time":174.799033712,"data":"2026-10-25 14:09:02.368 | INFO     | acestep.inference:generate_music:1002 - [Normalization] Audio 0 BEFORE: Peak=1.0000, Target=-1.0dB\n"}
-,{"stream_name":"stderr","time":174.830664273,"data":"2026-10-25 14:09:02.400 | INFO     | acestep.inference:generate_music:1007 - [Normalization] Audio 0 AFTER: Peak=0.8913\n"}
-,{"stream_name":"stderr","time":177.153285471,"data":"2026-10-25 14:09:04.722 | DEBUG    | acestep.audio_utils:_save_mp3:183 - [AudioSaver] Saved audio to /kaggle/tmp/acestep-little-star-new/401591f4-8b7c-6272-81fe-ecc9dfaea2c6.mp3 (mp3, 48000Hz, 128k)\n"}
-,{"stream_name":"stdout","time":177.157252898,"data":"acestep-little-star-new ok 13s Generation completed successfully!\n"}
-,{"stream_name":"stdout","time":181.190443551,"data":"gen exit 0\n"}
-,{"stream_name":"stdout","time":181.190474344,"data":"done\n"}
-,{"stream_name":"stderr","time":183.488062594,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":183.488107043,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":183.826718713,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":183.826745704,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":184.821164881,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
-,{"stream_name":"stderr","time":185.933241691,"data":"[NbConvertApp] Writing 294993 bytes to __results__.html\n"}
+[{"stream_name":"stdout","time":1.065239023,"data":"$ nvidia-smi -L\n"}
+,{"stream_name":"stdout","time":1.176704115,"data":"GPU 0: Tesla T4 (UUID: GPU-d1cc26e7-aee4-f8fa-0654-43319cbf656e)\n"}
+,{"stream_name":"stdout","time":1.176767359,"data":"GPU 1: Tesla T4 (UUID: GPU-48c766ad-a0af-32f0-93ca-4f71c9ac4574)\n"}
+,{"stream_name":"stdout","time":1.176774442,"data":" \n"}
+,{"stream_name":"stdout","time":1.176779838,"data":"$ git clone --depth 1 https://github.com/ace-step/ACE-Step-1.5 /kaggle/tmp/ace\n"}
+,{"stream_name":"stdout","time":2.419817885,"data":" Cloning into '/kaggle/tmp/ace'...\n"}
+,{"stream_name":"stdout","time":2.419853154,"data":"\n"}
+,{"stream_name":"stdout","time":2.419856914,"data":"$ pip install -q uv\n"}
+,{"stream_name":"stdout","time":6.484153304,"data":" \n"}
+,{"stream_name":"stdout","time":6.484195416,"data":"$ uv venv -p 3.12 /kaggle/tmp/venv\n"}
+,{"stream_name":"stdout","time":7.033188118,"data":" warning: The `--system` flag has no effect, `uv venv` always ignores virtual environments when finding a Python interpreter; did you mean `--no-managed-python`?\n"}
+,{"stream_name":"stdout","time":7.03321136,"data":"Using CPython 3.12.3 interpreter at: /usr/bin/python3.12\n"}
+,{"stream_name":"stdout","time":7.033217107,"data":"Creating virtual environment at: /kaggle/tmp/venv\n"}
+,{"stream_name":"stdout","time":7.033221905,"data":"Activate with: source /kaggle/tmp/venv/bin/activate\n"}
+,{"stream_name":"stdout","time":7.033226594,"data":"\n"}
+,{"stream_name":"stdout","time":7.033230868,"data":"$ uv pip install --python /kaggle/tmp/venv/bin/python -e .\n"}
+,{"stream_name":"stdout","time":65.112440978,"data":"  certifi==2026.10.23\n"}
+,{"stream_name":"stdout","time":65.112486134,"data":" + cffi==2.1.1\n"}
+,{"stream_name":"stdout","time":65.112492599,"data":" + charset-normalizer==3.5.2\n"}
+,{"stream_name":"stdout","time":65.112497929,"data":" + click==8.5.0\n"}
+,{"stream_name":"stdout","time":65.112503356,"data":" + contourpy==1.4.0\n"}
+,{"stream_name":"stdout","time":65.112508614,"data":" + cryptography==50.0.2\n"}
+,{"stream_name":"stdout","time":65.112513639,"data":" + cuda-bindings==12.9.4\n"}
+,{"stream_name":"stdout","time":65.112518665,"data":" + cuda-pathfinder==1.8.4\n"}
+,{"stream_name":"stdout","time":65.112523743,"data":" + cycler==0.12.1\n"}
+,{"stream_name":"stdout","time":65.112528969,"data":" + diffusers==0.39.0\n"}
+,{"stream_name":"stdout","time":65.112534106,"data":" + diskcache==5.6.3\n"}
+,{"stream_name":"stdout","time":65.112538977,"data":" + einops==0.8.2\n"}
+,{"stream_name":"stdout","time":65.112543841,"data":" + einx==0.4.3\n"}
+,{"stream_name":"stdout","time":65.112549005,"data":" + fastapi==0.162.0\n"}
+,{"stream_name":"stdout","time":65.112554161,"data":" + ffmpy==1.0.0\n"}
+,{"stream_name":"stdout","time":65.112558987,"data":" + filelock==4.2.4\n"}
+,{"stream_name":"stdout","time":65.112563297,"data":" + fonttools==4.67.0\n"}
+,{"stream_name":"stdout","time":65.112568275,"data":" + frozendict==2.4.7\n"}
+,{"stream_name":"stdout","time":65.112573425,"data":" + frozenlist==1.8.0\n"}
+,{"stream_name":"stdout","time":65.112578245,"data":" + fsspec==2026.9.0\n"}
+,{"stream_name":"stdout","time":65.112583074,"data":" + gradio==6.2.0\n"}
+,{"stream_name":"stdout","time":65.112587953,"data":" + gradio-client==2.0.2\n"}
+,{"stream_name":"stdout","time":65.112593041,"data":" + groovy==0.1.2\n"}
+,{"stream_name":"stdout","time":65.112598309,"data":" + grpcio==1.84.1\n"}
+,{"stream_name":"stdout","time":65.112603863,"data":" + h11==0.16.0\n"}
+,{"stream_name":"stdout","time":65.112609095,"data":" + hf-xet==1.7.0\n"}
+,{"stream_name":"stdout","time":65.112622609,"data":" + httpcore==1.0.9\n"}
+,{"stream_name":"stdout","time":65.112626964,"data":" + httptools==0.9.0\n"}
+,{"stream_name":"stdout","time":65.112630978,"data":" + httpx==0.28.1\n"}
+,{"stream_name":"stdout","time":65.11263502,"data":" + huggingface-hub==0.36.2\n"}
+,{"stream_name":"stdout","time":65.112639283,"data":" + idna==3.20\n"}
+,{"stream_name":"stdout","time":65.112643156,"data":" + importlib-metadata==10.1.0\n"}
+,{"stream_name":"stdout","time":65.11264781,"data":" + jinja2==3.1.6\n"}
+,{"stream_name":"stdout","time":65.112651742,"data":" + kiwisolver==1.5.1\n"}
+,{"stream_name":"stdout","time":65.112655817,"data":" + lightning==2.6.6\n"}
+,{"stream_name":"stdout","time":65.112659758,"data":" + lightning-utilities==0.15.3\n"}
+,{"stream_name":"stdout","time":65.112663804,"data":" + llvmlite==0.50.0\n"}
+,{"stream_name":"stdout","time":65.112668075,"data":" + loguru==0.7.3\n"}
+,{"stream_name":"stdout","time":65.112672152,"data":" + lycoris-lora==4.1.3\n"}
+,{"stream_name":"stdout","time":65.112676188,"data":" + markdown==3.11.2\n"}
+,{"stream_name":"stdout","time":65.112680146,"data":" + markdown-it-py==4.2.0\n"}
+,{"stream_name":"stdout","time":65.112684987,"data":" + markupsafe==3.0.4\n"}
+,{"stream_name":"stdout","time":65.1126893,"data":" + matplotlib==3.11.2\n"}
+,{"stream_name":"stdout","time":65.112693373,"data":" + mdurl==0.1.2\n"}
+,{"stream_name":"stdout","time":65.112697416,"data":" + modelscope==1.40.2\n"}
+,{"stream_name":"stdout","time":65.112701252,"data":" + modelscope-hub==0.5.0\n"}
+,{"stream_name":"stdout","time":65.112705348,"data":" + mpmath==1.3.0\n"}
+,{"stream_name":"stdout","time":65.112709387,"data":" + multidict==7.2.1\n"}
+,{"stream_name":"stdout","time":65.112714047,"data":" + nano-vllm==0.2.0 (from file:///kaggle/tmp/ace/acestep/third_parts/nano-vllm)\n"}
+,{"stream_name":"stdout","time":65.112718385,"data":" + networkx==3.7\n"}
+,{"stream_name":"stdout","time":65.112722896,"data":" + numba==0.68.0\n"}
+,{"stream_name":"stdout","time":65.112726853,"data":" + numpy==2.5.4\n"}
+,{"stream_name":"stdout","time":65.112730767,"data":" + nvidia-cublas-cu12==12.8.4.1\n"}
+,{"stream_name":"stdout","time":65.112734945,"data":" + nvidia-cuda-cupti-cu12==12.8.90\n"}
+,{"stream_name":"stdout","time":65.112739064,"data":" + nvidia-cuda-nvrtc-cu12==12.8.93\n"}
+,{"stream_name":"stdout","time":65.112743405,"data":" + nvidia-cuda-runtime-cu12==12.8.90\n"}
+,{"stream_name":"stdout","time":65.112747867,"data":" + nvidia-cudnn-cu12==9.10.2.21\n"}
+,{"stream_name":"stdout","time":65.112752089,"data":" + nvidia-cufft-cu12==11.3.3.83\n"}
+,{"stream_name":"stdout","time":65.112756017,"data":" + nvidia-cufile-cu12==1.13.1.3\n"}
+,{"stream_name":"stdout","time":65.112760309,"data":" + nvidia-curand-cu12==10.3.9.90\n"}
+,{"stream_name":"stdout","time":65.112764533,"data":" + nvidia-cusolver-cu12==11.7.3.90\n"}
+,{"stream_name":"stdout","time":65.112768879,"data":" + nvidia-cusparse-cu12==12.5.8.93\n"}
+,{"stream_name":"stdout","time":65.112773387,"data":" + nvidia-cusparselt-cu12==0.7.1\n"}
+,{"stream_name":"stdout","time":65.112777491,"data":" + nvidia-nccl-cu12==2.27.5\n"}
+,{"stream_name":"stdout","time":65.112781527,"data":" + nvidia-nvjitlink-cu12==12.8.93\n"}
+,{"stream_name":"stdout","time":65.112785559,"data":" + nvidia-nvshmem-cu12==3.4.5\n"}
+,{"stream_name":"stdout","time":65.112789705,"data":" + nvidia-nvtx-cu12==12.8.90\n"}
+,{"stream_name":"stdout","time":65.112794282,"data":" + opentelemetry-api==1.45.1\n"}
+,{"stream_name":"stdout","time":65.112804652,"data":" + orjson==3.13.0\n"}
+,{"stream_name":"stdout","time":65.112808919,"data":" + packaging==26.3\n"}
+,{"stream_name":"stdout","time":65.112812965,"data":" + pandas==2.3.3\n"}
+,{"stream_name":"stdout","time":65.112817602,"data":" + peft==0.21.2\n"}
+,{"stream_name":"stdout","time":65.112822373,"data":" + pillow==12.3.0\n"}
+,{"stream_name":"stdout","time":65.112826403,"data":" + propcache==0.5.4\n"}
+,{"stream_name":"stdout","time":65.112830364,"data":" + protobuf==7.36.2\n"}
+,{"stream_name":"stdout","time":65.112834411,"data":" + psutil==7.2.2\n"}
+,{"stream_name":"stdout","time":65.112838749,"data":" + pycparser==3.12\n"}
+,{"stream_name":"stdout","time":65.112842743,"data":" + pydantic==2.14.1\n"}
+,{"stream_name":"stdout","time":65.112847059,"data":" + pydantic-core==2.50.1\n"}
+,{"stream_name":"stdout","time":65.112851237,"data":" + pydub==0.25.1\n"}
+,{"stream_name":"stdout","time":65.112855444,"data":" + pygments==2.21.0\n"}
+,{"stream_name":"stdout","time":65.112859497,"data":" + pyparsing==3.3.3\n"}
+,{"stream_name":"stdout","time":65.112863587,"data":" + python-dateutil==3.0.0\n"}
+,{"stream_name":"stdout","time":65.112867752,"data":" + python-dotenv==1.2.4\n"}
+,{"stream_name":"stdout","time":65.112872256,"data":" + python-multipart==0.0.32\n"}
+,{"stream_name":"stdout","time":65.112876186,"data":" + pytorch-lightning==2.6.6\n"}
+,{"stream_name":"stdout","time":65.112880223,"data":" + pytorch-wavelets==1.3.0\n"}
+,{"stream_name":"stdout","time":65.112884538,"data":" + pytz==2026.5\n"}
+,{"stream_name":"stdout","time":65.112892528,"data":" + pywavelets==1.10.0\n"}
+,{"stream_name":"stdout","time":65.112897258,"data":" + pyyaml==6.0.3\n"}
+,{"stream_name":"stdout","time":65.112901269,"data":" + regex==2026.9.29\n"}
+,{"stream_name":"stdout","time":65.112905322,"data":" + requests==2.34.2\n"}
+,{"stream_name":"stdout","time":65.112909276,"data":" + rich==15.0.0\n"}
+,{"stream_name":"stdout","time":65.112913343,"data":" + safehttpx==0.1.7\n"}
+,{"stream_name":"stdout","time":65.112918039,"data":" + safetensors==0.8.0\n"}
+,{"stream_name":"stdout","time":65.112922001,"data":" + scipy==1.18.1\n"}
+,{"stream_name":"stdout","time":65.112926208,"data":" + semantic-version==2.10.0\n"}
+,{"stream_name":"stdout","time":65.112930446,"data":" + setuptools==71.1.0\n"}
+,{"stream_name":"stdout","time":65.112934485,"data":" + shellingham==1.5.4\n"}
+,{"stream_name":"stdout","time":65.112938936,"data":" + six==1.17.0\n"}
+,{"stream_name":"stdout","time":65.11294336,"data":" + soundfile==0.14.0\n"}
+,{"stream_name":"stdout","time":65.112947805,"data":" + starlette==0.52.1\n"}
+,{"stream_name":"stdout","time":65.112952564,"data":" + sympy==1.14.0\n"}
+,{"stream_name":"stdout","time":65.112956825,"data":" + tensorboard==2.21.0\n"}
+,{"stream_name":"stdout","time":65.112960942,"data":" + tensorboard-data-server==0.7.2\n"}
+,{"stream_name":"stdout","time":65.112965599,"data":" + tokenizers==0.22.2\n"}
+,{"stream_name":"stdout","time":65.112969626,"data":" + toml==0.10.2\n"}
+,{"stream_name":"stdout","time":65.112973488,"data":" + tomlkit==0.13.3\n"}
+,{"stream_name":"stdout","time":65.1130006,"data":" + torch==2.10.0+cu128\n"}
+,{"stream_name":"stdout","time":65.113006092,"data":" + torch-einops-utils==0.1.44\n"}
+,{"stream_name":"stdout","time":65.11301011,"data":" + torchao==0.16.0\n"}
+,{"stream_name":"stdout","time":65.113013882,"data":" + torchaudio==2.10.0+cu128\n"}
+,{"stream_name":"stdout","time":65.113017996,"data":" + torchcodec==0.17.0\n"}
+,{"stream_name":"stdout","time":65.113028598,"data":" + torchmetrics==1.9.0\n"}
+,{"stream_name":"stdout","time":65.113032707,"data":" + torchvision==0.25.0+cu128\n"}
+,{"stream_name":"stdout","time":65.113036836,"data":" + tqdm==4.70.1\n"}
+,{"stream_name":"stdout","time":65.113041041,"data":" + transformers==4.57.6\n"}
+,{"stream_name":"stdout","time":65.113045031,"data":" + triton==3.6.0\n"}
+,{"stream_name":"stdout","time":65.113049064,"data":" + typer==0.27.3\n"}
+,{"stream_name":"stdout","time":65.113053095,"data":" + typer-slim==0.24.0\n"}
+,{"stream_name":"stdout","time":65.113066923,"data":" + typing-extensions==4.16.0\n"}
+,{"stream_name":"stdout","time":65.113071417,"data":" + typing-inspection==0.4.4\n"}
+,{"stream_name":"stdout","time":65.113075652,"data":" + tzdata==2026.5\n"}
+,{"stream_name":"stdout","time":65.11307968,"data":" + urllib3==2.8.0\n"}
+,{"stream_name":"stdout","time":65.113083714,"data":" + uvicorn==0.54.0\n"}
+,{"stream_name":"stdout","time":65.11308841,"data":" + uvloop==0.23.0\n"}
+,{"stream_name":"stdout","time":65.113092904,"data":" + vector-quantize-pytorch==1.32.0\n"}
+,{"stream_name":"stdout","time":65.11309677,"data":" + watchfiles==1.3.0\n"}
+,{"stream_name":"stdout","time":65.113100882,"data":" + websockets==17.3\n"}
+,{"stream_name":"stdout","time":65.113104936,"data":" + werkzeug==3.1.9\n"}
+,{"stream_name":"stdout","time":65.11310916,"data":" + xxhash==4.0.2\n"}
+,{"stream_name":"stdout","time":65.113113449,"data":" + yarl==1.25.1\n"}
+,{"stream_name":"stdout","time":65.113117745,"data":" + zipp==4.1.2\n"}
+,{"stream_name":"stdout","time":65.113121769,"data":"\n"}
+,{"stream_name":"stdout","time":65.113125782,"data":"$ /kaggle/tmp/venv/bin/python -m acestep.model_downloader\n"}
+,{"stream_name":"stdout","time":115.436414388,"data":"Checkpoints directory: /kaggle/tmp/ace/checkpoints\n"}
+,{"stream_name":"stdout","time":115.43648392,"data":"Downloading main model (includes vae, text encoder, DiT, and LM 1.7B)...\n"}
+,{"stream_name":"stdout","time":115.436493703,"data":"Downloading main model from ACE-Step/Ace-Step1.5...\n"}
+,{"stream_name":"stdout","time":115.436499647,"data":"Destination: /kaggle/tmp/ace/checkpoints\n"}
+,{"stream_name":"stdout","time":115.436505423,"data":"This may take a while depending on your internet connection...\n"}
+,{"stream_name":"stdout","time":115.436511374,"data":"Successfully downloaded from HuggingFace: ACE-Step/Ace-Step1.5\n"}
+,{"stream_name":"stdout","time":115.436517374,"data":"\n"}
+,{"stream_name":"stdout","time":115.436523285,"data":"Download complete!\n"}
+,{"stream_name":"stdout","time":115.436528816,"data":"Models are available at: /kaggle/tmp/ace/checkpoints\n"}
+,{"stream_name":"stdout","time":115.436534723,"data":" 2026-10-25 15:09:23.930 | INFO     | __main__:_smart_download:249 - [Model Download] Auto-detected: HuggingFace Hub\n"}
+,{"stream_name":"stdout","time":115.436541044,"data":"2026-10-25 15:09:23.931 | INFO     | __main__:_smart_download:252 - [Model Download] Using HuggingFace Hub...\n"}
+,{"stream_name":"stdout","time":115.436547432,"data":"2026-10-25 15:09:27.046 | INFO     | __main__:_download_from_huggingface_internal:180 - [Model Download] Downloading from HuggingFace: ACE-Step/Ace-Step1.5 -\u003e /kaggle/tmp/ace/checkpoints\n"}
+,{"stream_name":"stdout","time":115.436556631,"data":"\n"}
+,{"stream_name":"stdout","time":115.436562108,"data":"Fetching 28 files:   0%|          | 0/28 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":115.436568801,"data":"Fetching 28 files:  29%|██▊       | 8/28 [00:00\u003c00:00, 21.57it/s]\n"}
+,{"stream_name":"stdout","time":115.436575733,"data":"Fetching 28 files:  57%|█████▋    | 16/28 [00:00\u003c00:00, 30.31it/s]\n"}
+,{"stream_name":"stdout","time":115.436591592,"data":"Fetching 28 files:  86%|████████▌ | 24/28 [00:04\u003c00:00,  5.20it/s]\n"}
+,{"stream_name":"stdout","time":115.436597006,"data":"Fetching 28 files:  93%|█████████▎| 26/28 [00:20\u003c00:01,  1.30it/s]\n"}
+,{"stream_name":"stdout","time":115.436601958,"data":"Fetching 28 files:  96%|█████████▋| 27/28 [00:32\u003c00:01,  1.21s/it]\n"}
+,{"stream_name":"stdout","time":115.436606952,"data":"Fetching 28 files: 100%|██████████| 28/28 [00:46\u003c00:00,  1.67s/it]\n"}
+,{"stream_name":"stdout","time":115.436612205,"data":"Fetching 28 files: 100%|██████████| 28/28 [00:46\u003c00:00,  1.67s/it]\n"}
+,{"stream_name":"stdout","time":115.436617136,"data":"2026-10-25 15:10:13.911 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced modeling_acestep_v15_turbo.py -\u003e /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/modeling_acestep_v15_turbo.py\n"}
+,{"stream_name":"stdout","time":115.436622301,"data":"2026-10-25 15:10:13.913 | DEBUG    | __main__:_sync_model_code_files:131 - [Model Sync] Synced configuration_acestep_v15.py -\u003e /kaggle/tmp/ace/checkpoints/acestep-v15-turbo/configuration_acestep_v15.py\n"}
+,{"stream_name":"stdout","time":115.436630211,"data":"2026-10-25 15:10:13.913 | INFO     | __main__:download_main_model:489 - [Model Download] Synced code files for acestep-v15-turbo: ['modeling_acestep_v15_turbo.py', 'configuration_acestep_v15.py']\n"}
+,{"stream_name":"stdout","time":115.436636045,"data":"\n"}
+,{"stream_name":"stderr","time":131.305029415,"data":"2026-10-25 15:10:29.897 | DEBUG    | acestep.core.generation.handler.init_service_memory_basic:_apply_malloc_mmap_threshold:50 - [memory] Set M_MMAP_THRESHOLD=131072 for immediate OS reclaim of large frees\n"}
+,{"stream_name":"stderr","time":142.533965698,"data":"/kaggle/tmp/venv/lib/python3.12/site-packages/torchao/quantization/quant_api.py:1811: SyntaxWarning: invalid escape sequence '\\.'\n"}
+,{"stream_name":"stderr","time":142.534013692,"data":"  \"\"\"Configuration class for applying different quantization configs to modules or parameters based on their fully qualified names (FQNs).\n"}
+,{"stream_name":"stderr","time":148.81437214,"data":"2026-10-25 15:10:47.406 | WARNING  | acestep.training.trainer:\u003cmodule\u003e:40 - bitsandbytes not installed. Using standard AdamW.\n"}
+,{"stream_name":"stderr","time":149.120524034,"data":"2026-10-25 15:10:47.712 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
+,{"stream_name":"stderr","time":149.1207042,"data":"2026-10-25 15:10:47.713 | INFO     | acestep.core.generation.handler.init_service_orchestrator:initialize_service:96 - [initialize_service] Pre-Ampere CUDA detected: using float16 instead of bfloat16.\n"}
+,{"stream_name":"stderr","time":149.45587714,"data":"2026-10-25 15:10:48.048 | INFO     | acestep.core.generation.handler.init_service_loader:_load_main_model_from_checkpoint:151 - [initialize_service] Pre-Ampere CUDA detected: using eager attention for float16 numerical stability.\n"}
+,{"stream_name":"stderr","time":149.4559052,"data":"2026-10-25 15:10:48.048 | INFO     | acestep.core.generation.handler.init_service_loader:_load_main_model_from_checkpoint:174 - [initialize_service] Attempting to load model with attention implementation: eager\n"}
+,{"stream_name":"stderr","time":157.456838456,"data":"2026-10-25 15:10:56.049 | INFO     | acestep.core.generation.handler.init_service_loader:_load_main_model_from_checkpoint:200 - [initialize_service] Keeping main model on cuda (persistent)\n"}
+,{"stream_name":"stderr","time":162.957179679,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stdout","time":165.656517618,"data":"dit True [OK] Model initialized successfully on cuda\n"}
+,{"stream_name":"stdout","time":165.656548354,"data":"Main model: /kaggle/tmp/ace/checkpoints/acestep-v15-turbo\n"}
+,{"stream_name":"stdout","time":165.656552214,"data":"VAE: /kaggle/tmp/ace/checkpoints/vae\n"}
+,{"stream_name":"stdout","time":165.656554838,"data":"Text encoder: /kaggle/tmp/ace/checkpoints/Qwen3-Embedding-0.6B\n"}
+,{"stream_name":"stdout","time":165.656557554,"data":"Dtype: torch.float32\n"}
+,{"stream_name":"stdout","time":165.656560021,"data":"Attention: eager\n"}
+,{"stream_name":"stdout","time":165.656562432,"data":"Compiled: False\n"}
+,{"stream_name":"stdout","time":165.656564794,"data":"Quantization: Disabled\n"}
+,{"stream_name":"stdout","time":165.65656727,"data":"Offload to CPU: True\n"}
+,{"stream_name":"stdout","time":165.656569616,"data":"Offload DiT to CPU: False\n"}
+,{"stream_name":"stdout","time":165.656571991,"data":"MLX DiT: Disabled\n"}
+,{"stream_name":"stdout","time":165.656574386,"data":"MLX VAE: Disabled\n"}
+,{"stream_name":"stdout","time":165.656716086,"data":"llm False ❌ 5Hz LM model not found at /kaggle/tmp/ace/checkpoints/acestep-5Hz-lm-0.6B\n"}
+,{"stream_name":"stderr","time":165.901431465,"data":"2026-10-25 15:11:04.494 | INFO     | acestep.inference:generate_music:660 - Skipping LM for task_type='cover' - using DiT directly\n"}
+,{"stream_name":"stderr","time":165.901484215,"data":"2026-10-25 15:11:04.494 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=True, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
+,{"stream_name":"stderr","time":165.901558158,"data":"2026-10-25 15:11:04.494 | INFO     | acestep.inference:generate_music:834 - [generate_music] cover task: using params.caption='children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby', params.lyrics='[verse]\n"}
+,{"stream_name":"stderr","time":165.901565281,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":165.90157004,"data":"滿天都是小星星\n"}
+,{"stream_name":"stderr","time":165.901573895,"data":"掛在天上放光明\n"}
+,{"stream_name":"stderr","time":165.901577696,"data":"好像許多小眼睛\n"}
+,{"stream_name":"stderr","time":165.901598214,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":165.901601899,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":165.901605889,"data":"滿天都是小星星'\n"}
+,{"stream_name":"stderr","time":165.901663949,"data":"2026-10-25 15:11:04.494 | INFO     | acestep.inference:generate_music:835 - [generate_music] Final inputs: dit_input_caption='children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby', dit_input_lyrics='[verse]\n"}
+,{"stream_name":"stderr","time":165.901679903,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":165.901685198,"data":"滿天都是小星星\n"}
+,{"stream_name":"stderr","time":165.901688902,"data":"掛在天上放光明\n"}
+,{"stream_name":"stderr","time":165.901692501,"data":"好像許多小眼睛\n"}
+,{"stream_name":"stderr","time":165.901696528,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":165.901699899,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":165.901703407,"data":"滿天都是小星星'\n"}
+,{"stream_name":"stderr","time":165.902196561,"data":"2026-10-25 15:11:04.494 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
+,{"stream_name":"stderr","time":165.902271918,"data":"2026-10-25 15:11:04.495 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
+,{"stream_name":"stderr","time":165.902338805,"data":"2026-10-25 15:11:04.495 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
+,{"stream_name":"stderr","time":165.906509515,"data":"2026-10-25 15:11:04.499 | INFO     | acestep.core.generation.handler.generate_music_request:_prepare_reference_and_source_audio:188 - [generate_music] Processing source audio...\n"}
+,{"stream_name":"stderr","time":166.425092344,"data":"2026-10-25 15:11:05.017 | DEBUG    | acestep.core.generation.handler.generate_music:_vram_preflight_check:133 - [generate_music] VRAM pre-flight: skipping check (offload_to_cpu=True, models loaded one-at-a-time)\n"}
+,{"stream_name":"stderr","time":166.425242625,"data":"2026-10-25 15:11:05.017 | INFO     | acestep.core.generation.handler.progress:_start_diffusion_progress_estimator:179 - [progress] No timing history — using fallback estimate (2.5s/step for batch_size=1).  This will self-calibrate after the first generation.\n"}
+,{"stream_name":"stderr","time":166.438867309,"data":"2026-10-25 15:11:05.031 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:41 - [_load_model_context] Loading vae to cuda (RSS: 4074 MB)\n"}
+,{"stream_name":"stderr","time":166.43911787,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":166.909582127,"data":"2026-10-25 15:11:05.502 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:58 - [_load_model_context] Loaded vae to cuda in 0.2182s (RSS: 4074 -\u003e 3414 MB, delta: -660 MB)\n"}
+,{"stream_name":"stderr","time":166.987694275,"data":"2026-10-25 15:11:05.580 | INFO     | acestep.core.generation.handler.conditioning_target:_prepare_target_latents_and_wavs:104 - [generate_music] Encoding target audio to latents for item 0...\n"}
+,{"stream_name":"stderr","time":166.98788734,"data":"2026-10-25 15:11:05.580 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
+,{"stream_name":"stderr","time":169.79623653,"data":"2026-10-25 15:11:08.388 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:67 - [_load_model_context] Offloading vae to CPU (RSS: 3720 MB)\n"}
+,{"stream_name":"stderr","time":169.796272105,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":170.657860722,"data":"2026-10-25 15:11:09.250 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:83 - [_load_model_context] Offloaded vae to CPU in 0.5857s (RSS: 3720 -\u003e 4363 MB, delta: +643 MB)\n"}
+,{"stream_name":"stderr","time":170.706479101,"data":"2026-10-25 15:11:09.299 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:119 - \n"}
+,{"stream_name":"stderr","time":170.706515623,"data":"======================================================================\n"}
+,{"stream_name":"stderr","time":170.70651932,"data":"2026-10-25 15:11:09.299 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:120 - 🔍 [DEBUG] DiT TEXT ENCODER INPUT (Inference)\n"}
+,{"stream_name":"stderr","time":170.706552357,"data":"2026-10-25 15:11:09.299 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:121 - ======================================================================\n"}
+,{"stream_name":"stderr","time":170.706619888,"data":"2026-10-25 15:11:09.299 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:122 - text_prompt:\n"}
+,{"stream_name":"stderr","time":170.706627915,"data":"# Instruction\n"}
+,{"stream_name":"stderr","time":170.706632067,"data":"Fill the audio semantic mask based on the given conditions:\n"}
+,{"stream_name":"stderr","time":170.706636327,"data":"\n"}
+,{"stream_name":"stderr","time":170.706640551,"data":"# Caption\n"}
+,{"stream_name":"stderr","time":170.70664468,"data":"children's nursery rhyme, sweet gentle young female voice singing clearly in Mandarin Chinese, music box, glockenspiel, soft piano, slow tempo, warm lullaby\n"}
+,{"stream_name":"stderr","time":170.70664917,"data":"\n"}
+,{"stream_name":"stderr","time":170.706652862,"data":"# Metas\n"}
+,{"stream_name":"stderr","time":170.706657062,"data":"- bpm: N/A\n"}
+,{"stream_name":"stderr","time":170.706660965,"data":"- timesignature: N/A\n"}
+,{"stream_name":"stderr","time":170.706664908,"data":"- keyscale: N/A\n"}
+,{"stream_name":"stderr","time":170.706668778,"data":"- duration: 37 seconds\n"}
+,{"stream_name":"stderr","time":170.706673129,"data":"\u003c|endoftext|\u003e\n"}
+,{"stream_name":"stderr","time":170.706678272,"data":"\n"}
+,{"stream_name":"stderr","time":170.706682404,"data":"2026-10-25 15:11:09.299 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:123 - ======================================================================\n"}
+,{"stream_name":"stderr","time":170.706697589,"data":"2026-10-25 15:11:09.299 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:124 - lyrics_text:\n"}
+,{"stream_name":"stderr","time":170.706703104,"data":"# Languages\n"}
+,{"stream_name":"stderr","time":170.706707293,"data":"zh\n"}
+,{"stream_name":"stderr","time":170.706711344,"data":"\n"}
+,{"stream_name":"stderr","time":170.706714943,"data":"# Lyric\n"}
+,{"stream_name":"stderr","time":170.706718323,"data":"[verse]\n"}
+,{"stream_name":"stderr","time":170.706721712,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":170.706725418,"data":"滿天都是小星星\n"}
+,{"stream_name":"stderr","time":170.706728844,"data":"掛在天上放光明\n"}
+,{"stream_name":"stderr","time":170.706732286,"data":"好像許多小眼睛\n"}
+,{"stream_name":"stderr","time":170.706735914,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":170.706740957,"data":"一閃一閃亮晶晶\n"}
+,{"stream_name":"stderr","time":170.706749105,"data":"滿天都是小星星\u003c|endoftext|\u003e\n"}
+,{"stream_name":"stderr","time":170.70675193,"data":"2026-10-25 15:11:09.299 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:125 - ======================================================================\n"}
+,{"stream_name":"stderr","time":170.706754711,"data":"\n"}
+,{"stream_name":"stderr","time":170.721214598,"data":"2026-10-25 15:11:09.313 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:41 - [_load_model_context] Loading vae to cuda (RSS: 4354 MB)\n"}
+,{"stream_name":"stderr","time":170.721251071,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":171.172504717,"data":"2026-10-25 15:11:09.764 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:58 - [_load_model_context] Loaded vae to cuda in 0.2020s (RSS: 4354 -\u003e 3711 MB, delta: -643 MB)\n"}
+,{"stream_name":"stderr","time":171.204639379,"data":"2026-10-25 15:11:09.797 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:67 - [_load_model_context] Offloading vae to CPU (RSS: 3732 MB)\n"}
+,{"stream_name":"stderr","time":171.204669567,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":172.065437349,"data":"2026-10-25 15:11:10.657 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:83 - [_load_model_context] Offloaded vae to CPU in 0.6013s (RSS: 3732 -\u003e 4376 MB, delta: +644 MB)\n"}
+,{"stream_name":"stderr","time":172.067143523,"data":"2026-10-25 15:11:10.659 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:110 - [preprocess_batch] Inferring prompt embeddings...\n"}
+,{"stream_name":"stderr","time":172.06731378,"data":"2026-10-25 15:11:10.660 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:41 - [_load_model_context] Loading text_encoder to cuda (RSS: 4376 MB)\n"}
+,{"stream_name":"stderr","time":173.064674796,"data":"2026-10-25 15:11:11.657 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:58 - [_load_model_context] Loaded text_encoder to cuda in 0.7456s (RSS: 4376 -\u003e 2103 MB, delta: -2273 MB)\n"}
+,{"stream_name":"stderr","time":173.306072092,"data":"2026-10-25 15:11:11.898 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:113 - [preprocess_batch] Inferring lyric embeddings...\n"}
+,{"stream_name":"stderr","time":173.306375486,"data":"2026-10-25 15:11:11.899 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:122 - [preprocess_batch] Inferring non-cover text embeddings...\n"}
+,{"stream_name":"stderr","time":173.349207491,"data":"2026-10-25 15:11:11.941 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:67 - [_load_model_context] Offloading text_encoder to CPU (RSS: 2198 MB)\n"}
+,{"stream_name":"stderr","time":175.766085653,"data":"2026-10-25 15:11:14.358 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:83 - [_load_model_context] Offloaded text_encoder to CPU in 2.0997s (RSS: 2198 -\u003e 4471 MB, delta: +2273 MB)\n"}
+,{"stream_name":"stderr","time":175.766220881,"data":"2026-10-25 15:11:14.358 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:173 - [service_generate] Generating audio... (DiT backend: PyTorch (cuda))\n"}
+,{"stream_name":"stderr","time":176.308823691,"data":"2026-10-25 15:11:14.901 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:276 - [service_generate] DiT diffusion via PyTorch (cuda)...\n"}
+,{"stream_name":"stderr","time":176.798543657,"data":"2026-10-25 15:11:15.391 | INFO     | acestep.models.common.dcw_correction:__init__:98 - [DCW] Active — mode=double, scaler=0.0500, high_scaler=0.0200, wavelet='haar'\n"}
+,{"stream_name":"stderr","time":177.473538569,"data":"2026-10-25 15:11:16.066 | INFO     | acestep.models.common.dcw_loader:get:84 - [DCW] Built DWT1D for wavelet='haar' (low-pass filter taps=2, device=cuda:0, dtype=torch.float32).\n"}
+,{"stream_name":"stderr","time":180.168580045,"data":"2026-10-25 15:11:18.761 | INFO     | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:42 - [generate_music] Model generation completed. Decoding latents...\n"}
+,{"stream_name":"stderr","time":180.169334808,"data":"2026-10-25 15:11:18.761 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:64 - [generate_music] pred_latents: torch.Size([1, 939, 64]), dtype=torch.float32\n"}
+,{"stream_name":"stderr","time":180.169364285,"data":"2026-10-25 15:11:18.762 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:65 - [generate_music] time_costs: {'encoder_time_cost': 0.3857748508453369, 'diffusion_time_cost': 3.4733593463897705, 'diffusion_per_step_time_cost': 0.4341699182987213, 'total_time_cost': 3.8591341972351074, 'offload_time_cost': 4.452563762664795}\n"}
+,{"stream_name":"stderr","time":180.351137495,"data":"2026-10-25 15:11:18.943 | INFO     | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:127 - [generate_music] Decoding latents with VAE...\n"}
+,{"stream_name":"stderr","time":180.351457546,"data":"2026-10-25 15:11:18.944 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:41 - [_load_model_context] Loading vae to cuda (RSS: 4727 MB)\n"}
+,{"stream_name":"stderr","time":180.351634096,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":180.8308581,"data":"2026-10-25 15:11:19.423 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:58 - [_load_model_context] Loaded vae to cuda in 0.2185s (RSS: 4727 -\u003e 4084 MB, delta: -643 MB)\n"}
+,{"stream_name":"stderr","time":180.832313032,"data":"2026-10-25 15:11:19.425 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:136 - [generate_music] Before VAE decode: allocated=9.89GB, max=12.80GB\n"}
+,{"stream_name":"stderr","time":180.832843407,"data":"2026-10-25 15:11:19.425 | INFO     | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:154 - [generate_music] Effective free VRAM before VAE decode: 4.54 GB\n"}
+,{"stream_name":"stderr","time":180.8329665,"data":"2026-10-25 15:11:19.425 | INFO     | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:172 - [generate_music] Using tiled VAE decode to reduce VRAM usage...\n"}
+,{"stream_name":"stderr","time":180.833636603,"data":"2026-10-25 15:11:19.426 | DEBUG    | acestep.core.generation.handler.memory_utils:_get_auto_decode_chunk_size:108 - [_get_auto_decode_chunk_size] Effective free VRAM: 4.54 GB\n"}
+,{"stream_name":"stderr","time":180.834163776,"data":"2026-10-25 15:11:19.426 | DEBUG    | acestep.core.generation.handler.memory_utils:_should_offload_wav_to_cpu:131 - [_should_offload_wav_to_cpu] Effective free VRAM: 4.54 GB\n"}
+,{"stream_name":"stderr","time":180.834191687,"data":"2026-10-25 15:11:19.426 | INFO     | acestep.core.generation.handler.vae_decode:tiled_decode:56 - [tiled_decode] chunk_size=128, offload_wav_to_cpu=True, latents_shape=torch.Size([1, 64, 939])\n"}
+,{"stream_name":"stderr","time":180.83434638,"data":"2026-10-25 15:11:19.427 | WARNING  | acestep.core.generation.handler.vae_decode_chunks:_tiled_decode_inner:39 - [tiled_decode] Reduced overlap from 64 to 32 for chunk_size=128\n"}
+,{"stream_name":"stderr","time":184.897704451,"data":"2026-10-25 15:11:23.490 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:193 - [generate_music] After VAE decode: allocated=10.21GB, max=12.80GB\n"}
+,{"stream_name":"stderr","time":184.91361852,"data":"2026-10-25 15:11:23.506 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:67 - [_load_model_context] Offloading vae to CPU (RSS: 4133 MB)\n"}
+,{"stream_name":"stderr","time":184.913806353,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":185.754652344,"data":"2026-10-25 15:11:24.347 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:83 - [_load_model_context] Offloaded vae to CPU in 0.5883s (RSS: 4133 -\u003e 4776 MB, delta: +643 MB)\n"}
+,{"stream_name":"stderr","time":185.994377153,"data":"2026-10-25 15:11:24.586 | INFO     | acestep.core.generation.handler.generate_music_payload:_build_generate_music_success_payload:38 - [generate_music] VAE decode completed. Preparing audio tensors...\n"}
+,{"stream_name":"stderr","time":185.994412152,"data":"2026-10-25 15:11:24.587 | INFO     | acestep.core.generation.handler.generate_music_payload:_build_generate_music_success_payload:50 - [generate_music] Done! Generated 1 audio tensors.\n"}
+,{"stream_name":"stderr","time":186.258028857,"data":"2026-10-25 15:11:24.850 | INFO     | acestep.inference:generate_music:1002 - [Normalization] Audio 0 BEFORE: Peak=1.0000, Target=-1.0dB\n"}
+,{"stream_name":"stderr","time":186.283454223,"data":"2026-10-25 15:11:24.876 | INFO     | acestep.inference:generate_music:1007 - [Normalization] Audio 0 AFTER: Peak=0.8913\n"}
+,{"stream_name":"stderr","time":188.430594116,"data":"2026-10-25 15:11:27.023 | DEBUG    | acestep.audio_utils:_save_mp3:183 - [AudioSaver] Saved audio to /kaggle/tmp/acestep-little-star-cover/34f163ab-79d1-6325-7031-fe9962268927.mp3 (mp3, 48000Hz, 128k)\n"}
+,{"stream_name":"stdout","time":188.433354426,"data":"acestep-little-star-cover ok 23s Generation completed successfully!\n"}
+,{"stream_name":"stderr","time":188.608615143,"data":"2026-10-25 15:11:27.201 | INFO     | acestep.inference:generate_music:660 - Skipping LM for task_type='cover' - using DiT directly\n"}
+,{"stream_name":"stderr","time":188.60864364,"data":"2026-10-25 15:11:27.201 | INFO     | acestep.inference:generate_music:662 - [generate_music] LLM usage decision: thinking=True, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False\n"}
+,{"stream_name":"stderr","time":188.60876908,"data":"2026-10-25 15:11:27.201 | INFO     | acestep.inference:generate_music:834 - [generate_music] cover task: using params.caption='classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm', params.lyrics='[verse]\n"}
+,{"stream_name":"stderr","time":188.608776537,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":188.608780101,"data":"How I wonder what you are\n"}
+,{"stream_name":"stderr","time":188.608783475,"data":"Up above the world so high\n"}
+,{"stream_name":"stderr","time":188.608786772,"data":"Like a diamond in the sky\n"}
+,{"stream_name":"stderr","time":188.608790135,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":188.60879336,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":188.608798235,"data":"How I wonder what you are'\n"}
+,{"stream_name":"stderr","time":188.608845731,"data":"2026-10-25 15:11:27.201 | INFO     | acestep.inference:generate_music:835 - [generate_music] Final inputs: dit_input_caption='classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm', dit_input_lyrics='[verse]\n"}
+,{"stream_name":"stderr","time":188.608861487,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":188.608865152,"data":"How I wonder what you are\n"}
+,{"stream_name":"stderr","time":188.608868371,"data":"Up above the world so high\n"}
+,{"stream_name":"stderr","time":188.60887203,"data":"Like a diamond in the sky\n"}
+,{"stream_name":"stderr","time":188.608875374,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":188.608878557,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":188.608881833,"data":"How I wonder what you are'\n"}
+,{"stream_name":"stderr","time":188.609417018,"data":"2026-10-25 15:11:27.202 | INFO     | acestep.core.generation.handler.generate_music:generate_music:313 - [generate_music] Turbo model detected: overriding guidance_scale 7.0 -\u003e 1.0 (turbo does not use CFG).\n"}
+,{"stream_name":"stderr","time":188.609517824,"data":"2026-10-25 15:11:27.202 | INFO     | acestep.core.generation.handler.generate_music:generate_music:329 - [generate_music] Starting generation...\n"}
+,{"stream_name":"stderr","time":188.611092564,"data":"2026-10-25 15:11:27.202 | INFO     | acestep.core.generation.handler.generate_music:generate_music:332 - [generate_music] Preparing inputs...\n"}
+,{"stream_name":"stderr","time":188.613732294,"data":"2026-10-25 15:11:27.206 | INFO     | acestep.core.generation.handler.generate_music_request:_prepare_reference_and_source_audio:188 - [generate_music] Processing source audio...\n"}
+,{"stream_name":"stderr","time":188.989427408,"data":"2026-10-25 15:11:27.581 | DEBUG    | acestep.core.generation.handler.generate_music:_vram_preflight_check:133 - [generate_music] VRAM pre-flight: skipping check (offload_to_cpu=True, models loaded one-at-a-time)\n"}
+,{"stream_name":"stderr","time":189.002435203,"data":"2026-10-25 15:11:27.595 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:41 - [_load_model_context] Loading vae to cuda (RSS: 4803 MB)\n"}
+,{"stream_name":"stderr","time":189.003109259,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":189.471514961,"data":"2026-10-25 15:11:28.064 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:58 - [_load_model_context] Loaded vae to cuda in 0.2205s (RSS: 4803 -\u003e 4159 MB, delta: -644 MB)\n"}
+,{"stream_name":"stderr","time":189.475469048,"data":"2026-10-25 15:11:28.068 | INFO     | acestep.core.generation.handler.conditioning_target:_prepare_target_latents_and_wavs:104 - [generate_music] Encoding target audio to latents for item 0...\n"}
+,{"stream_name":"stderr","time":189.475625567,"data":"2026-10-25 15:11:28.068 | INFO     | acestep.gpu_config:get_gpu_memory_gb:578 - CUDA GPU detected: Tesla T4 (14.6 GB)\n"}
+,{"stream_name":"stderr","time":191.443620835,"data":"2026-10-25 15:11:30.036 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:67 - [_load_model_context] Offloading vae to CPU (RSS: 4161 MB)\n"}
+,{"stream_name":"stderr","time":191.443724325,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":192.296269032,"data":"2026-10-25 15:11:30.888 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:83 - [_load_model_context] Offloaded vae to CPU in 0.5919s (RSS: 4161 -\u003e 4805 MB, delta: +644 MB)\n"}
+,{"stream_name":"stderr","time":192.310456467,"data":"2026-10-25 15:11:30.903 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:119 - \n"}
+,{"stream_name":"stderr","time":192.310491742,"data":"======================================================================\n"}
+,{"stream_name":"stderr","time":192.310497358,"data":"2026-10-25 15:11:30.903 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:120 - 🔍 [DEBUG] DiT TEXT ENCODER INPUT (Inference)\n"}
+,{"stream_name":"stderr","time":192.310536644,"data":"2026-10-25 15:11:30.903 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:121 - ======================================================================\n"}
+,{"stream_name":"stderr","time":192.310715765,"data":"2026-10-25 15:11:30.903 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:122 - text_prompt:\n"}
+,{"stream_name":"stderr","time":192.310722967,"data":"# Instruction\n"}
+,{"stream_name":"stderr","time":192.310726308,"data":"Fill the audio semantic mask based on the given conditions:\n"}
+,{"stream_name":"stderr","time":192.310729651,"data":"\n"}
+,{"stream_name":"stderr","time":192.310732694,"data":"# Caption\n"}
+,{"stream_name":"stderr","time":192.31075778,"data":"classic English nursery rhyme for toddlers, sweet clear young female voice, music box, glockenspiel, soft piano, slow tempo, gentle and warm\n"}
+,{"stream_name":"stderr","time":192.310761639,"data":"\n"}
+,{"stream_name":"stderr","time":192.310764588,"data":"# Metas\n"}
+,{"stream_name":"stderr","time":192.310767636,"data":"- bpm: N/A\n"}
+,{"stream_name":"stderr","time":192.310770731,"data":"- timesignature: N/A\n"}
+,{"stream_name":"stderr","time":192.310773854,"data":"- keyscale: N/A\n"}
+,{"stream_name":"stderr","time":192.310776864,"data":"- duration: 37 seconds\n"}
+,{"stream_name":"stderr","time":192.310779846,"data":"\u003c|endoftext|\u003e\n"}
+,{"stream_name":"stderr","time":192.310800363,"data":"\n"}
+,{"stream_name":"stderr","time":192.310807547,"data":"2026-10-25 15:11:30.903 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:123 - ======================================================================\n"}
+,{"stream_name":"stderr","time":192.31090895,"data":"2026-10-25 15:11:30.903 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:124 - lyrics_text:\n"}
+,{"stream_name":"stderr","time":192.310920468,"data":"# Languages\n"}
+,{"stream_name":"stderr","time":192.310924583,"data":"en\n"}
+,{"stream_name":"stderr","time":192.310928217,"data":"\n"}
+,{"stream_name":"stderr","time":192.310931694,"data":"# Lyric\n"}
+,{"stream_name":"stderr","time":192.310935428,"data":"[verse]\n"}
+,{"stream_name":"stderr","time":192.310938944,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":192.310942286,"data":"How I wonder what you are\n"}
+,{"stream_name":"stderr","time":192.310946418,"data":"Up above the world so high\n"}
+,{"stream_name":"stderr","time":192.310950166,"data":"Like a diamond in the sky\n"}
+,{"stream_name":"stderr","time":192.310953608,"data":"[outro]\n"}
+,{"stream_name":"stderr","time":192.310956937,"data":"Twinkle, twinkle, little star\n"}
+,{"stream_name":"stderr","time":192.310960702,"data":"How I wonder what you are\u003c|endoftext|\u003e\n"}
+,{"stream_name":"stderr","time":192.31098369,"data":"2026-10-25 15:11:30.903 | INFO     | acestep.core.generation.handler.conditioning_text:_prepare_text_conditioning_inputs:125 - ======================================================================\n"}
+,{"stream_name":"stderr","time":192.311020055,"data":"\n"}
+,{"stream_name":"stderr","time":192.323764749,"data":"2026-10-25 15:11:30.916 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:41 - [_load_model_context] Loading vae to cuda (RSS: 4780 MB)\n"}
+,{"stream_name":"stderr","time":192.323962352,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":192.807333832,"data":"2026-10-25 15:11:31.399 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:58 - [_load_model_context] Loaded vae to cuda in 0.2271s (RSS: 4780 -\u003e 4137 MB, delta: -644 MB)\n"}
+,{"stream_name":"stderr","time":192.808049794,"data":"2026-10-25 15:11:31.400 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:67 - [_load_model_context] Offloading vae to CPU (RSS: 4137 MB)\n"}
+,{"stream_name":"stderr","time":192.808153516,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":193.652264488,"data":"2026-10-25 15:11:32.244 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:83 - [_load_model_context] Offloaded vae to CPU in 0.5963s (RSS: 4137 -\u003e 4780 MB, delta: +644 MB)\n"}
+,{"stream_name":"stderr","time":193.652646346,"data":"2026-10-25 15:11:32.245 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:110 - [preprocess_batch] Inferring prompt embeddings...\n"}
+,{"stream_name":"stderr","time":193.652897591,"data":"2026-10-25 15:11:32.245 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:41 - [_load_model_context] Loading text_encoder to cuda (RSS: 4780 MB)\n"}
+,{"stream_name":"stderr","time":194.647112205,"data":"2026-10-25 15:11:33.239 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:58 - [_load_model_context] Loaded text_encoder to cuda in 0.7375s (RSS: 4780 -\u003e 2507 MB, delta: -2273 MB)\n"}
+,{"stream_name":"stderr","time":194.693355168,"data":"2026-10-25 15:11:33.285 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:113 - [preprocess_batch] Inferring lyric embeddings...\n"}
+,{"stream_name":"stderr","time":194.69358314,"data":"2026-10-25 15:11:33.286 | INFO     | acestep.core.generation.handler.conditioning_embed:preprocess_batch:122 - [preprocess_batch] Inferring non-cover text embeddings...\n"}
+,{"stream_name":"stderr","time":194.739273545,"data":"2026-10-25 15:11:33.331 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:67 - [_load_model_context] Offloading text_encoder to CPU (RSS: 2507 MB)\n"}
+,{"stream_name":"stderr","time":197.052766558,"data":"2026-10-25 15:11:35.645 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:83 - [_load_model_context] Offloaded text_encoder to CPU in 2.0558s (RSS: 2507 -\u003e 4781 MB, delta: +2273 MB)\n"}
+,{"stream_name":"stderr","time":197.052800183,"data":"2026-10-25 15:11:35.645 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:173 - [service_generate] Generating audio... (DiT backend: PyTorch (cuda))\n"}
+,{"stream_name":"stderr","time":197.227060128,"data":"2026-10-25 15:11:35.819 | INFO     | acestep.core.generation.handler.service_generate_execute:_execute_service_generate_diffusion:276 - [service_generate] DiT diffusion via PyTorch (cuda)...\n"}
+,{"stream_name":"stderr","time":197.827284553,"data":"2026-10-25 15:11:36.419 | INFO     | acestep.models.common.dcw_correction:__init__:98 - [DCW] Active — mode=double, scaler=0.0500, high_scaler=0.0200, wavelet='haar'\n"}
+,{"stream_name":"stderr","time":200.986304318,"data":"2026-10-25 15:11:39.578 | INFO     | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:42 - [generate_music] Model generation completed. Decoding latents...\n"}
+,{"stream_name":"stderr","time":200.987133897,"data":"2026-10-25 15:11:39.579 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:64 - [generate_music] pred_latents: torch.Size([1, 939, 64]), dtype=torch.float32\n"}
+,{"stream_name":"stderr","time":200.987224657,"data":"2026-10-25 15:11:39.579 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_prepare_generate_music_decode_state:65 - [generate_music] time_costs: {'encoder_time_cost': 0.4928550720214844, 'diffusion_time_cost': 3.2657713890075684, 'diffusion_per_step_time_cost': 0.40822142362594604, 'total_time_cost': 3.7586264610290527, 'offload_time_cost': 4.429130554199219}\n"}
+,{"stream_name":"stderr","time":201.172079377,"data":"2026-10-25 15:11:39.764 | INFO     | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:127 - [generate_music] Decoding latents with VAE...\n"}
+,{"stream_name":"stderr","time":201.172376447,"data":"2026-10-25 15:11:39.765 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:41 - [_load_model_context] Loading vae to cuda (RSS: 4781 MB)\n"}
+,{"stream_name":"stderr","time":201.172559991,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":201.651821501,"data":"2026-10-25 15:11:40.244 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:58 - [_load_model_context] Loaded vae to cuda in 0.2315s (RSS: 4781 -\u003e 4137 MB, delta: -644 MB)\n"}
+,{"stream_name":"stderr","time":201.65344481,"data":"2026-10-25 15:11:40.246 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:136 - [generate_music] Before VAE decode: allocated=10.21GB, max=13.44GB\n"}
+,{"stream_name":"stderr","time":201.654063444,"data":"2026-10-25 15:11:40.246 | INFO     | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:154 - [generate_music] Effective free VRAM before VAE decode: 4.22 GB\n"}
+,{"stream_name":"stderr","time":201.654140683,"data":"2026-10-25 15:11:40.246 | INFO     | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:172 - [generate_music] Using tiled VAE decode to reduce VRAM usage...\n"}
+,{"stream_name":"stderr","time":201.654853412,"data":"2026-10-25 15:11:40.247 | DEBUG    | acestep.core.generation.handler.memory_utils:_get_auto_decode_chunk_size:108 - [_get_auto_decode_chunk_size] Effective free VRAM: 4.22 GB\n"}
+,{"stream_name":"stderr","time":201.6554288,"data":"2026-10-25 15:11:40.248 | DEBUG    | acestep.core.generation.handler.memory_utils:_should_offload_wav_to_cpu:131 - [_should_offload_wav_to_cpu] Effective free VRAM: 4.22 GB\n"}
+,{"stream_name":"stderr","time":201.655506237,"data":"2026-10-25 15:11:40.248 | INFO     | acestep.core.generation.handler.vae_decode:tiled_decode:56 - [tiled_decode] chunk_size=128, offload_wav_to_cpu=True, latents_shape=torch.Size([1, 64, 939])\n"}
+,{"stream_name":"stderr","time":201.655596848,"data":"2026-10-25 15:11:40.248 | WARNING  | acestep.core.generation.handler.vae_decode_chunks:_tiled_decode_inner:39 - [tiled_decode] Reduced overlap from 64 to 32 for chunk_size=128\n"}
+,{"stream_name":"stderr","time":205.741861359,"data":"2026-10-25 15:11:44.334 | DEBUG    | acestep.core.generation.handler.generate_music_decode:_decode_generate_music_pred_latents:193 - [generate_music] After VAE decode: allocated=10.21GB, max=13.44GB\n"}
+,{"stream_name":"stderr","time":205.756488996,"data":"2026-10-25 15:11:44.349 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:67 - [_load_model_context] Offloading vae to CPU (RSS: 4152 MB)\n"}
+,{"stream_name":"stderr","time":205.756618508,"data":"There are modules in AutoencoderOobleck that should be kept in float32: []. Casting directly with `to()` can lead to inconsistent results; set `torch_dtype` in `from_pretrained()` instead to keep these modules in float32.\n"}
+,{"stream_name":"stderr","time":206.609753278,"data":"2026-10-25 15:11:45.202 | INFO     | acestep.core.generation.handler.init_service_offload_context:_load_model_context:83 - [_load_model_context] Offloaded vae to CPU in 0.5958s (RSS: 4152 -\u003e 4795 MB, delta: +643 MB)\n"}
+,{"stream_name":"stderr","time":206.851150274,"data":"2026-10-25 15:11:45.443 | INFO     | acestep.core.generation.handler.generate_music_payload:_build_generate_music_success_payload:38 - [generate_music] VAE decode completed. Preparing audio tensors...\n"}
+,{"stream_name":"stderr","time":206.851237409,"data":"2026-10-25 15:11:45.443 | INFO     | acestep.core.generation.handler.generate_music_payload:_build_generate_music_success_payload:50 - [generate_music] Done! Generated 1 audio tensors.\n"}
+,{"stream_name":"stderr","time":207.096362956,"data":"2026-10-25 15:11:45.688 | INFO     | acestep.inference:generate_music:1002 - [Normalization] Audio 0 BEFORE: Peak=1.0000, Target=-1.0dB\n"}
+,{"stream_name":"stderr","time":207.121233818,"data":"2026-10-25 15:11:45.713 | INFO     | acestep.inference:generate_music:1007 - [Normalization] Audio 0 AFTER: Peak=0.8913\n"}
+,{"stream_name":"stderr","time":208.500000725,"data":"2026-10-25 15:11:47.092 | DEBUG    | acestep.audio_utils:_save_mp3:183 - [AudioSaver] Saved audio to /kaggle/tmp/acestep-twinkle-cover/a9b7a81a-2bf9-b5ad-3e81-238628bc55bd.mp3 (mp3, 48000Hz, 128k)\n"}
+,{"stream_name":"stdout","time":208.503502576,"data":"acestep-twinkle-cover ok 20s Generation completed successfully!\n"}
+,{"stream_name":"stdout","time":213.026005488,"data":"gen exit 0\n"}
+,{"stream_name":"stdout","time":213.026041399,"data":"done\n"}
+,{"stream_name":"stderr","time":215.250898774,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":215.250925704,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":215.593804298,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":215.593829783,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":216.58781241,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":217.686576276,"data":"[NbConvertApp] Writing 295345 bytes to __results__.html\n"}
 ]
