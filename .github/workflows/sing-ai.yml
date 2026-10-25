@@ -31,6 +31,7 @@ jobs:
           if [ "$(python3 -c 'import json,sys;print(len(json.load(open(sys.argv[1]))))' "$RUNNER_TEMP/jobs.json")" = 0 ]; then echo "都做好了"; exit 0; fi
           pip install -q "kaggle>=1.8"
           tools/kaggle_sing/kaggle.sh "$RUNNER_TEMP/jobs.json" main audio/sing-ai
+          rm -f audio/sing-ai/kaggle-sing-log.txt
       - run: python3 tools/sing_ai.py "$RUNNER_TEMP/songs.json"
       - name: 推回 main
         run: |
