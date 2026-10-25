@@ -139,7 +139,7 @@
       const tag = BOOK_TAGS.find(t => t.id === pref.tag) || BOOK_TAGS[0];
       $('grid').style.cssText = `--c:${tag.color};--cd:${tag.dark}`;
       $('grid').innerHTML = BOOKS.filter(b => tag.id === 'all' || b.tag === tag.id).map((b, i) =>
-        `<div class="card story" role="button" data-go="#/read/${b.id}/0" style="--i:${i}"><span class="thumb">${b.cover}${tag.id === 'all' && b.tag ? `<span class="tag">${b.tag}</span>` : ''}</span><div class="name">📖 ${b.title}</div></div>`).join('');
+        `<div class="card story" role="button" data-go="#/read/${b.id}/0" style="--i:${i}"><span class="thumb">${b.cover}${tag.id === 'all' && b.tag ? `<span class="tag">${(BOOK_TAGS.find(t => t.id === b.tag) || {}).name || b.tag}</span>` : ''}</span><div class="name">📖 ${b.title}</div></div>`).join('');
     }
   }
 
