@@ -414,8 +414,8 @@
   // 兒歌有 AI 唱好的錄音（tools/sing.py 產生）就放錄音，沒有才用八音盒彈旋律
   let SUNG = {}, AI = {};
   fetch('audio/sing/index.json').then(r => r.ok ? r.json() : {}).then(j => { SUNG = j; }).catch(() => {});
-  // AI 歌手（ACE-Step）唱的版本：new = 新旋律（爸爸試聽最喜歡）、cover = 保留原本旋律
-  const AI_STYLE = 'new';
+  // AI 歌手（ACE-Step）唱的版本：cover = 保留原本旋律（小朋友聽得出是哪首歌）、new = AI 新作的旋律
+  const AI_STYLE = 'cover';
   fetch('audio/sing-ai/index.json').then(r => r.ok ? r.json() : {}).then(j => { AI = j; }).catch(() => {});
   // 這首歌要放哪個錄音：AI 歌手 > 合成的唱歌 > 沒有（八音盒）
   function track(id) {
