@@ -1,6 +1,6 @@
-/* 線稿包：陀螺對戰（原創對戰陀螺）
- * 全部是原創造型：三層構造（刀刃環 + 齒輪棘輪 + 帶小齒輪的尖底），
- * 四大主角陀螺：烈焰龍劍、雷霆虎爪、冰晶鳳凰、鋼鐵騎士盾。
+/* 線稿包：戰鬥陀螺 X（Beyblade X 風格的對戰陀螺）
+ * 每顆都是寬寬扁扁的三層構造：上蓋（刀刃 + 金屬環 + 徽章）/ 固鎖輪盤（方形齒 + 數字）/ 軸心（齒輪 + 短尖端）。
+ * 名字用台灣代理版的中文名。
  */
 (function () {
   const { eye, sparkle } = window.ART.helpers;
@@ -70,8 +70,8 @@
       <path fill="#dee2e6" d="M${P(x - .6 * s, y + .6 * s)} L${P(x - .62 * s, y - .1 * s)} Q${P(x - .6 * s, y - .78 * s)} ${P(x, y - .8 * s)} Q${P(x + .6 * s, y - .78 * s)} ${P(x + .62 * s, y - .1 * s)} L${P(x + .6 * s, y + .6 * s)} Z"/>
       <rect x="${f(x - .48 * s)}" y="${f(y - .22 * s)}" width="${f(.96 * s)}" height="${f(.2 * s)}" rx="${f(.1 * s)}" fill="#222"/>
       <path fill="#a5d8ff" d="M${P(x - .1 * s, y + .06 * s)} L${P(x + .1 * s, y + .06 * s)} L${P(x + .1 * s, y + .6 * s)} L${P(x - .1 * s, y + .6 * s)} Z"/>`,
-    whip: (x, y, s) => dragonHead(x, y, s, { face: '#69db7c', snout: '#d8f5a2', horn: '#ffd43b', mood: 'angry' }),
-    charge: (x, y, s) => dragonHead(x, y, s, { face: '#4c6ef5', snout: '#bac8ff', horn: '#e9ecef', mood: 'angry' }),
+    whip: (x, y, s) => dragonHead(x, y, s, { face: '#4dabf7', snout: '#e7f5ff', horn: '#ffd43b', mood: 'angry' }),
+    charge: (x, y, s) => dragonHead(x, y, s, { face: '#4c6ef5', snout: '#bac8ff', horn: '#ffd43b', mood: 'angry' }),
     brave: (x, y, s) => dragonHead(x, y, s, { face: '#74c0fc', snout: '#f1f3f5', horn: '#ffd43b', mood: 'smile' }),
     meteor: (x, y, s) => dragonHead(x, y, s, { face: '#748ffc', snout: '#dbe4ff', horn: '#ff922b', helmet: '#ced4da', plume: '#ff922b' }),
     panther: (x, y, s) => `
@@ -84,15 +84,18 @@
       <ellipse cx="${f(x + .26 * s)}" cy="${f(y - .14 * s)}" rx="${f(.15 * s)}" ry="${f(.11 * s)}" fill="#d8f5a2"/>
       <ellipse cx="${f(x - .26 * s)}" cy="${f(y - .14 * s)}" rx="${f(.04 * s)}" ry="${f(.1 * s)}" fill="#222"/>
       <ellipse cx="${f(x + .26 * s)}" cy="${f(y - .14 * s)}" rx="${f(.04 * s)}" ry="${f(.1 * s)}" fill="#222"/>`,
-    rhino: (x, y, s) => `
-      <ellipse cx="${f(x - .55 * s)}" cy="${f(y - .52 * s)}" rx="${f(.14 * s)}" ry="${f(.22 * s)}" fill="#adb5bd"/>
-      <ellipse cx="${f(x + .55 * s)}" cy="${f(y - .52 * s)}" rx="${f(.14 * s)}" ry="${f(.22 * s)}" fill="#adb5bd"/>
-      <ellipse cx="${f(x)}" cy="${f(y)}" rx="${f(.62 * s)}" ry="${f(.62 * s)}" fill="#ced4da"/>
-      <ellipse cx="${f(x)}" cy="${f(y + .32 * s)}" rx="${f(.42 * s)}" ry="${f(.26 * s)}" fill="#e9ecef"/>
-      <path fill="#ff922b" d="M${P(x - .18 * s, y + .12 * s)} Q${P(x - .05 * s, y - .5 * s)} ${P(x + .1 * s, y - 1.0 * s)} Q${P(x + .2 * s, y - .4 * s)} ${P(x + .18 * s, y + .12 * s)} Z"/>
-      ${eye(x - .34 * s, y - .16 * s, .1 * s)} ${eye(x + .34 * s, y - .16 * s, .1 * s)}
-      <circle cx="${f(x - .14 * s)}" cy="${f(y + .38 * s)}" r="${f(.05 * s)}" fill="#222"/>
-      <circle cx="${f(x + .14 * s)}" cy="${f(y + .38 * s)}" r="${f(.05 * s)}" fill="#222"/>`,
+    // 犀牛：側面的頭，鼻子上一支大角
+    rhino: (x, y, s) => {
+      const Q = (a, b) => P(x + a * s, y + b * s);
+      return `
+      <path fill="#adb5bd" d="M${Q(-.42, -.42)} L${Q(-.62, -.86)} L${Q(-.2, -.5)} Z"/>
+      <path fill="#ced4da" d="M${Q(-.82, -.15)} Q${Q(-.62, -.56)} ${Q(-.18, -.5)} L${Q(.25, -.3)} Q${Q(.6, -.12)} ${Q(.82, .2)} Q${Q(.84, .52)} ${Q(.5, .54)} L${Q(-.5, .5)} Q${Q(-.88, .32)} ${Q(-.82, -.15)} Z"/>
+      <path fill="#fff3bf" d="M${Q(.38, -.2)} Q${Q(.62, -.5)} ${Q(.86, -.9)} Q${Q(.88, -.36)} ${Q(.8, .1)} Q${Q(.6, -.08)} ${Q(.38, -.2)} Z"/>
+      <path fill="#fff3bf" d="M${Q(.06, -.38)} Q${Q(.16, -.6)} ${Q(.3, -.74)} Q${Q(.34, -.48)} ${Q(.3, -.28)} Z"/>
+      ${eye(x + .02 * s, y - .12 * s, .1 * s)}
+      <circle cx="${f(x + .64 * s)}" cy="${f(y + .26 * s)}" r="${f(.05 * s)}" fill="#222"/>
+      <path d="M${Q(.28, .4)} Q${Q(.5, .44)} ${Q(.72, .38)} M${Q(-.5, .02)} Q${Q(-.4, .2)} ${Q(-.3, .02)}"/>`;
+    },
     shark: (x, y, s) => `
       <path fill="#4dabf7" d="M${P(x - .25 * s, y - .45 * s)} L${P(x + .15 * s, y - 1.05 * s)} L${P(x + .3 * s, y - .45 * s)} Z"/>
       <ellipse cx="${f(x)}" cy="${f(y)}" rx="${f(.8 * s)}" ry="${f(.58 * s)}" fill="#74c0fc"/>
@@ -113,157 +116,372 @@
       <ellipse cx="${f(x)}" cy="${f(y)}" rx="${f(.5 * s)}" ry="${f(.58 * s)}" fill="#f8f0fc"/>
       <ellipse cx="${f(x)}" cy="${f(y + .38 * s)}" rx="${f(.34 * s)}" ry="${f(.22 * s)}" fill="#fcc2d7"/>
       ${eye(x - .2 * s, y - .08 * s, .1 * s)} ${eye(x + .2 * s, y - .08 * s, .1 * s)}`,
+    // 雄獅：一圈鬃毛 + 獅子臉
+    lion: (x, y, s) => {
+      let d = '';
+      for (let i = 0; i < 20; i++) {
+        const a = -Math.PI / 2 + i * Math.PI / 10, rr = i % 2 ? .78 * s : 1.0 * s;
+        d += `${i ? ' L' : 'M'}${P(x + rr * 1.15 * Math.cos(a), y + rr * Math.sin(a))}`;
+      }
+      return `<path fill="#ff922b" d="${d} Z"/>
+      <circle cx="${f(x - .44 * s)}" cy="${f(y - .46 * s)}" r="${f(.16 * s)}" fill="#ffd43b"/>
+      <circle cx="${f(x + .44 * s)}" cy="${f(y - .46 * s)}" r="${f(.16 * s)}" fill="#ffd43b"/>
+      <ellipse cx="${f(x)}" cy="${f(y)}" rx="${f(.6 * s)}" ry="${f(.58 * s)}" fill="#ffd43b"/>
+      <ellipse cx="${f(x)}" cy="${f(y + .3 * s)}" rx="${f(.32 * s)}" ry="${f(.22 * s)}" fill="#fff3bf"/>
+      <path fill="#222" d="M${P(x - .12 * s, y + .12 * s)} L${P(x + .12 * s, y + .12 * s)} L${P(x, y + .25 * s)} Z"/>
+      <path d="M${P(x - .2 * s, y + .4 * s)} Q${P(x, y + .5 * s)} ${P(x + .2 * s, y + .4 * s)}"/>
+      <path d="M${P(x - .44 * s, y - .32 * s)} L${P(x - .14 * s, y - .2 * s)} M${P(x + .44 * s, y - .32 * s)} L${P(x + .14 * s, y - .2 * s)}"/>
+      ${eye(x - .26 * s, y - .08 * s, .1 * s)} ${eye(x + .26 * s, y - .08 * s, .1 * s)}`;
+    },
+    // 魔導師：尖帽子 + 星星 + 白鬍子
+    wizard: (x, y, s) => `
+      <path fill="#7950f2" d="M${P(x - .62 * s, y - .3 * s)} Q${P(x - .2 * s, y - .62 * s)} ${P(x + .18 * s, y - 1.12 * s)} Q${P(x + .1 * s, y - .8 * s)} ${P(x + .5 * s, y - .32 * s)} Z"/>
+      <path fill="#ffe066" d="M${P(x - .78 * s, y - .32 * s)} Q${P(x, y - .48 * s)} ${P(x + .78 * s, y - .32 * s)} Q${P(x, y - .1 * s)} ${P(x - .78 * s, y - .32 * s)} Z"/>
+      <path fill="#f8f9fa" d="M${P(x - .46 * s, y + .02 * s)} Q${P(x - .5 * s, y + .6 * s)} ${P(x, y + .9 * s)} Q${P(x + .5 * s, y + .6 * s)} ${P(x + .46 * s, y + .02 * s)} Q${P(x, y + .36 * s)} ${P(x - .46 * s, y + .02 * s)} Z"/>
+      <path fill="#ffd8a8" d="M${P(x - .46 * s, y + .02 * s)} Q${P(x - .46 * s, y - .26 * s)} ${P(x, y - .24 * s)} Q${P(x + .46 * s, y - .26 * s)} ${P(x + .46 * s, y + .02 * s)} Q${P(x, y + .36 * s)} ${P(x - .46 * s, y + .02 * s)} Z"/>
+      ${eye(x - .18 * s, y - .04 * s, .09 * s)} ${eye(x + .18 * s, y - .04 * s, .09 * s)}
+      ${star(x + .02 * s, y - .62 * s, .16 * s, .07 * s, 5, '#ffe066')}`,
+    // 惡魔死神：大兜帽 + 發光的眼睛
+    reaper: (x, y, s) => `
+      <path fill="#495057" d="M${P(x - .7 * s, y + .7 * s)} Q${P(x - .8 * s, y - .5 * s)} ${P(x, y - .95 * s)} Q${P(x + .8 * s, y - .5 * s)} ${P(x + .7 * s, y + .7 * s)} Q${P(x, y + .5 * s)} ${P(x - .7 * s, y + .7 * s)} Z"/>
+      <path fill="#343a40" d="M${P(x - .44 * s, y + .4 * s)} Q${P(x - .5 * s, y - .5 * s)} ${P(x, y - .56 * s)} Q${P(x + .5 * s, y - .5 * s)} ${P(x + .44 * s, y + .4 * s)} Q${P(x, y + .28 * s)} ${P(x - .44 * s, y + .4 * s)} Z"/>
+      <path fill="#ff6b6b" d="M${P(x - .34 * s, y - .16 * s)} L${P(x - .06 * s, y - .02 * s)} L${P(x - .3 * s, y + .08 * s)} Z"/>
+      <path fill="#ff6b6b" d="M${P(x + .34 * s, y - .16 * s)} L${P(x + .06 * s, y - .02 * s)} L${P(x + .3 * s, y + .08 * s)} Z"/>`,
     star: (x, y, s) => star(x, y, .75 * s, .34 * s, 5, '#ffe066'),
   };
 
-  /* ---------------- 主題：刀刃形狀 + 顏色 ---------------- */
-  // lobe：每一片刀刃的頂點 [位置(0~1), 半徑比例]；acc：刀刃上的色塊
+  /* ---------------- 每顆陀螺：上蓋形狀 + 顏色 + 固鎖輪盤 + 軸心 ----------------
+   * lobe：一片上蓋刀刃的外緣 [位置(0~1), 半徑比例]，刀刃和刀刃之間的空隙會露出銀色金屬環
+   * light / mid：刀刃上斜面的亮面、暗面；side：上蓋側面
+   * rat：固鎖輪盤上的數字（第一個數字＝齒的數目）；bit：軸心尖端的樣子
+   */
   const THEME = {
-    // 1 鳳凰：三片張開的翅膀，每片三根羽毛尖
-    phoenix: { n: 3, rot: -1.9, lobe: [[0, .62], [.1, .8], [.18, .74], [.3, .92], [.38, .82], [.52, 1], [.62, .84], [.74, .64]],
-      acc: [[.3, .7], [.42, .78], [.52, .9], [.56, .7]],
-      blade: '#ff6b6b', side: '#c92a2a', acc2: '#ffd43b', core: '#ffa94d', emb: '#fff4e6', m: 'phoenix' },
-    // 2 時鐘：12 個方方的刻度齒，像時鐘也像齒輪
-    clock: { n: 12, rot: -1.57 - .13, lobe: [[0, .86], [.12, 1], [.5, 1], [.62, .86]],
-      acc: null,
-      blade: '#da77f2', side: '#9c36b5', acc2: '#e9ecef', core: '#ced4da', emb: '#f3d9fa', m: 'clock' },
-    // 3 騎士盾：五面圓圓的盾牌
-    knight: { n: 5, rot: -1.57, lobe: [[0, .72], [.06, .86], [.18, .96], [.34, 1], [.5, 1], [.66, 1], [.82, .96], [.94, .86]],
-      acc: [[.22, .74], [.34, .88], [.66, .88], [.78, .74]],
-      blade: '#ced4da', side: '#868e96', acc2: '#74c0fc', core: '#a5d8ff', emb: '#e7f5ff', m: 'helmet' },
-    // 4 飛龍鞭：兩條長長彎彎的鞭子
-    whip: { n: 2, rot: -2.4, lobe: [[0, .56], [.15, .62], [.3, .7], [.45, .8], [.58, .9], [.68, 1], [.73, .94], [.76, .74], [.8, .6]],
-      acc: [[.3, .64], [.45, .73], [.58, .82], [.6, .66]],
-      blade: '#51cf66', side: '#2b8a3e', acc2: '#ffd43b', core: '#ffe066', emb: '#ebfbee', m: 'whip' },
-    // 5 藍龍衝鋒：三支往前刺的長槍
-    charge: { n: 3, rot: -1.57 - 1.4, lobe: [[0, .62], [.3, .66], [.38, .8], [.46, 1], [.52, .8], [.6, .66]],
-      acc: [[.38, .68], [.46, .9], [.5, .68]],
-      blade: '#4c6ef5', side: '#364fc7', acc2: '#e9ecef', core: '#bac8ff', emb: '#edf2ff', m: 'charge' },
-    // 6 勇氣藍龍：兩片寬寬的龍翅膀
-    brave: { n: 2, rot: -2.0, lobe: [[0, .6], [.08, .84], [.16, .96], [.24, .84], [.32, 1], [.4, .86], [.48, .96], [.56, .8], [.64, .6]],
-      acc: [[.14, .7], [.24, .8], [.34, .82], [.44, .78], [.5, .68]],
-      blade: '#74c0fc', side: '#1971c2', acc2: '#f8f9fa', core: '#e7f5ff', emb: '#f8f9fa', m: 'brave' },
-    // 7 流星龍騎士：四道流星火焰
-    meteor: { n: 4, rot: -1.2, lobe: [[0, .64], [.2, .78], [.28, .72], [.44, .92], [.52, .8], [.68, 1], [.74, .66]],
-      acc: [[.4, .7], [.52, .8], [.64, .88], [.62, .7]],
-      blade: '#3b5bdb', side: '#1c2f8a', acc2: '#ff922b', core: '#ffc078', emb: '#dbe4ff', m: 'meteor' },
-    // 8 閃電獨角獸：五角星尖角
-    unicorn: { n: 5, rot: -1.57, lobe: [[0, 1], [.12, .76], [.5, .62], [.88, .76]],
-      acc: [[-.07, .7], [0, .9], [.07, .7]],
-      blade: '#e599f7', side: '#ae3ec9', acc2: '#ffe066', core: '#fff3bf', emb: '#f8f0fc', m: 'unicorn' },
-    // 9 鯊魚利齒：九顆尖尖的鋸齒
-    shark: { n: 9, rot: -1.57, lobe: [[0, .72], [.72, 1], [.8, .72]],
-      acc: null,
-      blade: '#4dabf7', side: '#1864ab', acc2: '#e7f5ff', core: '#d0ebff', emb: '#e7f5ff', m: 'shark' },
-    // 10 黑豹爪：三隻爪子，每隻三根勾勾爪
-    panther: { n: 3, rot: -1.3, lobe: [[0, .66], [.14, .86], [.2, .7], [.36, .9], [.42, .72], [.6, 1], [.66, .66]],
-      acc: null,
-      blade: '#7950f2', side: '#5f3dc4', acc2: '#d0bfff', core: '#d0bfff', emb: '#f3f0ff', m: 'panther' },
-    // 11 巨石烏龜：六塊圓圓的大石頭
-    turtle: { n: 6, rot: -1.57, lobe: [[0, .8], [.12, .94], [.3, 1], [.5, 1], [.7, 1], [.88, .94]],
-      acc: [[.25, .8], [.5, .9], [.75, .8], [.5, .74]],
-      blade: '#c0874a', side: '#8a5a2b', acc2: '#e8b16f', core: '#8ce99a', emb: '#ebfbee', m: 'turtle' },
-    // 12 火山犀牛：兩支大犀牛角
-    rhino: { n: 2, rot: -2.3, lobe: [[0, .72], [.2, .76], [.32, .86], [.4, 1], [.46, .82], [.6, .78], [.8, .74]],
-      acc: [[.3, .76], [.38, .9], [.42, .76]],
-      blade: '#ff6b6b', side: '#a61e4d', acc2: '#ffd43b', core: '#adb5bd', emb: '#f1f3f5', m: 'rhino' },
-    gold: { n: 6, rot: -1.57, lobe: [[0, 1], [.25, .78], [.5, .7], [.75, .78]],
-      acc: null,
-      blade: '#ffd43b', side: '#f59f00', acc2: '#fff3bf', core: '#ffec99', emb: '#fff9db', m: 'star' },
+    // 鳳凰飛翼 PhoenixWing 9-60GF：紅色，三片往後掃的大翅膀
+    phoenix: { n: 3, rot: -1.9, lobe: [[0, .72], [.06, .86], [.14, .84], [.22, .95], [.3, .9], [.4, 1.0], [.48, .94], [.62, 1.1], [.68, .9], [.78, .72]],
+      blade: '#ff6b6b', light: '#ffa8a8', mid: '#f03e3e', side: '#c92a2a', core: '#ffd43b', emb: '#fff4e6', m: 'phoenix',
+      rat: '9-60', ratC: '#868e96', bit: 'flat', bitC: '#ff8787', gearC: '#ffd43b' },
+    // 時鐘幻象 ClockMirage：紫色，六塊方方的時鐘刻度
+    clock: { n: 6, rot: -1.57 - .3, lobe: [[0, .78], [.06, .92], [.14, .99], [.62, .99], [.7, .92], [.76, .78]],
+      blade: '#da77f2', light: '#f3d9fa', mid: '#be4bdb', side: '#9c36b5', core: '#ced4da', emb: '#f8f0fc', m: 'clock',
+      rat: '5-70', ratC: '#868e96', bit: 'ball', bitC: '#e599f7', gearC: '#ced4da' },
+    // 騎士重盾 KnightShield 3-80N：圓圓的，四面大盾牌
+    knight: { n: 4, rot: -1.57 - .4, lobe: [[0, .78], [.05, .9], [.14, .97], [.3, 1.0], [.5, 1.01], [.7, 1.0], [.86, .97], [.93, .9], [.96, .78]], split: 4,
+      blade: '#e9ecef', light: '#f8f9fa', mid: '#ced4da', side: '#868e96', core: '#74c0fc', emb: '#e7f5ff', m: 'helmet',
+      rat: '3-80', ratC: '#495057', bit: 'needle', bitC: '#74c0fc', gearC: '#ced4da' },
+    // 蒼龍神劍 DranSword 3-60F：藍色，三把往前砍的大劍
+    whip: { n: 3, rot: -2.2, lobe: [[0, .78], [.1, .84], [.25, .9], [.42, .96], [.6, 1.1], [.64, .94], [.72, .78]],
+      blade: '#4dabf7', light: '#d0ebff', mid: '#1c7ed6', side: '#1864ab', core: '#e9ecef', emb: '#e7f5ff', m: 'whip',
+      rat: '3-60', ratC: '#868e96', bit: 'flat', bitC: '#f1f3f5', gearC: '#4dabf7' },
+    // 蒼龍突擊 DranStrike 4-50FF：深藍色，四支往前刺的長槍
+    charge: { n: 4, rot: -1.57 - 1.0, lobe: [[0, .8], [.3, .84], [.4, .92], [.48, 1.1], [.54, .92], [.64, .84], [.72, .8]],
+      blade: '#4c6ef5', light: '#bac8ff', mid: '#3b5bdb', side: '#364fc7', core: '#ffd43b', emb: '#edf2ff', m: 'charge',
+      rat: '4-50', ratC: '#868e96', bit: 'flat', bitC: '#ffd43b', gearC: '#4c6ef5' },
+    // 蒼龍勇氣 DranBrave 6-60V：兩片大大的龍翅膀
+    brave: { n: 2, rot: -2.0, lobe: [[0, .78], [.06, .9], [.14, 1.02], [.22, .9], [.32, 1.06], [.42, .9], [.54, 1.02], [.64, .9], [.76, .96], [.84, .86], [.88, .78]],
+      blade: '#74c0fc', light: '#e7f5ff', mid: '#339af0', side: '#1971c2', core: '#ff6b6b', emb: '#f8f9fa', m: 'brave',
+      rat: '6-60', ratC: '#868e96', bit: 'taper', bitC: '#ff8787', gearC: '#74c0fc' },
+    // 隕星龍騎士 MeteorDragoon 3-70J：左迴旋，三道流星火焰
+    meteor: { n: 3, rot: -1.2, left: true, lobe: [[0, .8], [.2, .86], [.28, .82], [.44, .97], [.52, .86], [.68, 1.08], [.74, .78]],
+      blade: '#3b5bdb', light: '#91a7ff', mid: '#364fc7', side: '#1c2f8a', core: '#ff922b', emb: '#dbe4ff', m: 'meteor',
+      rat: '3-70', ratC: '#868e96', bit: 'point', bitC: '#ffc078', gearC: '#ff922b' },
+    // 獨角刺心 UnicornSting 5-60GP：五根尖尖的螫刺
+    unicorn: { n: 5, rot: -1.57 - .7, lobe: [[0, .82], [.2, .86], [.45, 1.08], [.52, .9], [.7, .82]],
+      blade: '#e599f7', light: '#f8f0fc', mid: '#cc5de8', side: '#ae3ec9', core: '#ffe066', emb: '#f8f0fc', m: 'unicorn',
+      rat: '5-60', ratC: '#868e96', bit: 'point', bitC: '#ffe066', gearC: '#e599f7' },
+    // 鮫鯊狂鱗 SharkScale：九片鋸齒鯊魚鱗
+    shark: { n: 9, rot: -1.57, lobe: [[0, .8], [.68, 1.02], [.76, .8]], split: 1,
+      blade: '#4dabf7', light: '#d0ebff', mid: '#228be6', side: '#1864ab', core: '#e9ecef', emb: '#e7f5ff', m: 'shark',
+      rat: '4-50', ratC: '#868e96', bit: 'flat', bitC: '#a5d8ff', gearC: '#e9ecef' },
+    // 雄獅獵爪 LeonClaw 5-60P：金色，五隻勾勾獅爪
+    panther: { n: 5, rot: -1.57 - .5, lobe: [[0, .8], [.14, .9], [.22, .84], [.4, .96], [.48, .86], [.62, 1.06], [.68, .78]],
+      blade: '#ffd43b', light: '#fff3bf', mid: '#fab005', side: '#e67700', core: '#ff922b', emb: '#fff9db', m: 'lion',
+      rat: '5-60', ratC: '#868e96', bit: 'point', bitC: '#ffa94d', gearC: '#ffd43b' },
+    // 魔導幻箭 WizardArrow 4-80B：綠色，四支魔法箭頭
+    turtle: { n: 4, rot: -1.57 - .6, lobe: [[0, .8], [.16, .86], [.28, .82], [.42, 1.08], [.5, .82], [.58, .92], [.7, .84], [.76, .8]], split: 3,
+      blade: '#69db7c', light: '#d3f9d8', mid: '#40c057', side: '#2b8a3e', core: '#ffd43b', emb: '#ebfbee', m: 'wizard',
+      rat: '4-80', ratC: '#868e96', bit: 'ball', bitC: '#b2f2bb', gearC: '#ffd43b' },
+    // 戰犀號角 RhinoHorn 3-80S：三支大犀牛角
+    rhino: { n: 3, rot: -2.2, lobe: [[0, .8], [.2, .84], [.34, .9], [.44, 1.12], [.5, .9], [.62, .86], [.76, .8]],
+      blade: '#d9a066', light: '#f1cfa3', mid: '#b8763a', side: '#8a5a2b', core: '#ff922b', emb: '#f1f3f5', m: 'rhino',
+      rat: '3-80', ratC: '#868e96', bit: 'spike', bitC: '#ffa94d', gearC: '#d9a066' },
+    // 惡魔紅鐮 HellsScythe 4-60T：四把彎彎的紅色鐮刀
+    hells: { n: 4, rot: -1.9, lobe: [[0, .78], [.12, .88], [.3, .95], [.48, 1.0], [.64, 1.1], [.6, .9], [.7, .78]],
+      blade: '#fa5252', light: '#ffc9c9', mid: '#e03131', side: '#862e2e', core: '#495057', emb: '#f1f3f5', m: 'reaper',
+      rat: '4-60', ratC: '#868e96', bit: 'taper', bitC: '#ff8787', gearC: '#495057' },
+    // 獎盃上的金色陀螺
+    gold: { n: 6, rot: -1.57, lobe: [[0, .8], [.1, .9], [.45, 1.04], [.62, .9], [.76, .8]],
+      blade: '#ffd43b', light: '#fff3bf', mid: '#fab005', side: '#f59f00', core: '#ffec99', emb: '#fff9db', m: 'star',
+      rat: '6-60', ratC: '#fab005', bit: 'point', bitC: '#ffe066', gearC: '#fab005' },
   };
 
-  function bladePts(cx, cy, R, th, k) {
-    const pts = [];
-    for (let i = 0; i < th.n; i++) for (const [ph, rf] of th.lobe) {
-      const a = th.rot + (i + ph) / th.n * TAU;
-      pts.push([cx + R * rf * Math.cos(a), cy + R * rf * Math.sin(a) * k, a]);
+  const poly = pts => 'M' + pts.map(p => P(p[0], p[1])).join(' L') + ' Z';
+  const ell = (x, y, rx, ry, c) => `<ellipse cx="${f(x)}" cy="${f(y)}" rx="${f(rx)}" ry="${f(ry)}" fill="${c}"/>`;
+  // 圓柱的前半面（上平面 y1 → 下平面 y2）
+  const band = (cx, y1, y2, rx, k, c) =>
+    `<path fill="${c}" d="M${P(cx - rx, y1)} A${f(rx)} ${f(rx * k)} 0 0 0 ${P(cx + rx, y1)} L${P(cx + rx, y2)} A${f(rx)} ${f(rx * k)} 0 0 1 ${P(cx - rx, y2)} Z"/>`;
+
+  // 上蓋的每一片刀刃（極座標 [角度, 半徑比例]），左迴旋的陀螺左右相反
+  function pieces(th) {
+    const out = [];
+    const w = th.lobe[th.lobe.length - 1][0];
+    for (let i = 0; i < th.n; i++) {
+      const ang = ph => th.left ? th.rot - (i + ph) / th.n * TAU : th.rot + (i + ph) / th.n * TAU;
+      const outer = th.lobe.map(([ph, rf]) => [ang(ph), rf]);
+      const inner = [];
+      for (let j = 6; j >= 0; j--) inner.push([ang(w * j / 6), .4]);
+      let pc = outer.concat(inner);
+      // 不論左右迴旋，點的順序都要是「畫面上順時針」
+      if (th.left) pc = pc.reverse();
+      out.push({ outer: th.left ? outer.slice().reverse() : outer, poly: pc, ang });
+    }
+    return out;
+  }
+  // 斜面：沿著刀刃外緣的一圈，在最尖的地方分成亮面、暗面
+  function facets(pc, th) {
+    const O = pc.outer, n = O.length;
+    let im = th.split != null ? th.split : O.reduce((b, p, i) => p[1] > O[b][1] ? i : b, 0);
+    if (th.left) im = n - 1 - im;
+    const I = O.map(([a, r]) => [a, Math.max(.52, r - .19)]);
+    const res = [];
+    if (im > 0) res.push([O.slice(0, im + 1).concat(I.slice(0, im + 1).reverse()), th.left ? th.mid : th.light]);
+    if (im < n - 1) res.push([O.slice(im).concat(I.slice(im).reverse()), th.left ? th.light : th.mid]);
+    return res;
+  }
+  // 銀色金屬環（一圈方方的小凹口）
+  function ringPolar(m = 16, plain = false) {
+    const pts = [], w = TAU / m;
+    if (plain) { for (let j = 0; j < 40; j++) pts.push([j / 40 * TAU, .84]); return pts; }
+    for (let j = 0; j < m; j++) {
+      const a0 = j * w;
+      pts.push([a0, .85], [a0 + .55 * w, .85], [a0 + .55 * w, .8], [a0 + w, .8]);
     }
     return pts;
   }
-  const poly = pts => 'M' + pts.map(p => P(p[0], p[1])).join(' L') + ' Z';
-  function accents(cx, cy, R, th, k) {
-    if (!th.acc) return '';
+  const METAL = '#ced4da', METAL2 = '#adb5bd';
+
+  // 側牆：畫面上「x 往左走」的邊是朝向我們的，往下長出厚度
+  // 同一片刀刃上連續朝前的邊合成一條，少一點小碎塊
+  function walls(list, h) {
+    const q = [];
+    for (const [pts, c] of list) {
+      const n = pts.length, fr = i => pts[(i + 1) % n][0] < pts[i][0] - .5;
+      let st = 0;
+      while (st < n && fr((st + n - 1) % n)) st++;
+      for (let t = 0; t < n; t++) {
+        const i0 = (st + t) % n;
+        if (!fr(i0) || (t > 0 && fr((i0 + n - 1) % n))) continue;
+        const run = [pts[i0]];
+        let j = i0;
+        while (fr(j) && run.length <= n) { j = (j + 1) % n; run.push(pts[j]); }
+        const strip = run.concat(run.slice().reverse().map(p => [p[0], p[1] + h]));
+        q.push([Math.max(...run.map(p => p[1])), `<path fill="${c}" d="${poly(strip)}"/>`]);
+      }
+    }
+    return q.sort((a, b) => a[0] - b[0]).map(x => x[1]).join('');
+  }
+
+  // 小數字（固鎖輪盤上的 3-60），只用線條
+  const SEG = { a: [[0, 0], [1, 0]], b: [[1, 0], [1, .5]], c: [[1, .5], [1, 1]], d: [[0, 1], [1, 1]], e: [[0, .5], [0, 1]], f: [[0, 0], [0, .5]], g: [[0, .5], [1, .5]], h: [[1, 0], [.3, 1]] };
+  const DIG = { 0: 'abcdef', 1: 'bc', 2: 'abged', 3: 'abgcd', 4: 'fgbc', 5: 'afgcd', 6: 'afgedc', 7: 'ah', 8: 'abcdefg', 9: 'abcdfg', '-': 'g' };
+  function digits(str, cx, cy, hgt) {
+    const w = hgt * .5, gap = hgt * .38;
+    const ws = [...str].map(ch => ch === '-' ? w * .7 : w);
+    const total = ws.reduce((a, b) => a + b, 0) + gap * (str.length - 1);
+    let x = cx - total / 2, d = '';
+    [...str].forEach((ch, i) => {
+      const cw = ws[i];
+      for (const sg of DIG[ch] || '') {
+        const [[x1, y1], [x2, y2]] = SEG[sg];
+        d += `M${P(x + x1 * cw, cy - hgt / 2 + y1 * hgt)} L${P(x + x2 * cw, cy - hgt / 2 + y2 * hgt)} `;
+      }
+      x += cw + gap;
+    });
+    return `<path d="${d.trim()}"/>`;
+  }
+
+  // 圓柱外面一圈方形齒（固鎖輪盤的齒、軸心的齒輪）
+  // back=true 只畫後面的齒（要先畫，被身體蓋住），否則畫前面的齒
+  function teeth(cx, y1, y2, r0, r1, angles, d, k, face, sideC, back) {
+    const pt = (r, a, y) => [cx + r * Math.cos(a), y + r * Math.sin(a) * k];
     let s = '';
-    for (let i = 0; i < th.n; i++) {
-      const pts = th.acc.map(([ph, rf]) => {
-        const a = th.rot + (i + ph) / th.n * TAU;
-        return [cx + R * rf * Math.cos(a), cy + R * rf * Math.sin(a) * k];
-      });
-      s += `<path fill="${th.acc2}" d="${poly(pts)}"/>`;
+    for (const a of angles) {
+      const isBack = Math.sin(a) < 0;
+      if (isBack !== !!back) continue;
+      const b1 = a + d, b0 = a - d;
+      if (Math.cos(b1) > 0) s += `<path fill="${sideC}" d="${poly([pt(r0, b1, y1), pt(r1, b1, y1), pt(r1, b1, y2), pt(r0, b1, y2)])}"/>`;
+      if (-Math.cos(b0) > 0) s += `<path fill="${sideC}" d="${poly([pt(r0, b0, y1), pt(r1, b0, y1), pt(r1, b0, y2), pt(r0, b0, y2)])}"/>`;
+      if (Math.sin(a) > -.15) {
+        const n = 4, top = [], bot = [];
+        for (let j = 0; j <= n; j++) { const t = b0 + (b1 - b0) * j / n; top.push(pt(r1, t, y1)); bot.unshift(pt(r1, t, y2)); }
+        s += `<path fill="${face}" d="${poly(top.concat(bot))}"/>`;
+      }
+    }
+    return s;
+  }
+  const teethTops = (cx, y, r0, r1, angles, d, k, c) => angles.map(a => {
+    const pt = (r, t) => [cx + r * Math.cos(t), y + r * Math.sin(t) * k];
+    const pts = [];
+    for (let j = 0; j <= 4; j++) pts.push(pt(r1, a - d + 2 * d * j / 4));
+    pts.push(pt(r0, a + d), pt(r0, a - d));
+    return `<path fill="${c}" d="${poly(pts)}"/>`;
+  }).join('');
+
+  /* ---- 軸心：齒輪圈 + 短短的尖端 ---- */
+  function bitSVG(cx, gT, R, th, det, k, showTop) {
+    const Rg = .34 * R, hg = .09 * R, gB = gT + hg, Rt = .2 * R;
+    const y0 = gB + Rt * k; // 尖端從齒輪下面露出來的地方
+    let tip;
+    const L = cx - Rt, Rr = cx + Rt;
+    switch (th.bit) {
+      case 'flat': { // 平平的大底
+        const e = .62 * Rt, yE = y0 + .1 * R;
+        tip = `M${P(L, gB)} L${P(L, y0)} L${P(cx - e, yE)} A${f(e)} ${f(e * k)} 0 0 0 ${P(cx + e, yE)} L${P(Rr, y0)} L${P(Rr, gB)} Z`;
+        break;
+      }
+      case 'ball': { // 圓圓的球
+        const yE = y0 + .15 * R;
+        tip = `M${P(L, gB)} L${P(L, y0)} C${P(L, yE - .02 * R)} ${P(cx - .4 * Rt, yE)} ${P(cx, yE)} C${P(cx + .4 * Rt, yE)} ${P(Rr, yE - .02 * R)} ${P(Rr, y0)} L${P(Rr, gB)} Z`;
+        break;
+      }
+      case 'needle': { // 細細的針
+        const yN = y0 + .06 * R, yE = y0 + .18 * R;
+        tip = `M${P(L, gB)} L${P(L, y0)} L${P(cx - .32 * Rt, yN)} L${P(cx - .06 * Rt, yE - .01 * R)} Q${P(cx, yE + .01 * R)} ${P(cx + .06 * Rt, yE - .01 * R)} L${P(cx + .32 * Rt, yN)} L${P(Rr, y0)} L${P(Rr, gB)} Z`;
+        break;
+      }
+      case 'taper': { // 斜斜收進去的小平底
+        const yE = y0 + .14 * R, e = .3 * Rt;
+        tip = `M${P(L, gB)} L${P(L, y0)} L${P(cx - e, yE)} A${f(e)} ${f(e * k)} 0 0 0 ${P(cx + e, yE)} L${P(Rr, y0)} L${P(Rr, gB)} Z`;
+        break;
+      }
+      case 'spike': { // 尖刺（但是很短）
+        const yE = y0 + .17 * R;
+        tip = `M${P(L, gB)} L${P(L, y0)} L${P(cx - .08 * Rt, yE - .01 * R)} Q${P(cx, yE + .015 * R)} ${P(cx + .08 * Rt, yE - .01 * R)} L${P(Rr, y0)} L${P(Rr, gB)} Z`;
+        break;
+      }
+      default: { // point：圓圓的小尖
+        const yE = y0 + .14 * R;
+        tip = `M${P(L, gB)} L${P(L, y0)} Q${P(L + .1 * Rt, y0 + .08 * R)} ${P(cx - .22 * Rt, yE - .02 * R)} Q${P(cx, yE + .02 * R)} ${P(cx + .22 * Rt, yE - .02 * R)} Q${P(Rr - .1 * Rt, y0 + .08 * R)} ${P(Rr, y0)} L${P(Rr, gB)} Z`;
+      }
+    }
+    let s = `<path fill="${th.bitC}" d="${tip}"/>`;
+    const nt = det ? 8 : 6, ang = [];
+    for (let j = 0; j < nt; j++) ang.push(Math.PI / 2 + (j + .5) / nt * TAU);
+    const d = det ? .2 : .24, r1 = Rg * 1.16;
+    s += teeth(cx, gT, gB, Rg, r1, ang, d, k, th.gearC, th.gearC, true);
+    if (showTop) s += ell(cx, gT, Rg, Rg * k, th.gearC);
+    s += band(cx, gT, gB, Rg, k, th.gearC);
+    s += teeth(cx, gT, gB, Rg, r1, ang, d, k, th.gearC, th.gearC, false);
+    if (showTop) {
+      s += teethTops(cx, gT, Rg * .9, r1, ang.filter(a => Math.sin(a) <= 0), d, k, th.gearC);
+      // 上面的軸（插進固鎖輪盤的地方）
+      const ra = .14 * R, ya = gT - .2 * R;
+      s += band(cx, ya, gT, ra, k, th.bitC) + ell(cx, ya, ra, ra * k, th.bitC);
+      s += teethTops(cx, gT, Rg * .9, r1, ang.filter(a => Math.sin(a) > 0), d, k, th.gearC);
+    }
+    return { s, bottom: y0 + .18 * R };
+  }
+
+  /* ---- 固鎖輪盤：方形齒 + 數字 ---- */
+  function ratchetSVG(cx, rT, R, th, det, k, showTop) {
+    const Rr = .7 * R, hr = .3 * R, rB = rT + hr;
+    const nt = +th.rat[0], ang = [];
+    for (let j = 0; j < nt; j++) ang.push(Math.PI / 2 + (j + .5) / nt * TAU);
+    const d = Math.min(.2, .42 * Math.PI / nt), r1 = Rr * 1.045;
+    const toothC = '#adb5bd';
+    let s = teeth(cx, rT, rB, Rr * .9, r1, ang, d, k, toothC, '#868e96', true);
+    if (showTop) {
+      s += ell(cx, rT, Rr, Rr * k, '#dee2e6');
+      s += ell(cx, rT, .32 * R, .32 * R * k, '#868e96');
+      s += ell(cx, rT + .02 * R, .2 * R, .2 * R * k, '#222');
+      s += teethTops(cx, rT, Rr * .9, r1, ang.filter(a => Math.sin(a) <= 0), d, k, '#e9ecef');
+    }
+    s += band(cx, rT, rB, Rr, k, th.ratC);
+    s += teeth(cx, rT, rB, Rr * .9, r1, ang, d, k, toothC, '#868e96', false);
+    if (showTop) s += teethTops(cx, rT, Rr * .9, r1, ang.filter(a => Math.sin(a) > 0), d, k, '#e9ecef');
+    if (det) {
+      // 數字貼紙
+      const dh = det > 1 ? Math.max(.085 * R, 24) : .085 * R, lw = Math.max(.4 * R, 4.7 * dh), lh = Math.max(.135 * R, 1.55 * dh), ly = rB + Rr * k - lh / 2 - .025 * R;
+      s += `<rect x="${f(cx - lw / 2)}" y="${f(ly - lh / 2)}" width="${f(lw)}" height="${f(lh)}" rx="${f(.02 * R)}" fill="#f8f9fa"/>`;
+      if (det > 1) s += digits(th.rat, cx, ly, dh);
     }
     return s;
   }
 
-  /* 3/4 側面的陀螺：尖底(含小齒輪) → 棘輪 → 刀刃環 → 徽章 */
-  function top3(cx, cy, R, name, opt = {}) {
-    const th = THEME[name];
-    const h = .18 * R;
-    // 尖底
-    const gx = .3 * R, g1 = cy + .7 * R, g2 = cy + .88 * R, gy = gx * K;
-    const tipY = cy + 1.32 * R, cw = .22 * R;
-    let s = `<path fill="${opt.tip || '#868e96'}" d="M${P(cx - cw, g2)} L${P(cx - .05 * R, tipY - .06 * R)} Q${P(cx, tipY + .02 * R)} ${P(cx + .05 * R, tipY - .06 * R)} L${P(cx + cw, g2)} Z"/>`;
-    s += `<path fill="${opt.gear || '#ffd43b'}" d="M${P(cx - gx, g1)} L${P(cx + gx, g1)} L${P(cx + gx, g2)} A${f(gx)} ${f(gy)} 0 0 1 ${P(cx - gx, g2)} Z"/>`;
-    for (const a of [Math.PI / 2 - 1.05, Math.PI / 2 - .5, Math.PI / 2, Math.PI / 2 + .5, Math.PI / 2 + 1.05]) {
-      const x = cx + gx * Math.cos(a);
-      s += `<path d="M${P(x, g1)} L${P(x, g2 + gy * Math.sin(a))}"/>`;
-    }
-    // 棘輪（中間那層，有方形齒）
-    const rx = .5 * R, r1 = cy + .2 * R, r2 = cy + .58 * R, ry = rx * K;
-    s += `<path fill="${opt.ratchet || '#adb5bd'}" d="M${P(cx - rx, r1)} L${P(cx + rx, r1)} L${P(cx + rx, r2)} A${f(rx)} ${f(ry)} 0 0 1 ${P(cx - rx, r2)} Z"/>`;
-    for (const a of [Math.PI / 2 - .85, Math.PI / 2, Math.PI / 2 + .85]) {
-      const x = cx + rx * .97 * Math.cos(a), yb = r2 + ry * Math.sin(a) - .05 * R;
-      const w = .17 * R * (.45 + .55 * Math.sin(a));
-      s += `<rect x="${f(x - w / 2)}" y="${f(yb - .12 * R)}" width="${f(w)}" height="${f(.12 * R)}" rx="${f(.02 * R)}" fill="${opt.tooth || '#e9ecef'}"/>`;
-    }
-    // 刀刃環：側面
-    const pts = bladePts(cx, cy, R, th, K);
-    const front = pts.map(p => {
-      let a = ((p[2] % TAU) + TAU) % TAU;
-      if (a > TAU - .2) a -= TAU;
-      return [p[0], p[1], a];
-    }).filter(p => p[2] >= -.2 && p[2] <= Math.PI + .2).sort((a, b) => a[2] - b[2]);
-    const band = front.concat(front.slice().reverse().map(p => [p[0], p[1] + h]));
-    s += `<path fill="${th.side}" d="${poly(band)}"/>`;
-    // 刀刃環：上面
-    s += `<path fill="${th.blade}" d="${poly(pts)}"/>`;
-    s += accents(cx, cy, R, th, K);
-    s += `<ellipse cx="${f(cx)}" cy="${f(cy)}" rx="${f(.58 * R)}" ry="${f(.58 * R * K)}" fill="${th.core}"/>`;
-    // 徽章（凸起來的圓）
-    const ey = cy - .04 * R, erx = .38 * R, ery = .27 * R;
-    s += `<ellipse cx="${f(cx)}" cy="${f(ey + .06 * R)}" rx="${f(erx)}" ry="${f(ery)}" fill="${th.side}"/>`;
-    s += `<ellipse cx="${f(cx)}" cy="${f(ey)}" rx="${f(erx)}" ry="${f(ery)}" fill="${th.emb}"/>`;
+  /* ---- 上蓋：側牆 → 金屬環 → 刀刃 → 斜面 → 中心徽章 ---- */
+  function bladeSVG(cx, cy, R, th, det, k) {
+    const h = .11 * R;
+    const pr = ([a, r]) => [cx + R * r * Math.cos(a), cy + R * r * Math.sin(a) * k];
+    const ps = pieces(th);
+    const ring = ringPolar(16, true).map(pr);
+    const pp = ps.map(p => p.poly.map(pr));
+    let s = walls([[ring, METAL2]].concat(pp.map(p => [p, th.side])), h);
+    s += `<path fill="${METAL}" d="${poly(ring)}"/>`;
+    pp.forEach(p => { s += `<path fill="${th.blade}" d="${poly(p)}"/>`; });
+    if (det) ps.forEach(p => facets(p, th).forEach(([pts, c]) => { s += `<path fill="${c}" d="${poly(pts.map(pr))}"/>`; }));
+    // 中心：金屬圈 + 螺絲 + 凸起來的徽章
+    s += ell(cx, cy, .47 * R, .47 * R * k, th.core);
+    if (det) for (const sx of [-1, 1]) s += `<circle cx="${f(cx + sx * .405 * R)}" cy="${f(cy + .02 * R)}" r="${f(.028 * R)}" fill="${METAL2}"/>`;
+    const ey = cy - .05 * R, erx = .34 * R, ery = .22 * R;
+    s += ell(cx, ey + .05 * R, erx, ery, th.side);
+    s += ell(cx, ey, erx, ery, th.emb);
     s += motif[th.m](cx, ey, ery * .95);
     return s;
   }
 
-  /* 從上面往下看的陀螺 */
-  function topDown(cx, cy, R, name) {
-    const th = THEME[name];
-    let s = `<path fill="${th.blade}" d="${poly(bladePts(cx, cy, R, th, 1))}"/>`;
-    s += accents(cx, cy, R, th, 1);
-    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(.58 * R)}" fill="${th.core}"/>`;
-    for (let i = 0; i < 4; i++) {
-      const a = Math.PI / 4 + i * Math.PI / 2;
-      s += `<circle cx="${f(cx + .49 * R * Math.cos(a))}" cy="${f(cy + .49 * R * Math.sin(a))}" r="${f(.05 * R)}" fill="#adb5bd"/>`;
-    }
-    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(.4 * R)}" fill="${th.emb}"/>`;
-    s += motif[th.m](cx, cy + .04 * R, .3 * R);
+  /* 3/4 側面看的整顆陀螺：軸心 → 固鎖輪盤 → 上蓋（寬寬扁扁的，像真的陀螺） */
+  function top3(cx, cy, R, name, opt = {}) {
+    const th = THEME[name], k = K;
+    const det = opt.det != null ? opt.det : R >= 220 ? 2 : R >= 80 ? 1 : 0;
+    const rT = cy + .11 * R, rB = rT + .3 * R;
+    const gT = rB + (.7 * R - .34 * R) * k + .07 * R;
+    const bit = bitSVG(cx, gT, R, th, det, k, false);
+    let s = '';
+    if (opt.shadow !== false) s += ell(cx, bit.bottom - .02 * R, .5 * R, .09 * R, '#e9ecef');
+    s += bit.s;
+    s += ratchetSVG(cx, rT, R, th, det, k, false);
+    s += bladeSVG(cx, cy, R, th, det, k);
     return s;
   }
 
-  // 陀螺周圍的旋轉速度線（畫在陀螺前面之前，會被陀螺蓋住）
-  function spinLines(cx, cy, R) {
-    const rx = 1.14 * R, ry = rx * K;
-    return arc(cx, cy, rx, ry, Math.PI + .35, Math.PI + 1.15) + arc(cx, cy, rx, ry, TAU - 1.15, TAU - .35) +
-      arc(cx, cy + .2 * R, 1.2 * R, 1.2 * R * K, Math.PI - .25, Math.PI + .25) + arc(cx, cy + .2 * R, 1.2 * R, 1.2 * R * K, -.25, .25);
+  /* 從上面往下看的陀螺：刀刃空隙露出金屬環和固鎖輪盤的齒 */
+  function topDown(cx, cy, R, name) {
+    const th = THEME[name];
+    const pr = ([a, r]) => [cx + R * r * Math.cos(a), cy + R * r * Math.sin(a)];
+    const ps = pieces(th);
+    let s = '';
+    // 固鎖輪盤的齒，從刀刃之間的空隙探出頭
+    const w = th.lobe[th.lobe.length - 1][0];
+    const nt = +th.rat[0];
+    for (let i = 0; i < Math.min(nt, th.n); i++) {
+      const a = ps[i].ang((w + 1) / 2), d = .1;
+      s += `<path fill="#adb5bd" d="${poly([[a - d, .7], [a - d, .95], [a + d, .95], [a + d, .7]].map(pr))}"/>`;
+    }
+    s += `<path fill="${METAL}" d="${poly(ringPolar().map(pr))}"/>`;
+    ps.forEach(p => { s += `<path fill="${th.blade}" d="${poly(p.poly.map(pr))}"/>`; });
+    ps.forEach(p => facets(p, th).forEach(([pts, c]) => { s += `<path fill="${c}" d="${poly(pts.map(pr))}"/>`; }));
+    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(.47 * R)}" fill="${th.core}"/>`;
+    for (let i = 0; i < 4; i++) {
+      const a = Math.PI / 4 + i * Math.PI / 2;
+      s += `<circle cx="${f(cx + .41 * R * Math.cos(a))}" cy="${f(cy + .41 * R * Math.sin(a))}" r="${f(.035 * R)}" fill="${METAL2}"/>`;
+    }
+    s += `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(.34 * R)}" fill="${th.emb}"/>`;
+    s += motif[th.m](cx, cy + .03 * R, .27 * R);
+    return s;
   }
-  const floorSpin = (cx, y, rx) => arc(cx, y, rx, rx * .28, .3, Math.PI - .3) + arc(cx, y, rx * 1.35, rx * .38, .5, Math.PI - .5);
+
+  // 陀螺周圍的旋轉速度線（只有線）
+  function spinLines(cx, cy, R) {
+    const rx = 1.12 * R, ry = rx * .36;
+    return arc(cx, cy, rx, ry, Math.PI + .3, Math.PI + 1.0) + arc(cx, cy, rx, ry, TAU - 1.0, TAU - .3) +
+      arc(cx, cy + .12 * R, 1.08 * R, .4 * R, Math.PI - .35, Math.PI + .05) + arc(cx, cy + .12 * R, 1.08 * R, .4 * R, -.05, .35);
+  }
+  const floorSpin = (cx, y, rx) => arc(cx, y, rx, rx * .2, .35, Math.PI - .35) + arc(cx, y, rx * 1.3, rx * .28, .55, Math.PI - .55);
 
   /* ---------------- 單顆陀螺 ---------------- */
   const hero = (name, extra = '') => `
-    ${spinLines(400, 205, 235)}
-    ${floorSpin(400, 515, 70)}
-    ${top3(400, 205, 235, name)}
+    ${spinLines(400, 228, 280)}
+    ${floorSpin(400, 462, 180)}
+    ${top3(400, 228, 280, name)}
     ${extra}`;
 
   const bolt = (x, y, s = 1, c = '#ffe066') =>
@@ -271,163 +489,131 @@
   const flame = (x, y, s = 1, c = '#ff922b') =>
     `<path fill="${c}" d="M${P(x, y)} Q${P(x - 30 * s, y - 30 * s)} ${P(x - 5 * s, y - 70 * s)} Q${P(x, y - 40 * s)} ${P(x + 15 * s, y - 45 * s)} Q${P(x + 12 * s, y - 75 * s)} ${P(x + 30 * s, y - 85 * s)} Q${P(x + 50 * s, y - 30 * s)} ${P(x + 20 * s, y)} Z"/>`;
 
-  const phoenix = hero('phoenix', `${flame(70, 160, 1)} ${flame(700, 170, .8, '#ffd43b')} ${sparkle(100, 470, 16)} ${sparkle(705, 470, 18, '#ff922b')}`);
-  const clock = hero('clock', `${sparkle(95, 110, 20, '#e599f7')} ${sparkle(705, 115, 16)}
-    <circle cx="100" cy="460" r="32" fill="#f3d9fa"/><path d="M100 460 L100 440 M100 460 L114 468"/>
-    <circle cx="705" cy="455" r="26" fill="#f3d9fa"/><path d="M705 455 L705 438 M705 455 L690 462"/>`);
-  const knight = hero('knight', `${sparkle(100, 120, 20)} ${sparkle(700, 115, 16, '#a5d8ff')} ${sparkle(705, 480, 14)} ${sparkle(95, 470, 16, '#a5d8ff')}`);
-  const whip = hero('whip', `<path d="M60 170 Q110 120 90 80 M700 210 Q750 160 735 110"/>
-    ${sparkle(100, 470, 18, '#ffd43b')} ${sparkle(705, 470, 16, '#8ce99a')}`);
-  const charge = hero('charge', `<path d="M40 250 L120 250 M30 300 L105 300 M50 350 L115 350"/>
-    ${sparkle(700, 120, 20, '#bac8ff')} ${sparkle(100, 470, 16)} ${sparkle(705, 470, 14)}`);
-  const brave = hero('brave', `${star(95, 115, 26, 11, 5, '#ffe066')} ${sparkle(705, 120, 18, '#a5d8ff')} ${sparkle(100, 470, 14)} ${star(705, 470, 22, 10, 5, '#ffe066')}`);
+  const phoenix = hero('phoenix', `${flame(70, 120, .9)} ${flame(705, 120, .8, '#ffd43b')} ${sparkle(90, 520, 16)} ${sparkle(710, 525, 18, '#ff922b')}`);
+  const clock = hero('clock', `${sparkle(80, 80, 20, '#e599f7')} ${sparkle(720, 80, 16)}
+    <circle cx="90" cy="520" r="34" fill="#f3d9fa"/><path d="M90 520 L90 498 M90 520 L106 528"/>
+    <circle cx="712" cy="520" r="28" fill="#f3d9fa"/><path d="M712 520 L712 502 M712 520 L696 527"/>`);
+  const knight = hero('knight', `${sparkle(80, 80, 20)} ${sparkle(720, 80, 16, '#a5d8ff')} ${sparkle(712, 525, 14)} ${sparkle(88, 525, 16, '#a5d8ff')}`);
+  const whip = hero('whip', `<path fill="#e7f5ff" d="M40 140 L120 60 L132 72 L52 152 Z"/><path fill="#ffd43b" d="M44 160 L32 148 L60 132 L68 140 Z"/>
+    ${sparkle(720, 80, 18, '#a5d8ff')} ${sparkle(90, 525, 18, '#ffd43b')} ${sparkle(712, 525, 16, '#74c0fc')}`);
+  const charge = hero('charge', `<path d="M30 520 L120 520 M50 548 L140 548 M680 520 L770 520 M660 548 L750 548"/>
+    ${sparkle(720, 80, 20, '#bac8ff')} ${sparkle(80, 80, 16)}`);
+  const brave = hero('brave', `${star(80, 85, 26, 11, 5, '#ffe066')} ${sparkle(720, 80, 18, '#a5d8ff')} ${sparkle(90, 525, 14)} ${star(712, 520, 22, 10, 5, '#ffe066')}`);
   const meteor = hero('meteor', `
-    <path fill="#ffd43b" d="M80 150 Q120 105 175 80 Q140 125 135 150 Q120 175 95 175 Q75 170 80 150 Z"/>
-    <path fill="#ff922b" d="M640 520 Q690 480 745 460 Q712 500 708 525 Q695 548 668 545 Q640 540 640 520 Z"/>
-    ${sparkle(700, 120, 18, '#ffd43b')} ${sparkle(95, 470, 16, '#ff922b')}`);
-  const unicorn = hero('unicorn', `${bolt(70, 150)} ${bolt(690, 160, .9)} ${star(100, 470, 22, 10, 5, '#e599f7')} ${star(705, 470, 26, 11, 5, '#ffe066')}`);
+    <path fill="#ffd43b" d="M40 110 Q80 65 135 40 Q100 85 95 110 Q80 135 55 135 Q35 130 40 110 Z"/>
+    <path fill="#ff922b" d="M650 535 Q700 495 755 475 Q722 515 718 540 Q705 563 678 560 Q650 555 650 535 Z"/>
+    ${sparkle(720, 80, 18, '#ffd43b')} ${sparkle(90, 525, 16, '#ff922b')}`);
+  const unicorn = hero('unicorn', `${bolt(50, 100, .9)} ${bolt(690, 100, .8)} ${star(90, 520, 22, 10, 5, '#e599f7')} ${star(712, 520, 26, 11, 5, '#ffe066')}`);
   const shark = hero('shark', `
-    <path fill="#a5d8ff" d="M50 535 Q110 500 170 535 Q230 500 290 535 L290 565 L50 565 Z"/>
-    <path fill="#a5d8ff" d="M510 535 Q570 500 630 535 Q690 500 750 535 L750 565 L510 565 Z"/>
-    ${sparkle(95, 120, 16, '#d0ebff')} ${sparkle(705, 120, 18)}`);
-  const panther = hero('panther', `<path d="M70 120 L120 200 M100 105 L150 185 M130 95 L175 165 M640 400 L690 470 M670 385 L720 455 M700 375 L745 435"/>
-    ${sparkle(705, 120, 18, '#d0bfff')} ${sparkle(100, 470, 16)}`);
+    <path fill="#a5d8ff" d="M40 550 Q100 515 160 550 Q220 515 280 550 L280 580 L40 580 Z"/>
+    <path fill="#a5d8ff" d="M520 550 Q580 515 640 550 Q700 515 760 550 L760 580 L520 580 Z"/>
+    ${sparkle(80, 80, 16, '#d0ebff')} ${sparkle(720, 80, 18)}`);
+  const panther = hero('panther', `<path d="M40 60 L80 130 M70 50 L110 120 M100 45 L135 105 M670 490 L710 555 M700 480 L740 545 M730 475 L765 530"/>
+    ${sparkle(720, 80, 18, '#ffd43b')} ${sparkle(90, 525, 16)}`);
   const turtle = hero('turtle', `
-    <path fill="#adb5bd" d="M60 540 Q60 470 115 465 Q170 470 175 540 Z"/>
-    <path fill="#adb5bd" d="M640 540 Q645 490 690 485 Q740 492 745 540 Z"/>
-    ${sparkle(95, 120, 18, '#d8f5a2')} ${sparkle(705, 125, 16)}`);
+    <path fill="#ffe066" d="M50 140 L120 70 L112 100 L140 92 L70 160 L78 130 Z"/>
+    ${star(720, 85, 24, 10, 5, '#d0bfff')} ${sparkle(90, 525, 16, '#8ce99a')} ${sparkle(712, 525, 18)}`);
   const rhino = hero('rhino', `
-    <path fill="#868e96" d="M40 560 L120 430 L170 500 L200 470 L260 560 Z"/>
-    ${flame(108, 425, .55, '#ff922b')}
-    ${sparkle(705, 120, 18, '#ff922b')} ${sparkle(100, 120, 16)} ${sparkle(705, 470, 16, '#ffd43b')}`);
+    <path fill="#868e96" d="M30 580 L100 470 L140 525 L165 500 L215 580 Z"/>
+    ${flame(88, 468, .5, '#ff922b')}
+    ${sparkle(720, 80, 18, '#ff922b')} ${sparkle(80, 80, 16)} ${sparkle(712, 525, 16, '#ffd43b')}`);
 
-  /* ---------------- 上面看 ---------------- */
+  /* ---------------- 從上面看 ---------------- */
   const phoenixTop = `
-    <path d="M150 300 A250 250 0 0 1 220 125 M650 300 A250 250 0 0 1 580 475"/>
-    <path d="M115 330 A285 285 0 0 1 140 210 M685 270 A285 285 0 0 1 660 390"/>
+    <path d="M140 300 A260 260 0 0 1 215 118 M660 300 A260 260 0 0 1 585 482"/>
+    <path d="M105 330 A295 295 0 0 1 132 205 M695 270 A295 295 0 0 1 668 395"/>
     ${topDown(400, 300, 255, 'phoenix')}
-    ${sparkle(110, 110, 20, '#ffd43b')} ${sparkle(690, 110, 16, '#ff922b')} ${sparkle(700, 500, 18)}`;
+    ${sparkle(100, 90, 20, '#ffd43b')} ${sparkle(700, 90, 16, '#ff922b')} ${sparkle(705, 520, 18)} ${sparkle(95, 520, 14)}`;
 
   /* ---------------- 發射器 ---------------- */
-  // 捲繩發射器：轉轉捲繩器 + 拉繩手把，下面掛著一顆陀螺
+  // 捲繩發射器（拉繩）：陀螺吊在發射器下面
   const winder = `
+    ${top3(470, 395, 150, 'whip')}
     <path d="M232 228 Q190 215 175 245 Q160 270 135 255"/>
     <rect x="70" y="205" width="70" height="105" rx="24" fill="#ffd43b"/>
     <rect x="92" y="230" width="26" height="55" rx="13" fill="#fff9db"/>
-    <path fill="#ff922b" d="M300 280 L380 280 L360 470 Q356 490 336 490 L300 490 Q282 490 284 470 Z"/>
-    <path d="M292 340 L370 340 M290 390 L366 390 M288 440 L362 440"/>
+    <path fill="#ff922b" d="M290 280 L370 280 L350 470 Q346 490 326 490 L290 490 Q272 490 274 470 Z"/>
+    <path d="M282 340 L360 340 M280 390 L356 390 M278 440 L352 440"/>
+    <path fill="#868e96" d="M410 280 L530 280 L530 330 L505 330 L505 312 L435 312 L435 330 L410 330 Z"/>
     <rect x="225" y="170" width="380" height="125" rx="48" fill="#4dabf7"/>
     <circle cx="370" cy="232" r="46" fill="#ffd43b"/>
     <circle cx="370" cy="232" r="18" fill="#adb5bd"/>
     <rect x="470" y="200" width="100" height="26" rx="13" fill="#d0ebff"/>
-    <rect x="490" y="290" width="80" height="34" rx="8" fill="#868e96"/>
-    ${spinLines(530, 395, 115).replace(/<path d="M[^"]*"\/><path d="M[^"]*"\/>/, '')}
-    ${top3(530, 395, 115, 'meteor')}
-    ${sparkle(700, 160, 20)} ${sparkle(150, 430, 18, '#a5d8ff')} ${sparkle(720, 470, 14)}`;
+    ${sparkle(700, 140, 20)} ${sparkle(150, 430, 18, '#a5d8ff')} ${sparkle(720, 540, 14)}`;
 
   // 拉條發射器：長長的齒條拉條
   const rack = (() => {
     let teeth = 'M90 236';
     for (let x = 110; x <= 330; x += 22) teeth += ` L${x - 11} 222 L${x} 236`;
     return `
+    ${top3(470, 400, 150, 'knight')}
     <path fill="#ff6b6b" d="${teeth} L330 262 L90 262 Z"/>
     <path fill="#ffd43b" d="M40 190 L100 190 Q115 190 115 205 L115 295 Q115 310 100 310 L40 310 Q25 310 25 295 L25 205 Q25 190 40 190 Z"/>
     <rect x="48" y="220" width="40" height="60" rx="14" fill="#fff9db"/>
+    <path fill="#868e96" d="M410 285 L530 285 L530 335 L505 335 L505 317 L435 317 L435 335 L410 335 Z"/>
     <path fill="#69db7c" d="M300 175 L560 175 Q610 175 610 225 L610 255 Q610 300 565 300 L300 300 Q270 300 270 270 L270 205 Q270 175 300 175 Z"/>
     ${star(440, 237, 40, 18, 5, '#ffe066')}
-    <path fill="#2f9e44" d="M560 300 L600 300 L640 440 Q645 460 625 462 L600 464 Q585 464 580 450 Z"/>
-    <path d="M590 340 L615 340 M600 380 L625 380 M610 420 L634 420"/>
-    <rect x="370" y="295" width="80" height="34" rx="8" fill="#868e96"/>
-    ${top3(410, 400, 110, 'knight')}
-    ${sparkle(700, 140, 20)} ${sparkle(170, 420, 20, '#ffd43b')} ${sparkle(110, 520, 14)}`;
+    <path fill="#2f9e44" d="M580 290 L615 280 L660 420 Q665 440 645 444 L625 448 Q610 450 604 435 Z"/>
+    <path d="M600 330 L628 322 M612 370 L640 362 M624 410 L652 402"/>
+    ${sparkle(720, 140, 20)} ${sparkle(170, 420, 20, '#ffd43b')} ${sparkle(110, 520, 14)}`;
   })();
 
-  /* ---------------- 零件：三層分開 ---------------- */
+  /* ---------------- 零件：上蓋 / 固鎖輪盤 / 軸心，上下分開 ---------------- */
   const parts = (() => {
-    const cx = 260, R = 165;
-    const th = THEME.phoenix;
-    // 第 1 層：刀刃環
-    const by = 115;
-    const pts = bladePts(cx, by, R, th, K);
-    const front = pts.map(p => { let a = ((p[2] % TAU) + TAU) % TAU; if (a > TAU - .2) a -= TAU; return [p[0], p[1], a]; })
-      .filter(p => p[2] >= -.2 && p[2] <= Math.PI + .2).sort((a, b) => a[2] - b[2]);
-    const band = front.concat(front.slice().reverse().map(p => [p[0], p[1] + .18 * R]));
-    let blade = `<path fill="${th.side}" d="${poly(band)}"/><path fill="${th.blade}" d="${poly(pts)}"/>${accents(cx, by, R, th, K)}
-      <ellipse cx="${cx}" cy="${by}" rx="${f(.58 * R)}" ry="${f(.58 * R * K)}" fill="${th.core}"/>
-      <ellipse cx="${cx}" cy="${f(by - .04 * R + .06 * R)}" rx="${f(.38 * R)}" ry="${f(.27 * R)}" fill="${th.side}"/>
-      <ellipse cx="${cx}" cy="${f(by - .04 * R)}" rx="${f(.38 * R)}" ry="${f(.27 * R)}" fill="${th.emb}"/>
-      ${motif[th.m](cx, by - .04 * R, .27 * R * .95)}`;
-    // 第 2 層：棘輪（看得到上面的方形齒）
-    const ry0 = 300, rx = 92, ry = rx * K, hh = 42;
-    let ratchet = `<path fill="#adb5bd" d="M${cx - rx} ${ry0} L${cx - rx} ${ry0 + hh} A${rx} ${f(ry)} 0 0 0 ${cx + rx} ${ry0 + hh} L${cx + rx} ${ry0} Z"/>
-      <ellipse cx="${cx}" cy="${ry0}" rx="${rx}" ry="${f(ry)}" fill="#dee2e6"/>
-      <ellipse cx="${cx}" cy="${ry0}" rx="38" ry="${f(38 * K)}" fill="#868e96"/>`;
-    const tooth = a => {
-      const x = cx + rx * .8 * Math.cos(a), y = ry0 + ry * .8 * Math.sin(a);
-      return `<rect x="${f(x - 17)}" y="${f(y - 26)}" width="34" height="26" rx="4" fill="#f1f3f5"/>`;
-    };
-    ratchet += [-.6, Math.PI + .6].map(tooth).join('') + [.6, Math.PI - .6].map(tooth).join('');
-    // 第 3 層：尖底 + 小齒輪
-    const gy0 = 435, gx = 58, gh = 32, gry = gx * K;
-    let bit = `<path fill="#868e96" d="M${cx - 42} ${gy0 + gh} L${cx - 9} 566 Q${cx} 578 ${cx + 9} 566 L${cx + 42} ${gy0 + gh} Z"/>
-      <path fill="#ffd43b" d="M${cx - gx} ${gy0} L${cx - gx} ${gy0 + gh} A${gx} ${f(gry)} 0 0 0 ${cx + gx} ${gy0 + gh} L${cx + gx} ${gy0} Z"/>
-      <ellipse cx="${cx}" cy="${gy0}" rx="${gx}" ry="${f(gry)}" fill="#ffe066"/>`;
-    for (const a of [Math.PI / 2 - 1, Math.PI / 2 - .45, Math.PI / 2, Math.PI / 2 + .45, Math.PI / 2 + 1]) {
-      const x = cx + gx * Math.cos(a);
-      bit += `<path d="M${f(x)} ${f(gy0 + gry * Math.sin(a))} L${f(x)} ${f(gy0 + gh + gry * Math.sin(a))}"/>`;
-    }
-    bit += `<path fill="#dee2e6" d="M${cx - 22} ${gy0} L${cx - 22} ${gy0 - 30} A22 9 0 0 1 ${cx + 22} ${gy0 - 30} L${cx + 22} ${gy0} Z"/>
-      <ellipse cx="${cx}" cy="${gy0 - 30}" rx="22" ry="9" fill="#f1f3f5"/>`;
+    const cx = 250, R = 190, th = THEME.phoenix, k = K;
+    const blade = bladeSVG(cx, 85, R, th, 2, k);
+    const ratchet = ratchetSVG(cx, 270, R, th, 2, k, true);
+    const bit = bitSVG(cx, 455, 250, th, 2, k, true);
+    // 右邊：組合好的陀螺
     return `
-      <path d="M${cx} 228 L${cx} 240 M${cx} 252 L${cx} 262"/>
-      ${blade}
+      <path d="M${cx} 210 L${cx} 222 M${cx} 234 L${cx} 246"/>
+      ${bit.s}
       ${ratchet}
-      ${bit}
-      <path fill="#ffe066" d="M450 270 L520 270 L520 240 L575 300 L520 360 L520 330 L450 330 Z"/>
-      ${top3(670, 215, 108, 'phoenix')}
-      ${sparkle(560, 140, 16)} ${sparkle(760, 420, 16, '#ff922b')}`;
+      ${blade}
+      <path fill="#ffe066" d="M470 270 L515 270 L515 238 L565 300 L515 362 L515 330 L470 330 Z"/>
+      ${top3(685, 270, 98, 'phoenix')}
+      ${sparkle(560, 110, 16)} ${sparkle(760, 470, 16, '#ff922b')} ${sparkle(470, 520, 14)}`;
   })();
 
-  /* ---------------- 軌道對戰盤：極限衝刺 ---------------- */
+  /* ---------------- 對戰盤（有 X 軌道） ---------------- */
   const stadium = (() => {
-    const cx = 400, cy = 300;
-    let ticks = '';
-    for (let i = 0; i < 20; i++) {
-      const a = i / 20 * TAU + .08;
-      if (Math.sin(a) > .35 && Math.cos(a) > -.1 && Math.cos(a) < .75) continue; // 陀螺擋住的地方不用畫
-      ticks += `<path d="M${P(cx + 312 * Math.cos(a), cy + 118 * Math.sin(a))} L${P(cx + 340 * Math.cos(a), cy + 130 * Math.sin(a))}"/>`;
+    const cx = 400, cy = 315;
+    let rail = '';
+    // 軌道上的齒（只畫在前面的軌道上）
+    for (let i = 0; i <= 26; i++) {
+      const a = Math.PI * (.08 + .84 * i / 26);
+      rail += `<path d="M${P(cx + 318 * Math.cos(a), cy + 122 * Math.sin(a))} L${P(cx + 340 * Math.cos(a), cy + 132 * Math.sin(a))}"/>`;
     }
-    const a = .95, tx = cx + 326 * Math.cos(a), ty = cy + 124 * Math.sin(a);
     return `
-      <path fill="#4dabf7" d="M40 300 L64 395 A336 130 0 0 0 736 395 L760 300 Z"/>
-      <ellipse cx="${cx}" cy="${cy}" rx="360" ry="142" fill="#a5d8ff"/>
-      <ellipse cx="${cx}" cy="${cy}" rx="340" ry="130" fill="#ffd43b"/>
-      <ellipse cx="${cx}" cy="${cy}" rx="312" ry="118" fill="#e7f5ff"/>
-      ${ticks}
-      <ellipse cx="${cx}" cy="${cy - 8}" rx="120" ry="44" fill="#d0ebff"/>
-      ${top3(330, 205, 62, 'clock')}
-      <path d="M190 370 Q260 412 340 425 M220 330 Q280 372 360 388 M170 405 Q240 445 330 458"/>
-      ${top3(tx + 20, ty - 85, 66, 'charge')}
-      ${sparkle(tx + 30, ty + 6, 16, '#ff922b')} ${sparkle(tx + 82, ty - 10, 12)} ${sparkle(tx - 20, ty + 22, 10)}
-      ${sparkle(90, 120, 22)} ${sparkle(710, 110, 18, '#ffd43b')}`;
+      <path fill="#4dabf7" d="M40 315 L64 410 A336 130 0 0 0 736 410 L760 315 Z"/>
+      ${ell(cx, cy, 360, 142, '#a5d8ff')}
+      ${ell(cx, cy, 340, 132, '#ffd43b')}
+      ${ell(cx, cy, 312, 118, '#e7f5ff')}
+      ${rail}
+      ${ell(cx, cy - 6, 130, 48, '#d0ebff')}
+      <path d="M150 380 Q230 425 330 440 M190 345 Q260 392 350 405"/>
+      ${top3(290, 275, 95, 'whip', { shadow: false })}
+      ${top3(545, 315, 95, 'hells', { shadow: false })}
+      ${sparkle(660, 410, 16, '#ff922b')} ${sparkle(700, 380, 12)}
+      ${sparkle(80, 90, 22)} ${sparkle(720, 90, 18, '#ffd43b')}`;
   })();
 
   /* ---------------- 碰！兩顆陀螺對撞 ---------------- */
   const clash = `
-    <ellipse cx="400" cy="500" rx="370" ry="70" fill="#e7f5ff"/>
-    <path d="M60 300 Q90 280 120 300 M50 360 Q80 340 110 360 M690 300 Q720 280 750 300 M700 360 Q730 340 760 360"/>
-    <g transform="rotate(10 235 290)">${top3(235, 290, 140, 'whip')}</g>
-    <g transform="rotate(-10 565 290)">${top3(565, 290, 140, 'knight')}</g>
-    ${star(400, 225, 112, 62, 12, '#ffe066', -Math.PI / 2 + .13)}
-    ${star(400, 225, 62, 36, 8, '#ff922b')}
-    <rect x="388" y="180" width="24" height="52" rx="12" fill="#ff4b3e"/>
-    <circle cx="400" cy="252" r="12" fill="#ff4b3e"/>
-    ${sparkle(300, 90, 18)} ${sparkle(510, 80, 16, '#ff922b')} ${sparkle(400, 380, 14)}
-    ${sparkle(110, 130, 16, '#ffd43b')} ${sparkle(700, 140, 18, '#a5d8ff')}`;
+    ${ell(400, 500, 380, 70, '#e7f5ff')}
+    <path d="M30 300 Q60 280 90 300 M25 360 Q55 340 85 360 M710 300 Q740 280 770 300 M715 360 Q745 340 775 360"/>
+    <g transform="rotate(10 205 310)">${top3(205, 310, 160, 'phoenix', { shadow: false })}</g>
+    <g transform="rotate(-10 595 310)">${top3(595, 310, 160, 'whip', { shadow: false })}</g>
+    ${star(400, 205, 100, 56, 12, '#ffe066', -Math.PI / 2 + .13)}
+    ${star(400, 205, 56, 32, 8, '#ff922b')}
+    <rect x="388" y="164" width="24" height="48" rx="12" fill="#ff4b3e"/>
+    <circle cx="400" cy="230" r="11" fill="#ff4b3e"/>
+    ${sparkle(300, 60, 18)} ${sparkle(510, 55, 16, '#ff922b')} ${sparkle(400, 520, 14)}
+    ${sparkle(90, 120, 16, '#ffd43b')} ${sparkle(710, 120, 18, '#a5d8ff')}`;
 
   /* ---------------- 小朋友發射陀螺 ---------------- */
   const kid = `
-    <ellipse cx="560" cy="520" rx="210" ry="48" fill="#e7f5ff"/>
+    ${ell(560, 515, 215, 50, '#e7f5ff')}
     <rect x="175" y="400" width="44" height="110" rx="16" fill="#4c6ef5"/>
     <rect x="235" y="400" width="44" height="110" rx="16" fill="#4c6ef5"/>
     <ellipse cx="190" cy="518" rx="38" ry="18" fill="#ff6b6b"/>
@@ -447,11 +633,11 @@
     ${eye(200, 168, 11)} ${eye(256, 168, 11)}
     <path fill="#ff8787" d="M200 198 Q228 232 256 198 Z"/>
     <circle cx="178" cy="200" r="12" fill="#ffc2c2"/><circle cx="278" cy="200" r="12" fill="#ffc2c2"/>
-    ${spinLines(590, 345, 105)}
-    ${floorSpin(590, 520, 60)}
-    ${top3(590, 345, 105, 'brave')}
+    ${spinLines(590, 380, 150)}
+    ${floorSpin(590, 510, 100)}
+    ${top3(590, 380, 150, 'brave', { shadow: false })}
     <path d="M470 270 Q500 300 520 300 M500 250 Q540 275 560 270"/>
-    ${sparkle(700, 120, 22)} ${sparkle(560, 120, 16, '#ff922b')} ${sparkle(745, 300, 14)}`;
+    ${sparkle(700, 120, 22)} ${sparkle(580, 110, 16, '#ff922b')} ${sparkle(760, 250, 14)}`;
 
   /* ---------------- 冠軍獎盃 ---------------- */
   const trophy = `
@@ -459,31 +645,32 @@
     <path fill="#ffd43b" d="M265 120 Q170 120 178 210 Q188 300 300 312 L312 280 Q222 268 215 210 Q212 160 265 160 Z"/>
     <path fill="#ffd43b" d="M535 120 Q630 120 622 210 Q612 300 500 312 L488 280 Q578 268 585 210 Q588 160 535 160 Z"/>
     <path fill="#ffe066" d="M250 80 L550 80 L535 230 Q510 360 400 365 Q290 360 265 230 Z"/>
-    ${topDown(400, 200, 92, 'gold')}
+    ${topDown(400, 200, 100, 'gold')}
     <rect x="368" y="360" width="64" height="60" fill="#fab005"/>
     <rect x="290" y="415" width="220" height="40" rx="10" fill="#fab005"/>
     <rect x="250" y="452" width="300" height="80" rx="12" fill="#c0874a"/>
     <rect x="320" y="472" width="160" height="40" rx="8" fill="#ffe8cc"/>`;
+
 
   window.ART.addPack({
     categories: [
       { id: 'tops', name: '對戰陀螺', icon: '🌀', color: '#228be6', dark: '#1864ab', en: 'Battle Tops' },
     ],
     drawings: [
-      { id: 'tp-phoenix', cat: 'tops', name: '鳳凰陀螺', en: 'Phoenix Top', svg: phoenix },
-      { id: 'tp-clock', cat: 'tops', name: '時鐘陀螺', en: 'Clock Top', svg: clock },
-      { id: 'tp-knight', cat: 'tops', name: '騎士盾陀螺', en: 'Knight Shield Top', svg: knight },
-      { id: 'tp-whip', cat: 'tops', name: '飛龍鞭陀螺', en: 'Dragon Whip Top', svg: whip },
-      { id: 'tp-charge', cat: 'tops', name: '藍龍衝鋒陀螺', en: 'Blue Dragon Charge Top', svg: charge },
-      { id: 'tp-brave', cat: 'tops', name: '勇氣藍龍陀螺', en: 'Brave Blue Dragon Top', svg: brave },
-      { id: 'tp-meteor', cat: 'tops', name: '流星龍騎士陀螺', en: 'Meteor Dragon Knight Top', svg: meteor },
-      { id: 'tp-unicorn', cat: 'tops', name: '閃電獨角獸陀螺', en: 'Lightning Unicorn Top', svg: unicorn },
-      { id: 'tp-shark', cat: 'tops', name: '鯊魚利齒陀螺', en: 'Shark Teeth Top', svg: shark },
-      { id: 'tp-panther', cat: 'tops', name: '黑豹爪陀螺', en: 'Panther Claw Top', svg: panther },
-      { id: 'tp-turtle', cat: 'tops', name: '巨石烏龜陀螺', en: 'Rock Turtle Top', svg: turtle },
-      { id: 'tp-rhino', cat: 'tops', name: '火山犀牛陀螺', en: 'Volcano Rhino Top', svg: rhino },
-      { id: 'tp-phoenix-above', cat: 'tops', name: '從上面看鳳凰陀螺', en: 'Phoenix Top from above', svg: phoenixTop },
-      { id: 'tp-parts', cat: 'tops', name: '陀螺三零件', en: 'top parts', svg: parts },
+      { id: 'tp-phoenix', cat: 'tops', name: '鳳凰飛翼', en: 'PhoenixWing 9-60GF', svg: phoenix },
+      { id: 'tp-clock', cat: 'tops', name: '時鐘幻象', en: 'ClockMirage', svg: clock },
+      { id: 'tp-knight', cat: 'tops', name: '騎士重盾', en: 'KnightShield 3-80N', svg: knight },
+      { id: 'tp-whip', cat: 'tops', name: '蒼龍神劍', en: 'DranSword 3-60F', svg: whip },
+      { id: 'tp-charge', cat: 'tops', name: '蒼龍突擊', en: 'DranStrike 4-50FF', svg: charge },
+      { id: 'tp-brave', cat: 'tops', name: '蒼龍勇氣', en: 'DranBrave 6-60V', svg: brave },
+      { id: 'tp-meteor', cat: 'tops', name: '隕星龍騎士', en: 'MeteorDragoon 3-70J', svg: meteor },
+      { id: 'tp-unicorn', cat: 'tops', name: '獨角刺心', en: 'UnicornSting 5-60GP', svg: unicorn },
+      { id: 'tp-shark', cat: 'tops', name: '鮫鯊狂鱗', en: 'SharkScale', svg: shark },
+      { id: 'tp-panther', cat: 'tops', name: '雄獅獵爪', en: 'LeonClaw 5-60P', svg: panther },
+      { id: 'tp-turtle', cat: 'tops', name: '魔導幻箭', en: 'WizardArrow 4-80B', svg: turtle },
+      { id: 'tp-rhino', cat: 'tops', name: '戰犀號角', en: 'RhinoHorn 3-80S', svg: rhino },
+      { id: 'tp-phoenix-above', cat: 'tops', name: '從上面看鳳凰飛翼', en: 'PhoenixWing from above', svg: phoenixTop },
+      { id: 'tp-parts', cat: 'tops', name: '陀螺三零件', en: 'blade, ratchet and bit', svg: parts },
       { id: 'tp-winder', cat: 'tops', name: '捲繩發射器', en: 'string launcher', svg: winder },
       { id: 'tp-rack', cat: 'tops', name: '拉條發射器', en: 'ripcord launcher', svg: rack },
       { id: 'tp-stadium', cat: 'tops', name: '極限衝刺對戰盤', en: 'rail stadium dash', svg: stadium },
