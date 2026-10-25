@@ -587,5 +587,48 @@
   setInterval(checkUpdate, 3 * 60 * 1000);
   setTimeout(checkUpdate, 5000);
 
+  /* ---------------- 開著 App 時螢幕不要睡著 ----------------
+   * 小朋友不會自己解鎖，所以 App 開著就讓螢幕一直亮著。
+   * 但如果 30 分鐘都沒人碰、也沒在念故事或唱歌，就放手讓平板休息，免得整晚耗電。 */
+  const KeepAwake = (() => {
+    const IDLE = 30 * 60 * 1000;
+    let lock = null, video = null, lastTouch = Date.now();
+    const busy = () => Voice.busy() || Music.playing();
+    async function on() {
+      if (document.hidden) return;
+      if ('wakeLock' in navigator) {
+        if (lock) return;
+        try {
+          lock = await navigator.wakeLock.request('screen');
+          lock.addEventListener('release', () => { lock = null; });
+          return;
+        } catch (e) { /* 不支援或被擋，改用下面的影片方法 */ }
+      }
+      // 舊版 iPad：偷偷播一段無聲的小影片，系統就不會關螢幕
+      if (!video) {
+        video = document.createElement('video');
+        video.src = 'media/awake.mp4';
+        video.muted = true;
+        video.loop = true;
+        video.setAttribute('playsinline', '');
+        video.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:0;top:0';
+        document.body.appendChild(video);
+      }
+      video.play().catch(() => {});
+    }
+    function off() {
+      if (lock) { lock.release().catch(() => {}); lock = null; }
+      if (video) video.pause();
+    }
+    document.addEventListener('pointerdown', () => { lastTouch = Date.now(); on(); }, { passive: true });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) { lastTouch = Date.now(); on(); } });
+    setInterval(() => {
+      if (busy()) lastTouch = Date.now();
+      if (Date.now() - lastTouch > IDLE) off(); else on();
+    }, 60 * 1000);
+    on();
+    return { on, off };
+  })();
+
   route();
 })();

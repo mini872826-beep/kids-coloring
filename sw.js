@@ -29,6 +29,7 @@ const FILES = [
   'js/math.js',
   'js/app.js',
   'manifest.webmanifest',
+  'media/awake.mp4',
   'icons/icon.svg',
   'icons/icon-192.png',
   'icons/icon-512.png',
