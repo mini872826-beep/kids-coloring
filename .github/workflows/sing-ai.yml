@@ -1,0 +1,44 @@
+# AI 歌手：Kaggle 免費 GPU 上用 ACE-Step 把兒歌唱成像真人唱的（新旋律版＋原旋律版）
+name: AI 唱兒歌
+on:
+  push:
+    branches: [main]
+    paths: ['js/songs.js', 'tools/sing_ai.py', 'tools/kaggle_sing/**', '.github/workflows/sing-ai.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: sing-ai
+jobs:
+  sing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node tools/songs.js > "$RUNNER_TEMP/songs.json"
+      - run: python3 tools/sing_ai.py "$RUNNER_TEMP/songs.json" --plan "$RUNNER_TEMP/jobs.json"
+      - name: Kaggle 唱歌
+        continue-on-error: true
+        env:
+          KAGGLE_USERNAME: pacokids
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          if [ "$(python3 -c 'import json,sys;print(len(json.load(open(sys.argv[1]))))' "$RUNNER_TEMP/jobs.json")" = 0 ]; then echo "都做好了"; exit 0; fi
+          pip install -q "kaggle>=1.8"
+          tools/kaggle_sing/kaggle.sh "$RUNNER_TEMP/jobs.json" main audio/sing-ai
+      - run: python3 tools/sing_ai.py "$RUNNER_TEMP/songs.json"
+      - name: 推回 main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/sing-ai
+          if git diff --cached --quiet; then echo "沒有新的歌"; exit 0; fi
+          git commit -m "Update AI songs"
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 10; done
+          curl -sS -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || true

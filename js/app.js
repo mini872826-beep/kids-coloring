@@ -412,8 +412,22 @@
   /* ---------------- 兒歌唐詩 ---------------- */
   let song = null, songToken = 0;
   // 兒歌有 AI 唱好的錄音（tools/sing.py 產生）就放錄音，沒有才用八音盒彈旋律
-  let SUNG = {};
+  let SUNG = {}, AI = {};
   fetch('audio/sing/index.json').then(r => r.ok ? r.json() : {}).then(j => { SUNG = j; }).catch(() => {});
+  // AI 歌手（ACE-Step）唱的版本：new = 新旋律（爸爸試聽最喜歡）、cover = 保留原本旋律
+  const AI_STYLE = 'new';
+  fetch('audio/sing-ai/index.json').then(r => r.ok ? r.json() : {}).then(j => { AI = j; }).catch(() => {});
+  // 這首歌要放哪個錄音：AI 歌手 > 合成的唱歌 > 沒有（八音盒）
+  function track(id) {
+    const a = AI[id];
+    if (a) {
+      const style = a[AI_STYLE] ? AI_STYLE : (a.new ? 'new' : 'cover');
+      // 原旋律版的段落和原本一樣，可以沿用每句的時間；新旋律版就不知道每句在哪
+      return { url: 'audio/sing-ai/' + a[style], times: style === 'cover' && SUNG[id] ? SUNG[id].times : null };
+    }
+    if (SUNG[id]) return { url: 'audio/sing/' + SUNG[id].file, times: SUNG[id].times };
+    return null;
+  }
   const singer = new Audio();
   singer.preload = 'auto';
   document.addEventListener('pointerdown', () => {
@@ -424,12 +438,12 @@
   }, { once: true });
   let singRaf = 0;
   function playSung(my, from = 0) {
-    const info = SUNG[song.id];
-    const url = 'audio/sing/' + info.file;
+    const info = track(song.id);
+    const url = info.url;
     Music.hold();
     if (!singer.src.endsWith(url)) singer.src = url;
     const start = () => {
-      singer.currentTime = from > 0 ? Math.max(0, info.times[from] - .25) : 0;
+      singer.currentTime = from > 0 && info.times ? Math.max(0, info.times[from] - .25) : 0;
       singer.play().catch(() => { if (my === songToken) { Music.release(); setPlaying(false); } });
     };
     singer.readyState >= 1 ? start() : singer.addEventListener('loadedmetadata', start, { once: true });
@@ -437,7 +451,7 @@
     const tick = () => {
       if (my !== songToken) return;
       let i = -1;
-      info.times.forEach((t0, k) => { if (singer.currentTime >= t0 - .1) i = k; });
+      (info.times || []).forEach((t0, k) => { if (singer.currentTime >= t0 - .1) i = k; });
       if (i !== line) { line = i; highlight(i); }
       singRaf = requestAnimationFrame(tick);
     };
@@ -478,7 +492,8 @@
     $('lyrics').className = 'lyrics ' + sg.kind;
     $('lyrics').innerHTML = sg.lines.map((l, i) => `<li>${l}${sg.sub ? `<small>${sg.sub[i]}</small>` : ''}</li>`).join('');
     setPlaying(false);
-    if (SUNG[sg.id]) { singer.src = 'audio/sing/' + SUNG[sg.id].file; singer.load(); }
+    const tr = track(sg.id);
+    if (tr) { singer.src = tr.url; singer.load(); }
     // 一打開就先把題目和前幾句的聲音抓好
     Voice.warm([sg.title, sg.author].filter(Boolean).concat(sg.lines.slice(0, 4)));
     // 點進來就開始：兒歌彈旋律，唐詩念出來
@@ -500,7 +515,7 @@
     stopSong();
     setPlaying(true);
     const my = songToken;
-    if (SUNG[song.id]) {
+    if (track(song.id)) {
       playSung(my);
     } else if (song.notes) {
       Music.playMelody(song.notes, song.bpm, i => my === songToken && highlight(i), () => {
@@ -532,8 +547,9 @@
     const i = [...$('lyrics').children].indexOf(li);
     stopSong();
     setPlaying(true);
-    // 有唱的錄音：跳到那一句接著唱；沒有就從那一句開始念
-    if (SUNG[song.id]) playSung(songToken, i);
+    // 知道每句時間的錄音：跳到那一句接著唱；不知道（或沒有錄音）就從那一句開始念
+    const tr = track(song.id);
+    if (tr && tr.times) playSung(songToken, i);
     else readLines(songToken, false, i);
   });
   function songStep(d) {
