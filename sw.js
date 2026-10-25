@@ -15,6 +15,7 @@ const FILES = [
   'js/pack-food.js',
   'js/pack-nature.js',
   'js/pack-heroes.js',
+  'js/pack-tops.js',
   'js/books.js',
   'js/stories-manners.js',
   'js/stories-habits.js',
