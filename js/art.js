@@ -624,6 +624,66 @@
     <path d="M60 525 L60 440 M90 525 L90 440 M45 470 L105 470 M640 525 L640 440 M670 525 L670 440 M700 525 L700 440 M625 470 L715 470"/>
     ${ground(527)}`;
 
+  /* ---------------- 故事角色 ---------------- */
+  const wolf = `
+    <path fill="#8d99ae" d="M530 470 Q640 470 660 380 Q665 340 700 330 Q720 360 700 400 Q690 500 530 515 Z"/>
+    <path fill="#dfe4ec" d="M688 340 Q705 335 712 350 Q705 375 692 372 Z"/>
+    <ellipse cx="400" cy="445" rx="140" ry="105" fill="#8d99ae"/>
+    <ellipse cx="400" cy="470" rx="75" ry="65" fill="#dfe4ec"/>
+    <path fill="#8d99ae" d="M290 230 L300 95 L375 170 Z"/>
+    <path fill="#8d99ae" d="M510 230 L500 95 L425 170 Z"/>
+    <path fill="#ffc2d1" d="M308 190 L312 135 L350 172 Z"/>
+    <path fill="#ffc2d1" d="M492 190 L488 135 L450 172 Z"/>
+    <path fill="#8d99ae" d="M285 240 Q290 145 400 140 Q510 145 515 240 Q520 330 400 365 Q280 330 285 240 Z"/>
+    <path fill="#dfe4ec" d="M335 290 Q345 255 400 255 Q455 255 465 290 Q460 352 400 365 Q340 352 335 290 Z"/>
+    ${eye(352, 225, 13)} ${eye(448, 225, 13)}
+    <path d="M330 200 L372 212 M470 200 L428 212"/>
+    <ellipse cx="400" cy="282" rx="22" ry="15" fill="#222"/>
+    <path d="M400 297 L400 315 Q382 335 362 322 M400 315 Q418 335 438 322"/>
+    <path fill="#fff" stroke-width="5" d="M372 322 L378 336 L384 326 Z"/><path fill="#fff" stroke-width="5" d="M416 326 L422 336 L428 322 Z"/>
+    <ellipse cx="335" cy="540" rx="45" ry="24" fill="#8d99ae"/>
+    <ellipse cx="465" cy="540" rx="45" ry="24" fill="#8d99ae"/>`;
+
+  const sheep = `
+    ${[300, 360, 440, 500].map(x => `<rect x="${x - 16}" y="420" width="32" height="105" rx="14" fill="#5c4b4b"/>`).join('')}
+    <path fill="#fbfbfb" d="${scallop(400, 360, 150, 14, 14)}"/>
+    <ellipse cx="270" cy="260" rx="38" ry="18" fill="#7a6262" transform="rotate(-25 270 260)"/>
+    <ellipse cx="530" cy="260" rx="38" ry="18" fill="#7a6262" transform="rotate(25 530 260)"/>
+    <path fill="#fbfbfb" d="${scallop(400, 205, 70, 9, 10)}"/>
+    <ellipse cx="400" cy="275" rx="78" ry="88" fill="#7a6262"/>
+    <path fill="#fbfbfb" d="${scallop(400, 205, 55, 8, 9)}"/>
+    <circle cx="370" cy="270" r="17" fill="#fff"/>${eye(370, 272, 9)}
+    <circle cx="430" cy="270" r="17" fill="#fff"/>${eye(430, 272, 9)}
+    <circle cx="345" cy="310" r="13" fill="#ffb3b3"/><circle cx="455" cy="310" r="13" fill="#ffb3b3"/>
+    <path d="M385 322 Q400 336 415 322"/>
+    ${ground(527)}`;
+
+  // 小朋友：hood 是帽子顏色，有帽子就是小紅帽
+  const kid = (cape, hood, shirt, hair) => `
+    <rect x="345" y="455" width="40" height="80" rx="16" fill="#ffd8b8"/>
+    <rect x="415" y="455" width="40" height="80" rx="16" fill="#ffd8b8"/>
+    <ellipse cx="362" cy="537" rx="34" ry="18" fill="#6b4226"/>
+    <ellipse cx="438" cy="537" rx="34" ry="18" fill="#6b4226"/>
+    ${cape ? `<path fill="${cape}" d="M300 300 Q250 420 255 480 L545 480 Q550 420 500 300 Z"/>` : ''}
+    <path fill="${shirt}" d="M325 310 Q300 400 300 470 L500 470 Q500 400 475 310 Q400 290 325 310 Z"/>
+    <path fill="#fff" d="M300 445 L500 445 L500 470 L300 470 Z"/>
+    <ellipse cx="300" cy="380" rx="28" ry="50" fill="${cape || shirt}" transform="rotate(15 300 380)"/>
+    <ellipse cx="500" cy="380" rx="28" ry="50" fill="${cape || shirt}" transform="rotate(-15 500 380)"/>
+    <circle cx="292" cy="425" r="18" fill="#ffd8b8"/><circle cx="508" cy="425" r="18" fill="#ffd8b8"/>
+    ${hood ? `<path fill="${hood}" d="M275 240 Q275 95 400 92 Q525 95 525 240 Q530 330 470 330 L330 330 Q270 330 275 240 Z"/>` : ''}
+    ${!hood ? `<path fill="${hair}" d="M298 215 Q300 105 400 102 Q500 105 502 215 Q505 260 490 280 L310 280 Q295 260 298 215 Z"/>` : ''}
+    <circle cx="400" cy="230" r="92" fill="#ffd8b8"/>
+    <path fill="${hair}" d="M310 210 Q320 140 400 135 Q480 140 490 210 Q450 175 420 185 Q400 160 375 185 Q345 170 310 210 Z"/>
+    ${eye(365, 235, 12)} ${eye(435, 235, 12)}
+    <circle cx="340" cy="268" r="15" fill="#ffb3b3"/><circle cx="460" cy="268" r="15" fill="#ffb3b3"/>
+    <path d="M385 275 Q400 290 415 275"/>`;
+  const redHood = kid('#e03131', '#e03131', '#ffd43b', '#8a5a2b') + `
+    <path fill="#c98a4b" d="M520 440 L610 440 L598 500 L532 500 Z"/>
+    <path d="M532 440 Q565 395 598 440" fill="none"/>
+    <circle cx="555" cy="438" r="10" fill="#e03131"/><circle cx="578" cy="436" r="10" fill="#e03131"/>`;
+  const shepherd = kid('', '', '#4dabf7', '#3d2f1f') + `
+    <path d="M560 540 L560 300 Q560 260 595 262 Q625 265 620 300" fill="none" stroke-width="10"/>`;
+
   const DRAWINGS = [
     { id: 'car', cat: 'car', name: '小汽車', svg: car },
     { id: 'firetruck', cat: 'car', name: '消防車', svg: fireTruck },
@@ -641,6 +701,10 @@
     { id: 'elephant', cat: 'animal', name: '大象', svg: elephant },
     { id: 'bear', cat: 'animal', name: '小熊', svg: bear },
     { id: 'chick', cat: 'animal', name: '小雞', svg: chick },
+    { id: 'wolf', cat: 'animal', name: '大野狼', svg: wolf },
+    { id: 'sheep', cat: 'animal', name: '小綿羊', svg: sheep },
+    { id: 'redhood', cat: 'animal', name: '小紅帽', svg: redHood },
+    { id: 'shepherd', cat: 'animal', name: '放羊的孩子', svg: shepherd },
     { id: 'giraffe', cat: 'animal', name: '長頸鹿', svg: giraffe },
     { id: 'trex', cat: 'dino', name: '霸王龍', svg: trex },
     { id: 'trike', cat: 'dino', name: '三角龍', svg: trike },
@@ -709,6 +773,47 @@
       <circle cx="640" cy="90" r="45" fill="#fff3b0" class="tap" data-anim="boing" data-sound="twinkle"/>
       ${[[90, 60], [220, 120], [380, 50], [500, 140], [740, 200], [300, 200], [130, 220]].map(([x, y], i) => `<path class="twinkle tap" data-anim="spin" data-sound="twinkle" style="animation-delay:${i * .3}s" d="M${x} ${y - 12} L${x + 4} ${y - 4} L${x + 12} ${y} L${x + 4} ${y + 4} L${x} ${y + 12} L${x - 4} ${y + 4} L${x - 12} ${y} L${x - 4} ${y - 4} Z" fill="#ffe14d"/>`).join('')}
       <rect y="400" width="800" height="100" fill="#3c6e47"/>`,
+    // ---- 故事道具 ----
+    house: (type, x, y, w = 220) => {
+      const k = w / 220, L = 'stroke="#222" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"';
+      const col = { straw: ['#f6d365', '#e0b23f'], wood: ['#c98a4b', '#9c6332'], brick: ['#e8664f', '#b5442f'], grandma: ['#ffe8cc', '#e8590c'] }[type];
+      const deco = type === 'straw'
+        ? [30, 60, 90, 130, 160, 190].map(t => `<path d="M${t} 110 L${t + 6} 230" stroke="#b8902a" stroke-width="3"/>`).join('')
+        : type === 'wood'
+          ? [140, 170, 200].map(t => `<path d="M12 ${t} L208 ${t}" stroke="#7a4a22" stroke-width="3"/>`).join('')
+          : type === 'brick'
+            ? [130, 160, 190, 220].map((t, i) => `<path d="M12 ${t} L208 ${t}" stroke="#8c2f20" stroke-width="3"/>${[40, 100, 160].map(u => `<path d="M${u + (i % 2) * 30} ${t - 30} L${u + (i % 2) * 30} ${t}" stroke="#8c2f20" stroke-width="3"/>`).join('')}`).join('')
+            : '';
+      return `<g class="tap" data-anim="boing" data-sound="pop" transform="translate(${x} ${y}) scale(${k})">
+        <rect x="12" y="100" width="196" height="140" fill="${col[0]}" ${L}/>${deco}
+        <path d="M-10 110 L110 20 L230 110 Z" fill="${col[1]}" ${L}/>
+        <path d="M85 240 L85 175 Q85 150 110 150 Q135 150 135 175 L135 240 Z" fill="#7a4a22" ${L}/>
+        <rect x="150" y="135" width="44" height="40" rx="5" fill="#fff3a0" ${L}/>
+        <rect x="26" y="135" width="44" height="40" rx="5" fill="#fff3a0" ${L}/></g>`;
+    },
+    blocks: (x, y, fallen) => {
+      const L = 'stroke="#222" stroke-width="5" stroke-linejoin="round"';
+      const c = ['#ff6b6b', '#4dabf7', '#ffd43b', '#69db7c', '#b197fc'];
+      return `<g class="tap" data-anim="wiggle" data-sound="pop">${fallen
+        ? c.map((k, i) => `<rect x="${x + i * 55 - 20}" y="${y + 70 + (i % 2) * 18}" width="48" height="48" rx="6" fill="${k}" ${L} transform="rotate(${i * 23 - 30} ${x + i * 55} ${y + 95})"/>`).join('')
+        : c.map((k, i) => `<rect x="${x + (i % 2) * 14}" y="${y + 120 - i * 50}" width="56" height="50" rx="6" fill="${k}" ${L}/>`).join('')}</g>`;
+    },
+    cookies: (x, y, n = 6) => {
+      const L = 'stroke="#222" stroke-width="5"';
+      return `<g class="tap" data-anim="jump" data-sound="pop"><ellipse cx="${x}" cy="${y + 20}" rx="110" ry="26" fill="#fff" ${L}/>
+        ${Array.from({ length: n }, (_, i) => { const cx = x - 70 + (i % 3) * 70, cy = y - Math.floor(i / 3) * 34; return `<circle cx="${cx}" cy="${cy}" r="30" fill="#e0a96d" ${L}/><circle cx="${cx - 10}" cy="${cy - 6}" r="5" fill="#6b3e1f"/><circle cx="${cx + 9}" cy="${cy + 6}" r="5" fill="#6b3e1f"/>`; }).join('')}</g>`;
+    },
+    flag: (x, y) => `<g class="tap" data-anim="wiggle" data-sound="twinkle"><path d="M${x} ${y} L${x} ${y - 170}" stroke="#222" stroke-width="7" stroke-linecap="round"/>
+      <path d="M${x} ${y - 170} L${x + 90} ${y - 140} L${x} ${y - 110} Z" fill="#ff6b6b" stroke="#222" stroke-width="5" stroke-linejoin="round"/></g>`,
+    heart: (x, y, r = 30, c = '#ff6b8b') => `<path class="float tap" data-anim="boing" data-sound="twinkle" d="M${x} ${y + r} Q${x - r * 1.6} ${y - r * .2} ${x - r * .8} ${y - r * .9} Q${x} ${y - r * 1.2} ${x} ${y - r * .4} Q${x} ${y - r * 1.2} ${x + r * .8} ${y - r * .9} Q${x + r * 1.6} ${y - r * .2} ${x} ${y + r} Z" fill="${c}" stroke="#222" stroke-width="4"/>`,
+    bubble: (x, y, text, w = 220) => `<g><rect x="${x}" y="${y}" width="${w}" height="70" rx="35" fill="#fff" stroke="#222" stroke-width="4"/>
+      <path d="M${x + 40} ${y + 68} L${x + 30} ${y + 100} L${x + 70} ${y + 68}" fill="#fff" stroke="#222" stroke-width="4" stroke-linejoin="round"/>
+      <rect x="${x + 34}" y="${y + 60}" width="40" height="12" fill="#fff"/>
+      <text x="${x + w / 2}" y="${y + 47}" text-anchor="middle" font-size="34" font-weight="700" fill="#e8590c" font-family="Chiron GoRound TC, PingFang TC, sans-serif">${text}</text></g>`,
+    carrot: (x, y, rot = 0) => `<g class="tap" data-anim="jump" data-sound="pop" transform="rotate(${rot} ${x} ${y})"><path d="M${x - 12} ${y} Q${x} ${y - 6} ${x + 12} ${y} L${x} ${y + 60} Z" fill="#ff8c1a" stroke="#222" stroke-width="4" stroke-linejoin="round"/><path d="M${x} ${y - 2} Q${x - 14} ${y - 26} ${x - 4} ${y - 34} Q${x} ${y - 18} ${x + 2} ${y - 4} Q${x + 10} ${y - 28} ${x + 22} ${y - 30} Q${x + 14} ${y - 12} ${x + 4} ${y}" fill="#6cc551" stroke="#222" stroke-width="4" stroke-linejoin="round"/></g>`,
+    zzz: (x, y) => `<text class="float" x="${x}" y="${y}" font-size="46" font-weight="900" fill="#4dabf7" stroke="#fff" stroke-width="3" paint-order="stroke" font-family="Chiron GoRound TC, sans-serif">Z z z</text>`,
+    stars: () => [[120, 90], [680, 120], [400, 60], [220, 200], [600, 230]].map(([x, y], i) => `<path class="twinkle" style="animation-delay:${i * .3}s" d="M${x} ${y - 16} L${x + 5} ${y - 5} L${x + 16} ${y} L${x + 5} ${y + 5} L${x} ${y + 16} L${x - 5} ${y + 5} L${x - 16} ${y} L${x - 5} ${y - 5} Z" fill="#ffd43b" stroke="#222" stroke-width="3"/>`).join(''),
+    forest: () => `<rect width="800" height="500" fill="#d3f9d8"/><rect y="380" width="800" height="120" fill="#8ce99a"/>`,
     bubbles: () => [[100, 300], [700, 250], [400, 120], [600, 380]].map(([x, y], i) =>
       `<circle class="float tap" data-anim="boing" data-sound="pop" style="animation-delay:${i * .7}s" cx="${x}" cy="${y}" r="${10 + i * 3}" fill="rgba(255,255,255,.6)" stroke="#fff" stroke-width="3"/>`).join(''),
   };

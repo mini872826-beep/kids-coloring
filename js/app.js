@@ -117,7 +117,7 @@
       $('cats').hidden = true;
       $('grid').style.cssText = '--c:#9775fa;--cd:#7048e8';
       $('grid').innerHTML = BOOKS.map((b, i) =>
-        `<div class="card story" role="button" data-go="#/read/${b.id}/0" style="--i:${i}"><span class="thumb">${b.cover}</span><div class="name">📖 ${b.title}</div></div>`).join('');
+        `<div class="card story" role="button" data-go="#/read/${b.id}/0" style="--i:${i}"><span class="thumb">${b.cover}${b.tag ? `<span class="tag">${b.tag}</span>` : ''}</span><div class="name">📖 ${b.title}</div></div>`).join('');
     }
   }
 

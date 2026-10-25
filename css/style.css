@@ -187,6 +187,19 @@ button {
 .card.story .thumb { aspect-ratio: 8 / 5; }
 .card .thumb > svg, .card .thumb > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .card .thumb .blank { position: absolute; inset: 0; display: grid; place-items: center; font-size: 56px; opacity: .5; }
+.card .tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--cd);
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .15);
+}
 .card .badge {
   position: absolute;
   top: 6px;
