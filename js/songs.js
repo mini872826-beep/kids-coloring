@@ -120,6 +120,105 @@
       ],
     },
 
+    /* ======== 原創兒歌（用公版旋律，歌詞是這個 App 自己寫的） ======== */
+    {
+      id: 'brush-song', kind: 'song', title: '刷牙歌', original: true, bpm: 120,
+      art: svg(scene.day() + scene.grass() + put('bear', 60, 130, 300, 'wiggle', 'pop') + scene.toothbrush(520, 230) + scene.tooth(620, 330, true, 60)),
+      lines: ['刷刷牙齒，刷刷牙齒', '上下刷，上下刷', '早上晚上都要刷', '牙齒白白亮晶晶', '真乾淨，真乾淨'],
+      notes: [
+        [[C, 1], [D, 1], [E, 1], [C, 1], [C, 1], [D, 1], [E, 1], [C, 1]],
+        [[E, 1], [F, 1], [G, 2], [E, 1], [F, 1], [G, 2]],
+        [[G, .5], [A, .5], [G, .5], [F, .5], [E, 1], [C, 1], [C, 1]],
+        [[G, .5], [A, .5], [G, .5], [F, .5], [E, 1], [C, 1], [C, 1]],
+        [[C, 1], [G0, 1], [C, 2], [C, 1], [G0, 1], [C, 2]],
+      ],
+    },
+    {
+      id: 'wash-song', kind: 'song', title: '洗手歌', original: true, bpm: 120,
+      art: svg(scene.day() + scene.grass() + put('bunny', 40, 120, 320, 'wiggle', 'splash') + scene.faucet(560, 260) + scene.soap(560, 430) + scene.bubbles()),
+      lines: ['搓搓搓搓小手心', '小手心，小手心', '手背手指都要洗', '細菌全跑光'],
+      notes: [
+        [[E, 1.5], [D, .5], [C, 1], [D, 1], [E, 1], [E, 1], [E, 2]],
+        [[D, 1], [D, 1], [D, 2], [E, 1], [G, 1], [G, 2]],
+        [[E, 1.5], [D, .5], [C, 1], [D, 1], [E, 1], [E, 1], [E, 1], [E, 1]],
+        [[D, 1], [D, 1], [E, 1], [D, 1], [C, 4]],
+      ],
+    },
+    {
+      id: 'number-song', kind: 'song', title: '數字歌', original: true, bpm: 100,
+      art: svg(`<rect width="800" height="500" fill="#fff9db"/>` + '12345'.split('').map((n, i) => `<text class="tap float" data-anim="jump" data-sound="pop" style="animation-delay:${i * .3}s" x="${100 + i * 150}" y="${260 + (i % 2) * 90}" text-anchor="middle" font-size="150" font-weight="900" fill="${['#ff6b6b', '#ff922b', '#51cf66', '#4dabf7', '#845ef7'][i]}" stroke="#222" stroke-width="6" paint-order="stroke" font-family="Nunito, sans-serif">${n}</text>`).join('')),
+      lines: ['一二三四五六七', '數數我們一起來', '八個蘋果九顆星', '十隻小鴨排排站', '一二三四五六七', '大家一起數一數'],
+      notes: [
+        [[C, 1], [C, 1], [G, 1], [G, 1], [A, 1], [A, 1], [G, 2]],
+        [[F, 1], [F, 1], [E, 1], [E, 1], [D, 1], [D, 1], [C, 2]],
+        [[G, 1], [G, 1], [F, 1], [F, 1], [E, 1], [E, 1], [D, 2]],
+        [[G, 1], [G, 1], [F, 1], [F, 1], [E, 1], [E, 1], [D, 2]],
+        [[C, 1], [C, 1], [G, 1], [G, 1], [A, 1], [A, 1], [G, 2]],
+        [[F, 1], [F, 1], [E, 1], [E, 1], [D, 1], [D, 1], [C, 2]],
+      ],
+    },
+    {
+      id: 'color-song', kind: 'song', title: '顏色歌', original: true, bpm: 120,
+      art: svg(scene.day() + scene.sun() + scene.grass() + scene.flowers() + `<path d="M120 380 A280 280 0 0 1 680 380" fill="none" stroke="#ff6b6b" stroke-width="22"/><path d="M150 380 A250 250 0 0 1 650 380" fill="none" stroke="#ffd43b" stroke-width="22"/><path d="M180 380 A220 220 0 0 1 620 380" fill="none" stroke="#51cf66" stroke-width="22"/><path d="M210 380 A190 190 0 0 1 590 380" fill="none" stroke="#4dabf7" stroke-width="22"/>`),
+      lines: ['紅色蘋果圓又圓', '圓又圓，圓又圓', '綠色葉子藍色天', '顏色真漂亮'],
+      notes: [
+        [[G, 1.5], [A, .5], [G, 1], [F, 1], [E, 1], [F, 1], [G, 2]],
+        [[D, 1], [E, 1], [F, 2], [E, 1], [F, 1], [G, 2]],
+        [[G, 1.5], [A, .5], [G, 1], [F, 1], [E, 1], [F, 1], [G, 2]],
+        [[D, 2], [G, 2], [E, 1], [C, 3]],
+      ],
+    },
+    {
+      id: 'goodnight-song', kind: 'song', title: '晚安歌', original: true, bpm: 84,
+      art: svg(scene.night() + scene.bed(400, 380) + put('bear', 200, 230, 170, 'wiggle', 'twinkle') + scene.zzz(470, 240)),
+      lines: ['月亮出來亮晶晶', '小星星也眨眼睛', '小熊小兔要睡覺', '蓋好被子不吵鬧', '晚安晚安好夢甜', '明天早上見太陽'],
+      notes: [
+        [[C, 1], [C, 1], [G, 1], [G, 1], [A, 1], [A, 1], [G, 2]],
+        [[F, 1], [F, 1], [E, 1], [E, 1], [D, 1], [D, 1], [C, 2]],
+        [[G, 1], [G, 1], [F, 1], [F, 1], [E, 1], [E, 1], [D, 2]],
+        [[G, 1], [G, 1], [F, 1], [F, 1], [E, 1], [E, 1], [D, 2]],
+        [[C, 1], [C, 1], [G, 1], [G, 1], [A, 1], [A, 1], [G, 2]],
+        [[F, 1], [F, 1], [E, 1], [E, 1], [D, 1], [D, 1], [C, 2]],
+      ],
+    },
+    {
+      id: 'animal-sounds', kind: 'song', title: '動物叫聲歌', original: true, bpm: 140,
+      art: svg(scene.day() + scene.sun() + scene.grass() + put('dog', 0, 200, 220, 'jump', 'woof') + put('cat', 200, 200, 220, 'jump', 'pop') + put('duckling', 400, 230, 200, 'jump', 'pop') + put('chick', 580, 220, 200, 'jump', 'pop')),
+      lines: ['小狗小狗汪汪叫', '汪汪汪汪汪', '小貓小貓喵喵叫', '喵喵喵喵喵', '小鴨嘎嘎，小雞唧唧', '大家一起唱唱歌', '小狗小狗汪汪叫', '汪汪汪汪汪'],
+      notes: [
+        [[G, 1], [G, 1], [G, 1], [D, 1], [E, 1], [E, 1], [D, 2]],
+        [[B, 1], [B, 1], [A, 1], [A, 1], [G, 3]],
+        [[G, 1], [G, 1], [G, 1], [D, 1], [E, 1], [E, 1], [D, 2]],
+        [[B, 1], [B, 1], [A, 1], [A, 1], [G, 3]],
+        [[D, .5], [D, .5], [G, 1], [G, 1], [D, .5], [D, .5], [G, 1], [G, 1]],
+        [[G, .5], [G, .5], [G, 1], [G, 1], [A, 1], [B, 1], [G, 2]],
+        [[G, 1], [G, 1], [G, 1], [D, 1], [E, 1], [E, 1], [D, 2]],
+        [[B, 1], [B, 1], [A, 1], [A, 1], [G, 3]],
+      ],
+    },
+    {
+      id: 'vehicle-song', kind: 'song', title: '交通工具歌', original: true, bpm: 110,
+      art: svg(scene.day() + scene.sun() + scene.road() + put('car', 40, 260, 260, 'jump', 'pop') + put('train', 300, 240, 280, 'jump', 'pop') + put('plane', 420, 40, 300, 'jump', 'pop')),
+      lines: ['汽車汽車叭叭叭', '火車火車嘟嘟嘟', '飛機飛機飛呀飛到天上去', '大家一起去旅行'],
+      notes: [
+        [[C, 1.5], [C, 1.5], [C, 1], [D, .5], [E, 1.5]],
+        [[E, 1], [D, .5], [E, 1], [F, .5], [G, 3]],
+        [[C2, .5], [C2, .5], [C2, .5], [G, .5], [G, .5], [G, .5], [E, .5], [E, .5], [E, .5], [C, .5], [C, .5], [C, .5]],
+        [[G, 1], [F, .5], [E, 1], [D, .5], [C, 3]],
+      ],
+    },
+    {
+      id: 'rain-song', kind: 'song', title: '下雨歌', original: true, bpm: 110,
+      art: svg(scene.rain() + `<rect y="400" width="800" height="100" fill="#8ce99a"/>` + scene.flowers(440) + put('duckling', 300, 230, 220, 'jump', 'splash')),
+      lines: ['下雨了，滴答答', '小花小草喝水啦', '撐起雨傘去散步', '雨停出現彩虹啦'],
+      notes: [
+        [[G, 1], [E, 1], [G, .5], [G, .5], [E, 2]],
+        [[G, .5], [G, .5], [E, .5], [E, .5], [G, .5], [G, .5], [E, 2]],
+        [[G, .5], [G, .5], [E, .5], [E, .5], [G, .5], [G, .5], [E, 2]],
+        [[G, .5], [G, .5], [E, .5], [E, .5], [G, .5], [A, .5], [G, 2]],
+      ],
+    },
+
     /* ======== 英文兒歌（傳統童謠，公版） ======== */
     {
       id: 'en-twinkle', kind: 'en-song', title: 'Twinkle Twinkle Little Star', bpm: 100,
