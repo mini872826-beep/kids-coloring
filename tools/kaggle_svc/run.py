@@ -62,7 +62,9 @@ def reference(ref):
     if ref.get('sep'):
         # 把伴奏去掉只留人聲（demucs），再把中間沒唱的空白剪掉
         run([sys.executable, '-m', 'demucs', '--two-stems', 'vocals', '-n', 'htdemucs', '-o', '/kaggle/tmp/sep', src])
-        src = glob.glob('/kaggle/tmp/sep/htdemucs/' + name + '/vocals.*')[0]
+        src = glob.glob('/kaggle/tmp/sep/**/vocals.*', recursive=True)
+        log('sep', src)
+        src = [f for f in src if os.path.basename(os.path.dirname(f)) == os.path.basename(get(ref['path']))[:-4]][0]
     run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-af',
          'silenceremove=start_periods=1:start_threshold=-40dB:stop_periods=-1:stop_duration=0.4:stop_threshold=-40dB',
          '-t', '24', '-ac', '1', '-ar', '44100', out])
