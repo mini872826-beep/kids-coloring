@@ -10,6 +10,7 @@ concurrency:
   group: voice-trial
 jobs:
   minimax:
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -38,8 +39,10 @@ jobs:
       - name: 安裝 BreezyVoice（CPU 版）
         run: |
           git clone --depth 1 --recursive https://github.com/mtkresearch/BreezyVoice.git bv
-          sed -e 's/onnxruntime-gpu/onnxruntime/' -e '/extra-index-url/d' -e '/deepspeed/d' bv/requirements.txt > req.txt
+          sed -e 's/onnxruntime-gpu/onnxruntime/' -e '/extra-index-url/d' -e '/deepspeed/d' -e '/openai-whisper/d' bv/requirements.txt > req.txt
+          pip install "setuptools<80" wheel
           pip install torch==2.3.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cpu
+          pip install --no-build-isolation openai-whisper==20231117
           pip install -r req.txt
       - name: BreezyVoice 錄音
         env:
