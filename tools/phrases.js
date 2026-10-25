@@ -5,7 +5,7 @@ const vm = require('vm');
 
 const ctx = { window: {}, console };
 vm.createContext(ctx);
-for (const f of ['js/words.js', 'js/art.js', ...fs.readdirSync('js').filter(f => f.startsWith('pack-')).sort().map(f => 'js/' + f), 'js/books.js', 'js/songs.js']) {
+for (const f of ['js/words.js', 'js/art.js', ...fs.readdirSync('js').filter(f => f.startsWith('pack-')).sort().map(f => 'js/' + f), 'js/books.js', ...fs.readdirSync('js').filter(f => f.startsWith('stories-')).sort().map(f => 'js/' + f), 'js/songs.js']) {
   vm.runInContext(fs.readFileSync(f, 'utf8'), ctx, { filename: f });
 }
 const { ART, BOOKS, SONGS, WORDS } = ctx.window;

@@ -189,6 +189,11 @@
       $('grid').innerHTML = BOOKS.filter(b => tag.id === 'all' || b.tag === tag.id).map((b, i) =>
         `<div class="card story" role="button" data-go="#/read/${b.id}/0" style="--i:${i}"><span class="thumb">${b.cover}${tag.id === 'all' && b.tag ? `<span class="tag">${(BOOK_TAGS.find(t => t.id === b.tag) || {}).name || b.tag}</span>` : ''}</span><div class="name">📖 ${b.title}</div></div>`).join('');
     }
+    // 分類列重畫後會跑回最左邊；把選中的那顆捲回看得到的地方
+    document.querySelectorAll('#cats .cat-row').forEach(row => {
+      const on = row.querySelector('.cat.on');
+      if (on) row.scrollLeft = Math.max(0, on.offsetLeft - row.offsetLeft - (row.clientWidth - on.offsetWidth) / 2);
+    });
   }
 
   $('home').addEventListener('click', e => {
