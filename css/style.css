@@ -53,9 +53,9 @@ button {
 /* 背景：飄動的雲 + 草地 */
 .scenery { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 .cloud { position: absolute; width: 180px; opacity: .9; animation: cloud 60s linear infinite; }
-.cloud.c1 { top: 12%; animation-duration: 70s; animation-delay: -10s; }
-.cloud.c2 { top: 32%; width: 130px; opacity: .7; animation-duration: 90s; animation-delay: -50s; }
-.cloud.c3 { top: 6%; width: 110px; opacity: .8; animation-duration: 80s; animation-delay: -30s; }
+.cloud.c1 { top: 4px; width: 120px; opacity: .7; animation-duration: 70s; animation-delay: -10s; }
+.cloud.c2 { top: 30px; width: 90px; opacity: .5; animation-duration: 90s; animation-delay: -50s; }
+.cloud.c3 { top: 12px; width: 70px; opacity: .6; animation-duration: 80s; animation-delay: -30s; }
 @keyframes cloud { from { transform: translateX(-220px); } to { transform: translateX(110vw); } }
 .hills { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 22vh; }
 
@@ -93,20 +93,26 @@ button {
 .logo span:nth-child(6) { --k: #ff5fa2; animation-delay: 1s; transform: rotate(6deg); }
 @keyframes bob { 50% { translate: 0 -6px; } }
 
-.tabs { display: flex; gap: 12px; }
-.tab {
-  padding: 12px 22px;
-  border-radius: 22px;
+/* 塗顏色／聽故事：一個白色膠囊裡的兩個按鈕 */
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 5px;
+  border-radius: 999px;
   background: #fff;
-  border: 4px solid #fff;
-  box-shadow: 0 6px 0 rgba(0, 0, 0, .14);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, .12);
+}
+.tab {
+  padding: 10px 24px;
+  border-radius: 999px;
   font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
   font-weight: 700;
-  font-size: 24px;
-  transition: transform .12s;
+  font-size: 22px;
+  color: #8a6d3b;
+  transition: background .2s, color .2s;
 }
-.tab:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0, 0, 0, .14); }
-.tab.on { background: #ffc94d; border-color: #fff; box-shadow: 0 6px 0 #d9a21f; }
+.tab:active { transform: scale(.95); }
+.tab.on { background: #ffc94d; color: #3d2f1f; box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .12); }
 
 .music-btn {
   width: 58px;
@@ -122,37 +128,48 @@ button {
 .music-btn.on { background: #c9f0b0; animation: bob 1.6s ease-in-out infinite; }
 .music-btn:active { transform: translateY(4px); }
 
-.cats { display: flex; flex-direction: column; gap: 12px; margin: 0 4px 22px; }
-.cat-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-.story-row { flex-wrap: nowrap; overflow-x: auto; padding: 4px 4px 8px; margin: -4px -4px -8px; scrollbar-width: none; }
-.story-row::-webkit-scrollbar { display: none; }
-.story-row > * { flex: none; }
-.story-row .cat { font-size: 19px; }
-.story-row .cat-icon { width: 38px; height: 38px; font-size: 22px; }
-.row-label {
-  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  color: #1c6ea4;
-  padding: 0 4px;
+/* 分類：一排可以左右滑；故事主題打開時下面多一個托盤 */
+.cats { display: flex; flex-direction: column; gap: 10px; margin: 0 -16px 20px; }
+.cat-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  overflow-x: auto;
+  padding: 4px 20px 10px;
+  scrollbar-width: none;
 }
+.cat-row::-webkit-scrollbar { display: none; }
+@media (max-width: 1100px) {
+  .main-row, .sub-row { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+}
+.cat-row > * { flex: none; }
+.sub-row {
+  margin: 0 16px;
+  padding: 12px 14px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, .55);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .8);
+  animation: popIn2 .25s ease;
+}
+.sub-row .cat { font-size: 18px; padding: 4px 14px 4px 4px; }
+.sub-row .cat-icon { width: 36px; height: 36px; font-size: 20px; }
 .cat {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 18px 6px 6px;
+  padding: 5px 16px 5px 5px;
   border-radius: 999px;
   background: #fff;
   box-shadow: 0 5px 0 rgba(0, 0, 0, .12);
   font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 20px;
   color: var(--cd);
   transition: transform .15s, background .15s;
 }
 .cat-icon {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--c);
   display: grid;
@@ -728,7 +745,21 @@ button {
 }
 
 /* ================= 閱讀器 ================= */
-#reader { display: flex; flex-direction: column; gap: 10px; background: var(--paper); }
+#reader, #done { background: linear-gradient(#7fd3ff 0%, #b8e8ff 60%, #dff6ff 100%); }
+#reader { display: flex; flex-direction: column; gap: 12px; }
+.reader-title { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.reader-title h2 {
+  margin: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 900;
+  font-size: clamp(22px, 3.6vw, 32px);
+  color: #fff;
+  text-shadow: 0 3px 0 rgba(0, 60, 110, .3);
+}
 
 .reader-top, .reader-bottom {
   display: flex;
@@ -737,34 +768,39 @@ button {
   gap: 10px;
 }
 .round {
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: var(--card);
-  box-shadow: var(--shadow);
-  font-size: 24px;
+  background: #fff;
+  color: #4d8ff0;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 3px #a9c9ef, 0 6px 0 3px rgba(60, 100, 150, .3);
   display: grid;
   place-items: center;
   flex: none;
 }
+.round svg { width: 60%; height: 60%; }
 .round:active { transform: translateY(3px); }
-.round.big { width: 72px; height: 72px; font-size: 32px; }
-.round.speak { background: #ffc94d; }
+.round.big { width: 76px; height: 76px; }
+.round.speak { background: #ffc94d; color: #fff; }
+#autoBtn { color: #fff; background: #ffa94d; }
+#autoBtn.on { background: #6cc534; }
 .round:disabled { opacity: .3; }
 .round.on { background: #8fd16a; }
 
 .dots { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.dots span { width: 12px; height: 12px; border-radius: 50%; background: rgba(61, 47, 31, .2); transition: .2s; }
-.dots span.on { background: #e8912a; transform: scale(1.3); }
+.dots span { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, .6); transition: .2s; }
+.dots span.on { background: #ffd43b; box-shadow: 0 0 0 3px #fff; transform: scale(1.2); }
 
 .page {
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: #fff;
+  border: 6px solid #fff;
+  border-radius: 28px;
+  box-shadow: 0 14px 30px rgba(0, 40, 80, .2);
   overflow: hidden;
   touch-action: pan-y;
 }
@@ -773,7 +809,12 @@ button {
 @keyframes turnNext { from { transform: translateX(40px); opacity: 0; } }
 @keyframes turnPrev { from { transform: translateX(-40px); opacity: 0; } }
 
-.art { flex: 1; min-height: 0; }
+.art { flex: 1; min-height: 0; border-radius: 22px; overflow: hidden; }
+/* 直的時候：圖固定 8:5，不會被切掉；字在下面 */
+@media (orientation: portrait) {
+  .art { flex: none; aspect-ratio: 8 / 5; }
+  .text { flex: 1; display: grid; place-items: center; }
+}
 .art svg { width: 100%; height: 100%; display: block; }
 .text {
   margin: 0;
@@ -816,7 +857,7 @@ button {
 }
 
 /* ================= 讀完啦 / 彩紙 ================= */
-#done { display: grid; place-items: center; background: var(--paper); }
+#done { display: grid; place-items: center; }
 .done-box { text-align: center; }
 .done-box h2 { font-size: clamp(30px, 8vw, 48px); margin: 12px 0 28px; }
 .stars { font-size: clamp(48px, 14vw, 90px); animation: pop .6s ease; }

@@ -74,6 +74,7 @@
   const pref = {
     tab: localStorage.getItem('tab') || 'paint',
     cat: localStorage.getItem('cat') || 'car',
+    tag: localStorage.getItem('tag') || 'all',
   };
   if (!CATEGORIES.some(c => c.id === pref.cat)) pref.cat = 'car';
   let thumbURLs = [];
@@ -85,6 +86,16 @@
       <div class="name">${d.name}</div>${del}</div>`;
   }
 
+  const STORY_THEMES = { id: 'story-themes', name: '故事主題', icon: '📚', color: '#845ef7', dark: '#6741d9' };
+  const BOOK_TAGS = [
+    { id: 'all', name: '全部', icon: '📚', color: '#9775fa', dark: '#7048e8' },
+    { id: '品德', name: '品德', icon: '💖', color: '#f06595', dark: '#c2255c' },
+    { id: '習慣', name: '好習慣', icon: '🪥', color: '#20c997', dark: '#099268' },
+    { id: '經典', name: '經典故事', icon: '🏰', color: '#ff922b', dark: '#e8590c' },
+    { id: '冒險', name: '冒險', icon: '🚗', color: '#4dabf7', dark: '#1c7ed6' },
+    { id: '節日', name: '節日', icon: '🎃', color: '#7950f2', dark: '#5f3dc4' },
+  ];
+
   function renderHome() {
     document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.tab === pref.tab));
     thumbURLs.forEach(URL.revokeObjectURL);
@@ -92,9 +103,12 @@
 
     if (pref.tab === 'paint') {
       $('cats').hidden = false;
-      const chip = c => `<button class="cat${c.id === pref.cat ? ' on' : ''}" data-cat="${c.id}" style="--c:${c.color};--cd:${c.dark}"><span class="cat-icon">${c.icon}</span>${c.name}</button>`;
-      $('cats').innerHTML = `<div class="cat-row">${CATEGORIES.filter(c => !c.group).map(chip).join('')}</div>
-        <div class="cat-row story-row"><span class="row-label">📚 故事主題</span>${CATEGORIES.filter(c => c.group === 'story').map(chip).join('')}</div>`;
+      // 一排主分類；「故事主題」打開時才多一排小按鈕，平常不佔位置
+      const inStory = pref.cat.startsWith('story-');
+      const chip = (c, on) => `<button class="cat${on ? ' on' : ''}" data-cat="${c.id}" style="--c:${c.color};--cd:${c.dark}"><span class="cat-icon">${c.icon}</span>${c.name}</button>`;
+      const themes = CATEGORIES.filter(c => c.group === 'story');
+      $('cats').innerHTML = `<div class="cat-row main-row">${CATEGORIES.filter(c => !c.group).map(c => chip(c, c.id === pref.cat)).join('')}${chip(STORY_THEMES, inStory)}</div>
+        ${inStory ? `<div class="cat-row sub-row">${themes.map(c => chip(c, c.id === pref.cat)).join('')}</div>` : ''}`;
       const cat = CATEGORIES.find(c => c.id === pref.cat);
       const list = pref.cat === 'free'
         ? Blanks.list().slice().reverse().map(Blanks.drawing)
@@ -119,10 +133,13 @@
         }
       });
     } else {
-      $('cats').hidden = true;
-      $('grid').style.cssText = '--c:#9775fa;--cd:#7048e8';
-      $('grid').innerHTML = BOOKS.map((b, i) =>
-        `<div class="card story" role="button" data-go="#/read/${b.id}/0" style="--i:${i}"><span class="thumb">${b.cover}${b.tag ? `<span class="tag">${b.tag}</span>` : ''}</span><div class="name">📖 ${b.title}</div></div>`).join('');
+      $('cats').hidden = false;
+      $('cats').innerHTML = `<div class="cat-row main-row">${BOOK_TAGS.map(t =>
+        `<button class="cat${t.id === pref.tag ? ' on' : ''}" data-tag="${t.id}" style="--c:${t.color};--cd:${t.dark}"><span class="cat-icon">${t.icon}</span>${t.name}</button>`).join('')}</div>`;
+      const tag = BOOK_TAGS.find(t => t.id === pref.tag) || BOOK_TAGS[0];
+      $('grid').style.cssText = `--c:${tag.color};--cd:${tag.dark}`;
+      $('grid').innerHTML = BOOKS.filter(b => tag.id === 'all' || b.tag === tag.id).map((b, i) =>
+        `<div class="card story" role="button" data-go="#/read/${b.id}/0" style="--i:${i}"><span class="thumb">${b.cover}${tag.id === 'all' && b.tag ? `<span class="tag">${b.tag}</span>` : ''}</span><div class="name">📖 ${b.title}</div></div>`).join('');
     }
   }
 
@@ -135,11 +152,26 @@
       Sound.play('pop');
       Voice.say(tab.textContent.replace(/[^\u4e00-\u9fff]/g, ''));
       renderHome();
+    } else if (cat && cat.dataset.tag) {
+      pref.tag = cat.dataset.tag;
+      localStorage.setItem('tag', pref.tag);
+      Sound.play('pop');
+      Voice.say(BOOK_TAGS.find(t => t.id === pref.tag).name);
+      renderHome();
     } else if (cat) {
-      pref.cat = cat.dataset.cat;
+      let id = cat.dataset.cat;
+      if (id === STORY_THEMES.id) {
+        // 打開故事主題：回到上次看的那個故事
+        const last = localStorage.getItem('storyCat');
+        id = CATEGORIES.some(c => c.id === last) ? last : CATEGORIES.find(c => c.group === 'story').id;
+        Voice.say(STORY_THEMES.name);
+      } else {
+        Voice.say(CATEGORIES.find(c => c.id === id).name);
+      }
+      if (id.startsWith('story-')) localStorage.setItem('storyCat', id);
+      pref.cat = id;
       localStorage.setItem('cat', pref.cat);
       Sound.play('pop');
-      Voice.say(CATEGORIES.find(c => c.id === pref.cat).name);
       renderHome();
     } else if (del) {
       const d = findDrawing(del.dataset.del);
@@ -179,6 +211,7 @@
     const p = b.pages[i];
     $('art').innerHTML = p.art;
     $('text').textContent = p.text;
+    $('bookTitle').textContent = b.title;
     $('dots').innerHTML = b.pages.map((_, k) => `<span class="${k === i ? 'on' : ''}"></span>`).join('');
     $('prevBtn').disabled = i === 0;
     const pg = $('page');
@@ -212,7 +245,9 @@
   function setAuto(on) {
     auto = on;
     $('autoBtn').classList.toggle('on', on);
-    $('autoBtn').textContent = on ? '⏸️' : '▶️';
+    $('autoBtn').innerHTML = on
+      ? '<svg viewBox="0 0 48 48"><rect x="12" y="10" width="9" height="28" rx="3" fill="currentColor"/><rect x="27" y="10" width="9" height="28" rx="3" fill="currentColor"/></svg>'
+      : '<svg viewBox="0 0 48 48"><path d="M15 10 L38 24 L15 38 Z" fill="currentColor" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></svg>';
   }
 
   // 左右滑動翻頁
