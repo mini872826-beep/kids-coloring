@@ -1,9 +1,7 @@
 # AI 歌手：Kaggle 免費 GPU 上用 ACE-Step 把兒歌唱成像真人唱的（新旋律版＋原旋律版）
 name: AI 唱兒歌
+# 已經改用 sing-vc.yml（原本旋律＋自然歌聲），這個只留著手動執行
 on:
-  push:
-    branches: [main]
-    paths: ['js/songs.js', 'tools/sing_ai.py', 'tools/kaggle_sing/**', '.github/workflows/sing-ai.yml']
   workflow_dispatch:
 permissions:
   contents: write

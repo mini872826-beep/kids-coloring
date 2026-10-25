@@ -42,7 +42,11 @@ PY
  "kernel_type": "script", "is_private": "true", "enable_gpu": "true", "enable_internet": "true",
  "machine_shape": "NvidiaTeslaT4", "dataset_sources": [], "competition_sources": [], "kernel_sources": [], "model_sources": []}
 META
-  kaggle kernels push -p /tmp/kv || exit 1
+  # Kaggle 免費 GPU 同時最多跑 2 個：滿了就等一下再送
+  for t in $(seq 1 60); do
+    out=$(kaggle kernels push -p /tmp/kv 2>&1); echo "$out"
+    case "$out" in *"Maximum batch GPU session"*) sleep 120;; *rror*) exit 1;; *) break;; esac
+  done
 else
   echo "上一次還在跑，繼續等"
 fi
