@@ -736,6 +736,59 @@
     ${[250, 330, 410, 490, 560].map(x => `<circle cx="${x}" cy="285" r="7" fill="#fff"/>`).join('')}
     ${ground(522)}`;
 
+  const mouse = `
+    <path d="M520 480 Q640 500 650 420 Q655 380 690 380"/>
+    <ellipse cx="400" cy="450" rx="125" ry="100" fill="#ced4da"/>
+    <ellipse cx="400" cy="470" rx="70" ry="60" fill="#f1f3f5"/>
+    <circle cx="275" cy="190" r="80" fill="#ced4da"/><circle cx="525" cy="190" r="80" fill="#ced4da"/>
+    <circle cx="275" cy="190" r="50" fill="#ffc2d1"/><circle cx="525" cy="190" r="50" fill="#ffc2d1"/>
+    <path fill="#ced4da" d="M290 270 Q290 170 400 165 Q510 170 510 270 Q505 350 400 370 Q295 350 290 270 Z"/>
+    ${eye(360, 260, 14)} ${eye(440, 260, 14)}
+    <circle cx="400" cy="315" r="14" fill="#ff8fab"/>
+    <path d="M400 329 L400 340 Q388 352 375 344 M400 340 Q412 352 425 344 M330 310 L270 300 M330 325 L268 332 M470 310 L530 300 M470 325 L532 332"/>
+    <circle cx="335" cy="300" r="14" fill="#ffc2d1"/><circle cx="465" cy="300" r="14" fill="#ffc2d1"/>
+    <ellipse cx="345" cy="545" rx="38" ry="20" fill="#ffc2d1"/>
+    <ellipse cx="455" cy="545" rx="38" ry="20" fill="#ffc2d1"/>`;
+
+  const crow = `
+    <path d="M340 440 L330 520 M330 520 L305 535 M330 520 L345 540 M420 445 L425 520 M425 520 L400 535 M425 520 L445 540"/>
+    <path fill="#495057" d="M200 330 L90 300 L120 350 L80 380 L210 380 Z"/>
+    <ellipse cx="370" cy="360" rx="175" ry="110" fill="#495057"/>
+    <path fill="#343a40" d="M250 330 Q350 290 450 340 Q380 430 260 400 Z"/>
+    <circle cx="530" cy="250" r="90" fill="#495057"/>
+    <path fill="#ffa94d" d="M605 230 L720 260 L605 290 Z"/>
+    <path d="M605 260 L700 260"/>
+    <circle cx="555" cy="225" r="24" fill="#fff"/>${eye(560, 228, 12)}
+    <circle cx="530" cy="285" r="14" fill="#ffb3b3"/>
+    ${ground(540)}`;
+
+  const duckling = `
+    <path fill="#ff922b" d="M330 470 L310 530 L350 530 Z M430 470 L420 530 L460 530 Z"/>
+    <path fill="#adb5bd" d="M180 360 Q170 250 260 270 Q360 300 470 300 Q600 300 600 400 Q590 490 420 490 L300 490 Q190 480 180 360 Z"/>
+    <path fill="#868e96" d="M300 360 Q390 330 470 380 Q420 440 320 420 Z"/>
+    <circle cx="530" cy="230" r="95" fill="#adb5bd"/>
+    <path fill="#ff922b" d="M610 240 Q700 230 705 260 Q690 285 610 280 Z"/>
+    <path fill="#adb5bd" d="M520 140 Q530 110 555 120 Q540 130 545 145 Z"/>
+    ${eye(560, 215, 13)}
+    <circle cx="545" cy="265" r="15" fill="#ffb3b3"/>
+    <path fill="#a5d8ff" d="M40 530 Q200 505 400 530 Q600 555 760 530 L760 570 L40 570 Z"/>`;
+
+  const swan = `
+    <path fill="#f8f9fa" d="M150 400 Q130 300 260 320 Q330 330 420 330 Q560 330 560 420 Q540 500 380 505 L260 505 Q160 495 150 400 Z"/>
+    <path fill="#e9ecef" d="M240 380 Q340 330 460 380 Q380 460 260 440 Z"/>
+    <path fill="#f8f9fa" d="M500 350 Q590 300 560 200 Q530 110 600 90 Q660 80 670 130 Q640 120 625 140 Q590 180 620 250 Q650 350 540 400 Z"/>
+    <path fill="#ff922b" d="M660 115 L730 140 L668 150 Z"/>
+    <path fill="#343a40" d="M640 105 Q660 100 670 115 Q660 128 645 125 Z"/>
+    ${eye(625, 112, 9)}
+    <path fill="#ffd43b" d="M590 70 L600 45 L612 68 L625 45 L632 72 Z"/>
+    <path fill="#a5d8ff" d="M40 520 Q200 495 400 520 Q600 545 760 520 L760 570 L40 570 Z"/>`;
+
+  const giantCarrot = `
+    <path fill="#69db7c" d="M400 210 Q330 120 350 50 Q395 110 405 200 Q420 90 470 40 Q480 130 420 215 Q500 150 560 150 Q520 210 425 230 Z"/>
+    <path fill="#ff922b" d="M260 250 Q400 190 540 250 Q560 330 470 480 Q420 560 400 560 Q380 560 330 480 Q240 330 260 250 Z"/>
+    <path d="M300 300 L340 305 M470 330 L505 322 M340 400 L370 404 M440 430 L470 425"/>
+    ${[[150, 520], [650, 500]].map(([x, y]) => `<path fill="#69db7c" d="M${x} ${y} Q${x - 30} ${y - 50} ${x - 10} ${y - 80} Q${x + 5} ${y - 40} ${x} ${y} Q${x + 20} ${y - 60} ${x + 45} ${y - 70} Q${x + 30} ${y - 30} ${x} ${y} Z"/>`).join('')}`;
+
   const DRAWINGS = [
     { id: 'car', cat: 'car', name: '小汽車', svg: car },
     { id: 'firetruck', cat: 'car', name: '消防車', svg: fireTruck },
@@ -745,10 +798,10 @@
     { id: 'plane', cat: 'car', name: '飛機', svg: plane },
     { id: 'police', cat: 'car', name: '警車', svg: police },
     { id: 'heli', cat: 'car', name: '直升機', svg: heli },
-    { id: 'cat', cat: 'animal', name: '小貓咪', svg: cat },
-    { id: 'dog', cat: 'animal', name: '小狗狗', svg: dog },
+    { id: 'cat', cat: 'animal', name: '小貓咪', svg: cat, also: ['story-carrot'] },
+    { id: 'dog', cat: 'animal', name: '小狗狗', svg: dog, also: ['story-carrot'] },
     { id: 'bunny', cat: 'animal', name: '小兔子', svg: bunny, also: ['story-race'] },
-    { id: 'lion', cat: 'animal', name: '小獅子', svg: lion },
+    { id: 'lion', cat: 'animal', name: '小獅子', svg: lion, also: ['story-lion'] },
     { id: 'pig', cat: 'animal', name: '小豬', svg: pig, also: ['story-pigs'] },
     { id: 'elephant', cat: 'animal', name: '大象', svg: elephant },
     { id: 'bear', cat: 'animal', name: '小熊', svg: bear },
@@ -783,6 +836,11 @@
     { id: 'wood-house', cat: 'story-pigs', name: '木頭屋', svg: houseArt('wood') },
     { id: 'brick-house', cat: 'story-pigs', name: '磚頭屋', svg: houseArt('brick') },
     { id: 'trophy', cat: 'story-race', name: '獎盃', svg: trophy },
+    { id: 'mouse', cat: 'animal', name: '小老鼠', svg: mouse, also: ['story-lion', 'story-carrot'] },
+    { id: 'crow', cat: 'animal', name: '烏鴉', svg: crow, also: ['story-crow'] },
+    { id: 'duckling', cat: 'animal', name: '小鴨子', svg: duckling, also: ['story-duck'] },
+    { id: 'swan', cat: 'animal', name: '天鵝', svg: swan, also: ['story-duck'] },
+    { id: 'giant-carrot', cat: 'story-carrot', name: '大蘿蔔', svg: giantCarrot },
     { id: 'pumpkin', cat: 'halloween', name: '南瓜燈', svg: pumpkin },
     { id: 'ghost', cat: 'halloween', name: '小幽靈', svg: ghost },
     { id: 'bat', cat: 'halloween', name: '蝙蝠', svg: bat },
@@ -802,6 +860,10 @@
     { id: 'story-pigs', group: 'story', name: '三隻小豬', icon: '🐷', color: '#f783ac', dark: '#d6336c' },
     { id: 'story-race', group: 'story', name: '龜兔賽跑', icon: '🐢', color: '#20c997', dark: '#0ca678' },
     { id: 'story-wolf', group: 'story', name: '狼來了', icon: '🐑', color: '#748ffc', dark: '#4c6ef5' },
+    { id: 'story-carrot', group: 'story', name: '拔蘿蔔', icon: '🥕', color: '#ff922b', dark: '#e8590c' },
+    { id: 'story-lion', group: 'story', name: '獅子與老鼠', icon: '🦁', color: '#fab005', dark: '#e67700' },
+    { id: 'story-crow', group: 'story', name: '烏鴉喝水', icon: '🐦', color: '#868e96', dark: '#495057' },
+    { id: 'story-duck', group: 'story', name: '醜小鴨', icon: '🦢', color: '#3bc9db', dark: '#1098ad' },
     { id: 'free', name: '自由畫', icon: '🖼️', color: '#b197fc', dark: '#8b6fe0' },
   ];
 
@@ -909,6 +971,19 @@
       <circle cx="${x + 75}" cy="${y + 5}" r="22" fill="#ffd43b"/><circle cx="${x + 92}" cy="${y + 18}" r="16" fill="#e03131"/></g>`,
     bed: (x, y) => `<g stroke="#222" stroke-width="5" stroke-linejoin="round"><rect x="${x - 200}" y="${y - 120}" width="30" height="200" rx="10" fill="#c98a4b"/><rect x="${x + 170}" y="${y - 60}" width="30" height="140" rx="10" fill="#c98a4b"/>
       <rect x="${x - 175}" y="${y - 20}" width="350" height="70" rx="14" fill="#a5d8ff"/><ellipse cx="${x - 120}" cy="${y - 30}" rx="50" ry="26" fill="#fff"/></g>`,
+    jar: (x, y, level = .2, stones = 0) => `<g stroke="#222" stroke-width="5" stroke-linejoin="round">
+      <path d="M${x - 70} ${y - 120} L${x + 70} ${y - 120} L${x + 90} ${y + 100} Q${x + 90} ${y + 120} ${x + 70} ${y + 120} L${x - 70} ${y + 120} Q${x - 90} ${y + 120} ${x - 90} ${y + 100} Z" fill="#e7f5ff"/>
+      <rect x="${x - 85}" y="${y + 120 - 240 * level}" width="170" height="${240 * level - 4}" fill="#74c0fc" stroke="none"/>
+      ${Array.from({ length: stones }, (_, i) => `<ellipse cx="${x - 55 + (i % 4) * 36}" cy="${y + 100 - Math.floor(i / 4) * 28}" rx="18" ry="13" fill="#adb5bd"/>`).join('')}
+      <path d="M${x - 70} ${y - 120} L${x + 70} ${y - 120} L${x + 90} ${y + 100} Q${x + 90} ${y + 120} ${x + 70} ${y + 120} L${x - 70} ${y + 120} Q${x - 90} ${y + 120} ${x - 90} ${y + 100} Z" fill="none"/>
+      <rect x="${x - 50}" y="${y - 90}" width="14" height="150" rx="7" fill="#fff" stroke="none" opacity=".6"/></g>`,
+    pebbles: (x, y) => `<g class="tap" data-anim="jump" data-sound="pop" stroke="#222" stroke-width="4">${[[0, 0], [40, 6], [20, -24], [-36, 8], [70, -10]].map(([dx, dy]) => `<ellipse cx="${x + dx}" cy="${y + dy}" rx="20" ry="14" fill="#adb5bd"/>`).join('')}</g>`,
+    net: (x, y, w = 300, h = 220) => `<g stroke="#8a5a2b" stroke-width="5" fill="none" stroke-linecap="round">
+      ${Array.from({ length: 7 }, (_, i) => `<path d="M${x + i * w / 6} ${y} Q${x + i * w / 6 + 15} ${y + h / 2} ${x + i * w / 6} ${y + h}"/>`).join('')}
+      ${Array.from({ length: 5 }, (_, i) => `<path d="M${x} ${y + i * h / 4} Q${x + w / 2} ${y + i * h / 4 + 20} ${x + w} ${y + i * h / 4}"/>`).join('')}</g>`,
+    pond: () => `<rect width="800" height="500" fill="#c5f6fa"/><rect y="330" width="800" height="170" fill="#66d9e8"/>
+      <path d="M0 340 Q100 320 200 340 T400 340 T600 340 T800 340" fill="none" stroke="#fff" stroke-width="6"/>
+      ${[[90, 420], [700, 450]].map(([x, y]) => `<ellipse class="tap" data-anim="wiggle" data-sound="splash" cx="${x}" cy="${y}" rx="55" ry="18" fill="#51cf66" stroke="#222" stroke-width="4"/>`).join('')}`,
     forest: () => `<rect width="800" height="500" fill="#d3f9d8"/><rect y="380" width="800" height="120" fill="#8ce99a"/>`,
     bubbles: () => [[100, 300], [700, 250], [400, 120], [600, 380]].map(([x, y], i) =>
       `<circle class="float tap" data-anim="boing" data-sound="pop" style="animation-delay:${i * .7}s" cx="${x}" cy="${y}" r="${10 + i * 3}" fill="rgba(255,255,255,.6)" stroke="#fff" stroke-width="3"/>`).join(''),

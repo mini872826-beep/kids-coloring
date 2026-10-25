@@ -207,6 +207,56 @@
         { text: '要做誠實的好孩子，大家才會相信你喔！', art: svg(scene.day() + scene.sun() + scene.grass() + put('shepherd', 60, 100, 340) + put('sheep', 430, 180, 280) + scene.heart(400, 90) + scene.stars()) },
       ],
     },
+
+    {
+      id: 'giant-carrot', tag: '經典', title: '拔蘿蔔',
+      cover: svg(scene.day() + scene.grass() + put('giant-carrot', 130, 177, 540)),
+      pages: [
+        { text: '小兔子種的紅蘿蔔，長得好大好大。', art: svg(scene.day() + scene.sun() + scene.grass() + put('giant-carrot', 250, 192, 500, 'boing', 'pop') + put('bunny', 0, 210, 260)) },
+        { text: '小兔子用力拔，嘿咻嘿咻，拔不動。', art: svg(scene.day() + scene.grass() + put('giant-carrot', 320, 200, 480) + put('bunny', 100, 190, 270, 'wiggle', 'boing')) },
+        { text: '小狗來幫忙，嘿咻嘿咻，還是拔不動。', art: svg(scene.day() + scene.grass() + put('giant-carrot', 380, 215, 440) + put('bunny', 200, 210, 230) + put('dog', 20, 220, 230, 'wiggle', 'woof')) },
+        { text: '小貓也來了，嘿咻嘿咻，還是拔不動。', art: svg(scene.day() + scene.grass() + put('giant-carrot', 430, 230, 400) + put('bunny', 290, 230, 200) + put('dog', 140, 235, 200) + put('cat', -10, 235, 200, 'wiggle', 'pop')) },
+        { text: '最後小老鼠也來幫忙，大家一起，嘿咻——拔起來了！', art: svg(scene.day() + scene.sun() + put('giant-carrot', 380, -60, 420, 'jump', 'yay') + scene.grass() + put('bunny', 290, 240, 190) + put('dog', 150, 245, 190) + put('cat', 20, 245, 190) + put('mouse', -60, 300, 150, 'jump', 'pop') + scene.stars()) },
+        { text: '一個人做不到的事，大家合作就能做到喔！', art: svg(scene.day() + scene.sun() + scene.grass() + put('giant-carrot', 260, 160, 300) + put('bunny', 0, 220, 230) + put('dog', 560, 220, 230) + scene.heart(400, 80)) },
+      ],
+    },
+    {
+      id: 'lion-mouse', tag: '經典', title: '獅子與老鼠',
+      cover: svg(scene.forest() + scene.tree(680) + put('lion', 60, 90, 380) + put('mouse', 470, 250, 200)),
+      pages: [
+        { text: '森林裡，大獅子正在樹下睡午覺。', art: svg(scene.forest() + scene.tree(660) + put('lion', 160, 110, 380, 'wiggle', 'roar') + scene.zzz(470, 120)) },
+        { text: '小老鼠不小心爬到獅子身上，把牠吵醒了。', art: svg(scene.forest() + put('lion', 100, 110, 380, 'boing', 'roar') + put('mouse', 470, 240, 200, 'jump', 'pop')) },
+        { text: '小老鼠說：「對不起！放了我，以後我會幫你的。」', art: svg(scene.forest() + put('lion', 20, 120, 360) + put('mouse', 440, 220, 230, 'wiggle', 'pop') + scene.bubble(430, 50, '放了我！', 240)) },
+        { text: '獅子哈哈笑：「你這麼小，怎麼幫我？」還是放走了牠。', art: svg(scene.forest() + scene.tree(650) + put('lion', 120, 110, 380, 'boing', 'roar') + put('mouse', 560, 300, 140)) },
+        { text: '有一天，獅子被獵人的網子抓住了，怎麼掙扎都出不來。', art: svg(scene.forest() + put('lion', 220, 120, 360, 'wiggle', 'roar') + scene.net(230, 140, 360, 260)) },
+        { text: '小老鼠跑來，用牙齒咬啊咬，把網子咬破了！', art: svg(scene.forest() + put('lion', 220, 120, 360) + scene.net(230, 140, 160, 260) + put('mouse', 520, 280, 180, 'jump', 'pop')) },
+        { text: '獅子說：「謝謝你！」小小的朋友，也能幫大大的忙。', art: svg(scene.forest() + scene.tree(90) + put('lion', 160, 110, 360) + put('mouse', 520, 270, 190) + scene.heart(400, 80)) },
+      ],
+    },
+    {
+      id: 'crow-water', tag: '經典', title: '烏鴉喝水',
+      cover: svg(scene.day() + scene.grass() + put('crow', 40, 120, 340) + scene.jar(560, 290, .25)),
+      pages: [
+        { text: '天氣好熱，烏鴉好渴，到處找水喝。', art: svg(scene.day() + scene.sun(650, 90) + scene.grass() + put('crow', 160, 110, 400, 'wiggle', 'pop')) },
+        { text: '牠看到一個瓶子，裡面有一點點水。', art: svg(scene.day() + scene.grass() + put('crow', 20, 140, 340) + scene.jar(560, 290, .2)) },
+        { text: '可是瓶口太小、水太低，嘴巴碰不到。', art: svg(scene.day() + scene.grass() + put('crow', 140, 90, 340, 'wiggle', 'boing') + scene.jar(560, 290, .2)) },
+        { text: '烏鴉想了一個好辦法：把小石頭一顆一顆放進瓶子裡。', art: svg(scene.day() + scene.grass() + put('crow', 20, 140, 340, 'jump', 'pop') + scene.pebbles(200, 450) + scene.jar(560, 290, .35, 4)) },
+        { text: '石頭越來越多，水慢慢升高了！', art: svg(scene.day() + scene.grass() + put('crow', 20, 140, 340) + scene.jar(560, 290, .75, 12)) },
+        { text: '烏鴉喝到水了！遇到困難，動動腦就有辦法喔！', art: svg(scene.day() + scene.sun() + scene.grass() + put('crow', 220, 100, 340, 'jump', 'yay') + scene.jar(620, 300, .85, 12) + scene.stars()) },
+      ],
+    },
+    {
+      id: 'ugly-duckling', tag: '經典', title: '醜小鴨',
+      cover: svg(scene.pond() + put('duckling', 80, 140, 320) + put('swan', 400, 110, 360)),
+      pages: [
+        { text: '鴨媽媽的蛋孵出來了，有一隻小鴨長得灰灰的、大大的。', art: svg(scene.pond() + put('duckling', 220, 120, 380, 'wiggle', 'pop')) },
+        { text: '別的小動物笑牠：「你長得好奇怪喔！」', art: svg(scene.pond() + put('duckling', 40, 160, 300) + put('chick', 470, 160, 280, 'jump', 'pop') + scene.bubble(440, 40, '好奇怪喔！', 260)) },
+        { text: '醜小鴨好難過，一個人走得好遠好遠。', art: svg(scene.pond() + put('duckling', 420, 220, 220, 'wiggle', 'pop')) },
+        { text: '冬天過去了，春天來了。', art: svg(scene.day() + scene.sun() + scene.grass() + scene.tree(150) + scene.tree(650)) },
+        { text: '牠在湖水裡一看，哇！原來自己是一隻美麗的天鵝！', art: svg(scene.pond() + put('swan', 220, 90, 400, 'boing', 'twinkle') + scene.stars()) },
+        { text: '每個人都不一樣，都很特別。不要笑別人長得不一樣喔！', art: svg(scene.pond() + put('swan', 60, 110, 340) + put('duckling', 460, 170, 280) + scene.heart(400, 80)) },
+      ],
+    },
   ];
 
   window.BOOKS = BOOKS;
