@@ -54,6 +54,14 @@ t0 = time.time()
 cosy = CustomCosyVoice('MediaTek-Research/BreezyVoice-300M')
 conv = G2PWConverter()
 log('model loaded %.0fs' % (time.time() - t0))
+import re
+def clean(text):
+    # 引號單獨被切成一段會念出怪聲音：拿掉引號，冒號改逗號，連續標點合併
+    s = re.sub(r'[「」『』“”"‘’]', '', text)
+    s = s.replace('：', '，').replace(':', '，')
+    s = re.sub(r'([，。！？、；,.!?;])[，。！？、；,.!?;\s]+', r'\1', s)
+    s = s.strip('，、；,; ')
+    return s
 TRIM = 'silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.03,areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.08,areverse'
 done = 0
 for text, name in jobs:
@@ -65,7 +73,7 @@ for text, name in jobs:
     try:
         t = time.time()
         wav = '/kaggle/tmp/one.wav'
-        single_inference('/kaggle/tmp/prompt.wav', text, wav, cosy, conv, prompt_text)
+        single_inference('/kaggle/tmp/prompt.wav', clean(text), wav, cosy, conv, prompt_text)
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-af', TRIM, '-ar', '24000', '-ac', '1', '-b:a', '48k', out], check=True)
         done += 1
         log('ok %d/%d %.1fs %s' % (done, len(jobs), time.time() - t, text[:20]))
