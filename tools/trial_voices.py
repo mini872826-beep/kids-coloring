@@ -25,9 +25,10 @@ async def edge():
 
 
 def breezy():
-    sys.path.insert(0, 'bv')
-    sys.path.insert(0, 'bv/third_party/Matcha-TTS')
-    os.chdir('bv')
+    bv = os.path.abspath('bv')
+    sys.path.insert(0, bv)
+    sys.path.insert(0, os.path.join(bv, 'third_party', 'Matcha-TTS'))
+    os.chdir(bv)
     from single_inference import single_inference, CustomCosyVoice
     from g2pw import G2PWConverter
     t0 = time.time()
