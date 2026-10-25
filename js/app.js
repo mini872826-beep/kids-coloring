@@ -3,7 +3,8 @@
   const $ = id => document.getElementById(id);
   const { DRAWINGS, CATEGORIES, svgDoc, lineArt } = window.ART;
   const BOOKS = window.BOOKS;
-  const screens = ['home', 'paint', 'reader', 'done'];
+  const SONGS = window.SONGS;
+  const screens = ['home', 'paint', 'reader', 'song', 'done'];
 
   function show(name) {
     for (const s of screens) $(s).hidden = s !== name;
@@ -44,6 +45,7 @@
   function route() {
     const [, view, id, page] = location.hash.split('/');
     if (current === 'read') stopSpeaking();
+    if (current === 'song') stopSong();
     current = view;
     if (view === 'paint') {
       const d = findDrawing(id);
@@ -57,6 +59,11 @@
       setAuto(true);   // 一打開就自動朗讀、自動翻頁
       sayTitle = !+page;
       openPage(b, Math.min(+page || 0, b.pages.length - 1));
+    } else if (view === 'song') {
+      const sg = SONGS.find(x => x.id === id);
+      if (!sg) return go('#/');
+      show('song');
+      openSong(sg);
     } else if (view === 'done') {
       show('done');
       Sound.play('yay');
@@ -75,6 +82,7 @@
     tab: localStorage.getItem('tab') || 'paint',
     cat: localStorage.getItem('cat') || 'car',
     tag: localStorage.getItem('tag') || 'all',
+    songKind: localStorage.getItem('songKind') || 'song',
   };
   if (!CATEGORIES.some(c => c.id === pref.cat)) pref.cat = 'car';
   let thumbURLs = [];
@@ -94,6 +102,11 @@
     { id: '經典', name: '經典故事', icon: '🏰', color: '#ff922b', dark: '#e8590c' },
     { id: '冒險', name: '冒險', icon: '🚗', color: '#4dabf7', dark: '#1c7ed6' },
     { id: '節日', name: '節日', icon: '🎃', color: '#7950f2', dark: '#5f3dc4' },
+  ];
+
+  const SONG_KINDS = [
+    { id: 'song', name: '兒歌', icon: '🎵', color: '#ff8787', dark: '#e03131' },
+    { id: 'poem', name: '唐詩', icon: '📜', color: '#c0a37a', dark: '#8c6d46' },
   ];
 
   function renderHome() {
@@ -132,6 +145,14 @@
             : `<span class="badge half">✏️ 畫到一半</span><span class="mini-bar"><i style="width:${pct}%"></i></span>`);
         }
       });
+    } else if (pref.tab === 'song') {
+      $('cats').hidden = false;
+      $('cats').innerHTML = `<div class="cat-row main-row">${SONG_KINDS.map(k =>
+        `<button class="cat${k.id === pref.songKind ? ' on' : ''}" data-kind="${k.id}" style="--c:${k.color};--cd:${k.dark}"><span class="cat-icon">${k.icon}</span>${k.name}</button>`).join('')}</div>`;
+      const kind = SONG_KINDS.find(k => k.id === pref.songKind) || SONG_KINDS[0];
+      $('grid').style.cssText = `--c:${kind.color};--cd:${kind.dark}`;
+      $('grid').innerHTML = SONGS.filter(x => x.kind === kind.id).map((x, i) =>
+        `<div class="card story" role="button" data-go="#/song/${x.id}" data-say="${x.title}" style="--i:${i}"><span class="thumb">${x.art}${x.author ? `<span class="tag">${x.author}</span>` : ''}</span><div class="name">${kind.icon} ${x.title}</div></div>`).join('');
     } else {
       $('cats').hidden = false;
       $('cats').innerHTML = `<div class="cat-row main-row">${BOOK_TAGS.map(t =>
@@ -151,6 +172,12 @@
       localStorage.setItem('tab', pref.tab);
       Sound.play('pop');
       Voice.say(tab.textContent.replace(/[^\u4e00-\u9fff]/g, ''));
+      renderHome();
+    } else if (cat && cat.dataset.kind) {
+      pref.songKind = cat.dataset.kind;
+      localStorage.setItem('songKind', pref.songKind);
+      Sound.play('pop');
+      Voice.say(SONG_KINDS.find(k => k.id === pref.songKind).name);
       renderHome();
     } else if (cat && cat.dataset.tag) {
       pref.tag = cat.dataset.tag;
@@ -183,7 +210,7 @@
       go(`#/paint/${b.id}`);
     } else if (card) {
       Sound.play('click');
-      if (card.classList.contains('story')) unlockSpeech();
+      if (card.dataset.go.startsWith('#/read')) unlockSpeech();
       else Voice.say(card.dataset.say);
       go(card.dataset.go);
     }
@@ -312,6 +339,87 @@
     $('text').classList.remove('reading');
     Voice.cancel();
   }
+
+  /* ---------------- 兒歌唐詩 ---------------- */
+  let song = null, songToken = 0;
+  const PLAY_ICON = '<svg viewBox="0 0 48 48"><path d="M15 10 L38 24 L15 38 Z" fill="currentColor" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></svg>';
+  const STOP_ICON = '<svg viewBox="0 0 48 48"><rect x="13" y="13" width="22" height="22" rx="4" fill="currentColor"/></svg>';
+  function setPlaying(on) {
+    $('songPlay').innerHTML = on ? STOP_ICON : PLAY_ICON;
+    $('songPlay').classList.toggle('on', on);
+  }
+  function highlight(i) {
+    [...$('lyrics').children].forEach((li, k) => li.classList.toggle('on', k === i));
+  }
+  function openSong(sg) {
+    song = sg;
+    $('songTitle').textContent = sg.title;
+    $('songSub').textContent = sg.kind === 'poem' ? `唐・${sg.author}` : sg.original ? '原創兒歌' : '傳統兒歌';
+    $('songArt').innerHTML = sg.art;
+    $('lyrics').className = 'lyrics ' + sg.kind;
+    $('lyrics').innerHTML = sg.lines.map(l => `<li>${l}</li>`).join('');
+    setPlaying(false);
+    // 點進來就開始：兒歌彈旋律，唐詩念出來
+    const my = songToken;
+    setTimeout(() => { if (my === songToken && current === 'song' && song === sg) playSong(); }, 600);
+  }
+  function stopSong() {
+    songToken++;
+    Music.stopMelody();
+    Voice.cancel();
+    highlight(-1);
+    setPlaying(false);
+  }
+  function playSong() {
+    stopSong();
+    setPlaying(true);
+    const my = songToken;
+    if (song.kind === 'song') {
+      Music.playMelody(song.notes, song.bpm, i => my === songToken && highlight(i), () => {
+        if (my === songToken) { highlight(-1); setPlaying(false); }
+      });
+    } else {
+      readLines(my, true);
+    }
+  }
+  // 一句一句念，念到哪句就亮哪句；唐詩先念題目和作者
+  function readLines(my, withTitle) {
+    let i = -1;
+    const next = () => {
+      if (my !== songToken) return;
+      i++;
+      if (i >= song.lines.length) { highlight(-1); setPlaying(false); return; }
+      highlight(i);
+      Voice.speak([song.lines[i]], () => setTimeout(next, 400));
+    };
+    Voice.speak(withTitle ? [song.title, song.author] : [], () => setTimeout(next, 300));
+  }
+  function songStep(d) {
+    const list = SONGS.filter(x => x.kind === song.kind);
+    const k = (list.indexOf(song) + d + list.length) % list.length;
+    Sound.play('click');
+    go(`#/song/${list[k].id}`);
+  }
+  $('songPlay').addEventListener('click', () => {
+    if ($('songPlay').classList.contains('on')) stopSong(); else playSong();
+  });
+  $('songRead').addEventListener('click', () => {
+    stopSong();
+    setPlaying(true);
+    readLines(songToken, song.kind === 'poem');
+  });
+  $('songPrev').addEventListener('click', () => songStep(-1));
+  $('songNext').addEventListener('click', () => songStep(1));
+  $('songHome').addEventListener('click', () => go('#/'));
+  $('songArt').addEventListener('click', e => {
+    const t = e.target.closest('.tap');
+    if (!t) return;
+    const anim = t.dataset.anim || 'boing';
+    t.classList.remove(anim);
+    requestAnimationFrame(() => t.classList.add(anim));
+    t.addEventListener('animationend', () => t.classList.remove(anim), { once: true });
+    Sound.play(t.dataset.sound || 'pop');
+  });
 
   /* ---------------- 彩紙 ---------------- */
   function confetti() {

@@ -887,6 +887,24 @@
     <path d="M400 300 L400 530"/>
     ${ground(530)}`;
 
+  const tiger = `
+    <path fill="#ff922b" d="M520 470 Q640 480 640 360 Q640 320 670 305 Q700 320 685 360 Q690 510 510 505 Z"/>
+    <path fill="#222" d="M630 345 L668 338 L664 352 Z M622 400 L660 398 L652 412 Z"/>
+    <ellipse cx="400" cy="440" rx="150" ry="105" fill="#ff922b"/>
+    <ellipse cx="400" cy="460" rx="80" ry="65" fill="#fff4e6"/>
+    <path fill="#222" d="M262 420 L310 430 L262 446 Z M538 420 L490 430 L538 446 Z M270 480 L312 482 L280 498 Z M530 480 L488 482 L520 498 Z"/>
+    <circle cx="300" cy="160" r="40" fill="#ff922b"/><circle cx="500" cy="160" r="40" fill="#ff922b"/>
+    <circle cx="300" cy="160" r="20" fill="#fff4e6"/><circle cx="500" cy="160" r="20" fill="#fff4e6"/>
+    <circle cx="400" cy="260" r="122" fill="#ff922b"/>
+    <ellipse cx="400" cy="305" rx="70" ry="52" fill="#fff4e6"/>
+    <path fill="#222" d="M278 235 L322 245 L278 258 Z M522 235 L478 245 L522 258 Z M285 285 L320 290 L290 302 Z M515 285 L480 290 L510 302 Z"/>
+    <path d="M375 158 L425 158 M372 176 L428 176 M368 196 L432 196 M400 158 L400 196" stroke-width="7"/>
+    ${eye(355, 245, 14)} ${eye(445, 245, 14)}
+    <path fill="#ff8fab" d="M386 287 L414 287 L400 302 Z"/>
+    <path d="M400 302 Q388 325 368 310 M400 302 Q412 325 432 310"/>
+    <ellipse cx="335" cy="535" rx="45" ry="24" fill="#ff922b"/>
+    <ellipse cx="465" cy="535" rx="45" ry="24" fill="#ff922b"/>`;
+
   const DRAWINGS = [
     { id: 'car', cat: 'car', name: '小汽車', svg: car },
     { id: 'firetruck', cat: 'car', name: '消防車', svg: fireTruck },
@@ -908,6 +926,7 @@
     { id: 'sheep', cat: 'animal', name: '小綿羊', svg: sheep, also: ['story-wolf'] },
     { id: 'redhood', cat: 'animal', name: '小紅帽', svg: redHood, also: ['story-redhood'] },
     { id: 'shepherd', cat: 'animal', name: '放羊的孩子', svg: shepherd, also: ['story-wolf'] },
+    { id: 'tiger', cat: 'animal', name: '小老虎', svg: tiger },
     { id: 'giraffe', cat: 'animal', name: '長頸鹿', svg: giraffe },
     { id: 'trex', cat: 'dino', name: '霸王龍', svg: trex },
     { id: 'trike', cat: 'dino', name: '三角龍', svg: trike },
@@ -1090,6 +1109,26 @@
     pond: () => `<rect width="800" height="500" fill="#c5f6fa"/><rect y="330" width="800" height="170" fill="#66d9e8"/>
       <path d="M0 340 Q100 320 200 340 T400 340 T600 340 T800 340" fill="none" stroke="#fff" stroke-width="6"/>
       ${[[90, 420], [700, 450]].map(([x, y]) => `<ellipse class="tap" data-anim="wiggle" data-sound="splash" cx="${x}" cy="${y}" rx="55" ry="18" fill="#51cf66" stroke="#222" stroke-width="4"/>`).join('')}`,
+    mountains: (c1 = '#8ce99a', c2 = '#69db7c') => `<path d="M-20 400 L170 170 L320 330 L470 140 L660 360 L820 220 L820 500 L-20 500 Z" fill="${c1}" stroke="#222" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M-20 440 L200 300 L420 420 L620 320 L820 420 L820 500 L-20 500 Z" fill="${c2}" stroke="#222" stroke-width="5" stroke-linejoin="round"/>`,
+    river: () => `<path d="M330 500 Q380 430 360 380 Q340 340 420 300 L470 300 Q400 350 430 390 Q460 440 430 500 Z" fill="#74c0fc" stroke="#222" stroke-width="5" stroke-linejoin="round"/>`,
+    sunset: () => `<rect width="800" height="500" fill="#ffd8a8"/><circle class="tap" data-anim="boing" data-sound="twinkle" cx="400" cy="250" r="70" fill="#ff8787" stroke="#222" stroke-width="5"/>`,
+    birds: (n = 3) => [[150, 110], [230, 80], [620, 130], [540, 90]].slice(0, n).map(([x, y], i) => `<path class="float tap" data-anim="jump" data-sound="twinkle" style="animation-delay:${i * .5}s" d="M${x - 24} ${y} Q${x - 12} ${y - 16} ${x} ${y} Q${x + 12} ${y - 16} ${x + 24} ${y}" fill="none" stroke="#222" stroke-width="5" stroke-linecap="round"/>`).join(''),
+    flowers: (y = 440) => [90, 200, 600, 720].map((x, i) => `<g class="tap" data-anim="wiggle" data-sound="pop"><path d="M${x} ${y + 50} L${x} ${y}" stroke="#2f9e44" stroke-width="6"/>${[0, 1, 2, 3, 4].map(k => { const a = k * Math.PI * 2 / 5; return `<circle cx="${x + 16 * Math.cos(a)}" cy="${y + 16 * Math.sin(a)}" r="12" fill="${['#ff8fab', '#ffd43b', '#b197fc', '#ff922b'][i]}" stroke="#222" stroke-width="3"/>`; }).join('')}<circle cx="${x}" cy="${y}" r="9" fill="#fff3bf" stroke="#222" stroke-width="3"/></g>`).join(''),
+    rice: () => `<rect y="360" width="800" height="140" fill="#d8f5a2"/>${Array.from({ length: 12 }, (_, i) => { const x = 40 + i * 66; return `<g class="tap" data-anim="wiggle" data-sound="pop"><path d="M${x} 470 L${x} 380 M${x} 400 Q${x - 26} 380 ${x - 30} 350 M${x} 400 Q${x + 26} 380 ${x + 30} 350" fill="none" stroke="#5c940d" stroke-width="5" stroke-linecap="round"/><ellipse cx="${x}" cy="370" rx="8" ry="16" fill="#ffd43b" stroke="#222" stroke-width="3"/></g>`; }).join('')}`,
+    snow: () => `<rect width="800" height="500" fill="#d0ebff"/>${Array.from({ length: 40 }, (_, i) => `<circle class="fall" style="animation-delay:${(i * .13) % 1.2}s" cx="${(i * 97) % 800}" cy="${(i * 53) % 460}" r="${3 + (i % 3) * 2}" fill="#fff"/>`).join('')}`,
+    boat: (x, y) => `<g class="tap" data-anim="wiggle" data-sound="splash" stroke="#222" stroke-width="5" stroke-linejoin="round"><path d="M${x - 110} ${y} L${x + 110} ${y} L${x + 80} ${y + 40} L${x - 80} ${y + 40} Z" fill="#c98a4b"/>
+      <circle cx="${x - 20}" cy="${y - 50}" r="18" fill="#ffd8b8"/><path d="M${x - 50} ${y - 60} L${x - 20} ${y - 90} L${x + 10} ${y - 60} Z" fill="#e9ecef"/><path d="M${x - 40} ${y} L${x - 30} ${y - 32} L${x - 10} ${y - 32} L${x} ${y} Z" fill="#748ffc"/>
+      <path d="M${x} ${y - 40} L${x + 120} ${y - 120} M${x + 120} ${y - 120} L${x + 120} ${y + 30}" fill="none" stroke-width="3"/></g>`,
+    cake: (x, y) => `<g class="tap" data-anim="boing" data-sound="yay" stroke="#222" stroke-width="5" stroke-linejoin="round">
+      <rect x="${x - 120}" y="${y - 30}" width="240" height="110" rx="14" fill="#ffc9de"/><rect x="${x - 90}" y="${y - 100}" width="180" height="76" rx="12" fill="#fff0f6"/>
+      <path d="M${x - 120} ${y - 5} Q${x - 90} ${y + 20} ${x - 60} ${y - 5} Q${x - 30} ${y + 20} ${x} ${y - 5} Q${x + 30} ${y + 20} ${x + 60} ${y - 5} Q${x + 90} ${y + 20} ${x + 120} ${y - 5}" fill="none" stroke="#f06595"/>
+      ${[-50, 0, 50].map(dx => `<rect x="${x + dx - 7}" y="${y - 150}" width="14" height="50" rx="4" fill="#74c0fc"/><path class="twinkle" d="M${x + dx} ${y - 182} Q${x + dx + 12} ${y - 165} ${x + dx} ${y - 152} Q${x + dx - 12} ${y - 165} ${x + dx} ${y - 182} Z" fill="#ffd43b"/>`).join('')}
+      <ellipse cx="${x}" cy="${y + 84}" rx="150" ry="16" fill="#e9ecef"/></g>`,
+    window: () => `<rect width="800" height="500" fill="#3b3f73"/><rect x="250" y="60" width="300" height="260" rx="10" fill="#2b2d6e" stroke="#8a5a2b" stroke-width="16"/>
+      <circle class="tap" data-anim="boing" data-sound="twinkle" cx="430" cy="160" r="48" fill="#fff3b0" stroke="#222" stroke-width="5"/><path d="M400 60 L400 320 M250 190 L550 190" stroke="#8a5a2b" stroke-width="10"/>
+      <rect y="360" width="800" height="140" fill="#5f3dc4"/><path d="M80 470 L80 380 L720 380 L720 470" fill="#e5dbff" stroke="#222" stroke-width="5"/>
+      <path d="M300 380 Q400 330 500 380" fill="#fff" stroke="#222" stroke-width="5"/>`,
     forest: () => `<rect width="800" height="500" fill="#d3f9d8"/><rect y="380" width="800" height="120" fill="#8ce99a"/>`,
     bubbles: () => [[100, 300], [700, 250], [400, 120], [600, 380]].map(([x, y], i) =>
       `<circle class="float tap" data-anim="boing" data-sound="pop" style="animation-delay:${i * .7}s" cx="${x}" cy="${y}" r="${10 + i * 3}" fill="rgba(255,255,255,.6)" stroke="#fff" stroke-width="3"/>`).join(''),

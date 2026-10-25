@@ -59,12 +59,12 @@
     const BASS = [48, 43, 45, 41, 48, 41, 43, 48];
     let ac, master, timer, step = 0, next = 0, on = false, duckTimer;
 
-    function note(freq, t, vol, dur) {
+    function note(freq, t, vol, dur, dest = master) {
       const g = ac.createGain();
       g.gain.setValueAtTime(0, t);
       g.gain.linearRampToValueAtTime(vol, t + .01);
       g.gain.exponentialRampToValueAtTime(.0005, t + dur);
-      g.connect(master);
+      g.connect(dest);
       // 八音盒音色：基音 + 一點點泛音
       [[1, 1], [2, .25], [3.01, .08]].forEach(([k, a]) => {
         const o = ac.createOscillator(), og = ac.createGain();
@@ -121,16 +121,56 @@
       master.gain.setTargetAtTime(0, ac.currentTime, .2);
     }
 
+    // 唱兒歌：用同一個八音盒音色彈旋律，每一句開始時呼叫 onLine，彈完呼叫 onEnd。
+    // 彈的時候背景音樂先停，彈完再接回來。
+    let song = null;
+    function playMelody(lines, bpm, onLine, onEnd) {
+      stopMelody();
+      try {
+        ac ||= new (window.AudioContext || window.webkitAudioContext)();
+        ac.resume();
+      } catch (e) { return onEnd && onEnd(); }
+      const resumeBg = on;
+      stop();
+      const out = ac.createGain();
+      out.gain.value = .18;
+      out.connect(ac.destination);
+      const beat = 60 / bpm, t0 = ac.currentTime + .3, timers = [];
+      let t = t0;
+      lines.forEach((notes, li) => {
+        timers.push(setTimeout(() => onLine && onLine(li), (t - ac.currentTime) * 1000));
+        notes.forEach(([m, b], k) => {
+          note(n(m), t, .55, Math.max(.5, b * beat * 1.8), out);
+          if (k === 0) note(n(m - 24), t, .25, beat * 3, out);   // 每句開頭加一個低音
+          t += b * beat;
+        });
+        t += beat * .5;   // 句子之間喘口氣
+      });
+      timers.push(setTimeout(() => { stopMelody(); onEnd && onEnd(); }, (t - ac.currentTime) * 1000 + 300));
+      song = { out, timers, resumeBg };
+    }
+    function stopMelody() {
+      if (!song) return;
+      song.timers.forEach(clearTimeout);
+      song.out.gain.setTargetAtTime(0, ac.currentTime, .05);
+      const resume = song.resumeBg;
+      song = null;
+      if (resume && enabled()) start();
+    }
+
     const enabled = () => localStorage.getItem('music') !== 'off';
     // iPad 規定要手指點過才能出聲，所以第一次點畫面時開始播
     document.addEventListener('pointerdown', () => { if (enabled()) start(); }, { once: true });
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stop();
+      if (document.hidden) { stopMelody(); stop(); }
       else if (enabled() && ac) start();
     });
 
     return {
       enabled,
+      playMelody,
+      stopMelody,
+      playing: () => !!song,
       toggle() {
         const want = !enabled();
         localStorage.setItem('music', want ? 'on' : 'off');

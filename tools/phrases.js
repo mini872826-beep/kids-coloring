@@ -5,16 +5,17 @@ const vm = require('vm');
 
 const ctx = { window: {}, console };
 vm.createContext(ctx);
-for (const f of ['js/art.js', 'js/books.js', 'js/words.js']) {
+for (const f of ['js/art.js', 'js/books.js', 'js/songs.js', 'js/words.js']) {
   vm.runInContext(fs.readFileSync(f, 'utf8'), ctx, { filename: f });
 }
-const { ART, BOOKS, WORDS } = ctx.window;
+const { ART, BOOKS, SONGS, WORDS } = ctx.window;
 
 const all = new Set([
   ...ART.CATEGORIES.map(c => c.name),
   ...ART.DRAWINGS.map(d => d.name),
   ...BOOKS.flatMap(b => [b.title, ...b.pages.map(p => p.text)]),
   ...WORDS.BRUSHES.map(b => b.name),
+  ...SONGS.flatMap(s => [s.title, ...(s.author ? [s.author] : []), ...s.lines]),
   ...WORDS.COLOR_NAMES,
   ...WORDS.PATTERNS.map(p => p.name),
   ...WORDS.SHAPES.map(p => p.name),

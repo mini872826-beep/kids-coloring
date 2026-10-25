@@ -8,6 +8,7 @@ const FILES = [
   'js/version.js',
   'js/art.js',
   'js/books.js',
+  'js/songs.js',
   'js/words.js',
   'js/paint.js',
   'js/app.js',
