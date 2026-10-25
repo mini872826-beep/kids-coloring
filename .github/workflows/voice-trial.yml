@@ -3,6 +3,7 @@ name: 試聽聲音
 on:
   push:
     branches: [voice-trial]
+    paths: ['tools/trial_voices.py', '.github/workflows/voice-trial.yml']
   workflow_dispatch:
 permissions:
   contents: write

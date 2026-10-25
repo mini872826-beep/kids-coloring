@@ -1,0 +1,32 @@
+# 試聽：用 Kaggle 免費 GPU 跑 ACE-Step，讓兒歌像真人唱（只在 voice-trial 分支跑，不影響 App）
+name: 試聽唱歌
+on:
+  push:
+    branches: [voice-trial]
+    paths: ['tools/kaggle_sing/**', '.github/workflows/sing-trial.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: sing-trial
+jobs:
+  acestep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q "kaggle>=1.8"
+      - name: Kaggle GPU 唱歌（ACE-Step）
+        env:
+          KAGGLE_USERNAME: pacokids
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
+        run: tools/kaggle_sing/kaggle.sh
+      - name: 推回 voice-trial 分支
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add trial
+          git commit -m "ACE-Step singing trial" || exit 0
+          for i in 1 2 3; do git pull --rebase -q origin voice-trial && git push origin HEAD:voice-trial && break; sleep 5; done
