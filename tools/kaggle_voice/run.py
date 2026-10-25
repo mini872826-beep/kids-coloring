@@ -48,6 +48,7 @@ class S(_S):
 ort.InferenceSession = S
 from single_inference import single_inference, CustomCosyVoice
 from g2pw import G2PWConverter
+import torch, numpy as np, soundfile as sf
 jobs = json.load(open('/kaggle/tmp/jobs.json', encoding='utf-8'))
 prompt_text = open('/kaggle/tmp/prompt.txt', encoding='utf-8').read().strip()
 t0 = time.time()
@@ -62,7 +63,7 @@ def clean(text):
     s = re.sub(r'([，。！？、；,.!?;])[，。！？、；,.!?;\s]+', r'\1', s)
     s = s.strip('，、；,; ')
     return s
-TRIM = 'silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.03,areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.08,areverse'
+TRIM = 'silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.04,areverse,silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.1,areverse'
 done = 0
 for text, name in jobs:
     if time.time() - t0 > 10.5 * 3600:
@@ -73,8 +74,25 @@ for text, name in jobs:
     try:
         t = time.time()
         wav = '/kaggle/tmp/one.wav'
-        single_inference('/kaggle/tmp/prompt.wav', clean(text), wav, cosy, conv, prompt_text)
-        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-af', TRIM, '-ar', '24000', '-ac', '1', '-b:a', '48k', out], check=True)
+        say = clean(text)
+        n = len(re.findall(r'[\u4e00-\u9fff]', say)) or 1
+        if n <= 4 and not re.search(r'[。！？!?]$', say):
+            say += '。'   # 很短的詞單獨念容易失敗，當成一句話念
+        # 念完檢查有沒有真的出聲、長度合不合理，不好就換個亂數再念（最多 3 次）
+        for attempt in range(3):
+            torch.manual_seed(1234 + attempt * 77)
+            single_inference('/kaggle/tmp/prompt.wav', say, wav, cosy, conv, prompt_text)
+            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-af', TRIM, '-ar', '24000', '-ac', '1', '-b:a', '48k', out], check=True)
+            x, fs = sf.read(wav)
+            fr = int(fs * 0.05)
+            e = np.array([np.sqrt((x[k:k + fr] ** 2).mean()) for k in range(0, max(1, len(x) - fr), fr)] or [0])
+            speech = (e > 0.03).sum() * 0.05
+            if speech >= 0.12 * n and speech <= 0.9 * n + 0.8:
+                break
+            log('retry', attempt + 1, text[:20], 'speech %.1fs' % speech)
+        else:
+            os.remove(out)
+            raise RuntimeError('no good take')
         done += 1
         log('ok %d/%d %.1fs %s' % (done, len(jobs), time.time() - t, text[:20]))
     except Exception:
