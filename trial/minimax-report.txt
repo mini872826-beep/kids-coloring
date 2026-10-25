@@ -1,0 +1,13 @@
+little-star cover-free https://api.minimax.io: {"http_error": 410, "body": "{\"base_resp\":{\"status_code\":2153,\"status_msg\":\"This Music API is no longer available to new users. Existing paying customers can continue to use the service. For new access, please try MiniMax Audio (https://www.minimax.io/audio) or the open-source model at https:
+little-star cover-free https://api.minimaxi.com: code=2049 msg=invalid api key
+little-star cover https://api.minimaxi.com: code=2049 msg=invalid api key
+little-star 3.0-free https://api.minimaxi.com: code=2049 msg=invalid api key
+little-star 2.6-free https://api.minimaxi.com: code=2049 msg=invalid api key
+little-star 2.6 https://api.minimaxi.com: code=2049 msg=invalid api key
+little-star 3.0 https://api.minimaxi.com: code=2049 msg=invalid api key
+en-twinkle cover-free https://api.minimaxi.com: code=2049 msg=invalid api key
+en-twinkle cover https://api.minimaxi.com: code=2049 msg=invalid api key
+en-twinkle 3.0-free https://api.minimaxi.com: code=2049 msg=invalid api key
+en-twinkle 2.6-free https://api.minimaxi.com: code=2049 msg=invalid api key
+en-twinkle 2.6 https://api.minimaxi.com: code=2049 msg=invalid api key
+en-twinkle 3.0 https://api.minimaxi.com: code=2049 msg=invalid api key
