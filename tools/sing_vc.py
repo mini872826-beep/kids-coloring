@@ -36,7 +36,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     jobs = plan(songs, sung)
     if len(sys.argv) > 2 and sys.argv[2] == '--plan':
-        only = set(sys.argv[4].split(',')) if len(sys.argv) > 4 else None
+        only = set(filter(None, sys.argv[4].split(','))) if len(sys.argv) > 4 else None
         todo = [j for j in jobs if not os.path.exists(os.path.join(OUT, j['file'])) and (not only or j['id'] in only)]
         json.dump(todo, open(sys.argv[3], 'w', encoding='utf-8'), ensure_ascii=False)
         print(f'{len(todo)} songs to convert')

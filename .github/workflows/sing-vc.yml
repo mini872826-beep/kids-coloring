@@ -35,6 +35,8 @@ jobs:
           restore-keys: sing-
       - run: pip install edge-tts "setuptools<80" pyworld soundfile numpy
       - run: node tools/songs.js > "$RUNNER_TEMP/songs.json"
+      # 歌詞和音符要一個字配一個音，對不上就在這裡報錯
+      - run: python tools/check_songs.py "$RUNNER_TEMP/songs.json"
       # 1. 照歌譜唱好，人聲和伴奏分開存（Kaggle 要從 GitHub 抓，所以先推上去）
       - run: python tools/sing.py "$RUNNER_TEMP/songs.json"
       - name: 推人聲檔

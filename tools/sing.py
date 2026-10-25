@@ -22,7 +22,7 @@ VOICE = 'zh-TW-HsiaoYuNeural'
 VOICE_EN = 'en-US-AnaNeural'
 OUT = 'audio/sing'
 CACHE = '.sing-cache'            # 每個字的錄音（不進 git，Actions 用 cache 存）
-VERSION = 'v1'                   # 改了合成方法就換號碼，全部重唱
+VERSION = 'v2'                   # 改了合成方法就換號碼，全部重唱
 TEMPO = .85                      # 唱的比八音盒慢一點，字才聽得清楚
 
 CJK = re.compile(r'[一-鿿]')
@@ -32,9 +32,9 @@ CJK = re.compile(r'[一-鿿]')
 SYL_FIX = {'the': 1, 'are': 1, 'fire': 1, 'every': 3, 'everywhere': 3, 'little': 2, 'water': 2,
            'diamond': 2, 'lady': 2, 'merrily': 3, 'gently': 2, 'tumbling': 2, 'tumbling': 2,
            'happy': 2, 'birthday': 2, 'together': 3, 'macdonald': 3, 'e-i-e-i-o': 5, 'abcs': 3,
-           'w': 1, 'one': 1, 'once': 1, 'came': 1, 'came,': 1, 'mother': 2, 'over': 2,
+           'w': 2, 'climbed': 1, 'washed': 1, 'one': 1, 'once': 1, 'came': 1, 'came,': 1, 'mother': 2, 'over': 2,
            'sleeping': 2, 'morning': 2, 'ringing': 2, 'brother': 2, 'humpty': 2, 'dumpty': 2,
-           'hickory': 3, 'dickory': 3, 'itsy': 2, 'bitsy': 2, 'spider': 2, 'again': 2,
+           'hickory': 2, 'dickory': 2, 'itsy': 2, 'bitsy': 2, 'spider': 2, 'again': 2,
            'another': 3, 'children': 2, 'surely': 2, 'master': 2, 'falling': 2, 'london': 2,
            'wonder': 2, 'above': 2, 'kings': 1, "king's": 1, "couldn't": 2, "you're": 1, 'fetch': 1}
 
@@ -57,17 +57,26 @@ def syllables(word):
 
 def tokens(line, english):
     """一句歌詞 → [(要錄的字, 第幾段, 共幾段)]"""
+    # ~ = 不唱新的字，前一個字拉長到下一個音（一字多音）
     if not english:
-        return [(ch, 0, 1) for ch in CJK.findall(line)]
+        return [None if ch == '~' else (ch, 0, 1) for ch in re.findall(r'[一-鿿~]', line)]
     out = []
     for w in line.replace(',', ' ').replace('?', ' ').replace('.', ' ').replace('!', ' ').split():
+        if w == '~':
+            out.append(None)
+            continue
         k = syllables(w)
         out += [(w.strip("'"), i, k) for i in range(k)]
     return out
 
 
 def align(toks, notes):
-    """把音節和音符配對：音節多就把最長的音符切兩半，音節少就讓前一個字拉長（換音高）。"""
+    """把音節和音符配對：一個音節一個音符（歌譜應該寫成這樣，tools/check_songs.py 會檢查）。
+    數量對不上時才自己猜：音節多就把最長的音符切兩半，音節少就讓前一個字拉長（換音高）。"""
+    if len(toks) == len(notes):
+        return [(e, m, b) for e, (m, b) in zip(toks, notes)]
+    print('  WARNING 字數和音符數對不上：', len(toks), len(notes))
+    toks = [t for t in toks if t]
     notes = [list(n) for n in notes]
     while len(toks) > len(notes):
         i = max(range(len(notes)), key=lambda k: notes[k][1])
@@ -144,6 +153,7 @@ def sing(feat, part, nparts, hz, dur, prev_hz=None):
     f0, sp, ap = f0[a:b], sp[a:b], ap[a:b]
     voiced = np.where(f0 > 0)[0]
     total = max(8, int(round(dur * 1000 / FRAME)))
+    lead = []
     if len(voiced) == 0:
         idx = np.linspace(0, len(f0) - 1, min(total, len(f0))).astype(int)
         newf0 = np.zeros(len(idx))
@@ -173,7 +183,8 @@ def sing(feat, part, nparts, hz, dur, prev_hz=None):
     fi, fo = int(.005 * FS), int(.03 * FS)
     y[:fi] *= np.linspace(0, 1, fi)
     y[-fo:] *= np.linspace(1, 0, fo)
-    return y
+    # 子音那一段要提早唱，母音才會剛好落在拍子上
+    return y, int(len(lead) * FRAME / 1000 * FS)
 
 
 def hold_feat(feat):
@@ -226,15 +237,16 @@ def render(song):
             if e:
                 text, part, k = e
                 last = (feats[text], part, k)
-                y = sing(feats[text], part, k, hz, dur * .95, prev_hz)
+                y, pre = sing(feats[text], part, k, hz, dur * .95, prev_hz)
             elif last:
                 f = hold_feat(sing_slice(*last))
-                y = sing(f, 0, 1, hz, dur * .95, prev_hz)
+                y, pre = sing(f, 0, 1, hz, dur * .95, prev_hz)
             else:
-                y = np.zeros(1)
+                y, pre = np.zeros(1), 0
             prev_hz = hz
             s = int(t * FS)
-            vox[s:s + len(y)] += y[:len(vox) - s]
+            v = max(0, s - pre)
+            vox[v:v + len(y)] += y[:len(vox) - v]
             nb = box_note(midi_hz(m), max(.5, dur * 1.8), .18)
             acc[s:s + len(nb)] += nb[:len(acc) - s]
             t += dur
