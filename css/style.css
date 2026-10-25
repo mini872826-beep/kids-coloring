@@ -548,6 +548,33 @@ button {
 .inside-toggle.on .sw i { transform: translateX(26px); }
 .size i { display: block; border-radius: 50%; background: var(--ink); }
 
+.pattern-row { background: #f3f0ff; border-radius: 20px; padding: 8px 10px 12px; margin-bottom: 12px; }
+.pattern-items { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; }
+.pat {
+  width: clamp(44px, 6.4vw, 72px);
+  aspect-ratio: 1;
+  border-radius: 14px;
+  background-size: 24px 24px;
+  position: relative;
+  box-shadow: inset 0 0 0 3px rgba(0, 0, 0, .08);
+  transition: transform .12s;
+}
+.pat span {
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  transform: translateX(-50%);
+  padding: 0 6px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .9);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.pat.shape { background-size: cover; background-position: center; }
+.pat:active { transform: scale(.88); }
+.pat.on { transform: scale(1.08); box-shadow: 0 0 0 4px #fff, 0 0 0 7px #ffb300; }
+
 .color-grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -659,7 +686,8 @@ button {
   .brush { width: auto; }
   .brush svg { width: 84px; height: 34px; }
   .brush { font-size: 18px; gap: 4px; padding-right: 6px; }
-  .swatch { width: clamp(30px, 9.4vw, 72px); }
+  .swatch, .pat { width: clamp(30px, 9.4vw, 72px); }
+  .pattern-items { gap: 7px; }
   .color-grid { gap: 7px; }
 }
 

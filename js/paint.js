@@ -229,7 +229,7 @@
     return api;
   })();
 
-  const { COLORS, colorName, BRUSHES, BRUSH_GROUPS } = window.WORDS;
+  const { COLORS, colorName, BRUSHES, BRUSH_GROUPS, PATTERNS, SHAPES } = window.WORDS;
 
   /* ---------------- 本地保存（IndexedDB，作品不會上傳到任何地方） ---------------- */
   const Store = (() => {
@@ -319,8 +319,7 @@
       <rect x="34" y="10" width="76" height="6" ${HI}/>
       <rect x="110" y="11" width="9" height="24" rx="4" fill="#ff9fb6"/></g>`,
     pattern: c => `<g ${O}>
-      <rect x="4" y="6" width="50" height="34" rx="9" fill="${shade(c, .6)}"/>
-      <path d="M6 15 q6 -5 12 0 t12 0 t12 0 t10 0 M6 25 q6 -5 12 0 t12 0 t12 0 t10 0 M6 35 q6 -5 12 0 t12 0 t12 0 t10 0" fill="none" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/>
+      <image href="${patternTile(state.pattern, c).toDataURL()}" x="4" y="6" width="50" height="34" preserveAspectRatio="xMidYMid slice" clip-path="inset(0 round 9px)"/>
       <rect x="4" y="6" width="50" height="34" rx="9" fill="none"/>
       <path d="M54 23 L68 23" stroke-width="4"/>
       <rect x="66" y="15" width="50" height="16" rx="8" fill="#6c7a89"/>
@@ -362,7 +361,9 @@
     barrier: new Uint8Array(W * H),
     undo: [],
     dirty: false,
-    inside: localStorage.getItem('inside') !== 'off',   // 不出界，預設打開
+    inside: localStorage.getItem('inside') !== 'off',
+    pattern: localStorage.getItem('pattern') || 'waves',
+    shape: localStorage.getItem('shape') || 'star',   // 不出界，預設打開
     recent: (() => { try { return JSON.parse(localStorage.getItem('recent')) || []; } catch (e) { return []; } })(),
   };
   let lastTool = state.tool !== 'eraser' ? state.tool : 'crayon';
@@ -599,8 +600,57 @@
   /* ---------- 各種筆 ---------- */
   const rnd = (a, b) => a + Math.random() * (b - a);
   let pat = { key: '', crayon: null, pattern: null };
+  // 花紋滾筒的各種花紋：淺色底 + 目前顏色畫的圖案（彩虹例外）
+  function patternTile(id, color) {
+    const c = document.createElement('canvas');
+    const S = 48;
+    c.width = c.height = S;
+    const x = c.getContext('2d');
+    x.fillStyle = id === 'rainbow' ? '#fff' : shade(color, .62);
+    x.fillRect(0, 0, S, S);
+    x.fillStyle = x.strokeStyle = color;
+    x.lineWidth = 6;
+    x.lineCap = x.lineJoin = 'round';
+    const star = (cx, cy, r) => {
+      x.beginPath();
+      for (let i = 0; i < 10; i++) {
+        const rr = i % 2 ? r * .45 : r, a = i * Math.PI / 5 - Math.PI / 2;
+        x.lineTo(cx + rr * Math.cos(a), cy + rr * Math.sin(a));
+      }
+      x.fill();
+    };
+    const heart = (cx, cy, r) => {
+      x.beginPath();
+      x.moveTo(cx, cy + r);
+      x.bezierCurveTo(cx - r * 1.6, cy - r * .2, cx - r * .6, cy - r * 1.3, cx, cy - r * .35);
+      x.bezierCurveTo(cx + r * .6, cy - r * 1.3, cx + r * 1.6, cy - r * .2, cx, cy + r);
+      x.fill();
+    };
+    if (id === 'waves') {
+      for (const y of [8, 32]) {
+        x.beginPath(); x.moveTo(0, y);
+        x.quadraticCurveTo(12, y - 10, 24, y); x.quadraticCurveTo(36, y + 10, 48, y); x.stroke();
+      }
+    } else if (id === 'dots') {
+      for (const [cx, cy] of [[12, 12], [36, 36], [36, 12], [12, 36]]) { x.beginPath(); x.arc(cx, cy, 7, 0, Math.PI * 2); x.fill(); }
+    } else if (id === 'stripes') {
+      for (let k = -S; k < S * 2; k += 16) { x.beginPath(); x.moveTo(k, 0); x.lineTo(k + S, S); x.stroke(); }
+    } else if (id === 'checks') {
+      x.fillRect(0, 0, 24, 24); x.fillRect(24, 24, 24, 24);
+    } else if (id === 'hearts') {
+      heart(12, 13, 9); heart(36, 37, 9);
+    } else if (id === 'stars') {
+      star(12, 13, 10); star(36, 37, 10);
+    } else if (id === 'zigzag') {
+      for (const y of [12, 36]) { x.beginPath(); x.moveTo(0, y); for (let k = 0; k <= 4; k++) x.lineTo(k * 12, y + (k % 2 ? -8 : 8)); x.stroke(); }
+    } else if (id === 'rainbow') {
+      ['#ff3b3b', '#ff9d1f', '#ffe14d', '#3fc24f', '#2aa8f2', '#8a4fe0'].forEach((k, i) => { x.fillStyle = k; x.fillRect(0, i * 8, S, 8); });
+    }
+    return c;
+  }
+
   function patterns() {
-    const key = state.color;
+    const key = state.color + state.pattern;
     if (pat.key === key) return pat;
     // 蠟筆：帶小洞的紋理
     const c1 = document.createElement('canvas');
@@ -610,21 +660,7 @@
     x1.fillRect(0, 0, 64, 64);
     x1.globalCompositeOperation = 'destination-out';
     for (let i = 0; i < 420; i++) x1.fillRect(Math.random() * 64, Math.random() * 64, rnd(1, 2.5), rnd(1, 2.5));
-    // 花紋：淺底 + 波浪線
-    const c2 = document.createElement('canvas');
-    c2.width = c2.height = 48;
-    const x2 = c2.getContext('2d');
-    x2.fillStyle = shade(state.color, .6);
-    x2.fillRect(0, 0, 48, 48);
-    x2.strokeStyle = state.color;
-    x2.lineWidth = 6;
-    for (const y of [8, 32]) {
-      x2.beginPath();
-      x2.moveTo(0, y);
-      x2.quadraticCurveTo(12, y - 10, 24, y);
-      x2.quadraticCurveTo(36, y + 10, 48, y);
-      x2.stroke();
-    }
+    const c2 = patternTile(state.pattern, state.color);
     pat = { key, crayon: pctx.createPattern(c1, 'repeat'), pattern: pctx.createPattern(c2, 'repeat') };
     return pat;
   }
@@ -647,18 +683,75 @@
     return c;
   }
 
-  function star(ctx, x, y, r, rot, color) {
+  // 閃粉筆的造型：星星、愛心、泡泡、小花、亮片、雪花
+  function stamp(ctx, shape, x, y, r, rot, color) {
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(rot);
-    ctx.fillStyle = color;
+    ctx.fillStyle = ctx.strokeStyle = color;
+    ctx.lineCap = 'round';
     ctx.beginPath();
-    for (let i = 0; i < 10; i++) {
-      const rr = i % 2 ? r * .45 : r, a = i * Math.PI / 5 - Math.PI / 2;
-      ctx.lineTo(rr * Math.cos(a), rr * Math.sin(a));
+    if (shape === 'star') {
+      for (let i = 0; i < 10; i++) {
+        const rr = i % 2 ? r * .45 : r, a = i * Math.PI / 5 - Math.PI / 2;
+        ctx.lineTo(rr * Math.cos(a), rr * Math.sin(a));
+      }
+      ctx.fill();
+    } else if (shape === 'heart') {
+      ctx.moveTo(0, r);
+      ctx.bezierCurveTo(-r * 1.6, -r * .2, -r * .6, -r * 1.3, 0, -r * .35);
+      ctx.bezierCurveTo(r * .6, -r * 1.3, r * 1.6, -r * .2, 0, r);
+      ctx.fill();
+    } else if (shape === 'bubble') {
+      ctx.globalAlpha = .35;
+      ctx.arc(0, 0, r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.lineWidth = Math.max(2, r * .15);
+      ctx.stroke();
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(-r * .35, -r * .35, r * .22, 0, Math.PI * 2);
+      ctx.fill();
+    } else if (shape === 'flower') {
+      for (let i = 0; i < 5; i++) {
+        const a = i * Math.PI * 2 / 5;
+        ctx.beginPath();
+        ctx.arc(Math.cos(a) * r * .55, Math.sin(a) * r * .55, r * .45, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.fillStyle = '#ffd43b';
+      ctx.beginPath();
+      ctx.arc(0, 0, r * .35, 0, Math.PI * 2);
+      ctx.fill();
+    } else if (shape === 'diamond') {
+      ctx.moveTo(0, -r); ctx.lineTo(r * .6, 0); ctx.lineTo(0, r); ctx.lineTo(-r * .6, 0);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,.7)';
+      ctx.beginPath();
+      ctx.moveTo(0, -r * .6); ctx.lineTo(r * .25, 0); ctx.lineTo(0, -r * .1); ctx.lineTo(-r * .25, 0);
+      ctx.fill();
+    } else if (shape === 'snow') {
+      ctx.lineWidth = Math.max(2, r * .16);
+      for (let i = 0; i < 6; i++) {
+        ctx.rotate(Math.PI / 3);
+        ctx.moveTo(0, 0); ctx.lineTo(0, -r);
+        ctx.moveTo(0, -r * .55); ctx.lineTo(r * .25, -r * .8);
+        ctx.moveTo(0, -r * .55); ctx.lineTo(-r * .25, -r * .8);
+      }
+      ctx.stroke();
     }
-    ctx.fill();
     ctx.restore();
+  }
+
+  function shapePreview(shape, color) {
+    const c = document.createElement('canvas');
+    c.width = c.height = 64;
+    const x = c.getContext('2d');
+    x.fillStyle = '#fff';
+    x.fillRect(0, 0, 64, 64);
+    stamp(x, shape, 32, 30, 20, 0, color);
+    return c.toDataURL();
   }
 
   function line(ctx, a, b, width, style) {
@@ -702,7 +795,8 @@
     glitter: {
       move: (a, b, s) => along(a, b, s * 1.1, (x, y) => {
         const hue = Math.random() * 360;
-        star(sctx, x + rnd(-s, s), y + rnd(-s, s), rnd(s * .4, s * .9), Math.random() * 6, Math.random() < .5 ? state.color : `hsl(${hue},90%,65%)`);
+        const sh = state.shape;
+        stamp(sctx, sh, x + rnd(-s, s), y + rnd(-s, s), rnd(s * .45, s * .95), sh === 'heart' || sh === 'bubble' ? rnd(-.4, .4) : Math.random() * 6, Math.random() < .5 ? state.color : `hsl(${hue},90%,65%)`);
         sctx.fillStyle = '#fff';
         sctx.fillRect(x + rnd(-s, s), y + rnd(-s, s), 3, 3);
       }),
@@ -838,6 +932,14 @@
         `<button class="brush${b.id === state.tool ? ' on' : ''}" data-id="${b.id}">${iconSVG(b.id, state.color)}<span>${b.name}</span></button>`).join('')}</div></div>`).join('');
     $('sizes').innerHTML = SIZES.map((s, i) =>
       `<button class="size${i === state.size ? ' on' : ''}" data-i="${i}" aria-label="粗細${i + 1}"><i style="width:${10 + i * 14}px;height:${10 + i * 14}px"></i></button>`).join('');
+    $('patternRow').hidden = state.tool !== 'pattern' && state.tool !== 'glitter';
+    if (state.tool === 'glitter') {
+      $('patternRow').innerHTML = `<div class="group-title">✨ 選造型</div><div class="pattern-items">${SHAPES.map(p =>
+        `<button class="pat shape${p.id === state.shape ? ' on' : ''}" data-s="${p.id}" style="background-image:url(${shapePreview(p.id, state.color)})" aria-label="${p.name}"><span>${p.name}</span></button>`).join('')}</div>`;
+    } else if (state.tool === 'pattern') {
+      $('patternRow').innerHTML = `<div class="group-title">🎨 選花紋</div><div class="pattern-items">${PATTERNS.map(p =>
+        `<button class="pat${p.id === state.pattern ? ' on' : ''}" data-p="${p.id}" style="background-image:url(${patternTile(p.id, state.color).toDataURL()})" aria-label="${p.name}"><span>${p.name}</span></button>`).join('')}</div>`;
+    }
     $('colorGrid').innerHTML = COLORS.map(c =>
       `<button class="swatch${c === state.color ? ' on' : ''}${c === '#ffffff' ? ' light' : ''}" data-c="${c}" style="background:${c}" aria-label="${c}"></button>`).join('');
   }
@@ -883,6 +985,21 @@
     updateUI();
   });
   $('nameChip').addEventListener('click', () => { Sound.play('click'); Voice.say(state.drawing.name); });
+  $('patternRow').addEventListener('click', e => {
+    const b = e.target.closest('.pat');
+    if (!b) return;
+    Sound.play('pop');
+    if (b.dataset.s) {
+      state.shape = b.dataset.s;
+      localStorage.setItem('shape', state.shape);
+      Voice.say(SHAPES.find(p => p.id === state.shape).name);
+      return updateUI();
+    }
+    state.pattern = b.dataset.p;
+    localStorage.setItem('pattern', state.pattern);
+    Voice.say(PATTERNS.find(p => p.id === state.pattern).name);
+    updateUI();
+  });
   $('customColor').addEventListener('input', e => setColor(e.target.value));
 
   $('brushBtn').addEventListener('click', () => {

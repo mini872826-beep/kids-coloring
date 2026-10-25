@@ -58,6 +58,28 @@
     { id: 'magic', name: '特別工具', icon: '✨' },
   ];
 
+  // 花紋滾筒可以選的花紋
+  const PATTERNS = [
+    { id: 'waves', name: '波浪' },
+    { id: 'dots', name: '圓點點' },
+    { id: 'stripes', name: '斜條紋' },
+    { id: 'checks', name: '格子' },
+    { id: 'hearts', name: '愛心' },
+    { id: 'stars', name: '星星' },
+    { id: 'zigzag', name: '鋸齒' },
+    { id: 'rainbow', name: '彩虹' },
+  ];
+
+  // 閃粉筆可以選的造型
+  const SHAPES = [
+    { id: 'star', name: '星星' },
+    { id: 'heart', name: '愛心' },
+    { id: 'bubble', name: '泡泡' },
+    { id: 'flower', name: '小花' },
+    { id: 'diamond', name: '亮片' },
+    { id: 'snow', name: '雪花' },
+  ];
+
   // 程式裡固定會念的句子
   const FIXED = [
     '塗顏色', '聽故事', '畫筆', '特別工具', '新的白紙', '畫好了，好棒！', '太棒啦，讀完啦！', '橡皮擦', '全部擦掉嗎？',
@@ -68,5 +90,5 @@
   const COLOR_NAMES = ['白色', '黑色', '灰色', '淺灰色', '深灰色', '咖啡色', '橄欖綠',
     ...base, ...base.map(n => '淺' + n), ...base.map(n => '深' + n)];
 
-  window.WORDS = { COLORS, colorName, BRUSHES, BRUSH_GROUPS, FIXED, COLOR_NAMES };
+  window.WORDS = { COLORS, colorName, BRUSHES, BRUSH_GROUPS, PATTERNS, SHAPES, FIXED, COLOR_NAMES };
 })();

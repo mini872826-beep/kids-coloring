@@ -16,6 +16,8 @@ const all = new Set([
   ...BOOKS.flatMap(b => [b.title, ...b.pages.map(p => p.text)]),
   ...WORDS.BRUSHES.map(b => b.name),
   ...WORDS.COLOR_NAMES,
+  ...WORDS.PATTERNS.map(p => p.name),
+  ...WORDS.SHAPES.map(p => p.name),
   ...WORDS.FIXED,
 ]);
 for (let i = 1; i <= 60; i++) all.add(`白紙 ${i}`);
