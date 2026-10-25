@@ -460,12 +460,24 @@ button {
   pointer-events: none;
 }
 
-.brush-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; }
+.brush-list { display: flex; flex-direction: column; gap: 10px; }
+.brush-group { border-radius: 20px; padding: 8px 10px 10px; }
+.brush-group.pen { background: #fff8e1; }
+.brush-group.magic { background: #f3f0ff; }
+.group-title {
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #8a6d1f;
+  margin: 0 0 4px 6px;
+}
+.brush-group.magic .group-title { color: #6741d9; }
+.group-items { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; }
 .brush {
   display: flex;
   align-items: center;
   gap: 6px;
-  width: 210px;
+  min-width: 220px;
   padding: 4px 10px 4px 4px;
   border-radius: 16px;
   font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
@@ -475,6 +487,7 @@ button {
   transition: background .15s;
 }
 .brush svg { width: 120px; height: 46px; flex: none; transition: transform .15s; }
+.brush span { white-space: nowrap; }
 .brush.on { background: #fff1b8; box-shadow: inset 0 0 0 3px #ffcf4d; }
 .brush.on svg { transform: translateX(-8px); }
 
@@ -644,7 +657,8 @@ button {
     transform: rotate(45deg);
   }
   .brush { width: auto; }
-  .brush svg { width: 96px; height: 38px; }
+  .brush svg { width: 84px; height: 34px; }
+  .brush { font-size: 18px; gap: 4px; padding-right: 6px; }
   .swatch { width: clamp(30px, 9.4vw, 72px); }
   .color-grid { gap: 7px; }
 }

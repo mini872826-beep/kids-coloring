@@ -229,7 +229,7 @@
     return api;
   })();
 
-  const { COLORS, colorName, BRUSHES } = window.WORDS;
+  const { COLORS, colorName, BRUSHES, BRUSH_GROUPS } = window.WORDS;
 
   /* ---------------- 本地保存（IndexedDB，作品不會上傳到任何地方） ---------------- */
   const Store = (() => {
@@ -356,7 +356,7 @@
 
   const state = {
     drawing: null,
-    tool: localStorage.getItem('tool') || 'bucket',
+    tool: localStorage.getItem('tool') || 'crayon',
     color: localStorage.getItem('color') || '#ff1f1f',
     size: +(localStorage.getItem('size') || 1),
     barrier: new Uint8Array(W * H),
@@ -365,7 +365,7 @@
     inside: localStorage.getItem('inside') !== 'off',   // 不出界，預設打開
     recent: (() => { try { return JSON.parse(localStorage.getItem('recent')) || []; } catch (e) { return []; } })(),
   };
-  let lastTool = state.tool !== 'eraser' ? state.tool : 'bucket';
+  let lastTool = state.tool !== 'eraser' ? state.tool : 'crayon';
 
   /* 畫布大小：在可用空間裡保持 4:3 */
   function fit() {
@@ -833,8 +833,9 @@
     $('recent').innerHTML = state.recent.map(c =>
       `<button data-c="${c}" style="background:${c}" aria-label="${colorName(c)}"></button>`).join('');
 
-    $('brushList').innerHTML = BRUSHES.map(b =>
-      `<button class="brush${b.id === state.tool ? ' on' : ''}" data-id="${b.id}">${iconSVG(b.id, state.color)}<span>${b.name}</span></button>`).join('');
+    $('brushList').innerHTML = BRUSH_GROUPS.map(g => `
+      <div class="brush-group ${g.id}"><div class="group-title">${g.icon} ${g.name}</div><div class="group-items">${BRUSHES.filter(b => b.group === g.id).map(b =>
+        `<button class="brush${b.id === state.tool ? ' on' : ''}" data-id="${b.id}">${iconSVG(b.id, state.color)}<span>${b.name}</span></button>`).join('')}</div></div>`).join('');
     $('sizes').innerHTML = SIZES.map((s, i) =>
       `<button class="size${i === state.size ? ' on' : ''}" data-i="${i}" aria-label="粗細${i + 1}"><i style="width:${10 + i * 14}px;height:${10 + i * 14}px"></i></button>`).join('');
     $('colorGrid').innerHTML = COLORS.map(c =>

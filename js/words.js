@@ -41,21 +41,26 @@
     '#b5157a', '#6b2e10', '#5b7a10', '#1d8a72', '#1b7a8a', '#1e3f8a', '#5a2a80', '#5f5d58',
   ];
 
+  // 分兩組：真正的「筆」放上面，好玩的特別工具放下面
   const BRUSHES = [
-    { id: 'bucket', name: '油漆桶' },
-    { id: 'marker', name: '馬克筆' },
-    { id: 'crayon', name: '蠟筆' },
-    { id: 'pencil', name: '鉛筆' },
-    { id: 'water', name: '水彩筆' },
-    { id: 'spray', name: '噴漆' },
-    { id: 'glitter', name: '閃粉筆' },
-    { id: 'rainbow', name: '彩虹筆' },
-    { id: 'pattern', name: '花紋筆' },
+    { id: 'crayon', group: 'pen', name: '蠟筆' },
+    { id: 'marker', group: 'pen', name: '馬克筆' },
+    { id: 'pencil', group: 'pen', name: '鉛筆' },
+    { id: 'water', group: 'pen', name: '水彩筆' },
+    { id: 'bucket', group: 'magic', name: '油漆桶' },
+    { id: 'spray', group: 'magic', name: '噴漆' },
+    { id: 'rainbow', group: 'magic', name: '彩虹筆' },
+    { id: 'glitter', group: 'magic', name: '閃粉筆' },
+    { id: 'pattern', group: 'magic', name: '花紋滾筒' },
+  ];
+  const BRUSH_GROUPS = [
+    { id: 'pen', name: '畫筆', icon: '✏️' },
+    { id: 'magic', name: '特別工具', icon: '✨' },
   ];
 
   // 程式裡固定會念的句子
   const FIXED = [
-    '塗顏色', '聽故事', '新的白紙', '畫好了，好棒！', '太棒啦，讀完啦！', '橡皮擦', '全部擦掉嗎？',
+    '塗顏色', '聽故事', '畫筆', '特別工具', '新的白紙', '畫好了，好棒！', '太棒啦，讀完啦！', '橡皮擦', '全部擦掉嗎？',
     '細細的', '中等的', '粗粗的', '不畫出線外，打開', '不畫出線外，關掉', '音樂開', '音樂關',
   ];
   // 所有可能的顏色名字（自選顏色也會落在這些裡面）
@@ -63,5 +68,5 @@
   const COLOR_NAMES = ['白色', '黑色', '灰色', '淺灰色', '深灰色', '咖啡色', '橄欖綠',
     ...base, ...base.map(n => '淺' + n), ...base.map(n => '深' + n)];
 
-  window.WORDS = { COLORS, colorName, BRUSHES, FIXED, COLOR_NAMES };
+  window.WORDS = { COLORS, colorName, BRUSHES, BRUSH_GROUPS, FIXED, COLOR_NAMES };
 })();
