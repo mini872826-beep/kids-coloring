@@ -1,24 +1,40 @@
 # 試聽：講故事的聲音（只在 story-trial 分支跑，結果推回這個分支的 trial/story/）
+# 1. MiniMax 台灣腔念故事  2. 把 MiniMax、曉曉念的換成志工 1 的音色（Kaggle 上的 Seed-VC）
 name: 講故事聲音試聽
 on:
   push:
     branches: [story-trial]
-    paths: ['trial/story_trial.py', '.github/workflows/story-trial.yml']
+    paths: ['trial/story_trial.py', 'trial/kaggle_vc/**', '.github/workflows/story-trial.yml']
 permissions:
   contents: write
 jobs:
   trial:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install edge-tts
+      - run: pip install edge-tts "kaggle>=1.8"
       - env:
           MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
         run: python trial/story_trial.py
-      - run: |
+      - name: 先推上去（Kaggle 從 GitHub 抓）
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add trial/story && git commit -m "Story voice trial" && git push origin HEAD:story-trial
+          git add trial/story && git commit -m "Story voice trial: MiniMax Taiwan voices" && git push origin HEAD:story-trial || true
+      - name: 換成志工 1 的音色
+        env:
+          KAGGLE_USERNAME: pacokids
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          python3 -c "
+          import json, os
+          src = sorted(f for f in os.listdir('trial/story') if f.endswith('.mp3') and (f.startswith('xiaoxiao-') or f.startswith('mm-')))
+          json.dump([{'src': 'trial/story/' + f, 'out': 'vc1-' + f} for f in src], open('$RUNNER_TEMP/jobs.json', 'w'))
+          print(len(src), 'clips')"
+          trial/kaggle_vc/kaggle.sh "$RUNNER_TEMP/jobs.json" story-trial trial/story/vc
+          git add trial/story && git commit -m "Story voice trial: volunteer 1 timbre" && git push origin HEAD:story-trial || true
