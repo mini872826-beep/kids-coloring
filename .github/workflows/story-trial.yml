@@ -1,0 +1,24 @@
+# 試聽：講故事的聲音（只在 story-trial 分支跑，結果推回這個分支的 trial/story/）
+name: 講故事聲音試聽
+on:
+  push:
+    branches: [story-trial]
+    paths: ['trial/story_trial.py', '.github/workflows/story-trial.yml']
+permissions:
+  contents: write
+jobs:
+  trial:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install edge-tts
+      - env:
+          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
+        run: python trial/story_trial.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add trial/story && git commit -m "Story voice trial" && git push origin HEAD:story-trial
