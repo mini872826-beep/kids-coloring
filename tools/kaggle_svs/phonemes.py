@@ -28,9 +28,20 @@ def english(word, phoneset):
     return 'en_' + '-'.join(p for p in ph if 'en_' + p in phoneset)
 
 
+# 多音字：這些詞照這裡念（g2pM 有時會選錯，例如「數一數」的數要念 shu3、「蘿蔔」念 luo2 bo5）
+FIX = {'數一數': 'shu3 yi4 shu3', '數數': 'shu3 shu3', '數到': 'shu3 dao4', '數綿羊': 'shu3 mian2 yang2',
+       '蘿蔔': 'luo2 bo5', '長在': 'zhang3 zai4', '長大': 'zhang3 da4', '載著': 'zai4 zhe5'}
+
+
 def mandarin(chars, phoneset):
     simp = _t2s.convert(''.join(chars))
-    pys = _g2p_zh(simp, tone=True, char_split=False)
+    pys = list(_g2p_zh(simp, tone=True, char_split=False))
+    text = ''.join(chars)
+    for w, py in FIX.items():
+        k = text.find(w)
+        while k >= 0:
+            pys[k:k + len(w)] = py.split()
+            k = text.find(w, k + 1)
     out = []
     for ch, py in zip(chars, pys):
         p = 'zh_' + py.replace('ü', 'u:').replace('v', 'u:')
