@@ -34,7 +34,9 @@ import json, sys
 src = open('tools/kaggle_voice/run.py', encoding='utf-8').read()
 jobs = json.load(open(sys.argv[1], encoding='utf-8'))
 src = src.replace('__JOBS__', json.dumps(jobs, ensure_ascii=False)).replace('__BRANCH__', sys.argv[2])
-src = src.replace('__PROMPT_TEXT__', open('tools/voice/prompt.txt', encoding='utf-8').read().strip())
+prompts = {'v1': open('tools/voice/prompt.txt', encoding='utf-8').read().strip(),
+           'v2': open('tools/voice/prompt2.txt', encoding='utf-8').read().strip()}
+src = src.replace('__PROMPTS__', json.dumps(prompts, ensure_ascii=False))
 open('/tmp/kv/run.py', 'w', encoding='utf-8').write(src)
 PY
   cat > /tmp/kv/kernel-metadata.json <<META

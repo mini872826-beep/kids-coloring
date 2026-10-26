@@ -1,5 +1,6 @@
 // 列出 App 裡所有會念出來的句子（給 gen_voice.py 錄音用）
 // 用法：node tools/phrases.js > phrases.json
+//       node tools/phrases.js --story > stories.json   只列故事的句子（故事用志工 2 的聲音念）
 const fs = require('fs');
 const vm = require('vm');
 
@@ -9,6 +10,10 @@ for (const f of ['js/words.js', 'js/art.js', ...fs.readdirSync('js').filter(f =>
   vm.runInContext(fs.readFileSync(f, 'utf8'), ctx, { filename: f });
 }
 const { ART, BOOKS, SONGS, WORDS } = ctx.window;
+if (process.argv.includes('--story')) {
+  process.stdout.write(JSON.stringify([...new Set(BOOKS.flatMap(b => [b.title, ...b.pages.map(p => p.text)]))], null, 1));
+  process.exit(0);
+}
 
 const all = new Set([
   ...ART.CATEGORIES.map(c => c.name),
