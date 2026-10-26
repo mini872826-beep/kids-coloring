@@ -44,6 +44,12 @@ REDO = set(json.load(open('tools/voice/redo.json', encoding='utf-8'))) if os.pat
 # MiniMax 還沒錄到的句子，先用以前的 BreezyVoice 錄音或微軟曉臻頂著
 STORY = set(json.load(open(os.environ['MINIMAX_PHRASES'], encoding='utf-8'))) if os.environ.get('MINIMAX_PHRASES') else set()
 MM = json.load(open('tools/voice/minimax.json', encoding='utf-8'))
+# 故事的句子念慢一點（node tools/phrases.js --story），其他快一點
+TALES = set(json.load(open(os.environ['STORY_PHRASES'], encoding='utf-8'))) if os.environ.get('STORY_PHRASES') else set()
+
+
+def mm_speed(text):
+    return MM['speed'] if text in TALES else MM.get('speed_other', MM['speed'])
 
 
 def mm_fix(text):
@@ -52,7 +58,7 @@ def mm_fix(text):
 
 
 def mm_name(text):
-    key = f"minimax|{MM['voice_id']}|{MM['model']}|{MM['speed']}|loud|{text}"
+    key = f"minimax|{MM['voice_id']}|{MM['model']}|{mm_speed(text)}|loud|{text}"
     if mm_fix(text):   # 指定讀音的句子換檔名，才會重錄
         key += '|' + ','.join(mm_fix(text))
     return hashlib.sha1(key.encode('utf-8')).hexdigest()[:12] + '.mp3'

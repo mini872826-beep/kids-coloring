@@ -8,7 +8,7 @@ import numpy as np
 import soundfile as sf
 
 sys.path.insert(0, os.path.dirname(__file__))
-from gen_voice import MM, OUT, STORY, TRIM, mm_fix, mm_name   # noqa: E402
+from gen_voice import MM, OUT, STORY, TRIM, mm_fix, mm_name, mm_speed   # noqa: E402
 
 KEY = os.environ.get('MINIMAX_API_KEY', '').strip()
 HOST = 'https://api.minimax.io'
@@ -17,7 +17,7 @@ LOUD = -21.8     # 和志工 1 的旁白一樣大聲（dB）
 
 def say(text):
     body = {'model': MM['model'], 'text': text, 'stream': False,
-            'voice_setting': {'voice_id': MM['voice_id'], 'speed': MM['speed']},
+            'voice_setting': {'voice_id': MM['voice_id'], 'speed': mm_speed(text)},
             'audio_setting': {'format': 'mp3', 'sample_rate': 32000}}
     if mm_fix(text):   # 多音字：指定讀音（例如「數一數」念 ㄕㄨˇ ㄧˋ ㄕㄨˇ）
         fix = mm_fix(text)

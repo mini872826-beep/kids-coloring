@@ -29,5 +29,8 @@ for (let n = 0; n <= 1000; n++) WORDS.numberWords(n).forEach(w => all.add(w));
 WORDS.MATH_WORDS.forEach(w => all.add(w));
 
 // 全部中文旁白都用 MiniMax 台灣腔講故事大姊姊念（英文另外用英文的聲音）
-const out = process.argv.includes('--minimax') ? [...all].filter(t => /[\u4e00-\u9fff]/.test(t)) : [...all];
+// --story：故事的句子（念故事用比較慢的速度）
+const story = [...new Set(BOOKS.flatMap(b => [b.title, ...b.pages.map(p => p.text)]))];
+const out = process.argv.includes('--story') ? story
+  : process.argv.includes('--minimax') ? [...all].filter(t => /[\u4e00-\u9fff]/.test(t)) : [...all];
 process.stdout.write(JSON.stringify(out, null, 1));
