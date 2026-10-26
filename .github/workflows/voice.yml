@@ -30,9 +30,14 @@ jobs:
       - run: pip install edge-tts
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: node tools/phrases.js > "$RUNNER_TEMP/phrases.json"
-      # 故事的句子用志工 2 的聲音念
-      - run: node tools/phrases.js --story > "$RUNNER_TEMP/stories.json" && echo "STORY_PHRASES=$RUNNER_TEMP/stories.json" >> "$GITHUB_ENV"
-      # 中文旁白：Kaggle 免費 GPU 上用 BreezyVoice（故事志工 2、其他志工 1）錄還沒錄過的句子
+      # 故事、兒歌唐詩、畫畫的中文：MiniMax 台灣腔講故事大姊姊
+      - run: node tools/phrases.js --minimax > "$RUNNER_TEMP/minimax.json" && echo "MINIMAX_PHRASES=$RUNNER_TEMP/minimax.json" >> "$GITHUB_ENV"
+      - name: MiniMax 錄音
+        continue-on-error: true
+        env:
+          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
+        run: pip install -q numpy soundfile && python tools/minimax_voice.py
+      # 數學的中文：Kaggle 免費 GPU 上用 BreezyVoice（志工 1）錄還沒錄過的句子
       - run: python tools/gen_voice.py "$RUNNER_TEMP/phrases.json" --plan "$RUNNER_TEMP/jobs.json"
       - name: Kaggle 錄中文旁白
         continue-on-error: true

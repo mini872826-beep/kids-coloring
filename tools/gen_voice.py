@@ -1,10 +1,10 @@
-"""用 AI 聲音把每一句錄成 mp3（中文：BreezyVoice 模仿志工的聲音，在 Kaggle GPU 上錄——故事用志工 2，其他用志工 1；
+"""用 AI 聲音把每一句錄成 mp3（中文：BreezyVoice 模仿志工 1 的聲音，在 Kaggle GPU 上錄；故事用 MiniMax 台灣腔講故事大姊姊；
 英文：微軟 Ana。BreezyVoice 還沒錄到的中文句子，先用微軟曉臻頂著，下次再補），放在 audio/，並寫出 audio/index.json（句子 -> 檔名）。
 
 GitHub Actions 每次推上新內容會自動跑（.github/workflows/voice.yml），
 只會錄新增或改過的句子；刪掉的句子對應的 mp3 也會一起清掉。
-用法：STORY_PHRASES=stories.json python tools/gen_voice.py phrases.json
-（stories.json 由 node tools/phrases.js --story 產生，這些句子用志工 2 的聲音）
+用法：MINIMAX_PHRASES=minimax.json python tools/gen_voice.py phrases.json
+（minimax.json 由 node tools/phrases.js --minimax 產生，這些句子用 MiniMax 的聲音，tools/minimax_voice.py 錄）
 """
 import asyncio
 import hashlib
@@ -40,18 +40,21 @@ BREEZY = 'breezy-v1'   # 換聲音範本或改念法時換號碼，全部重錄
 REDO = set(json.load(open('tools/voice/redo.json', encoding='utf-8'))) if os.path.exists('tools/voice/redo.json') else set()
 
 
-# 講故事用志工 2（起伏比較多），其他旁白用志工 1。換誰念就換檔名，會自動重錄
-STORY = set(json.load(open(os.environ['STORY_PHRASES'], encoding='utf-8'))) if os.environ.get('STORY_PHRASES') else set()
+# 故事、兒歌唐詩、畫畫的中文用 MiniMax 的台灣腔講故事大姊姊（tools/minimax_voice.py 錄），數學用志工 1。
+# MiniMax 還沒錄到的句子，先用以前的 BreezyVoice 錄音或微軟曉臻頂著
+STORY = set(json.load(open(os.environ['MINIMAX_PHRASES'], encoding='utf-8'))) if os.environ.get('MINIMAX_PHRASES') else set()
+MM = json.load(open('tools/voice/minimax.json', encoding='utf-8'))
 
 
-def speaker(text):
-    return 'v2' if text in STORY else 'v1'
+def mm_name(text):
+    key = f"minimax|{MM['voice_id']}|{MM['model']}|{MM['speed']}|loud|{text}"
+    return hashlib.sha1(key.encode('utf-8')).hexdigest()[:12] + '.mp3'
 
 
-def breezy_name(text):
+def breezy_name(text, spk='v1'):
     tag = BREEZY + '-redo1' if text in REDO else BREEZY
-    if speaker(text) != 'v1':
-        tag += '-' + speaker(text) + '-loud'   # loud：音量調到和志工 1 一樣（志工 2 原本小聲很多）
+    if spk != 'v1':
+        tag += '-' + spk + '-loud'   # 以前故事用過志工 2（loud：音量調到和志工 1 一樣）
     return hashlib.sha1(f'{tag}|trim|{text}'.encode('utf-8')).hexdigest()[:12] + '.mp3'
 
 
@@ -93,15 +96,20 @@ async def main():
     os.makedirs(OUT, exist_ok=True)
     if len(sys.argv) > 2 and sys.argv[2] == '--plan':
         # 列出還沒有 BreezyVoice 錄音的中文句子，交給 tools/kaggle_voice/kaggle.sh 去錄
-        jobs = [[t, breezy_name(t), speaker(t)] for t in phrases
-                if not is_english(t) and not os.path.exists(os.path.join(OUT, breezy_name(t)))]
+        jobs = [[t, breezy_name(t), 'v1'] for t in phrases
+                if not is_english(t) and t not in STORY and not os.path.exists(os.path.join(OUT, breezy_name(t)))]
         json.dump(jobs, open(sys.argv[3], 'w', encoding='utf-8'), ensure_ascii=False)
         print(f'{len(jobs)} phrases need BreezyVoice')
         return
     index = {}
     for text in phrases:
-        if not is_english(text) and os.path.exists(os.path.join(OUT, breezy_name(text))):
-            index[text] = breezy_name(text)
+        if text in STORY and os.path.exists(os.path.join(OUT, mm_name(text))):
+            index[text] = mm_name(text)
+            continue
+        # MiniMax 還沒錄到的：用以前 BreezyVoice 的錄音（志工 1，或故事以前的志工 2）
+        old = [n for n in (breezy_name(text), breezy_name(text, 'v2')) if os.path.exists(os.path.join(OUT, n))]
+        if not is_english(text) and old:
+            index[text] = old[0]
             continue
         name = file_name(text)
         path = os.path.join(OUT, name)
@@ -121,4 +129,5 @@ async def main():
     print(f'{len(index)} / {len(phrases)} phrases have audio')
 
 
-asyncio.run(main())
+if __name__ == '__main__':
+    asyncio.run(main())
