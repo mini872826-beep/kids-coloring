@@ -46,8 +46,15 @@ STORY = set(json.load(open(os.environ['MINIMAX_PHRASES'], encoding='utf-8'))) if
 MM = json.load(open('tools/voice/minimax.json', encoding='utf-8'))
 
 
+def mm_fix(text):
+    """這句話裡要指定讀音的詞（tools/voice/minimax.json 的 pronounce），照 MiniMax 的格式：詞/(拼音)"""
+    return [f'{w}/{py}' for w, py in MM.get('pronounce', {}).items() if not w.startswith('_') and w in text]
+
+
 def mm_name(text):
     key = f"minimax|{MM['voice_id']}|{MM['model']}|{MM['speed']}|loud|{text}"
+    if mm_fix(text):   # 指定讀音的句子換檔名，才會重錄
+        key += '|' + ','.join(mm_fix(text))
     return hashlib.sha1(key.encode('utf-8')).hexdigest()[:12] + '.mp3'
 
 

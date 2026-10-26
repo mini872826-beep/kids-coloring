@@ -36,7 +36,7 @@ jobs:
         continue-on-error: true
         env:
           MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
-        run: pip install -q numpy soundfile && python tools/minimax_voice.py
+        run: pip install -q numpy soundfile opencc-python-reimplemented && python tools/minimax_voice.py
       # MiniMax 之外的中文（目前沒有）：Kaggle 免費 GPU 上用 BreezyVoice（志工 1）錄
       - run: python tools/gen_voice.py "$RUNNER_TEMP/phrases.json" --plan "$RUNNER_TEMP/jobs.json"
       - name: Kaggle 錄中文旁白

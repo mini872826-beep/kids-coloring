@@ -8,7 +8,7 @@ import numpy as np
 import soundfile as sf
 
 sys.path.insert(0, os.path.dirname(__file__))
-from gen_voice import MM, OUT, STORY, TRIM, mm_name   # noqa: E402
+from gen_voice import MM, OUT, STORY, TRIM, mm_fix, mm_name   # noqa: E402
 
 KEY = os.environ.get('MINIMAX_API_KEY', '').strip()
 HOST = 'https://api.minimax.io'
@@ -19,6 +19,14 @@ def say(text):
     body = {'model': MM['model'], 'text': text, 'stream': False,
             'voice_setting': {'voice_id': MM['voice_id'], 'speed': MM['speed']},
             'audio_setting': {'format': 'mp3', 'sample_rate': 32000}}
+    if mm_fix(text):   # 多音字：指定讀音（例如「數一數」念 ㄕㄨˇ ㄧˋ ㄕㄨˇ）
+        fix = mm_fix(text)
+        try:   # MiniMax 內部可能先轉成簡體再比對，簡體寫法也一起給
+            import opencc
+            fix += [f for f in (opencc.OpenCC('t2s').convert(x) for x in fix) if f not in fix]
+        except ImportError:
+            pass
+        body['pronunciation_dict'] = {'tone': fix}
     req = urllib.request.Request(HOST + '/v1/t2a_v2', data=json.dumps(body).encode(),
                                  headers={'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json'})
     res = json.loads(urllib.request.urlopen(req, timeout=120).read())
