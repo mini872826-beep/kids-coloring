@@ -412,14 +412,16 @@
   /* ---------------- 兒歌唐詩 ---------------- */
   let song = null, songToken = 0;
   // 兒歌有 AI 唱好的錄音（tools/sing.py 產生）就放錄音，沒有才用八音盒彈旋律
-  let SUNG = {}, VC = {};
-  fetch('audio/sing/index.json').then(r => r.ok ? r.json() : {}).then(j => { SUNG = j; }).catch(() => {});
-  // 自然歌聲版（tools/sing_vc.py）：旋律、節拍和上面完全一樣，只是把聲音換成自然的人聲
-  fetch('audio/sing-vc/index.json').then(r => r.ok ? r.json() : {}).then(j => { VC = j; }).catch(() => {});
-  // 這首歌要放哪個錄音：自然歌聲 > 合成的唱歌 > 沒有（八音盒）
+  let SUNG = {}, AI = {};
+  const index = url => fetch(url).then(r => r.ok ? r.json() : {}).catch(() => ({}));
+  // AI 歌手照歌譜唱的版本（tools/sing_svs.py）：時間軸和上面一樣，字幕照樣跟得上
+  // 兩份清單都抓到才開始放歌，不然剛打開 App 就點歌會先放到舊的版本
+  const songsReady = Promise.all([index('audio/sing/index.json'), index('audio/sing-svs/index.json')])
+    .then(([a, b]) => { SUNG = a; AI = b; });
+  // 這首歌要放哪個錄音：AI 歌手 > 合成的唱歌 > 沒有（八音盒）
   function track(id) {
-    const a = VC[id] || SUNG[id];
-    if (a) return { url: (VC[id] ? 'audio/sing-vc/' : 'audio/sing/') + a.file, times: a.times };
+    const a = AI[id] || SUNG[id];
+    if (a) return { url: (AI[id] ? 'audio/sing-svs/' : 'audio/sing/') + a.file, times: a.times };
     return null;
   }
   const singer = new Audio();
@@ -486,13 +488,15 @@
     $('lyrics').className = 'lyrics ' + sg.kind;
     $('lyrics').innerHTML = sg.lines.map((l, i) => `<li>${l}${sg.sub ? `<small>${sg.sub[i]}</small>` : ''}</li>`).join('');
     setPlaying(false);
-    const tr = track(sg.id);
-    if (tr) { singer.src = tr.url; singer.load(); }
+    songsReady.then(() => {
+      const tr = song === sg && track(sg.id);
+      if (tr) { singer.src = tr.url; singer.load(); }
+    });
     // 一打開就先把題目和前幾句的聲音抓好
     Voice.warm([sg.title, sg.author].filter(Boolean).concat(sg.lines.slice(0, 4)));
     // 點進來就開始：兒歌彈旋律，唐詩念出來
     const my = songToken;
-    setTimeout(() => { if (my === songToken && current === 'song' && song === sg) playSong(); }, 300);
+    setTimeout(() => songsReady.then(() => { if (my === songToken && current === 'song' && song === sg) playSong(); }), 300);
   }
   function stopSong() {
     songToken++;
