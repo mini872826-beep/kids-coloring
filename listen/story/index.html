@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>講故事聲音試聽</title>
+<style>
+  :root { --bg: #f4f8ff; --card: #fff; --ink: #1f2a44; --sub: #5b6785; --accent: #3a7bd5; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #111827; --card: #1f2937; --ink: #f3f4f6; --sub: #9ca3af; --accent: #7fb0ff; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 -apple-system, "PingFang TC", "Noto Sans TC", sans-serif; }
+  main { max-width: 640px; margin: 0 auto; padding: 20px 16px 48px; }
+  h1 { font-size: 24px; margin: 8px 0 4px; }
+  p.lead { color: var(--sub); margin: 0 0 20px; }
+  .card { background: var(--card); border-radius: 16px; padding: 14px 16px; margin: 0 0 14px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .card h2 { font-size: 18px; margin: 0 0 8px; }
+  .tag { display: inline-block; font-size: 13px; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 0 8px; margin-left: 6px; vertical-align: 2px; }
+  audio { width: 100%; }
+  .text { color: var(--sub); font-size: 15px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>講故事聲音試聽</h1>
+  <p class="lead">同樣念〈三隻小豬〉的幾句話，比較哪一個講故事最有起伏、最好聽。「＋志工 1 的聲音」是保留那個版本的講法，只把音色換成志工 1。</p>
+  <div class="card"><h2>① 現在的志工 1<span class="tag">App 目前</span></h2><audio controls preload="none" src="now.mp3"></audio><div class="text">只有前 3 句</div></div>
+  <div class="card"><h2>② 微軟曉曉 原本的聲音</h2><audio controls preload="none" src="xiaoxiao.mp3"></audio></div>
+  <div class="card"><h2>③ 曉曉的講法 ＋ 志工 1 的聲音</h2><audio controls preload="none" src="xiaoxiao-v1.mp3"></audio></div>
+  <div class="card"><h2>④ MiniMax 台灣腔講故事大姊姊 原本的聲音</h2><audio controls preload="none" src="design.mp3"></audio></div>
+  <div class="card"><h2>⑤ MiniMax 台灣腔的講法 ＋ 志工 1 的聲音</h2><audio controls preload="none" src="design-v1.mp3"></audio></div>
+  <div class="card"><h2>⑥ 同 ⑤，另一種換法</h2><audio controls preload="none" src="design-v1b.mp3"></audio></div>
+  <div class="card text">念的句子：三隻小豬／豬媽媽說：「孩子們長大了，去蓋自己的房子吧！」／豬大哥用稻草蓋房子，一下子就蓋好了。／大野狼來了！牠用力一吹，呼——稻草屋倒了！／豬小弟說：「別怕別怕，快躲進我的磚頭屋！」</div>
+</main>
+</body>
+</html>
