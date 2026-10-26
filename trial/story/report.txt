@@ -1,4 +1,10 @@
 xiaoxiao: ok
 xiaoyi: ok
 hsiaochen: ok
-minimax https://api.minimax.io speech-02-hd female-shaonv: {"status_code": 0, "status_msg": "success"}minimax: 332 system voices, Taiwan: 
+minimax https://api.minimax.io speech-02-hd female-shaonv: {"status_code": 0, "status_msg": "success"}minimax: 332 system voices, Taiwan: voice_design: {"status_code": 0, "status_msg": "success"}
+voice_design voice_id: ttv-voice-2026102621433626-ZQvXmqxj
+minimax ttv-voice-2026102621433626-ZQvXmqxj: done
+minimax Chinese (Mandarin)_Soft_Girl: done
+minimax Chinese (Mandarin)_Warm_Girl: done
+minimax Chinese (Mandarin)_Sweet_Lady: done
+minimax Chinese (Mandarin)_Crisp_Girl: done
