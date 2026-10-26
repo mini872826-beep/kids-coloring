@@ -269,9 +269,13 @@
       if (st.tries === 0) st.correct++;
       btn.classList.add('right');
       Sound.play('twinkle');
-      Voice.speak(['答對了，好棒！']);
       st.i++;
-      setTimeout(next, 1500);
+      // 等「答對了」念完才換下一題（念的長短不一定，不能用固定秒數，不然會被切掉）
+      const q = st.q;
+      let moved = false;
+      const go = () => { if (!moved && st.q === q) { moved = true; next(); } };
+      Voice.speak(['答對了，好棒！'], () => setTimeout(go, 400));
+      setTimeout(go, 6000);   // 萬一聲音沒放出來，也不會卡住
     } else {
       st.tries++;
       btn.disabled = true;
