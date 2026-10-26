@@ -63,6 +63,7 @@ def clean(text):
     s = re.sub(r'([，。！？、；,.!?;])[，。！？、；,.!?;\s]+', r'\1', s)
     s = s.strip('，、；,; ')
     return s
+LOUD = -21.8   # 旁白的音量（dB，和志工 1 平均一樣）
 TRIM = 'silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.04,areverse,silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.1,areverse'
 done = 0
 for job in jobs:
@@ -89,7 +90,7 @@ for job in jobs:
             x, fs = sf.read(wav)
             fr = int(fs * 0.05)
             e = np.array([np.sqrt((x[k:k + fr] ** 2).mean()) for k in range(0, max(1, len(x) - fr), fr)] or [0])
-            speech = (e > 0.03).sum() * 0.05
+            speech = (e > max(0.005, e.max() * 0.15)).sum() * 0.05   # 跟這句最大聲的地方比，小聲的志工也量得準
             lo, hi = 0.12 * n, 1.3 * n + 1.2
             miss = max(0, lo - speech, speech - hi)
             if best is None or miss < best[0]:
@@ -100,7 +101,13 @@ for job in jobs:
             log('retry', attempt + 1, text[:20], 'speech %.1fs (want %.1f-%.1f)' % (speech, lo, hi))
         if best[0] > 0 and best[0] > 0.5 * n:
             raise RuntimeError('no good take: off by %.1fs' % best[0])
-        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', '/kaggle/tmp/best.wav', '-af', TRIM, '-ar', '24000', '-ac', '1', '-b:a', '48k', out], check=True)
+        # 修掉頭尾靜音，音量調到一樣大（每個志工錄音的音量不同），再存成 mp3
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', '/kaggle/tmp/best.wav', '-af', TRIM, '-ar', '24000', '-ac', '1', '/kaggle/tmp/trim.wav'], check=True)
+        y, fs = sf.read('/kaggle/tmp/trim.wav')
+        y = y * 10 ** ((LOUD - 20 * np.log10(np.sqrt((y ** 2).mean()) + 1e-9)) / 20)
+        y = y / max(1, np.abs(y).max() / 0.89)
+        sf.write('/kaggle/tmp/trim.wav', y, fs)
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', '/kaggle/tmp/trim.wav', '-b:a', '48k', out], check=True)
         done += 1
         log('ok %d/%d %.1fs %s' % (done, len(jobs), time.time() - t, text[:20]))
     except Exception:

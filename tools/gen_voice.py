@@ -51,7 +51,7 @@ def speaker(text):
 def breezy_name(text):
     tag = BREEZY + '-redo1' if text in REDO else BREEZY
     if speaker(text) != 'v1':
-        tag += '-' + speaker(text)
+        tag += '-' + speaker(text) + '-loud'   # loud：音量調到和志工 1 一樣（志工 2 原本小聲很多）
     return hashlib.sha1(f'{tag}|trim|{text}'.encode('utf-8')).hexdigest()[:12] + '.mp3'
 
 
