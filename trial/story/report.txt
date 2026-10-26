@@ -1,4 +1,4 @@
 xiaoxiao: ok
 xiaoyi: ok
 hsiaochen: ok
-minimax https://api.minimax.io speech-02-hd female-shaonv: {"status_code": 0, "status_msg": "success"}
+minimax https://api.minimax.io speech-02-hd female-shaonv: {"status_code": 0, "status_msg": "success"}minimax: 332 system voices, Taiwan: 
