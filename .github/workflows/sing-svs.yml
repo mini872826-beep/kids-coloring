@@ -3,7 +3,7 @@ name: 兒歌 AI 歌手
 on:
   push:
     branches: [main]
-    paths: ['js/songs.js', 'tools/sing.py', 'tools/sing_svs.py', 'tools/kaggle_svs/**', '.github/workflows/sing-svs.yml']
+    paths: ['js/songs.js', 'tools/sing.py', 'tools/accomp.py', 'tools/sing_svs.py', 'tools/kaggle_svs/**', '.github/workflows/sing-svs.yml']
   workflow_dispatch:
     inputs:
       only:
@@ -27,17 +27,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      # ffmpeg 轉檔；fluidsynth＋FluidR3 GM 音色庫（MIT）用來彈伴奏
+      - run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg fluidsynth fluid-soundfont-gm
       - uses: actions/cache@v4
         with:
           path: .sing-cache
           key: sing-${{ hashFiles('js/songs.js') }}
           restore-keys: sing-
-      - run: pip install edge-tts "setuptools<80" pyworld soundfile numpy
+      - run: pip install edge-tts "setuptools<80" pyworld soundfile numpy mido
       - run: node tools/songs.js > "$RUNNER_TEMP/songs.json"
       # 歌詞和音符要一個字配一個音，對不上就在這裡報錯
       - run: python tools/check_songs.py "$RUNNER_TEMP/songs.json"
-      # 1. 照歌譜做伴奏和每句的時間（Kaggle 要從 GitHub 抓伴奏，所以先推上去）
+      # 1. 編伴奏、算出每句的時間（Kaggle 要從 GitHub 抓伴奏，所以先推上去）
       - run: python tools/sing.py "$RUNNER_TEMP/songs.json"
       - name: 推人聲檔
         run: |

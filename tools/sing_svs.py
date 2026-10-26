@@ -1,18 +1,19 @@
 """兒歌「AI 歌手照歌譜唱」：把每首歌的歌詞、音高、每個音多長交給 SoulX-Singer（Kaggle 免費 GPU），
 它照譜直接唱出自然的歌聲，再配上 tools/sing.py 做的八音盒伴奏。
-時間軸和 tools/sing.py 完全一樣（第一句 0.6 秒開始、每句中間空半拍），所以 audio/sing/index.json 的 times 可以直接亮字幕。
+時間軸和 tools/sing.py 一樣（都由 tools/accomp.py 決定），所以 audio/sing/index.json 的 times 可以直接亮字幕。
 輸出 audio/sing-svs/<id>-<hash>.mp3，index.json 記 {id: {file, times}}。
 用法：python tools/sing_svs.py songs.json --plan jobs.json [id,id]   列出還沒做的（交給 tools/kaggle_svs/kaggle.sh）
       python tools/sing_svs.py songs.json                           整理 index.json、刪掉舊檔
 """
-import hashlib, json, os, sys
+import hashlib, json, math, os, sys
 
 sys.path.insert(0, os.path.dirname(__file__))
-from sing import TEMPO, syllables, tokens   # noqa: E402  跟照譜唱用同一套斷字和速度
+import accomp                                # noqa: E402  伴奏和時間軸
+from sing import syllables, tokens            # noqa: E402  跟照譜唱用同一套斷字
 
 OUT = 'audio/sing-svs'
-VERSION = 'v1'
-SETTINGS = {'steps': 32, 'cfg': 3, 'vox_gain': 1.0, 'acc_gain': 0.3}
+VERSION = 'v2'
+SETTINGS = {'steps': 32, 'cfg': 3, 'vox_gain': 1.0, 'acc_gain': 0.85}
 
 
 def part(word, i, k):
@@ -28,31 +29,39 @@ def part(word, i, k):
 
 
 def segments(song):
-    """每一句一段：[(開始秒數, 字, 音高, 長度, 種類)]；種類 1 = 空白、2 = 新的字、3 = 同一個字拉到下一個音"""
+    """每一句一段：字、音高、長度、種類（1 = 空白、2 = 新的字、3 = 同一個字拉到下一個音）。
+    時間軸和 tools/accomp.py 的伴奏一樣；句子之間沒空檔時，最後一個音收短一點讓歌手換氣。"""
     english = song['kind'] == 'en-song'
     lines = song['sing'] or song['lines']
-    beat = 60 / (song['bpm'] * TEMPO)
+    beat, starts, secs, _ = accomp.timeline(song)
     allm = [m for line in song['notes'] for m, _ in line]
     shift = -12 * round((sum(allm) / len(allm) - 67) / 12)   # 和 sing.py 一樣移到 G4 附近
-    gap = beat * .5
-    pad = min(.3, gap * .6)
-    t, segs = .6, []
-    for line, notes in zip(lines, song['notes']):
+    ends = secs[1:] + [secs[-1] + math.ceil(sum(b for _, b in song['notes'][-1]) / accomp.meter(song) - 1e-6)
+                       * accomp.meter(song) * beat]
+    segs, prev_end = [], 0
+    for line, notes, t, slot_end in zip(lines, song['notes'], secs, ends):
+        pad = max(.02, min(.25, t - prev_end))      # 前面留一點空白，但不要蓋到上一句
         words, pitch, dur, kind = ['<SP>'], [0], [pad], [1]
         last = None
         for tok, (m, b) in zip(tokens(line, english), notes):
             word, first = (last, False) if tok is None else part(*tok)
             last = word
             words.append(word)
-            kind.append(2 if first else 3)
             pitch.append(m + shift)
-            dur.append(round(b * beat, 3))
-        tail = round(max(.02, min(.1, gap - pad - .02)), 3)
+            dur.append(b * beat)
+            kind.append(2 if first else 3)
+        # 下一句前面也要留 0.25 秒空白，再加上換氣的時間：不夠就讓最後一個音收短一點
+        room = slot_end - .25 - (t + sum(dur[1:]))
+        breath = min(.3 * beat, dur[-1] * .3)
+        if room < breath:
+            dur[-1] -= min(breath - room, dur[-1] * .6)
+        tail = max(.02, slot_end - .25 - (t + sum(dur[1:])))
         words.append('<SP>'); pitch.append(0); dur.append(tail); kind.append(1)
         start = t - pad
+        dur = [round(x, 3) for x in dur]
         segs.append({'time': [round(start * 1000), round((start + sum(dur)) * 1000)],
-                     'words': words, 'pitch': pitch, 'dur': [round(x, 3) for x in dur], 'type': kind})
-        t += sum(b for _, b in notes) * beat + gap
+                     'words': words, 'pitch': pitch, 'dur': dur, 'type': kind})
+        prev_end = start + sum(dur)
     return segs
 
 
@@ -89,6 +98,10 @@ def main():
     for f in os.listdir(OUT):
         if f.endswith('.mp3') and f not in keep:
             os.remove(os.path.join(OUT, f))
+    stems = os.path.join(OUT, 'stems')            # 只有人聲的版本（檔名一樣）
+    for f in os.listdir(stems) if os.path.isdir(stems) else []:
+        if f not in keep:
+            os.remove(os.path.join(stems, f))
     with open(os.path.join(OUT, 'index.json'), 'w', encoding='utf-8') as fp:
         json.dump(index, fp, ensure_ascii=False, indent=0, sort_keys=True)
     print(len(index), 'songs sung by the AI singer')

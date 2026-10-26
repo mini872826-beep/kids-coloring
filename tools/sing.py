@@ -1,7 +1,7 @@
 """把兒歌「唱」出來：AI 聲音一個字一個字錄，再用 WORLD 聲碼器把音高、長度改成歌譜上的音符，
-配上八音盒伴奏，輸出 audio/sing/<id>-<hash>.mp3，並在 audio/sing/index.json 記下每一句開始的時間。
+配上 tools/accomp.py 編的伴奏，輸出 audio/sing/<id>-<hash>.mp3，並在 audio/sing/index.json 記下每一句開始的時間。
 
-GitHub Actions 跑（.github/workflows/voice.yml）；歌詞或旋律沒變就不會重做。
+GitHub Actions 跑（.github/workflows/sing-svs.yml）；歌詞或旋律沒變就不會重做。
 用法：python tools/sing.py songs.json        （songs.json 由 node tools/songs.js 產生）
 """
 import asyncio
@@ -16,14 +16,16 @@ import numpy as np
 import pyworld as pw
 import soundfile as sf
 
+import accomp
+
 FS = 24000
 FRAME = 5.0                      # WORLD 一格 5 毫秒
 VOICE = 'zh-TW-HsiaoYuNeural'
 VOICE_EN = 'en-US-AnaNeural'
 OUT = 'audio/sing'
 CACHE = '.sing-cache'            # 每個字的錄音（不進 git，Actions 用 cache 存）
-VERSION = 'v2'                   # 改了合成方法就換號碼，全部重唱
-TEMPO = .85                      # 唱的比八音盒慢一點，字才聽得清楚
+VERSION = 'v3'                   # 改了合成方法就換號碼，全部重唱
+TEMPO = accomp.TEMPO              # 唱的比原本慢一點，字才聽得清楚
 
 CJK = re.compile(r'[一-鿿]')
 
@@ -197,14 +199,6 @@ def hold_feat(feat):
     return f0[a:b], sp[a:b], ap[a:b]
 
 
-# ---------------- 八音盒伴奏 ----------------
-def box_note(hz, dur, vol):
-    t = np.arange(int(FS * (dur + .05))) / FS
-    env = np.exp(-t * 4.0 / max(dur, .2)) * np.minimum(1, t / .01)
-    tone = sum(a * np.sin(2 * np.pi * hz * k * t) for k, a in ((1, 1), (2, .25), (3.01, .08)))
-    return vol * env * tone
-
-
 def midi_hz(m):
     return 440 * 2 ** ((m - 69) / 12)
 
@@ -223,12 +217,11 @@ def render(song):
     paths = asyncio.run(_record_all(texts, voice))
     feats = {t: analyse(load(paths[t])) for t in texts}
 
-    t = .6
-    total = t + sum(b for line in song['notes'] for _, b in line) * beat + len(song['notes']) * beat * .5 + 2
-    vox = np.zeros(int(total * FS))
-    acc = np.zeros_like(vox)
+    # 時間軸和伴奏都由 tools/accomp.py 決定：每句佔滿整數小節，前面有兩小節前奏
+    _, _, starts, total = accomp.timeline(song)
+    vox = np.zeros(int((total + 1) * FS))
     times = []
-    for line, notes in zip(plan, song['notes']):
+    for line, notes, t in zip(plan, song['notes'], starts):
         times.append(round(t, 2))
         last, prev_hz = None, None
         for (e, m, b), (om, _) in zip(line, notes):
@@ -247,18 +240,15 @@ def render(song):
             s = int(t * FS)
             v = max(0, s - pre)
             vox[v:v + len(y)] += y[:len(vox) - v]
-            nb = box_note(midi_hz(m), max(.5, dur * 1.8), .18)
-            acc[s:s + len(nb)] += nb[:len(acc) - s]
             t += dur
-        t += beat * .5
+    acc = accomp.render(song)
+    vox = vox[:len(acc)]
     vox /= max(1e-6, np.abs(vox).max())
-    acc /= max(1e-6, np.abs(acc).max())
-    end = int(min(len(vox), (t + 1) * FS))
-    return vox[:end], acc[:end], times
+    return vox, acc, times
 
 
 def mixdown(vox, acc):
-    mix = vox * .85 + acc * .3
+    mix = vox * .85 + acc * .45
     return mix / (max(1e-6, np.abs(mix).max()) / .9)
 
 
@@ -278,7 +268,8 @@ async def _record_all(texts, voice):
 
 
 def song_key(song):
-    raw = json.dumps([VERSION, TEMPO, song['bpm'], song['lines'], song['notes'], song['sing']], ensure_ascii=False)
+    raw = json.dumps([VERSION, TEMPO, song['bpm'], song['lines'], song['notes'], song['sing'], song.get('meter'),
+                      hashlib.sha1(open(accomp.__file__, 'rb').read()).hexdigest()], ensure_ascii=False)
     return hashlib.sha1(raw.encode()).hexdigest()[:10]
 
 

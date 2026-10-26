@@ -1,5 +1,5 @@
 """在 Kaggle 免費 GPU 上用 SoulX-Singer（Apache-2.0）照歌譜唱兒歌：每個字唱哪個音、唱多久都照我們的譜，
-所以字、旋律、字幕一定對得上。再配上 tools/sing.py 做的八音盒伴奏。
+所以字、旋律、字幕一定對得上。再配上 tools/accomp.py 編的伴奏。
 JOBS 由 tools/kaggle_svs/kaggle.sh 填進來（tools/sing_svs.py --plan 產生），做好的 mp3 放在 /kaggle/working/out/。"""
 import json, os, subprocess, time, traceback
 
@@ -98,10 +98,13 @@ for job in jobs:
             total[s:s + n] += y
         vox = '/kaggle/tmp/vox.wav'
         sf.write(vox, total, SR)
+        # 人聲另外存一份，之後只改伴奏就不用再請 GPU 重唱
+        os.makedirs('/kaggle/working/out/stems', exist_ok=True)
+        run(['ffmpeg', '-v', 'error', '-y', '-i', vox, '-b:a', '96k', '/kaggle/working/out/stems/' + job['file']])
         # 人聲放前面、八音盒輕輕在後面，最後限幅避免爆音
         run(['ffmpeg', '-v', 'error', '-y', '-i', vox, '-i', get(job['acc']), '-filter_complex',
              f"[0:a]loudnorm=I=-17:TP=-2,aresample=44100,volume={job['vox_gain']}[a];"
-             f"[1:a]loudnorm=I=-27:TP=-2,aresample=44100,volume={job['acc_gain']}[b];"
+             f"[1:a]loudnorm=I=-23:TP=-2,aresample=44100,volume={job['acc_gain']}[b];"
              '[a][b]amix=inputs=2:normalize=0:duration=longest,alimiter=limit=0.9',
              '-ac', '1', '-b:a', '96k', out])
         log('ok', job['file'], '%.0fs' % (time.time() - t))

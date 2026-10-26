@@ -38,7 +38,7 @@
       ],
     },
     {
-      id: 'birthday', kind: 'song', title: '生日快樂', bpm: 110,
+      id: 'birthday', kind: 'song', title: '生日快樂', bpm: 110, meter: 3,
       art: svg(scene.day() + scene.grass() + scene.cake(400, 320) + scene.stars()),
       lines: ['祝你生日快樂', '祝你生日快樂', '祝你生日快樂', '祝你生日快樂'],
       // 唱的時候：~ = 前一個字拉長（第三句的「樂」唱兩個音）
@@ -387,7 +387,7 @@
       ],
     },
     {
-      id: 'en-birthday', kind: 'en-song', title: 'Happy Birthday', bpm: 110,
+      id: 'en-birthday', kind: 'en-song', title: 'Happy Birthday', bpm: 110, meter: 3,
       art: svg(scene.day() + scene.grass() + scene.cake(400, 320) + scene.stars()),
       lines: ['Happy birthday to you', 'Happy birthday to you', 'Happy birthday, dear friend', 'Happy birthday to you'],
       sing: ['Happy birthday to you', 'Happy birthday to you', 'Happy birthday, dear friend ~', 'Happy birthday to you'],

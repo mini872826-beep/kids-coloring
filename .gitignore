@@ -1,1 +1,3 @@
 .sing-cache/
+__pycache__/
+.claude/
