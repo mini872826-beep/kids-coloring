@@ -1,6 +1,6 @@
 $ nvidia-smi -L
-GPU 0: Tesla T4 (UUID: GPU-6dcd95d8-60e6-64ac-dc14-dd203b970f68)
-GPU 1: Tesla T4 (UUID: GPU-205288b0-d6de-692a-718f-d62b3014036d)
+GPU 0: Tesla T4 (UUID: GPU-64e5cb96-a9e2-ed6d-d9e8-ae772da75ea8)
+GPU 1: Tesla T4 (UUID: GPU-d817ffa4-fb4d-cf89-24d7-227f09a1900b)
  
 $ git clone --depth 1 https://github.com/Plachtaa/seed-vc /kaggle/tmp/seed-vc
  Cloning into '/kaggle/tmp/seed-vc'...
@@ -17,45 +17,45 @@ Activate with: source /kaggle/tmp/venv/bin/activate
 
 $ uv pip install --python /kaggle/tmp/venv/bin/python torch==2.4.0 torchaudio==2.4.0 torchvision==0.19.0 --index-url https://download.pytorch.org/whl/cu121
  Using Python 3.10.22 environment at: /kaggle/tmp/venv
-Resolved 26 packages in 1.01s
-Downloading numpy (16.0MiB)
+Resolved 26 packages in 617ms
 Downloading nvidia-cudnn-cu12 (634.0MiB)
-Downloading nvidia-cublas-cu12 (391.6MiB)
-Downloading nvidia-nvjitlink-cu12 (37.9MiB)
-Downloading torch (762.1MiB)
-Downloading torchvision (6.7MiB)
-Downloading sympy (6.0MiB)
-Downloading pillow (6.6MiB)
 Downloading networkx (1.6MiB)
-Downloading triton (199.7MiB)
+Downloading sympy (6.0MiB)
+Downloading numpy (16.0MiB)
+Downloading pillow (6.6MiB)
+Downloading torchvision (6.7MiB)
+Downloading torch (762.1MiB)
+Downloading nvidia-cublas-cu12 (391.6MiB)
 Downloading torchaudio (3.2MiB)
+Downloading triton (199.7MiB)
 Downloading nvidia-cusolver-cu12 (118.4MiB)
+ Downloaded torchaudio
 Downloading nvidia-cusparse-cu12 (186.9MiB)
 Downloading nvidia-cuda-nvrtc-cu12 (22.6MiB)
+ Downloaded torchvision
+Downloading nvidia-nvjitlink-cu12 (37.9MiB)
 Downloading nvidia-cufft-cu12 (116.0MiB)
 Downloading nvidia-curand-cu12 (53.9MiB)
 Downloading nvidia-cuda-cupti-cu12 (13.5MiB)
 Downloading nvidia-nccl-cu12 (168.1MiB)
- Downloaded torchaudio
- Downloaded torchvision
  Downloaded networkx
  Downloaded nvidia-cuda-cupti-cu12
- Downloaded nvidia-nvjitlink-cu12
  Downloaded sympy
  Downloaded pillow
  Downloaded nvidia-cuda-nvrtc-cu12
+ Downloaded nvidia-nvjitlink-cu12
  Downloaded numpy
  Downloaded nvidia-curand-cu12
  Downloaded nvidia-cusolver-cu12
  Downloaded nvidia-cufft-cu12
+ Downloaded nvidia-cusparse-cu12
  Downloaded nvidia-nccl-cu12
  Downloaded triton
- Downloaded nvidia-cusparse-cu12
  Downloaded nvidia-cublas-cu12
  Downloaded nvidia-cudnn-cu12
  Downloaded torch
-Prepared 26 packages in 28.53s
-Installed 26 packages in 275ms
+Prepared 26 packages in 28.83s
+Installed 26 packages in 274ms
  + filelock==3.32.3
  + fsspec==2026.7.0
  + jinja2==3.1.6
@@ -85,7 +85,7 @@ Installed 26 packages in 275ms
 
 $ uv pip install --python /kaggle/tmp/venv/bin/python -r /kaggle/tmp/req.txt torch==2.4.0 torchaudio==2.4.0 --extra-index-url https://download.pytorch.org/whl/cu121 --index-strategy unsafe-best-match
   1 package in 18ms
-Installed 118 packages in 242ms
+Installed 118 packages in 236ms
  + absl-py==2.5.1
  + accelerate==1.15.0
  + aliyun-python-sdk-core==2.16.1
@@ -206,13 +206,68 @@ Installed 118 packages in 242ms
  + webrtcvad==2.0.10
  + werkzeug==3.1.9
 
-setup 52s
-loaded 45s
+setup 56s
+loaded 53s
+ok vc1-mm-Crisp_Girl-0.mp3
+ok vc1-mm-Crisp_Girl-1.mp3
+ok vc1-mm-Crisp_Girl-2.mp3
+ok vc1-mm-Crisp_Girl-3.mp3
+ok vc1-mm-Crisp_Girl-4.mp3
+ok vc1-mm-Soft_Girl-0.mp3
+ok vc1-mm-Soft_Girl-1.mp3
+ok vc1-mm-Soft_Girl-2.mp3
+ok vc1-mm-Soft_Girl-3.mp3
+ok vc1-mm-Soft_Girl-4.mp3
+ok vc1-mm-Sweet_Lady-0.mp3
+ok vc1-mm-Sweet_Lady-1.mp3
+ok vc1-mm-Sweet_Lady-2.mp3
+ok vc1-mm-Sweet_Lady-3.mp3
+ok vc1-mm-Sweet_Lady-4.mp3
+ok vc1-mm-Warm_Girl-0.mp3
+ok vc1-mm-Warm_Girl-1.mp3
+ok vc1-mm-Warm_Girl-2.mp3
+ok vc1-mm-Warm_Girl-3.mp3
+ok vc1-mm-Warm_Girl-4.mp3
+ok vc1-mm-design-0.mp3
+ok vc1-mm-design-1.mp3
+ok vc1-mm-design-2.mp3
+ok vc1-mm-design-3.mp3
+ok vc1-mm-design-4.mp3
 ok vc1-xiaoxiao-0.mp3
 ok vc1-xiaoxiao-1.mp3
 ok vc1-xiaoxiao-2.mp3
 ok vc1-xiaoxiao-3.mp3
 ok vc1-xiaoxiao-4.mp3
+ok vcf0-mm-Crisp_Girl-0.mp3
+ok vcf0-mm-Crisp_Girl-1.mp3
+ok vcf0-mm-Crisp_Girl-2.mp3
+ok vcf0-mm-Crisp_Girl-3.mp3
+ok vcf0-mm-Crisp_Girl-4.mp3
+ok vcf0-mm-Soft_Girl-0.mp3
+ok vcf0-mm-Soft_Girl-1.mp3
+ok vcf0-mm-Soft_Girl-2.mp3
+ok vcf0-mm-Soft_Girl-3.mp3
+ok vcf0-mm-Soft_Girl-4.mp3
+ok vcf0-mm-Sweet_Lady-0.mp3
+ok vcf0-mm-Sweet_Lady-1.mp3
+ok vcf0-mm-Sweet_Lady-2.mp3
+ok vcf0-mm-Sweet_Lady-3.mp3
+ok vcf0-mm-Sweet_Lady-4.mp3
+ok vcf0-mm-Warm_Girl-0.mp3
+ok vcf0-mm-Warm_Girl-1.mp3
+ok vcf0-mm-Warm_Girl-2.mp3
+ok vcf0-mm-Warm_Girl-3.mp3
+ok vcf0-mm-Warm_Girl-4.mp3
+ok vcf0-mm-design-0.mp3
+ok vcf0-mm-design-1.mp3
+ok vcf0-mm-design-2.mp3
+ok vcf0-mm-design-3.mp3
+ok vcf0-mm-design-4.mp3
+ok vcf0-xiaoxiao-0.mp3
+ok vcf0-xiaoxiao-1.mp3
+ok vcf0-xiaoxiao-2.mp3
+ok vcf0-xiaoxiao-3.mp3
+ok vcf0-xiaoxiao-4.mp3
 gen done
 gen exit 0
 done
