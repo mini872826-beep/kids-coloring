@@ -1,4 +1,4 @@
-"""故事、兒歌唐詩、畫畫的中文句子用 MiniMax 的「台灣腔講故事大姊姊」念（tools/voice/minimax.json），錄好放在 audio/。
+"""中文句子用 MiniMax 的「台灣腔講故事大姊姊」念（tools/voice/minimax.json），錄好放在 audio/。
 只錄還沒錄過的句子；頭尾靜音修掉、音量調到和其他旁白一樣。檔名由 tools/gen_voice.py 的 mm_name() 決定。
 用法：MINIMAX_API_KEY=... MINIMAX_PHRASES=minimax.json python tools/minimax_voice.py
 """

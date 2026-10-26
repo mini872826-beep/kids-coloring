@@ -1,4 +1,4 @@
-"""用 AI 聲音把每一句錄成 mp3（中文：BreezyVoice 模仿志工 1 的聲音，在 Kaggle GPU 上錄；故事用 MiniMax 台灣腔講故事大姊姊；
+"""用 AI 聲音把每一句錄成 mp3（中文：BreezyVoice 模仿志工 1 的聲音，在 Kaggle GPU 上錄；中文旁白都改用 MiniMax 台灣腔講故事大姊姊，BreezyVoice 只補 MiniMax 沒錄到的；
 英文：微軟 Ana。BreezyVoice 還沒錄到的中文句子，先用微軟曉臻頂著，下次再補），放在 audio/，並寫出 audio/index.json（句子 -> 檔名）。
 
 GitHub Actions 每次推上新內容會自動跑（.github/workflows/voice.yml），
@@ -40,7 +40,7 @@ BREEZY = 'breezy-v1'   # 換聲音範本或改念法時換號碼，全部重錄
 REDO = set(json.load(open('tools/voice/redo.json', encoding='utf-8'))) if os.path.exists('tools/voice/redo.json') else set()
 
 
-# 故事、兒歌唐詩、畫畫的中文用 MiniMax 的台灣腔講故事大姊姊（tools/minimax_voice.py 錄），數學用志工 1。
+# 中文旁白都用 MiniMax 的台灣腔講故事大姊姊（tools/minimax_voice.py 錄）。
 # MiniMax 還沒錄到的句子，先用以前的 BreezyVoice 錄音或微軟曉臻頂著
 STORY = set(json.load(open(os.environ['MINIMAX_PHRASES'], encoding='utf-8'))) if os.environ.get('MINIMAX_PHRASES') else set()
 MM = json.load(open('tools/voice/minimax.json', encoding='utf-8'))

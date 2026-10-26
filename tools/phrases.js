@@ -1,6 +1,6 @@
 // 列出 App 裡所有會念出來的句子（給 gen_voice.py 錄音用）
 // 用法：node tools/phrases.js > phrases.json
-//       node tools/phrases.js --minimax > minimax.json   用 MiniMax 台灣腔講故事大姊姊念的句子（數學和英文以外的中文）
+//       node tools/phrases.js --minimax > minimax.json   用 MiniMax 台灣腔講故事大姊姊念的句子（全部中文）
 const fs = require('fs');
 const vm = require('vm');
 
@@ -24,15 +24,10 @@ const all = new Set([
   ...WORDS.FIXED,
 ]);
 for (let i = 1; i <= 60; i++) all.add(`白紙 ${i}`);
-// 故事、兒歌唐詩、畫畫：MiniMax 台灣腔講故事大姊姊念（英文另外用英文的聲音）
-const minimax = [...all].filter(t => /[\u4e00-\u9fff]/.test(t));
 // 學數學：0~1000 的數字片段、題目用語
 for (let n = 0; n <= 1000; n++) WORDS.numberWords(n).forEach(w => all.add(w));
 WORDS.MATH_WORDS.forEach(w => all.add(w));
 
-const math = new Set();
-for (let n = 0; n <= 1000; n++) WORDS.numberWords(n).forEach(w => math.add(w));
-WORDS.MATH_WORDS.forEach(w => math.add(w));
-// 數學題是很多片段接起來念的，維持同一個聲音（志工 1），所以數學也會用到的詞不換
-const out = process.argv.includes('--minimax') ? minimax.filter(t => !math.has(t)) : [...all];
+// 全部中文旁白都用 MiniMax 台灣腔講故事大姊姊念（英文另外用英文的聲音）
+const out = process.argv.includes('--minimax') ? [...all].filter(t => /[\u4e00-\u9fff]/.test(t)) : [...all];
 process.stdout.write(JSON.stringify(out, null, 1));
