@@ -44,14 +44,14 @@ jobs:
           if [ "$(python3 -c 'import json,sys;print(len(json.load(open(sys.argv[1]))))' "$RUNNER_TEMP/jobs.json")" = 0 ]; then echo "都錄好了"; exit 0; fi
           pip install -q "kaggle>=1.8"
           tools/kaggle_voice/kaggle.sh "$RUNNER_TEMP/jobs.json" main audio
-          rm -f audio/kaggle-voice-log.txt
+          mv audio/kaggle-voice-log.txt tools/kaggle_voice/last-log.txt 2>/dev/null || true
       - run: python tools/gen_voice.py "$RUNNER_TEMP/phrases.json"
       # 兒歌唱歌的部分在 sing-vc.yml（照歌譜唱好再換成自然歌聲）
       - name: 推回 main
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add audio
+          git add audio tools/kaggle_voice/last-log.txt 2>/dev/null || git add audio
           if git diff --cached --quiet; then echo "沒有新的配音"; exit 0; fi
           git commit -m "Update voice audio"
           git pull --rebase origin main

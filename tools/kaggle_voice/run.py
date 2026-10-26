@@ -48,7 +48,7 @@ class S(_S):
 ort.InferenceSession = S
 from single_inference import single_inference, CustomCosyVoice
 from g2pw import G2PWConverter
-import torch, numpy as np, soundfile as sf
+import shutil, torch, numpy as np, soundfile as sf
 jobs = json.load(open('/kaggle/tmp/jobs.json', encoding='utf-8'))
 prompts = json.load(open('/kaggle/tmp/prompts.json', encoding='utf-8'))
 t0 = time.time()
@@ -80,25 +80,32 @@ for job in jobs:
         n = len(re.findall(r'[\u4e00-\u9fff]', say)) or 1
         if n <= 4 and not re.search(r'[。！？!?]$', say):
             say += '。'   # 很短的詞單獨念容易失敗，當成一句話念
-        # 念完檢查有沒有真的出聲、長度合不合理，不好就換個亂數再念（最多 3 次）
+        # 念完檢查有沒有真的出聲、長度合不合理，不好就換個亂數再念（最多 3 次）。
+        # 每個志工講話快慢不一樣（志工 2 比較慢），所以合理的長度放寬一點；3 次都不理想就留最接近的那次
+        best = None
         for attempt in range(3):
             torch.manual_seed(1234 + attempt * 77)
             single_inference(f'/kaggle/tmp/prompt-{spk}.wav', say, wav, cosy, conv, prompts[spk])
-            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-af', TRIM, '-ar', '24000', '-ac', '1', '-b:a', '48k', out], check=True)
             x, fs = sf.read(wav)
             fr = int(fs * 0.05)
             e = np.array([np.sqrt((x[k:k + fr] ** 2).mean()) for k in range(0, max(1, len(x) - fr), fr)] or [0])
             speech = (e > 0.03).sum() * 0.05
-            if speech >= 0.12 * n and speech <= 0.9 * n + 0.8:
+            lo, hi = 0.12 * n, 1.3 * n + 1.2
+            miss = max(0, lo - speech, speech - hi)
+            if best is None or miss < best[0]:
+                best = (miss, attempt)
+                shutil.copy(wav, '/kaggle/tmp/best.wav')
+            if miss == 0:
                 break
-            log('retry', attempt + 1, text[:20], 'speech %.1fs' % speech)
-        else:
-            os.remove(out)
-            raise RuntimeError('no good take')
+            log('retry', attempt + 1, text[:20], 'speech %.1fs (want %.1f-%.1f)' % (speech, lo, hi))
+        if best[0] > 0 and best[0] > 0.5 * n:
+            raise RuntimeError('no good take: off by %.1fs' % best[0])
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', '/kaggle/tmp/best.wav', '-af', TRIM, '-ar', '24000', '-ac', '1', '-b:a', '48k', out], check=True)
         done += 1
         log('ok %d/%d %.1fs %s' % (done, len(jobs), time.time() - t, text[:20]))
     except Exception:
-        log('FAIL', text, traceback.format_exc()[-800:])
+        tb = traceback.format_exc()
+        log('FAIL', text, '|', tb.strip().splitlines()[-1][:200], '\n', tb[-800:])   # 錯誤原因放同一行，GitHub 的紀錄才看得到
 log('gen done', done)
 '''
 
