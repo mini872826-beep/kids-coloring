@@ -1,0 +1,206 @@
+$ nvidia-smi -L
+GPU 0: Tesla T4 (UUID: GPU-60e68214-4c91-1b2e-9b42-0d120ac5fd60)
+GPU 1: Tesla T4 (UUID: GPU-a42990e7-64c5-7a00-25ff-b4c5d4353f70)
+ 
+$ git clone --depth 1 https://github.com/Soul-AILab/SoulX-Singer /kaggle/tmp/sx
+ Cloning into '/kaggle/tmp/sx'...
+
+$ pip install -q uv
+ 
+$ uv venv -p 3.10 /kaggle/tmp/venv
+ warning: The `--system` flag has no effect, `uv venv` always ignores virtual environments when finding a Python interpreter; did you mean `--no-managed-python`?
+Downloading cpython-3.10.22-linux-x86_64-gnu (download) (28.0MiB)
+ Downloaded cpython-3.10.22-linux-x86_64-gnu (download)
+Using CPython 3.10.22
+Creating virtual environment at: /kaggle/tmp/venv
+Activate with: source /kaggle/tmp/venv/bin/activate
+
+$ uv pip install --python /kaggle/tmp/venv/bin/python torch==2.2.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121
+ Using Python 3.10.22 environment at: /kaggle/tmp/venv
+Resolved 23 packages in 602ms
+Downloading triton (160.1MiB)
+Downloading torch (722.2MiB)
+Downloading torchaudio (3.2MiB)
+Downloading nvidia-cusparse-cu12 (186.9MiB)
+Downloading nvidia-cusolver-cu12 (118.4MiB)
+Downloading nvidia-cublas-cu12 (391.6MiB)
+Downloading nvidia-nvjitlink-cu12 (37.9MiB)
+Downloading nvidia-cuda-nvrtc-cu12 (22.6MiB)
+Downloading nvidia-cufft-cu12 (116.0MiB)
+Downloading nvidia-cuda-cupti-cu12 (13.5MiB)
+Downloading nvidia-curand-cu12 (53.9MiB)
+Downloading nvidia-nccl-cu12 (151.3MiB)
+Downloading nvidia-cudnn-cu12 (697.8MiB)
+Downloading networkx (1.6MiB)
+Downloading sympy (6.0MiB)
+ Downloaded torchaudio
+ Downloaded networkx
+ Downloaded sympy
+ Downloaded nvidia-cuda-cupti-cu12
+ Downloaded nvidia-cuda-nvrtc-cu12
+ Downloaded nvidia-nvjitlink-cu12
+ Downloaded nvidia-cusolver-cu12
+ Downloaded nvidia-curand-cu12
+ Downloaded triton
+ Downloaded nvidia-cufft-cu12
+ Downloaded nvidia-cusparse-cu12
+ Downloaded nvidia-nccl-cu12
+ Downloaded nvidia-cublas-cu12
+ Downloaded torch
+ Downloaded nvidia-cudnn-cu12
+Prepared 23 packages in 32.12s
+Installed 23 packages in 218ms
+ + filelock==3.32.3
+ + fsspec==2026.7.0
+ + jinja2==3.1.6
+ + markupsafe==3.0.3
+ + mpmath==1.3.0
+ + networkx==3.4.2
+ + nvidia-cublas-cu12==12.1.3.1
+ + nvidia-cuda-cupti-cu12==12.1.105
+ + nvidia-cuda-nvrtc-cu12==12.1.105
+ + nvidia-cuda-runtime-cu12==12.1.105
+ + nvidia-cudnn-cu12==8.9.2.26
+ + nvidia-cufft-cu12==11.0.2.54
+ + nvidia-curand-cu12==10.3.2.106
+ + nvidia-cusolver-cu12==11.4.5.107
+ + nvidia-cusparse-cu12==12.1.0.106
+ + nvidia-nccl-cu12==2.19.3
+ + nvidia-nvjitlink-cu12==12.9.86
+ + nvidia-nvtx-cu12==12.1.105
+ + sympy==1.14.0
+ + torch==2.2.0+cu121
+ + torchaudio==2.2.0+cu121
+ + triton==2.2.0
+ + typing-extensions==4.16.0
+
+$ uv pip install --python /kaggle/tmp/venv/bin/python torch==2.2.0 torchaudio==2.2.0 accelerate==1.11.0 einops==0.8.2 librosa==0.11.0 "numpy<2" omegaconf==2.3.0 scipy==1.15.3 soundfile==0.13.1 tqdm transformers==4.41.2 huggingface_hub g2pM g2p_en nltk opencc-python-reimplemented --extra-index-url https://download.pytorch.org/whl/cu121 --index-strategy unsafe-best-match
+ Using Python 3.10.22 environment at: /kaggle/tmp/venv
+Resolved 72 packages in 1.52s
+   Building distance==0.1.3
+   Building antlr4-python3-runtime==4.9.3
+Downloading numpy (17.4MiB)
+Downloading hf-xet (4.0MiB)
+Downloading scikit-learn (9.2MiB)
+Downloading llvmlite (56.9MiB)
+Downloading tokenizers (3.4MiB)
+Downloading g2pm (1.6MiB)
+Downloading nltk (1.6MiB)
+Downloading g2p-en (3.0MiB)
+Downloading scipy (35.9MiB)
+Downloading transformers (8.7MiB)
+Downloading numba (3.7MiB)
+Downloading soundfile (1.3MiB)
+ Downloaded soundfile
+      Built distance==0.1.3
+ Downloaded nltk
+ Downloaded g2pm
+      Built antlr4-python3-runtime==4.9.3
+ Downloaded hf-xet
+ Downloaded g2p-en
+ Downloaded tokenizers
+ Downloaded numba
+ Downloaded scikit-learn
+ Downloaded transformers
+ Downloaded numpy
+ Downloaded scipy
+ Downloaded llvmlite
+Prepared 49 packages in 1.70s
+Installed 49 packages in 75ms
+ + accelerate==1.11.0
+ + antlr4-python3-runtime==4.9.3
+ + audioread==3.1.0
+ + certifi==2026.10.23
+ + cffi==2.1.1
+ + charset-normalizer==3.5.2
+ + click==8.5.0
+ + cloudpickle==3.1.2
+ + decorator==5.3.1
+ + defusedxml==0.7.1
+ + distance==0.1.3
+ + einops==0.8.2
+ + g2p-en==2.1.0
+ + g2pm==0.1.2.5
+ + hf-xet==1.7.0
+ + huggingface-hub==0.36.2
+ + idna==3.20
+ + inflect==7.6.0
+ + jaraco-functools==4.6.0
+ + joblib==1.6.0
+ + lazy-loader==0.6
+ + librosa==0.11.0
+ + llvmlite==0.50.0
+ + more-itertools==11.1.0
+ + msgpack==1.2.3
+ + nltk==3.10.4
+ + numba==0.68.0
+ + numpy==1.26.4
+ + omegaconf==2.3.0
+ + opencc-python-reimplemented==0.1.7
+ + packaging==26.3
+ + platformdirs==4.12.4
+ + pooch==1.9.0
+ + psutil==7.2.2
+ + pycparser==3.11
+ + pyyaml==6.0.3
+ + regex==2026.9.29
+ + requests==2.34.2
+ + safetensors==0.8.0
+ + scikit-learn==1.7.2
+ + scipy==1.15.3
+ + soundfile==0.13.1
+ + soxr==1.1.0
+ + threadpoolctl==3.7.0
+ + tokenizers==0.19.1
+ + tqdm==4.70.1
+ + transformers==4.41.2
+ + typeguard==4.6.0
+ + urllib3==2.8.0
+
+$ /kaggle/tmp/venv/bin/python -c "from huggingface_hub import snapshot_download as d; d('Soul-AILab/SoulX-Singer', local_dir='pretrained_models/SoulX-Singer')"
+ 
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]
+Fetching 7 files:  29%|██▊       | 2/7 [00:00<00:00, 14.68it/s]
+Fetching 7 files:  57%|█████▋    | 4/7 [00:00<00:00,  8.30it/s]
+Fetching 7 files:  71%|███████▏  | 5/7 [00:20<00:08,  4.00s/it]
+Fetching 7 files:  86%|████████▌ | 6/7 [00:26<00:04,  4.40s/it]
+Fetching 7 files: 100%|██████████| 7/7 [00:26<00:00,  3.78s/it]
+
+setup 71s
+loaded 15s
+ok little-star-dd6ece4e.mp3 71s
+ok two-tigers-62cc779a.mp3 47s
+ok birthday-aba04a9f.mp3 45s
+ok old-farm-0fc08fa6.mp3 85s
+ok pull-carrot-269913ca.mp3 46s
+ok mom-dad-2a1da401.mp3 53s
+ok sheep-home-d9719a7f.mp3 52s
+ok tricycle-bc7886a8.mp3 44s
+ok london-bridge-5234f44f.mp3 46s
+ok brush-song-10a88113.mp3 51s
+ok wash-song-e66a7a25.mp3 41s
+ok number-song-d2891c27.mp3 75s
+ok color-song-fa271029.mp3 41s
+ok goodnight-song-6035a467.mp3 89s
+ok animal-sounds-8da24123.mp3 70s
+ok vehicle-song-46d9c495.mp3 43s
+ok rain-song-f8a9ae9b.mp3 40s
+ok en-twinkle-3420030e.mp3 59s
+ok en-abc-29a77f49.mp3 59s
+ok en-baa-6e2a838f.mp3 39s
+ok en-row-af6283c5.mp3 31s
+ok en-mary-bd3317d2.mp3 36s
+ok en-london-08e84ea2.mp3 36s
+ok en-farm-2ad7ea1f.mp3 65s
+ok en-john-8d492d53.mp3 39s
+ok en-humpty-f1eb284c.mp3 35s
+ok en-hickory-9423861a.mp3 33s
+ok en-rain-a825da0a.mp3 29s
+ok en-spider-6c1179d7.mp3 41s
+ok en-ducks-41002170.mp3 35s
+ok en-happy-cf3b1d25.mp3 37s
+ok en-birthday-49d23ad4.mp3 33s
+ok en-jack-29a3571a.mp3 32s
+gen done
+gen exit 0
+done
