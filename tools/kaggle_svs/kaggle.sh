@@ -61,7 +61,7 @@ for i in $(seq 1 600); do
 done
 kaggle kernels output "$KID" -p /tmp/kx-out/ >/dev/null || true
 cp /tmp/kx-out/log.txt "$DEST/kaggle-svs-log.txt" 2>/dev/null
-grep -E "^ok |FAIL|EXCEPTION|setup|loaded|gen done|^ref" /tmp/kx-out/log.txt | cut -c1-300 | tail -40
+grep -E "^ok |FAIL|EXCEPTION|setup|loaded|gen done|^heard" /tmp/kx-out/log.txt | cut -c1-500 | tail -80
 cp /tmp/kx-out/out/*.mp3 "$DEST"/ 2>/dev/null
 mkdir -p "$DEST/stems" && cp /tmp/kx-out/out/stems/*.mp3 "$DEST/stems"/ 2>/dev/null
 ls "$DEST" | wc -l

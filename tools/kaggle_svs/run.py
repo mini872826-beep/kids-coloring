@@ -71,7 +71,18 @@ SR = config.audio.sample_rate
 prompts = {}
 for lang, name in (('Mandarin', 'zh_prompt'), ('English', 'en_prompt')):
     meta = json.load(open(f'example/audio/{name}.json', encoding='utf-8'))[0]
-    prompts[lang] = dp.process(meta, f'example/audio/{name}.mp3')
+    # 範本的標記只對應錄音裡 time 那一段（英文範本是 5.2～10.3 秒），先剪出那段再給模型，
+    # 不然聲音和歌詞對不上，學到的發音就會怪怪的
+    a, b = meta['time']
+    cut = f'/kaggle/tmp/{name}.wav'
+    run(['ffmpeg', '-v', 'error', '-y', '-ss', str(a / 1000), '-t', str((b - a) / 1000), '-i', f'example/audio/{name}.mp3', cut])
+    prompts[lang] = dp.process(meta, cut)
+try:   # 只是用來檢查，載不起來也照樣唱
+    import whisper
+    asr = whisper.load_model('small', device='cuda')
+except Exception as e:
+    asr = None
+    log('whisper not loaded', str(e)[:200])
 log('loaded %.0fs' % (time.time() - t))
 for job in jobs:
     out = '/kaggle/working/out/' + job['file']
@@ -108,6 +119,13 @@ for job in jobs:
              '[a][b]amix=inputs=2:normalize=0:duration=longest,alimiter=limit=0.9',
              '-ac', '1', '-b:a', '96k', out])
         log('ok', job['file'], '%.0fs' % (time.time() - t))
+        try:
+            if asr is None:
+                raise RuntimeError('no whisper')
+            heard = asr.transcribe(vox, language='en' if job['lang'] == 'English' else 'zh', fp16=False)['text'].strip()
+            log('heard', job['id'], '|', heard[:400])
+        except Exception as e:
+            log('heard', job['id'], '| (whisper failed)', str(e)[:200])
     except Exception:
         log('FAILED', job['file'], traceback.format_exc()[-1500:])
 log('gen done')
@@ -123,7 +141,7 @@ try:
     sh(f'uv pip install --python {VENV} torch==2.2.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121')
     sh(f'uv pip install --python {VENV} torch==2.2.0 torchaudio==2.2.0 accelerate==1.11.0 einops==0.8.2 librosa==0.11.0 '
        '"numpy<2" omegaconf==2.3.0 scipy==1.15.3 soundfile==0.13.1 tqdm transformers==4.41.2 huggingface_hub '
-       'g2pM g2p_en nltk opencc-python-reimplemented '
+       'g2pM g2p_en nltk opencc-python-reimplemented openai-whisper '
        '--extra-index-url https://download.pytorch.org/whl/cu121 --index-strategy unsafe-best-match')
     sh(f'{VENV} -c "from huggingface_hub import snapshot_download as d; d(\'Soul-AILab/SoulX-Singer\', local_dir=\'pretrained_models/SoulX-Singer\')"', cwd=SX)
     json.dump(JOBS, open('/kaggle/tmp/jobs.json', 'w', encoding='utf-8'), ensure_ascii=False)

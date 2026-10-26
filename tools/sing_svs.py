@@ -12,7 +12,7 @@ import accomp                                # noqa: E402  伴奏和時間軸
 from sing import syllables, tokens            # noqa: E402  跟照譜唱用同一套斷字
 
 OUT = 'audio/sing-svs'
-VERSION = 'v2'
+VERSION = 'v3'   # v3：範本錄音剪到標記的那段（英文唱得比較清楚）
 SETTINGS = {'steps': 32, 'cfg': 3, 'vox_gain': 1.0, 'acc_gain': 0.85}
 
 
