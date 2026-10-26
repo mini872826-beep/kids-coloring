@@ -20,7 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 340
     steps:
+      # 排隊等的時候前一輪可能已經推了新的錄音：一律從最新的 main 開始，才不會重錄、推的時候打架
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 20
