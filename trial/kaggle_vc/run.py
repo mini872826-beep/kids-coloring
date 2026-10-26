@@ -47,11 +47,16 @@ ref = '/kaggle/tmp/ref.wav'
 urllib.request.urlretrieve(raw + 'tools/voice/prompt.wav', '/kaggle/tmp/ref0.wav')
 run(['ffmpeg', '-v', 'error', '-y', '-i', '/kaggle/tmp/ref0.wav', '-ar', '22050', '-ac', '1', ref])
 import inference
+# 兩種模式：plain = 說話版（音高重新生成）、f0 = 完整照抄原本的音高曲線，只把整體音高移到志工 1 的音域
 args = SimpleNamespace(f0_condition=False, auto_f0_adjust=False, semi_tone_shift=0, checkpoint=None, config=None,
                        fp16=False, length_adjust=1.0, diffusion_steps=30, inference_cfg_rate=0.7, output='', source='', target='')
 t = time.time()
-models = inference.load_models(args)
-inference.load_models = lambda a: models
+real_load = inference.load_models
+models = {}
+for f0 in sorted({bool(j.get('f0')) for j in jobs}):
+    args.f0_condition = f0
+    models[f0] = real_load(args)
+inference.load_models = lambda a: models[bool(a.f0_condition)]
 log('loaded %.0fs' % (time.time() - t))
 for job in jobs:
     out = '/kaggle/working/out/' + job['out']
@@ -61,6 +66,11 @@ for job in jobs:
         run(['ffmpeg', '-v', 'error', '-y', '-i', '/kaggle/tmp/src.mp3', '-ar', '22050', '-ac', '1', src])
         odir = '/kaggle/tmp/vc'
         shutil.rmtree(odir, ignore_errors=True)
+        f0 = bool(job.get('f0'))
+        args.f0_condition, args.auto_f0_adjust = f0, f0
+        sr = 44100 if f0 else 22050
+        run(['ffmpeg', '-v', 'error', '-y', '-i', '/kaggle/tmp/src.mp3', '-ar', str(sr), '-ac', '1', src])
+        run(['ffmpeg', '-v', 'error', '-y', '-i', '/kaggle/tmp/ref0.wav', '-ar', str(sr), '-ac', '1', ref])
         args.source, args.target, args.output = src, ref, odir
         inference.main(args)
         vc = glob.glob(odir + '/*.wav')[0]

@@ -34,7 +34,8 @@ jobs:
           python3 -c "
           import json, os
           src = sorted(f for f in os.listdir('trial/story') if f.endswith('.mp3') and (f.startswith('xiaoxiao-') or f.startswith('mm-')))
-          json.dump([{'src': 'trial/story/' + f, 'out': 'vc1-' + f} for f in src], open('$RUNNER_TEMP/jobs.json', 'w'))
+          jobs = [{'src': 'trial/story/' + f, 'out': 'vc1-' + f} for f in src] + [{'src': 'trial/story/' + f, 'out': 'vcf0-' + f, 'f0': True} for f in src]
+          json.dump(jobs, open('$RUNNER_TEMP/jobs.json', 'w'))
           print(len(src), 'clips')"
           trial/kaggle_vc/kaggle.sh "$RUNNER_TEMP/jobs.json" story-trial trial/story/vc
           git add trial/story && git commit -m "Story voice trial: volunteer 1 timbre" && git push origin HEAD:story-trial || true
