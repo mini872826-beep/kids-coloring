@@ -34,11 +34,11 @@
     <div id="homeBar" class="home-bar">
      <div class="bar-row">
       <nav class="tabs">
-        <button class="tab" data-tab="paint">🖍️ 塗顏色</button>
-        <button class="tab" data-tab="story">📖 聽故事</button>
-        <button class="tab" data-tab="song">🎵 兒歌唐詩</button>
-        <button class="tab" data-tab="math">🔢 學數學</button>
-        <button class="tab" data-tab="english">🔤 學英文</button>
+        <button class="tab" data-tab="paint" style="--c:#ff8a5c;--cd:#e8590c"><span class="tab-ic">🖍️</span><span class="tab-lbl">塗顏色</span></button>
+        <button class="tab" data-tab="story" style="--c:#9775fa;--cd:#6741d9"><span class="tab-ic">📖</span><span class="tab-lbl">聽故事</span></button>
+        <button class="tab" data-tab="song" style="--c:#f06595;--cd:#c2255c"><span class="tab-ic">🎵</span><span class="tab-lbl">兒歌唐詩</span></button>
+        <button class="tab" data-tab="math" style="--c:#40c057;--cd:#2b8a3e"><span class="tab-ic">🔢</span><span class="tab-lbl">學數學</span></button>
+        <button class="tab" data-tab="english" style="--c:#339af0;--cd:#1971c2"><span class="tab-ic">🔤</span><span class="tab-lbl">學英文</span></button>
       </nav>
       <button id="musicBtn" class="music-btn" aria-label="背景音樂">🎵</button>
       <button id="installBtn" class="pill" hidden>⬇️ 安裝</button>
@@ -54,6 +54,7 @@
   <section id="paint" class="screen" hidden>
     <div id="board" class="board">
       <div class="board-top">
+        <button id="paintHome" class="round" aria-label="回首頁"><svg viewBox="0 0 48 48"><path d="M8 24 L24 9 L40 24" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 22 L13 39 Q13 41 15 41 L21 41 L21 31 L27 31 L27 41 L33 41 Q35 41 35 39 L35 22" fill="currentColor"/></svg></button>
         <button id="nameChip" class="name-chip" aria-label="念名字"></button>
         <div id="progress" class="progress" hidden><span><i></i></span><b></b></div>
       </div>
@@ -63,6 +64,9 @@
         <canvas id="cLines"></canvas>
       </div>
     </div>
+
+    <!-- 常用顏色：一直擺在旁邊，點一下就換色，不用打開大調色盤 -->
+    <div id="quick" class="quick" aria-label="常用顏色"></div>
 
     <aside class="toolbar">
       <div class="pair">
@@ -176,8 +180,8 @@
         <div id="mathStars" class="stars"></div>
         <p id="mathScore"></p>
         <div class="modal-actions">
-          <button id="mathAgain" class="pill big">🔁 再玩一次</button>
-          <button id="mathBack" class="pill big">🏠 回首頁</button>
+          <button id="mathAgain" class="pill big blue-pill">🔁 再玩一次</button>
+          <button id="mathBack" class="pill big green-pill">🏠 回首頁</button>
         </div>
       </div>
     </div>
@@ -189,8 +193,8 @@
       <div class="stars">⭐⭐⭐</div>
       <h2>太棒啦，讀完啦！</h2>
       <div class="done-actions">
-        <button id="againBtn" class="pill big">🔁 再讀一遍</button>
-        <button id="backBtn" class="pill big">🏠 回首頁</button>
+        <button id="againBtn" class="pill big blue-pill">🔁 再讀一遍</button>
+        <button id="backBtn" class="pill big green-pill">🏠 回首頁</button>
       </div>
     </div>
   </section>

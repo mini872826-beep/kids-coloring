@@ -285,6 +285,13 @@
     go('#/');
   });
 
+  // 左上角的小房子：先把畫存好，再回首頁（和 ✔ 一樣不會弄丟作品）
+  $('paintHome').addEventListener('click', async () => {
+    Sound.play('click');
+    await window.Painter.save();
+    go('#/');
+  });
+
   /* ---------------- 講故事 ---------------- */
   let book = null, pageIdx = 0, auto = false, sayTitle = false;
 

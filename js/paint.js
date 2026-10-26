@@ -308,6 +308,8 @@
   })();
 
   const { COLORS, colorName, BRUSHES, BRUSH_GROUPS, PATTERNS, SHAPES } = window.WORDS;
+  // 一直擺在畫旁邊的常用顏色（像一盒蠟筆），點一下就換，不用打開大調色盤
+  const QUICK = ['#ff1f1f', '#ff9d1f', '#ffee00', '#33c41f', '#29b6f6', '#2962ff', '#7b1fd6', '#f06ad8', '#6b2e10', '#111111'];
 
   /* ---------------- 本地保存（IndexedDB，作品不會上傳到任何地方） ---------------- */
   const Store = (() => {
@@ -1081,6 +1083,8 @@
     $('undoBtn').disabled = !state.undo.length;
     $('insideBtn').classList.toggle('on', state.inside);
     $('insideBtn').innerHTML = `<span class="sw"><i></i></span>不畫出線外`;
+    $('quick').innerHTML = QUICK.map(c =>
+      `<button class="qc${c === state.color && state.tool !== 'eraser' ? ' on' : ''}" data-c="${c}" style="--qc:${c}" aria-label="${colorName(c)}"></button>`).join('');
     $('recent').innerHTML = state.recent.map(c =>
       `<button data-c="${c}" style="background:${c}" aria-label="${colorName(c)}"></button>`).join('');
 
@@ -1132,6 +1136,14 @@
     if (!b) return;
     Sound.play('pop');
     Voice.say(colorName(b.dataset.c));
+    setColor(b.dataset.c);
+  });
+  $('quick').addEventListener('click', e => {
+    const b = e.target.closest('.qc');
+    if (!b) return;
+    Sound.play('pop');
+    Voice.say(colorName(b.dataset.c));
+    showPop(null);
     setColor(b.dataset.c);
   });
   $('insideBtn').addEventListener('click', () => {

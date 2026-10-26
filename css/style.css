@@ -7,7 +7,11 @@
   --card: #ffffff;
   --shadow: 0 6px 0 rgba(61, 47, 31, 0.18);
   --radius: 26px;
-  --bar: 132px;
+  --bar: 148px;
+  --quick: 84px;
+  --round: 64px;
+  --round-big: 84px;
+  --title-ink: #24476b;
   font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
 }
 
@@ -88,9 +92,9 @@ button {
   gap: 12px;
   padding: 0 max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left));
 }
-.bar-row .tabs { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.bar-row .tabs { flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .bar-row .tabs::-webkit-scrollbar { display: none; }
-.bar-row .tabs > * { flex: none; }
+.bar-row > :not(.tabs) { flex: none; }
 
 .logo {
   margin: 0;
@@ -118,29 +122,49 @@ button {
 .logo span:nth-child(6) { --k: #ff5fa2; animation-delay: 1s; transform: rotate(6deg); }
 @keyframes bob { 50% { translate: 0 -6px; } }
 
-/* 塗顏色／聽故事：一個白色膠囊裡的兩個按鈕 */
+/* 五個大分頁：每個都有自己的顏色和大圖示，看圖就知道是什麼 */
 .tabs {
   display: flex;
-  gap: 4px;
-  padding: 5px;
-  border-radius: 999px;
-  background: #fff;
-  box-shadow: 0 6px 0 rgba(0, 0, 0, .12);
+  gap: 10px;
+  padding: 4px 2px 10px;
 }
 .tab {
-  padding: 10px 18px;
-  border-radius: 999px;
+  flex: 1 1 0;
+  min-width: 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 6px 0 rgba(0, 60, 110, .16);
   font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
   font-weight: 700;
-  font-size: 20px;
-  color: #8a6d3b;
+  font-size: 19px;
+  color: var(--cd);
   white-space: nowrap;
-  transition: background .2s, color .2s;
+  transition: background .2s, color .2s, transform .15s, box-shadow .15s;
 }
-.tab:active { transform: scale(.95); }
-.tab.on { background: #ffc94d; color: #3d2f1f; box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .12); }
+.tab-ic {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  background: color-mix(in srgb, var(--c) 22%, #fff);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .08);
+  transition: transform .2s;
+}
+.tab-lbl { line-height: 1.15; }
+.tab:active { transform: translateY(4px) scale(.96); box-shadow: 0 2px 0 rgba(0, 60, 110, .16); }
+.tab.on { background: var(--c); color: #fff; box-shadow: 0 6px 0 var(--cd); text-shadow: 0 2px 0 rgba(0, 0, 0, .15); }
+.tab.on .tab-ic { background: #fff; transform: scale(1.06) rotate(-6deg); }
 
 .music-btn {
+  flex: none;
+  align-self: center;
   width: 58px;
   height: 58px;
   border-radius: 50%;
@@ -179,13 +203,14 @@ button {
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, .8);
   animation: popIn2 .25s ease;
 }
-.sub-row .cat { font-size: 18px; padding: 4px 14px 4px 4px; }
+.sub-row .cat { font-size: 18px; padding: 4px 14px 4px 4px; min-height: 48px; }
 .sub-row .cat-icon { width: 36px; height: 36px; font-size: 20px; }
 .cat {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 16px 5px 5px;
+  min-height: 56px;
+  padding: 5px 18px 5px 5px;
   border-radius: 999px;
   background: #fff;
   box-shadow: 0 5px 0 rgba(0, 0, 0, .12);
@@ -196,8 +221,8 @@ button {
   transition: transform .15s, background .15s;
 }
 .cat-icon {
-  width: 40px;
-  height: 40px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: var(--c);
   display: grid;
@@ -345,8 +370,13 @@ button {
   font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
   font-weight: 700;
   font-size: 26px;
-  padding: 14px 28px;
+  min-height: 64px;
+  padding: 14px 30px;
 }
+.pill.blue-pill { background: #4dabf7; color: #fff; box-shadow: 0 5px 0 #1c7ed6; text-shadow: 0 2px 0 rgba(0, 0, 0, .15); }
+.pill.blue-pill:active { box-shadow: 0 1px 0 #1c7ed6; }
+.pill.green-pill { background: #51cf66; color: #fff; box-shadow: 0 5px 0 #2f9e44; text-shadow: 0 2px 0 rgba(0, 0, 0, .15); }
+.pill.green-pill:active { box-shadow: 0 1px 0 #2f9e44; }
 
 /* ================= 塗色 ================= */
 #paint {
@@ -463,10 +493,39 @@ button {
   font-size: 20px;
 }
 .name-chip:active { transform: scale(.94); }
+.board-top .round { width: 60px; height: 60px; }
+.name-chip { min-height: 52px; min-width: 0; }
+
+/* 常用顏色：像一盒蠟筆擺在畫的旁邊，不會蓋住圖 */
+.quick {
+  flex: none;
+  width: var(--quick);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: max(14px, env(safe-area-inset-top)) 0 max(14px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.quick::-webkit-scrollbar { display: none; }
+.qc {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, rgba(255, 255, 255, .55) 0 14%, transparent 15%), var(--qc);
+  border: 4px solid #fff;
+  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, .18), 0 4px 0 rgba(0, 40, 80, .25);
+  transition: transform .15s, box-shadow .15s;
+}
+.qc:active { transform: scale(.86); }
+.qc.on { transform: scale(1.14); box-shadow: inset 0 -5px 0 rgba(0, 0, 0, .18), 0 0 0 4px #ffb300, 0 4px 10px rgba(0, 40, 80, .3); }
 
 .sq {
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: 14px;
   font-size: 28px;
   font-weight: 900;
@@ -514,7 +573,7 @@ button {
 .pop {
   position: absolute;
   z-index: 6;
-  right: calc(var(--bar) + env(safe-area-inset-right) + 18px);
+  right: calc(var(--bar) + var(--quick) + env(safe-area-inset-right) + 8px);
   top: 50%;
   transform: translateY(-50%);
   background: #f7faff;
@@ -730,8 +789,18 @@ button {
 
 /* 豎著拿平板/手機：工具欄移到下面 */
 @media (orientation: portrait) {
-  :root { --bar: 132px; }
+  :root { --bar: 142px; --quick: 84px; }
   #paint { flex-direction: column; }
+  .quick {
+    width: auto;
+    height: var(--quick);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 10px;
+    padding: 8px max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left));
+    overflow: visible;
+  }
   .board { padding: max(64px, calc(env(safe-area-inset-top) + 56px)) 12px 12px; }
   .toolbar {
     width: auto;
@@ -745,11 +814,11 @@ button {
     box-shadow: inset 0 6px 10px rgba(120, 80, 20, .18);
     padding: 10px max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
   }
-  .pair { flex-direction: column; gap: 6px; }
+  .pair { flex-direction: column; gap: 8px; }
   .tools { flex-direction: row; gap: 18px; }
-  .lbl { font-size: 14px; }
+  .lbl { font-size: 15px; }
   .recent { display: none; }
-  .sq { width: 44px; height: 44px; font-size: 22px; }
+  .sq { width: 56px; height: 56px; font-size: 24px; }
   .bigbtn { width: 80px; height: 80px; }
   .dot { width: 58px; height: 58px; }
   .pop {
@@ -758,7 +827,7 @@ button {
     bottom: calc(var(--bar) + env(safe-area-inset-bottom) + 14px);
     transform: translateX(50%);
     max-width: calc(100% - 16px);
-    max-height: calc(100% - var(--bar) - 40px);
+    max-height: calc(100% - var(--bar) - 90px);
     animation: none;
   }
   .pop-arrow {
@@ -788,10 +857,11 @@ button {
 .obj.gone { opacity: .3; position: relative; }
 .obj.gone::after { content: "✕"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 40px; font-weight: 900; color: #e03131; }
 .op { font-size: 48px; font-weight: 900; color: var(--cd); }
-.math-q { font-family: "Chiron GoRound TC", "PingFang TC", sans-serif; font-weight: 900; font-size: clamp(40px, 8vw, 84px); color: #3d2f1f; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.math-q { font-family: "Chiron GoRound TC", "PingFang TC", sans-serif; font-weight: 900; font-size: clamp(30px, 7vw, 76px); line-height: 1.25; text-align: center; text-wrap: balance; color: #3d2f1f; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
 .math-choices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; width: min(100%, 760px); }
 .choice {
-  padding: 18px 8px;
+  min-height: 84px;
+  padding: 16px 8px;
   border-radius: 24px;
   background: #fff;
   border: 5px solid var(--c, #4dabf7);
@@ -813,17 +883,22 @@ button {
 #mathSay { color: #fff; background: #4dabf7; }
 .tier-title {
   grid-column: 1 / -1;
-  margin: 8px 4px -6px;
+  justify-self: start;
+  margin: 8px 0 -4px;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .85);
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 12px;
+  gap: 4px 12px;
   font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
   font-weight: 900;
-  font-size: 26px;
-  color: #fff;
-  text-shadow: 0 3px 0 rgba(0, 60, 110, .25);
+  font-size: 24px;
+  color: var(--title-ink);
+  box-shadow: 0 4px 0 rgba(0, 60, 110, .12);
 }
-.tier-title small { font-size: 16px; font-weight: 700; opacity: .9; }
+.tier-title small { font-size: 15px; font-weight: 700; color: #4a6a88; }
 .math-card .learn {
   position: absolute !important;
   inset: 8px auto auto 8px !important;
@@ -894,7 +969,7 @@ button {
   font-size: 24px;
 }
 .chip-sep { width: 3px; height: 34px; border-radius: 2px; background: rgba(255, 255, 255, .8); margin: 0 4px; }
-.song-sub { font-size: 15px; font-weight: 700; color: #fff; opacity: .9; }
+.song-sub { font-size: 15px; font-weight: 700; color: #3f6f99; }
 
 /* 歌詞：一句一行，唱到哪句就亮哪句 */
 .lyrics {
@@ -907,15 +982,18 @@ button {
   gap: 8px;
   font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
   font-weight: 700;
-  font-size: clamp(22px, 3.4vw, 32px);
+  font-size: clamp(22px, 4vw, 36px);
   overflow-y: auto;
 }
-.lyrics li { padding: 4px 16px; border-radius: 16px; color: #6b7c8a; transition: background .25s, color .25s, transform .25s; transform-origin: left center; }
-.lyrics li.on { background: #fff3bf; color: #3d2f1f; transform: scale(1.06); }
+.lyrics { align-items: center; text-align: center; }
+#song .lyrics { flex: 1; min-height: 0; }
+.lyrics li { padding: 6px 22px; border-radius: 18px; color: #5b6b7a; cursor: pointer; transition: background .25s, color .25s, transform .25s, box-shadow .25s; transform-origin: center; }
+.lyrics li:active { background: #f1f3f5; }
+.lyrics li.on { background: #ffe066; color: #3d2f1f; transform: scale(1.08); box-shadow: 0 4px 0 #f0b400; }
 .lyrics.en-song { font-family: "Nunito", "Chiron GoRound TC", sans-serif; font-weight: 800; font-size: clamp(18px, 2.4vw, 26px); }
 .lyrics.poem { align-items: center; letter-spacing: .25em; font-size: clamp(26px, 4vw, 38px); }
 .lyrics.poem li { transform-origin: center; }
-.lyrics.times { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); align-content: center; gap: 6px 10px; font-size: clamp(20px, 2.6vw, 26px); }
+.lyrics.times { display: grid; justify-items: stretch; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); align-content: center; gap: 6px 10px; font-size: clamp(20px, 2.6vw, 26px); }
 .lyrics li small { display: block; font-size: .6em; font-family: "Noto Sans TC", sans-serif; opacity: .7; letter-spacing: 0; }
 #songPlay { color: #fff; }
 #songPlay.on { background: #ff8787; }
@@ -960,11 +1038,14 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  padding: 4px 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 0 4px 0 rgba(0, 60, 110, .14);
   font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
   font-weight: 900;
-  font-size: clamp(22px, 3.6vw, 32px);
-  color: #fff;
-  text-shadow: 0 3px 0 rgba(0, 60, 110, .3);
+  font-size: clamp(20px, 3.4vw, 30px);
+  color: var(--title-ink);
 }
 
 .reader-top, .reader-bottom {
@@ -974,8 +1055,8 @@ button {
   gap: 10px;
 }
 .round {
-  width: 56px;
-  height: 56px;
+  width: var(--round);
+  height: var(--round);
   border-radius: 50%;
   background: #fff;
   color: #4d8ff0;
@@ -986,8 +1067,10 @@ button {
   flex: none;
 }
 .round svg { width: 60%; height: 60%; }
-.round:active { transform: translateY(3px); }
-.round.big { width: 76px; height: 76px; }
+.round { transition: transform .12s, box-shadow .12s; }
+.round:active { transform: translateY(4px) scale(.95); box-shadow: 0 0 0 3px #a9c9ef, 0 2px 0 3px rgba(60, 100, 150, .3); }
+.round.big { width: var(--round-big); height: var(--round-big); }
+.reader-bottom { padding: 0 4px 4px; }
 .round.speak { background: #ffc94d; color: #fff; }
 #autoBtn { color: #fff; background: #ffa94d; }
 #autoBtn.on { background: #6cc534; }
@@ -995,7 +1078,7 @@ button {
 .round.on { background: #8fd16a; }
 
 .dots { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.dots span { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, .6); transition: .2s; }
+.dots span { width: 12px; height: 12px; border-radius: 50%; background: rgba(36, 71, 107, .22); transition: .2s; }
 .dots span.on { background: #ffd43b; box-shadow: 0 0 0 3px #fff; transform: scale(1.2); }
 
 .page {
@@ -1076,8 +1159,16 @@ button {
 
 /* ================= 讀完啦 / 彩紙 ================= */
 #done { display: grid; place-items: center; }
-.done-box { text-align: center; }
-.done-box h2 { font-size: clamp(30px, 8vw, 48px); margin: 12px 0 28px; }
+.done-box {
+  text-align: center;
+  padding: 28px clamp(20px, 5vw, 48px) 34px;
+  border-radius: 36px;
+  background: rgba(255, 255, 255, .92);
+  border: 6px solid #fff;
+  box-shadow: 0 14px 30px rgba(0, 40, 80, .18);
+  max-width: 100%;
+}
+.done-box h2 { font-family: "Chiron GoRound TC", "PingFang TC", sans-serif; font-weight: 900; color: var(--title-ink); font-size: clamp(30px, 8vw, 48px); margin: 12px 0 28px; }
 .stars { font-size: clamp(48px, 14vw, 90px); animation: pop .6s ease; }
 @keyframes pop { from { transform: scale(0); } 70% { transform: scale(1.2); } }
 .done-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
@@ -1096,11 +1187,30 @@ button {
 /* ================= 手機（窄螢幕） ================= */
 @media (max-width: 600px) {
   /* 五個分頁擠得下：圖示在上、字在下，平均分 */
-  .bar-row { gap: 8px; }
-  .bar-row .tabs { flex: 1; gap: 2px; padding: 4px; }
-  .bar-row .tabs > .tab { flex: 1 1 0; min-width: 0; padding: 6px 2px; font-size: 12px; line-height: 1.2; white-space: normal; word-break: keep-all; text-align: center; }
+  :root { --round: 56px; --round-big: 72px; }
+  .bar-row { gap: 6px; }
+  .bar-row .tabs { flex: 1; gap: 5px; padding: 2px 0 8px; }
+  .bar-row .tabs > .tab { flex: 1 1 0; min-width: 0; padding: 6px 1px 5px; gap: 2px; border-radius: 18px; font-size: 12px; line-height: 1.2; white-space: normal; word-break: keep-all; text-align: center; box-shadow: 0 4px 0 rgba(0, 60, 110, .16); }
+  .bar-row .tabs > .tab.on { box-shadow: 0 4px 0 var(--cd); }
+  .tab-ic { width: 36px; height: 36px; font-size: 21px; }
   .music-btn { width: 44px; height: 44px; font-size: 22px; border-width: 3px; flex: none; }
-  .cat { font-size: 15px; }
+  .cat { font-size: 15px; min-height: 50px; }
+  .cat-icon { width: 40px; height: 40px; font-size: 23px; }
+  .tier-title { font-size: 20px; padding: 5px 14px; }
+  .tier-title small { font-size: 13px; }
+  .reader-title h2 { padding: 3px 14px; }
+  /* 畫畫頁：工具欄塞得下，常用顏色排兩排 */
+  .toolbar { padding-left: max(8px, env(safe-area-inset-left)); padding-right: max(8px, env(safe-area-inset-right)); }
+  .tools { gap: 8px; }
+  .bigbtn { width: 68px; height: 68px; border-width: 5px; }
+  .dot { width: 48px; height: 48px; }
+  .board-top .round { width: 52px; height: 52px; }
+  .pop { width: calc(100% - 16px); }
+  .brush-group { padding: 8px 6px 10px; }
+  .brush { min-width: 0; padding-right: 4px; }
+  .brush svg { width: 56px; height: 28px; }
+  .brush.on svg { transform: none; }
+  .group-items { gap: 4px 6px; }
   /* 一排兩張卡 */
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 0 0 24px; }
   .card .name { font-size: 16px; }
@@ -1111,7 +1221,7 @@ button {
   .name-chip { white-space: nowrap; font-size: 18px; padding: 4px 12px 4px 6px; }
   .name-chip .ic { width: 30px; height: 30px; }
   .name-chip .en { font-size: 14px; margin-left: 4px; }
-  .progress { min-width: 0; padding: 6px 10px; }
+  .progress { min-width: 0; padding: 6px 10px; flex: 1; }
   .progress span { width: auto; flex: 1; min-width: 40px; }
   /* 兒歌唐詩：圖照原本比例縮小，不要被裁掉 */
   #song .art { flex: none; }
@@ -1127,4 +1237,36 @@ button {
   .lyrics, .lyrics.poem { font-size: 20px; }
   .lyrics.poem { letter-spacing: .12em; }
   .lyrics li { white-space: nowrap; padding: 2px 12px; }
+}
+
+/* 手機直拿：常用顏色排成兩排（一排五個），按鈕還是夠大 */
+@media (orientation: portrait) and (max-width: 600px) {
+  :root { --quick: 132px; }
+  .quick { gap: 10px 16px; padding-top: 10px; padding-bottom: 10px; }
+  .qc { width: 52px; height: 52px; }
+}
+
+/* 手機橫拿（很矮）：畫畫工具縮小一點才放得下 */
+@media (orientation: landscape) and (max-height: 500px) {
+  :root { --bar: 132px; --quick: 116px; --round: 52px; --round-big: 64px; }
+  .tools { gap: 8px; }
+  .tool .lbl { display: none; }
+  .bigbtn { width: 64px; height: 64px; border-width: 5px; }
+  .dot { width: 46px; height: 46px; }
+  .lbl { font-size: 13px; }
+  .recent { display: none; }
+  .sq { width: 50px; height: 50px; }
+  .qc { width: 46px; height: 46px; border-width: 3px; }
+  .quick { display: grid; grid-template-columns: repeat(2, 46px); align-content: center; justify-content: center; gap: 10px 12px; }
+  .board { padding-top: 62px; }
+  .board-top { top: max(8px, env(safe-area-inset-top)); }
+  .board-top .round { width: 48px; height: 48px; }
+  .name-chip { min-height: 44px; font-size: 18px; }
+}
+
+/* 直拿平板：故事圖保持 8:5 完整不裁切，下面留給大大的字 */
+@media (orientation: portrait) {
+  #reader .art { flex: 0 1 auto; }
+  #reader .art svg { width: 100%; height: auto; max-height: 100%; }
+  #reader .text { flex: 1; display: grid; place-items: center; font-size: clamp(24px, 5vw, 44px); }
 }
