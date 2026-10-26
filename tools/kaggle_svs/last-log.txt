@@ -1,6 +1,6 @@
 $ nvidia-smi -L
-GPU 0: Tesla T4 (UUID: GPU-1579870d-03da-5f62-ac58-54cb49928141)
-GPU 1: Tesla T4 (UUID: GPU-1665ed4c-42bf-9875-d15a-196f443063e2)
+GPU 0: Tesla T4 (UUID: GPU-163a1fe7-1a06-4c51-6491-ea428d670107)
+GPU 1: Tesla T4 (UUID: GPU-9c400363-e3a3-5384-8160-410e8f299483)
  
 $ git clone --depth 1 https://github.com/Soul-AILab/SoulX-Singer /kaggle/tmp/sx
  Cloning into '/kaggle/tmp/sx'...
@@ -17,18 +17,16 @@ Activate with: source /kaggle/tmp/venv/bin/activate
 
 $ uv pip install --python /kaggle/tmp/venv/bin/python torch==2.2.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121
  Using Python 3.10.22 environment at: /kaggle/tmp/venv
-Resolved 23 packages in 842ms
-Downloading nvidia-cusolver-cu12 (118.4MiB)
+Resolved 23 packages in 624ms
+Downloading triton (160.1MiB)
 Downloading torch (722.2MiB)
 Downloading torchaudio (3.2MiB)
-Downloading triton (160.1MiB)
 Downloading networkx (1.6MiB)
+Downloading nvidia-cusolver-cu12 (118.4MiB)
 Downloading sympy (6.0MiB)
-Downloading nvidia-cublas-cu12 (391.6MiB)
 Downloading nvidia-nvjitlink-cu12 (37.9MiB)
+Downloading nvidia-cublas-cu12 (391.6MiB)
  Downloaded torchaudio
- Downloaded networkx
- Downloaded sympy
 Downloading nvidia-cusparse-cu12 (186.9MiB)
 Downloading nvidia-cuda-nvrtc-cu12 (22.6MiB)
 Downloading nvidia-cufft-cu12 (116.0MiB)
@@ -36,20 +34,22 @@ Downloading nvidia-cuda-cupti-cu12 (13.5MiB)
 Downloading nvidia-curand-cu12 (53.9MiB)
 Downloading nvidia-nccl-cu12 (151.3MiB)
 Downloading nvidia-cudnn-cu12 (697.8MiB)
+ Downloaded networkx
+ Downloaded sympy
  Downloaded nvidia-cuda-cupti-cu12
- Downloaded nvidia-nvjitlink-cu12
  Downloaded nvidia-cuda-nvrtc-cu12
+ Downloaded nvidia-nvjitlink-cu12
  Downloaded triton
- Downloaded nvidia-cusolver-cu12
  Downloaded nvidia-curand-cu12
- Downloaded nvidia-cusparse-cu12
+ Downloaded nvidia-cusolver-cu12
  Downloaded nvidia-cufft-cu12
+ Downloaded nvidia-cusparse-cu12
  Downloaded nvidia-nccl-cu12
  Downloaded nvidia-cublas-cu12
- Downloaded torch
  Downloaded nvidia-cudnn-cu12
-Prepared 23 packages in 34.54s
-Installed 23 packages in 3.08s
+ Downloaded torch
+Prepared 23 packages in 30.66s
+Installed 23 packages in 421ms
  + filelock==3.32.3
  + fsspec==2026.7.0
  + jinja2==3.1.6
@@ -76,41 +76,41 @@ Installed 23 packages in 3.08s
 
 $ uv pip install --python /kaggle/tmp/venv/bin/python torch==2.2.0 torchaudio==2.2.0 accelerate==1.11.0 einops==0.8.2 librosa==0.11.0 "numpy<2" omegaconf==2.3.0 scipy==1.15.3 soundfile==0.13.1 tqdm transformers==4.41.2 huggingface_hub g2pM g2p_en nltk opencc-python-reimplemented openai-whisper --extra-index-url https://download.pytorch.org/whl/cu121 --index-strategy unsafe-best-match
  Using Python 3.10.22 environment at: /kaggle/tmp/venv
-Resolved 74 packages in 1.67s
+Resolved 74 packages in 4.05s
+   Building antlr4-python3-runtime==4.9.3
    Building openai-whisper==20250625
    Building distance==0.1.3
-   Building antlr4-python3-runtime==4.9.3
 Downloading numpy (17.4MiB)
 Downloading hf-xet (4.0MiB)
 Downloading tiktoken (1.2MiB)
-Downloading g2pm (1.6MiB)
-Downloading llvmlite (56.9MiB)
-Downloading soundfile (1.3MiB)
 Downloading scikit-learn (9.2MiB)
-Downloading numba (3.7MiB)
-Downloading scipy (35.9MiB)
-Downloading nltk (1.6MiB)
-Downloading tokenizers (3.4MiB)
-Downloading transformers (8.7MiB)
 Downloading g2p-en (3.0MiB)
+Downloading nltk (1.6MiB)
+Downloading transformers (8.7MiB)
+Downloading tokenizers (3.4MiB)
+Downloading llvmlite (56.9MiB)
+Downloading g2pm (1.6MiB)
+Downloading scipy (35.9MiB)
+Downloading soundfile (1.3MiB)
+Downloading numba (3.7MiB)
  Downloaded tiktoken
- Downloaded nltk
+      Built distance==0.1.3
  Downloaded soundfile
  Downloaded g2pm
+ Downloaded nltk
       Built antlr4-python3-runtime==4.9.3
-      Built distance==0.1.3
  Downloaded g2p-en
  Downloaded tokenizers
- Downloaded numba
  Downloaded hf-xet
+ Downloaded numba
  Downloaded transformers
  Downloaded scikit-learn
  Downloaded numpy
- Downloaded scipy
       Built openai-whisper==20250625
+ Downloaded scipy
  Downloaded llvmlite
-Prepared 51 packages in 2.29s
-Installed 51 packages in 1.57s
+Prepared 51 packages in 2.33s
+Installed 51 packages in 77ms
  + accelerate==1.11.0
  + antlr4-python3-runtime==4.9.3
  + audioread==3.1.0
@@ -135,7 +135,7 @@ Installed 51 packages in 1.57s
  + librosa==0.11.0
  + llvmlite==0.50.0
  + more-itertools==11.1.0
- + msgpack==1.2.3
+ + msgpack==1.2.4
  + nltk==3.10.4
  + numba==0.68.0
  + numpy==1.26.4
@@ -166,82 +166,36 @@ Installed 51 packages in 1.57s
 $ /kaggle/tmp/venv/bin/python -c "from huggingface_hub import snapshot_download as d; d('Soul-AILab/SoulX-Singer', local_dir='pretrained_models/SoulX-Singer')"
  
 Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]
-Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:00,  6.94it/s]
-Fetching 7 files:  29%|██▊       | 2/7 [00:00<00:00,  7.79it/s]
-Fetching 7 files:  43%|████▎     | 3/7 [00:00<00:00,  6.34it/s]
-Fetching 7 files:  57%|█████▋    | 4/7 [00:00<00:00,  5.98it/s]
-Fetching 7 files:  86%|████████▌ | 6/7 [00:24<00:04,  4.06s/it]
-Fetching 7 files: 100%|██████████| 7/7 [00:36<00:00,  5.15s/it]
-Fetching 7 files: 100%|██████████| 7/7 [00:36<00:00,  5.15s/it]
+Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:01,  4.91it/s]
+Fetching 7 files:  57%|█████▋    | 4/7 [00:00<00:00,  7.08it/s]
+Fetching 7 files:  86%|████████▌ | 6/7 [00:20<00:03,  3.33s/it]
+Fetching 7 files: 100%|██████████| 7/7 [00:29<00:00,  4.25s/it]
+Fetching 7 files: 100%|██████████| 7/7 [00:29<00:00,  4.25s/it]
 
-setup 89s
-loaded 25s
-ok little-star-c38e2fc2.mp3 79s
-heard little-star | 一闪一闪亮晶晶满天都是小星星挂在天上放光明好像许多小眼睛一闪一闪亮晶晶一闪一闪亮晶晶满天都是小星星
-ok two-tigers-e1f948ac.mp3 54s
-heard two-tigers | 两只老虎,两只老虎,跑得快,跑得快,一直没有耳朵,一直没有尾巴,真奇怪,真奇怪。
-ok birthday-d44f458f.mp3 55s
-heard birthday | 祝你生日快樂
-ok old-farm-8029186d.mp3 100s
-heard old-farm | 王老先生有快递一呀一呀有他在天边养了小鸡一呀一呀有这里积极那里也积极这里积那里积到处都积极王老先生有快递王老先生有快递一呀一呀有
-ok pull-carrot-cede8c0d.mp3 53s
-heard pull-carrot | 小狗小猫快来帮大家一起拔起来
-ok mom-dad-163a4972.mp3 61s
-heard mom-dad | 爸爸上班好辛苦妈妈煮饭香喷喷我会帮忙说谢谢我爱爸爸和妈妈
-ok sheep-home-097637b8.mp3 58s
-heard sheep-home | 小羊小羊练泥椒太阳公公下山了一只两只三只羊大家一起回家落
-ok tricycle-96abc749.mp3 50s
-heard tricycle | 三轮车跑得快上面做个老太太要五毛给一块你说奇怪不奇怪
-ok london-bridge-1526c3d1.mp3 53s
-heard london-bridge | - 串串-轮串铁桥跨下来跨下来跨下来轮串铁桥跨下来就要跨下来
-ok brush-song-eb367291.mp3 61s
-heard brush-song | 
-ok wash-song-2a41d10a.mp3 49s
-heard wash-song | 小手心 小手心 小手心手背手指都要吸 細菌全跑光
-ok number-song-81a184cb.mp3 85s
-heard number-song | 一二三四五六七叔叔我们一起来八个苹果酒可行十只小鸭排排站一二三四五六七大家一起来大家一起输一输
-ok color-song-526d469e.mp3 48s
-heard color-song | 《红色苹果》
-ok goodnight-song-3d0285c4.mp3 101s
-heard goodnight-song | 晚安晚安好梦天明天早上見太陽
-ok animal-sounds-a6add567.mp3 79s
-heard animal-sounds | 小狗小狗 往往叫往往往往往小貓小貓 喵喵叫喵喵喵喵喵小牙咖咖 小機器大家一起唱唱歌小狗小狗 往往叫往往往往往
-ok vehicle-song-60c1e5f6.mp3 49s
+setup 75s
+loaded 20s
+ok pull-carrot-6dd337f3.mp3 75s
+heard pull-carrot | 小狗小毛小狗小毛
+ok mom-dad-7025da0e.mp3 84s
+heard mom-dad | 我爱爸爸和妈妈
+ok sheep-home-3339de38.mp3 86s
+heard sheep-home | 小羊小羊的臉吃飽清草曬太陽媽媽在叫小綿羊快回媽媽的身旁一隻兩隻三隻羊排好隊伍慌啞慌回到家裡暖羊羊大家一起進夢想
+ok brush-song-ead5faf4.mp3 50s
+heard brush-song | 小鸭刷手中每天早晚刷刷鸭上面刷下面裡面外面都刷刷叔叔口花啦啦鸭翅拜拜小哈哈
+ok wash-song-18b06796.mp3 81s
+heard wash-song | 
+ok number-song-8fd3f0f2.mp3 65s
+heard number-song | 一二三 爬上山 四五六 翻梗豆七八九 拍拍手 十個好朋友一二三四五六七 八九十手拉手
+ok color-song-a3103259.mp3 59s
+heard color-song | 
+ok goodnight-song-34894e52.mp3 116s
+heard goodnight-song | 《月亮萬萬掛天上》《月亮萬萬掛天上》
+ok animal-sounds-8b5b737c.mp3 61s
+heard animal-sounds | 小狗小狗怎么叫哇哇哇哇哇小猫小猫怎么叫喵喵喵喵喵小鸭小鸭怎么叫咕咕咕咕咕咕大家一起哈哈笑
+ok vehicle-song-a282855f.mp3 62s
 heard vehicle-song | 
-ok rain-song-61bb9f81.mp3 46s
-heard rain-song | 下雨了滴答答笑話笑草喝水了春季雨散去散步雨停出現彩虹了
-ok en-twinkle-f4463240.mp3 67s
-heard en-twinkle | Twinkle, twinkle little star How I wonder what you are Up above the world so high Like a diamond in the sky Twinkle, twinkle little star How I wonder what you are
-ok en-abc-347b57ab.mp3 67s
-heard en-abc | A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, and C. Now I know my ABCs, next time will you sing with me?
-ok en-baa-3c622287.mp3 45s
-heard en-baa | Buh-buh, Black Sheep, have you any wool? Yes sir, yes sir, three bags full. One for the master, one for the dame, And one for the little boy who lies down the lane.
-ok en-row-7a3049d1.mp3 35s
-heard en-row | Row, row, row your boat gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream.
-ok en-mary-8c099be6.mp3 42s
-heard en-mary | Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow.
-ok en-london-ef220c21.mp3 41s
-heard en-london | London Bridge is falling down, falling down, falling down. London Bridge is falling down, my fair lady.
-ok en-farm-5c7a39c1.mp3 76s
-heard en-farm | Oh, Manoh had a farm E-I-E-I-O And on his farm he had a pig E-I-E-I-O With an oink oink here An oink oink there Here an oink there an oink everywhere An oink oink Oh, MacDonald had a farm E-I-E-I-O
-ok en-john-c9a75d99.mp3 45s
-heard en-john | Are you sleeping? Are you sleeping? Brother John, brother John Morning bells are ringing Morning bells are ringing Ding-dang-dong, ding-dang-dong
-ok en-humpty-7e9faa9d.mp3 42s
-heard en-humpty | Humpty Dumpty sat on a wall Humpty Dumpty had a grape fall All the king's horses and all the king's men Kluen put Hum together again
-ok en-hickory-3744400f.mp3 39s
-heard en-hickory | Hickory dickory dock, the mouse ran up the clock. The clock struck one, the mouse ran down. Hickory dickory dock.
-ok en-rain-181d89a5.mp3 34s
-heard en-rain | Rain, rain, go away, come again on the day, little children want to play. Rain, rain, go away.
-ok en-spider-f15c3aff.mp3 48s
-heard en-spider | The itsy bitsy spider climbed up the water spout. Down came the rain and washed the spider out. Out came the sun and dried up all the rain. And the itsy bitsy spider climbed up the spout again.
-ok en-ducks-16805349.mp3 41s
-heard en-ducks | Five little ducks went out one day Over the hill and far away Mother duck said quack quack quack quack But only four little ducks came back
-ok en-happy-bad2bf52.mp3 45s
-heard en-happy | If you're happy and you know it, clap your hands. If you're happy and you know it, clap your hands. If you're happy and you know it, then your face will surely show it. If you're happy and you know it, clap your hands.
-ok en-birthday-73b64fd3.mp3 40s
-heard en-birthday | Happy birthday to you, happy birthday to you, happy birthday dear friend, happy birthday to you.
-ok en-jack-0cc11d2f.mp3 36s
-heard en-jack | Jack and Jill went up the hill to fetch a pail of water. Jack fell down and broke his crown and Jill came tumbling there.
+ok rain-song-edaf64d6.mp3 63s
+heard rain-song | 小花张开小嘴巴咕嚕咕嚕喝水了乘起雨散回到家雨停了 彩虹瓜天空变成大涂花
 gen done
 gen exit 0
 done
