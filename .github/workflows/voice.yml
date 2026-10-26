@@ -59,8 +59,8 @@ jobs:
           git add audio tools/kaggle_voice/last-log.txt 2>/dev/null || git add audio
           if git diff --cached --quiet; then echo "沒有新的配音"; exit 0; fi
           git commit -m "Update voice audio"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          # 別的工作（兒歌）可能同時在推：先同步再推，失敗就再試
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 15; done
           # 用 GITHUB_TOKEN 推的不會自動觸發 Pages，手動叫它重建
           curl -sS -X POST \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
