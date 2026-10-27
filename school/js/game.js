@@ -574,7 +574,9 @@
     $('mathChoices').className = 'math-choices lesson-bar';
     // 教完的下一步：科目可以指定（課本：上完課 → 點點看），不然就去練習題
     const after = st.P.afterLearn || ['quiz', '✏️ 開始練習'];
-    $('mathChoices').innerHTML = `<button class="pill big" data-act="replay">🔁 再看一次</button><button class="pill big go" data-act="practice" data-to="${after[0]}">${after[1]}</button>`;
+    // 上一頁／再聽這一頁／下一頁：一樣會自動往下念，想回頭或跳過再自己按
+    $('mathChoices').innerHTML = `<div class="lesson-nav"><button class="pill" data-act="prev">⏮ 上一頁</button><button class="pill" data-act="replay">🔁 再聽一次</button><button class="pill" data-act="next">⏭ 下一頁</button></div>
+      <button class="pill big go" data-act="practice" data-to="${after[0]}">${after[1]}</button>`;
     slide();
     setTimeout(() => lessonStep(0), 300);
   }
@@ -589,6 +591,9 @@
     setQ(s);
     $('mathQ').classList.toggle('done-step', !!s.done);
     $('mathChoices').classList.toggle('ready', k === st.steps.length - 1);
+    $('mathDots').innerHTML = `<span class="lesson-n">${k + 1} / ${st.steps.length}</span>`;
+    $('mathChoices').querySelector('[data-act=prev]').disabled = k === 0;
+    $('mathChoices').querySelector('[data-act=next]').disabled = k === st.steps.length - 1;
     Voice.speak(s.say, () => {
       if (my !== st.token || st.mode !== 'lesson') return;
       if (k + 1 < st.steps.length) setTimeout(() => my === st.token && lessonStep(k + 1), s.fast ? 150 : 700);
@@ -600,7 +605,9 @@
     const act = e.target.closest('[data-act]');
     if (act) {
       Sound.play('click');
-      if (act.dataset.act === 'replay') lessonStep(0);
+      if (act.dataset.act === 'replay') lessonStep(st.step);   // 只重念這一頁
+      else if (act.dataset.act === 'prev') lessonStep(Math.max(0, st.step - 1));
+      else if (act.dataset.act === 'next') lessonStep(Math.min(st.steps.length - 1, st.step + 1));
       else { location.hash = `#/${st.P.route}/${st.level.id}/${act.dataset.to || 'quiz'}`; }
       return;
     }
