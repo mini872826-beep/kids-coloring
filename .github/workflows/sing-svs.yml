@@ -3,7 +3,7 @@ name: 兒歌 AI 歌手
 on:
   push:
     branches: [main]
-    paths: ['js/songs.js', 'tools/sing.py', 'tools/accomp.py', 'tools/sing_svs.py', 'tools/kaggle_svs/**', '.github/workflows/sing-svs.yml']
+    paths: ['js/songs.js', 'tools/sing.py', 'tools/accomp.py', 'tools/sing_svs.py', 'tools/kaggle_svs/**', 'tools/sing_kid.py', 'tools/kidvoice/run.py', 'tools/kidvoice/kaggle.sh', 'tools/voice/kid-sing-ref.mp3', '.github/workflows/sing-svs.yml']
   workflow_dispatch:
     inputs:
       only:
@@ -66,9 +66,23 @@ jobs:
           mv audio/sing-svs/kaggle-svs-log.txt tools/kaggle_svs/last-log.txt 2>/dev/null || true
       # 人聲對拍（rubberband）、跟伴奏混成成品
       - run: python3 tools/sing_svs.py "$RUNNER_TEMP/songs.json"
+      # 3. 英文兒歌換成小朋友的聲音（Seed-VC），再對一次拍、配伴奏
+      - run: python3 tools/sing_kid.py "$RUNNER_TEMP/songs.json" --plan "$RUNNER_TEMP/kid.json"
+      - name: Kaggle 換成小朋友的聲音
+        continue-on-error: true
+        env:
+          KAGGLE_USERNAME: pacokids
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          if [ "$(python3 -c 'import json,sys;print(len(json.load(open(sys.argv[1]))))' "$RUNNER_TEMP/kid.json")" = 0 ]; then echo "都做好了"; exit 0; fi
+          pip install -q "kaggle>=1.8"
+          tools/kidvoice/kaggle.sh "$RUNNER_TEMP/kid.json" main audio/sing-kid/stems
+          mv audio/sing-kid/stems/kaggle-kidvc-log.txt tools/kidvoice/last-log.txt 2>/dev/null || true
+      - run: python3 tools/sing_kid.py "$RUNNER_TEMP/songs.json"
       - name: 推回 main
         run: |
-          git add -A audio/sing-svs tools/kaggle_svs
+          git add -A audio/sing-svs audio/sing-kid tools/kaggle_svs tools/kidvoice
           if git diff --cached --quiet; then echo "沒有新的歌"; exit 0; fi
           git commit -m "Update AI-singer songs"
           for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 10; done

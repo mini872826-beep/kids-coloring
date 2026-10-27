@@ -419,16 +419,16 @@
   /* ---------------- 兒歌唐詩 ---------------- */
   let song = null, songToken = 0;
   // 兒歌有 AI 唱好的錄音（tools/sing.py 產生）就放錄音，沒有才用八音盒彈旋律
-  let SUNG = {}, AI = {};
+  let SUNG = {}, AI = {}, KID = {};
   const index = url => fetch(url).then(r => r.ok ? r.json() : {}).catch(() => ({}));
   // AI 歌手照歌譜唱的版本（tools/sing_svs.py）：時間軸和上面一樣，字幕照樣跟得上
   // 兩份清單都抓到才開始放歌，不然剛打開 App 就點歌會先放到舊的版本
-  const songsReady = Promise.all([index('audio/sing/index.json'), index('audio/sing-svs/index.json')])
-    .then(([a, b]) => { SUNG = a; AI = b; });
+  const songsReady = Promise.all([index('audio/sing/index.json'), index('audio/sing-svs/index.json'), index('audio/sing-kid/index.json')])
+    .then(([a, b, c]) => { SUNG = a; AI = b; KID = c; });
   // 這首歌要放哪個錄音：AI 歌手 > 合成的唱歌 > 沒有（八音盒）
   function track(id) {
-    const a = AI[id] || SUNG[id];
-    if (a) return { url: (AI[id] ? 'audio/sing-svs/' : 'audio/sing/') + a.file, times: a.times };
+    const a = KID[id] || AI[id] || SUNG[id];
+    if (a) return { url: (KID[id] ? 'audio/sing-kid/' : AI[id] ? 'audio/sing-svs/' : 'audio/sing/') + a.file, times: a.times };
     return null;
   }
   const singer = new Audio();

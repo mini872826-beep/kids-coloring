@@ -68,6 +68,10 @@ for job in jobs:
         args.source, args.target, args.output = get(job['vox'], 'src.wav'), get(job['ref'], 'ref.wav'), odir
         inference.main(args)
         vc = glob.glob(odir + '/*.wav')[0]
+        if 'acc' not in job:   # 正式版：只要人聲（之後在 GitHub 上對拍、配伴奏）
+            run(['ffmpeg', '-v', 'error', '-y', '-i', vc, '-ar', '24000', '-ac', '1', '-b:a', '96k', out])
+            log('ok', job['out'])
+            continue
         run(['ffmpeg', '-v', 'error', '-y', '-i', vc, '-i', get(job['acc'], 'acc.wav'), '-filter_complex',
              '[0:a]loudnorm=I=-17:TP=-2,aresample=44100[a];[1:a]loudnorm=I=-23:TP=-2,aresample=44100,volume=0.85[b];'
              '[a][b]amix=inputs=2:normalize=0:duration=longest,alimiter=limit=0.9',

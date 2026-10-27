@@ -97,11 +97,11 @@ def plan(songs, sung):
 TIGHT_TAG = '-t1'   # 對拍的方法改了就換號碼：成品換新檔名，平板上存的舊歌才不會一直用
 
 
-def finish(song, j):
+def finish(song, j, out=OUT):
     """人聲對拍（tools/tighten.py），再跟伴奏混成成品。回傳成品檔名"""
     import subprocess, tempfile
     import tighten
-    stem, tight = os.path.join(OUT, 'stems', j['file']), os.path.join(OUT, 'tight', j['file'])
+    stem, tight = os.path.join(out, 'stems', j['file']), os.path.join(out, 'tight', j['file'])
     final = j['file'][:-4] + TIGHT_TAG + '.mp3'
     if not os.path.exists(tight):
         os.makedirs(os.path.dirname(tight), exist_ok=True)
@@ -111,12 +111,12 @@ def finish(song, j):
             n = tighten.tighten(song, a, b)
             subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', b, '-b:a', '96k', tight], check=True)
         print('tighten', j['id'], n, 'notes')
-    if not os.path.exists(os.path.join(OUT, final)):
+    if not os.path.exists(os.path.join(out, final)):
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', tight, '-i', j['acc'], '-filter_complex',
                         f"[0:a]loudnorm=I=-17:TP=-2,aresample=44100,volume={j['vox_gain']}[a];"
                         f"[1:a]loudnorm=I=-23:TP=-2,aresample=44100,volume={j['acc_gain']}[b];"
                         '[a][b]amix=inputs=2:normalize=0:duration=longest,alimiter=limit=0.9',
-                        '-ac', '1', '-b:a', '96k', os.path.join(OUT, final)], check=True)
+                        '-ac', '1', '-b:a', '96k', os.path.join(out, final)], check=True)
     return final
 
 
