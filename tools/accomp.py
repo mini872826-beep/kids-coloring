@@ -48,16 +48,31 @@ def beat_sec(song):
     return 60 / (song['bpm'] * TEMPO)
 
 
+def pickups(song):
+    """每句前面有幾拍是「弱拍進來」的（例如 Mary had a little lamb, *its* fleece 的 its）"""
+    p = song.get('pickup') or 0
+    return list(p) if isinstance(p, list) else [p] * len(song['notes'])
+
+
+def sub(song):
+    """一拍切幾份：一般 2 份（八分音符），6/8 拍的搖擺歌 3 份（三連音）"""
+    return 3 if song.get('compound') else 2
+
+
 def timeline(song):
     """回傳（一拍幾秒, 每句開始的拍數, 每句開始的秒數, 整首結束的秒數）。
-    每句佔滿整數個小節（2 拍或 3 拍），伴奏的節拍才會一直穩穩的；開頭先彈 2 小節前奏。"""
+    每句的重拍落在小節的第一拍（弱拍進來的字放在前一小節的尾巴），伴奏的節拍才會一直穩穩的；
+    開頭先彈 2 小節前奏。6/8 拍的歌一拍 = 附點四分音符（一小節 2 拍）。"""
     m = meter(song)
     beat = beat_sec(song)
-    pos = 2 * m                                    # 前奏
-    starts = []
-    for notes in song['notes']:
-        starts.append(pos)
-        pos += math.ceil(sum(b for _, b in notes) / m - 1e-6) * m
+    pos = 2 * m                                    # 第一句的重拍（前面是 2 小節前奏）
+    starts, end = [], 0
+    for notes, p in zip(song['notes'], pickups(song)):
+        while pos - p < end - 1e-6:                # 弱拍會蓋到上一句：往後一小節
+            pos += m
+        starts.append(pos - p)
+        end = pos - p + sum(b for _, b in notes)
+        pos = max(pos + m, math.ceil(end / m - 1e-6) * m)
     end_beats = pos + 2 * m                        # 最後一個和弦留兩小節收尾
     return beat, starts, [round(T0 + s * beat, 3) for s in starts], T0 + end_beats * beat
 
@@ -66,7 +81,7 @@ def chords(song):
     """每小節（2 或 3 拍）選一個和弦：旋律的音落在和弦裡越多越好（拍子上的音更重要）"""
     m = meter(song)
     _, starts, _, _ = timeline(song)
-    starts = [s - starts[0] for s in starts]      # 從第一句開始算（前奏另外處理）
+    starts = [s - (2 * m) for s in starts]          # 從第一句的重拍開始算（前奏另外處理）
     key = tonic(song)
     events = []                                    # (開始拍, 長度, 相對主音的音名)
     for st, notes in zip(starts, song['notes']):
@@ -74,9 +89,8 @@ def chords(song):
         for p, b in notes:
             events.append((t, b, (p - key) % 12))
             t += b
-    nbars = int(round((starts[-1] + math.ceil(sum(b for _, b in song['notes'][-1]) / m - 1e-6) * m) / m))
-    line_end = {int(round((st + math.ceil(sum(b for _, b in n) / m - 1e-6) * m) / m)) - 1
-                for st, n in zip(starts, song['notes'])}
+    nbars = math.ceil((starts[-1] + sum(b for _, b in song['notes'][-1])) / m - 1e-6)
+    line_end = {math.ceil((st + sum(b for _, b in n)) / m - 1e-6) - 1 for st, n in zip(starts, song['notes'])}
     out, prev = [], 'I'
     for k in range(nbars):
         a, z = k * m, (k + 1) * m
@@ -154,7 +168,8 @@ def arrange(song):
     else:
         keys, pizz, sparkle = Track(0, 12), Track(2, 45), Track(3, 13)       # 馬林巴、撥奏弦樂、木琴
         tracks += [keys, pizz, sparkle]
-    lines_at = {int(round((s - starts[0]) / m)) for s in starts}
+    lines_at = {math.ceil((s - 2 * m) / m - 1e-6) for s in starts}
+    n = sub(song)                                  # 一拍切幾份
     for k in range(-2, len(prog) + 1):             # 前奏 2 小節（主和弦、屬和弦）＋歌＋最後的長和弦
         name = 'I' if k == -2 else 'V' if k == -1 else (prog[k] if k < len(prog) else 'I')
         b0 = t0b + (k + 2) * m
@@ -173,15 +188,16 @@ def arrange(song):
         if style == 'gentle':
             bass.note(b0, m * .95, root, hum(58))
             pat = [voicing(name, 48, key)[0], voicing(name, 55, key)[0], voicing(name, 60, key)[1], voicing(name, 60, key)[2]]
-            for i in range(int(m * 2)):            # 八分音符分解和弦
-                keys.note(b0 + i * .5, .9, pat[i % 4] if m == 2 else pat[[0, 1, 2, 1, 2, 3][i]], hum(48 if i % 2 else 56))
+            for i in range(int(m * n)):            # 分解和弦（八分音符；6/8 拍是三連音）
+                order = [0, 1, 2, 1] if n == 2 and m == 2 else [0, 1, 2, 1, 2, 3] if n == 2 else [0, 1, 2, 3, 2, 1]
+                keys.note(b0 + i / n, .9, pat[order[i % len(order)]], hum(48 if i % n else 56))
             for p in voicing(name, 60, key):
                 pad.note(b0, m, p, 34)
             if k % 2 == 0 and k >= 0:
                 sparkle.note(b0, .8, voicing(name, 84, key)[rnd.randint(0, 2)], hum(40))
             if song['id'] != 'goodnight-song':
-                for i in range(int(m * 2)):
-                    drums.note(b0 + i * .5, .1, 70, hum(26 if i % 2 else 34))     # 沙鈴
+                for i in range(int(m * n)):
+                    drums.note(b0 + i / n, .1, 70, hum(26 if i % n else 34))     # 沙鈴
         elif style == 'bouncy':
             if m == 3:                             # 三拍子：蹦－恰－恰
                 bass.note(b0, .9, root, hum(80))
@@ -194,16 +210,16 @@ def arrange(song):
             else:
                 bass.note(b0, .9, root, hum(85))
                 bass.note(b0 + 1, .9, root + 7 if root + 7 < 52 else root - 5, hum(75))
-                for i, d in ((0, 1), (.5, 1), (1, 1), (1.5, 1)):            # 吉他刷：下、上、下、上
+                for i in ([0, .5, 1, 1.5] if n == 2 else [0, 2 / 3, 1, 5 / 3]):   # 吉他刷：下、上、下、上（6/8 拍長短長短）
                     up = i % 1 > 0
                     for j, p in enumerate(reversed(ch) if up else ch):
                         keys.note(b0 + i + j * .015, .4, p, hum(52 if up else 66))
                 drums.note(b0, .1, 36, hum(82))
                 drums.note(b0 + 1, .1, 39 if k % 2 else 38, hum(64))         # 拍手、小鼓輪流
-                for i in range(4):
-                    drums.note(b0 + i * .5, .1, 42, hum(40 if i % 2 else 50))
-                drums.note(b0 + .5, .1, 54, hum(38))
-                drums.note(b0 + 1.5, .1, 54, hum(38))
+                for i in range(2 * n):
+                    drums.note(b0 + i / n, .1, 42, hum(40 if i % n else 50))
+                drums.note(b0 + (n - 1) / n, .1, 54, hum(38))
+                drums.note(b0 + 1 + (n - 1) / n, .1, 54, hum(38))
                 if fill:
                     for i, p in enumerate((48, 47, 45)):                     # 小小的鼓過門
                         drums.note(b0 + 1 + i * .25 + .25, .1, p, hum(60))
@@ -213,14 +229,14 @@ def arrange(song):
         else:
             bass.note(b0, .8, root, hum(72))
             pat = [voicing(name, 60, key)[0], voicing(name, 60, key)[1], voicing(name, 60, key)[2], voicing(name, 60, key)[1]]
-            for i in range(int(m * 2)):
-                keys.note(b0 + i * .5, .45, pat[i % 4], hum(58 if i % 2 == 0 else 48))
+            for i in range(int(m * n)):
+                keys.note(b0 + i / n, .45, pat[i % 4] if n == 2 else pat[[0, 1, 2][i % 3]], hum(58 if i % n == 0 else 48))
             for i in range(int(m)):
-                pizz.note(b0 + i + .5, .3, voicing(name, 48, key)[1 + i % 2], hum(42))
+                pizz.note(b0 + i + (n - 1) / n, .3, voicing(name, 48, key)[1 + i % 2], hum(42))
             drums.note(b0, .1, 36, hum(48))
-            for i in range(int(m * 2)):
-                drums.note(b0 + i * .5, .1, 70, hum(30 if i % 2 else 40))     # 沙鈴
-            drums.note(b0 + .5, .1, 76 if k % 2 else 77, hum(44))             # 木魚
+            for i in range(int(m * n)):
+                drums.note(b0 + i / n, .1, 70, hum(30 if i % n else 40))     # 沙鈴
+            drums.note(b0 + (n - 1) / n, .1, 76 if k % 2 else 77, hum(44))     # 木魚
             if fill:
                 for i, p in enumerate(voicing(name, 72, key) + [voicing(name, 84, key)[0]]):
                     sparkle.note(b0 + 1 + i * .25, .25, p, hum(46))           # 木琴小小的跑音

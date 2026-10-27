@@ -11,6 +11,6 @@ for (const f of fs.readdirSync('js').filter(f => f.startsWith('pack-')).sort()) 
 js('js/songs.js');
 
 const out = ctx.window.SONGS.filter(s => s.notes && s.kind !== 'times').map(s => ({
-  id: s.id, kind: s.kind, bpm: s.bpm, lines: s.lines, notes: s.notes, sing: s.sing || null, meter: s.meter || null,
+  id: s.id, kind: s.kind, bpm: s.bpm, lines: s.lines, notes: s.notes, sing: s.sing || null, meter: s.meter || null, pickup: s.pickup || null, compound: !!s.compound,
 }));
 process.stdout.write(JSON.stringify(out, null, 1));

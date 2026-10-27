@@ -268,7 +268,7 @@ async def _record_all(texts, voice):
 
 
 def song_key(song):
-    raw = json.dumps([VERSION, TEMPO, song['bpm'], song['lines'], song['notes'], song['sing'], song.get('meter'),
+    raw = json.dumps([VERSION, TEMPO, song['bpm'], song['lines'], song['notes'], song['sing'], song.get('meter'), song.get('pickup'), song.get('compound'),
                       hashlib.sha1(open(accomp.__file__, 'rb').read()).hexdigest()], ensure_ascii=False)
     return hashlib.sha1(raw.encode()).hexdigest()[:10]
 

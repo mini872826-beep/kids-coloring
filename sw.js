@@ -62,18 +62,38 @@ self.addEventListener('fetch', e => {
     return;
   }
   if (new URL(req.url).origin !== location.origin) return;
-  // 語音和唱歌的 mp3 檔名就是內容的指紋，內容不會變：有存就直接用，不用等網路
-  if (/\/audio\/.+\.mp3$/.test(new URL(req.url).pathname) && !req.headers.has('range')) {
-    e.respondWith(caches.open(CACHE).then(c => c.match(req).then(hit => hit || fetch(req).then(res => {
-      if (res.ok) c.put(req, res.clone());
-      return res;
-    }))));
+  // 語音和唱歌的 mp3 檔名就是內容的指紋，內容不會變：有存就直接用，不用等網路。
+  // 播放器跳到歌曲中間時會要「其中一段」（Range）：從存好的整個檔案切那一段給它，不然跳不過去
+  if (/\/audio\/.+\.mp3$/.test(new URL(req.url).pathname)) {
+    e.respondWith((async () => {
+      const c = await caches.open(CACHE);
+      const key = new Request(req.url);
+      let hit = await c.match(key);
+      if (!hit) {
+        const res = await fetch(key);
+        if (res.status !== 200) return res;
+        await c.put(key, res.clone());
+        hit = res;
+      }
+      const range = req.headers.get('range');
+      if (!range) return hit;
+      const buf = await hit.arrayBuffer();
+      const m = /bytes=(\d*)-(\d*)/.exec(range) || [];
+      const size = buf.byteLength;
+      let start = m[1] ? +m[1] : 0, end = m[2] ? Math.min(+m[2], size - 1) : size - 1;
+      if (!m[1] && m[2]) { start = Math.max(0, size - +m[2]); end = size - 1; }   // bytes=-500：最後 500 個 byte
+      return new Response(buf.slice(start, end + 1), {
+        status: 206,
+        headers: { 'Content-Type': 'audio/mpeg', 'Content-Range': `bytes ${start}-${end}/${size}`,
+                   'Content-Length': String(end - start + 1), 'Accept-Ranges': 'bytes' },
+      });
+    })());
     return;
   }
   e.respondWith((async () => {
     const cache = await caches.open(CACHE);
     const fresh = fetch(req, { cache: 'no-cache' }).then(res => {
-      if (res.ok) cache.put(req, res.clone());
+      if (res.status === 200) cache.put(req, res.clone());   // 206（只有一段）不能存
       return res;
     });
     const slow = new Promise(r => setTimeout(r, TIMEOUT));
