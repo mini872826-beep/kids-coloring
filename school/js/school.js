@@ -52,12 +52,16 @@
     async start(quiet) {
       try {
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) throw Object.assign(new Error('unsupported'), { name: 'Unsupported' });
+        // voice.js 把 iPhone 的聲音設成「只播放」（靜音鍵開著也念）；這個模式下 Safari 會直接拒絕麥克風，
+        // 所以要錄音時先換成「播放＋錄音」（一定要在按下去的當下、還沒 await 之前換）
+        if (navigator.audioSession) navigator.audioSession.type = 'play-and-record';
         if (!Mic.stream) Mic.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         localStorage.setItem('sayRec', '1');
         if (!sayOn()) Mic.stop();
         Mic.show();
         return true;
       } catch (e) {
+        if (navigator.audioSession) navigator.audioSession.type = 'playback';
         localStorage.setItem('sayRec', '0');
         Mic.show();
         if (quiet) return false;
@@ -88,6 +92,7 @@
     stop() {
       if (Mic.stream) Mic.stream.getTracks().forEach(t => t.stop());
       Mic.stream = null;
+      if (navigator.audioSession) navigator.audioSession.type = 'playback';   // 換回只播放（靜音鍵開著也念）
     },
     // 錄 ms 毫秒，回傳錄音的網址（錄不到回傳 null）
     record(ms) {
