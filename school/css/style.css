@@ -1807,3 +1807,33 @@ button {
   .lesson-bar .pill { font-size: 16px; padding: 6px 14px; }
   .fix-card { padding: 4px 12px; }
 }
+/* 檢查發音：說到的字綠色、沒說到的紅色 */
+.sb-check { margin-top: 6px; text-align: center; font-family: var(--en); font-weight: 900; font-size: clamp(22px, 4vw, 34px); line-height: 1.3; }
+.sb-check .ok { color: #2b8a3e; }
+.sb-check .bad { color: #e03131; text-decoration: underline wavy #fa5252; text-underline-offset: 6px; }
+.sb-heard { text-align: center; font-size: 15px; color: #868e96; margin-top: 2px; }
+.sb-weak { background: #fff3bf; box-shadow: 0 4px 0 #e67700; color: #e67700; font-size: 18px; }
+@media (orientation: landscape) and (max-height: 500px) { .sb-check { font-size: 20px; } }
+/* 口說練習：開始畫面 */
+.sb-start { text-align: center; padding: 10px; }
+.sb-start-ic { font-size: clamp(64px, 14vh, 110px); line-height: 1; }
+.sb-start h3 { margin: 4px 0; font-family: "Chiron GoRound TC", sans-serif; font-weight: 900; font-size: clamp(28px, 5vw, 40px); color: #c92a2a; }
+.sb-start p { margin: 0 0 8px; font-family: "Chiron GoRound TC", sans-serif; font-weight: 700; font-size: clamp(18px, 3vw, 24px); line-height: 1.5; color: #5c4a35; }
+.sb-start p small { font-size: .75em; color: #868e96; }
+.sb-go { background: #ff8787; color: #fff; box-shadow: 0 5px 0 #c92a2a; font-size: clamp(22px, 4vw, 30px); }
+/* 一課的選單：照學習順序分段（① 上課 → ② 課本 → ③ 口語 → ④ 遊戲 → ⑤ 小考） */
+.math-menu.sections { display: flex; flex-direction: column; gap: 14px; }
+.menu-sec { display: flex; flex-direction: column; gap: 8px; }
+.menu-h { margin: 0; align-self: flex-start; padding: 4px 16px; border-radius: 999px; background: #f1f3f5; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-family: "Chiron GoRound TC", sans-serif; font-weight: 900; font-size: clamp(18px, 2.6vw, 24px); color: var(--title-ink); }
+.menu-h small { font-size: .7em; font-weight: 700; color: #6c7f93; }
+.menu-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(10px, 2vw, 18px); }
+.menu-row.n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* 只有一張的段落：扁長的橫卡片，不佔一整排高度 */
+.menu-row.n1 { grid-template-columns: 1fr; }
+.menu-row.n1 .game-card { flex-direction: row; justify-content: center; gap: 18px; min-height: 0; padding: 10px 18px; }
+.menu-row.n1 .gpic { width: auto; height: auto; }
+.menu-row.n1 .gemoji { font-size: clamp(40px, 7vh, 64px); }
+.menu-row.n2 .game-card, .menu-row.n4 .game-card { min-height: 0; }
+.menu-row .gpic { height: clamp(60px, 12vh, 130px); }
+@media (max-width: 600px) { .menu-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (orientation: landscape) and (max-height: 500px) { .menu-row .gpic { height: 54px; } .menu-row.n1 .gemoji { font-size: 36px; } .menu-row.n1 .game-card { padding: 6px 14px; } }

@@ -98,7 +98,7 @@
   const say = () => {
     if (st.mode === 'fix') return st.fix && st.fix.say && Voice.speak(st.fix.say);
     if (st.mode === 'lesson') return lessonStep(st.step);
-    if (st.mode === 'menu') return Voice.speak(['選一個遊戲']);
+    if (st.mode === 'menu') return Voice.speak([st.P.menuSay || '選一個遊戲']);
     if (st.mode === 'view') return st.P.views[st.view].say && st.P.views[st.view].say(st.level);
     if (st.q && !st.busy) {
       const intro = st.intro || [];
@@ -181,15 +181,22 @@
       `<button class="game-card${cls}" data-go="${go}" style="--gc:${c};--gd:${d}"><span class="gpic">${pic}</span><span class="gname">${name}</span>${star ? `<span class="gbest">${'⭐'.repeat(star)}</span>` : ''}</button>`;
     const p = best(id);
     const base = `#/${st.P.route}/${id}`;
-    // 科目自己的畫面排在最前面
-    const own = Object.entries(st.P.views || {}).map(([v, x]) => card(`${base}/${v}`, `<span class="gemoji">${x.icon}</span>`, x.name, 0, x.color, x.dark, ' plain')).join('');
-    const learn = card(`${base}/learn`, '<span class="gemoji">📘</span>', st.P.learnName || '看教學', 0, '#a5d8ff', '#1c7ed6', ' plain');
-    // 順序：點點看、跟老師複習、四個遊戲、小小考試
-    $('mathMenu').innerHTML = own + learn + GAME_LIST.map(g => card(`${base}/${g.id}`, g.pic(), g.name, best(id, g.id), g.color, g.dark)).join('') +
-      card(`${base}/quiz`, '<span class="gemoji">✏️</span>', st.P.quizName || '練習題', p ? (p >= 9 ? 3 : p >= 6 ? 2 : 1) : 0, '#ffe066', '#f08c00', ' plain');
+    const cards = {
+      learn: card(`${base}/learn`, '<span class="gemoji">📘</span>', st.P.learnName || '看教學', 0, '#a5d8ff', '#1c7ed6', ' plain'),
+      quiz: card(`${base}/quiz`, '<span class="gemoji">✏️</span>', st.P.quizName || '練習題', p ? (p >= 9 ? 3 : p >= 6 ? 2 : 1) : 0, '#ffe066', '#f08c00', ' plain'),
+    };
+    Object.entries(st.P.views || {}).forEach(([v, x]) => { cards[v] = card(`${base}/${v}`, `<span class="gemoji">${x.icon}</span>`, x.name, 0, x.color, x.dark, ' plain'); });
+    GAME_LIST.forEach(g => { cards[g.id] = card(`${base}/${g.id}`, g.pic(), g.name, best(id, g.id), g.color, g.dark); });
+    // 科目可以把卡片分段排（照學習的順序：上課 → 課本 → 口語 → 遊戲 → 考試）；沒有分段就全部排在一起
+    const groups = st.P.menu || [{ items: [...Object.keys(st.P.views || {}), 'learn', ...GAME_LIST.map(g => g.id), 'quiz'] }];
+    $('mathMenu').innerHTML = st.P.menu
+      ? groups.map(g => `<section class="menu-sec"><h3 class="menu-h">${g.title}${g.note ? `<small>${g.note}</small>` : ''}</h3>
+          <div class="menu-row n${g.items.length}">${g.items.map(k => cards[k] || '').join('')}</div></section>`).join('')
+      : groups[0].items.map(k => cards[k] || '').join('');
+    $('mathMenu').classList.toggle('sections', !!st.P.menu);
     slide();
     const my = st.token;
-    setTimeout(() => my === st.token && Voice.speak(['選一個遊戲']), 300);
+    setTimeout(() => my === st.token && Voice.speak([st.P.menuSay || '選一個遊戲']), 300);
   }
 
   $('mathMenu').addEventListener('click', e => {
@@ -565,7 +572,9 @@
     st.step = 0;
     $('mathDots').innerHTML = '';
     $('mathChoices').className = 'math-choices lesson-bar';
-    $('mathChoices').innerHTML = '<button class="pill big" data-act="replay">🔁 再看一次</button><button class="pill big go" data-act="practice">✏️ 開始練習</button>';
+    // 教完的下一步：科目可以指定（課本：上完課 → 點點看），不然就去練習題
+    const after = st.P.afterLearn || ['quiz', '✏️ 開始練習'];
+    $('mathChoices').innerHTML = `<button class="pill big" data-act="replay">🔁 再看一次</button><button class="pill big go" data-act="practice" data-to="${after[0]}">${after[1]}</button>`;
     slide();
     setTimeout(() => lessonStep(0), 300);
   }
@@ -592,7 +601,7 @@
     if (act) {
       Sound.play('click');
       if (act.dataset.act === 'replay') lessonStep(0);
-      else { location.hash = `#/${st.P.route}/${st.level.id}/quiz`; }
+      else { location.hash = `#/${st.P.route}/${st.level.id}/${act.dataset.to || 'quiz'}`; }
       return;
     }
     const b = e.target.closest('.choice');

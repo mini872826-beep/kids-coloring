@@ -28,7 +28,7 @@
   // 貼紙本：最新的在前面
   function bookHTML() {
     const l = list();
-    if (!l.length) return `<p class="sticker-empty">還沒有貼紙喔！<br>做完「小小考試」、玩完小遊戲、「跟我說」說完一課，都可以得到貼紙 🎁</p>`;
+    if (!l.length) return `<p class="sticker-empty">還沒有貼紙喔！<br>做完「小小考試」、玩完小遊戲、「跟我說」或「口說練習」說完一課，都可以得到貼紙 🎁</p>`;
     return `<div class="sticker-count">已經收集 ${l.length} 張貼紙</div><div class="sticker-book">${l.slice().reverse().map(s =>
       `<div class="sticker" title="${s.from}"><span>${s.e}</span><small>${s.from}</small></div>`).join('')}</div>`;
   }
