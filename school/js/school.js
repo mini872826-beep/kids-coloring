@@ -242,6 +242,11 @@
         turn('🎉 ' + T.sayDone);
       }
       Sound.play('yay');
+      // 說完了：換成「再練一次／回到這一課」，不會停在最後一句不知道要按什麼
+      $('sayBar').style.transition = 'none';
+      $('sayBar').style.width = '100%';
+      document.querySelector('.sb-say .sb-say-ctl').innerHTML = `<button class="pill big" data-say-act="restart">🔁 再練一次</button>
+        <button class="pill big sb-go" data-say-act="menu">📋 回到這一課</button>`;
       // 說完一課送一張貼紙
       const st = window.Stickers && Stickers.give(`${S.label}・${T.sayName}`);
       if (st) Stickers.pop(st);
@@ -314,6 +319,8 @@
     const S = sayState, act = b.dataset.sayAct;
     Sound.play('click');
     if (act === 'start') return Mic.start().then(ok => ok && S.reshow(S.onlyWeak));   // 口說練習：允許麥克風後開始
+    if (act === 'restart') { S.token++; Voice.cancel(); return S.reshow(false); }
+    if (act === 'menu') { S.token++; Voice.cancel(); location.hash = `#/b/${S.book.id}/${S.lv.id}`; return; }
     if (act === 'weak') { S.token++; Voice.cancel(); Mic.stop(); return S.reshow(true); }
     if (act === 'pause') {
       if (!S.paused) {

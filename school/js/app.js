@@ -110,7 +110,8 @@
     // 說一下現在的速度，再用新的速度把題目／教學念一次
     document.dispatchEvent(new Event('speedchange'));   // 先讓跟我說／口說練習停在這一句
     // （跟我說／口說練習念到一半換速度：用新的速度把這一句重念，不會卡住）
-    Voice.speak([SPEED[next][2]], () => { if (!$('math').hidden) $('mathSay').click(); });
+    // 點點看不用重念（小朋友自己點）
+    Voice.speak([SPEED[next][2]], () => { if (!$('math').hidden && !/view-tap/.test($('mathMenu').className)) $('mathSay').click(); });
   }, true);
   showSpeed();
 
