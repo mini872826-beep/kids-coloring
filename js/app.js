@@ -67,7 +67,7 @@
       openSong(sg);
     } else if (view === 'math') {
       show('math');
-      window.MathGame.open(id, page === 'learn');
+      window.MathGame.open(id, page);   // page：空白＝選遊戲、learn、quiz、race、feed、tower、frog
     } else if (view === 'done') {
       show('done');
       Sound.play('yay');
