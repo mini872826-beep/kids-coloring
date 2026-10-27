@@ -1063,6 +1063,24 @@ button {
 .lane.rival .racer { filter: hue-rotate(200deg); width: calc(var(--car) * .8); }
 .lane.me .racer { filter: drop-shadow(0 0 4px #fff); }
 .win .lane.me .racer { animation: hopC .5s ease infinite; }
+.lost .lane.rival .racer { animation: hopC .5s ease infinite; }
+.lane { position: relative; }
+.lane-tag {
+  position: absolute;
+  left: 2px;
+  bottom: 100%;
+  z-index: 2;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .9);
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 900;
+  font-size: clamp(12px, 1.8vw, 18px);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.lane.me .lane-tag { color: #c92a2a; }
+.lane.rival .lane-tag { color: #1c7ed6; }
 
 /* 🐻 餵小熊 */
 .feed { height: 100%; display: flex; align-items: center; justify-content: center; gap: 6%; padding: 8px 16px; background: linear-gradient(#fff9db, #ffe8cc); }
@@ -1130,6 +1148,43 @@ button {
   .math-board { --bh: 110px; }
   .math-page.is-game .choice { min-height: 60px; padding: 6px; }
   .gpic { height: 64px; }
+}
+/* 答錯時亮一下正確答案 */
+.choice.show { background: #d3f9d8; border-color: #2f9e44; box-shadow: 0 7px 0 #2b8a3e; animation: hintPulse 1s ease-in-out infinite; }
+.choice:disabled:not(.wrong):not(.show):not(.right):not(.was) { opacity: .85; }
+/* 訂正時間 */
+.math-page.is-fix { justify-content: flex-start; overflow-x: hidden; overflow-y: auto; }
+.math-page.is-fix::before { content: ""; margin-top: auto; }
+.math-page.is-fix > .math-choices { margin-bottom: auto; }
+.math-fix { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 16px; width: min(100%, 760px); }
+.math-fix[hidden] { display: none; }
+.fix-card {
+  flex: 1 1 220px;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 22px;
+  border: 5px solid;
+  font-family: "Chiron GoRound TC", "PingFang TC", sans-serif;
+  font-weight: 900;
+  animation: popIn2 .35s cubic-bezier(.3, 1.5, .6, 1) backwards;
+}
+.fix-card[hidden] { display: none; }
+.fix-card.bad { background: #fff5f5; border-color: #fa5252; color: #c92a2a; }
+.fix-card.good { background: #ebfbee; border-color: #40c057; color: #2b8a3e; }
+.fix-mark { font-size: clamp(34px, 6vw, 54px); line-height: 1; }
+.fix-lbl { font-size: clamp(20px, 3.4vw, 30px); white-space: nowrap; }
+.fix-card b { font-size: clamp(38px, 7vw, 64px); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.fix-card.bad b { text-decoration: line-through; text-decoration-thickness: 5px; }
+.choice.was { background: #fff5f5; border-color: #fa5252; box-shadow: 0 7px 0 #e03131; color: #c92a2a; }
+.choice.was.wrong { opacity: .55; }
+@media (max-width: 600px) and (orientation: portrait) {
+  .math-page.is-fix { gap: 12px; padding: 10px 10px 14px; }
+  .fix-card { flex-basis: 140px; padding: 6px 10px; gap: 6px; }
+  .math-page.is-fix .choice { min-height: 68px; padding: 10px 8px; }
 }
 #mathResult .modal-actions { flex-wrap: wrap; justify-content: center; gap: 14px; }
 .name-chip .en { margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: var(--c, #ffc94d); color: #fff; font-family: "Nunito", "Chiron GoRound TC", sans-serif; font-size: 18px; }
