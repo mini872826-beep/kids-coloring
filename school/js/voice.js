@@ -138,7 +138,11 @@
       }
       return blobs.get(f);
     }
-    function one(text, done, my) {
+    function one(text, end, my) {
+      // 保險：iPhone 開著麥克風時，播放有時會停住、播不完也不報錯；最多等 15 秒就當作念完，不會整個卡住
+      let over = false;
+      const done = () => { if (over) return; over = true; clearTimeout(dog); end(); };
+      const dog = setTimeout(() => { if (my !== token) return; au.pause(); playing = false; done(); }, 15000);
       const p = load(text);
       if (!p) return fallback(text, done);
       playing = true;

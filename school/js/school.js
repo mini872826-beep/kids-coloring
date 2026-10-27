@@ -105,6 +105,7 @@
         r.onstop = () => ok(chunks.length ? URL.createObjectURL(new Blob(chunks, { type: r.mimeType || 'audio/mp4' })) : null);
         r.start();
         setTimeout(() => { try { r.stop(); } catch (e) { ok(null); } }, ms);
+        setTimeout(() => ok(null), ms + 2500);   // 保險：iPhone 偶爾不會通知錄好了，就跳過這句的回放
       });
     },
   };
@@ -112,6 +113,13 @@
   window.addEventListener('hashchange', () => setTimeout(() => { if (!sayOn()) Mic.stop(); }, 0));
 
   /* ---------- 跟我說的播放（每本書共用） ---------- */
+  // 念完再做 cb；iPhone 開著麥克風時聲音偶爾會停住、不會念完，所以最多等 ms 就繼續（不會卡在同一句）
+  function talk(list, cb, ms) {
+    let fired = false;
+    const go = () => { if (!fired) { fired = true; cb(); } };
+    Voice.speak(list, go);
+    setTimeout(go, ms);
+  }
   let sayState = null;
   const sayOn = () => sayState && $('mathMenu').className.includes('view-say');
   // 念第 k 句：先聽老師說，再「換你說」，停一下（句子越長停越久），再到下一句
@@ -130,10 +138,10 @@
     const alive = () => my === S.token && sayOn() && sayState === S;
     const listen = () => {
       const t0 = Date.now();
-      Voice.speak([it.en], () => {
+      talk([it.en], () => {
         if (!alive()) return;
-        const heard = Date.now() - t0;
-        Voice.speak([T.yourTurn], () => {
+        const heard = Math.min(6000, Date.now() - t0);
+        talk([T.yourTurn], () => {
           if (!alive()) return;
           // 換你說：停的時間＝老師念的時間的 1.6 倍＋1.5 秒（慢速時自然就停久一點）
           const wait = Math.min(9000, Math.max(2500, heard * 1.6 + 1500));
@@ -154,7 +162,7 @@
             }
             S.k++;
             // 每說完五句誇一下
-            if (S.k % 5 === 0) { Sound.play('twinkle'); Voice.speak([T.great], () => alive() && sayGo(false)); } else sayGo(false);
+            if (S.k % 5 === 0) { Sound.play('twinkle'); talk([T.great], () => alive() && sayGo(false), 4000); } else sayGo(false);
           };
           if (!Mic.stream) return setTimeout(advance, wait);
           // 🎤 錄我的聲音：換你說的時候錄下來，馬上放給他聽
@@ -163,7 +171,7 @@
             if (!url) return advance();
             $('sayTurn').textContent = '🎧 ' + T.listenYou;
             $('sayTurn').className = 'sb-say-turn hear';
-            Voice.speak([T.listenYou], () => {
+            talk([T.listenYou], () => {
               if (!alive()) return;
               const a = new Audio(url);
               let done = false;
@@ -171,12 +179,12 @@
               a.onended = a.onerror = next;
               a.play().catch(next);
               setTimeout(next, wait + 1500);   // 保險
-            });
+            }, 3500);
           });
-        });
-      });
+        }, 3500);
+      }, 12000);
     };
-    if (intro) Voice.speak([T.sayIntro], () => alive() && listen()); else listen();
+    if (intro) talk([T.sayIntro], () => alive() && listen(), 6000); else listen();
   }
   $('mathMenu').addEventListener('click', e => {
     const b = e.target.closest('[data-say-act]');
