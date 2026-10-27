@@ -1,4 +1,4 @@
-// 大班學英文的離線緩存：有網路時先抓最新版，沒網路才用緩存。
+// 小書包學習本的離線緩存：有網路時先抓最新版，沒網路才用緩存。
 // 錄音檔放在上一層的 audio/（和小朋友愛畫畫共用），檔名就是內容的指紋，存過就直接用。
 const CACHE = 'school-english';
 const FILES = [
@@ -9,7 +9,8 @@ const FILES = [
   'js/voice.js',
   'js/pics.js',
   'js/game.js',
-  'js/lessons.js',
+  'js/shelf.js',
+  'js/books/english-k2-1.js',
   'js/school.js',
   'js/app.js',
   'manifest.webmanifest',

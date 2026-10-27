@@ -1715,3 +1715,21 @@ button {
   .sb-choices .choice .sb-pic { max-width: 96px; }
   .sb-banner .em { font-size: 56px; }
 }
+/* 英文速度按鈕 */
+.speed-btn { flex: none; display: inline-flex; align-items: center; gap: 4px; height: 52px; padding: 0 14px; border-radius: 999px; background: #fff; border: 4px solid #74c0fc; box-shadow: 0 4px 0 #1c7ed6; font-family: "Chiron GoRound TC", "PingFang TC", sans-serif; font-weight: 900; font-size: 18px; color: #1c7ed6; white-space: nowrap; }
+.speed-btn span { font-size: 26px; line-height: 1; }
+.speed-btn.slow { background: #fff3bf; border-color: #fcc419; box-shadow: 0 4px 0 #e67700; color: #e67700; }
+.speed-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #1c7ed6; }
+.reader-top .speed-btn { margin-left: auto; }
+.reader-top .speed-btn + .round { margin-left: 10px; }
+@media (max-width: 600px) { .speed-btn b { display: none; } .speed-btn { padding: 0 10px; } }
+/* 書架、誰在學習 */
+.kids { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin: 4px 0 14px; }
+.kids-q { font-family: "Chiron GoRound TC", sans-serif; font-weight: 900; font-size: 20px; color: var(--title-ink); }
+.kid { padding: 8px 18px; border-radius: 999px; background: rgba(255, 255, 255, .8); border: 4px solid #fff; font-family: "Chiron GoRound TC", sans-serif; font-weight: 900; font-size: 22px; color: #3d2f1f; box-shadow: 0 4px 0 rgba(0, 60, 110, .15); }
+.kid.on { background: #fff3bf; border-color: #fcc419; box-shadow: 0 4px 0 #e67700; }
+.kid.add { background: rgba(255, 255, 255, .55); color: #4a6a88; font-size: 18px; }
+.crumb { display: flex; align-items: center; gap: 14px; margin: 0 4px 10px; flex-wrap: wrap; }
+.crumb h2 { margin: 0; font-family: "Chiron GoRound TC", sans-serif; font-weight: 900; font-size: clamp(22px, 4vw, 34px); color: var(--title-ink); }
+.shelf-card .thumb { background: linear-gradient(135deg, var(--c), var(--cd)); display: grid; place-items: center; }
+.shelf-card .subj { position: absolute !important; inset: 8px auto auto 8px !important; width: auto !important; height: auto !important; padding: 5px 12px; border-radius: 999px; background: #fff; color: var(--sc); font-family: "Chiron GoRound TC", sans-serif; font-weight: 900; font-size: 16px; box-shadow: 0 3px 0 rgba(0, 0, 0, .18); }

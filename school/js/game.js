@@ -5,6 +5,8 @@
   const $ = id => document.getElementById(id);
   const ROUND = 10;
   // 一到十（念「答對了幾題」、青蛙跳到第幾片）
+  // 每個小朋友的星星分開存（app.js 的「誰在學習」）
+  const kidKey = k => { const kid = localStorage.getItem('kid'); return kid ? `${kid}|${k}` : k; };
   const N = n => [n === 10 ? '十' : '零一二三四五六七八九'[n] || String(n)];
 
   /* ---------- 練習 ---------- */
@@ -153,7 +155,7 @@
     $('mathScore').textContent = `答對了 ${n} 題`;
     $('mathResult').hidden = false;
     try {
-      const key = `${st.P.store[0]}:${st.level.id}`;
+      const key = kidKey(`${st.P.store[0]}:${st.level.id}`);
       if (n > +(localStorage.getItem(key) || 0)) localStorage.setItem(key, n);
     } catch (e) { }
     Sound.play('yay');
@@ -540,7 +542,7 @@
     $('mathScore').textContent = `${info.icon} ${st.g && st.g.lost ? '差一點點！' : ''}答對了 ${st.correct} 題`;
     $('mathResult').hidden = false;
     try {
-      const key = `${st.P.store[1]}:${st.level.id}:${st.game}`;
+      const key = kidKey(`${st.P.store[1]}:${st.level.id}:${st.game}`);
       if (s > +(localStorage.getItem(key) || 0)) localStorage.setItem(key, s);
     } catch (e) { }
     Sound.play('twinkle');
@@ -589,13 +591,14 @@
   $('mathSay').addEventListener('click', say);
   $('mathAgain').addEventListener('click', () => open(st.level.id, st.view, st.P.id));
   $('mathPick').addEventListener('click', () => { location.hash = `#/${st.P.route}/${st.level.id}`; });
-  $('mathBack').addEventListener('click', () => { location.hash = '#/'; });
+  // 回到這本書（科目有 home 的話），不然回首頁
+  $('mathBack').addEventListener('click', () => { location.hash = st.P.home || '#/'; });
   // 在遊戲／練習裡按小房子先回到「選遊戲」，在選遊戲畫面再按才回首頁
-  $('mathHome').addEventListener('click', () => { location.hash = st.view === 'menu' ? '#/' : `#/${st.P.route}/${st.level.id}`; });
+  $('mathHome').addEventListener('click', () => { location.hash = st.view === 'menu' ? st.P.home || '#/' : `#/${st.P.route}/${st.level.id}`; });
 
   // 練習題：最多答對幾題；遊戲：最多拿過幾顆星
   function best(id, game, P = st.P) {
-    try { return +(localStorage.getItem(game ? `${P.store[1]}:${id}:${game}` : `${P.store[0]}:${id}`) || 0); } catch (e) { return 0; }
+    try { return +(localStorage.getItem(kidKey(game ? `${P.store[1]}:${id}:${game}` : `${P.store[0]}:${id}`)) || 0); } catch (e) { return 0; }
   }
 
   // 首頁：三個階段，每關一張卡；左上角「看教學」，點卡片選遊戲（賽車、餵小熊、蓋高塔、青蛙跳、練習題）

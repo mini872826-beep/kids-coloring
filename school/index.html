@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-  <title>大班學英文</title>
-  <meta name="description" content="幼稚園大班英文課本的有聲複習：點圖聽單字、跟老師複習、念謠、小小考試和小遊戲。">
+  <title>小書包學習本</title>
+  <meta name="description" content="小朋友的有聲複習本：照學校課本分科目、分學期，點圖聽、跟老師複習、小小考試和小遊戲。">
   <meta name="theme-color" content="#fcc419">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
@@ -12,7 +12,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="大班學英文">
+  <meta name="apple-mobile-web-app-title" content="小書包學習本">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@700;900&family=Noto+Sans+TC:wght@700;900&family=Nunito:wght@800;900&display=swap">
@@ -28,10 +28,12 @@
       <svg class="hills" viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0 120 Q200 40 420 110 T820 90 T1200 100 V200 H0 Z" fill="#a5e383"/><path d="M0 160 Q260 90 560 150 T1200 140 V200 H0 Z" fill="#7fd36b"/></svg>
     </div>
     <header class="home-header">
-      <h1 class="logo" id="logo"><span>大</span><span>班</span><span>學</span><span>英</span><span>文</span><span>🎒</span></h1>
+      <h1 class="logo" id="logo"><span>小</span><span>書</span><span>包</span><span>學</span><span>習</span><span>本</span></h1>
+      <button class="speed-btn" data-speed aria-label="英文速度"></button>
       <button id="installBtn" class="pill" hidden>⬇️ 安裝</button>
     </header>
-    <p class="sub-title">My School Book・幼稚園課本複習</p>
+    <div id="kids" class="kids"></div>
+    <div id="crumb" class="crumb" hidden><button class="pill" data-go="#/">📚 書架</button><h2 id="bookTitle"></h2></div>
     <div id="grid" class="grid"></div>
     <div id="version" class="version"></div>
   </section>
@@ -42,6 +44,7 @@
     <div class="reader-top">
       <button id="mathHome" class="round" aria-label="回首頁"><svg viewBox="0 0 48 48"><path d="M8 24 L24 9 L40 24" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 22 L13 39 Q13 41 15 41 L21 41 L21 31 L27 31 L27 41 L33 41 Q35 41 35 39 L35 22" fill="currentColor"/></svg></button>
       <div class="reader-title"><h2 id="mathTitle"></h2><div id="mathDots" class="dots"></div></div>
+      <button class="speed-btn" data-speed aria-label="英文速度"></button>
       <button id="mathSay" class="round" aria-label="再念一次"><svg viewBox="0 0 48 48"><path d="M8 19 L16 19 L26 10 L26 38 L16 29 L8 29 Z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M32 17 Q37 24 32 31 M36 12 Q45 24 36 36" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></button>
     </div>
     <div id="mathPage" class="page math-page">
@@ -71,7 +74,9 @@
   <script src="js/voice.js"></script>
   <script src="js/pics.js"></script>
   <script src="js/game.js"></script>
-  <script src="js/lessons.js"></script>
+  <script src="js/shelf.js"></script>
+  <!-- 書：一本一個檔案，照學期排（新的書加在這裡，也要加到 sw.js） -->
+  <script src="js/books/english-k2-1.js"></script>
   <script src="js/school.js"></script>
   <script src="js/app.js"></script>
 </body>

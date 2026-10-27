@@ -59,6 +59,22 @@
       pick();
       speechSynthesis.addEventListener?.('voiceschanged', pick);
     }
+    /* 英文的速度：1 倍、0.75 倍、0.5 倍（中文是老師的聲音，一直用正常速度）。
+     * 慢速的英文是另外錄好的（tools/gen_voice.py 的 slow75:／slow50:，AI 真的慢慢念，聲音不會糊）；
+     * 還沒錄好的，先把正常的錄音放慢播（音調不變）。 */
+    const SPEEDS = [1, .75, .5];
+    let speed = 1;
+    try { speed = SPEEDS.includes(+localStorage.getItem('enSpeed')) ? +localStorage.getItem('enSpeed') : 1; } catch (e) { }
+    const isEn = text => /^[\x00-\x7F]+$/.test(text);
+    // 這一句要播哪個錄音（慢速有錄好就用慢速的）
+    function key(text) {
+      if (speed === 1 || !isEn(text)) return text;
+      const k = (speed === .75 ? 'slow75:' : 'slow50:') + text;
+      return index[k] ? k : text;
+    }
+    // 慢速還沒錄好：播正常的錄音，但放慢
+    const stretch = text => speed !== 1 && isEn(text) && key(text) === text;
+
     function utter(text) {
       const u = new SpeechSynthesisUtterance(text);
       if (/^[\x00-\x7F]+$/.test(text)) {
@@ -66,7 +82,7 @@
         const en = speechSynthesis.getVoices().find(v => /^en[-_]US/i.test(v.lang));
         u.lang = 'en-US';
         if (en) u.voice = en;
-        u.rate = .8;
+        u.rate = .8 * speed;
         return u;
       }
       u.lang = voice ? voice.lang : 'zh-TW';
@@ -106,7 +122,7 @@
     // 音檔先抓成 blob 放在記憶體：播的時候不用再等網路，一句接一句不會卡
     const blobs = new Map();
     function load(text) {
-      const f = index[text];
+      const f = index[key(text)];
       if (!f) return null;
       if (!blobs.has(f)) {
         const p = fetch(AUDIO + f).then(r => r.ok ? r.blob() : null)
@@ -132,6 +148,9 @@
         au.onended = () => { playing = false; done(); };
         au.onerror = () => { playing = false; fallback(text, done); };
         au.src = url;
+        // 放慢但音調不變
+        au.preservesPitch = au.mozPreservesPitch = au.webkitPreservesPitch = true;
+        au.defaultPlaybackRate = au.playbackRate = stretch(text) ? speed : 1;
         au.play().catch(() => { playing = false; au.onended = au.onerror = null; fallback(text, done); });
       });
     }
@@ -149,7 +168,7 @@
     function decode(text) {
       const p = load(text);
       if (!p || !ctx) return null;
-      const f = index[text];
+      const f = index[key(text)];
       if (!bufs.has(f)) {
         const b = p.then(u => u && fetch(u)).then(r => r && r.arrayBuffer())
           .then(a => a && new Promise((ok, no) => ctx.decodeAudioData(a, ok, no))).catch(() => null);
@@ -168,7 +187,7 @@
     function gapless(list, onend, my) {
       if (!ctx || ctx.state !== 'running' || !list.length) return Promise.resolve(false);
       const ps = list.map(decode);
-      if (ps.some(x => !x)) return Promise.resolve(false);
+      if (ps.some(x => !x) || list.some(stretch)) return Promise.resolve(false);   // 要放慢播的句子用一般播放器（Web Audio 放慢會變低音）
       const wait = new Promise(ok => setTimeout(() => ok(null), 2500));
       return Promise.race([Promise.all(ps), wait]).then(bs => {
         if (my !== token) return true;
@@ -191,6 +210,12 @@
     }
 
     const api = {
+      speeds: SPEEDS,
+      speed: () => speed,
+      setSpeed(v) {
+        speed = SPEEDS.includes(v) ? v : 1;
+        try { localStorage.setItem('enSpeed', speed); } catch (e) { }
+      },
       ok: true,
       // 依序念一串句子，全部念完呼叫 onend
       speak(list, onend) {

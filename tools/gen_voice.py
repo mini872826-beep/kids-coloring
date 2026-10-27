@@ -21,6 +21,16 @@ VOICE_EN = 'en-US-AnaNeural'    # 英文：美國小朋友的聲音
 RATE = '-8%'                     # 講慢一點，小朋友比較聽得懂
 PITCH = '+0Hz'
 OUT = 'audio'
+# 大班學英文（school/）的慢速英文：句子前面加「slow75:」「slow50:」就是 0.75 倍、0.5 倍（1 倍 = RATE 的 -8%）
+SLOW = {'slow75:': '-31%', 'slow50:': '-54%'}
+
+
+def split_slow(text):
+    """'slow75:I see the sea.' → ('I see the sea.', '-31%')；一般的句子 → (句子, None)"""
+    for tag, rate in SLOW.items():
+        if text.startswith(tag):
+            return text[len(tag):], rate
+    return text, None
 # 錄好的檔頭尾各有快一秒的靜音，句子之間會卡卡的；用 ffmpeg 修掉（名字加 trim，修過的才算數）
 TRIM = 'silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.03,areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.08,areverse'
 
@@ -44,7 +54,7 @@ ZY = zhuyin_read()
 
 
 def is_english(text):
-    return all(ord(ch) < 128 for ch in text)
+    return all(ord(ch) < 128 for ch in split_slow(text)[0])
 
 
 def voice_for(text):
@@ -93,7 +103,7 @@ def file_name(text):
     # 聲音設定也算進去，換聲音時會全部重錄
     if text in ZY:
         return hashlib.sha1(f'{VOICE}|{ZY_TAG}|{ZY_RATE}|{text}|{ZY[text]}'.encode('utf-8')).hexdigest()[:12] + '.mp3'
-    key = f'{voice_for(text)}|{RATE}|{PITCH}|trim|{text}'
+    key = f'{voice_for(text)}|{split_slow(text)[1] or RATE}|{PITCH}|trim|{text}'
     return hashlib.sha1(key.encode('utf-8')).hexdigest()[:12] + '.mp3'
 
 
@@ -136,7 +146,8 @@ async def record(text, path):
         return
     for attempt in range(4):
         try:
-            await edge_tts.Communicate(text, voice_for(text), rate=RATE, pitch='+0Hz' if is_english(text) else PITCH).save(path)
+            words, slow = split_slow(text)
+            await edge_tts.Communicate(words, voice_for(text), rate=slow or RATE, pitch='+0Hz' if is_english(text) else PITCH).save(path)
             if os.path.getsize(path) > 0:
                 trim(path)
                 return
