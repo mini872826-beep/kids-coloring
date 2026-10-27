@@ -61,7 +61,8 @@ def check():
             if not os.path.exists(f):
                 continue
             subprocess.run(['ffmpeg', '-v', 'quiet', '-y', '-i', f, '-af', 'adelay=500,apad=pad_dur=1', '-ar', '16000', '/tmp/x.wav'])
-            segs, _ = m.transcribe('/tmp/x.wav', language='zh', beam_size=5)
+            import soundfile as sf
+            segs, _ = m.transcribe(sf.read('/tmp/x.wav', dtype='float32')[0], language='zh', beam_size=5)
             t = ''.join(s.text for s in segs).strip()
             heard = ' '.join(lazy_pinyin(re.sub(r'[^一-鿿]', '', t)))
             res[f'{n}-{k}'] = {'text': t, 'py': heard}
