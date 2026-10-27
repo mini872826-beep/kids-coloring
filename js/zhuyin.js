@@ -71,12 +71,14 @@
 
   /* ---------- 念法 ---------- */
   // 一個音節怎麼念：「勒、凹、老，三聲」；輕聲的字單獨念不出來，改念整個詞
-  function sayParts(syl) { return parse(syl).parts.map(p => SAY[p]); }
+  // 符號和單字的發音用注音本身當 key（微軟曉臻錄的標準發音，見 tools/gen_voice.py），句子才用大姊姊
+  const SND = z => SAY[z] ? z : null;
+  function sayParts(syl) { return parse(syl).parts; }
   function saySpell(syl, word) {
-    const { tone } = parse(syl), rep = SAY[syl];
+    const { tone } = parse(syl), rep = SND(syl);
     return [...sayParts(syl), ...(rep ? [rep] : []), Z.TONE_NAMES[tone], ...(!rep && word ? [word] : [])];
   }
-  const sayOf = (c, q) => q.kind === 'tone' ? Z.TONE_NAMES[+String(c).slice(1)] : SAY[c] || null;
+  const sayOf = (c, q) => q.kind === 'tone' ? Z.TONE_NAMES[+String(c).slice(1)] : SND(c);
 
   /* ---------- 出題 ---------- */
   let last = '';
@@ -98,7 +100,7 @@
     if (others.length < 3) others = others.concat(shuffle(Z.SYMBOLS.filter(x => ok(x) && !others.includes(x) && INITIALS.includes(x.z) === INITIALS.includes(s.z))));
     const choices = shuffle([s.z, ...others.slice(0, 3).map(x => x.z)]);
     const base = { kind: 'sym', qt: 'sym', sym: s, ans: s.z, choices, cls: 'zy-choices k-sym', key: s.z + Math.random() };
-    if (Math.random() < .5) return { ...base, key: s.z + 'h', text: T.hearSym, say: [T.hearSym, s.say], visual: ear() };
+    if (Math.random() < .5) return { ...base, key: s.z + 'h', text: T.hearSym, say: [T.hearSym, s.z], visual: ear() };
     const ask = inChar[0] === s.z ? T.firstSym : T.hasSym;
     return { ...base, key: s.z + 'p', text: ask, say: [s.w, ask], visual: card(s, { hi: k, plain: true }) };
   }
@@ -125,15 +127,15 @@
     const rest = shuffle(near.filter(x => !share.includes(x)));
     const choices = shuffle([syl, ...[...share, ...rest].slice(0, 3)]);
     const base = { kind: 'syl', qt: 'spell', syl, ans: syl, choices, cls: 'zy-choices k-syl' };
-    if (Math.random() < .5) return { ...base, key: syl + 'h', text: T.hearSyl, say: [T.hearSyl, ch], visual: ear() };
-    return { ...base, key: syl + 'b', text: T.blend, say: [...parts.map(p => SAY[p]), T.blend], visual: spellRow(syl, { ask: true }) };
+    if (Math.random() < .5) return { ...base, key: syl + 'h', text: T.hearSyl, say: [T.hearSyl, syl], visual: ear() };
+    return { ...base, key: syl + 'b', text: T.blend, say: [...parts, T.blend], visual: spellRow(syl, { ask: true }) };
   }
   // 中階：四個聲調
   function toneQ() {
     const set = pick(Z.TONES), t = rnd(0, 3), [syl, ch] = set[t];
     if (Math.random() < .5) {
       return { kind: 'syl', qt: 'tone', syl, ans: syl, choices: shuffle(set.map(x => x[0])), cls: 'zy-choices k-syl', key: syl + 'h',
-        text: T.hearTone, say: [T.hearTone, ch], visual: ear() };
+        text: T.hearTone, say: [T.hearTone, syl], visual: ear() };
     }
     return { kind: 'tone', qt: 'tone', syl, ans: 't' + (t + 1), choices: ['t1', 't2', 't3', 't4'], cls: 'zy-choices k-tone', key: syl + 's',
       text: T.seeTone, say: [T.seeTone], visual: `<div class="zsee">${zy(syl, { cls: 'zbigzy' })}</div>` };
@@ -176,9 +178,9 @@
 
   /* ---------- 一步一步講：拼一個音（教學和訂正都用） ---------- */
   function spellSteps(syl, word, k) {
-    const { tone, parts } = parse(syl), rep = SAY[syl];
+    const { tone, parts } = parse(syl), rep = SND(syl);
     const head = word ? card(word, { hi: k }) : '';
-    const steps = parts.map((p, i) => ({ html: head + spellRow(syl, { upto: i }), qhtml: qText(p, ''), say: [SAY[p]], fast: true }));
+    const steps = parts.map((p, i) => ({ html: head + spellRow(syl, { upto: i }), qhtml: qText(p, ''), say: [p], fast: true }));
     steps.push({
       html: head + spellRow(syl, { result: true }) + contour(tone),
       qhtml: `<span class="zq-big">${zy(syl)}</span>${rep && word ? '' : ''}<span class="zq-txt">${Z.TONE_NAMES[tone]}</span>`,
@@ -201,8 +203,8 @@
       if (level === 'jie') steps.push({ html: `<div class="zgrid">${[...MEDIALS].map(m => `<span class="on">${m}</span>`).join('')}</div>`, text: T.jieMid, say: [T.jieMid] });
       for (const [syl, ch] of EX[level]) {
         const parts = parse(syl).parts;
-        parts.forEach((p, i) => steps.push({ html: spellRow(syl, { upto: i }), qhtml: qText(p), say: [SAY[p]] }));
-        steps.push({ html: spellRow(syl, { result: true }), qhtml: `<span class="zq-big">${zy(syl)}</span><span class="zq-txt">${ch}</span>`, say: [...parts.map(p => SAY[p]), ch] });
+        parts.forEach((p, i) => steps.push({ html: spellRow(syl, { upto: i }), qhtml: qText(p), say: [p] }));
+        steps.push({ html: spellRow(syl, { result: true }), qhtml: `<span class="zq-big">${zy(syl)}</span><span class="zq-txt">${ch}</span>`, say: [...parts, syl] });
       }
       steps[steps.length - 1].done = true;
       return steps;
@@ -211,11 +213,11 @@
       const ma = Z.TONES[0];
       const row = lit => `<div class="ztones">${ma.map(([s, c], i) => `<span class="${i === lit ? 'on' : ''}">${zy(s)}<b>${c}</b></span>`).join('')}</div>`;
       const steps = [{ html: `<div class="zcontours">${[1, 2, 3, 4].map(t => contour(t)).join('')}</div>`, text: T.toneIntro, say: [T.toneIntro] }];
-      ma.forEach(([s, c], i) => steps.push({ html: `<div class="zsee">${contour(i + 1, true)}${zy(s, { cls: 'zbigzy' })}</div>`, qhtml: qText(T['t' + (i + 1)]), say: [T['t' + (i + 1)], c, c] }));
+      ma.forEach(([s, c], i) => steps.push({ html: `<div class="zsee">${contour(i + 1, true)}${zy(s, { cls: 'zbigzy' })}</div>`, qhtml: qText(T['t' + (i + 1)]), say: [T['t' + (i + 1)], s, s] }));
       const light = Z.LIGHT[0];
       steps.push({ html: card(light, { hi: 1 }) + contour(5), qhtml: qText(T.t5), say: [T.t5, light.w] });
       steps.push({ html: row(-1), text: T.toneAll, say: [T.toneAll] });
-      ma.forEach(([, c], i) => steps.push({ html: row(i), text: c, say: [c], fast: true }));
+      ma.forEach(([s, c], i) => steps.push({ html: row(i), text: c, say: [s], fast: true }));
       steps[steps.length - 1].done = true;
       return steps;
     }
@@ -226,8 +228,8 @@
         steps.push({ html: card(v), text: w, say: [w] });
         syls(v).forEach((syl, k) => {
           const parts = parse(syl).parts;
-          parts.forEach((p, i) => steps.push({ html: card(v, { hi: k }) + spellRow(syl, { upto: i }), qhtml: qText(p), say: [SAY[p]], fast: true }));
-          const rep = SAY[syl], tone = parse(syl).tone;
+          parts.forEach((p, i) => steps.push({ html: card(v, { hi: k }) + spellRow(syl, { upto: i }), qhtml: qText(p), say: [p], fast: true }));
+          const rep = SND(syl), tone = parse(syl).tone;
           steps.push({ html: card(v, { hi: k }) + spellRow(syl, { result: true }), qhtml: `<span class="zq-big">${zy(syl)}</span><span class="zq-txt">${v.w[k]}　${Z.TONE_NAMES[tone]}</span>`,
             say: rep ? [rep, Z.TONE_NAMES[tone], rep] : [Z.TONE_NAMES[tone], w] });
         });
@@ -239,9 +241,9 @@
     // 初階：一個一個認識，最後一起念一次
     const group = Z.SYMBOLS.filter(s => s.g === level);
     const steps = [{ html: symGrid(group), text: T.meet, say: [T.meet] }];
-    group.forEach(s => steps.push({ html: symCard(s), qhtml: qText(`${s.z}　${s.w}`), say: [s.say, s.w, s.say] }));
+    group.forEach(s => steps.push({ html: symCard(s), qhtml: qText(`${s.z}　${s.w}`), say: [s.z, s.w, s.z] }));
     steps.push({ html: symGrid(group), text: T.readAll, say: [T.readAll] });
-    group.forEach((s, i) => steps.push({ html: symGrid(group, i), qhtml: qText(s.z), say: [s.say], fast: true }));
+    group.forEach((s, i) => steps.push({ html: symGrid(group, i), qhtml: qText(s.z), say: [s.z], fast: true }));
     steps.push({ html: symGrid(group, group.length), text: `${T.learned} ${group.length} ${T.learnedN}`, say: [T.learned, ...N(group.length), T.learnedN], done: true });
     return steps;
   }
@@ -251,8 +253,8 @@
     if (q.qt === 'sym') {
       const s = q.sym, c = Z.SYMBOLS.find(x => x.z === chosen);
       const steps = [];
-      if (c) steps.push({ html: `<div class="zvs">${bigSym(c.z, 'bad')}<span class="zplus">≠</span>${bigSym(s.z, 'good')}</div>`, qhtml: qText(`${c.z} 是「${c.say}」`), say: [T.youPicked, c.say] });
-      steps.push({ html: symCard(s, { cls: 'good' }), qhtml: qText(`${s.z} 是「${s.say}」，${s.w}`), say: [T.answer, s.say, s.w, s.say], done: true });
+      if (c) steps.push({ html: `<div class="zvs">${bigSym(c.z, 'bad')}<span class="zplus">≠</span>${bigSym(s.z, 'good')}</div>`, qhtml: qText(`${c.z} 是「${c.say}」`), say: [T.youPicked, c.z] });
+      steps.push({ html: symCard(s, { cls: 'good' }), qhtml: qText(`${s.z} 是「${s.say}」，${s.w}`), say: [T.answer, s.z, s.w, s.z], done: true });
       return steps;
     }
     const word = q.word, steps = [];

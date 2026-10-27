@@ -276,7 +276,7 @@
 
   const ZHUYIN_WORDS = [...new Set([
     ...Object.values(ZY_TEXT), ...ZY_TONE_NAMES.filter(Boolean),
-    ...ZY_LEVELS.map(l => l.say || l.name), ...Object.values(ZY_SAY),
+    ...ZY_LEVELS.map(l => l.say || l.name), ...Object.keys(ZY_SAY),
     ...ZY_SYMBOLS.map(s => s.w), ...ZY_LIGHT.map(v => v.w), ...Object.values(ZY_VOCAB).flat().map(v => v.w),
   ])];
   const ZHUYIN = { SYMBOLS: ZY_SYMBOLS, PIN: ZY_PIN, JIE: ZY_JIE, TONES: ZY_TONES, LIGHT: ZY_LIGHT, VOCAB: ZY_VOCAB, SAY: ZY_SAY, TONE_NAMES: ZY_TONE_NAMES, TIERS: ZY_TIERS, LEVELS: ZY_LEVELS, T: ZY_TEXT };

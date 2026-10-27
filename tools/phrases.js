@@ -33,6 +33,8 @@ WORDS.ZHUYIN_WORDS.forEach(w => all.add(w));
 // 全部中文旁白都用 MiniMax 台灣腔講故事大姊姊念（英文另外用英文的聲音）
 // --story：故事的句子（念故事用比較慢的速度）
 const story = [...new Set(BOOKS.flatMap(b => [b.title, ...b.pages.map(p => p.text)]))];
+// --zhuyin-read：注音 → 要念的字（ㄅ → 玻、ㄅㄚˊ → 拔）。這些用注音當 key 的發音由 gen_voice.py 用微軟曉臻錄
+if (process.argv.includes('--zhuyin-read')) { process.stdout.write(JSON.stringify(WORDS.ZHUYIN.SAY, null, 1)); process.exit(0); }
 const out = process.argv.includes('--story') ? story
   : process.argv.includes('--minimax') ? [...all].filter(t => /[\u4e00-\u9fff]/.test(t)) : [...all];
 process.stdout.write(JSON.stringify(out, null, 1));

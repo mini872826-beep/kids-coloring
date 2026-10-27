@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install edge-tts
+      - run: pip install edge-tts numpy soundfile
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: node tools/phrases.js > "$RUNNER_TEMP/phrases.json"
       # 中文旁白：MiniMax 台灣腔講故事大姊姊

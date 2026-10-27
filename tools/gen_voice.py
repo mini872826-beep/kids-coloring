@@ -25,6 +25,24 @@ OUT = 'audio'
 TRIM = 'silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.03,areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.08,areverse'
 
 
+# 注音符號和單一個字的標準發音（學注音用，key 是注音本身，例如「ㄅ」「ㄅㄚˊ」）：
+# MiniMax 大姊姊單獨念一個字常常念歪（ㄆ 念成「泡」、ㄦ 像英文），改用微軟曉臻（台灣標準發音）念代表字，音量調到和大姊姊一樣
+ZY_TAG = 'zy1'
+ZY_RATE = '-10%'
+
+
+def zhuyin_read():
+    try:
+        out = subprocess.run(['node', 'tools/phrases.js', '--zhuyin-read'], capture_output=True, text=True, check=True).stdout
+        return json.loads(out)
+    except Exception as e:
+        print('no zhuyin readings:', e)
+        return {}
+
+
+ZY = zhuyin_read()
+
+
 def is_english(text):
     return all(ord(ch) < 128 for ch in text)
 
@@ -73,6 +91,8 @@ def breezy_name(text, spk='v1'):
 
 def file_name(text):
     # 聲音設定也算進去，換聲音時會全部重錄
+    if text in ZY:
+        return hashlib.sha1(f'{VOICE}|{ZY_TAG}|{ZY_RATE}|{text}|{ZY[text]}'.encode('utf-8')).hexdigest()[:12] + '.mp3'
     key = f'{voice_for(text)}|{RATE}|{PITCH}|trim|{text}'
     return hashlib.sha1(key.encode('utf-8')).hexdigest()[:12] + '.mp3'
 
@@ -87,7 +107,33 @@ def trim(path):
         os.remove(tmp)
 
 
+def loud(path, db=-21.8):
+    """音量調到和 MiniMax 大姊姊一樣（tools/minimax_voice.py 的 LOUD）"""
+    import numpy as np
+    import soundfile as sf
+    wav = path + '.wav'
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', path, '-ar', '24000', '-ac', '1', wav], check=True)
+    y, fs = sf.read(wav)
+    y = y * 10 ** ((db - 20 * np.log10(np.sqrt((y ** 2).mean()) + 1e-9)) / 20)
+    sf.write(wav, y / max(1, np.abs(y).max() / 0.89), fs)
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-b:a', '48k', path], check=True)
+    os.remove(wav)
+
+
 async def record(text, path):
+    if text in ZY:
+        for attempt in range(4):
+            try:
+                await edge_tts.Communicate(ZY[text], VOICE, rate=ZY_RATE, pitch=PITCH).save(path)
+                if os.path.getsize(path) > 0:
+                    trim(path)
+                    loud(path)
+                    return
+            except Exception as e:
+                print(f'retry {attempt + 1}: {text} ({e})')
+            await asyncio.sleep(2 * (attempt + 1))
+        print(f'FAILED: {text}')
+        return
     for attempt in range(4):
         try:
             await edge_tts.Communicate(text, voice_for(text), rate=RATE, pitch='+0Hz' if is_english(text) else PITCH).save(path)
@@ -110,7 +156,7 @@ async def main():
     if len(sys.argv) > 2 and sys.argv[2] == '--plan':
         # 列出還沒有 BreezyVoice 錄音的中文句子，交給 tools/kaggle_voice/kaggle.sh 去錄
         jobs = [[t, breezy_name(t), 'v1'] for t in phrases
-                if not is_english(t) and t not in STORY and not os.path.exists(os.path.join(OUT, breezy_name(t)))]
+                if not is_english(t) and t not in STORY and t not in ZY and not os.path.exists(os.path.join(OUT, breezy_name(t)))]
         json.dump(jobs, open(sys.argv[3], 'w', encoding='utf-8'), ensure_ascii=False)
         print(f'{len(jobs)} phrases need BreezyVoice')
         return
@@ -120,7 +166,7 @@ async def main():
             index[text] = mm_name(text)
             continue
         # MiniMax 還沒錄到的：用以前 BreezyVoice 的錄音（志工 1，或故事以前的志工 2）
-        old = [n for n in (breezy_name(text), breezy_name(text, 'v2')) if os.path.exists(os.path.join(OUT, n))]
+        old = [] if text in ZY else [n for n in (breezy_name(text), breezy_name(text, 'v2')) if os.path.exists(os.path.join(OUT, n))]
         if not is_english(text) and old:
             index[text] = old[0]
             continue
