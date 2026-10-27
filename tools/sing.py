@@ -208,7 +208,7 @@ def render(song):
     voice = VOICE_EN if english else VOICE
     lines = song['sing'] or song['lines']
     plan = [align(tokens(l, english), n) for l, n in zip(lines, song['notes'])]
-    beat = 60 / (song['bpm'] * TEMPO)
+    beat = accomp.beat_sec(song)
     allm = [m for line in song['notes'] for m, _ in line]
     # 人聲移到舒服的音域（中間大約在 G4）
     shift = -12 * round((np.mean(allm) - 67) / 12)
@@ -226,7 +226,7 @@ def render(song):
         last, prev_hz = None, None
         for (e, m, b), (om, _) in zip(line, notes):
             dur = b * beat
-            hz = midi_hz(m + shift)
+            hz = midi_hz(m + shift + accomp.transpose(song))
             if e:
                 text, part, k = e
                 last = (feats[text], part, k)

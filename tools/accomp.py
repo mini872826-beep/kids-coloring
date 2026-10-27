@@ -44,8 +44,18 @@ def meter(song):
     return song.get('meter') or 2
 
 
+def tempo(song):
+    """英文兒歌放慢太多會拖拖拉拉、沒精神，只慢一點點"""
+    return .95 if song['kind'] == 'en-song' else TEMPO
+
+
+def transpose(song):
+    """英文兒歌整首升兩個半音（C 大調 → D 大調），人聲和伴奏一起升，聽起來比較明亮有精神"""
+    return 2 if song['kind'] == 'en-song' else 0
+
+
 def beat_sec(song):
-    return 60 / (song['bpm'] * TEMPO)
+    return 60 / (song['bpm'] * tempo(song))
 
 
 def pickups(song):
@@ -151,7 +161,7 @@ def arrange(song):
     m = meter(song)
     beat, starts, _, end = timeline(song)
     prog = chords(song)
-    key = tonic(song)
+    key = (tonic(song) + transpose(song)) % 12
     style = STYLE.get(song['id'], 'marimba')
     rnd = random.Random(song['id'])
     hum = lambda v: v + rnd.randint(-6, 6)

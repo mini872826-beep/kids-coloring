@@ -49,7 +49,7 @@ def segments(song):
             word, first = (last, False) if tok is None else part(*tok)
             last = word
             words.append(word)
-            pitch.append(m + shift)
+            pitch.append(m + shift + accomp.transpose(song))
             dur.append(b * beat)
             kind.append(2 if first else 3)
         # 下一句前面也要留 0.25 秒空白，再加上換氣的時間：不夠就讓最後一個音收短一點
