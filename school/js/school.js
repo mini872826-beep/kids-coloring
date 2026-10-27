@@ -62,7 +62,7 @@
         Mic.show();
         if (quiet) return false;
         Voice.speak([T.noMic]);
-        alert(Mic.why(e));
+        alert(Mic.why(e) + `\n\n（錯誤代碼：${e.name || e}）`);
         return false;
       }
     },
@@ -76,7 +76,8 @@
       if (e.name === 'NotFoundError' || e.name === 'OverconstrainedError') return '找不到麥克風。請確認裝置的麥克風可以用，再按一次「錄我的聲音」。';
       if (e.name === 'NotReadableError') return '麥克風正在被別的 App 使用（例如通話、錄音）。先把那個 App 關掉，再按一次「錄我的聲音」。';
       if (ios) {
-        return '麥克風被擋住了（可能之前按了「不允許」）。\n\n請這樣打開：\n'
+        return '麥克風被擋住了。\n\n'
+          + (standalone ? '' : '如果 Safari 上面出現「減少進階隱私權保護措施」，先按「減少保護措施」，再按一次「錄我的聲音」。\n\n還是不行的話：\n')
           + '1. 打開 iPhone／iPad 的「設定」→「App」→「Safari」→「麥克風」，選「詢問」或「允許」\n'
           + '（舊版 iOS：「設定」→「Safari」→ 往下滑到「麥克風」）\n'
           + (standalone ? '2. 把「小書包學習本」完全關掉（從下往上滑、把它滑掉），再重新打開\n' : '2. 重新整理這個網頁\n')
