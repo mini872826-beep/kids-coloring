@@ -52,6 +52,15 @@
     $('home').hidden = current === 'game';
     if (current === 'game') return window.MathGame.open(id, page, b.id);
     renderKids();
+    if (view === 'stickers') {
+      // 貼紙本
+      current = 'stickers';
+      $('crumb').hidden = false;
+      $('bookTitle').textContent = '📒 ' + T.stickerBook;
+      $('grid').style.cssText = '';
+      $('grid').innerHTML = window.Stickers.bookHTML();
+      return;
+    }
     $('crumb').hidden = current !== 'book';
     if (current === 'book') {
       // 一本書：一課一張卡

@@ -38,6 +38,52 @@
     if (e.target.closest('[data-replay]')) $('mathSay').click();
   });
 
+  /* ---------- 🎤 錄我的聲音（跟我說用）：麥克風只在「跟我說」畫面開著，離開就關掉 ---------- */
+  const Mic = {
+    stream: null,
+    want: () => localStorage.getItem('sayRec') === '1',
+    show() {
+      const b = $('sayRec');
+      if (!b) return;
+      b.textContent = Mic.stream ? '🎤 錄我的聲音：開' : '🎤 錄我的聲音：關';
+      b.classList.toggle('on', !!Mic.stream);
+    },
+    async start() {
+      try {
+        if (!Mic.stream) Mic.stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+        localStorage.setItem('sayRec', '1');
+        if (!sayOn()) Mic.stop();
+        Mic.show();
+        return true;
+      } catch (e) {
+        localStorage.setItem('sayRec', '0');
+        Mic.show();
+        Voice.speak([T.noMic]);
+        alert('沒辦法用麥克風。請在設定裡允許這個網站使用麥克風，再按一次「錄我的聲音」。');
+        return false;
+      }
+    },
+    stop() {
+      if (Mic.stream) Mic.stream.getTracks().forEach(t => t.stop());
+      Mic.stream = null;
+    },
+    // 錄 ms 毫秒，回傳錄音的網址（錄不到回傳 null）
+    record(ms) {
+      return new Promise(ok => {
+        if (!Mic.stream || !window.MediaRecorder) return ok(null);
+        let r;
+        try { r = new MediaRecorder(Mic.stream); } catch (e) { return ok(null); }
+        const chunks = [];
+        r.ondataavailable = e => e.data.size && chunks.push(e.data);
+        r.onstop = () => ok(chunks.length ? URL.createObjectURL(new Blob(chunks, { type: r.mimeType || 'audio/mp4' })) : null);
+        r.start();
+        setTimeout(() => { try { r.stop(); } catch (e) { ok(null); } }, ms);
+      });
+    },
+  };
+  // 離開「跟我說」就把麥克風關掉
+  window.addEventListener('hashchange', () => setTimeout(() => { if (!sayOn()) Mic.stop(); }, 0));
+
   /* ---------- 跟我說的播放（每本書共用） ---------- */
   let sayState = null;
   const sayOn = () => sayState && $('mathMenu').className.includes('view-say');
@@ -69,17 +115,37 @@
           void $('sayBar').offsetWidth;
           $('sayBar').style.transition = `width ${wait}ms linear`;
           $('sayBar').style.width = '100%';
-          setTimeout(() => {
+          const advance = () => {
             if (!alive() || S.paused) return;
             if (S.k + 1 >= S.items.length) {
               $('sayTurn').textContent = '🎉 ' + T.sayDone;
               Sound.play('yay');
-              return Voice.speak([T.sayDone]);
+              // 說完一課送一張貼紙
+              const st = window.Stickers && Stickers.give(`${S.label}・${T.sayName}`);
+              if (st) Stickers.pop(st);
+              return Voice.speak([T.sayDone, ...(st ? [T.sticker] : [])]);
             }
             S.k++;
             // 每說完五句誇一下
             if (S.k % 5 === 0) { Sound.play('twinkle'); Voice.speak([T.great], () => alive() && sayGo(false)); } else sayGo(false);
-          }, wait);
+          };
+          if (!Mic.stream) return setTimeout(advance, wait);
+          // 🎤 錄我的聲音：換你說的時候錄下來，馬上放給他聽
+          Mic.record(wait).then(url => {
+            if (!alive() || S.paused) return;
+            if (!url) return advance();
+            $('sayTurn').textContent = '🎧 ' + T.listenYou;
+            $('sayTurn').className = 'sb-say-turn hear';
+            Voice.speak([T.listenYou], () => {
+              if (!alive()) return;
+              const a = new Audio(url);
+              let done = false;
+              const next = () => { if (done) return; done = true; URL.revokeObjectURL(url); setTimeout(advance, 500); };
+              a.onended = a.onerror = next;
+              a.play().catch(next);
+              setTimeout(next, wait + 1500);   // 保險
+            });
+          });
         });
       });
     };
@@ -90,6 +156,10 @@
     if (!b || !sayOn()) return;
     const S = sayState, act = b.dataset.sayAct;
     Sound.play('click');
+    if (act === 'rec') {
+      if (Mic.stream) { Mic.stop(); localStorage.setItem('sayRec', '0'); Mic.show(); return Voice.speak([T.recOff]); }
+      return Mic.start().then(ok => ok && Voice.speak([T.recOn]));
+    }
     if (act === 'pause') {
       if (!S.paused) {
         S.paused = true;
@@ -228,7 +298,7 @@
       return out;
     }
     function sayShow(lv, box) {
-      sayState = { book, items: sayItems(lv.id), k: 0, paused: false, token: 0 };
+      sayState = { book, label: lv.name, items: sayItems(lv.id), k: 0, paused: false, token: 0 };
       box.innerHTML = `<div class="sb-say">
         <div class="sb-say-card" id="sayCard"></div>
         <div class="sb-say-turn" id="sayTurn"></div>
@@ -238,7 +308,10 @@
           <button class="pill" data-say-act="again">🔁 再聽一次</button>
           <button class="pill" data-say-act="pause" id="sayPause">⏸ 暫停</button>
           <button class="pill" data-say-act="next">⏭ 下一句</button>
-        </div></div>`;
+        </div>
+        <button class="pill sb-rec" data-say-act="rec" id="sayRec"></button></div>`;
+      Mic.show();
+      if (Mic.want()) Mic.start();
       sayGo(true);
     }
 

@@ -45,6 +45,7 @@
     review: '跟老師複習', words: '學單字', pattern: '說說看', meaning: '意思是',
     youPicked: '你選的是', right: '正確答案是', tryIt: '換你選選看', answerIs: '答案是',
     all: '總複習', allNote: '整本書的單字一起考', shelf: '書架', whoLearns: '誰要學習？', addKid: '新增小朋友',
+    sticker: '你得到一張貼紙！', stickerBook: '貼紙本', listenYou: '聽聽你說的', recOn: '錄音打開', recOff: '錄音關掉', noMic: '沒辦法用麥克風',
     sayName: '跟我說', sayIntro: '老師說一句，你跟著說一句', yourTurn: '換你說', great: '說得好棒！', sayDone: '全部說完了，你好棒！',
     speed1: '英文正常速度', speed75: '英文慢一點', speed50: '英文再慢一點',
     yourTeacher: '說說看你的老師是誰', myTeacher: 'My teacher is', quiz: '小小考試',

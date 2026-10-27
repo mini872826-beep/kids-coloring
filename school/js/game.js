@@ -159,7 +159,16 @@
       if (n > +(localStorage.getItem(key) || 0)) localStorage.setItem(key, n);
     } catch (e) { }
     Sound.play('yay');
-    Voice.speak(['全部答完了！', '答對了', ...N(n), '題']);
+    const gift = reward(st.P.quizName || '練習題');
+    Voice.speak(['全部答完了！', '答對了', ...N(n), '題', ...gift]);
+  }
+
+  // 做完一輪就送一張貼紙（stickers.js），顯示在結果視窗上；回傳要念的話
+  function reward(what) {
+    if (!window.Stickers) { $('mathSticker').innerHTML = ''; return []; }
+    const s = Stickers.give(`${st.level.name}・${what}`);
+    $('mathSticker').innerHTML = `<span>${s.e}</span><b>${SHELF.T.sticker}</b>`;
+    return [SHELF.T.sticker];
   }
 
   /* ---------- 選遊戲 ---------- */
@@ -546,6 +555,7 @@
       if (s > +(localStorage.getItem(key) || 0)) localStorage.setItem(key, s);
     } catch (e) { }
     Sound.play('twinkle');
+    Voice.speak(reward(info.name));
   }
 
   /* ---------- 教學播放：每一步念完自動到下一步 ---------- */
