@@ -296,7 +296,9 @@
       });
     }, 3500);
 
-    const listen = () => {
+    // 先說中文（小朋友還看不懂中文字，先知道意思）→ 再說英文 → 換你說
+    const listen = () => talk([it.zh], () => alive() && listenEn(), 8000);
+    const listenEn = () => {
       const t0 = Date.now();
       talk([it.en], () => {
         if (!alive()) return;
@@ -490,7 +492,7 @@
           <button class="pill" data-say-act="pause" id="sayPause">⏸ 暫停</button>
           <button class="pill" data-say-act="next">⏭ 下一句</button>
         </div></div>`;
-      sayGo(true);
+      sayGo(!speak);   // 口說練習的開始畫面已經說明過了，不用再說一次
     }
 
     /* ---------- 點點看：點圖片聽單字和句子，點念謠一句一句聽 ---------- */

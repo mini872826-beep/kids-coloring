@@ -136,6 +136,7 @@
     const said = G ? G.wrong(st.g) : null;
     talk(said || ['沒關係，下一題'], () => {
       if (!G) return next();
+      if (st.g && st.g.over) return;   // 賽車：小藍車已經到終點了
       G.won(st.g) || (G.finishUp && st.i >= GAME_MAX) ? win() : next();
     }, 1600);
   }
@@ -327,7 +328,11 @@
         step();
         talk(end ? [] : ['往前走三格！'], done, 1300);
       },
+      // 答錯：自己退一格，小藍車往前一格（一直亂按也一定會比完，不會玩不完）
       wrong(g) {
+        g.rival++;
+        at('race-rival', g.rival);
+        if (g.rival >= TRACK) { later(lose, 400); return []; }
         if (g.pos <= 0) return null;
         g.pos--;
         at('race-me', g.pos);
@@ -472,7 +477,10 @@
   function review(done) {
     st.mode = 'fix';
     st.q = null;
-    st.fix = { list: st.mistakes.slice(), k: 0, done, say: null };
+    // 小遊戲後的訂正最多 5 題（重複的題目只講一次），不然亂按的小朋友要訂正很久；練習題（10 題）全部訂正
+    let list = st.mistakes.slice();
+    if (st.game) list = list.filter((m, i) => list.findIndex(x => String(x.q.ans) === String(m.q.ans)) === i).slice(0, 5);
+    st.fix = { list, k: 0, done, say: null };
     $('mathPage').classList.add('is-fix');
     $('mathBoard').hidden = true;
     fixShow(true);
