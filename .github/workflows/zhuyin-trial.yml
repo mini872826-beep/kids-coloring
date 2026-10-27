@@ -1,0 +1,38 @@
+# 試聽：注音符號的念法（手動執行；結果放在 listen/zhuyin/）
+name: 注音念法試聽
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['tools/zhuyin_trial.py', '.github/workflows/zhuyin-trial.yml']
+permissions:
+  contents: write
+  pages: write
+jobs:
+  trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - run: pip install -q edge-tts numpy soundfile opencc-python-reimplemented faster-whisper pypinyin
+      - name: 錄
+        env:
+          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
+        run: python tools/zhuyin_trial.py record
+      - run: python tools/zhuyin_trial.py check
+      - run: python tools/zhuyin_trial.py page
+      - name: 推回 main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add listen/zhuyin
+          git commit -m "Zhuyin pronunciation trial" || exit 0
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 15; done
+          curl -sS -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || true
