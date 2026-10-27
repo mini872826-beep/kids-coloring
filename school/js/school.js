@@ -38,6 +38,75 @@
     if (e.target.closest('[data-replay]')) $('mathSay').click();
   });
 
+  /* ---------- 跟我說的播放（每本書共用） ---------- */
+  let sayState = null;
+  const sayOn = () => sayState && $('mathMenu').className.includes('view-say');
+  // 念第 k 句：先聽老師說，再「換你說」，停一下（句子越長停越久），再到下一句
+  function sayGo(intro) {
+    const S = sayState;
+    if (!S || !sayOn()) return;
+    const my = ++S.token, it = S.items[S.k];
+    $('sayCard').innerHTML = (it.chant ? `<div class="sb-say-chant" style="--c:${it.chant.color};--cd:${it.chant.dark}">🎵 ${it.chant.chant.title}</div>` : pic(it.pic)) +
+      `<div class="sb-lines"><div><b>${it.en}</b><small>${it.zh}</small></div></div><div class="sb-say-n">${S.k + 1} / ${S.items.length}</div>`;
+    $('sayTurn').textContent = '👂 聽老師說';
+    $('sayTurn').className = 'sb-say-turn';
+    $('sayBar').style.transition = 'none';
+    $('sayBar').style.width = '0';
+    $('sayPause').textContent = '⏸ 暫停';
+    S.paused = false;
+    const alive = () => my === S.token && sayOn() && sayState === S;
+    const listen = () => {
+      const t0 = Date.now();
+      Voice.speak([it.en], () => {
+        if (!alive()) return;
+        const heard = Date.now() - t0;
+        Voice.speak([T.yourTurn], () => {
+          if (!alive()) return;
+          // 換你說：停的時間＝老師念的時間的 1.6 倍＋1.5 秒（慢速時自然就停久一點）
+          const wait = Math.min(9000, Math.max(2500, heard * 1.6 + 1500));
+          $('sayTurn').textContent = '🗣️ 換你說！';
+          $('sayTurn').className = 'sb-say-turn you';
+          void $('sayBar').offsetWidth;
+          $('sayBar').style.transition = `width ${wait}ms linear`;
+          $('sayBar').style.width = '100%';
+          setTimeout(() => {
+            if (!alive() || S.paused) return;
+            if (S.k + 1 >= S.items.length) {
+              $('sayTurn').textContent = '🎉 ' + T.sayDone;
+              Sound.play('yay');
+              return Voice.speak([T.sayDone]);
+            }
+            S.k++;
+            // 每說完五句誇一下
+            if (S.k % 5 === 0) { Sound.play('twinkle'); Voice.speak([T.great], () => alive() && sayGo(false)); } else sayGo(false);
+          }, wait);
+        });
+      });
+    };
+    if (intro) Voice.speak([T.sayIntro], () => alive() && listen()); else listen();
+  }
+  $('mathMenu').addEventListener('click', e => {
+    const b = e.target.closest('[data-say-act]');
+    if (!b || !sayOn()) return;
+    const S = sayState, act = b.dataset.sayAct;
+    Sound.play('click');
+    if (act === 'pause') {
+      if (!S.paused) {
+        S.paused = true;
+        S.token++;
+        Voice.cancel();
+        $('sayBar').style.transition = 'none';
+        $('sayPause').textContent = '▶️ 繼續';
+        return;
+      }
+      return sayGo(false);
+    }
+    if (act === 'prev') S.k = Math.max(0, S.k - 1);
+    if (act === 'next') S.k = Math.min(S.items.length - 1, S.k + 1);
+    Voice.cancel();
+    sayGo(false);
+  });
+
   /* ---------- 一本英文課本 → 一個科目 ---------- */
   function englishBook(book) {
     // 每個單字一個 key：「書/課/單字」
@@ -144,6 +213,35 @@
     }
     const lessonSteps = id => (id === 'all' ? UNITS.flatMap(u => unitSteps(u, false)) : unitSteps(unitsOf(id)[0], true));
 
+    /* ---------- 跟我說：老師念一句 → 停下來讓小朋友跟著說（停的時間照句子長短）→ 下一句 ----------
+     * 英文照右上角的速度念（🐢 慢速時跟著說比較容易）。單字 → 句型 → 念謠，一句一句來 */
+    function sayItems(id) {
+      const out = [];
+      for (const u of unitsOf(id)) {
+        for (const w of [...u.words, ...(id === 'all' ? [] : u.extra)]) out.push({ pic: w, en: w.en, zh: w.zh });
+        for (const w of u.words) {
+          const s = sentence(u, w);
+          if (s) s.en.forEach((en, k) => out.push({ pic: w, en, zh: s.zh[k] }));
+        }
+        if (id !== 'all') u.chant.lines.forEach(([en, zh]) => out.push({ chant: u, en, zh }));
+      }
+      return out;
+    }
+    function sayShow(lv, box) {
+      sayState = { book, items: sayItems(lv.id), k: 0, paused: false, token: 0 };
+      box.innerHTML = `<div class="sb-say">
+        <div class="sb-say-card" id="sayCard"></div>
+        <div class="sb-say-turn" id="sayTurn"></div>
+        <div class="sb-say-bar"><i id="sayBar"></i></div>
+        <div class="sb-say-ctl">
+          <button class="pill" data-say-act="prev">⏮ 上一句</button>
+          <button class="pill" data-say-act="again">🔁 再聽一次</button>
+          <button class="pill" data-say-act="pause" id="sayPause">⏸ 暫停</button>
+          <button class="pill" data-say-act="next">⏭ 下一句</button>
+        </div></div>`;
+      sayGo(true);
+    }
+
     /* ---------- 點點看：點圖片聽單字和句子，點念謠一句一句聽 ---------- */
     function tapShow(lv, box) {
       tapToken++;
@@ -231,7 +329,10 @@
           showHTML: `<span class="sb-show"><span class="em">${UNITS.slice(0, 5).map(u => u.icon).join('')}<br>${UNITS.slice(5).map(u => u.icon).join('')}</span></span>` },
       ],
       pace: Object.fromEntries(['all', ...book.tiers.map((t, k) => 't' + k)].map(k => [k, 4200])),
-      views: { tap: { name: T.tap, icon: '👆', color: '#ffd8a8', dark: '#e8590c', show: tapShow, say: () => Voice.speak([T.tapHint]) } },
+      views: {
+        tap: { name: T.tap, icon: '👆', color: '#ffd8a8', dark: '#e8590c', show: tapShow, say: () => Voice.speak([T.tapHint]) },
+        say: { name: T.sayName, icon: '🗣️', color: '#d0bfff', dark: '#7048e8', show: sayShow, say: () => sayGo(false) },
+      },
       makeQuestion, lessonSteps, explainSteps, label,
       fixSay(m, q) {
         if (q.kind === 'yn') return [T.youPicked, ynText(q.u, m.chosen), T.right, ynText(q.u, q.ans), T.tryIt];
