@@ -277,6 +277,60 @@
       });
     }
 
+    // 一句話常常是好幾段拼起來的（「三」「加」「三」「等於多少？」）。iPad／手機每換一個音檔要多等一下，
+    // 聽起來會一頓一頓的：所以先把整句解碼好，用 Web Audio 一段接一段無縫排好一起播
+    let ctx = null, srcs = [], timer = 0;
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) ctx = new AC();
+      if (navigator.audioSession) navigator.audioSession.type = 'playback';   // 跟原本的播放器一樣，靜音鍵開著也念
+    } catch (e) { ctx = null; }
+    if (ctx) document.addEventListener('pointerdown', () => { if (ctx.state !== 'running') ctx.resume().catch(() => {}); });
+    const bufs = new Map();
+    function decode(text) {
+      const p = load(text);
+      if (!p || !ctx) return null;
+      const f = index[text];
+      if (!bufs.has(f)) {
+        const b = p.then(u => u && fetch(u)).then(r => r && r.arrayBuffer())
+          .then(a => a && new Promise((ok, no) => ctx.decodeAudioData(a, ok, no))).catch(() => null);
+        bufs.set(f, b);
+        b.then(x => { if (!x) bufs.delete(f); });
+        if (bufs.size > 80) bufs.delete(bufs.keys().next().value);
+      }
+      return bufs.get(f);
+    }
+    function stopBufs() {
+      srcs.forEach(s => { s.onended = null; try { s.stop(); } catch (e) { } });
+      srcs = [];
+      clearTimeout(timer);
+    }
+    // 全部都解碼好才用無縫播放；有一段沒錄好或解不開，就照舊一段一段放
+    function gapless(list, onend, my) {
+      if (!ctx || ctx.state !== 'running' || !list.length) return Promise.resolve(false);
+      const ps = list.map(decode);
+      if (ps.some(x => !x)) return Promise.resolve(false);
+      const wait = new Promise(ok => setTimeout(() => ok(null), 2500));
+      return Promise.race([Promise.all(ps), wait]).then(bs => {
+        if (my !== token) return true;
+        if (!bs || bs.some(b => !b)) return false;
+        playing = true;
+        let t = ctx.currentTime + .03;
+        bs.forEach((b, i) => {
+          const s = ctx.createBufferSource();
+          s.buffer = b;
+          s.connect(ctx.destination);
+          s.start(t);
+          t += b.duration;
+          srcs.push(s);
+          if (i === bs.length - 1) s.onended = () => { if (my !== token || !playing) return; playing = false; srcs = []; clearTimeout(timer); onend && onend(); };
+        });
+        // 保險：萬一 onended 沒來
+        timer = setTimeout(() => { if (my === token && playing) { playing = false; srcs = []; onend && onend(); } }, (t - ctx.currentTime) * 1000 + 600);
+        return true;
+      });
+    }
+
     const api = {
       ok: true,
       // 依序念一串句子，全部念完呼叫 onend
@@ -290,15 +344,16 @@
           if (i >= list.length) return onend && onend();
           one(list[i++], next, my);
         };
-        next();
+        gapless(list, onend, my).then(ok => { if (!ok && my === token) next(); });
       },
       // 先把等一下要念的句子抓好
-      warm(list) { list.forEach(load); },
+      warm(list) { list.forEach(t => decode(t) || load(t)); },
       say(text) { api.speak([text]); },
       cancel() {
         token++;
         au.onended = au.onerror = null;
         au.pause();
+        stopBufs();
         playing = false;
         if (tts) speechSynthesis.cancel();
       },
