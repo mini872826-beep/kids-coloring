@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'kaggle_svs'))
 from phonemes import FIX                      # noqa: E402  多音字讀音
 
 OUT = 'audio/sing-svs'
-VERSION = 'v3'   # v3：範本錄音剪到標記的那段（英文唱得比較清楚）
+VERSION = 'v4'   # v4：英文多音節的字一個音節唱一個音（v3：範本錄音剪到標記的那段）
 SETTINGS = {'steps': 32, 'cfg': 3, 'vox_gain': 1.0, 'acc_gain': 0.85}
 
 
@@ -46,12 +46,20 @@ def segments(song):
         words, pitch, dur, kind = ['<SP>'], [0], [pad], [1]
         last = None
         for tok, (m, b) in zip(tokens(line, english), notes):
-            word, first = (last, False) if tok is None else part(*tok)
+            if tok is None:                          # ~：前一個音拉長
+                word, kind_ = last, 3
+            else:
+                word, first = part(*tok)
+                kind_ = 2 if first else 3
+                # 英文多音節的字（Twin-kle）：每個音節各唱一個音，寫成 Twinkle#0/2、Twinkle#1/2，
+                # tools/kaggle_svs/phonemes.py 會把發音切開。不然 AI 會照說話習慣把後面的音節唱早（搶拍）
+                if english and word == tok[0] and tok[2] > 1:
+                    word, kind_ = f'{tok[0]}#{tok[1]}/{tok[2]}', 2
             last = word
             words.append(word)
             pitch.append(m + shift + accomp.transpose(song))
             dur.append(b * beat)
-            kind.append(2 if first else 3)
+            kind.append(kind_)
         # 下一句前面也要留 0.25 秒空白，再加上換氣的時間：不夠就讓最後一個音收短一點
         room = slot_end - .25 - (t + sum(dur[1:]))
         breath = min(.3 * beat, dur[-1] * .3)

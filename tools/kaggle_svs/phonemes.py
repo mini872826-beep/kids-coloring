@@ -21,7 +21,28 @@ def _load():
         _g2p_en, _g2p_zh, _t2s = G2p(), G2pM(), opencc.OpenCC('t2s')
 
 
+def syllable(ph, i, k):
+    """把一個字的發音（ARPAbet）切成 k 個音節，取第 i 個。母音前的子音歸給後面的音節（Twin-kle → T W IH NG | K AH L）"""
+    vowels = [j for j, p in enumerate(ph) if p[-1].isdigit()]
+    if len(vowels) < 2:
+        return ph if i == 0 else [p for p in ph if p[-1].isdigit()] or ph   # 只有一個母音：後面的音只拉長母音
+    if len(vowels) > k:                       # 字典的音節比音符多：多的併到最後一個音節
+        vowels = vowels[:k]
+    cuts = [0]
+    for a, b in zip(vowels, vowels[1:]):
+        cons = b - a - 1                      # 兩個母音中間的子音
+        cuts.append(b - (1 if cons >= 1 else 0) if cons <= 1 else a + 1 + cons // 2 + (cons % 2))
+    cuts.append(len(ph))
+    parts = [ph[cuts[j]:cuts[j + 1]] for j in range(len(cuts) - 1)]
+    return parts[min(i, len(parts) - 1)]
+
+
 def english(word, phoneset):
+    if '#' in word:                           # Twinkle#1/2：這個字的第 2 個音節
+        word, pos = word.split('#')
+        i, k = (int(x) for x in pos.split('/'))
+        full = english(word, phoneset)[3:].split('-')
+        return 'en_' + '-'.join(syllable(full, i, k))
     w = re.sub(r"[^A-Za-z']", '', word)
     ph = LETTERS.get(w) or '-'.join(p for p in _g2p_en(w.lower()) if p.strip() and p not in ',.?!')
     ph = [p if 'en_' + p in phoneset else re.sub(r'\d', '', p) + '1' for p in ph.split('-')]
