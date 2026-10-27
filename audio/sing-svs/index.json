@@ -1,6 +1,6 @@
 {
 "animal-sounds": {
-"file": "animal-sounds-abafa458.mp3",
+"file": "animal-sounds-847475bb.mp3",
 "times": [
 2.44,
 4.58,
@@ -12,16 +12,16 @@
 ]
 },
 "birthday": {
-"file": "birthday-d44f458f.mp3",
+"file": "birthday-e3e1a468.mp3",
 "times": [
-4.15,
-8.0,
-11.85,
-17.63
+3.51,
+7.36,
+11.21,
+15.06
 ]
 },
 "brush-song": {
-"file": "brush-song-ead5faf4.mp3",
+"file": "brush-song-543e56bb.mp3",
 "times": [
 2.54,
 4.78,
@@ -32,7 +32,7 @@
 ]
 },
 "color-song": {
-"file": "color-song-a3103259.mp3",
+"file": "color-song-c008737c.mp3",
 "times": [
 2.91,
 6.84,
@@ -42,7 +42,7 @@
 ]
 },
 "en-abc": {
-"file": "en-abc-347b57ab.mp3",
+"file": "en-abc-4ae363df.mp3",
 "times": [
 3.12,
 8.77,
@@ -53,25 +53,25 @@
 ]
 },
 "en-baa": {
-"file": "en-baa-3c622287.mp3",
+"file": "en-baa-1987c78e.mp3",
 "times": [
 3.12,
 8.77,
 14.42,
-20.07
+19.71
 ]
 },
 "en-birthday": {
-"file": "en-birthday-73b64fd3.mp3",
+"file": "en-birthday-f31a6654.mp3",
 "times": [
-4.15,
-8.0,
-11.85,
-17.63
+3.51,
+7.36,
+11.21,
+15.06
 ]
 },
 "en-ducks": {
-"file": "en-ducks-16805349.mp3",
+"file": "en-ducks-ac4f6641.mp3",
 "times": [
 2.65,
 7.36,
@@ -80,57 +80,57 @@
 ]
 },
 "en-farm": {
-"file": "en-farm-5c7a39c1.mp3",
+"file": "en-farm-5433b080.mp3",
 "times": [
 2.32,
 6.35,
-10.38,
-15.43,
-19.46,
-24.5,
-29.54,
-33.58
+9.88,
+14.42,
+17.95,
+22.48,
+26.52,
+30.55
 ]
 },
 "en-happy": {
-"file": "en-happy-bad2bf52.mp3",
+"file": "en-happy-a48de7bb.mp3",
 "times": [
-2.47,
-7.9,
-13.33,
-19.85
+1.93,
+6.27,
+10.62,
+14.96
 ]
 },
 "en-hickory": {
-"file": "en-hickory-3744400f.mp3",
+"file": "en-hickory-2d7efae1.mp3",
 "times": [
-2.65,
-6.18,
-9.71,
-12.06,
-14.42
+4.01,
+7.42,
+11.14,
+12.99,
+15.16
 ]
 },
 "en-humpty": {
-"file": "en-humpty-7e9faa9d.mp3",
+"file": "en-humpty-86058355.mp3",
 "times": [
-2.87,
-8.0,
-13.13,
-18.27
+4.12,
+7.93,
+11.75,
+15.56
 ]
 },
 "en-jack": {
-"file": "en-jack-0cc11d2f.mp3",
+"file": "en-jack-e53fa556.mp3",
 "times": [
-2.87,
-6.72,
-10.57,
-14.42
+4.01,
+7.73,
+11.45,
+15.16
 ]
 },
 "en-john": {
-"file": "en-john-c9a75d99.mp3",
+"file": "en-john-ce204062.mp3",
 "times": [
 2.65,
 7.36,
@@ -140,7 +140,7 @@
 ]
 },
 "en-london": {
-"file": "en-london-ef220c21.mp3",
+"file": "en-london-2b6733dc.mp3",
 "times": [
 2.65,
 7.36,
@@ -149,43 +149,43 @@
 ]
 },
 "en-mary": {
-"file": "en-mary-8c099be6.mp3",
+"file": "en-mary-3fcc9730.mp3",
 "times": [
 2.65,
 7.36,
 12.06,
-16.77
+16.18
 ]
 },
 "en-rain": {
-"file": "en-rain-181d89a5.mp3",
+"file": "en-rain-19b83246.mp3",
 "times": [
 2.87,
-6.72,
-10.57,
-14.42
+5.43,
+8.0,
+10.57
 ]
 },
 "en-row": {
-"file": "en-row-7a3049d1.mp3",
+"file": "en-row-77479810.mp3",
 "times": [
-2.87,
-6.72,
-10.57,
-14.42
+4.01,
+7.73,
+11.45,
+15.16
 ]
 },
 "en-spider": {
-"file": "en-spider-f15c3aff.mp3",
+"file": "en-spider-cb49f85c.mp3",
 "times": [
-2.65,
-9.71,
-16.77,
-23.83
+3.71,
+11.45,
+18.88,
+25.69
 ]
 },
 "en-twinkle": {
-"file": "en-twinkle-f4463240.mp3",
+"file": "en-twinkle-82e1e381.mp3",
 "times": [
 3.12,
 8.77,
@@ -196,7 +196,7 @@
 ]
 },
 "goodnight-song": {
-"file": "goodnight-song-295ba553.mp3",
+"file": "goodnight-song-9f13200c.mp3",
 "times": [
 5.73,
 11.16,
@@ -209,7 +209,7 @@
 ]
 },
 "little-star": {
-"file": "little-star-c38e2fc2.mp3",
+"file": "little-star-4835df74.mp3",
 "times": [
 3.12,
 8.77,
@@ -220,7 +220,7 @@
 ]
 },
 "london-bridge": {
-"file": "london-bridge-1526c3d1.mp3",
+"file": "london-bridge-8d7e3446.mp3",
 "times": [
 2.65,
 7.36,
@@ -229,7 +229,7 @@
 ]
 },
 "mom-dad": {
-"file": "mom-dad-0402003f.mp3",
+"file": "mom-dad-37797dc9.mp3",
 "times": [
 4.71,
 9.12,
@@ -241,7 +241,7 @@
 ]
 },
 "number-song": {
-"file": "number-song-8fd3f0f2.mp3",
+"file": "number-song-1e7a7c7e.mp3",
 "times": [
 3.02,
 5.73,
@@ -252,20 +252,20 @@
 ]
 },
 "old-farm": {
-"file": "old-farm-8029186d.mp3",
+"file": "old-farm-6492271c.mp3",
 "times": [
 2.32,
 6.35,
-10.38,
-15.43,
-19.46,
-23.49,
-27.53,
-31.56
+9.88,
+14.42,
+17.95,
+21.98,
+26.52,
+30.55
 ]
 },
 "pull-carrot": {
-"file": "pull-carrot-0b5ac35a.mp3",
+"file": "pull-carrot-488ea53f.mp3",
 "times": [
 2.73,
 6.38,
@@ -278,7 +278,7 @@
 ]
 },
 "rain-song": {
-"file": "rain-song-edaf64d6.mp3",
+"file": "rain-song-44fed679.mp3",
 "times": [
 2.82,
 5.34,
@@ -289,7 +289,7 @@
 ]
 },
 "sheep-home": {
-"file": "sheep-home-3339de38.mp3",
+"file": "sheep-home-6fbbe933.mp3",
 "times": [
 3.02,
 5.73,
@@ -302,7 +302,7 @@
 ]
 },
 "tricycle": {
-"file": "tricycle-96abc749.mp3",
+"file": "tricycle-3f68e11c.mp3",
 "times": [
 2.44,
 6.72,
@@ -311,7 +311,7 @@
 ]
 },
 "two-tigers": {
-"file": "two-tigers-e1f948ac.mp3",
+"file": "two-tigers-0273f8a8.mp3",
 "times": [
 2.47,
 6.82,
@@ -321,7 +321,7 @@
 ]
 },
 "vehicle-song": {
-"file": "vehicle-song-8ddb5424.mp3",
+"file": "vehicle-song-4668f2a9.mp3",
 "times": [
 2.65,
 5.01,
@@ -333,7 +333,7 @@
 ]
 },
 "wash-song": {
-"file": "wash-song-18b06796.mp3",
+"file": "wash-song-14536891.mp3",
 "times": [
 2.82,
 5.34,
