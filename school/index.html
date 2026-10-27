@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>大班學英文</title>
+  <meta name="description" content="幼稚園大班英文課本的有聲複習：點圖聽單字、跟老師複習、念謠、小小考試和小遊戲。">
+  <meta name="theme-color" content="#fcc419">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="大班學英文">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@700;900&family=Noto+Sans+TC:wght@700;900&family=Nunito:wght@800;900&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 首頁：一課一張卡 -->
+  <section id="home" class="screen">
+    <div class="scenery" aria-hidden="true">
+      <svg class="cloud c1" viewBox="0 0 200 90"><path d="M40 80 a30 30 0 0 1 8 -58 a40 40 0 0 1 72 -6 a32 32 0 0 1 52 30 a26 26 0 0 1 -10 34 z" fill="#fff"/></svg>
+      <svg class="cloud c2" viewBox="0 0 200 90"><path d="M40 80 a30 30 0 0 1 8 -58 a40 40 0 0 1 72 -6 a32 32 0 0 1 52 30 a26 26 0 0 1 -10 34 z" fill="#fff"/></svg>
+      <svg class="cloud c3" viewBox="0 0 200 90"><path d="M40 80 a30 30 0 0 1 8 -58 a40 40 0 0 1 72 -6 a32 32 0 0 1 52 30 a26 26 0 0 1 -10 34 z" fill="#fff"/></svg>
+      <svg class="hills" viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0 120 Q200 40 420 110 T820 90 T1200 100 V200 H0 Z" fill="#a5e383"/><path d="M0 160 Q260 90 560 150 T1200 140 V200 H0 Z" fill="#7fd36b"/></svg>
+    </div>
+    <header class="home-header">
+      <h1 class="logo" id="logo"><span>大</span><span>班</span><span>學</span><span>英</span><span>文</span><span>🎒</span></h1>
+      <button id="installBtn" class="pill" hidden>⬇️ 安裝</button>
+    </header>
+    <p class="sub-title">My School Book・幼稚園課本複習</p>
+    <div id="grid" class="grid"></div>
+    <div id="version" class="version"></div>
+  </section>
+  <div id="toast" class="toast" hidden></div>
+
+  <!-- 上課：點點看、跟老師複習、小小考試、小遊戲（遊戲引擎在 js/game.js） -->
+  <section id="math" class="screen" hidden>
+    <div class="reader-top">
+      <button id="mathHome" class="round" aria-label="回首頁"><svg viewBox="0 0 48 48"><path d="M8 24 L24 9 L40 24" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 22 L13 39 Q13 41 15 41 L21 41 L21 31 L27 31 L27 41 L33 41 Q35 41 35 39 L35 22" fill="currentColor"/></svg></button>
+      <div class="reader-title"><h2 id="mathTitle"></h2><div id="mathDots" class="dots"></div></div>
+      <button id="mathSay" class="round" aria-label="再念一次"><svg viewBox="0 0 48 48"><path d="M8 19 L16 19 L26 10 L26 38 L16 29 L8 29 Z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M32 17 Q37 24 32 31 M36 12 Q45 24 36 36" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></button>
+    </div>
+    <div id="mathPage" class="page math-page">
+      <div id="mathMenu" class="math-menu" hidden></div>
+      <div id="mathBoard" class="math-board" hidden></div>
+      <div id="mathVisual" class="math-visual"></div>
+      <div id="mathQ" class="math-q"></div>
+      <div id="mathFix" class="math-fix" hidden></div>
+      <div id="mathChoices" class="math-choices"></div>
+    </div>
+    <div id="mathResult" class="modal" hidden>
+      <div class="modal-box">
+        <div id="mathStars" class="stars"></div>
+        <p id="mathScore"></p>
+        <div class="modal-actions">
+          <button id="mathAgain" class="pill big blue-pill">🔁 再玩一次</button>
+          <button id="mathPick" class="pill big">🎮 換遊戲</button>
+          <button id="mathBack" class="pill big green-pill">🏠 回首頁</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="confetti" class="confetti"></div>
+
+  <script src="js/version.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/pics.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/school.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
