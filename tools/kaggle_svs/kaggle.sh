@@ -10,7 +10,7 @@ status() { kaggle kernels status "$KID" 2>&1 | tr A-Z a-z; }   # Kaggle 回的�
 # 1. 先把上一次（可能已經跑完）的成果收回來，只送還沒做好的
 case "$(status)" in *running*|*queued*) RUNNING=1;; *) RUNNING=0;; esac
 if [ $RUNNING = 0 ]; then
-  kaggle kernels output "$KID" -p /tmp/kx-prev/ >/dev/null 2>&1 || true
+  for t in 1 2 3; do kaggle kernels output "$KID" -p /tmp/kx-prev/ >/dev/null 2>&1 && break; sleep 20; done
   python3 - "$JOBS_FILE" "/tmp/kx-prev/out" "$DEST" <<'PY'
 import json, os, shutil, sys
 jobs = json.load(open(sys.argv[1], encoding='utf-8'))
