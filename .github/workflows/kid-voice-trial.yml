@@ -1,0 +1,52 @@
+# 試聽：英文兒歌換成小朋友的歌聲（手動執行；結果放在 listen/kid/，網址 /listen/kid/）
+name: 小朋友歌聲試聽
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: sing-svs
+jobs:
+  trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - name: MiniMax 小朋友說話範本
+        env:
+          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
+        run: python tools/kidvoice/trial.py refs
+      - name: 先推上去（Kaggle 從 GitHub 抓）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add listen/kid
+          git commit -m "Kid voice trial: references" || true
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 15; done
+          f=$(ls listen/kid/ref-*.mp3 | head -1)
+          for i in $(seq 1 30); do curl -sfI "https://raw.githubusercontent.com/${{ github.repository }}/main/$f" >/dev/null && break; sleep 10; done
+      - name: Kaggle 換成小朋友的聲音
+        env:
+          KAGGLE_USERNAME: pacokids
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          pip install -q "kaggle>=1.8"
+          python tools/kidvoice/trial.py jobs "$RUNNER_TEMP/jobs.json"
+          tools/kidvoice/kaggle.sh "$RUNNER_TEMP/jobs.json" main listen/kid
+          mv listen/kid/kaggle-kidvc-log.txt tools/kidvoice/last-log.txt 2>/dev/null || true
+      - name: 試聽網頁、推回 main
+        run: |
+          python tools/kidvoice/trial.py page
+          git add -A listen/kid tools/kidvoice
+          git commit -m "Kid voice trial" || exit 0
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 15; done
+          curl -sS -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || true
