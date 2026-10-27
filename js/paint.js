@@ -1041,12 +1041,19 @@
   };
 
   stage.addEventListener('pointerdown', e => {
-    if (active !== null) return;      // 只認一根手指，手掌碰到也沒關係
+    // 只認一根手指，手掌碰到也沒關係。
+    // 但如果上一筆的「放開」沒收到（iPad 偶爾會漏，或畫到一半跳出去），active 會卡住，之後怎麼點都不能畫：
+    // isPrimary = 現在畫面上沒有別的手指，表示上一筆其實早就放開了，先把它收尾
+    if (active !== null) {
+      if (!e.isPrimary) return;
+      endStroke({ pointerId: active });
+    }
     e.preventDefault();
     const p = toCanvas(e);
     if (state.tool === 'bucket') { bucket(p.x, p.y); return; }
     active = e.pointerId;
-    stage.setPointerCapture(e.pointerId);
+    try { stage.setPointerCapture(e.pointerId); } catch (err) { }   // 手指已經離開時會丟錯，不能讓它卡住
+
     snapshot();
     const t = TOOLS[state.tool];
     makeClip(p);
@@ -1085,6 +1092,10 @@
   }
   stage.addEventListener('pointerup', endStroke);
   stage.addEventListener('pointercancel', endStroke);
+  stage.addEventListener('lostpointercapture', endStroke);
+  // 畫到一半切到別的畫面、或 App 被切到背景：這一筆也要收尾
+  window.addEventListener('hashchange', () => active !== null && endStroke({ pointerId: active }));
+  document.addEventListener('visibilitychange', () => document.hidden && active !== null && endStroke({ pointerId: active }));
 
   /* ---------- 工具欄和彈出面板 ---------- */
   const brushPop = $('brushPop'), colorPop = $('colorPop'), scrim = $('scrim');
