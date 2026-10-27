@@ -10,6 +10,8 @@ import hashlib, json, math, os, sys
 sys.path.insert(0, os.path.dirname(__file__))
 import accomp                                # noqa: E402  伴奏和時間軸
 from sing import syllables, tokens            # noqa: E402  跟照譜唱用同一套斷字
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'kaggle_svs'))
+from phonemes import FIX                      # noqa: E402  多音字讀音
 
 OUT = 'audio/sing-svs'
 VERSION = 'v3'   # v3：範本錄音剪到標記的那段（英文唱得比較清楚）
@@ -73,7 +75,11 @@ def plan(songs, sung):
         src = sung[s['id']]['file']
         segs = segments(s)
         lang = 'English' if s['kind'] == 'en-song' else 'Mandarin'
-        h = hashlib.sha1(json.dumps([VERSION, src, segs, SETTINGS], ensure_ascii=False).encode()).hexdigest()[:8]
+        # 這首歌用到的多音字讀音也算進去：改了讀音，只有用到那個字的歌會重唱
+        lyrics = ''.join(s['sing'] or s['lines'])
+        fixes = sorted((w, py) for w, py in FIX.items() if w in lyrics)
+        h = hashlib.sha1(json.dumps([VERSION, src, segs, SETTINGS] + ([fixes] if fixes else []),
+                                    ensure_ascii=False).encode()).hexdigest()[:8]
         jobs.append({'id': s['id'], 'file': f"{s['id']}-{h}.mp3", 'lang': lang, 'segments': segs,
                      'acc': 'audio/sing/stems/' + src[:-4] + '-acc.mp3', **SETTINGS})
     return jobs

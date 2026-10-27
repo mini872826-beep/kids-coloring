@@ -30,7 +30,8 @@ def english(word, phoneset):
 
 # 多音字：這些詞照這裡念（g2pM 有時會選錯，例如「數一數」的數要念 shu3、「蘿蔔」念 luo2 bo5）
 FIX = {'數一數': 'shu3 yi4 shu3', '數數': 'shu3 shu3', '數到': 'shu3 dao4', '數綿羊': 'shu3 mian2 yang2',
-       '蘿蔔': 'luo2 bo5', '長在': 'zhang3 zai4', '長大': 'zhang3 da4', '載著': 'zai4 zhe5'}
+       '蘿蔔': 'luo2 bo5', '長在': 'zhang3 zai4', '長大': 'zhang3 da4', '載著': 'zai4 zhe5',
+       '呱': 'gua1'}
 
 
 def mandarin(chars, phoneset):
