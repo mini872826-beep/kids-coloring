@@ -1,7 +1,8 @@
 """兒歌「AI 歌手照歌譜唱」：把每首歌的歌詞、音高、每個音多長交給 SoulX-Singer（Kaggle 免費 GPU），
 它照譜直接唱出自然的歌聲，再配上 tools/sing.py 做的八音盒伴奏。
 時間軸和 tools/sing.py 一樣（都由 tools/accomp.py 決定），所以 audio/sing/index.json 的 times 可以直接亮字幕。
-輸出 audio/sing-svs/<id>-<hash>.mp3，index.json 記 {id: {file, times}}。
+Kaggle 唱好的人聲放 audio/sing-svs/stems/，這裡再用 tools/tighten.py 對拍（audio/sing-svs/tight/），
+跟伴奏混成成品 audio/sing-svs/<id>-<hash>-t1.mp3，index.json 記 {id: {file, times}}。
 用法：python tools/sing_svs.py songs.json --plan jobs.json [id,id]   列出還沒做的（交給 tools/kaggle_svs/kaggle.sh）
       python tools/sing_svs.py songs.json                           整理 index.json、刪掉舊檔
 """
@@ -93,6 +94,32 @@ def plan(songs, sung):
     return jobs
 
 
+TIGHT_TAG = '-t1'   # 對拍的方法改了就換號碼：成品換新檔名，平板上存的舊歌才不會一直用
+
+
+def finish(song, j):
+    """人聲對拍（tools/tighten.py），再跟伴奏混成成品。回傳成品檔名"""
+    import subprocess, tempfile
+    import tighten
+    stem, tight = os.path.join(OUT, 'stems', j['file']), os.path.join(OUT, 'tight', j['file'])
+    final = j['file'][:-4] + TIGHT_TAG + '.mp3'
+    if not os.path.exists(tight):
+        os.makedirs(os.path.dirname(tight), exist_ok=True)
+        with tempfile.TemporaryDirectory() as d:
+            a, b = os.path.join(d, 'a.wav'), os.path.join(d, 'b.wav')
+            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', stem, '-ar', '24000', '-ac', '1', a], check=True)
+            n = tighten.tighten(song, a, b)
+            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', b, '-b:a', '96k', tight], check=True)
+        print('tighten', j['id'], n, 'notes')
+    if not os.path.exists(os.path.join(OUT, final)):
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', tight, '-i', j['acc'], '-filter_complex',
+                        f"[0:a]loudnorm=I=-17:TP=-2,aresample=44100,volume={j['vox_gain']}[a];"
+                        f"[1:a]loudnorm=I=-23:TP=-2,aresample=44100,volume={j['acc_gain']}[b];"
+                        '[a][b]amix=inputs=2:normalize=0:duration=longest,alimiter=limit=0.9',
+                        '-ac', '1', '-b:a', '96k', os.path.join(OUT, final)], check=True)
+    return final
+
+
 def main():
     songs = json.load(open(sys.argv[1], encoding='utf-8'))
     sung = json.load(open('audio/sing/index.json', encoding='utf-8'))
@@ -100,31 +127,34 @@ def main():
     jobs = plan(songs, sung)
     if len(sys.argv) > 2 and sys.argv[2] == '--plan':
         only = set(filter(None, sys.argv[4].split(','))) if len(sys.argv) > 4 else None
-        # 成品或只有人聲的版本少一個，都要（從 Kaggle 收回或重唱）
-        todo = [j for j in jobs if (not os.path.exists(os.path.join(OUT, j['file']))
-                                    or not os.path.exists(os.path.join(OUT, 'stems', j['file'])))
+        # 只要「只有人聲」的版本（Kaggle 唱的）在，成品就在這裡對拍、混音
+        todo = [j for j in jobs if not os.path.exists(os.path.join(OUT, 'stems', j['file']))
                 and (not only or j['id'] in only)]
         json.dump(todo, open(sys.argv[3], 'w', encoding='utf-8'), ensure_ascii=False)
         print(f'{len(todo)} songs to sing')
         return
     old = json.load(open(os.path.join(OUT, 'index.json'), encoding='utf-8')) if os.path.exists(os.path.join(OUT, 'index.json')) else {}
+    byid = {x['id']: x for x in songs}
     index, keep = {}, set()
     for j in jobs:
-        if os.path.exists(os.path.join(OUT, j['file'])):
-            index[j['id']] = {'file': j['file'], 'times': sung[j['id']]['times']}
-            keep.add(j['file'])
+        if os.path.exists(os.path.join(OUT, 'stems', j['file'])):
+            final = finish(byid[j['id']], j)
+            index[j['id']] = {'file': final, 'times': sung[j['id']]['times']}
+            keep |= {j['file'], final}
         elif j['id'] in old and os.path.exists(os.path.join(OUT, old[j['id']]['file'])):
             # 新的還沒做好（或沒下載到）：先留著舊的，不要讓這首歌沒有 AI 歌手
             index[j['id']] = old[j['id']]
             keep.add(old[j['id']]['file'])
+            keep.add(old[j['id']]['file'].replace(TIGHT_TAG, ''))
             print('keep old:', j['id'])
     for f in os.listdir(OUT):
         if f.endswith('.mp3') and f not in keep:
             os.remove(os.path.join(OUT, f))
-    stems = os.path.join(OUT, 'stems')            # 只有人聲的版本（檔名一樣）
-    for f in os.listdir(stems) if os.path.isdir(stems) else []:
-        if f not in keep:
-            os.remove(os.path.join(stems, f))
+    for sub in ('stems', 'tight'):                # 只有人聲的版本、對好拍的人聲（檔名跟 Kaggle 的成品一樣）
+        d = os.path.join(OUT, sub)
+        for f in os.listdir(d) if os.path.isdir(d) else []:
+            if f not in keep:
+                os.remove(os.path.join(d, f))
     with open(os.path.join(OUT, 'index.json'), 'w', encoding='utf-8') as fp:
         json.dump(index, fp, ensure_ascii=False, indent=0, sort_keys=True)
     print(len(index), 'songs sung by the AI singer')

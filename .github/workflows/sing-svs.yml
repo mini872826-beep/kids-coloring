@@ -31,7 +31,7 @@ jobs:
         with:
           python-version: '3.12'
       # ffmpeg 轉檔；fluidsynth＋FluidR3 GM 音色庫（MIT）用來彈伴奏
-      - run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg fluidsynth fluid-soundfont-gm
+      - run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg fluidsynth fluid-soundfont-gm rubberband-cli
       - uses: actions/cache@v4
         with:
           path: .sing-cache
@@ -64,6 +64,7 @@ jobs:
           pip install -q "kaggle>=1.8"
           tools/kaggle_svs/kaggle.sh "$RUNNER_TEMP/jobs.json" main audio/sing-svs
           mv audio/sing-svs/kaggle-svs-log.txt tools/kaggle_svs/last-log.txt 2>/dev/null || true
+      # 人聲對拍（rubberband）、跟伴奏混成成品
       - run: python3 tools/sing_svs.py "$RUNNER_TEMP/songs.json"
       - name: 推回 main
         run: |
