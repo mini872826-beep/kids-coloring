@@ -1,0 +1,594 @@
+{
+ "bo-now": {
+  "text": "波",
+  "py": "bo"
+ },
+ "bo-mm_sym": {
+  "text": "Dull",
+  "py": ""
+ },
+ "bo-ms_sym": {
+  "text": "吧",
+  "py": "ba"
+ },
+ "bo-ms_char": {
+  "text": "播",
+  "py": "bo"
+ },
+ "po-now": {
+  "text": "泡",
+  "py": "pao"
+ },
+ "po-mm_sym": {
+  "text": "啪",
+  "py": "pa"
+ },
+ "po-ms_sym": {
+  "text": "啪",
+  "py": "pa"
+ },
+ "po-ms_char": {
+  "text": "哼",
+  "py": "heng"
+ },
+ "mo-now": {
+  "text": "More",
+  "py": ""
+ },
+ "mo-mm_sym": {
+  "text": "梅",
+  "py": "mei"
+ },
+ "mo-ms_sym": {
+  "text": "妈",
+  "py": "ma"
+ },
+ "mo-ms_char": {
+  "text": "摸",
+  "py": "mo"
+ },
+ "fo-now": {
+  "text": "佛",
+  "py": "fu"
+ },
+ "fo-mm_sym": {
+  "text": "Foo",
+  "py": ""
+ },
+ "fo-ms_sym": {
+  "text": "FU",
+  "py": ""
+ },
+ "fo-ms_char": {
+  "text": "佛",
+  "py": "fu"
+ },
+ "de-now": {
+  "text": "得",
+  "py": "de"
+ },
+ "de-mm_sym": {
+  "text": "2",
+  "py": ""
+ },
+ "de-ms_sym": {
+  "text": "",
+  "py": ""
+ },
+ "de-ms_char": {
+  "text": "得",
+  "py": "de"
+ },
+ "te-now": {
+  "text": "车",
+  "py": "che"
+ },
+ "te-mm_sym": {
+  "text": "2",
+  "py": ""
+ },
+ "te-ms_sym": {
+  "text": "他",
+  "py": "ta"
+ },
+ "te-ms_char": {
+  "text": "哼",
+  "py": "heng"
+ },
+ "ne-now": {
+  "text": "呢",
+  "py": "ne"
+ },
+ "ne-mm_sym": {
+  "text": "Nah",
+  "py": ""
+ },
+ "ne-ms_sym": {
+  "text": "呢",
+  "py": "ne"
+ },
+ "ne-ms_char": {
+  "text": "呢",
+  "py": "ne"
+ },
+ "le-now": {
+  "text": "了",
+  "py": "le"
+ },
+ "le-mm_sym": {
+  "text": "A",
+  "py": ""
+ },
+ "le-ms_sym": {
+  "text": "喏",
+  "py": "nuo"
+ },
+ "le-ms_char": {
+  "text": "啦",
+  "py": "la"
+ },
+ "ge-now": {
+  "text": "哥",
+  "py": "ge"
+ },
+ "ge-mm_sym": {
+  "text": "哥",
+  "py": "ge"
+ },
+ "ge-ms_sym": {
+  "text": "哥",
+  "py": "ge"
+ },
+ "ge-ms_char": {
+  "text": "哥",
+  "py": "ge"
+ },
+ "ke-now": {
+  "text": "酷",
+  "py": "ku"
+ },
+ "ke-mm_sym": {
+  "text": "卡",
+  "py": "ka"
+ },
+ "ke-ms_sym": {
+  "text": "科",
+  "py": "ke"
+ },
+ "ke-ms_char": {
+  "text": "科",
+  "py": "ke"
+ },
+ "he-now": {
+  "text": "喝",
+  "py": "he"
+ },
+ "he-mm_sym": {
+  "text": "他",
+  "py": "ta"
+ },
+ "he-ms_sym": {
+  "text": "呵",
+  "py": "he"
+ },
+ "he-ms_char": {
+  "text": "呵",
+  "py": "he"
+ },
+ "ji-now": {
+  "text": "雞毛",
+  "py": "ji mao"
+ },
+ "ji-mm_sym": {
+  "text": "滴 滴",
+  "py": "di di"
+ },
+ "ji-ms_sym": {
+  "text": "鸡",
+  "py": "ji"
+ },
+ "ji-ms_char": {
+  "text": "鸡",
+  "py": "ji"
+ },
+ "qi-now": {
+  "text": "漆",
+  "py": "qi"
+ },
+ "qi-mm_sym": {
+  "text": "2",
+  "py": ""
+ },
+ "qi-ms_sym": {
+  "text": "漆",
+  "py": "qi"
+ },
+ "qi-ms_char": {
+  "text": "漆",
+  "py": "qi"
+ },
+ "xi-now": {
+  "text": "C",
+  "py": ""
+ },
+ "xi-mm_sym": {
+  "text": "啥",
+  "py": "sha"
+ },
+ "xi-ms_sym": {
+  "text": "稀",
+  "py": "xi"
+ },
+ "xi-ms_char": {
+  "text": "稀",
+  "py": "xi"
+ },
+ "zhi-now": {
+  "text": "Zu",
+  "py": ""
+ },
+ "zhi-mm_sym": {
+  "text": "GOODBYE",
+  "py": ""
+ },
+ "zhi-ms_sym": {
+  "text": "鸡",
+  "py": "ji"
+ },
+ "zhi-ms_char": {
+  "text": "鸡",
+  "py": "ji"
+ },
+ "chi-now": {
+  "text": "吃",
+  "py": "chi"
+ },
+ "chi-mm_sym": {
+  "text": "2",
+  "py": ""
+ },
+ "chi-ms_sym": {
+  "text": "吃",
+  "py": "chi"
+ },
+ "chi-ms_char": {
+  "text": "吃",
+  "py": "chi"
+ },
+ "shi-now": {
+  "text": "诗",
+  "py": "shi"
+ },
+ "shi-mm_sym": {
+  "text": "show",
+  "py": ""
+ },
+ "shi-ms_sym": {
+  "text": "虚",
+  "py": "xu"
+ },
+ "shi-ms_char": {
+  "text": "虚",
+  "py": "xu"
+ },
+ "ri-now": {
+  "text": "有",
+  "py": "you"
+ },
+ "ri-mm_sym": {
+  "text": "RE",
+  "py": ""
+ },
+ "ri-ms_sym": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "ri-ms_char": {
+  "text": "喻",
+  "py": "yu"
+ },
+ "zi-now": {
+  "text": "滋",
+  "py": "zi"
+ },
+ "zi-mm_sym": {
+  "text": "Zé",
+  "py": ""
+ },
+ "zi-ms_sym": {
+  "text": "子",
+  "py": "zi"
+ },
+ "zi-ms_char": {
+  "text": "子",
+  "py": "zi"
+ },
+ "ci-now": {
+  "text": "刺",
+  "py": "ci"
+ },
+ "ci-mm_sym": {
+  "text": "さ",
+  "py": ""
+ },
+ "ci-ms_sym": {
+  "text": "雌",
+  "py": "ci"
+ },
+ "ci-ms_char": {
+  "text": "雌",
+  "py": "ci"
+ },
+ "si-now": {
+  "text": "嘶",
+  "py": "si"
+ },
+ "si-mm_sym": {
+  "text": "Suh",
+  "py": ""
+ },
+ "si-ms_sym": {
+  "text": "丝",
+  "py": "si"
+ },
+ "si-ms_char": {
+  "text": "丝",
+  "py": "si"
+ },
+ "yi-now": {
+  "text": "猴两猴",
+  "py": "hou liang hou"
+ },
+ "yi-mm_sym": {
+  "text": "ed. ed.",
+  "py": ""
+ },
+ "yi-ms_sym": {
+  "text": "E",
+  "py": ""
+ },
+ "yi-ms_char": {
+  "text": "E",
+  "py": ""
+ },
+ "wu-now": {
+  "text": "呜",
+  "py": "wu"
+ },
+ "wu-mm_sym": {
+  "text": "Woo",
+  "py": ""
+ },
+ "wu-ms_sym": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "wu-ms_char": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "yu-now": {
+  "text": "耶",
+  "py": "ye"
+ },
+ "yu-mm_sym": {
+  "text": "U",
+  "py": ""
+ },
+ "yu-ms_sym": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "yu-ms_char": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "a-now": {
+  "text": "啊",
+  "py": "a"
+ },
+ "a-mm_sym": {
+  "text": "啊",
+  "py": "a"
+ },
+ "a-ms_sym": {
+  "text": "啊",
+  "py": "a"
+ },
+ "a-ms_char": {
+  "text": "啊",
+  "py": "a"
+ },
+ "o-now": {
+  "text": "哦",
+  "py": "o"
+ },
+ "o-mm_sym": {
+  "text": "啊",
+  "py": "a"
+ },
+ "o-ms_sym": {
+  "text": "哦",
+  "py": "o"
+ },
+ "o-ms_char": {
+  "text": "哦",
+  "py": "o"
+ },
+ "e-now": {
+  "text": "呃",
+  "py": "e"
+ },
+ "e-mm_sym": {
+  "text": "呃",
+  "py": "e"
+ },
+ "e-ms_sym": {
+  "text": "啊",
+  "py": "a"
+ },
+ "e-ms_char": {
+  "text": "呃",
+  "py": "e"
+ },
+ "ê-now": {
+  "text": "A",
+  "py": ""
+ },
+ "ê-mm_sym": {
+  "text": "Era",
+  "py": ""
+ },
+ "ê-ms_sym": {
+  "text": "",
+  "py": ""
+ },
+ "ê-ms_char": {
+  "text": "",
+  "py": ""
+ },
+ "ai-now": {
+  "text": "嗨",
+  "py": "hai"
+ },
+ "ai-mm_sym": {
+  "text": "I",
+  "py": ""
+ },
+ "ai-ms_sym": {
+  "text": "愛",
+  "py": "ai"
+ },
+ "ai-ms_char": {
+  "text": "愛",
+  "py": "ai"
+ },
+ "ei-now": {
+  "text": "喂",
+  "py": "wei"
+ },
+ "ei-mm_sym": {
+  "text": "A",
+  "py": ""
+ },
+ "ei-ms_sym": {
+  "text": "A",
+  "py": ""
+ },
+ "ei-ms_char": {
+  "text": "A",
+  "py": ""
+ },
+ "ao-now": {
+  "text": "Ow",
+  "py": ""
+ },
+ "ao-mm_sym": {
+  "text": "L",
+  "py": ""
+ },
+ "ao-ms_sym": {
+  "text": "哦",
+  "py": "o"
+ },
+ "ao-ms_char": {
+  "text": "哦",
+  "py": "o"
+ },
+ "ou-now": {
+  "text": "哦",
+  "py": "o"
+ },
+ "ou-mm_sym": {
+  "text": "哦",
+  "py": "o"
+ },
+ "ou-ms_sym": {
+  "text": "哦",
+  "py": "o"
+ },
+ "ou-ms_char": {
+  "text": "哦",
+  "py": "o"
+ },
+ "an-now": {
+  "text": "汉",
+  "py": "han"
+ },
+ "an-mm_sym": {
+  "text": "and",
+  "py": ""
+ },
+ "an-ms_sym": {
+  "text": "按",
+  "py": "an"
+ },
+ "an-ms_char": {
+  "text": "按",
+  "py": "an"
+ },
+ "en-now": {
+  "text": "恩",
+  "py": "en"
+ },
+ "en-mm_sym": {
+  "text": "",
+  "py": ""
+ },
+ "en-ms_sym": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "en-ms_char": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "ang-now": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "ang-mm_sym": {
+  "text": "on",
+  "py": ""
+ },
+ "ang-ms_sym": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "ang-ms_char": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "eng-now": {
+  "text": "安",
+  "py": "an"
+ },
+ "eng-mm_sym": {
+  "text": "哼",
+  "py": "heng"
+ },
+ "eng-ms_sym": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "eng-ms_char": {
+  "text": "嗯",
+  "py": "n"
+ },
+ "er-now": {
+  "text": "Hi Ken",
+  "py": ""
+ },
+ "er-mm_sym": {
+  "text": "out",
+  "py": ""
+ },
+ "er-ms_sym": {
+  "text": "呃",
+  "py": "e"
+ },
+ "er-ms_char": {
+  "text": "二",
+  "py": "er"
+ }
+}
