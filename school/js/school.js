@@ -48,9 +48,11 @@
       b.textContent = Mic.stream ? '🎤 錄我的聲音：開' : '🎤 錄我的聲音：關';
       b.classList.toggle('on', !!Mic.stream);
     },
-    async start() {
+    // quiet：自動打開（上次有開）時失敗就算了，不跳說明；小朋友自己按的才跳說明
+    async start(quiet) {
       try {
-        if (!Mic.stream) Mic.stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) throw Object.assign(new Error('unsupported'), { name: 'Unsupported' });
+        if (!Mic.stream) Mic.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         localStorage.setItem('sayRec', '1');
         if (!sayOn()) Mic.stop();
         Mic.show();
@@ -58,10 +60,29 @@
       } catch (e) {
         localStorage.setItem('sayRec', '0');
         Mic.show();
+        if (quiet) return false;
         Voice.speak([T.noMic]);
-        alert('沒辦法用麥克風。請在設定裡允許這個網站使用麥克風，再按一次「錄我的聲音」。');
+        alert(Mic.why(e));
         return false;
       }
+    },
+    // 告訴爸媽為什麼不能錄、要怎麼打開（iPhone／iPad 最常見的是之前按了「不允許」）
+    why(e) {
+      const ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const standalone = navigator.standalone || matchMedia('(display-mode: standalone), (display-mode: fullscreen)').matches;
+      if (e.name === 'Unsupported') {
+        return '這個瀏覽器不能錄音。\n\n請用 Safari（iPhone／iPad）或 Chrome（安卓）打開網址再試試看；在 LINE、Facebook 裡面打開的網頁沒辦法錄音。';
+      }
+      if (e.name === 'NotFoundError' || e.name === 'OverconstrainedError') return '找不到麥克風。請確認裝置的麥克風可以用，再按一次「錄我的聲音」。';
+      if (e.name === 'NotReadableError') return '麥克風正在被別的 App 使用（例如通話、錄音）。先把那個 App 關掉，再按一次「錄我的聲音」。';
+      if (ios) {
+        return '麥克風被擋住了（可能之前按了「不允許」）。\n\n請這樣打開：\n'
+          + '1. 打開 iPhone／iPad 的「設定」→「App」→「Safari」→「麥克風」，選「詢問」或「允許」\n'
+          + '（舊版 iOS：「設定」→「Safari」→ 往下滑到「麥克風」）\n'
+          + (standalone ? '2. 把「小書包學習本」完全關掉（從下往上滑、把它滑掉），再重新打開\n' : '2. 重新整理這個網頁\n')
+          + '3. 再按一次「錄我的聲音」，跳出詢問時按「允許」';
+      }
+      return '麥克風被擋住了（可能之前按了「不允許」）。\n\n請點網址列旁邊的鎖頭 🔒 →「網站設定」→ 麥克風選「允許」，重新整理後再按一次「錄我的聲音」。';
     },
     stop() {
       if (Mic.stream) Mic.stream.getTracks().forEach(t => t.stop());
@@ -311,7 +332,7 @@
         </div>
         <button class="pill sb-rec" data-say-act="rec" id="sayRec"></button></div>`;
       Mic.show();
-      if (Mic.want()) Mic.start();
+      if (Mic.want()) Mic.start(true);
       sayGo(true);
     }
 
