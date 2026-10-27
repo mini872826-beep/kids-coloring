@@ -104,11 +104,17 @@ def main():
         json.dump(todo, open(sys.argv[3], 'w', encoding='utf-8'), ensure_ascii=False)
         print(f'{len(todo)} songs to sing')
         return
+    old = json.load(open(os.path.join(OUT, 'index.json'), encoding='utf-8')) if os.path.exists(os.path.join(OUT, 'index.json')) else {}
     index, keep = {}, set()
     for j in jobs:
         if os.path.exists(os.path.join(OUT, j['file'])):
             index[j['id']] = {'file': j['file'], 'times': sung[j['id']]['times']}
             keep.add(j['file'])
+        elif j['id'] in old and os.path.exists(os.path.join(OUT, old[j['id']]['file'])):
+            # 新的還沒做好（或沒下載到）：先留著舊的，不要讓這首歌沒有 AI 歌手
+            index[j['id']] = old[j['id']]
+            keep.add(old[j['id']]['file'])
+            print('keep old:', j['id'])
     for f in os.listdir(OUT):
         if f.endswith('.mp3') and f not in keep:
             os.remove(os.path.join(OUT, f))

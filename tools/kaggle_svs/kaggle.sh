@@ -59,7 +59,8 @@ for i in $(seq 1 600); do
   case "$s" in *complete*|*error*|*cancel*) echo "$s"; break;; esac
   [ $((i % 20)) = 0 ] && echo "$s"
 done
-kaggle kernels output "$KID" -p /tmp/kx-out/ >/dev/null || true
+# 下載成品（Kaggle 偶爾回 502，失敗就等一下再抓）
+for t in 1 2 3 4 5; do kaggle kernels output "$KID" -p /tmp/kx-out/ >/dev/null && break; echo "下載失敗，重試 $t"; sleep 30; done
 cp /tmp/kx-out/log.txt "$DEST/kaggle-svs-log.txt" 2>/dev/null
 grep -E "^ok |FAIL|EXCEPTION|setup|loaded|gen done|^heard" /tmp/kx-out/log.txt | cut -c1-500 | tail -80
 cp /tmp/kx-out/out/*.mp3 "$DEST"/ 2>/dev/null
