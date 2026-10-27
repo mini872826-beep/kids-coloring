@@ -250,14 +250,15 @@
 
     const yourTurn = heard => talk([T.yourTurn], () => {
       if (!alive()) return;
-      // 換你說：停的時間＝老師念的時間的 1.6 倍＋1.5 秒（慢速時自然就停久一點）
-      const wait = Math.min(9000, Math.max(2500, heard * 1.6 + 1500));
+      // 換你說：停的時間＝老師念的時間的 2 倍＋2 秒（慢速時自然就停久一點），最少 3.5 秒、最多 10 秒
+      const wait = Math.min(10000, Math.max(3500, heard * 2 + 2000));
       turn('🗣️ 換你說！', 'you');
       void $('sayBar').offsetWidth;
       $('sayBar').style.transition = `width ${wait}ms linear`;
       $('sayBar').style.width = '100%';
       // 口說練習才錄音、檢查發音；跟我說只是停下來讓他說
-      const rec = S.speak && Mic.stream ? Mic.record(wait) : Promise.resolve(null);
+      // 不錄音（跟我說）也要停 wait 這麼久，讓他把這句說完
+      const rec = S.speak && Mic.stream ? Mic.record(wait) : new Promise(ok => setTimeout(() => ok(null), wait));
       const chk = S.speak && Check.ok ? Check.listen(wait) : Promise.resolve(null);
       Promise.all([rec, chk]).then(([url, heardIt]) => {
         if (!alive() || S.paused) return;
@@ -305,6 +306,8 @@
     };
     if (intro) talk([T.sayIntro], () => alive() && listen(), 6000); else listen();
   }
+  // 換速度：停在這一句（舊的計時器不會再往下走），等一下用新的速度重念這一句
+  document.addEventListener('speedchange', () => { if (sayState) sayState.token++; });
   $('mathMenu').addEventListener('click', e => {
     const b = e.target.closest('[data-say-act]');
     if (!b || !sayOn()) return;
