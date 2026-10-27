@@ -46,7 +46,7 @@
     const [, view, id, page] = location.hash.split('/');
     if (current === 'read') stopSpeaking();
     if (current === 'song') stopSong();
-    if (current === 'math') window.MathGame.stop();
+    if (current === 'math' || current === 'zhuyin') window.MathGame.stop();
     current = view;
     if (view === 'paint') {
       const d = findDrawing(id);
@@ -68,6 +68,9 @@
     } else if (view === 'math') {
       show('math');
       window.MathGame.open(id, page);   // page：空白＝選遊戲、learn、quiz、race、feed、tower、frog
+    } else if (view === 'zhuyin') {
+      show('math');   // 學注音和學數學用同一個畫面、同一套遊戲
+      window.MathGame.open(id, page, 'zhuyin');
     } else if (view === 'done') {
       show('done');
       Sound.play('yay');
@@ -180,6 +183,10 @@
       // 練習題關卡＋九九乘法歌（一到九）
       $('grid').innerHTML = window.MathGame.cards(SONGS.filter(x => x.kind === 'times').map((x, i) =>
         `<div class="card story" role="button" data-go="#/song/${x.id}" data-say="${x.title}" style="--i:${i + 4};--c:#ff922b;--cd:#e8590c"><span class="thumb">${x.art}</span><div class="name">✖️ ${x.title}</div></div>`).join(''));
+    } else if (pref.tab === 'zhuyin') {
+      $('cats').hidden = true;
+      $('grid').style.cssText = '--c:#e64980;--cd:#c2255c';
+      $('grid').innerHTML = window.MathGame.cards('', 'zhuyin');
     } else {
       $('cats').hidden = false;
       $('cats').innerHTML = `<div class="cat-row main-row">${BOOK_TAGS.map(t =>

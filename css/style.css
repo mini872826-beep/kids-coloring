@@ -1506,3 +1506,125 @@ button {
   #reader .art svg { width: 100%; height: auto; max-height: 100%; }
   #reader .text { flex: 1; display: grid; place-items: center; font-size: clamp(24px, 5vw, 44px); }
 }
+
+/* 很窄的手機：六個分頁排成兩排（一排三個，圖示在左、字在右），每顆都夠大好按 */
+@media (max-width: 440px) {
+  .bar-row .tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .bar-row .tabs > .tab { flex-direction: row; justify-content: center; gap: 4px; min-height: 56px; padding: 4px 4px; font-size: 14px; }
+  .bar-row .tabs > .tab .tab-ic { width: 34px; height: 34px; font-size: 20px; flex: none; }
+}
+@media (max-width: 380px) {
+  .bar-row .tabs > .tab { flex-direction: column; gap: 1px; padding: 3px 2px; font-size: 13px; }
+  .bar-row .tabs > .tab .tab-ic { width: 30px; height: 30px; font-size: 18px; }
+}
+
+/* ================= 學注音（和學數學共用畫面，這裡只放注音的樣子） ================= */
+:root { --zyf: "Noto Sans TC", "Chiron GoRound TC", "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif; }
+.tab-ic.zy-ic { font-family: var(--zyf); font-weight: 900; color: var(--cd); }
+/* 直的注音：符號一個疊一個，聲調在右邊，輕聲的點在最上面 */
+.zy { display: inline-flex; align-items: stretch; font-family: var(--zyf); font-weight: 900; line-height: 1; vertical-align: middle; }
+.zy-c { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.zy-c i { font-style: normal; display: block; height: 1.04em; line-height: 1.04em; text-align: center; }
+.zy-c i.zy-dot { height: .5em; line-height: .5em; }
+.zy-t { display: flex; align-items: center; width: .5em; margin-left: .02em; font-size: .95em; line-height: 1; }
+.zy.n2 .zy-t, .zy.n3 .zy-t { align-self: flex-end; height: 1.7em; }
+.zy-t.q { color: #e03131; font-size: .7em; width: .6em; }
+.zy-q { color: #e03131; }
+/* 字＋注音 */
+.zw { display: inline-flex; align-items: center; gap: .12em; font-family: "Chiron GoRound TC", "PingFang TC", sans-serif; font-weight: 900; color: #3d2f1f; line-height: 1; }
+.zr { display: inline-flex; align-items: center; gap: .04em; }
+.zr .zy { font-size: .4em; }
+.zr.hi .zh, .zr.hi .zy { color: #e03131; }
+.zr.hi .zh { text-decoration: underline; text-decoration-thickness: .06em; text-underline-offset: .12em; }
+/* 圖＋詞 */
+.zcard { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 3vw, 28px); flex-wrap: wrap; }
+.zp { width: clamp(100px, 22vh, 230px); aspect-ratio: 4 / 3; display: grid; place-items: center; background: #fff; border-radius: 22px; box-shadow: 0 5px 0 rgba(0, 60, 110, .12); overflow: hidden; }
+.zp svg { width: 100%; height: 100%; }
+.zp { container-type: inline-size; }
+.zp.emoji { font-size: clamp(56px, 12vh, 130px); font-size: 52cqw; line-height: 1; }
+.zcard .zw { font-size: clamp(48px, 9vh, 100px); }
+.zsym { display: flex; align-items: center; justify-content: center; gap: clamp(12px, 3vw, 32px); flex-wrap: wrap; }
+.zbig { font-family: var(--zyf); font-weight: 900; font-size: clamp(90px, 18vh, 180px); line-height: 1; color: var(--cd); background: #fff; border-radius: 28px; padding: .08em .22em; box-shadow: 0 6px 0 rgba(0, 60, 110, .14); }
+.zbig.bad { color: #e03131; text-decoration: line-through; text-decoration-thickness: .06em; opacity: .8; }
+.zbig.good { color: #2b8a3e; }
+.zvs { display: flex; align-items: center; gap: 16px; }
+/* 一組符號 */
+.zgrid { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(8px, 1.6vw, 14px); max-width: 760px; }
+.zgrid > span { font-family: var(--zyf); font-weight: 900; font-size: clamp(44px, 8vw, 76px); line-height: 1; min-width: 1.4em; padding: .12em .1em; text-align: center; color: var(--cd); background: #fff; border-radius: 20px; box-shadow: 0 5px 0 rgba(0, 60, 110, .12); transition: transform .2s, background .2s; }
+.zgrid > span.on { background: #fff3bf; transform: scale(1.15); box-shadow: 0 0 0 5px #ffd43b; }
+.zgrid > span.done { background: #d3f9d8; }
+/* 拼音算式：聲母藍、介音綠、韻母橘、聲調紫 */
+.zspell { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px 8px; font-family: var(--zyf); font-weight: 900; font-size: clamp(42px, 8vh, 80px); line-height: 1; }
+.zt { min-width: 1.3em; padding: .1em .14em; text-align: center; border-radius: 18px; background: #fff; border: 4px solid; transition: opacity .2s, transform .2s; }
+.zt.initial { color: #1971c2; border-color: #74c0fc; }
+.zt.medial { color: #2b8a3e; border-color: #8ce99a; }
+.zt.final { color: #e8590c; border-color: #ffc078; }
+.zt.tone { color: #7048e8; border-color: #b197fc; }
+.zt.dim { opacity: .25; }
+.zt.on { transform: scale(1.12); box-shadow: 0 0 0 5px #ffd43b; }
+.zt.miss { color: #e03131; border-style: dashed; border-color: #e03131; }
+.zplus { font-size: .6em; color: #495057; }
+.zspell .zy { font-size: .8em; color: #3d2f1f; }
+.zspell .zres { color: var(--cd); background: #fff; border-radius: 18px; padding: .1em .15em; box-shadow: 0 0 0 4px #ffd43b; }
+/* 聲調的高低線 */
+.zcontours { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.zcontour { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; background: #fff; border-radius: 18px; padding: 6px 10px 8px; box-shadow: 0 4px 0 rgba(0, 60, 110, .12); }
+.zcontour svg { width: clamp(70px, 12vw, 110px); height: auto; }
+.zcontour.big svg { width: clamp(100px, 20vw, 170px); }
+.zcontour b { font-family: "Chiron GoRound TC", sans-serif; font-size: clamp(18px, 3vw, 26px); color: #3d2f1f; }
+.zcontour.t1 { color: #1c7ed6; }
+.zcontour.t2 { color: #2f9e44; }
+.zcontour.t3 { color: #e8590c; }
+.zcontour.t4 { color: #e03131; }
+.zcontour.t5 { color: #7048e8; }
+.zsee { display: flex; align-items: center; justify-content: center; gap: clamp(14px, 4vw, 40px); flex-wrap: wrap; }
+.zbigzy { font-size: clamp(64px, 13vh, 130px); color: #3d2f1f; background: #fff; border-radius: 26px; padding: .12em .2em; box-shadow: 0 6px 0 rgba(0, 60, 110, .14); }
+.ztones { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.ztones > span { display: flex; align-items: center; gap: 6px; padding: 8px 14px; background: #fff; border-radius: 20px; box-shadow: 0 4px 0 rgba(0, 60, 110, .12); transition: transform .2s; }
+.ztones .zy { font-size: clamp(30px, 5vw, 48px); }
+.ztones b { font-family: "Chiron GoRound TC", sans-serif; font-size: clamp(40px, 7vw, 68px); }
+.ztones > span.on { transform: scale(1.12); box-shadow: 0 0 0 5px #ffd43b; }
+.zcards { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+/* 聽一聽：大喇叭，點了再念一次 */
+.z-ear { width: clamp(96px, 18vh, 160px); aspect-ratio: 1; border-radius: 50%; background: #fff; border: 6px solid var(--c); box-shadow: 0 7px 0 var(--cd); font-size: clamp(48px, 9vh, 84px); line-height: 1; }
+.z-ear:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--cd); }
+/* 題目文字：注音的題目句子比較長，字小一點 */
+#math[data-subject="zhuyin"] .math-q { font-size: clamp(24px, 4.4vw, 46px); display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 16px; }
+.zq-big .zy { font-size: 1.4em; color: var(--cd); }
+/* 選項：符號、直的注音、聲調 */
+.zy-choices .choice { font-family: var(--zyf); display: grid; place-items: center; }
+.zy-choices.k-sym .choice { font-size: clamp(44px, 7vw, 70px); }
+.zy-choices.k-syl .choice { font-size: clamp(30px, 4.6vw, 48px); padding: 10px 6px; }
+.zy-choices.k-tone .choice { padding: 8px 4px; }
+.zy-sym { line-height: 1; }
+.zy-tn { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.zy-tn b { font-family: var(--zyf); font-size: clamp(48px, 8vw, 76px); height: .62em; line-height: .9; }
+.zy-tn small { font-family: "Chiron GoRound TC", sans-serif; font-size: clamp(20px, 3vw, 28px); margin-top: 6px; }
+.zy-choices.k-tone:has(.choice:nth-child(5)) { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.fix-card b .zy { font-size: .8em; }
+.fix-card b .zy-tn b { font-size: 1em; }
+.fix-card b .zy-tn small { font-size: .4em; }
+/* 首頁卡片 */
+.zy-show { position: static !important; display: flex; flex-direction: column; align-items: center; gap: 2px; padding-top: 30px; font-family: var(--zyf); font-weight: 900; font-size: clamp(32px, 5vw, 50px); white-space: nowrap; line-height: 1.1; color: #fff; text-shadow: 0 4px 0 rgba(0, 0, 0, .2); letter-spacing: .06em; }
+.zy-show.word { padding-top: 22px; }
+.zy-show.word .zw { font-size: clamp(40px, 6vw, 64px); color: #fff; }
+/* 遊戲時題目區小一點，選項留大 */
+#math[data-subject="zhuyin"] .math-page.is-game .zp { width: clamp(80px, 15vh, 170px); }
+#math[data-subject="zhuyin"] .math-page.is-game .zcard .zw { font-size: clamp(40px, 7vh, 80px); }
+#math[data-subject="zhuyin"] .math-page.is-game .zspell { font-size: clamp(34px, 6vh, 64px); }
+#math[data-subject="zhuyin"] .math-page.is-game .z-ear { width: clamp(80px, 13vh, 130px); }
+#math[data-subject="zhuyin"] .math-page.is-game .zbigzy { font-size: clamp(54px, 10vh, 110px); }
+@media (max-width: 600px) {
+  .zy-choices.k-tone:has(.choice:nth-child(5)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .zcard .zw { font-size: clamp(44px, 13vw, 72px); }
+  .zp { width: clamp(96px, 34vw, 170px); }
+  .zspell { font-size: clamp(34px, 10vw, 60px); gap: 4px 5px; }
+  .zbig { font-size: clamp(80px, 26vw, 140px); }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .zp, #math[data-subject="zhuyin"] .math-page.is-game .zp { width: 90px; }
+  .zcard .zw, #math[data-subject="zhuyin"] .math-page.is-game .zcard .zw { font-size: 40px; }
+  .zspell, #math[data-subject="zhuyin"] .math-page.is-game .zspell { font-size: 32px; }
+  .z-ear, #math[data-subject="zhuyin"] .math-page.is-game .z-ear { width: 72px; font-size: 36px; }
+  .zbig { font-size: 76px; }
+}

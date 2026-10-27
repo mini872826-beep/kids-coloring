@@ -27,6 +27,7 @@ const FILES = [
   'js/songs.js',
   'js/paint.js',
   'js/math.js',
+  'js/zhuyin.js',
   'js/app.js',
   'manifest.webmanifest',
   'media/awake.mp4',

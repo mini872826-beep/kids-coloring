@@ -66,7 +66,7 @@
   function makeQuestion(level) {
     if (level === 'count') {
       const n = rnd(1, 10);
-      return { ans: n, a: 0, b: n, op: 'count', text: '數一數，有幾個？', say: ['數一數，有幾個？'], visual: objs([n]), choices: choices(n, 1, 10) };
+      return { big: true, ans: n, a: 0, b: n, op: 'count', text: '數一數，有幾個？', say: ['數一數，有幾個？'], visual: objs([n]), choices: choices(n, 1, 10) };
     }
     if (level === 'times25' || level === 'times') {
       const a = level === 'times25' ? [2, 5][rnd(0, 1)] : rnd(2, 9), b = level === 'times25' ? rnd(1, 9) : rnd(2, 9);
@@ -234,11 +234,20 @@
   const st = { level: null, i: 0, q: null, correct: 0, tries: 0, busy: false, mode: 'quiz', token: 0, view: 'menu', game: null, g: null, intro: null, mistakes: [], fix: null };
   // 遊戲最多出幾題：答錯很多次也一定會走到終點，不會一直玩不完
   const GAME_MAX = 10;
+  // 題目／教學的字：有 qhtml 用 qhtml（注音要排直的），不然用純文字
+  function setQ(x) {
+    if (x.qhtml) $('mathQ').innerHTML = x.qhtml; else $('mathQ').textContent = x.text;
+  }
+  // 按鈕上的 data-v 是字串：換回選項本來的值（數字或注音）
+  const valueOf = (q, btn) => q.choices.find(c => String(c) === btn.dataset.v);
+  const choiceBtn = v => [...$('mathChoices').querySelectorAll('.choice')].find(b => b.dataset.v === String(v));
 
   // view：menu（選遊戲）、learn（看教學）、quiz（練習題）、或遊戲 id（race、feed、tower、frog）
-  function open(levelId, view) {
-    const lv = LEVELS.find(l => l.id === levelId) || LEVELS[0];
+  function open(levelId, view, subject) {
+    const P = SUBJECTS[subject] || MATH;
+    const lv = P.levels.find(l => l.id === levelId) || P.levels[0];
     if (view === true) view = 'learn';
+    st.P = P;
     st.level = lv;
     st.token++;
     st.view = view === 'learn' || view === 'quiz' || GAMES[view] ? view : 'menu';
@@ -248,6 +257,7 @@
     $('mathResult').hidden = true;
     $('math').style.setProperty('--c', lv.color);
     $('math').style.setProperty('--cd', lv.dark);
+    $('math').dataset.subject = P.id;
     $('mathPage').classList.toggle('is-menu', st.view === 'menu');
     $('mathPage').classList.toggle('is-game', !!st.game);
     $('mathMenu').hidden = st.view !== 'menu';
@@ -281,16 +291,16 @@
 
   function next() {
     if (!st.game && st.i >= ROUND) return quizEnd();
-    st.q = makeQuestion(st.level.id);
+    st.q = st.P.makeQuestion(st.level.id);
     st.tries = 0;
     st.busy = false;
     $('mathDots').innerHTML = st.game ? '' : Array.from({ length: ROUND }, (_, k) => `<span class="${k < st.i ? 'done' : k === st.i ? 'on' : ''}"></span>`).join('');
     $('mathVisual').innerHTML = st.q.visual;
     $('mathVisual').hidden = !st.q.visual;
-    $('mathVisual').classList.toggle('big', st.level.id === 'count');
-    $('mathQ').textContent = st.q.text;
-    $('mathChoices').className = 'math-choices';
-    $('mathChoices').innerHTML = st.q.choices.map(c => `<button class="choice" data-v="${c}">${c}</button>`).join('');
+    $('mathVisual').classList.toggle('big', !!st.q.big);
+    setQ(st.q);
+    $('mathChoices').className = 'math-choices' + (st.q.cls ? ' ' + st.q.cls : '');
+    $('mathChoices').innerHTML = st.q.choices.map(c => `<button class="choice" data-v="${c}">${st.P.label(c, st.q)}</button>`).join('');
     if (st.game && GAMES[st.game].question) GAMES[st.game].question(st.g, st.q);
     slide();
     setTimeout(say, 350);
@@ -311,7 +321,7 @@
   function choose(btn) {
     if (st.mode === 'fix') return fixChoose(btn);
     if (st.busy || btn.disabled) return;
-    const v = +btn.dataset.v;
+    const v = valueOf(st.q, btn);
     st.busy = true;
     st.i++;
     if (v === st.q.ans) {
@@ -329,7 +339,7 @@
     st.mistakes.push({ q: st.q, chosen: v });
     btn.classList.add('wrong');
     $('mathChoices').querySelectorAll('.choice').forEach(b => { b.disabled = true; });
-    const right = $('mathChoices').querySelector(`[data-v="${st.q.ans}"]`);
+    const right = choiceBtn(st.q.ans);
     if (right) right.classList.add('show');
     Sound.play('boing');
     const G = st.game && GAMES[st.game];
@@ -355,7 +365,7 @@
     $('mathScore').textContent = `答對了 ${n} 題`;
     $('mathResult').hidden = false;
     try {
-      const key = 'math:' + st.level.id;
+      const key = `${st.P.store[0]}:${st.level.id}`;
       if (n > +(localStorage.getItem(key) || 0)) localStorage.setItem(key, n);
     } catch (e) { }
     Sound.play('yay');
@@ -371,9 +381,10 @@
     const card = (go, pic, name, star, c, d, cls = '') =>
       `<button class="game-card${cls}" data-go="${go}" style="--gc:${c};--gd:${d}"><span class="gpic">${pic}</span><span class="gname">${name}</span>${star ? `<span class="gbest">${'⭐'.repeat(star)}</span>` : ''}</button>`;
     const p = best(id);
-    $('mathMenu').innerHTML = GAME_LIST.map(g => card(`#/math/${id}/${g.id}`, g.pic(), g.name, best(id, g.id), g.color, g.dark)).join('') +
-      card(`#/math/${id}/quiz`, '<span class="gemoji">✏️</span>', '練習題', p ? (p >= 9 ? 3 : p >= 6 ? 2 : 1) : 0, '#ffe066', '#f08c00', ' plain') +
-      card(`#/math/${id}/learn`, '<span class="gemoji">📘</span>', '看教學', 0, '#a5d8ff', '#1c7ed6', ' plain');
+    const base = `#/${st.P.route}/${id}`;
+    $('mathMenu').innerHTML = GAME_LIST.map(g => card(`${base}/${g.id}`, g.pic(), g.name, best(id, g.id), g.color, g.dark)).join('') +
+      card(`${base}/quiz`, '<span class="gemoji">✏️</span>', '練習題', p ? (p >= 9 ? 3 : p >= 6 ? 2 : 1) : 0, '#ffe066', '#f08c00', ' plain') +
+      card(`${base}/learn`, '<span class="gemoji">📘</span>', '看教學', 0, '#a5d8ff', '#1c7ed6', ' plain');
     slide();
     const my = st.token;
     setTimeout(() => my === st.token && Voice.speak(['選一個遊戲']), 300);
@@ -469,7 +480,7 @@
         g.rival = 0;
         g.go = false;      // 題目念完才開始算時間
         g.over = false;
-        g.pace = { easy: 2800, mid: 3600, hard: 4500 }[st.level.tier] || 3200;   // 想題目時小藍車每幾毫秒走一格
+        g.pace = (st.P.pace || { easy: 2800, mid: 3600, hard: 4500 })[st.level.tier] || 3200;   // 想題目時小藍車每幾毫秒走一格
         g.wait = g.pace;
         const cells = Array.from({ length: TRACK + 1 }, (_, k) =>
           `<i class="${k === 0 ? 'start' : k === TRACK ? 'goal' : ''}">${k > 0 && k < TRACK ? k : ''}</i>`).join('');
@@ -572,7 +583,7 @@
     //   其他關卡＝過河：答對往前跳兩片荷葉，跳到第十片就過河了
     frog: {
       setup(g) {
-        g.line = ['count', 'add10', 'sub10'].includes(st.level.id);
+        g.line = !!(st.P.frogLine && st.P.frogLine(st.level.id));
         g.pos = 0;
         g.got = 0;
         const pads = Array.from({ length: PADS + 1 }, (_, k) => `<i><b>${!g.line && k === PADS ? '🌸' : k}</b></i>`).join('');
@@ -666,18 +677,18 @@
     $('mathDots').innerHTML = f.list.map((_, k) => `<span class="${k < f.k ? 'done' : k === f.k ? 'on' : ''}"></span>`).join('');
     $('mathVisual').innerHTML = q.visual;
     $('mathVisual').hidden = !q.visual;
-    $('mathVisual').classList.toggle('big', q.op === 'count');
-    $('mathQ').textContent = q.text;
+    $('mathVisual').classList.toggle('big', !!q.big);
+    setQ(q);
     $('mathQ').classList.remove('done-step');
     $('mathFix').hidden = false;
-    $('mathFix').innerHTML = `<div class="fix-card bad"><span class="fix-mark">✗</span><span class="fix-lbl">你選了</span><b>${m.chosen}</b></div>
-      <div class="fix-card good" hidden><span class="fix-mark">✓</span><span class="fix-lbl">正確答案是</span><b>${q.ans}</b></div>`;
-    $('mathChoices').className = 'math-choices';
-    $('mathChoices').innerHTML = q.choices.map(c => `<button class="choice${c === m.chosen ? ' was' : ''}" data-v="${c}" disabled>${c}</button>`).join('');
+    $('mathFix').innerHTML = `<div class="fix-card bad"><span class="fix-mark">✗</span><span class="fix-lbl">你選了</span><b>${st.P.label(m.chosen, q)}</b></div>
+      <div class="fix-card good" hidden><span class="fix-mark">✓</span><span class="fix-lbl">正確答案是</span><b>${st.P.label(q.ans, q)}</b></div>`;
+    $('mathChoices').className = 'math-choices' + (q.cls ? ' ' + q.cls : '');
+    $('mathChoices').innerHTML = q.choices.map(c => `<button class="choice${c === m.chosen ? ' was' : ''}" data-v="${c}" disabled>${st.P.label(c, q)}</button>`).join('');
     slide();
     // 先念題目，再一步一步講為什麼，最後告訴他選了什麼、正確答案是什麼
     f.say = [...(first ? ['我們來訂正'] : []), ...q.say];
-    later(() => talk(f.say, () => fixSteps(explainSteps(q, st.level.id), 0), 500), 350);
+    later(() => talk(f.say, () => fixSteps(st.P.explainSteps(q, st.level.id, m.chosen), 0), 500), 350);
   }
 
   function fixSteps(steps, k) {
@@ -685,7 +696,7 @@
     const s = steps[k];
     $('mathVisual').hidden = false;
     $('mathVisual').innerHTML = s.html;
-    $('mathQ').textContent = s.text;
+    setQ(s);
     $('mathQ').classList.toggle('done-step', !!s.done);
     st.fix.say = s.say;
     talk(s.say, () => fixSteps(steps, k + 1), s.fast ? 0 : 700);
@@ -693,13 +704,15 @@
 
   function fixAsk() {
     const f = st.fix, m = f.list[f.k], q = m.q;
-    $('mathQ').textContent = q.text;
+    setQ(q);
+    // 講解完：把題目的圖放回來，再讓他選一次
+    if (st.P.id !== 'math') { $('mathVisual').innerHTML = q.visual; $('mathVisual').hidden = !q.visual; $('mathVisual').classList.toggle('big', !!q.big); }
     $('mathQ').classList.remove('done-step');
     const good = $('mathFix').querySelector('.good');
     if (good) good.hidden = false;
     $('mathChoices').querySelectorAll('.choice').forEach(b => { b.disabled = false; });
     f.busy = false;
-    f.say = ['你選了', ...N(m.chosen), '正確答案是', ...N(q.ans), '換你選選看'];
+    f.say = st.P.fixSay(m, q);
     Voice.speak(f.say);
   }
 
@@ -707,7 +720,7 @@
     const f = st.fix;
     if (!f || f.busy || btn.disabled) return;
     const q = f.list[f.k].q;
-    if (+btn.dataset.v === q.ans) {
+    if (valueOf(q, btn) === q.ans) {
       f.busy = true;
       btn.classList.remove('hint');
       btn.classList.add('right');
@@ -723,9 +736,9 @@
     btn.disabled = true;
     btn.classList.add('wrong');
     Sound.play('boing');
-    const right = $('mathChoices').querySelector(`[data-v="${q.ans}"]`);
+    const right = choiceBtn(q.ans);
     if (right) right.classList.add('hint');
-    Voice.speak(['答案是', ...N(q.ans)]);
+    Voice.speak(st.P.answerSay(q));
   }
 
   function showResult() {
@@ -736,7 +749,7 @@
     $('mathScore').textContent = `${info.icon} ${st.g && st.g.lost ? '差一點點！' : ''}答對了 ${st.correct} 題`;
     $('mathResult').hidden = false;
     try {
-      const key = `mathgame:${st.level.id}:${st.game}`;
+      const key = `${st.P.store[1]}:${st.level.id}:${st.game}`;
       if (s > +(localStorage.getItem(key) || 0)) localStorage.setItem(key, s);
     } catch (e) { }
     Sound.play('twinkle');
@@ -745,7 +758,7 @@
   /* ---------- 教學播放：每一步念完自動到下一步 ---------- */
   function lesson() {
     st.mode = 'lesson';
-    st.steps = lessonSteps(st.level.id);
+    st.steps = st.P.lessonSteps(st.level.id);
     st.step = 0;
     $('mathDots').innerHTML = '';
     $('mathChoices').className = 'math-choices lesson-bar';
@@ -761,7 +774,7 @@
     $('mathVisual').hidden = false;
     $('mathVisual').classList.remove('big');
     $('mathVisual').innerHTML = s.html;
-    $('mathQ').textContent = s.text;
+    setQ(s);
     $('mathQ').classList.toggle('done-step', !!s.done);
     $('mathChoices').classList.toggle('ready', k === st.steps.length - 1);
     Voice.speak(s.say, () => {
@@ -776,37 +789,59 @@
     if (act) {
       Sound.play('click');
       if (act.dataset.act === 'replay') lessonStep(0);
-      else { location.hash = `#/math/${st.level.id}/quiz`; }
+      else { location.hash = `#/${st.P.route}/${st.level.id}/quiz`; }
       return;
     }
     const b = e.target.closest('.choice');
     if (b) choose(b);
   });
   $('mathSay').addEventListener('click', say);
-  $('mathAgain').addEventListener('click', () => open(st.level.id, st.view));
-  $('mathPick').addEventListener('click', () => { location.hash = `#/math/${st.level.id}`; });
+  $('mathAgain').addEventListener('click', () => open(st.level.id, st.view, st.P.id));
+  $('mathPick').addEventListener('click', () => { location.hash = `#/${st.P.route}/${st.level.id}`; });
   $('mathBack').addEventListener('click', () => { location.hash = '#/'; });
   // 在遊戲／練習裡按小房子先回到「選遊戲」，在選遊戲畫面再按才回首頁
-  $('mathHome').addEventListener('click', () => { location.hash = st.view === 'menu' ? '#/' : `#/math/${st.level.id}`; });
+  $('mathHome').addEventListener('click', () => { location.hash = st.view === 'menu' ? '#/' : `#/${st.P.route}/${st.level.id}`; });
 
   // 練習題：最多答對幾題；遊戲：最多拿過幾顆星
-  function best(id, game) {
-    try { return +(localStorage.getItem(game ? `mathgame:${id}:${game}` : 'math:' + id) || 0); } catch (e) { return 0; }
+  function best(id, game, P = st.P || MATH) {
+    try { return +(localStorage.getItem(game ? `${P.store[1]}:${id}:${game}` : `${P.store[0]}:${id}`) || 0); } catch (e) { return 0; }
   }
 
   // 首頁：三個階段，每關一張卡；左上角「看教學」，點卡片選遊戲（賽車、餵小熊、蓋高塔、青蛙跳、練習題）
-  function cards(timesCards) {
+  // subject：'math'（預設）或其他登記過的科目（例如 'zhuyin'）；extra 是接在最後面的卡片（數學：九九乘法歌）
+  function cards(extra, subject) {
+    const P = SUBJECTS[subject] || MATH;
     let i = 0;
-    return TIERS.map(t => `<h3 class="tier-title">${t.name}<small>${t.note}</small></h3>` +
-      LEVELS.filter(l => l.tier === t.id).map(l => {
-        const b = best(l.id);
-        return `<div class="card story math-card" role="button" data-go="#/math/${l.id}" data-say="${l.name}" style="--i:${i++};--c:${l.color};--cd:${l.dark}">
-          <span class="thumb"><span class="math-show">${l.show}</span>
-            <span class="learn" data-go="#/math/${l.id}/learn" data-say="看教學" role="button">📘 看教學</span>
+    return P.tiers.map(t => `<h3 class="tier-title">${t.name}<small>${t.note}</small></h3>` +
+      P.levels.filter(l => l.tier === t.id).map(l => {
+        const b = best(l.id, null, P);
+        return `<div class="card story math-card${P.cardClass ? ' ' + P.cardClass : ''}" role="button" data-go="#/${P.route}/${l.id}" data-say="${l.say || l.name}" style="--i:${i++};--c:${l.color};--cd:${l.dark}">
+          <span class="thumb">${l.showHTML || `<span class="math-show">${l.show}</span>`}
+            <span class="learn" data-go="#/${P.route}/${l.id}/learn" data-say="看教學" role="button">📘 看教學</span>
             ${b ? `<span class="best">${b >= 9 ? '⭐⭐⭐' : b >= 6 ? '⭐⭐' : '⭐'}</span>` : ''}</span>
           <div class="name">✏️ ${l.name}</div></div>`;
-      }).join('')).join('') + `<h3 class="tier-title">🎵 九九乘法歌<small>跟著念口訣</small></h3>` + timesCards;
+      }).join('')).join('') + (extra ? `<h3 class="tier-title">🎵 九九乘法歌<small>跟著念口訣</small></h3>` + extra : '');
   }
 
-  window.MathGame = { open, cards, stop: () => { st.q = null; st.token++; Voice.cancel(); } };
+  /* ---------- 科目：題目、教學、訂正由科目提供；練習題和四個遊戲（賽車、餵小熊、蓋高塔、青蛙）大家共用 ----------
+   * 科目要有：id、route（網址 #/route/關卡）、store（存星星用的兩個前綴）、tiers、levels、
+   *   makeQuestion(關卡) → { ans, choices, say, text 或 qhtml, visual, cls?, big? }、lessonSteps(關卡)、explainSteps(題目, 關卡, 選的)
+   * 可以有：label(選項, 題目) → 按鈕裡的 HTML、fixSay(錯題) / answerSay(題目) → 訂正時念的話、frogLine(關卡)、pace。
+   */
+  const MATH = {
+    id: 'math', route: 'math', store: ['math', 'mathgame'], tiers: TIERS, levels: LEVELS,
+    makeQuestion, lessonSteps, explainSteps: (q, level) => explainSteps(q, level),
+    frogLine: id => ['count', 'add10', 'sub10'].includes(id),
+  };
+  const SUBJECTS = {};
+  function register(P) {
+    SUBJECTS[P.id] = Object.assign(P, Object.assign({
+      label: c => String(c),
+      fixSay: (m, q) => ['你選了', ...N(m.chosen), '正確答案是', ...N(q.ans), '換你選選看'],
+      answerSay: q => ['答案是', ...N(q.ans)],
+    }, P));
+  }
+  register(MATH);
+
+  window.MathGame = { open, cards, register, stop: () => { st.q = null; st.token++; Voice.cancel(); } };
 })();

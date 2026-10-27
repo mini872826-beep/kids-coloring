@@ -125,5 +125,161 @@
     // 答錯直接下一題，最後「訂正時間」
     '沒關係，下一題', '我們來訂正', '你選了', '正確答案是', '換你選選看', '訂正完成，你好棒！', '全部答對，好厲害！', '你贏了！', '差一點點！再試一次！'];
 
-  window.WORDS = { COLORS, colorName, BRUSHES, BRUSH_GROUPS, PATTERNS, SHAPES, FIXED, COLOR_NAMES, zh, numberWords, timesLine, MATH_WORDS };
+  /* ---------- 學注音（台灣的注音符號，讀音照教育部國語辭典） ----------
+   * 注音符號本身 AI 聲音念不準，所以每個符號用一個「同音的字」來念（ㄅ 念「玻」、ㄈ 念「佛」……），
+   * 一個音節也用一個常見的字來念（ㄅㄚ 念「八」、ㄇㄚˇ 念「馬」）。多音字在 tools/voice/minimax.json 的 pronounce 指定讀音。
+   * 例詞：w 詞、z 每個字的注音（空白分開；輕聲的點寫在最前面）、k 這個符號在第幾個字、pic 畫好的圖 id 或 emoji。
+   */
+  const ZY_SYMBOLS = [
+    { z: 'ㄅ', say: '玻', g: 'sm1', w: '棒棒糖', z2: 'ㄅㄤˋ ㄅㄤˋ ㄊㄤˊ', pic: 'd-lollipop' },
+    { z: 'ㄆ', say: '坡', g: 'sm1', w: '蘋果', z2: 'ㄆㄧㄥˊ ㄍㄨㄛˇ', pic: 'f-apple' },
+    { z: 'ㄇ', say: '摸', g: 'sm1', w: '貓咪', z2: 'ㄇㄠ ㄇㄧ', pic: 'cat' },
+    { z: 'ㄈ', say: '佛', g: 'sm1', w: '飛機', z2: 'ㄈㄟ ㄐㄧ', pic: 'plane' },
+    { z: 'ㄉ', say: '德', g: 'sm1', w: '大象', z2: 'ㄉㄚˋ ㄒㄧㄤˋ', pic: 'elephant' },
+    { z: 'ㄊ', say: '特', g: 'sm1', w: '太陽', z2: 'ㄊㄞˋ ㄧㄤˊ', pic: 's-sun' },
+    { z: 'ㄋ', say: '訥', g: 'sm1', w: '牛奶', z2: 'ㄋㄧㄡˊ ㄋㄞˇ', pic: 'd-milk' },
+    { z: 'ㄌ', say: '勒', g: 'sm1', w: '老虎', z2: 'ㄌㄠˇ ㄏㄨˇ', pic: 'tiger' },
+    { z: 'ㄍ', say: '哥', g: 'sm2', w: '公車', z2: 'ㄍㄨㄥ ㄔㄜ', pic: 'bus' },
+    { z: 'ㄎ', say: '科', g: 'sm2', w: '卡車', z2: 'ㄎㄚˇ ㄔㄜ', pic: 'truck' },
+    { z: 'ㄏ', say: '呵', g: 'sm2', w: '蝴蝶', z2: 'ㄏㄨˊ ㄉㄧㄝˊ', pic: 'i-butterfly' },
+    { z: 'ㄐ', say: '基', g: 'sm2', w: '鯨魚', z2: 'ㄐㄧㄥ ㄩˊ', pic: 'whale' },
+    { z: 'ㄑ', say: '欺', g: 'sm2', w: '企鵝', z2: 'ㄑㄧˋ ㄜˊ', pic: 'penguin' },
+    { z: 'ㄒ', say: '希', g: 'sm2', w: '西瓜', z2: 'ㄒㄧ ㄍㄨㄚ', pic: 'f-watermelon' },
+    { z: 'ㄓ', say: '知', g: 'sm3', w: '蜘蛛', z2: 'ㄓ ㄓㄨ', pic: 'i-spider' },
+    { z: 'ㄔ', say: '吃', g: 'sm3', w: '長頸鹿', z2: 'ㄔㄤˊ ㄐㄧㄥˇ ㄌㄨˋ', pic: 'giraffe' },
+    { z: 'ㄕ', say: '詩', g: 'sm3', w: '獅子', z2: 'ㄕ ˙ㄗ', pic: 'lion' },
+    { z: 'ㄖ', say: '日', g: 'sm3', w: '熱狗', z2: 'ㄖㄜˋ ㄍㄡˇ', pic: 'd-hotdog' },
+    { z: 'ㄗ', say: '資', g: 'sm3', w: '足球', z2: 'ㄗㄨˊ ㄑㄧㄡˊ', pic: '⚽' },
+    { z: 'ㄘ', say: '疵', g: 'sm3', w: '草莓', z2: 'ㄘㄠˇ ㄇㄟˊ', pic: 'f-strawberry' },
+    { z: 'ㄙ', say: '思', g: 'sm3', w: '松鼠', z2: 'ㄙㄨㄥ ㄕㄨˇ', pic: 'squirrel' },
+    { z: 'ㄧ', say: '衣', g: 'ym1', w: '鴨子', z2: 'ㄧㄚ ˙ㄗ', pic: 'duckling' },
+    { z: 'ㄨ', say: '烏', g: 'ym1', w: '烏鴉', z2: 'ㄨ ㄧㄚ', pic: 'crow' },
+    { z: 'ㄩ', say: '迂', g: 'ym1', w: '魚', z2: 'ㄩˊ', pic: 'fish' },
+    { z: 'ㄚ', say: '啊', g: 'ym1', w: '阿公', z2: 'ㄚ ㄍㄨㄥ', pic: '👴' },
+    { z: 'ㄛ', say: '喔', g: 'ym1', w: '外婆', z2: 'ㄨㄞˋ ㄆㄛˊ', k: 1, pic: 'grandma' },
+    { z: 'ㄜ', say: '鵝', g: 'ym1', w: '鵝', z2: 'ㄜˊ', pic: 'swan' },
+    { z: 'ㄝ', say: '欸', g: 'ym1', w: '葉子', z2: 'ㄧㄝˋ ˙ㄗ', pic: '🍃' },
+    { z: 'ㄞ', say: '哀', g: 'ym2', w: '愛心', z2: 'ㄞˋ ㄒㄧㄣ', pic: '❤️' },
+    { z: 'ㄟ', say: '誒', g: 'ym2', w: '杯子', z2: 'ㄅㄟ ˙ㄗ', pic: '🥤' },
+    { z: 'ㄠ', say: '凹', g: 'ym2', w: '包子', z2: 'ㄅㄠ ˙ㄗ', pic: '🥟' },
+    { z: 'ㄡ', say: '歐', g: 'ym2', w: '猴子', z2: 'ㄏㄡˊ ˙ㄗ', pic: 'monkey' },
+    { z: 'ㄢ', say: '安', g: 'ym2', w: '安全帽', z2: 'ㄢ ㄑㄩㄢˊ ㄇㄠˋ', pic: '⛑️' },
+    { z: 'ㄣ', say: '恩', g: 'ym2', w: '門', z2: 'ㄇㄣˊ', pic: '🚪' },
+    { z: 'ㄤ', say: '骯', g: 'ym2', w: '糖果', z2: 'ㄊㄤˊ ㄍㄨㄛˇ', pic: '🍬' },
+    { z: 'ㄥ', say: '鞥', g: 'ym2', w: '蜜蜂', z2: 'ㄇㄧˋ ㄈㄥ', k: 1, pic: 'i-bee' },
+    { z: 'ㄦ', say: '兒', g: 'ym2', w: '耳朵', z2: 'ㄦˇ ˙ㄉㄨㄛ', pic: '👂' },
+  ];
+  // 中階：聲母＋韻母（都是一聲）、三拼音（中間有介音）、四個聲調
+  const ZY_PIN = [['ㄅㄚ', '八'], ['ㄆㄚ', '趴'], ['ㄇㄚ', '媽'], ['ㄈㄚ', '發'], ['ㄊㄚ', '他'], ['ㄌㄚ', '拉'], ['ㄍㄜ', '哥'], ['ㄔㄜ', '車'],
+    ['ㄅㄠ', '包'], ['ㄇㄠ', '貓'], ['ㄉㄠ', '刀'], ['ㄍㄠ', '高'], ['ㄈㄟ', '飛'], ['ㄅㄟ', '杯'], ['ㄏㄟ', '黑'], ['ㄎㄞ', '開'], ['ㄆㄞ', '拍'],
+    ['ㄊㄡ', '偷'], ['ㄕㄢ', '山'], ['ㄙㄢ', '三'], ['ㄕㄣ', '身'], ['ㄍㄣ', '根'], ['ㄈㄤ', '方'], ['ㄊㄤ', '湯'], ['ㄉㄥ', '燈'], ['ㄈㄥ', '風'],
+    ['ㄓㄨ', '豬'], ['ㄕㄨ', '書'], ['ㄎㄨ', '哭']];
+  const ZY_JIE = [['ㄐㄧㄚ', '家'], ['ㄒㄧㄚ', '蝦'], ['ㄧㄚ', '鴨'], ['ㄏㄨㄚ', '花'], ['ㄍㄨㄚ', '瓜'], ['ㄨㄚ', '蛙'], ['ㄊㄧㄢ', '天'], ['ㄅㄧㄢ', '邊'],
+    ['ㄒㄧㄥ', '星'], ['ㄅㄧㄥ', '冰'], ['ㄒㄧㄣ', '心'], ['ㄑㄧㄡ', '秋'], ['ㄔㄨㄤ', '窗'], ['ㄍㄨㄤ', '光'], ['ㄉㄨㄥ', '東'], ['ㄍㄨㄛ', '鍋'],
+    ['ㄉㄨㄛ', '多'], ['ㄒㄩㄝ', '靴'], ['ㄑㄩㄝ', '缺'], ['ㄒㄩㄢ', '宣'], ['ㄐㄩㄣ', '軍'], ['ㄔㄨㄣ', '春']];
+  const ZY_TONES = [
+    [['ㄇㄚ', '媽'], ['ㄇㄚˊ', '麻'], ['ㄇㄚˇ', '馬'], ['ㄇㄚˋ', '罵']],
+    [['ㄅㄚ', '八'], ['ㄅㄚˊ', '拔'], ['ㄅㄚˇ', '把'], ['ㄅㄚˋ', '爸']],
+    [['ㄊㄤ', '湯'], ['ㄊㄤˊ', '糖'], ['ㄊㄤˇ', '躺'], ['ㄊㄤˋ', '燙']],
+    [['ㄨ', '烏'], ['ㄨˊ', '無'], ['ㄨˇ', '五'], ['ㄨˋ', '霧']],
+    [['ㄏㄨ', '呼'], ['ㄏㄨˊ', '湖'], ['ㄏㄨˇ', '虎'], ['ㄏㄨˋ', '戶']],
+    [['ㄧㄡ', '優'], ['ㄧㄡˊ', '油'], ['ㄧㄡˇ', '有'], ['ㄧㄡˋ', '右']],
+    [['ㄧ', '衣'], ['ㄧˊ', '姨'], ['ㄧˇ', '椅'], ['ㄧˋ', '意']],
+  ];
+  // 輕聲：用詞來念（單獨一個字念不出輕聲）
+  const ZY_LIGHT = [{ w: '媽媽', z2: 'ㄇㄚ ˙ㄇㄚ', pic: '👩' }, { w: '爸爸', z2: 'ㄅㄚˋ ˙ㄅㄚ', pic: '👨' }];
+  // 高階：圖＋詞語
+  const ZY_VOCAB = {
+    wa: [
+      { w: '老虎', z2: 'ㄌㄠˇ ㄏㄨˇ', pic: 'tiger' }, { w: '小狗', z2: 'ㄒㄧㄠˇ ㄍㄡˇ', pic: 'dog' }, { w: '小貓', z2: 'ㄒㄧㄠˇ ㄇㄠ', pic: 'cat' },
+      { w: '兔子', z2: 'ㄊㄨˋ ˙ㄗ', pic: 'bunny' }, { w: '大象', z2: 'ㄉㄚˋ ㄒㄧㄤˋ', pic: 'elephant' }, { w: '獅子', z2: 'ㄕ ˙ㄗ', pic: 'lion' },
+      { w: '小豬', z2: 'ㄒㄧㄠˇ ㄓㄨ', pic: 'pig' }, { w: '熊貓', z2: 'ㄒㄩㄥˊ ㄇㄠ', pic: 'panda' }, { w: '猴子', z2: 'ㄏㄡˊ ˙ㄗ', pic: 'monkey' },
+      { w: '斑馬', z2: 'ㄅㄢ ㄇㄚˇ', pic: 'zebra' }, { w: '青蛙', z2: 'ㄑㄧㄥ ㄨㄚ', pic: 'frog' }, { w: '企鵝', z2: 'ㄑㄧˋ ㄜˊ', pic: 'penguin' },
+      { w: '蝴蝶', z2: 'ㄏㄨˊ ㄉㄧㄝˊ', pic: 'i-butterfly' }, { w: '螞蟻', z2: 'ㄇㄚˇ ㄧˇ', pic: 'i-ant' }, { w: '小雞', z2: 'ㄒㄧㄠˇ ㄐㄧ', pic: 'chick' },
+      { w: '海豚', z2: 'ㄏㄞˇ ㄊㄨㄣˊ', pic: 'dolphin' }, { w: '長頸鹿', z2: 'ㄔㄤˊ ㄐㄧㄥˇ ㄌㄨˋ', pic: 'giraffe' },
+    ],
+    wf: [
+      { w: '蘋果', z2: 'ㄆㄧㄥˊ ㄍㄨㄛˇ', pic: 'f-apple' }, { w: '香蕉', z2: 'ㄒㄧㄤ ㄐㄧㄠ', pic: 'f-banana' }, { w: '西瓜', z2: 'ㄒㄧ ㄍㄨㄚ', pic: 'f-watermelon' },
+      { w: '草莓', z2: 'ㄘㄠˇ ㄇㄟˊ', pic: 'f-strawberry' }, { w: '蛋糕', z2: 'ㄉㄢˋ ㄍㄠ', pic: 'd-cake' }, { w: '牛奶', z2: 'ㄋㄧㄡˊ ㄋㄞˇ', pic: 'd-milk' },
+      { w: '玉米', z2: 'ㄩˋ ㄇㄧˇ', pic: 'f-corn' }, { w: '紅蘿蔔', z2: 'ㄏㄨㄥˊ ㄌㄨㄛˊ ˙ㄅㄛ', pic: 'f-carrot' }, { w: '橘子', z2: 'ㄐㄩˊ ˙ㄗ', pic: 'f-orange' },
+      { w: '餅乾', z2: 'ㄅㄧㄥˇ ㄍㄢ', pic: 'd-cookies' }, { w: '漢堡', z2: 'ㄏㄢˋ ㄅㄠˇ', pic: 'd-burger' }, { w: '薯條', z2: 'ㄕㄨˇ ㄊㄧㄠˊ', pic: 'd-fries' },
+      { w: '茄子', z2: 'ㄑㄧㄝˊ ˙ㄗ', pic: 'f-eggplant' }, { w: '番茄', z2: 'ㄈㄢ ㄑㄧㄝˊ', pic: 'f-tomato' }, { w: '南瓜', z2: 'ㄋㄢˊ ㄍㄨㄚ', pic: 'f-pumpkin' },
+    ],
+    wg: [
+      { w: '飛機', z2: 'ㄈㄟ ㄐㄧ', pic: 'plane' }, { w: '公車', z2: 'ㄍㄨㄥ ㄔㄜ', pic: 'bus' }, { w: '火車', z2: 'ㄏㄨㄛˇ ㄔㄜ', pic: 'train' },
+      { w: '汽車', z2: 'ㄑㄧˋ ㄔㄜ', pic: 'car' }, { w: '卡車', z2: 'ㄎㄚˇ ㄔㄜ', pic: 'truck' }, { w: '輪船', z2: 'ㄌㄨㄣˊ ㄔㄨㄢˊ', pic: 'ship' },
+      { w: '帆船', z2: 'ㄈㄢ ㄔㄨㄢˊ', pic: 'sailboat' }, { w: '火箭', z2: 'ㄏㄨㄛˇ ㄐㄧㄢˋ', pic: 's-rocket' }, { w: '太陽', z2: 'ㄊㄞˋ ㄧㄤˊ', pic: 's-sun' },
+      { w: '星星', z2: 'ㄒㄧㄥ ㄒㄧㄥ', pic: 's-stars' }, { w: '地球', z2: 'ㄉㄧˋ ㄑㄧㄡˊ', pic: 's-earth' }, { w: '腳踏車', z2: 'ㄐㄧㄠˇ ㄊㄚˋ ㄔㄜ', pic: 'bicycle' },
+      { w: '熱氣球', z2: 'ㄖㄜˋ ㄑㄧˋ ㄑㄧㄡˊ', pic: 'balloon' }, { w: '救護車', z2: 'ㄐㄧㄡˋ ㄏㄨˋ ㄔㄜ', pic: 'ambulance' }, { w: '摩托車', z2: 'ㄇㄛˊ ㄊㄨㄛ ㄔㄜ', pic: 'motorcycle' },
+    ],
+  };
+  // 單獨念一個字會念錯（多音字）的音節：換一個同音、不會念錯的字來念
+  const ZY_REP = { 'ㄔㄤˊ': '常', 'ㄐㄧㄥˇ': '井', 'ㄐㄧㄠˇ': '餃', 'ㄉㄧˋ': '弟', 'ㄑㄧˋ': '氣', 'ㄇㄚˇ': '馬', 'ㄍㄢ': '甘', 'ㄇㄛˊ': '魔', 'ㄈㄢ': '翻', 'ㄕㄨˇ': '鼠', 'ㄅㄠˇ': '飽' };
+  const ZY_TONE_NAMES = ['', '一聲', '二聲', '三聲', '四聲', '輕聲'];
+  // 關卡（首頁卡片）：name 顯示、say 念出來
+  const ZY_TIERS = [
+    { id: 'easy', name: '🌱 初階', note: '認識 37 個注音符號' },
+    { id: 'mid', name: '🌿 中階', note: '拼音和四個聲調' },
+    { id: 'hard', name: '🌳 高階', note: '看圖念詞語' },
+  ];
+  const ZY_LEVELS = [
+    { id: 'sm1', tier: 'easy', name: '聲母 1', say: '聲母第一組', show: 'ㄅㄆㄇㄈ', color: '#ff6b6b', dark: '#e03131' },
+    { id: 'sm2', tier: 'easy', name: '聲母 2', say: '聲母第二組', show: 'ㄍㄎㄏㄐ', color: '#ff922b', dark: '#e8590c' },
+    { id: 'sm3', tier: 'easy', name: '聲母 3', say: '聲母第三組', show: 'ㄓㄔㄕㄖ', color: '#fab005', dark: '#e67700' },
+    { id: 'ym1', tier: 'easy', name: '介音和韻母', show: 'ㄧㄨㄩㄚ', color: '#94d82d', dark: '#5c940d' },
+    { id: 'ym2', tier: 'easy', name: '更多韻母', show: 'ㄞㄟㄠㄡ', color: '#51cf66', dark: '#2f9e44' },
+    { id: 'pin', tier: 'mid', name: '拼一拼', show: 'ㄅ＋ㄚ', color: '#20c997', dark: '#099268' },
+    { id: 'jie', tier: 'mid', name: '三拼音', show: 'ㄐㄧㄚ', color: '#22b8cf', dark: '#0c8599' },
+    { id: 'tone', tier: 'mid', name: '四個聲調', show: 'ˉˊˇˋ', color: '#4dabf7', dark: '#1c7ed6' },
+    { id: 'wa', tier: 'hard', name: '動物詞語', show: '老虎', color: '#845ef7', dark: '#6741d9' },
+    { id: 'wf', tier: 'hard', name: '好吃的詞語', show: '蘋果', color: '#f06595', dark: '#c2255c' },
+    { id: 'wg', tier: 'hard', name: '交通和天空', show: '飛機', color: '#5c7cfa', dark: '#3b5bdb' },
+  ];
+  // 學注音裡會念的固定句子（程式用 key 拿，保證念的字都在錄音清單裡）
+  const ZY_TEXT = {
+    tab: '學注音',
+    hearSym: '聽一聽，是哪一個注音？',
+    firstSym: '紅色的字，第一個注音是哪一個？',
+    hasSym: '紅色的字裡面，有哪一個注音？',
+    blend: '拼起來是哪一個？',
+    hearSyl: '聽一聽，怎麼拼？',
+    hearTone: '聽一聽，是第幾聲？',
+    seeTone: '看一看，這是第幾聲？',
+    charZy: '紅色的字，注音是哪一個？',
+    charTone: '紅色的字，是第幾聲？',
+    charPart: '紅色的字，少了哪一個注音？',
+    meet: '我們來認識注音符號',
+    readAll: '跟著念一次',
+    learned: '你學會了', learnedN: '個注音符號',
+    pinIntro: '聲母和韻母拼在一起，就變成一個音',
+    jieIntro: '中間加上介音，三個一起拼',
+    jieMid: '衣、烏、迂，叫做介音',
+    toneIntro: '注音有四個聲調，還有輕聲',
+    t1: '一聲，平平的，不用寫符號', t2: '二聲，往上揚', t3: '三聲，往下再往上', t4: '四聲，往下降', t5: '輕聲，輕輕短短的，點點寫在上面',
+    toneAll: '一二三四，一起念念看',
+    wordIntro: '每個字都有自己的注音',
+    wordEach: '一個字一個字拼拼看',
+    spell: '我們一起拼拼看',
+    wrongPick: '你選的不對喔',
+    youPicked: '你選了', right: '正確答案是', tryIt: '換你選選看', answer: '答案是', fix: '我們來訂正',
+    initial: '聲母', medial: '介音', final: '韻母',
+  };
+
+  // 一個音節要念哪個字：符號念法 > 中階的字 > 高階詞語裡的字（多音字換成 ZY_REP）；輕聲沒有（用整個詞念）
+  const ZY_SAY = {};
+  ZY_SYMBOLS.forEach(s => { ZY_SAY[s.z] = s.say; });
+  [...ZY_PIN, ...ZY_JIE, ...ZY_TONES.flat()].forEach(([z, c]) => { if (!ZY_SAY[z]) ZY_SAY[z] = c; });
+  Object.entries(ZY_REP).forEach(([z, c]) => { if (!ZY_SAY[z]) ZY_SAY[z] = c; });
+  Object.values(ZY_VOCAB).flat().forEach(v => v.z2.split(' ').forEach((z, i) => {
+    if (!z.startsWith('˙') && !ZY_SAY[z]) ZY_SAY[z] = v.w[i];
+  }));
+
+  const ZHUYIN_WORDS = [...new Set([
+    ...Object.values(ZY_TEXT), ...ZY_TONE_NAMES.filter(Boolean),
+    ...ZY_LEVELS.map(l => l.say || l.name), ...Object.values(ZY_SAY),
+    ...ZY_SYMBOLS.map(s => s.w), ...ZY_LIGHT.map(v => v.w), ...Object.values(ZY_VOCAB).flat().map(v => v.w),
+  ])];
+  const ZHUYIN = { SYMBOLS: ZY_SYMBOLS, PIN: ZY_PIN, JIE: ZY_JIE, TONES: ZY_TONES, LIGHT: ZY_LIGHT, VOCAB: ZY_VOCAB, SAY: ZY_SAY, TONE_NAMES: ZY_TONE_NAMES, TIERS: ZY_TIERS, LEVELS: ZY_LEVELS, T: ZY_TEXT };
+
+  window.WORDS = { COLORS, colorName, BRUSHES, BRUSH_GROUPS, PATTERNS, SHAPES, FIXED, COLOR_NAMES, zh, numberWords, timesLine, MATH_WORDS, ZHUYIN, ZHUYIN_WORDS };
 })();

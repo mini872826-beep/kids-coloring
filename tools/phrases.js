@@ -27,6 +27,8 @@ for (let i = 1; i <= 60; i++) all.add(`白紙 ${i}`);
 // 學數學：0~1000 的數字片段、題目用語
 for (let n = 0; n <= 1000; n++) WORDS.numberWords(n).forEach(w => all.add(w));
 WORDS.MATH_WORDS.forEach(w => all.add(w));
+// 學注音：符號念法、音節的代表字、例詞、題目用語
+WORDS.ZHUYIN_WORDS.forEach(w => all.add(w));
 
 // 全部中文旁白都用 MiniMax 台灣腔講故事大姊姊念（英文另外用英文的聲音）
 // --story：故事的句子（念故事用比較慢的速度）
