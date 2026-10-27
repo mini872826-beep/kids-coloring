@@ -1,0 +1,222 @@
+$ nvidia-smi -L
+GPU 0: Tesla T4 (UUID: GPU-a9e41158-121f-e41b-6370-b2f99edcea03)
+GPU 1: Tesla T4 (UUID: GPU-1ba62741-ea78-ae69-28cd-81395aa6a101)
+ 
+$ git clone --depth 1 https://github.com/Plachtaa/seed-vc /kaggle/tmp/seed-vc
+ Cloning into '/kaggle/tmp/seed-vc'...
+
+$ pip install -q uv
+ 
+$ uv venv -p 3.10 /kaggle/tmp/venv
+ warning: The `--system` flag has no effect, `uv venv` always ignores virtual environments when finding a Python interpreter; did you mean `--no-managed-python`?
+Downloading cpython-3.10.22-linux-x86_64-gnu (download) (28.0MiB)
+ Downloaded cpython-3.10.22-linux-x86_64-gnu (download)
+Using CPython 3.10.22
+Creating virtual environment at: /kaggle/tmp/venv
+Activate with: source /kaggle/tmp/venv/bin/activate
+
+$ uv pip install --python /kaggle/tmp/venv/bin/python torch==2.4.0 torchaudio==2.4.0 torchvision==0.19.0 --index-url https://download.pytorch.org/whl/cu121
+ Using Python 3.10.22 environment at: /kaggle/tmp/venv
+Resolved 26 packages in 390ms
+Downloading numpy (16.0MiB)
+Downloading nvidia-cudnn-cu12 (634.0MiB)
+Downloading sympy (6.0MiB)
+Downloading nvidia-nvjitlink-cu12 (37.9MiB)
+Downloading triton (199.7MiB)
+Downloading nvidia-cublas-cu12 (391.6MiB)
+Downloading networkx (1.6MiB)
+Downloading pillow (6.6MiB)
+Downloading nvidia-cusolver-cu12 (118.4MiB)
+Downloading torch (762.1MiB)
+Downloading torchaudio (3.2MiB)
+Downloading torchvision (6.7MiB)
+Downloading nvidia-cusparse-cu12 (186.9MiB)
+Downloading nvidia-cuda-nvrtc-cu12 (22.6MiB)
+ Downloaded torchaudio
+Downloading nvidia-cufft-cu12 (116.0MiB)
+Downloading nvidia-curand-cu12 (53.9MiB)
+Downloading nvidia-nccl-cu12 (168.1MiB)
+Downloading nvidia-cuda-cupti-cu12 (13.5MiB)
+ Downloaded torchvision
+ Downloaded networkx
+ Downloaded pillow
+ Downloaded sympy
+ Downloaded numpy
+ Downloaded nvidia-cuda-cupti-cu12
+ Downloaded nvidia-nvjitlink-cu12
+ Downloaded nvidia-cuda-nvrtc-cu12
+ Downloaded nvidia-cusolver-cu12
+ Downloaded nvidia-curand-cu12
+ Downloaded nvidia-cusparse-cu12
+ Downloaded nvidia-cufft-cu12
+ Downloaded nvidia-nccl-cu12
+ Downloaded triton
+ Downloaded nvidia-cublas-cu12
+ Downloaded nvidia-cudnn-cu12
+ Downloaded torch
+Prepared 26 packages in 32.77s
+Installed 26 packages in 259ms
+ + filelock==3.32.3
+ + fsspec==2026.7.0
+ + jinja2==3.1.6
+ + markupsafe==3.0.3
+ + mpmath==1.3.0
+ + networkx==3.4.2
+ + numpy==2.2.6
+ + nvidia-cublas-cu12==12.1.3.1
+ + nvidia-cuda-cupti-cu12==12.1.105
+ + nvidia-cuda-nvrtc-cu12==12.1.105
+ + nvidia-cuda-runtime-cu12==12.1.105
+ + nvidia-cudnn-cu12==9.1.0.70
+ + nvidia-cufft-cu12==11.0.2.54
+ + nvidia-curand-cu12==10.3.2.106
+ + nvidia-cusolver-cu12==11.4.5.107
+ + nvidia-cusparse-cu12==12.1.0.106
+ + nvidia-nccl-cu12==2.20.5
+ + nvidia-nvjitlink-cu12==12.9.86
+ + nvidia-nvtx-cu12==12.1.105
+ + pillow==12.3.0
+ + sympy==1.14.0
+ + torch==2.4.0+cu121
+ + torchaudio==2.4.0+cu121
+ + torchvision==0.19.0+cu121
+ + triton==3.0.0
+ + typing-extensions==4.16.0
+
+$ uv pip install --python /kaggle/tmp/venv/bin/python -r /kaggle/tmp/req.txt torch==2.4.0 torchaudio==2.4.0 --extra-index-url https://download.pytorch.org/whl/cu121 --index-strategy unsafe-best-match
+  1 package in 20ms
+Installed 118 packages in 255ms
+ + absl-py==2.5.1
+ + accelerate==1.15.0
+ + aliyun-python-sdk-core==2.16.1
+ + aliyun-python-sdk-kms==2.16.5
+ + antlr4-python3-runtime==4.9.3
+ + argbind==0.3.9
+ + asttokens==3.0.2
+ + audioread==3.1.0
+ + certifi==2026.10.23
+ + cffi==2.1.1
+ + charset-normalizer==3.5.2
+ + click==8.5.0
+ + cloudpickle==3.1.2
+ + contourpy==1.3.2
+ + crcmod==1.7
+ + cryptography==50.0.2
+ + cycler==0.12.1
+ + decorator==5.3.1
+ + descript-audio-codec==1.0.0
+ + descript-audiotools==0.7.2
+ + docstring-parser==0.18.0
+ + editdistance==0.8.1
+ + einops==0.8.0
+ + exceptiongroup==1.3.1
+ + executing==2.3.0
+ + ffmpy==1.0.0
+ + fire==0.7.1
+ + flatten-dict==0.5.0
+ + fonttools==4.65.0
+ + funasr==1.1.5
+ + grpcio==1.85.0
+ + hf-xet==1.7.0
+ + huggingface-hub==0.36.2
+ + hydra-core==1.3.2
+ + idna==3.20
+ + importlib-resources==7.1.0
+ + ipython==8.39.0
+ + jaconv==0.5.0
+ + jamo==0.4.1
+ + jedi==0.20.1
+ + jieba==0.42.1
+ + jiwer==3.0.3
+ + jmespath==1.1.0
+ + joblib==1.6.0
+ + julius==0.2.8
+ + kaldiio==2.18.1
+ + kiwisolver==1.5.1
+ + lazy-loader==0.6
+ + librosa==0.10.2
+ + llvmlite==0.50.0
+ + markdown==3.10.3
+ + markdown-it-py==4.2.0
+ + markdown2==2.5.5
+ + matplotlib==3.10.9
+ + matplotlib-inline==0.2.2
+ + mdurl==0.1.2
+ + modelscope==1.18.1
+ + msgpack==1.2.4
+ + munch==4.0.0
+ + numba==0.68.0
+ - numpy==2.2.6
+ + numpy==1.26.4
+ + omegaconf==2.3.1
+ + oss2==2.19.1
+ + packaging==26.3
+ + parso==0.8.7
+ + pexpect==4.9.0
+ + platformdirs==4.12.4
+ + pooch==1.9.0
+ + prompt-toolkit==3.0.53
+ + protobuf==3.19.6
+ + psutil==7.2.2
+ + ptyprocess==0.7.0
+ + pure-eval==0.2.4
+ + pycparser==3.11
+ + pycryptodome==4.2.0
+ + pydub==0.25.1
+ + pygments==2.21.0
+ + pyloudnorm==0.2.0
+ + pynndescent==0.6.0
+ + pyparsing==3.3.3
+ + pystoi==0.4.1
+ + python-dateutil==3.0.0
+ + python-dotenv==1.2.4
+ + pytorch-wpe==0.0.1
+ + pyyaml==6.0.3
+ + randomname==0.2.1
+ + rapidfuzz==3.14.5
+ + regex==2026.9.29
+ + requests==2.34.2
+ + resemblyzer==0.1.4
+ + rich==15.0.0
+ + safetensors==0.8.0
+ + scikit-learn==1.7.2
+ + scipy==1.13.1
+ + sentencepiece==0.2.2
+ + setuptools==84.2.1
+ + six==1.17.0
+ + soundfile==0.12.1
+ + soxr==1.1.0
+ + stack-data==0.6.3
+ + tensorboard==2.20.0
+ + tensorboard-data-server==0.7.2
+ + tensorboardx==2.6
+ + termcolor==3.3.0
+ + threadpoolctl==3.7.0
+ + tokenizers==0.20.3
+ + torch-complex==0.4.4
+ + torch-stoi==0.2.3
+ + tqdm==4.70.1
+ + traitlets==5.16.1
+ + transformers==4.46.3
+ + typing==3.10.0.0
+ + tzdata==2026.5
+ + umap-learn==0.5.12
+ + urllib3==2.8.0
+ + wcwidth==0.9.4
+ + webrtcvad==2.0.10
+ + werkzeug==3.1.9
+
+setup 56s
+loaded 52s
+ok en-twinkle-playful.mp3
+ok en-twinkle-softgirl.mp3
+ok en-twinkle-design.mp3
+ok en-rain-playful.mp3
+ok en-rain-softgirl.mp3
+ok en-rain-design.mp3
+ok en-row-playful.mp3
+ok en-row-softgirl.mp3
+ok en-row-design.mp3
+gen done
+gen exit 0
+done
