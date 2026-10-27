@@ -100,7 +100,10 @@ def main():
     jobs = plan(songs, sung)
     if len(sys.argv) > 2 and sys.argv[2] == '--plan':
         only = set(filter(None, sys.argv[4].split(','))) if len(sys.argv) > 4 else None
-        todo = [j for j in jobs if not os.path.exists(os.path.join(OUT, j['file'])) and (not only or j['id'] in only)]
+        # 成品或只有人聲的版本少一個，都要（從 Kaggle 收回或重唱）
+        todo = [j for j in jobs if (not os.path.exists(os.path.join(OUT, j['file']))
+                                    or not os.path.exists(os.path.join(OUT, 'stems', j['file'])))
+                and (not only or j['id'] in only)]
         json.dump(todo, open(sys.argv[3], 'w', encoding='utf-8'), ensure_ascii=False)
         print(f'{len(todo)} songs to sing')
         return

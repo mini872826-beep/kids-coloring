@@ -21,6 +21,10 @@ for j in jobs:
     f = os.path.join(prev, name(j))
     if os.path.exists(f) and os.path.getsize(f) > 0:
         shutil.copy(f, os.path.join(dest, name(j)))
+        st = os.path.join(prev, 'stems', name(j))      # 只有人聲的版本也一起收回來
+        if os.path.exists(st):
+            os.makedirs(os.path.join(dest, 'stems'), exist_ok=True)
+            shutil.copy(st, os.path.join(dest, 'stems', name(j)))
     else:
         left.append(j)
 print(len(jobs) - len(left), 'already done,', len(left), 'left')
