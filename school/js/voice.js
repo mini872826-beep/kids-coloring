@@ -264,6 +264,35 @@
       // 先把等一下要念的句子抓好
       warm(list) { list.forEach(t => decode(t) || load(t)); },
       say(text) { api.speak([text]); },
+      // 播一段錄音（小朋友自己的聲音）：iPhone 每個播放器都要各自點過才能出聲，所以用已經解鎖的這兩個播放，
+      // 優先用 Web Audio（可以放大聲一點，小朋友的錄音通常很小聲），不行再用一般播放器
+      playClip(url, onend) {
+        api.cancel();
+        const my = ++token;
+        let over = false;
+        const end = () => { if (over || my !== token) return; over = true; playing = false; onend && onend(); };
+        const viaElement = () => {
+          if (my !== token) return;
+          playing = true;
+          au.onended = end;
+          au.onerror = end;
+          au.src = url;
+          au.defaultPlaybackRate = au.playbackRate = 1;
+          au.play().catch(end);
+        };
+        if (!ctx || ctx.state !== 'running') return viaElement();
+        fetch(url).then(r => r.arrayBuffer()).then(a => new Promise((ok, no) => ctx.decodeAudioData(a, ok, no))).then(buf => {
+          if (my !== token) return;
+          playing = true;
+          const src = ctx.createBufferSource(), gain = ctx.createGain();
+          gain.gain.value = 2.5;
+          src.buffer = buf;
+          src.connect(gain).connect(ctx.destination);
+          src.onended = end;
+          src.start();
+          srcs.push(src);
+        }).catch(viaElement);
+      },
       cancel() {
         token++;
         au.onended = au.onerror = null;

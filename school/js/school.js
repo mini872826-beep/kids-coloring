@@ -184,11 +184,9 @@
   }
   // 放一段錄音，放完（或最多 ms）做 cb
   function playURL(url, cb, ms) {
-    const a = new Audio(url);
     let done = false;
     const next = () => { if (!done) { done = true; cb(); } };
-    a.onended = a.onerror = next;
-    a.play().catch(next);
+    Voice.playClip(url, next);   // 用已經解鎖的播放器（new Audio() 在 iPhone 上沒點過會被擋，沒有聲音）
     setTimeout(next, ms);
   }
   // 說不好的句子記起來，下次可以「只練上次說不好的」（每個小朋友、每一課分開）
