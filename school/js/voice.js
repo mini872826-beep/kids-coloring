@@ -6,7 +6,11 @@
   /* ---------------- 聲音（用 WebAudio 現場合成，不用音頻文件） ---------------- */
   const Sound = (() => {
     let ac;
-    const ctx = () => (ac ||= new (window.AudioContext || window.webkitAudioContext)());
+    const ctx = () => {
+      ac ||= new (window.AudioContext || window.webkitAudioContext)();
+      if (ac.state !== 'running') ac.resume().catch(() => {});   // iPad：被鎖住的話，趁這次點擊解開
+      return ac;
+    };
     function tone(freq, dur, type = 'sine', vol = .25, slide = 0, delay = 0) {
       try {
         const a = ctx(), t = a.currentTime + delay;
@@ -107,11 +111,28 @@
     const au = new Audio();
     au.preload = 'auto';
     let playing = false, token = 0;
-    // iPad 規定第一次播放要手指點擊，先播一段無聲的把它解鎖
-    document.addEventListener('pointerdown', () => {
-      au.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
-      au.play().catch(() => {});
-    }, { once: true });
+    // iPad／iPhone 規定要手指「點完」（放開）才能出聲；按下去（pointerdown）有些 iPad 不算。
+    // 所以按下、放開、click 都試著解鎖，直到真的解開為止
+    const SILENT = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+    let unlocked = false;
+    function unlock() {
+      if (ctx && ctx.state !== 'running') ctx.resume().catch(() => {});
+      if (unlocked || playing) return;
+      au.src = SILENT;
+      au.play().then(() => { unlocked = true; hideHint(); }).catch(() => {});
+    }
+    ['pointerdown', 'touchend', 'click'].forEach(ev => document.addEventListener(ev, unlock, { capture: true, passive: true }));
+    // 還是被擋住：跳出大大的「點一下開聲音」，不要讓小朋友以為壞掉了
+    let hint = null;
+    function showHint() {
+      if (hint) return;
+      hint = document.createElement('button');
+      hint.className = 'sound-hint';
+      hint.innerHTML = '🔇<b>點一下畫面，打開聲音</b><small>如果還是沒有聲音：把音量調大，打開控制中心確認沒有靜音</small>';
+      hint.addEventListener('click', () => { unlock(); hideHint(); });
+      document.body.appendChild(hint);
+    }
+    function hideHint() { if (hint) { hint.remove(); hint = null; } }
 
     function fallback(text, done) {
       if (!tts) return done();
@@ -155,7 +176,12 @@
         // 放慢但音調不變
         au.preservesPitch = au.mozPreservesPitch = au.webkitPreservesPitch = true;
         au.defaultPlaybackRate = au.playbackRate = stretch(text) ? speed : 1;
-        au.play().catch(() => { playing = false; au.onended = au.onerror = null; fallback(text, done); });
+        au.play().then(() => { unlocked = true; hideHint(); }).catch(err => {
+          playing = false;
+          au.onended = au.onerror = null;
+          if (err && err.name === 'NotAllowedError') { unlocked = false; showHint(); }   // iPad 擋住了聲音
+          fallback(text, done);
+        });
       });
     }
 
@@ -224,6 +250,7 @@
       // 依序念一串句子，全部念完呼叫 onend
       speak(list, onend) {
         api.cancel();
+        if (ctx && ctx.state !== 'running') ctx.resume().catch(() => {});   // 通常是在點擊裡呼叫的：順便解鎖
         const my = ++token;
         let i = 0;
         list.forEach(load);

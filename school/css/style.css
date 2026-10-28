@@ -1734,7 +1734,7 @@ button {
 .shelf-card .thumb { background: linear-gradient(135deg, var(--c), var(--cd)); display: grid; place-items: center; }
 .shelf-card .subj { position: absolute !important; inset: 8px auto auto 8px !important; width: auto !important; height: auto !important; padding: 5px 12px; border-radius: 999px; background: #fff; color: var(--sc); font-family: "Chiron GoRound TC", sans-serif; font-weight: 900; font-size: 16px; box-shadow: 0 3px 0 rgba(0, 0, 0, .18); }
 /* 跟我說 */
-.math-menu.view-say { display: flex; justify-content: center; margin: auto 0; }
+.math-menu.view-say, .math-menu.view-speak { display: flex; justify-content: center; width: 100%; margin: auto 0; }
 .sb-say { display: flex; flex-direction: column; align-items: center; gap: 16px; width: min(100%, 820px); }
 .sb-say-card { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .sb-say-card > .sb-pic { width: clamp(150px, 28vh, 270px); background: #fff; box-shadow: 0 6px 0 rgba(0, 60, 110, .14); }
@@ -1843,3 +1843,7 @@ button {
 .lesson-nav .pill { font-size: clamp(17px, 2.6vw, 22px); }
 .lesson-nav .pill:disabled { opacity: .35; }
 .lesson-n { width: auto !important; height: auto !important; background: none !important; font-family: "Nunito", sans-serif; font-weight: 900; font-size: 16px; color: #4a6a88; }
+/* iPad 擋住聲音時：大大的「點一下開聲音」 */
+.sound-hint { position: fixed; left: 50%; bottom: max(20px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 70; display: flex; flex-direction: column; align-items: center; gap: 2px; width: min(92vw, 460px); padding: 14px 20px; border-radius: 26px; background: #fff3bf; border: 5px solid #fcc419; box-shadow: 0 6px 0 #e67700, 0 10px 30px rgba(0, 0, 0, .25); font-size: 44px; line-height: 1.1; animation: hintPulse 1.2s ease-in-out infinite; }
+.sound-hint b { font-family: "Chiron GoRound TC", sans-serif; font-size: 24px; color: #e67700; }
+.sound-hint small { font-size: 14px; color: #868e96; font-weight: 700; }

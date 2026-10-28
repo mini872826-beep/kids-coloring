@@ -39,16 +39,22 @@
   });
 
   /* ---------- 🎤 麥克風（口說練習用）：只在口說練習畫面開著，離開就關掉 ---------- */
+  // iPhone 開著麥克風時會變成「通話模式」，聲音從上面的聽筒出來、喇叭幾乎沒聲音。
+  // 所以麥克風只在「換你說」那幾秒打開，錄完馬上關掉，老師的聲音和播他的錄音才會從喇叭大聲放出來。
+  // 「開始」時只問一次允許（ok），之後每一句自己開、關。
   const Mic = {
     stream: null,
+    ok: false,
     async start() {
       try {
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) throw Object.assign(new Error('unsupported'), { name: 'Unsupported' });
         // voice.js 把 iPhone 的聲音設成「只播放」（靜音鍵開著也念）；這個模式下 Safari 會直接拒絕麥克風，
         // 所以要錄音時先換成「播放＋錄音」（一定要在按下去的當下、還沒 await 之前換）
         if (navigator.audioSession) navigator.audioSession.type = 'play-and-record';
-        if (!Mic.stream) Mic.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        if (!sayOn()) Mic.stop();
+        const s = await navigator.mediaDevices.getUserMedia({ audio: true });
+        s.getTracks().forEach(t => t.stop());   // 只是先問允許，馬上關掉
+        if (navigator.audioSession) navigator.audioSession.type = 'playback';
+        Mic.ok = true;
         return true;
       } catch (e) {
         if (navigator.audioSession) navigator.audioSession.type = 'playback';
@@ -81,18 +87,22 @@
       Mic.stream = null;
       if (navigator.audioSession) navigator.audioSession.type = 'playback';   // 換回只播放（靜音鍵開著也念）
     },
-    // 錄 ms 毫秒，回傳錄音的網址（錄不到回傳 null）
+    // 打開麥克風錄 ms 毫秒、關掉，回傳錄音的網址（錄不到回傳 null）
     record(ms) {
-      return new Promise(ok => {
-        if (!Mic.stream || !window.MediaRecorder) return ok(null);
-        let r;
-        try { r = new MediaRecorder(Mic.stream); } catch (e) { return ok(null); }
-        const chunks = [];
-        r.ondataavailable = e => e.data.size && chunks.push(e.data);
-        r.onstop = () => ok(chunks.length ? URL.createObjectURL(new Blob(chunks, { type: r.mimeType || 'audio/mp4' })) : null);
-        r.start();
-        setTimeout(() => { try { r.stop(); } catch (e) { ok(null); } }, ms);
-        setTimeout(() => ok(null), ms + 2500);   // 保險：iPhone 偶爾不會通知錄好了，就跳過這句的回放
+      return new Promise(async res => {
+        let done = false;
+        const ok = v => { if (done) return; done = true; Mic.stop(); res(v); };   // 不管怎樣都把麥克風關掉，聲音回到喇叭
+        setTimeout(() => ok(null), ms + 3000);   // 保險：iPhone 偶爾不會通知錄好了，就跳過這句的回放
+        if (!Mic.ok || !window.MediaRecorder) return setTimeout(() => ok(null), ms);
+        try {
+          if (navigator.audioSession) navigator.audioSession.type = 'play-and-record';
+          Mic.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          const r = new MediaRecorder(Mic.stream), chunks = [];
+          r.ondataavailable = e => e.data.size && chunks.push(e.data);
+          r.onstop = () => ok(chunks.length ? URL.createObjectURL(new Blob(chunks, { type: r.mimeType || 'audio/mp4' })) : null);
+          r.start();
+          setTimeout(() => { try { r.stop(); } catch (e) { ok(null); } }, ms);
+        } catch (e) { setTimeout(() => ok(null), ms); }
       });
     },
   };
@@ -263,7 +273,7 @@
       $('sayBar').style.width = '100%';
       // 口說練習才錄音、檢查發音；跟我說只是停下來讓他說
       // 不錄音（跟我說）也要停 wait 這麼久，讓他把這句說完
-      const rec = S.speak && Mic.stream ? Mic.record(wait) : new Promise(ok => setTimeout(() => ok(null), wait));
+      const rec = S.speak && Mic.ok ? Mic.record(wait) : new Promise(ok => setTimeout(() => ok(null), wait));
       const chk = S.speak && Check.ok ? Check.listen(wait) : Promise.resolve(null);
       Promise.all([rec, chk]).then(([url, heardIt]) => {
         if (!alive() || S.paused) return;
@@ -470,13 +480,14 @@
       S.reshow = only => sayShow(lv, box, only, speak);
       const weak = speak ? getWeak(S) : [];
       if (onlyWeak && weak.length) S.items = S.items.filter(x => weak.includes(x.en));
-      if (speak && !Mic.stream) {
+      if (speak && !Mic.ok) {
         // 先按「開始」：iPhone 規定要手指按下去才能問麥克風
         box.innerHTML = `<div class="sb-say sb-start">
           <div class="sb-start-ic">🎤</div>
           <h3>${T.speakName}</h3>
           <p>老師說一句，你說一句。<br>${SR ? '會幫你聽聽看說得清不清楚，最後一起訂正說不好的句子。' : '會錄下你說的，馬上放給你聽。<br><small>（這個瀏覽器不能檢查發音，所以沒有訂正時間）</small>'}</p>
-          <button class="pill big sb-go" data-say-act="start">▶️ 開始（允許麥克風）</button>
+          <button class="pill big sb-go" data-say-act="start">▶️ 開始</button>
+          <p><small>第一次會問可不可以用麥克風，請按「允許」</small></p>
           ${!onlyWeak && weak.length ? `<button class="pill sb-weak" data-say-act="weak">🔁 ${T.onlyWeak}（${weak.length} 句）</button>` : ''}
         </div>`;
         setTimeout(() => sayState === S && sayOn() && Voice.speak([T.speakName, T.speakIntro]), 300);
@@ -594,7 +605,7 @@
       views: {
         tap: { name: T.tap, icon: '👆', color: '#ffd8a8', dark: '#e8590c', show: tapShow, say: () => Voice.speak([T.tapHint]) },
         say: { name: T.sayName, icon: '🗣️', color: '#d0bfff', dark: '#7048e8', show: (lv, box) => sayShow(lv, box, false, false), say: () => sayGo(false) },
-        speak: { name: T.speakName, icon: '🎤', color: '#ffc9c9', dark: '#e03131', show: (lv, box) => sayShow(lv, box, false, true), say: () => (Mic.stream ? sayGo(false) : Voice.speak([T.speakIntro])) },
+        speak: { name: T.speakName, icon: '🎤', color: '#ffc9c9', dark: '#e03131', show: (lv, box) => sayShow(lv, box, false, true), say: () => (Mic.ok ? sayGo(false) : Voice.speak([T.speakIntro])) },
       },
       makeQuestion, lessonSteps, explainSteps, label,
       fixSay(m, q) {
