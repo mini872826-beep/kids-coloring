@@ -18,6 +18,8 @@ const FILES = [
   'js/pack-tops.js',
   'js/pack-ultra.js',
   'js/pack-ultra2.js',
+  'js/pack-poke.js',
+  'js/pack-poke2.js',
   'js/books.js',
   'js/stories-manners.js',
   'js/stories-habits.js',
