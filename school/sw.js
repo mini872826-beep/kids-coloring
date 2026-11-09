@@ -12,6 +12,7 @@ const FILES = [
   'js/game.js',
   'js/shelf.js',
   'js/books/english-k2-1.js',
+  'js/books/english-k2-1-story.js',
   'js/school.js',
   'js/app.js',
   'manifest.webmanifest',

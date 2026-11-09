@@ -76,7 +76,7 @@
     $('grid').innerHTML = terms.map(t => `<h3 class="tier-title">🎒 ${t}</h3>` + BOOKS.filter(x => x.grade + x.term === t).map(x => {
       const s = subjectOf(x);
       return `<div class="card story shelf-card" role="button" data-go="#/b/${x.id}" data-say="${x.title}" style="--i:${i++};--c:${x.color};--cd:${x.dark}">
-        <span class="thumb"><span class="subj" style="--sc:${s.color}">${s.icon} ${s.name}</span><span class="sb-show"><span class="em">${x.icon}</span><b>${x.units.length} 課</b></span></span>
+        <span class="thumb"><span class="subj" style="--sc:${s.color}">${s.icon} ${s.name}</span><span class="sb-show"><span class="em">${x.icon}</span><b>${x.units.length} ${x.unitWord || '課'}</b></span></span>
         <div class="name">${x.title}</div></div>`;
     }).join('')).join('');
   }

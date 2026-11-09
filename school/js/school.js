@@ -7,7 +7,7 @@
   const $ = id => document.getElementById(id);
   const { BOOKS, T, sentence, picHTML } = window.SHELF;
   const CN = '一二三四五六七八九十';
-  const lessonNo = u => `第${CN[u.no - 1]}課`;
+  const lessonNo = u => `第${CN[u.no - 1]}${u.unitWord || '課'}`;   // 故事書是「第一段」
 
   const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
   const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = rnd(0, i); [a[i], a[j]] = [a[j], a[i]]; } return a; };
@@ -116,7 +116,8 @@
   const SAME = [['two', 'to', 'too'], ['one', 'won'], ['four', 'for'], ['sea', 'see'], ['i', 'eye'], ['eight', 'ate'], ['right', 'write'], ['by', 'bye', 'buy'], ['moo', 'mew'], ['meow', 'mew', 'miaow'], ['woof', 'wolf', 'woo'], ['boo', 'blue'], ['dad', 'dead'], ['mom', 'mum', 'mam'], ['tweet', 'treat']];
   const canon = w => { const g = SAME.find(x => x.includes(w)); return g ? g[0] : w; };
   const stem = w => w.replace(/(es|s)$/, '');
-  const normWord = t => { const w = t.toLowerCase().replace(/[’]/g, "'").replace(/[^a-z0-9']/g, '').replace(/^'+|'+$/g, ''); return NUM[w] || w; };
+  // 拉長的字（Pooooof、Mmm）縮成兩個字母，和辨識出來的 poof、mm 一樣
+  const normWord = t => { const w = t.toLowerCase().replace(/[’]/g, "'").replace(/[^a-z0-9']/g, '').replace(/^'+|'+$/g, '').replace(/(.)\1{2,}/g, '$1$1'); return NUM[w] || w; };
   function lev(a, b) {
     const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
     for (let j = 1; j <= b.length; j++) d[0][j] = j;
@@ -201,7 +202,7 @@
     const S = sayState;
     if (!S || !sayOn()) return;
     const my = ++S.token, it = S.items[S.k], prev = S.fixing ? S.prev[S.k] : null;
-    $('sayCard').innerHTML = (it.chant ? `<div class="sb-say-chant" style="--c:${it.chant.color};--cd:${it.chant.dark}">🎵 ${it.chant.chant.title}</div>` : pic(it.pic)) +
+    $('sayCard').innerHTML = (it.chant ? `<div class="sb-say-chant" style="--c:${it.chant.color};--cd:${it.chant.dark}">${S.book.story ? '📖' : '🎵'} ${it.chant.chant.title}</div>` : pic(it.pic)) +
       `<div class="sb-lines"><div><b>${it.en}</b><small>${it.zh}</small></div></div><div id="sayMarks">${prev && prev.marks ? marksHTML(prev) : ''}</div>
       <div class="sb-say-n">${S.fixing ? '✏️ 訂正時間 ' : ''}${S.k + 1} / ${S.items.length}</div>`;
     $('sayTurn').textContent = '👂 聽老師說';
@@ -440,25 +441,36 @@
       const steps = [{
         html: `<div class="sb-banner" style="--c:${u.color};--cd:${u.dark}"><span class="em">${u.icon}</span><b>${lessonNo(u)}</b><span>${u.name}</span></div>`,
         qhtml: hasQ ? lines([u.q[0]], [u.q[1]]) : `<div class="sb-lines"><div><b>${u.name}</b></div></div>`,
-        say: [lessonNo(u), u.name, ...(hasQ ? u.q : []), ...(u.noSentence ? [T.yourTeacher] : [])],
+        say: [lessonNo(u), u.name, ...(hasQ ? u.q : []), ...(u.myTeacher ? [T.yourTeacher] : [])],
       }];
       for (const w of u.words) {
         const s = sentence(u, w);
-        steps.push({ html: bigCard(w), qhtml: s ? lines(s.en, s.zh) : lines([w.en], [w.zh]), say: [w.en, w.zh, ...(s ? [...s.en, ...s.zh] : [])] });
+        // 沒有句型的單字：圖卡上已經寫了，下面不用再寫一次
+        steps.push({ html: bigCard(w), qhtml: s ? lines(s.en, s.zh) : '<span></span>', say: [w.en, w.zh, ...(s ? [...s.en, ...s.zh] : [])] });
       }
       if (!withChant) return steps;
-      for (const w of u.extra) steps.push({ html: bigCard(w), qhtml: lines([w.en], [w.zh]), say: [w.en, w.zh] });
-      steps.push({ html: chantBoard(u, -1), qhtml: lines([u.chant.title], [u.chant.zh]), say: [T.chant, u.chant.title] });
+      for (const w of u.extra) steps.push({ html: bigCard(w), qhtml: '<span></span>', say: [w.en, w.zh] });
+      steps.push({ html: chantBoard(u, -1), qhtml: lines([u.chant.title], [u.chant.zh]), say: [book.story ? T.story : T.chant, u.chant.title] });
       u.chant.lines.forEach(([en, zh], k) => steps.push({ html: chantBoard(u, k), qhtml: lines([en], [zh]), say: [en, zh] }));
       steps[steps.length - 1].done = true;
       return steps;
     }
-    const lessonSteps = id => (id === 'all' ? UNITS.flatMap(u => unitSteps(u, false)) : unitSteps(unitsOf(id)[0], true));
+    // 故事書的「整篇故事」：從頭到尾一句一句念（每一段的看板跟著換）
+    function storySteps() {
+      const u0 = UNITS[0], steps = [{ html: `<div class="sb-banner" style="--c:${book.color};--cd:${book.dark}"><span class="em">${book.icon}</span><b>${book.allName}</b><span>${u0.chant.title}</span></div>`,
+        qhtml: lines([u0.chant.title], [u0.chant.zh]), say: [book.allName, u0.chant.title] }];
+      UNITS.forEach(u => u.chant.lines.forEach(([en, zh], k) => steps.push({ html: chantBoard(u, k), qhtml: lines([en], [zh]), say: [en, zh] })));
+      steps[steps.length - 1].done = true;
+      return steps;
+    }
+    const lessonSteps = id => (id === 'all' ? (book.story ? storySteps() : UNITS.flatMap(u => unitSteps(u, false))) : unitSteps(unitsOf(id)[0], true));
 
     /* ---------- 跟我說：老師念一句 → 停下來讓小朋友跟著說（停的時間照句子長短）→ 下一句 ----------
      * 英文照右上角的速度念（🐢 慢速時跟著說比較容易）。單字 → 句型 → 念謠，一句一句來 */
     function sayItems(id) {
       const out = [];
+      // 故事書的整篇故事：只練故事的句子，從頭到尾
+      if (id === 'all' && book.story) return UNITS.flatMap(u => u.chant.lines.map(([en, zh]) => ({ chant: u, en, zh })));
       for (const u of unitsOf(id)) {
         for (const w of [...u.words, ...(id === 'all' ? [] : u.extra)]) out.push({ pic: w, en: w.en, zh: w.zh });
         for (const w of u.words) {
@@ -513,19 +525,21 @@
       box.innerHTML = units.map(u => {
         const hasQ = !u.q[0].includes('___');
         const card = (x, cls) => `<button class="sb-tap${cls}" data-key="${book.id}/${u.id}/${x.id}">${pic(x)}<b>${x.en}</b><small>${x.zh}</small></button>`;
-        const teacher = u.noSentence ? `<button class="sb-q sb-name" data-teacher><span>✏️ My teacher is <u>${teacherName || '_____'}</u>.</span><small>我的老師是${teacherName || '＿＿'}。（點這裡寫老師的名字）</small></button>` : '';
-        const one = units.length === 1;
+        const teacher = u.myTeacher ? `<button class="sb-q sb-name" data-teacher><span>✏️ My teacher is <u>${teacherName || '_____'}</u>.</span><small>我的老師是${teacherName || '＿＿'}。（點這裡寫老師的名字）</small></button>` : '';
+        const one = units.length === 1, chant = one || book.story;   // 故事書的整篇故事：每一段都顯示故事句子
         return `<section class="sb-unit" style="--c:${u.color};--cd:${u.dark}">
           ${one ? '' : `<h3 class="sb-unit-h" data-unit="${u.id}"><span>${u.icon}</span>${lessonNo(u)} ${u.name}</h3>`}
-          <button class="sb-q" data-unit="${u.id}"><span>🔊 ${hasQ ? u.q[0] : u.ask.replace('___', '_____')}</span><small>${hasQ ? u.q[1] : u.askZh.replace('___', '＿＿')}</small></button>
+          ${!one && book.story ? '' : `<button class="sb-q" data-unit="${u.id}"><span>🔊 ${hasQ ? u.q[0] : u.ask.replace('___', '_____')}</span><small>${hasQ ? u.q[1] : u.askZh.replace('___', '＿＿')}</small></button>`}
           ${teacher}
-          <div class="sb-taps">${u.words.map(w => card(w, '')).join('')}</div>
+          ${one || !book.story ? `<div class="sb-taps">${u.words.map(w => card(w, '')).join('')}</div>` : ''}
           ${one && u.extra.length ? `<h4 class="sb-sub">🎵 念謠裡的單字</h4><div class="sb-taps small">${u.extra.map(w => card(w, ' small')).join('')}</div>` : ''}
-          ${one ? `<div class="sb-chant tap" data-chant="${u.id}"><h4>${u.chant.title}<small>${u.chant.zh}</small>
+          ${chant ? `<div class="sb-chant tap" data-chant="${u.id}"><h4>${u.chant.title}<small>${u.chant.zh}</small>
               <button class="pill sb-all" data-readall="${u.id}">▶️ ${T.readAll}</button></h4>
             ${u.chant.lines.map(([en, zh], k) => `<p data-line="${k}">${en}<small>${zh}</small></p>`).join('')}</div>` : ''}
         </section>`;
       }).join('');
+      // 整篇故事：最上面一顆「從頭念到尾」
+      if (book.story && units.length > 1) box.insertAdjacentHTML('afterbegin', `<button class="pill big sb-go sb-story-all" data-readall="*">▶️ ${book.allName}・${T.readAll}</button>`);
       const my = tapToken;
       setTimeout(() => my === tapToken && Voice.speak([T.tapHint]), 300);
     }
@@ -565,15 +579,20 @@
         return Voice.speak(u.chant.lines[k], () => lit(box, -1));
       }
       if (all) {
-        // 全部念一遍：只念英文，念到哪句亮哪句
-        const u = UNITS.find(v => v.id === all.dataset.readall), box = all.closest('[data-chant]'), my = tapToken;
-        const step = k => {
-          if (my !== tapToken) return;
-          if (k >= u.chant.lines.length) { lit(box, -1); return Sound.play('twinkle'); }
-          lit(box, k);
-          Voice.speak([u.chant.lines[k][0]], () => setTimeout(() => step(k + 1), 250));
-        };
-        step(0);
+        // 全部念一遍：只念英文，念到哪句亮哪句（整篇故事：一段接一段念下去）
+      const boxes = all.dataset.readall === '*' ? [...$('mathMenu').querySelectorAll('[data-chant]')] : [all.closest('[data-chant]')], my = tapToken;
+      const queue = boxes.flatMap(box => { const u = UNITS.find(v => v.id === box.dataset.chant); return u.chant.lines.map((l, k) => ({ box, k, en: l[0] })); });
+      const step = k => {
+        if (my !== tapToken) return;
+        boxes.forEach(b => lit(b, -1));
+        if (k >= queue.length) return Sound.play('twinkle');
+        const q = queue[k];
+        lit(q.box, k >= 0 ? q.k : -1);
+        const p = q.box.querySelector(`[data-line="${q.k}"]`);
+        if (p && boxes.length > 1) p.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        Voice.speak([q.en], () => setTimeout(() => step(k + 1), 250));
+      };
+      step(0);
       }
     });
 
@@ -590,13 +609,13 @@
         { title: '④ 🎮 練習小遊戲', note: '聽英文選圖', items: ['race', 'feed', 'tower', 'frog'] },
         { title: '⑤ ✏️ 小小考試', note: '考完有訂正', items: ['quiz'] },
       ],
-      tiers: [...book.tiers.map((t, k) => ({ id: 't' + k, name: t.name, note: t.note })), { id: 'all', name: '🏆 ' + T.all, note: T.allNote }],
+      tiers: [...book.tiers.map((t, k) => ({ id: 't' + k, name: t.name, note: t.note })), { id: 'all', name: '🏆 ' + (book.allName || T.all), note: book.allNote || T.allNote }],
       levels: [
         ...UNITS.map(u => ({
           id: u.id, tier: 't' + Math.max(0, book.tiers.findIndex(t => u.no >= t.from && u.no <= t.to)), name: `${u.no}・${u.name}`, say: u.name, color: u.color, dark: u.dark,
           showHTML: `<span class="sb-show"><span class="em">${u.icon}</span><b>${u.chant.title}</b></span>`,
         })),
-        { id: 'all', tier: 'all', name: T.all, say: T.all, color: book.color, dark: book.dark,
+        { id: 'all', tier: 'all', name: book.allName || T.all, say: book.allName || T.all, color: book.color, dark: book.dark,
           showHTML: `<span class="sb-show"><span class="em">${UNITS.slice(0, 5).map(u => u.icon).join('')}<br>${UNITS.slice(5).map(u => u.icon).join('')}</span></span>` },
       ],
       pace: Object.fromEntries(['all', ...book.tiers.map((t, k) => 't' + k)].map(k => [k, 4200])),

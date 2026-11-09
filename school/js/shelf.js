@@ -41,7 +41,7 @@
     title: '幼稚園課本', titleEn: 'My School Book',
     listen: '聽一聽，哪一個是', listenSent: '聽聽看，說的是哪一個？', answer: '聽英文回答問題',
     yesNo: '看一看，有沒有？', look: '看看圖，答答看',
-    tap: '點點看', tapHint: '點圖片，聽聽看怎麼念', chant: '念謠', readAll: '全部念一遍',
+    tap: '點點看', tapHint: '點圖片，聽聽看怎麼念', chant: '念謠', story: '故事', readAll: '全部念一遍',
     review: '老師上課', pick: '今天要做什麼呢？', words: '學單字', pattern: '說說看', meaning: '意思是',
     youPicked: '你選的是', right: '正確答案是', tryIt: '換你選選看', answerIs: '答案是',
     all: '總複習', allNote: '整本書的單字一起考', shelf: '書架', whoLearns: '誰要學習？', addKid: '新增小朋友',
@@ -66,7 +66,7 @@
   // 給 tools/phrases.js：這些都要錄音
   function phrases() {
     const out = [...Object.values(T), ...SUBJECTS.map(x => x.name)];
-    for (const b of BOOKS) out.push(b.grade + b.term, b.title);
+    for (const b of BOOKS) out.push(b.grade + b.term, b.title, ...(b.allName ? [b.allName, b.allNote] : []));
     for (const u of BOOKS.filter(b => b.type === 'english').flatMap(b => b.units)) {
       out.push(u.name, ...u.q, u.ans, u.ansZh, u.chant.title, u.chant.zh, ...u.chant.lines.flat());
       if (u.nope) out.push(...u.nope);
@@ -75,7 +75,7 @@
         const s = sentence(u, w);
         if (s) out.push(...s.en, ...s.zh);
       }
-      out.push(`第${'一二三四五六七八九十'[u.no - 1]}課`);
+      out.push(`第${'一二三四五六七八九十'[u.no - 1]}${u.unitWord || '課'}`);
     }
     return [...new Set(out.filter(t => !t.includes('___')))];
   }

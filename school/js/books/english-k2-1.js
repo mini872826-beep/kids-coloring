@@ -62,7 +62,7 @@ window.SHELF.addBook({
     id: 'teacher', no: 3, name: '我的老師', icon: '👩‍🏫', color: '#f783ac', dark: '#c2255c',
     q: ['Who is your teacher?', '你的老師是誰？'],
     ans: 'My teacher is ___.', ansZh: '我的老師是___。',
-    noSentence: true,   // 句型要填老師的名字：單字不套進句子
+    noSentence: true, myTeacher: true,   // 句型要填老師的名字：單字不套進句子；點點看可以寫老師的名字
     words: [
       { id: 'teacher', en: 'teacher', zh: '老師', pic: '👩‍🏫' },
       { id: 'school', en: 'school', zh: '學校', pic: '🏫' },
