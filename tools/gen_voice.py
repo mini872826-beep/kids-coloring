@@ -80,9 +80,25 @@ def mm_speed(text):
     return MM['speed'] if text in TALES else MM.get('speed_other', MM['speed'])
 
 
+# 繁體字的多音字：MiniMax 會照簡體的習慣念（「餅乾」念成餅「錢」、「抱著」念成抱「住」），
+# 所以句子裡有這幾個字就指定讀音；例外的詞（睡著）整個詞指定
+TRAD = {'著': '(zhe5)', '乾': '(gan1)'}
+TRAD_EXCEPT = {'睡著': '(shui4)(zhao2)', '著名': '(zhu4)(ming2)', '乾隆': '(qian2)(long2)', '乾坤': '(qian2)(kun1)'}
+
+
+def trad_fix(text):
+    out = [f'{w}/{py}' for w, py in TRAD_EXCEPT.items() if w in text]
+    rest = text
+    for w in TRAD_EXCEPT:
+        rest = rest.replace(w, '')
+    return out + [f'{ch}/{py}' for ch, py in TRAD.items() if ch in rest]
+
+
 def mm_fix(text):
     """這句話裡要指定讀音的詞（tools/voice/minimax.json 的 pronounce），照 MiniMax 的格式：詞/(拼音)"""
-    return [f'{w}/{py}' for w, py in MM.get('pronounce', {}).items() if not w.startswith('_') and w in text]
+    fix = [f'{w}/{py}' for w, py in MM.get('pronounce', {}).items() if not w.startswith('_') and w in text]
+    taken = ''.join(f.split('/')[0] for f in fix)
+    return fix + [f for f in trad_fix(text) if f.split('/')[0] not in taken]
 
 
 def mm_name(text):
