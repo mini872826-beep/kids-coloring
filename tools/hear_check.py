@@ -24,7 +24,7 @@ EN_MODEL = 'facebook/wav2vec2-large-960h-lv60-self'
 TW = {'垃圾': 'le4 se4', '星期': 'xing1 qi2', '期': 'qi2', '企鵝': 'qi4 e2', '危險': 'wei2 xian3', '微笑': 'wei2 xiao4',
       '頭髮': 'tou2 fa3', '研究': 'yan2 jiu4', '細菌': 'xi4 jun4', '擁抱': 'yong3 bao4', '寂寞': 'ji2 mo4', '質': 'zhi2',
       '暴露': 'bao4 lu4', '亞洲': 'ya3 zhou1', '友誼': 'you3 yi2', '曝光': 'pu4 guang1', '一會兒': 'yi1 hui3 er',
-      '蝸牛': 'gua1 niu2', '和': None}
+      '蝸牛': 'gua1 niu2', '泊': 'bo2', '鹿柴': 'lu4 zhai4', '咳咳': 'ke2 ke2', '朝辭': 'zhao1 ci2', '朝起': 'zhao1 qi3', '和': None}
 
 ZY_INIT = {'ㄅ': 'b', 'ㄆ': 'p', 'ㄇ': 'm', 'ㄈ': 'f', 'ㄉ': 'd', 'ㄊ': 't', 'ㄋ': 'n', 'ㄌ': 'l', 'ㄍ': 'g', 'ㄎ': 'k', 'ㄏ': 'h',
            'ㄐ': 'j', 'ㄑ': 'q', 'ㄒ': 'x', 'ㄓ': 'zh', 'ㄔ': 'ch', 'ㄕ': 'sh', 'ㄖ': 'r', 'ㄗ': 'z', 'ㄘ': 'c', 'ㄙ': 's'}
@@ -63,6 +63,13 @@ def norm(py):
     return re.sub(r'\d', '', py or '').replace('ü', 'v').replace('ê', 'e')
 
 
+def tw(py):
+    """台灣口音聽起來一樣的算對：ㄓㄗ、ㄔㄘ、ㄕㄙ 不分，ㄣㄥ 不分（辨識模型是用大陸口音學的）"""
+    p = norm(py)
+    p = re.sub(r'^(z|c|s)h', r'\1', p)
+    return re.sub(r'(e|i)ng$', r'\1n', p)
+
+
 def expected_zh(text):
     """這句話「應該」怎麼念：每個漢字一個拼音（帶聲調），標點不算"""
     import opencc
@@ -88,6 +95,11 @@ def expected_zh(text):
                 if m.start() + k in pos:
                     out[pos.index(m.start() + k)] = p[k]
     return [c for c in chars], out
+
+
+def cc_s(t):
+    import opencc
+    return opencc.OpenCC('t2s').convert(t)
 
 
 def readings(ch):
@@ -137,14 +149,27 @@ def kind(key):
     return 'en'
 
 
-def check_zh(ear, key, path, zy=False):
-    heard = ear(load(path))
+CARRIER = '答案是'   # 很短的錄音（一兩個字）前面接這句，辨識才有上下文，不會亂猜
+CARRIER_PY = ['da2', 'an4', 'shi4']
+
+
+def check_zh(ear, key, path, zy=False, carrier=None):
     if zy:
         exp_c, exp = [key], [zhuyin_py(key)]
     else:
         exp_c, exp = expected_zh(key)
+    x = load(path)
+    short = carrier is not None and len(exp) <= 2
+    if short:
+        x = np.concatenate([carrier, x])
+    heard = ear(x)
     hc, hp = heard_py(heard)
-    a, b = [norm(p) for p in exp], [norm(p) for p in hp]
+    if short:   # 去掉「答案是」那三個字
+        sm0 = difflib.SequenceMatcher(a=[tw(p) for p in hp], b=[tw(p) for p in CARRIER_PY], autojunk=False)
+        m = sm0.find_longest_match(0, len(hp), 0, 3)
+        cut = m.a + m.size + (3 - m.b - m.size) if m.size else 3
+        hc, hp = hc[cut:], hp[cut:]
+    a, b = [tw(p) for p in exp], [tw(p) for p in hp]
     sm = difflib.SequenceMatcher(a=a, b=b, autojunk=False)
     subs, poly = [], []
     for op, i1, i2, j1, j2 in sm.get_opcodes():
@@ -157,7 +182,9 @@ def check_zh(ear, key, path, zy=False):
                     'heard': hp[h] if h is not None else '', 'heard_char': hc[h] if h is not None else ''}
             subs.append(item)
             # 多音字念成它自己的另一個讀音：幾乎一定是真的念錯
-            if e is not None and h is not None and not zy and norm(hp[h]) in readings(exp_c[e]) - {norm(exp[e])}:
+            # （聽到的字跟原本的字一樣時看不出念哪個音，不算；「地」念輕聲的 de 是對的）
+            if e is not None and h is not None and not zy and norm(hp[h]) in readings(exp_c[e]) - {norm(exp[e])} \
+                    and hc[h] not in (exp_c[e], cc_s(exp_c[e])) and not (exp_c[e] == '地' and norm(hp[h]) == 'de'):
                 poly.append(item)
     err = 1 - sm.ratio() if a else 0
     return {'heard': heard, 'want': ' '.join(p or '?' for p in exp), 'got': ' '.join(hp), 'err': round(err, 3),
@@ -187,10 +214,11 @@ def main():
     for k, ear_name in (('zh', ZH_MODEL), ('en', EN_MODEL)):
         ear = Ear(ear_name)
         todo = [(t, f) for t, f in items if (kind(t) in ('zh', 'zy')) == (k == 'zh')]
+        carrier = load('audio/' + idx[CARRIER])[:-3200] if k == 'zh' and CARRIER in idx else None
         print(k, len(todo), flush=True)
         for n, (t, f) in enumerate(todo):
             try:
-                r = check_en(ear, t, 'audio/' + f) if k == 'en' else check_zh(ear, t, 'audio/' + f, kind(t) == 'zy')
+                r = check_en(ear, t, 'audio/' + f) if k == 'en' else check_zh(ear, t, 'audio/' + f, kind(t) == 'zy', carrier)
             except Exception as e:
                 r = {'error': str(e)[:200]}
             res[t] = {'file': f, 'kind': kind(t), **r}
