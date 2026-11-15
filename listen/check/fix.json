@@ -1,64 +1,11 @@
 [
 {
-"key": "ㄆ",
-"want": "po1",
-"cands": [
-{
-"why": "原本的",
-"path": "fx/0-0.mp3",
-"score": 0.0,
-"heard": [
-"答安叙托",
-"答案是撲"
-]
-},
-{
-"why": "HsiaoChen 念「坡」",
-"path": "fx/0-1.mp3",
-"score": 1.0,
-"heard": [
-"答爱是坡",
-"答案是破"
-]
-},
-{
-"why": "HsiaoChen 念「潑」",
-"path": "fx/0-2.mp3",
-"score": 1.0,
-"heard": [
-"答爱是坡",
-"答案是破"
-]
-},
-{
-"why": "HsiaoYu 念「坡」",
-"path": "fx/0-3.mp3",
-"score": 0.0,
-"heard": [
-"答安叙托",
-"答案是撲"
-]
-},
-{
-"why": "HsiaoYu 念「潑」",
-"path": "fx/0-4.mp3",
-"score": 0.0,
-"heard": [
-"答安叙托",
-"答案是撲"
-]
-}
-],
-"take": true,
-"file": "fx-34950c51500c.mp3"
-},
-{
 "key": "ㄇㄧˇ",
 "want": "mi3",
 "cands": [
 {
 "why": "原本的",
-"path": "fx/1-0.mp3",
+"path": "fx/0-0.mp3",
 "score": 0.0,
 "heard": [
 "答安是妳",
@@ -67,7 +14,7 @@
 },
 {
 "why": "HsiaoChen 念「米」",
-"path": "fx/1-1.mp3",
+"path": "fx/0-1.mp3",
 "score": 0.0,
 "heard": [
 "答安是妳",
@@ -76,16 +23,16 @@
 },
 {
 "why": "HsiaoChen 念「靡」",
-"path": "fx/1-2.mp3",
+"path": "fx/0-2.mp3",
 "score": 0.0,
 "heard": [
 "答安是尼",
-"答案是 你"
+"答案是你"
 ]
 },
 {
 "why": "HsiaoYu 念「米」",
-"path": "fx/1-3.mp3",
+"path": "fx/0-3.mp3",
 "score": 0.0,
 "heard": [
 "答安是妳",
@@ -94,7 +41,7 @@
 },
 {
 "why": "HsiaoYu 念「靡」",
-"path": "fx/1-4.mp3",
+"path": "fx/0-4.mp3",
 "score": 0.5,
 "heard": [
 "答安是尼",
@@ -110,7 +57,7 @@
 "cands": [
 {
 "why": "原本的",
-"path": "fx/2-0.mp3",
+"path": "fx/1-0.mp3",
 "score": 0.0,
 "heard": [
 "答安叙佛",
@@ -119,16 +66,16 @@
 },
 {
 "why": "HsiaoChen 念「佛」",
-"path": "fx/2-1.mp3",
+"path": "fx/1-1.mp3",
 "score": 0.0,
 "heard": [
 "答爱是夫",
-"答案是? 佛"
+"答案是 佛"
 ]
 },
 {
 "why": "HsiaoYu 念「佛」",
-"path": "fx/2-2.mp3",
+"path": "fx/1-2.mp3",
 "score": 0.0,
 "heard": [
 "答安叙佛",
@@ -139,65 +86,12 @@
 "take": false
 },
 {
-"key": "ㄊㄚˋ",
-"want": "ta4",
-"cands": [
-{
-"why": "原本的",
-"path": "fx/3-0.mp3",
-"score": 0.0,
-"heard": [
-"答安是帕",
-"答案是 怕"
-]
-},
-{
-"why": "HsiaoChen 念「踏」",
-"path": "fx/3-1.mp3",
-"score": 1.0,
-"heard": [
-"答安是她",
-"答案是他"
-]
-},
-{
-"why": "HsiaoChen 念「蹋」",
-"path": "fx/3-2.mp3",
-"score": 1.0,
-"heard": [
-"答安是她",
-"答案是他"
-]
-},
-{
-"why": "HsiaoYu 念「踏」",
-"path": "fx/3-3.mp3",
-"score": 0.0,
-"heard": [
-"答安是帕",
-"答案是 怕"
-]
-},
-{
-"why": "HsiaoYu 念「蹋」",
-"path": "fx/3-4.mp3",
-"score": 0.0,
-"heard": [
-"答安是帕",
-"答案是 怕"
-]
-}
-],
-"take": true,
-"file": "fx-d9113ecb0383.mp3"
-},
-{
 "key": "ㄔㄤˊ",
 "want": "chang2",
 "cands": [
 {
 "why": "原本的",
-"path": "fx/4-0.mp3",
+"path": "fx/2-0.mp3",
 "score": 0.0,
 "heard": [
 "答安是长",
@@ -206,16 +100,16 @@
 },
 {
 "why": "HsiaoChen 念「常」",
-"path": "fx/4-1.mp3",
+"path": "fx/2-1.mp3",
 "score": 0.0,
 "heard": [
 "答爱是长",
-"答案是 長"
+"答案是長"
 ]
 },
 {
 "why": "HsiaoYu 念「常」",
-"path": "fx/4-2.mp3",
+"path": "fx/2-2.mp3",
 "score": 0.0,
 "heard": [
 "答安是长",
@@ -226,57 +120,38 @@
 "take": false
 },
 {
-"key": "ㄛ",
-"want": "o1",
+"key": "ㄖ",
+"want": "ri1",
 "cands": [
 {
 "why": "原本的",
-"path": "fx/5-0.mp3",
+"path": "fx/3-0.mp3",
+"score": 0.5,
+"heard": [
+"达安日",
+"答案是日"
+]
+},
+{
+"why": "HsiaoChen 念「日」",
+"path": "fx/3-1.mp3",
 "score": 0.0,
 "heard": [
-"答安叙多",
-"答案是我"
+"达安师玉",
+"答案是 遇"
 ]
 },
 {
-"why": "HsiaoChen 念「喔」",
-"path": "fx/5-1.mp3",
-"score": 1.0,
+"why": "HsiaoYu 念「日」",
+"path": "fx/3-2.mp3",
+"score": 0.5,
 "heard": [
-"答爱是喔",
-"答案是 喔"
-]
-},
-{
-"why": "HsiaoChen 念「噢」",
-"path": "fx/5-2.mp3",
-"score": 1.0,
-"heard": [
-"答爱是喔",
-"答案是 喔"
-]
-},
-{
-"why": "HsiaoYu 念「喔」",
-"path": "fx/5-3.mp3",
-"score": 0.0,
-"heard": [
-"答安叙多",
-"答案是我"
-]
-},
-{
-"why": "HsiaoYu 念「噢」",
-"path": "fx/5-4.mp3",
-"score": 0.0,
-"heard": [
-"答安叙多",
-"答案是我"
+"达安日",
+"答案是日"
 ]
 }
 ],
-"take": true,
-"file": "fx-79e64811a78d.mp3"
+"take": false
 },
 {
 "key": "ㄝ",
@@ -284,7 +159,7 @@
 "cands": [
 {
 "why": "原本的",
-"path": "fx/6-0.mp3",
+"path": "fx/4-0.mp3",
 "score": 0.0,
 "heard": [
 "答安叙裴",
@@ -293,7 +168,7 @@
 },
 {
 "why": "HsiaoChen 念「欸」",
-"path": "fx/6-1.mp3",
+"path": "fx/4-1.mp3",
 "score": 0.0,
 "heard": [
 "答安是给",
@@ -302,7 +177,7 @@
 },
 {
 "why": "HsiaoYu 念「欸」",
-"path": "fx/6-2.mp3",
+"path": "fx/4-2.mp3",
 "score": 0.0,
 "heard": [
 "答安叙裴",
@@ -318,7 +193,7 @@
 "cands": [
 {
 "why": "原本的",
-"path": "fx/7-0.mp3",
+"path": "fx/5-0.mp3",
 "score": 0.0,
 "heard": [
 "南安须费",
@@ -327,7 +202,7 @@
 },
 {
 "why": "HsiaoChen 念「誒」",
-"path": "fx/7-1.mp3",
+"path": "fx/5-1.mp3",
 "score": 0.0,
 "heard": [
 "答安师贝",
@@ -336,54 +211,11 @@
 },
 {
 "why": "HsiaoYu 念「誒」",
-"path": "fx/7-2.mp3",
+"path": "fx/5-2.mp3",
 "score": 0.0,
 "heard": [
 "南安须费",
 "答案是A"
-]
-}
-],
-"take": false
-},
-{
-"key": "呱呱呱呱呱",
-"want": "gua1 gua1 gua1 gua1 gua1",
-"cands": [
-{
-"why": "原本的",
-"path": "fx/8-0.mp3",
-"score": 0.0,
-"heard": [
-"官官官官",
-"關 關 關 關 關"
-]
-},
-{
-"why": "念錯的字指定讀音",
-"path": "fx/8-1.mp3",
-"score": 0.2,
-"heard": [
-"乖乖乖瓜瓜",
-"呱呱呱呱呱"
-]
-},
-{
-"why": "整句每個字都指定讀音",
-"path": "fx/8-2.mp3",
-"score": 0.0,
-"heard": [
-"拐乖乖乖锅",
-"呱呱呱呱呱"
-]
-},
-{
-"why": "整句指定讀音（再錄一次）",
-"path": "fx/8-3.mp3",
-"score": 0.0,
-"heard": [
-"乖管乖乖乖",
-"呱呱呱呱呱"
 ]
 }
 ],
