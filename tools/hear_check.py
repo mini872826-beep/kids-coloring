@@ -254,10 +254,26 @@ def second_opinion(res, idx):
     w = hf.Whisper()
     # 英文也一樣：wav2vec2 沒有字典，狀聲詞、名字常拼錯；Whisper 聽起來對就標 w_ok
     wen = hf.Whisper('en', w.m)
+    # 單字給前面加一句「The word is」（同一個聲音），耳朵有上下文才不會亂猜（frog 聽成別的字）
+    import asyncio, edge_tts
+    asyncio.run(edge_tts.Communicate('The word is', gv.VOICE_EN).save('/tmp/en-carrier.mp3'))
+    en_car = load('/tmp/en-carrier.mp3')[:-3200]
+
+    def with_carrier(x):
+        return wen(np.concatenate([en_car, x]))
     for t, r in res.items():
         if r.get('kind') == 'en' and r.get('err', 0) > .3:
             try:
-                r2 = check_en(wen, t, 'audio/' + r['file'])
+                text = t.split(':', 1)[1] if t.startswith('slow') else t
+                if len(words(text)) <= 2:
+                    heard = with_carrier(load('audio/' + r['file']))
+                    b = words(heard)
+                    b = b[3:] if b[:3] == ['the', 'word', 'is'] else b[-len(words(text)):]
+                    a = words(text)
+                    err = 1 - difflib.SequenceMatcher(a=a, b=b, autojunk=False).ratio()
+                    r2 = {'heard': heard.lower(), 'err': err}
+                else:
+                    r2 = check_en(wen, t, 'audio/' + r['file'])
                 r['whisper'], r['w_ok'] = r2['heard'], r2['err'] <= .3
             except Exception as e:
                 r['whisper'] = 'error: ' + str(e)[:100]
