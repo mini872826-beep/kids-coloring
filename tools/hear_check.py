@@ -1,0 +1,232 @@
+"""讀音檢查（AI 的耳朵）：把 audio/ 裡每一段錄音用語音辨識聽一遍，跟應該念的讀音比對，列出可疑的。
+
+  中文：wav2vec2 的中文辨識（CTC，一個音一個字，沒有「猜句子」的語言模型，聽到「餅錢」就寫「饼钱」），
+        聽到的字轉成拼音，跟應有的台灣讀音比（指定讀音 tools/voice/minimax.json ＋ 繁體多音字規則 ＋ 台灣讀音表）。
+        最可疑：多音字念成它的另一個讀音（乾 gan → qian、著 zhe → zhu），這種幾乎一定是真的念錯。
+  注音：學注音的發音（key 是注音本身），注音直接換成拼音來比。
+  英文：wav2vec2 英文辨識，跟句子比字錯率。
+結果：listen/check/report.json 和 listen/check/index.html（可以點來聽）
+
+用法：python tools/hear_check.py [只檢查前 N 段]
+"""
+import difflib, json, os, re, subprocess, sys
+
+import numpy as np
+
+sys.path.insert(0, os.path.dirname(__file__))
+import gen_voice as gv   # noqa: E402
+
+OUT = 'listen/check'
+ZH_MODEL = 'jonatasgrosman/wav2vec2-large-xlsr-53-chinese-zh-cn'
+EN_MODEL = 'facebook/wav2vec2-large-960h-lv60-self'
+
+# 台灣和大陸讀音不同的詞（教育部的台灣讀音）；拼音工具預設是大陸讀音
+TW = {'垃圾': 'le4 se4', '星期': 'xing1 qi2', '期': 'qi2', '企鵝': 'qi4 e2', '危險': 'wei2 xian3', '微笑': 'wei2 xiao4',
+      '頭髮': 'tou2 fa3', '研究': 'yan2 jiu4', '細菌': 'xi4 jun4', '擁抱': 'yong3 bao4', '寂寞': 'ji2 mo4', '質': 'zhi2',
+      '暴露': 'bao4 lu4', '亞洲': 'ya3 zhou1', '友誼': 'you3 yi2', '曝光': 'pu4 guang1', '一會兒': 'yi1 hui3 er',
+      '蝸牛': 'gua1 niu2', '和': None}
+
+ZY_INIT = {'ㄅ': 'b', 'ㄆ': 'p', 'ㄇ': 'm', 'ㄈ': 'f', 'ㄉ': 'd', 'ㄊ': 't', 'ㄋ': 'n', 'ㄌ': 'l', 'ㄍ': 'g', 'ㄎ': 'k', 'ㄏ': 'h',
+           'ㄐ': 'j', 'ㄑ': 'q', 'ㄒ': 'x', 'ㄓ': 'zh', 'ㄔ': 'ch', 'ㄕ': 'sh', 'ㄖ': 'r', 'ㄗ': 'z', 'ㄘ': 'c', 'ㄙ': 's'}
+ZY_FIN = {'ㄚ': 'a', 'ㄛ': 'o', 'ㄜ': 'e', 'ㄝ': 'e', 'ㄞ': 'ai', 'ㄟ': 'ei', 'ㄠ': 'ao', 'ㄡ': 'ou', 'ㄢ': 'an', 'ㄣ': 'en',
+          'ㄤ': 'ang', 'ㄥ': 'eng', 'ㄦ': 'er', 'ㄧ': 'i', 'ㄨ': 'u', 'ㄩ': 'v',
+          'ㄧㄚ': 'ia', 'ㄧㄛ': 'io', 'ㄧㄝ': 'ie', 'ㄧㄞ': 'iai', 'ㄧㄠ': 'iao', 'ㄧㄡ': 'iu', 'ㄧㄢ': 'ian', 'ㄧㄣ': 'in',
+          'ㄧㄤ': 'iang', 'ㄧㄥ': 'ing', 'ㄨㄚ': 'ua', 'ㄨㄛ': 'uo', 'ㄨㄞ': 'uai', 'ㄨㄟ': 'ui', 'ㄨㄢ': 'uan', 'ㄨㄣ': 'un',
+          'ㄨㄤ': 'uang', 'ㄨㄥ': 'ong', 'ㄩㄝ': 've', 'ㄩㄢ': 'van', 'ㄩㄣ': 'vn', 'ㄩㄥ': 'iong'}
+ZY_SYM = {'ㄅ': 'bo', 'ㄆ': 'po', 'ㄇ': 'mo', 'ㄈ': 'fo', 'ㄉ': 'de', 'ㄊ': 'te', 'ㄋ': 'ne', 'ㄌ': 'le', 'ㄍ': 'ge', 'ㄎ': 'ke',
+          'ㄏ': 'he', 'ㄐ': 'ji', 'ㄑ': 'qi', 'ㄒ': 'xi', 'ㄓ': 'zhi', 'ㄔ': 'chi', 'ㄕ': 'shi', 'ㄖ': 'ri', 'ㄗ': 'zi', 'ㄘ': 'ci',
+          'ㄙ': 'si', 'ㄧ': 'yi', 'ㄨ': 'wu', 'ㄩ': 'yu', 'ㄝ': 'ê'}
+TONE = {'ˊ': '2', 'ˇ': '3', 'ˋ': '4', '˙': '5'}
+
+
+def zhuyin_py(z):
+    """注音 → 拼音（ㄌㄠˇ → lao3）"""
+    tone = next((TONE[c] for c in z if c in TONE), '1')
+    body = ''.join(c for c in z if c not in TONE)
+    if body in ZY_SYM:
+        return ZY_SYM[body] + tone
+    if body in ZY_FIN and body[0] not in ZY_INIT:
+        f = ZY_FIN[body]
+        f = {'i': 'yi', 'u': 'wu', 'v': 'yu', 'ia': 'ya', 'io': 'yo', 'ie': 'ye', 'iai': 'yai', 'iao': 'yao', 'iu': 'you',
+             'ian': 'yan', 'in': 'yin', 'iang': 'yang', 'ing': 'ying', 'ua': 'wa', 'uo': 'wo', 'uai': 'wai', 'ui': 'wei',
+             'uan': 'wan', 'un': 'wen', 'uang': 'wang', 'ong': 'weng', 've': 'yue', 'van': 'yuan', 'vn': 'yun',
+             'iong': 'yong'}.get(f, f)
+        return f + tone
+    i, f = ZY_INIT.get(body[0], ''), ZY_FIN.get(body[1:], '')
+    if i in ('j', 'q', 'x') and f.startswith('v'):
+        f = 'u' + f[1:]
+    return i + f.replace('v', 'ü') + tone
+
+
+def norm(py):
+    """比對用：去掉聲調、ü/v 統一"""
+    return re.sub(r'\d', '', py or '').replace('ü', 'v').replace('ê', 'e')
+
+
+def expected_zh(text):
+    """這句話「應該」怎麼念：每個漢字一個拼音（帶聲調），標點不算"""
+    import opencc
+    from pypinyin import lazy_pinyin, Style
+    cc = opencc.OpenCC('t2s')
+    chars = [c for c in text if '一' <= c <= '鿿']
+    s = cc.convert(text)
+    py = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True, errors=lambda x: [None] * len(x))
+    pos = [i for i, c in enumerate(text) if '一' <= c <= '鿿']
+    if len(s) != len(text) or len(py) != len(text):
+        py = lazy_pinyin([cc.convert(c) for c in chars], style=Style.TONE3, neutral_tone_with_five=True)
+        out = list(py)
+    else:
+        out = [py[i] for i in pos]
+    # 指定讀音（和錄音時給 MiniMax 的一樣）、台灣讀音表
+    fixes = [(f.split('/')[0], re.findall(r'\((\w+)\)', f.split('/', 1)[1])) for f in gv.mm_fix(text)]
+    fixes += [(w, p.split()) for w, p in TW.items() if p and w in text]
+    for w, p in fixes:
+        if len(p) != len(w):
+            continue
+        for m in re.finditer(re.escape(w), text):
+            for k in range(len(w)):
+                if m.start() + k in pos:
+                    out[pos.index(m.start() + k)] = p[k]
+    return [c for c in chars], out
+
+
+def readings(ch):
+    """一個字所有可能的讀音（不帶聲調）"""
+    import opencc
+    from pypinyin import pinyin, Style
+    s = opencc.OpenCC('t2s').convert(ch)
+    r = set()
+    for c in set(ch + s):
+        r |= {norm(p) for p in pinyin(c, style=Style.TONE3, heteronym=True)[0]}
+    return r
+
+
+def heard_py(text):
+    from pypinyin import lazy_pinyin, Style
+    t = re.sub(r'[^一-鿿]', '', text)
+    return list(t), lazy_pinyin(t, style=Style.TONE3, neutral_tone_with_five=True)
+
+
+def load(path):
+    raw = subprocess.run(['ffmpeg', '-v', 'quiet', '-i', path, '-f', 's16le', '-ac', '1', '-ar', '16000', '-'],
+                         capture_output=True).stdout
+    x = np.frombuffer(raw, dtype=np.int16).astype(np.float32) / 32768
+    return np.pad(x, (3200, 3200))
+
+
+class Ear:
+    def __init__(self, name):
+        import torch
+        from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
+        self.torch = torch
+        self.proc = Wav2Vec2Processor.from_pretrained(name)
+        self.model = Wav2Vec2ForCTC.from_pretrained(name).eval()
+
+    def __call__(self, x):
+        with self.torch.no_grad():
+            v = self.proc(x, sampling_rate=16000, return_tensors='pt').input_values
+            ids = self.model(v).logits.argmax(-1)
+        return self.proc.batch_decode(ids)[0]
+
+
+def kind(key):
+    if re.search(r'[一-鿿]', key):
+        return 'zh'
+    if re.search(r'[㄀-ㄯ]', key):
+        return 'zy'
+    return 'en'
+
+
+def check_zh(ear, key, path, zy=False):
+    heard = ear(load(path))
+    if zy:
+        exp_c, exp = [key], [zhuyin_py(key)]
+    else:
+        exp_c, exp = expected_zh(key)
+    hc, hp = heard_py(heard)
+    a, b = [norm(p) for p in exp], [norm(p) for p in hp]
+    sm = difflib.SequenceMatcher(a=a, b=b, autojunk=False)
+    subs, poly = [], []
+    for op, i1, i2, j1, j2 in sm.get_opcodes():
+        if op == 'equal':
+            continue
+        for k in range(max(i2 - i1, j2 - j1)):
+            e = i1 + k if i1 + k < i2 else None
+            h = j1 + k if j1 + k < j2 else None
+            item = {'char': exp_c[e] if e is not None else '', 'want': exp[e] if e is not None else '',
+                    'heard': hp[h] if h is not None else '', 'heard_char': hc[h] if h is not None else ''}
+            subs.append(item)
+            # 多音字念成它自己的另一個讀音：幾乎一定是真的念錯
+            if e is not None and h is not None and not zy and norm(hp[h]) in readings(exp_c[e]) - {norm(exp[e])}:
+                poly.append(item)
+    err = 1 - sm.ratio() if a else 0
+    return {'heard': heard, 'want': ' '.join(p or '?' for p in exp), 'got': ' '.join(hp), 'err': round(err, 3),
+            'subs': subs, 'poly': poly}
+
+
+def words(t):
+    return re.findall(r"[a-z']+", t.lower().replace('’', "'"))
+
+
+def check_en(ear, key, path):
+    text = key.split(':', 1)[1] if key.startswith('slow') else key
+    heard = ear(load(path))
+    a, b = words(text), words(heard)
+    sm = difflib.SequenceMatcher(a=a, b=b, autojunk=False)
+    miss = [' '.join(a[i1:i2]) + ' → ' + ' '.join(b[j1:j2]) for op, i1, i2, j1, j2 in sm.get_opcodes() if op != 'equal']
+    return {'heard': heard.lower(), 'want': ' '.join(a), 'err': round(1 - sm.ratio(), 3) if a else 0, 'subs': miss}
+
+
+def main():
+    idx = json.load(open('audio/index.json', encoding='utf-8'))
+    items = sorted(idx.items())
+    if len(sys.argv) > 1:
+        items = items[:int(sys.argv[1])]
+    os.makedirs(OUT, exist_ok=True)
+    res = {}
+    for k, ear_name in (('zh', ZH_MODEL), ('en', EN_MODEL)):
+        ear = Ear(ear_name)
+        todo = [(t, f) for t, f in items if (kind(t) in ('zh', 'zy')) == (k == 'zh')]
+        print(k, len(todo), flush=True)
+        for n, (t, f) in enumerate(todo):
+            try:
+                r = check_en(ear, t, 'audio/' + f) if k == 'en' else check_zh(ear, t, 'audio/' + f, kind(t) == 'zy')
+            except Exception as e:
+                r = {'error': str(e)[:200]}
+            res[t] = {'file': f, 'kind': kind(t), **r}
+            if n % 100 == 0:
+                print(n, t[:30], r.get('err'), flush=True)
+    json.dump(res, open(f'{OUT}/report.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
+    page(res)
+
+
+def page(res=None):
+    import html
+    res = res or json.load(open(f'{OUT}/report.json', encoding='utf-8'))
+    play = lambda f: f'<button onclick="new Audio(\'../../audio/{f}\').play()">▶</button>'
+    esc = html.escape
+
+    def row(t, r, extra):
+        return f'<tr><td>{play(r["file"])}</td><td>{esc(t)}</td><td>{extra}</td></tr>'
+    poly = [(t, r) for t, r in res.items() if r.get('poly')]
+    zh = sorted([(t, r) for t, r in res.items() if r.get('kind') in ('zh', 'zy') and not r.get('poly') and r.get('err', 0) > .34],
+                key=lambda x: -x[1]['err'])
+    en = sorted([(t, r) for t, r in res.items() if r.get('kind') == 'en' and r.get('err', 0) > .3], key=lambda x: -x[1]['err'])
+    fmt = lambda s: '、'.join(f'{esc(x["char"])} 應念 <b>{x["want"]}</b>，聽到 <b class=no>{x["heard"]}</b>（{esc(x["heard_char"])}）' for x in s)
+    sec = [
+        ('1. 多音字念成另一個讀音（最可能真的念錯）', poly, lambda r: fmt(r['poly'])),
+        ('2. 中文聽起來差很多（可能念錯，也可能是辨識不準）', zh, lambda r: f'應：{r["want"]}<br>聽：{esc(r["got"])}（{r["err"]}）'),
+        ('3. 英文聽起來差很多', en, lambda r: f'聽到：{esc(r["heard"])}<br>{esc("；".join(r["subs"][:4]))}（{r["err"]}）'),
+    ]
+    body = ''.join(f'<h3>{h}：{len(rows)} 段</h3><table>{"".join(row(t, r, f(r)) for t, r in rows)}</table>' for h, rows, f in sec)
+    n = {k: sum(1 for r in res.values() if r.get('kind') == k) for k in ('zh', 'zy', 'en')}
+    open(f'{OUT}/index.html', 'w', encoding='utf-8').write(f'''<!doctype html><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>讀音檢查</title>
+<style>body{{font:16px system-ui;margin:12px;background:#fffdf5}}table{{border-collapse:collapse;width:100%}}
+td{{border:1px solid #ddd;padding:6px;vertical-align:top}}button{{font-size:20px;border:0;border-radius:10px;background:#ffd43b;padding:2px 10px}}
+.no{{color:#c92a2a}}</style><h2>讀音檢查</h2>
+<p>聽了中文 {n["zh"]} 段、注音 {n["zy"]} 段、英文 {n["en"]} 段。下面是聽起來可疑的（語音辨識只是參考，請用耳朵確認）。</p>{body}''')
+
+
+if __name__ == '__main__':
+    page() if sys.argv[1:] == ['page'] else main()
