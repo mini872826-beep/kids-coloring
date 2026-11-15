@@ -2544,13 +2544,20 @@
 "poly": []
 },
 "一行白鷺上青天": {
-"file": "9ba3889dd5c4.mp3",
+"file": "8e27c78ff200.mp3",
 "kind": "zh",
-"heard": "一行白路上清天",
-"want": "yi1 xing2 bai2 lu4 shang4 qing1 tian1",
-"got": "yi1 xing2 bai2 lu4 shang4 qing1 tian1",
-"err": 0.0,
-"subs": [],
+"heard": "义行白路上清天",
+"want": "yi4 hang2 bai2 lu4 shang4 qing1 tian1",
+"got": "yi4 xing2 bai2 lu4 shang4 qing1 tian1",
+"err": 0.143,
+"subs": [
+{
+"char": "行",
+"want": "hang2",
+"heard": "xing2",
+"heard_char": "行"
+}
+],
 "poly": []
 },
 "一起分享": {
@@ -5294,20 +5301,13 @@
 "poly": []
 },
 "便溺回，輒淨手": {
-"file": "4ffb339c16a6.mp3",
+"file": "20138df75a63.mp3",
 "kind": "zh",
-"heard": "贬密回浙敬守",
+"heard": "便鸟回则晋守",
 "want": "bian4 niao4 hui2 zhe2 jing4 shou3",
-"got": "bian3 mi4 hui2 zhe4 jing4 shou3",
-"err": 0.167,
-"subs": [
-{
-"char": "溺",
-"want": "niao4",
-"heard": "mi4",
-"heard_char": "密"
-}
-],
+"got": "bian4 niao3 hui2 ze2 jin4 shou3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "個": {
@@ -5391,13 +5391,20 @@
 "poly": []
 },
 "借人物，及時還": {
-"file": "2f90fc640211.mp3",
+"file": "e5ce42fc66cf.mp3",
 "kind": "zh",
-"heard": "戒人物及实还",
-"want": "jie4 ren2 wu4 ji2 shi2 hai2",
-"got": "jie4 ren2 wu4 ji2 shi2 hai2",
-"err": 0.0,
-"subs": [],
+"heard": "戒人物及石<unk>",
+"want": "jie4 ren2 wu4 ji2 shi2 huan2",
+"got": "jie4 ren2 wu4 ji2 shi2",
+"err": 0.091,
+"subs": [
+{
+"char": "還",
+"want": "huan2",
+"heard": "",
+"heard_char": ""
+}
+],
 "poly": []
 },
 "借來的恐龍書": {
@@ -5739,11 +5746,11 @@
 "poly": []
 },
 "入竹萬竿斜": {
-"file": "4c6e2446a9e7.mp3",
+"file": "3b9fe43f329a.mp3",
 "kind": "zh",
-"heard": "入竹万干鞋",
-"want": "ru4 zhu2 wan4 gan1 xie2",
-"got": "ru4 zhu2 wan4 gan4 xie2",
+"heard": "入足万干霞",
+"want": "ru4 zhu2 wan4 gan1 xia2",
+"got": "ru4 zu2 wan4 gan4 xia2",
 "err": 0.0,
 "subs": [],
 "poly": []
@@ -6525,20 +6532,13 @@
 "poly": []
 },
 "冠必正，紐必結": {
-"file": "5346084ab967.mp3",
+"file": "90a84f64ed3a.mp3",
 "kind": "zh",
-"heard": "关闭正扭毕<unk>",
+"heard": "关闭正纽毕节",
 "want": "guan1 bi4 zheng4 niu3 bi4 jie2",
-"got": "guan1 bi4 zheng4 niu3 bi4",
-"err": 0.091,
-"subs": [
-{
-"char": "結",
-"want": "jie2",
-"heard": "",
-"heard_char": ""
-}
-],
+"got": "guan1 bi4 zheng4 niu3 bi4 jie2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "冠軍獎盃": {
@@ -7100,13 +7100,20 @@
 "poly": []
 },
 "千里江陵一日還": {
-"file": "d9a6ccdcd5f6.mp3",
+"file": "78d0bb370fce.mp3",
 "kind": "zh",
-"heard": "千里将邻一日海",
-"want": "qian1 li3 jiang1 ling2 yi1 ri4 hai2",
-"got": "qian1 li3 jiang1 lin2 yi1 ri4 hai3",
-"err": 0.0,
-"subs": [],
+"heard": "千里将邻一日<unk>",
+"want": "qian1 li3 jiang1 ling2 yi2 ri4 huan2",
+"got": "qian1 li3 jiang1 lin2 yi1 ri4",
+"err": 0.077,
+"subs": [
+{
+"char": "還",
+"want": "huan2",
+"heard": "",
+"heard_char": ""
+}
+],
 "poly": []
 },
 "南瓜": {
@@ -8448,34 +8455,21 @@
 "poly": []
 },
 "垃圾車": {
-"file": "e2de0bca59f3.mp3",
+"file": "4626d4b11c37.mp3",
 "kind": "zh",
-"heard": "拉居车",
+"heard": "勒色车",
 "want": "le4 se4 che1",
-"got": "la1 ju1 che1",
-"err": 0.667,
+"got": "lei1 se4 che1",
+"err": 0.333,
 "subs": [
 {
 "char": "垃",
 "want": "le4",
-"heard": "la1",
-"heard_char": "拉"
-},
-{
-"char": "圾",
-"want": "se4",
-"heard": "ju1",
-"heard_char": "居"
+"heard": "lei1",
+"heard_char": "勒"
 }
 ],
-"poly": [
-{
-"char": "垃",
-"want": "le4",
-"heard": "la1",
-"heard_char": "拉"
-}
-]
+"poly": []
 },
 "垮下來，垮下來": {
 "file": "79ee3bac2fa8.mp3",
@@ -8905,20 +8899,13 @@
 "poly": []
 },
 "天同覆，地同載": {
-"file": "b9920df6c751.mp3",
+"file": "a4506705e9b7.mp3",
 "kind": "zh",
-"heard": "天同赴地藤仔",
+"heard": "天铜附地桐在",
 "want": "tian1 tong2 fu4 di4 tong2 zai4",
-"got": "tian1 tong2 fu4 di4 teng2 zai3",
-"err": 0.167,
-"subs": [
-{
-"char": "同",
-"want": "tong2",
-"heard": "teng2",
-"heard_char": "藤"
-}
-],
+"got": "tian1 tong2 fu4 di4 tong2 zai4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "天氣好熱，烏鴉好渴，到處找水喝。": {
@@ -11574,7 +11561,7 @@
 "poly": []
 },
 "少小離家老大回": {
-"file": "feace6e7dcff.mp3",
+"file": "c066b37830df.mp3",
 "kind": "zh",
 "heard": "少小离家老大回",
 "want": "shao4 xiao3 li2 jia1 lao3 da4 hui2",
@@ -11704,11 +11691,11 @@
 "poly": []
 },
 "年方少，勿飲酒": {
-"file": "1b8754effc41.mp3",
+"file": "a431ba556ca5.mp3",
 "kind": "zh",
-"heard": "年方少物营酒",
-"want": "nian2 fang1 shao3 wu4 yin3 jiu3",
-"got": "nian2 fang1 shao3 wu4 ying2 jiu3",
+"heard": "年方少五营九",
+"want": "nian2 fang1 shao4 wu4 yin3 jiu3",
+"got": "nian2 fang1 shao3 wu3 ying2 jiu3",
 "err": 0.0,
 "subs": [],
 "poly": []
@@ -11941,24 +11928,24 @@
 "poly": []
 },
 "弟於長，宜先知": {
-"file": "23dae1db4113.mp3",
+"file": "0b55146bf492.mp3",
 "kind": "zh",
-"heard": "地于长于先支",
-"want": "di4 yu2 zhang3 yi2 xian1 zhi1",
-"got": "di4 yu2 chang2 yu2 xian1 zhi1",
-"err": 0.333,
+"heard": "<unk>余长由先支",
+"want": "ti4 yu2 zhang3 yi2 xian1 zhi1",
+"got": "yu2 zhang3 you2 xian1 zhi1",
+"err": 0.273,
 "subs": [
 {
-"char": "長",
-"want": "zhang3",
-"heard": "chang2",
-"heard_char": "长"
+"char": "弟",
+"want": "ti4",
+"heard": "",
+"heard_char": ""
 },
 {
 "char": "宜",
 "want": "yi2",
-"heard": "yu2",
-"heard_char": "于"
+"heard": "you2",
+"heard_char": "由"
 }
 ],
 "poly": []
@@ -13451,11 +13438,11 @@
 "poly": []
 },
 "揠苗助長": {
-"file": "fbc9a67b5150.mp3",
+"file": "20c6a56bd8b8.mp3",
 "kind": "zh",
-"heard": "亚苗助长",
+"heard": "雅苗住长",
 "want": "ya4 miao2 zhu4 zhang3",
-"got": "ya4 miao2 zhu4 zhang3",
+"got": "ya3 miao2 zhu4 zhang3",
 "err": 0.0,
 "subs": [],
 "poly": []
@@ -13979,11 +13966,11 @@
 "poly": []
 },
 "昔孟母，擇鄰處": {
-"file": "f2608664c2a8.mp3",
+"file": "b390fbeff440.mp3",
 "kind": "zh",
-"heard": "西孟母则林处",
-"want": "xi1 meng4 mu3 ze2 lin2 chu4",
-"got": "xi1 meng4 mu3 ze2 lin2 chu4",
+"heard": "西孟母责领楚",
+"want": "xi1 meng4 mu3 ze2 lin2 chu3",
+"got": "xi1 meng4 mu3 ze2 ling3 chu3",
 "err": 0.0,
 "subs": [],
 "poly": []
@@ -14202,7 +14189,7 @@
 "poly": []
 },
 "曲項向天歌": {
-"file": "6b6185e28290.mp3",
+"file": "874e3fdbe267.mp3",
 "kind": "zh",
 "heard": "曲向向天歌",
 "want": "qu1 xiang4 xiang4 tian1 ge1",
@@ -14366,13 +14353,20 @@
 "poly": []
 },
 "有一天，獅子被獵人的網子抓住了，怎麼掙扎都出不來。": {
-"file": "f3ec2bfbcc14.mp3",
+"file": "e060b4d95180.mp3",
 "kind": "zh",
-"heard": "有一 天狮子被烈人的网子抓住了 怎么真闸都出不来",
+"heard": "有一天狮子被列人的网子抓住了怎么侦着都出不来",
 "want": "you3 yi1 tian1 shi1 zi5 bei4 lie4 ren2 de5 wang3 zi5 zhua1 zhu4 le5 zen3 me5 zheng1 zha2 dou1 chu1 bu4 lai2",
-"got": "you3 yi1 tian1 shi1 zi5 bei4 lie4 ren2 de5 wang3 zi5 zhua1 zhu4 le5 zen3 me5 zhen1 zha2 dou1 chu1 bu4 lai2",
-"err": 0.0,
-"subs": [],
+"got": "you3 yi1 tian1 shi1 zi5 bei4 lie4 ren2 de5 wang3 zi5 zhua1 zhu4 le5 zen3 me5 zhen1 zhe5 dou1 chu1 bu4 lai2",
+"err": 0.045,
+"subs": [
+{
+"char": "扎",
+"want": "zha2",
+"heard": "zhe5",
+"heard_char": "着"
+}
+],
 "poly": []
 },
 "有好東西和朋友分享，大家都好開心。": {
@@ -16236,10 +16230,10 @@
 "poly": []
 },
 "為人子，方少時": {
-"file": "46d356d8b678.mp3",
+"file": "73330324caf8.mp3",
 "kind": "zh",
-"heard": "魏人子方邵时",
-"want": "wei2 ren2 zi5 fang1 shao3 shi2",
+"heard": "为仁子方邵时",
+"want": "wei2 ren2 zi5 fang1 shao4 shi2",
 "got": "wei4 ren2 zi5 fang1 shao4 shi2",
 "err": 0.0,
 "subs": [],
@@ -19412,11 +19406,11 @@
 "poly": []
 },
 "竇燕山，有義方": {
-"file": "f1b974f28721.mp3",
+"file": "605258fc18de.mp3",
 "kind": "zh",
-"heard": "豆艳山有一方",
+"heard": "豆烟山有一方",
 "want": "dou4 yan1 shan1 you3 yi4 fang1",
-"got": "dou4 yan4 shan1 you3 yi1 fang1",
+"got": "dou4 yan1 shan1 you3 yi1 fang1",
 "err": 0.0,
 "subs": [],
 "poly": []
@@ -20254,11 +20248,11 @@
 "poly": []
 },
 "置冠服，有定位": {
-"file": "26d72afe0f00.mp3",
+"file": "bad633ed7da1.mp3",
 "kind": "zh",
-"heard": "至灌府有定位",
+"heard": "至官服有定位",
 "want": "zhi4 guan1 fu2 you3 ding4 wei4",
-"got": "zhi4 guan4 fu3 you3 ding4 wei4",
+"got": "zhi4 guan1 fu2 you3 ding4 wei4",
 "err": 0.0,
 "subs": [],
 "poly": []
@@ -22718,11 +22712,11 @@
 "poly": []
 },
 "返景入深林": {
-"file": "defd52bed25c.mp3",
+"file": "5660cf157638.mp3",
 "kind": "zh",
-"heard": "樊井入申林",
-"want": "fan3 jing3 ru4 shen1 lin2",
-"got": "fan2 jing3 ru4 shen1 lin2",
+"heard": "樊尹入申邻",
+"want": "fan3 ying3 ru4 shen1 lin2",
+"got": "fan2 yin3 ru4 shen1 lin2",
 "err": 0.0,
 "subs": [],
 "poly": []
@@ -22967,11 +22961,11 @@
 "poly": []
 },
 "遠上寒山石徑斜": {
-"file": "79b1ceb6ae70.mp3",
+"file": "8864faa3d965.mp3",
 "kind": "zh",
-"heard": "远上寒山石径协",
-"want": "yuan3 shang4 han2 shan1 shi2 jing4 xie2",
-"got": "yuan3 shang4 han2 shan1 shi2 jing4 xie2",
+"heard": "远上寒山石晋霞",
+"want": "yuan3 shang4 han2 shan1 shi2 jing4 xia2",
+"got": "yuan3 shang4 han2 shan1 shi2 jin4 xia2",
 "err": 0.0,
 "subs": [],
 "poly": []
@@ -23057,11 +23051,11 @@
 "poly": []
 },
 "鄉音無改鬢毛衰": {
-"file": "8e2f45213fff.mp3",
+"file": "a9bd3fdf1759.mp3",
 "kind": "zh",
-"heard": "香因五改并毛衰",
-"want": "xiang1 yin1 wu2 gai3 bin4 mao2 shuai1",
-"got": "xiang1 yin1 wu3 gai3 bing4 mao2 shuai1",
+"heard": "相因五改并毛催",
+"want": "xiang1 yin1 wu2 gai3 bin4 mao2 cui1",
+"got": "xiang1 yin1 wu3 gai3 bing4 mao2 cui1",
 "err": 0.0,
 "subs": [],
 "poly": []
@@ -23234,11 +23228,11 @@
 "poly": []
 },
 "長浮華，成何人": {
-"file": "745672a38cb9.mp3",
+"file": "fe3a483bb86c.mp3",
 "kind": "zh",
-"heard": "长符华承何人",
+"heard": "长符花承何人",
 "want": "zhang3 fu2 hua2 cheng2 he2 ren2",
-"got": "zhang3 fu2 hua2 cheng2 he2 ren2",
+"got": "zhang3 fu2 hua1 cheng2 he2 ren2",
 "err": 0.0,
 "subs": [],
 "poly": []
@@ -23893,14 +23887,28 @@
 "poly": []
 },
 "首孝弟，次見聞": {
-"file": "e207042a1f7b.mp3",
+"file": "adec99a0c9d6.mp3",
 "kind": "zh",
-"heard": "首效弟赐建文",
-"want": "shou3 xiao4 di4 ci4 jian4 wen2",
-"got": "shou3 xiao4 di4 ci4 jian4 wen2",
-"err": 0.0,
-"subs": [],
-"poly": []
+"heard": "首效替字见文",
+"want": "shou3 xiao4 ti4 ci4 jian4 wen2",
+"got": "shou3 xiao4 ti4 zi4 jian4 wen2",
+"err": 0.167,
+"subs": [
+{
+"char": "次",
+"want": "ci4",
+"heard": "zi4",
+"heard_char": "字"
+}
+],
+"poly": [
+{
+"char": "次",
+"want": "ci4",
+"heard": "zi4",
+"heard_char": "字"
+}
+]
 },
 "首孝悌，次謹信": {
 "file": "bc50111a6e37.mp3",
