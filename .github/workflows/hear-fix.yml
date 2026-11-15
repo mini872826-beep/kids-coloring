@@ -40,9 +40,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A audio listen/check tools/voice/override.json
-          git commit -m "Pronunciation self-correction" || exit 0
-          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 15; done
+          # 別人（重錄）可能同時改了 audio/index.json：每次都拿 main 最新的版本，再把換上的錄音套上去
+          for i in 1 2 3 4 5; do
+            git fetch -q origin main && git reset -q --mixed origin/main
+            git checkout origin/main -- audio/index.json
+            python tools/hear_fix.py --apply
+            git add audio/fx-*.mp3 audio/index.json listen/check tools/voice/override.json
+            git diff --cached --quiet && break
+            git commit -qm "Pronunciation self-correction" && git push origin HEAD:main && break
+            sleep 15
+          done
           # 換上之後再完整檢查一次
           curl -sS -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" \
             "https://api.github.com/repos/${{ github.repository }}/actions/workflows/hear-check.yml/dispatches" -d '{"ref":"main"}' || true

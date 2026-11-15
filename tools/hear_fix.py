@@ -90,7 +90,22 @@ async def edge(text, voice, path):
     gv.loud(path)
 
 
+def apply():
+    """把 override.json 套到最新的 audio/index.json（只在錄音沒被重錄過時，was 還對得上才換）"""
+    idx = json.load(open('audio/index.json', encoding='utf-8'))
+    ovr = json.load(open(OVR, encoding='utf-8'))
+    n = 0
+    for k, o in ovr.items():
+        if idx.get(k) == o['was'] and os.path.exists('audio/' + o['file']):
+            idx[k] = o['file']
+            n += 1
+    json.dump(idx, open('audio/index.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0, sort_keys=True)
+    print('applied', n, 'of', len(ovr))
+
+
 def main():
+    if sys.argv[1:] == ['--apply']:
+        return apply()
     limit = int(sys.argv[1]) if len(sys.argv) > 1 else 150
     rep = json.load(open(f'{OUT}/report.json', encoding='utf-8'))
     idx = json.load(open('audio/index.json', encoding='utf-8'))
