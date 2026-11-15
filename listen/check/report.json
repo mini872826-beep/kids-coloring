@@ -1107,7 +1107,7 @@
 }
 ],
 "poly": [],
-"whisper": "答案是 喝。",
+"whisper": "答案是 喝",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -1697,9 +1697,9 @@
 }
 ],
 "poly": [],
-"whisper": "答案是 遇",
-"w_score": 0.0,
-"w_ok": false
+"whisper": "答案是日",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄖㄜˋ": {
 "file": "7d5617bddcaa.mp3",
@@ -1717,7 +1717,7 @@
 }
 ],
 "poly": [],
-"whisper": "答案是 热",
+"whisper": "答案是 熱",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -1957,7 +1957,7 @@
 }
 ],
 "poly": [],
-"whisper": "答案是 以",
+"whisper": "答案是已",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -3673,7 +3673,7 @@
 }
 ],
 "poly": [],
-"whisper": "答案是 酒",
+"whisper": "答案是9",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -7440,7 +7440,7 @@
 }
 ],
 "poly": [],
-"whisper": "呱呱呱呱呱",
+"whisper": "刮刮刮刮刮",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -10020,7 +10020,7 @@
 "heard_char": "布"
 }
 ],
-"whisper": "小兔子种的红萝卜,长得好大好大。",
+"whisper": "小兔子种的红萝卜,长得好大好大!",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -16215,7 +16215,7 @@
 "heard_char": "重"
 }
 ],
-"whisper": "熊媽媽說,每天早晚刷牙,鑄牙蟲就不見了。",
+"whisper": "雄媽媽說,每天早晚刷牙,鑄牙蟲就不見了。",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -23222,7 +23222,7 @@
 "pooooof → puff",
 "pooooof → puff"
 ],
-"whisper": " puff, wow! puff! so sweet!",
+"whisper": " puff wow puff so sweet",
 "w_ok": false
 },
 "\"The Magic Sweet Fart.\"": {
@@ -23269,7 +23269,7 @@
 "subs": [
 "yuck yuck yuck → at at at"
 ],
-"whisper": " yuck, yuck, yuck.",
+"whisper": " yuck! yuck! yuck!",
 "w_ok": true
 },
 "\"Yummy, yummy!\"": {
@@ -23829,7 +23829,7 @@
 "subs": [
 "ditto → dio"
 ],
-"whisper": " ditto",
+"whisper": " ditto.",
 "w_ok": true
 },
 "Do you have a pet?": {
@@ -24003,7 +24003,7 @@
 "subs": [
 "earth → o"
 ],
-"whisper": " earth",
+"whisper": " earth.",
 "w_ok": true
 },
 "Eevee": {
@@ -24171,7 +24171,7 @@
 "subs": [
 "geodude → g doone"
 ],
-"whisper": " geodude.",
+"whisper": " geodude",
 "w_ok": true
 },
 "Ghosts say BOO and bats fly by.": {
@@ -24650,8 +24650,8 @@
 "subs": [
 "sandcastle → sand castle"
 ],
-"whisper": " i see a sandcastle.",
-"w_ok": true
+"whisper": " i see a sand castle.",
+"w_ok": false
 },
 "I see a starfish looking at me.": {
 "file": "740e89f6ed16.mp3",
@@ -24738,7 +24738,7 @@
 "subs": [
 "a robot → to row back"
 ],
-"whisper": " i want a robot.",
+"whisper": " i want a robot!",
 "w_ok": true
 },
 "I want a teddy bear.": {
@@ -25052,8 +25052,8 @@
 "subs": [
 "magikarp → magic cop"
 ],
-"whisper": " magica",
-"w_ok": false
+"whisper": " magikarp",
+"w_ok": true
 },
 "Make my school a happy day.": {
 "file": "e95981f6f22b.mp3",
@@ -25120,8 +25120,8 @@
 "subs": [
 "meowth → tea"
 ],
-"whisper": " meowth",
-"w_ok": true
+"whisper": " meow",
+"w_ok": false
 },
 "Merrily, merrily, merrily, merrily": {
 "file": "153f798030d6.mp3",
@@ -25172,7 +25172,7 @@
 "subs": [
 "mewtwo → mutlo"
 ],
-"whisper": " neat flow.",
+"whisper": " neutro",
 "w_ok": false
 },
 "Mimikyu": {
@@ -25564,7 +25564,7 @@
 "subs": [
 "raichu → wait you"
 ],
-"whisper": " wait you.",
+"whisper": " wait you",
 "w_ok": false
 },
 "Rain, Rain, Go Away": {
@@ -25662,7 +25662,7 @@
 "subs": [
 "rowlet → well le"
 ],
-"whisper": " roll it",
+"whisper": " roll it.",
 "w_ok": false
 },
 "Running on the roof, roof, roof.": {
@@ -25695,7 +25695,7 @@
 "subs": [
 "saturn → saten"
 ],
-"whisper": " salute!",
+"whisper": " saren",
 "w_ok": false
 },
 "Scorbunny": {
@@ -25783,7 +25783,7 @@
 "subs": [
 "snorlax → solax"
 ],
-"whisper": " snorlax",
+"whisper": " snorlax.",
 "w_ok": true
 },
 "So, boys and girls,": {
@@ -25841,7 +25841,7 @@
 "subs": [
 "specium → speciun"
 ],
-"whisper": " special way",
+"whisper": " special ray",
 "w_ok": false
 },
 "Spiky Monster": {
@@ -25885,7 +25885,7 @@
 "subs": [
 "t rex → tx"
 ],
-"whisper": " t-rex",
+"whisper": " t-rex.",
 "w_ok": true
 },
 "Teacher": {
@@ -26370,7 +26370,7 @@
 "subs": [
 "dyna → dinah"
 ],
-"whisper": " i don't know what to say.",
+"whisper": " i'll see you in china.",
 "w_ok": false
 },
 "Ultraman Gaia": {
@@ -26454,7 +26454,7 @@
 "subs": [
 "ultraman tiga → ultramantiga"
 ],
-"whisper": " 保持媒体的",
+"whisper": " 保持媒体的。",
 "w_ok": false
 },
 "Ultraman Trigger": {
@@ -26574,7 +26574,7 @@
 "subs": [
 "and z → can se"
 ],
-"whisper": " wx, y, and c",
+"whisper": " wx, y and c",
 "w_ok": false
 },
 "Watch your steps.": {
@@ -26711,7 +26711,7 @@
 "subs": [
 "wizardarrow → wizard arrow four dash at"
 ],
-"whisper": " wizard arrow 4-80p",
+"whisper": " wizard arrow 4-80b",
 "w_ok": false
 },
 "Woof, woof, woof.": {
@@ -26847,7 +26847,7 @@
 "subs": [
 "pig → tin"
 ],
-"whisper": " a pig",
+"whisper": " a pig.",
 "w_ok": true
 },
 "a sandcastle": {
@@ -26919,7 +26919,7 @@
 "subs": [
 "alien → calian"
 ],
-"whisper": " carry on.",
+"whisper": " carey and",
 "w_ok": false
 },
 "ambulance": {
@@ -26931,8 +26931,8 @@
 "subs": [
 "ambulance → andulets"
 ],
-"whisper": " ambulance",
-"w_ok": true
+"whisper": " bambulance!",
+"w_ok": false
 },
 "ankylosaurus": {
 "file": "3ff31497a171.mp3",
@@ -27149,7 +27149,7 @@
 "subs": [
 "broomstick → brown stick"
 ],
-"whisper": " bromstead",
+"whisper": " bronsted",
 "w_ok": false
 },
 "brothers": {
@@ -27197,7 +27197,7 @@
 "subs": [
 "cake → kate"
 ],
-"whisper": " kate",
+"whisper": " kit",
 "w_ok": false
 },
 "candy bucket": {
@@ -27281,8 +27281,8 @@
 "subs": [
 "chick → chip"
 ],
-"whisper": " check.",
-"w_ok": false
+"whisper": " chick.",
+"w_ok": true
 },
 "chicken": {
 "file": "7245421ca18c.mp3",
@@ -27341,8 +27341,8 @@
 "subs": [
 "coral → pol"
 ],
-"whisper": " coral reef",
-"w_ok": true
+"whisper": " poor riff.",
+"w_ok": false
 },
 "corn": {
 "file": "0123f4a6816c.mp3",
@@ -27561,7 +27561,7 @@
 "subs": [
 "embarrassed → embarrasd"
 ],
-"whisper": " embarrassed",
+"whisper": " embarrassed.",
 "w_ok": true
 },
 "fart": {
@@ -27801,7 +27801,7 @@
 "subs": [
 "hermit → hummock"
 ],
-"whisper": " helicopter",
+"whisper": " helmet crab",
 "w_ok": false
 },
 "hippo": {
@@ -27869,7 +27869,7 @@
 "subs": [
 "jar → ja"
 ],
-"whisper": " ja",
+"whisper": " jaar",
 "w_ok": false
 },
 "jealous": {
@@ -27937,7 +27937,7 @@
 "subs": [
 "a top → atop"
 ],
-"whisper": " launching a top.",
+"whisper": " launching a top",
 "w_ok": true
 },
 "lemon": {
@@ -28077,7 +28077,7 @@
 "subs": [
 "moon → my"
 ],
-"whisper": " no, no.",
+"whisper": " no.",
 "w_ok": false
 },
 "moon rover": {
@@ -28141,7 +28141,7 @@
 "subs": [
 "nose → nos"
 ],
-"whisper": " niaos.",
+"whisper": " news",
 "w_ok": false
 },
 "octopus": {
@@ -28245,7 +28245,7 @@
 "subs": [
 "pear → per"
 ],
-"whisper": " pear.",
+"whisper": " pear",
 "w_ok": true
 },
 "penguin": {
@@ -28417,8 +28417,8 @@
 "subs": [
 "rail → wale"
 ],
-"whisper": " rail stadium dash",
-"w_ok": true
+"whisper": " railstadium-",
+"w_ok": false
 },
 "rhinoceros beetle": {
 "file": "b4240b2e55a3.mp3",
@@ -28457,7 +28457,7 @@
 "subs": [
 "ripcord launcher → whipcord luncheon"
 ],
-"whisper": " rip card launcher",
+"whisper": " rip card luncher",
 "w_ok": false
 },
 "robot": {
@@ -28549,7 +28549,7 @@
 "subs": [
 "seashell → sea shell"
 ],
-"whisper": " see y'all!",
+"whisper": " see you soon!",
 "w_ok": false
 },
 "share": {
@@ -28965,7 +28965,7 @@
 "subs": [
 "fruit → three"
 ],
-"whisper": " food",
+"whisper": " food.",
 "w_ok": false
 },
 "slow50:Ghosts say BOO and bats fly by.": {
@@ -28995,7 +28995,7 @@
 "subs": [
 "grapes grapes → great great"
 ],
-"whisper": " greats, greats, small and round.",
+"whisper": " greats, greats, small and round",
 "w_ok": false
 },
 "slow50:Guess what? His fart was not stinky!": {
@@ -29253,7 +29253,7 @@
 "subs": [
 "trick or treat → triotreet"
 ],
-"whisper": " i say trick or treat",
+"whisper": " i say trick or treat.",
 "w_ok": true
 },
 "slow50:I see a crab looking at me.": {
@@ -29273,7 +29273,7 @@
 "subs": [
 "sandcastle → sand castle"
 ],
-"whisper": " i see a sandcastle.",
+"whisper": " i see a sandcastle",
 "w_ok": true
 },
 "slow50:I see a starfish looking at me.": {
@@ -29982,7 +29982,7 @@
 "oh oh → po po",
 "fart → fire"
 ],
-"whisper": " then suddenly... oh! oh! i have to fire...",
+"whisper": " then, suddenly, oh! oh! i have to fire...",
 "w_ok": true
 },
 "slow50:This is what I always say:": {
@@ -30222,7 +30222,7 @@
 "subs": [
 "crab → cram"
 ],
-"whisper": " oh, crap!",
+"whisper": " oh crap!",
 "w_ok": false
 },
 "slow50:a duck": {
@@ -30270,8 +30270,8 @@
 "subs": [
 "sandcastle → sand castle"
 ],
-"whisper": " a sandcastle",
-"w_ok": true
+"whisper": " a sand castle",
+"w_ok": false
 },
 "slow50:a sheep": {
 "file": "421c1d95650c.mp3",
@@ -30306,7 +30306,7 @@
 "subs": [
 "a tractor → tate"
 ],
-"whisper": " a treasure",
+"whisper": " a treasure.",
 "w_ok": false
 },
 "slow50:apples": {
@@ -30434,7 +30434,7 @@
 "subs": [
 "dog → da"
 ],
-"whisper": " ta-da!",
+"whisper": " duh!",
 "w_ok": false
 },
 "slow50:doll": {
@@ -30562,7 +30562,7 @@
 "subs": [
 "happy → haty"
 ],
-"whisper": " happy",
+"whisper": " happy!",
 "w_ok": true
 },
 "slow50:have a barbecue": {
@@ -30574,7 +30574,7 @@
 "subs": [
 "barbecue → barby cu"
 ],
-"whisper": " have a barbecue",
+"whisper": " have a barbecue!",
 "w_ok": true
 },
 "slow50:hungry": {
@@ -30726,7 +30726,7 @@
 "subs": [
 "robot → ol by"
 ],
-"whisper": " robot",
+"whisper": " robot!",
 "w_ok": true
 },
 "slow50:school": {
@@ -30754,7 +30754,7 @@
 "subs": [
 "sorry → sa"
 ],
-"whisper": " sorry.",
+"whisper": " sorry!",
 "w_ok": true
 },
 "slow50:star": {
@@ -30798,7 +30798,7 @@
 "subs": [
 "story → sto"
 ],
-"whisper": " story",
+"whisper": " story.",
 "w_ok": true
 },
 "slow50:surprised": {
@@ -30971,7 +30971,7 @@
 "pooooof → puff",
 "pooooof → puff"
 ],
-"whisper": " puff, wow! puff! so sweet!",
+"whisper": " puff wow puff so sweet",
 "w_ok": false
 },
 "slow75:\"The Magic Sweet Fart.\"": {
@@ -31244,7 +31244,7 @@
 "subs": [
 "greedy → creety"
 ],
-"whisper": " don't be greedy!",
+"whisper": " don't be greedy.",
 "w_ok": true
 },
 "slow75:Flying high above the street.": {
@@ -31524,7 +31524,7 @@
 "subs": [
 "trick or → tricko"
 ],
-"whisper": " i say trick or treat",
+"whisper": " i say trick or treat.",
 "w_ok": true
 },
 "slow75:I say, Trick or Treat.": {
@@ -31556,8 +31556,8 @@
 "subs": [
 "sandcastle → sand castle"
 ],
-"whisper": " i see a sandcastle.",
-"w_ok": true
+"whisper": " i see a sand castle.",
+"w_ok": false
 },
 "slow75:I see a starfish looking at me.": {
 "file": "97866def0af3.mp3",
@@ -31971,7 +31971,7 @@
 "subs": [
 "sea sea → see cee"
 ],
-"whisper": " see see what you see",
+"whisper": " see, see, what do you see?",
 "w_ok": false
 },
 "slow75:See the traffic light.": {
@@ -32302,7 +32302,7 @@
 "subs": [
 "tweet tweet tweet → treat treat treat"
 ],
-"whisper": " tweet, tweet, tweet.",
+"whisper": " tweet. tweet. tweet.",
 "w_ok": true
 },
 "slow75:Twinkling in the night.": {
@@ -32519,7 +32519,7 @@
 "subs": [
 "a farmer → afana"
 ],
-"whisper": " afana",
+"whisper": " a fauna",
 "w_ok": false
 },
 "slow75:a pig": {
@@ -32543,7 +32543,7 @@
 "subs": [
 "sandcastle → sand castle"
 ],
-"whisper": " a sand castle",
+"whisper": " a sand castle.",
 "w_ok": false
 },
 "slow75:a sheep": {
@@ -32555,7 +32555,7 @@
 "subs": [
 "a sheep → by she"
 ],
-"whisper": " but she...",
+"whisper": " i see.",
 "w_ok": false
 },
 "slow75:a starfish": {
@@ -32671,7 +32671,7 @@
 "subs": [
 "cat → ton"
 ],
-"whisper": " cat",
+"whisper": " cat.",
 "w_ok": true
 },
 "slow75:chicken": {
@@ -32703,8 +32703,8 @@
 "subs": [
 "dog → da"
 ],
-"whisper": " dog",
-"w_ok": true
+"whisper": " duh!",
+"w_ok": false
 },
 "slow75:doll": {
 "file": "240175557a27.mp3",
@@ -32715,7 +32715,7 @@
 "subs": [
 "doll → da"
 ],
-"whisper": " d'oh!",
+"whisper": " d'aww!",
 "w_ok": false
 },
 "slow75:dumplings": {
@@ -32759,8 +32759,8 @@
 "subs": [
 "fart → five"
 ],
-"whisper": " fuck",
-"w_ok": false
+"whisper": " fart",
+"w_ok": true
 },
 "slow75:feet": {
 "file": "638fdb14faff.mp3",
@@ -32995,7 +32995,7 @@
 "subs": [
 "school → score"
 ],
-"whisper": " school",
+"whisper": " school.",
 "w_ok": true
 },
 "slow75:share": {
@@ -33307,7 +33307,7 @@
 "subs": [
 "stingray → stinglay"
 ],
-"whisper": " stingray.",
+"whisper": " stingray",
 "w_ok": true
 },
 "stinky": {
@@ -33327,7 +33327,7 @@
 "subs": [
 "sign → siing"
 ],
-"whisper": " stop sign",
+"whisper": " stop sign.",
 "w_ok": true
 },
 "story": {
@@ -33419,7 +33419,7 @@
 "subs": [
 "swan → swung"
 ],
-"whisper": " swan.",
+"whisper": " swan",
 "w_ok": true
 },
 "sweet": {
@@ -33531,7 +33531,7 @@
 "subs": [
 "toy car → ti i ca"
 ],
-"whisper": " toy cart",
+"whisper": " toy cart!",
 "w_ok": false
 },
 "tractor": {
