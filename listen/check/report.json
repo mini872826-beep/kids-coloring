@@ -209,20 +209,13 @@
 "poly": []
 },
 "ㄅㄚˇ": {
-"file": "e1c489e68c55.mp3",
+"file": "fx-78f2316cf036.mp3",
 "kind": "zy",
-"heard": "达安须",
+"heard": "答安是吧",
 "want": "ba3",
-"got": "",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄅㄚˇ",
-"want": "ba3",
-"heard": "",
-"heard_char": ""
-}
-],
+"got": "ba5",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄅㄚˊ": {
@@ -236,20 +229,13 @@
 "poly": []
 },
 "ㄅㄚˋ": {
-"file": "4bf9bc4cfd6c.mp3",
+"file": "fx-0fe6391da0a3.mp3",
 "kind": "zy",
-"heard": "答安是",
+"heard": "南安须巴",
 "want": "ba4",
-"got": "",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄅㄚˋ",
-"want": "ba4",
-"heard": "",
-"heard_char": ""
-}
-],
+"got": "ba1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄅㄟ": {
@@ -263,20 +249,13 @@
 "poly": []
 },
 "ㄅㄠ": {
-"file": "0218a73f29a2.mp3",
+"file": "fx-46b0b22ec160.mp3",
 "kind": "zy",
-"heard": "达爱是邦",
+"heard": "达安序包",
 "want": "bao1",
-"got": "bang1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄅㄠ",
-"want": "bao1",
-"heard": "bang1",
-"heard_char": "邦"
-}
-],
+"got": "bao1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄅㄠˇ": {
@@ -447,20 +426,13 @@
 "poly": []
 },
 "ㄇㄠ": {
-"file": "983b54f58ff4.mp3",
+"file": "fx-849ebabe5f14.mp3",
 "kind": "zy",
-"heard": "答爱是吗",
+"heard": "达安是猫",
 "want": "mao1",
-"got": "ma5",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄇㄠ",
-"want": "mao1",
-"heard": "ma5",
-"heard_char": "吗"
-}
-],
+"got": "mao1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄇㄧˇ": {
@@ -508,37 +480,23 @@
 "poly": []
 },
 "ㄈㄟ": {
-"file": "8ecea1eb4f28.mp3",
+"file": "fx-838440bd9288.mp3",
 "kind": "zy",
-"heard": "答安是碑",
+"heard": "南安是非",
 "want": "fei1",
-"got": "bei1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄈㄟ",
-"want": "fei1",
-"heard": "bei1",
-"heard_char": "碑"
-}
-],
+"got": "fei1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄈㄢ": {
-"file": "e5f4a3688bef.mp3",
+"file": "fx-6961f6a127ef.mp3",
 "kind": "zy",
-"heard": "答安是班",
+"heard": "答安叙蕃",
 "want": "fan1",
-"got": "ban1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄈㄢ",
-"want": "fan1",
-"heard": "ban1",
-"heard_char": "班"
-}
-],
+"got": "fan1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄈㄤ": {
@@ -552,20 +510,13 @@
 "poly": []
 },
 "ㄈㄥ": {
-"file": "d406018fb48f.mp3",
+"file": "fx-ef3c586288f1.mp3",
 "kind": "zy",
-"heard": "答案是中",
+"heard": "答安是风",
 "want": "feng1",
-"got": "zhong1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄈㄥ",
-"want": "feng1",
-"heard": "zhong1",
-"heard_char": "中"
-}
-],
+"got": "feng1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄉ": {
@@ -1074,20 +1025,13 @@
 "poly": []
 },
 "ㄎㄨ": {
-"file": "905aad4bf395.mp3",
+"file": "fx-7fb83c3312aa.mp3",
 "kind": "zy",
-"heard": "答案是<unk>",
+"heard": "答爱是哭",
 "want": "ku1",
-"got": "",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄎㄨ",
-"want": "ku1",
-"heard": "",
-"heard_char": ""
-}
-],
+"got": "ku1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄏ": {
@@ -1248,20 +1192,13 @@
 "poly": []
 },
 "ㄐㄧㄠ": {
-"file": "296598a12936.mp3",
+"file": "fx-7227f9c26ff3.mp3",
 "kind": "zy",
-"heard": "答案是江",
+"heard": "答安师郊",
 "want": "jiao1",
-"got": "jiang1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄐㄧㄠ",
-"want": "jiao1",
-"heard": "jiang1",
-"heard_char": "江"
-}
-],
+"got": "jiao1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄐㄧㄠˇ": {
@@ -1465,37 +1402,23 @@
 "poly": []
 },
 "ㄒㄧㄥ": {
-"file": "a39b6a9824bf.mp3",
+"file": "fx-8e33bdb8a5b0.mp3",
 "kind": "zy",
-"heard": "答案是清",
+"heard": "答安是兴",
 "want": "xing1",
-"got": "qing1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄒㄧㄥ",
-"want": "xing1",
-"heard": "qing1",
-"heard_char": "清"
-}
-],
+"got": "xing1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄒㄩㄝ": {
-"file": "2ef400921959.mp3",
+"file": "fx-d6c98dd34cf8.mp3",
 "kind": "zy",
-"heard": "达安是萱",
+"heard": "答安是薛",
 "want": "xue1",
-"got": "xuan1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄒㄩㄝ",
-"want": "xue1",
-"heard": "xuan1",
-"heard_char": "萱"
-}
-],
+"got": "xue1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄒㄩㄢ": {
@@ -1774,37 +1697,23 @@
 "poly": []
 },
 "ㄜ": {
-"file": "8e13bc7ebfa8.mp3",
+"file": "fx-a1e83fa1676d.mp3",
 "kind": "zy",
-"heard": "答爱是阿",
+"heard": "答安叙额",
 "want": "e1",
-"got": "a1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄜ",
-"want": "e1",
-"heard": "a1",
-"heard_char": "阿"
-}
-],
+"got": "e2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄜˊ": {
-"file": "8b7eef8bfc94.mp3",
+"file": "fx-ca10dfe50211.mp3",
 "kind": "zy",
-"heard": "答爱是阿",
+"heard": "答安叙额",
 "want": "e2",
-"got": "a1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄜˊ",
-"want": "e2",
-"heard": "a1",
-"heard_char": "阿"
-}
-],
+"got": "e2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄝ": {
@@ -2063,20 +1972,13 @@
 "poly": []
 },
 "ㄨˊ": {
-"file": "b7b84e901040.mp3",
+"file": "fx-76a68c9735a4.mp3",
 "kind": "zy",
-"heard": "答安是",
+"heard": "答安是吴",
 "want": "wu2",
-"got": "",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄨˊ",
-"want": "wu2",
-"heard": "",
-"heard_char": ""
-}
-],
+"got": "wu2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "ㄨˋ": {
@@ -3715,32 +3617,13 @@
 "poly": []
 },
 "九五四十五": {
-"file": "1020b7f4277a.mp3",
+"file": "fx-bdc78fdf00b6.mp3",
 "kind": "zh",
-"heard": "侨母<unk>时武",
+"heard": "九武四十武",
 "want": "jiu3 wu3 si4 shi2 wu3",
-"got": "qiao2 mu3 shi2 wu3",
-"err": 0.556,
-"subs": [
-{
-"char": "九",
-"want": "jiu3",
-"heard": "qiao2",
-"heard_char": "侨"
-},
-{
-"char": "五",
-"want": "wu3",
-"heard": "mu3",
-"heard_char": "母"
-},
-{
-"char": "四",
-"want": "si4",
-"heard": "",
-"heard_char": ""
-}
-],
+"got": "jiu3 wu3 si4 shi2 wu3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "九八七十二": {
@@ -3945,24 +3828,24 @@
 "poly": []
 },
 "二一得二": {
-"file": "d4f05ae533ff.mp3",
+"file": "fx-9a205db69188.mp3",
 "kind": "zh",
-"heard": "阿伊德奥",
+"heard": "阿尔伊的阿尔",
 "want": "er4 yi1 de5 er4",
-"got": "a1 yi1 de2 ao4",
-"err": 0.5,
+"got": "a1 er3 yi1 de5 a1 er3",
+"err": 0.2,
 "subs": [
 {
-"char": "二",
-"want": "er4",
+"char": "",
+"want": "",
 "heard": "a1",
 "heard_char": "阿"
 },
 {
-"char": "二",
-"want": "er4",
-"heard": "ao4",
-"heard_char": "奥"
+"char": "",
+"want": "",
+"heard": "a1",
+"heard_char": "阿"
 }
 ],
 "poly": []
@@ -4081,26 +3964,13 @@
 "poly": []
 },
 "二十一": {
-"file": "e34b4a15c207.mp3",
+"file": "fx-6af6b6047224.mp3",
 "kind": "zh",
-"heard": "奥奇伊",
+"heard": "二十伊",
 "want": "er4 shi2 yi1",
-"got": "ao4 qi2 yi1",
-"err": 0.667,
-"subs": [
-{
-"char": "二",
-"want": "er4",
-"heard": "ao4",
-"heard_char": "奥"
-},
-{
-"char": "十",
-"want": "shi2",
-"heard": "qi2",
-"heard_char": "奇"
-}
-],
+"got": "er4 shi2 yi1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "二十七": {
@@ -4343,24 +4213,18 @@
 "poly": []
 },
 "五五二十五": {
-"file": "c6e131427f59.mp3",
+"file": "fx-928afd584a10.mp3",
 "kind": "zh",
-"heard": "武武艾喜武",
+"heard": "武武按石武",
 "want": "wu3 wu3 er4 shi2 wu3",
-"got": "wu3 wu3 ai4 xi3 wu3",
-"err": 0.4,
+"got": "wu3 wu3 an4 shi2 wu3",
+"err": 0.2,
 "subs": [
 {
 "char": "二",
 "want": "er4",
-"heard": "ai4",
-"heard_char": "艾"
-},
-{
-"char": "十",
-"want": "shi2",
-"heard": "xi3",
-"heard_char": "喜"
+"heard": "an4",
+"heard_char": "按"
 }
 ],
 "poly": []
@@ -5311,26 +5175,13 @@
 "poly": []
 },
 "個": {
-"file": "4791ee98632f.mp3",
+"file": "fx-9d417b1a5541.mp3",
 "kind": "zh",
-"heard": "达安市该康",
+"heard": "答安是个",
 "want": "ge4",
-"got": "gai1 kang1",
-"err": 1.0,
-"subs": [
-{
-"char": "個",
-"want": "ge4",
-"heard": "gai1",
-"heard_char": "该"
-},
-{
-"char": "",
-"want": "",
-"heard": "kang1",
-"heard_char": "康"
-}
-],
+"got": "ge4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "個位": {
@@ -6455,20 +6306,13 @@
 "poly": []
 },
 "再來": {
-"file": "5c32821baf0c.mp3",
+"file": "fx-5773f7d31300.mp3",
 "kind": "zh",
-"heard": "答安市这来",
+"heard": "达安市在来",
 "want": "zai4 lai2",
-"got": "zhe4 lai2",
-"err": 0.5,
-"subs": [
-{
-"char": "再",
-"want": "zai4",
-"heard": "zhe4",
-"heard_char": "这"
-}
-],
+"got": "zai4 lai2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "再加進位的一": {
@@ -6932,20 +6776,13 @@
 "poly": []
 },
 "十": {
-"file": "8d473858a7c4.mp3",
+"file": "fx-60fa9f432437.mp3",
 "kind": "zh",
-"heard": "答安是什",
+"heard": "答安叙实",
 "want": "shi2",
-"got": "shen2",
-"err": 1.0,
-"subs": [
-{
-"char": "十",
-"want": "shi2",
-"heard": "shen2",
-"heard_char": "什"
-}
-],
+"got": "shi2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "十一": {
@@ -7016,20 +6853,13 @@
 "poly": []
 },
 "十位": {
-"file": "23fb934ad558.mp3",
+"file": "fx-a256bf587b35.mp3",
 "kind": "zh",
-"heard": "答安市职位",
+"heard": "答安是时尉",
 "want": "shi2 wei4",
-"got": "zhi2 wei4",
-"err": 0.5,
-"subs": [
-{
-"char": "十",
-"want": "shi2",
-"heard": "zhi2",
-"heard_char": "职"
-}
-],
+"got": "shi2 wei4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "十位數加減": {
@@ -8147,20 +7977,13 @@
 "poly": []
 },
 "四十": {
-"file": "1edf29bd9817.mp3",
+"file": "fx-2da8ce3a7aed.mp3",
 "kind": "zh",
-"heard": "答安是四习",
+"heard": "答安是四时",
 "want": "si4 shi2",
-"got": "si4 xi2",
-"err": 0.5,
-"subs": [
-{
-"char": "十",
-"want": "shi2",
-"heard": "xi2",
-"heard_char": "习"
-}
-],
+"got": "si4 shi2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "四十一": {
@@ -8769,19 +8592,19 @@
 ],
 "poly": []
 },
-"大蘿蔔": {
-"file": "f0c170a37a47.mp3",
+"大紅蘿蔔": {
+"file": "22bc89532e7f.mp3",
 "kind": "zh",
-"heard": "大罗布",
-"want": "da4 luo2 bo5",
-"got": "da4 luo2 bu4",
-"err": 0.333,
+"heard": "大洪罗不",
+"want": "da4 hong2 luo2 bo5",
+"got": "da4 hong2 luo2 bu4",
+"err": 0.25,
 "subs": [
 {
 "char": "蔔",
 "want": "bo5",
 "heard": "bu4",
-"heard_char": "布"
+"heard_char": "不"
 }
 ],
 "poly": [
@@ -8789,7 +8612,7 @@
 "char": "蔔",
 "want": "bo5",
 "heard": "bu4",
-"heard_char": "布"
+"heard_char": "不"
 }
 ]
 },
@@ -8983,40 +8806,14 @@
 "poly": []
 },
 "太棒啦，讀完啦！": {
-"file": "7910ef6bd175.mp3",
+"file": "fx-abc331f34bb3.mp3",
 "kind": "zh",
-"heard": "他一棒啦读丸娜",
+"heard": "太棒啦读完啦",
 "want": "tai4 bang4 la5 du2 wan2 la5",
-"got": "ta1 yi1 bang4 la5 du2 wan2 na4",
-"err": 0.385,
-"subs": [
-{
-"char": "太",
-"want": "tai4",
-"heard": "ta1",
-"heard_char": "他"
-},
-{
-"char": "",
-"want": "",
-"heard": "yi1",
-"heard_char": "一"
-},
-{
-"char": "啦",
-"want": "la5",
-"heard": "na4",
-"heard_char": "娜"
-}
-],
-"poly": [
-{
-"char": "太",
-"want": "tai4",
-"heard": "ta1",
-"heard_char": "他"
-}
-]
+"got": "tai4 bang4 la5 du2 wan2 la5",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "太空": {
 "file": "43ec9cb5bb8e.mp3",
@@ -11155,20 +10952,13 @@
 "poly": []
 },
 "小貓": {
-"file": "6276314947e4.mp3",
+"file": "fx-c07037fe3123.mp3",
 "kind": "zh",
-"heard": "答案是小吗",
+"heard": "答案是小猫",
 "want": "xiao3 mao1",
-"got": "xiao3 ma5",
-"err": 0.5,
-"subs": [
-{
-"char": "貓",
-"want": "mao1",
-"heard": "ma5",
-"heard_char": "吗"
-}
-],
+"got": "xiao3 mao1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "小貓也來了，嘿咻嘿咻，還是拔不動。": {
@@ -12178,20 +11968,13 @@
 "poly": []
 },
 "念謠": {
-"file": "960ae37b8b08.mp3",
+"file": "fx-170d3a31c853.mp3",
 "kind": "zh",
-"heard": "答案是聂窑",
+"heard": "达案是廿瑶",
 "want": "nian4 yao2",
-"got": "nie4 yao2",
-"err": 0.5,
-"subs": [
-{
-"char": "念",
-"want": "nian4",
-"heard": "nie4",
-"heard_char": "聂"
-}
-],
+"got": "nian4 yao2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "忽聞岸上踏歌聲": {
@@ -12279,26 +12062,13 @@
 "poly": []
 },
 "恐龍蛋": {
-"file": "ad9099cacdfa.mp3",
+"file": "fx-f9122ae161e2.mp3",
 "kind": "zh",
-"heard": "口龙担案",
+"heard": "孔龙蛋",
 "want": "kong3 long2 dan4",
-"got": "kou3 long2 dan1 an4",
-"err": 0.429,
-"subs": [
-{
-"char": "恐",
-"want": "kong3",
-"heard": "kou3",
-"heard_char": "口"
-},
-{
-"char": "",
-"want": "",
-"heard": "an4",
-"heard_char": "案"
-}
-],
+"got": "kong3 long2 dan4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "惟其是，勿佞巧": {
@@ -12549,26 +12319,13 @@
 "poly": []
 },
 "我喜歡葡萄。": {
-"file": "254caa2f2ec8.mp3",
+"file": "fx-387bf1d6628f.mp3",
 "kind": "zh",
-"heard": "博喜欢葡汤",
+"heard": "我喜欢葡萄",
 "want": "wo3 xi3 huan1 pu2 tao2",
-"got": "bo2 xi3 huan1 pu2 tang1",
-"err": 0.4,
-"subs": [
-{
-"char": "我",
-"want": "wo3",
-"heard": "bo2",
-"heard_char": "博"
-},
-{
-"char": "萄",
-"want": "tao2",
-"heard": "tang1",
-"heard_char": "汤"
-}
-],
+"got": "wo3 xi3 huan1 pu2 tao2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "我喜歡蘋果。": {
@@ -13237,26 +12994,13 @@
 "poly": []
 },
 "拿走": {
-"file": "0e08311b73ff.mp3",
+"file": "fx-9789d073b297.mp3",
 "kind": "zh",
-"heard": "达案是拿子楼",
+"heard": "达安是哪走",
 "want": "na2 zou3",
-"got": "na2 zi5 lou2",
-"err": 0.6,
-"subs": [
-{
-"char": "走",
-"want": "zou3",
-"heard": "zi5",
-"heard_char": "子"
-},
-{
-"char": "",
-"want": "",
-"heard": "lou2",
-"heard_char": "楼"
-}
-],
+"got": "na3 zou3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "指縫指尖也搓到": {
@@ -13565,20 +13309,13 @@
 "poly": []
 },
 "故事": {
-"file": "dd82e3504686.mp3",
+"file": "fx-bf1dcf679f88.mp3",
 "kind": "zh",
-"heard": "答安系故系",
+"heard": "答安市故事",
 "want": "gu4 shi4",
-"got": "gu4 xi4",
-"err": 0.5,
-"subs": [
-{
-"char": "事",
-"want": "shi4",
-"heard": "xi4",
-"heard_char": "系"
-}
-],
+"got": "gu4 shi4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "故事主題": {
@@ -13939,20 +13676,13 @@
 "poly": []
 },
 "昆蟲": {
-"file": "fd5b55a8bf9b.mp3",
+"file": "fx-d880661a8e9d.mp3",
 "kind": "zh",
-"heard": "达案是昆程",
+"heard": "达案是昆虫",
 "want": "kun1 chong2",
-"got": "kun1 cheng2",
-"err": 0.5,
-"subs": [
-{
-"char": "蟲",
-"want": "chong2",
-"heard": "cheng2",
-"heard_char": "程"
-}
-],
+"got": "kun1 chong2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "明天見太陽": {
@@ -14110,32 +13840,13 @@
 "poly": []
 },
 "晚安晚安": {
-"file": "dd5d8eb34c9c.mp3",
+"file": "fx-3083e27ca813.mp3",
 "kind": "zh",
-"heard": "晚晚安",
+"heard": "晚安晚安",
 "want": "wan3 an1 wan3 an1",
-"got": "wan3 wan3 an1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wan3",
-"heard_char": "晚"
-},
-{
-"char": "晚",
-"want": "wan3",
-"heard": "",
-"heard_char": ""
-},
-{
-"char": "安",
-"want": "an1",
-"heard": "",
-"heard_char": ""
-}
-],
+"got": "wan3 an1 wan3 an1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "晚安歌": {
@@ -14601,20 +14312,13 @@
 "poly": []
 },
 "杜牧": {
-"file": "4a0e97306f88.mp3",
+"file": "fx-198cd045be86.mp3",
 "kind": "zh",
-"heard": "达安是都目",
+"heard": "达安是杜木",
 "want": "du4 mu4",
-"got": "dou1 mu4",
-"err": 0.5,
-"subs": [
-{
-"char": "杜",
-"want": "du4",
-"heard": "dou1",
-"heard_char": "都"
-}
-],
+"got": "du4 mu4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "杜甫": {
@@ -14648,20 +14352,13 @@
 "poly": []
 },
 "松鼠": {
-"file": "2594adfe6660.mp3",
+"file": "fx-f2f0f559936a.mp3",
 "kind": "zh",
-"heard": "答案是僧熟",
+"heard": "南安市松属",
 "want": "song1 shu3",
-"got": "seng1 shu2",
-"err": 0.5,
-"subs": [
-{
-"char": "松",
-"want": "song1",
-"heard": "seng1",
-"heard_char": "僧"
-}
-],
+"got": "song1 shu3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "柳丁": {
@@ -14923,20 +14620,13 @@
 "poly": []
 },
 "檸檬": {
-"file": "b8d662bc8bc6.mp3",
+"file": "fx-3bd75f6f97de.mp3",
 "kind": "zh",
-"heard": "达安是林蒙",
+"heard": "答安是宁蒙",
 "want": "ning2 meng2",
-"got": "lin2 meng2",
-"err": 0.5,
-"subs": [
-{
-"char": "檸",
-"want": "ning2",
-"heard": "lin2",
-"heard_char": "林"
-}
-],
+"got": "ning2 meng2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "櫻桃": {
@@ -15238,20 +14928,13 @@
 "poly": []
 },
 "水餃": {
-"file": "994ab2715f3c.mp3",
+"file": "fx-0b143b20c63e.mp3",
 "kind": "zh",
-"heard": "答案市水蒋",
+"heard": "答案市水角",
 "want": "shui3 jiao3",
-"got": "shui3 jiang3",
-"err": 0.5,
-"subs": [
-{
-"char": "餃",
-"want": "jiao3",
-"heard": "jiang3",
-"heard_char": "蒋"
-}
-],
+"got": "shui3 jiao3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "汗滴禾下土": {
@@ -15681,20 +15364,13 @@
 "poly": []
 },
 "海豹": {
-"file": "2c9121041726.mp3",
+"file": "fx-f2e482f91613.mp3",
 "kind": "zh",
-"heard": "达安市海棒",
+"heard": "达安市海报",
 "want": "hai3 bao4",
-"got": "hai3 bang4",
-"err": 0.5,
-"subs": [
-{
-"char": "豹",
-"want": "bao4",
-"heard": "bang4",
-"heard_char": "棒"
-}
-],
+"got": "hai3 bao4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "海邊": {
@@ -16173,20 +15849,13 @@
 "poly": []
 },
 "火車": {
-"file": "f0bd2d616203.mp3",
+"file": "fx-9eee283be10f.mp3",
 "kind": "zh",
-"heard": "答案是果车",
+"heard": "答案是火车",
 "want": "huo3 che1",
-"got": "guo3 che1",
-"err": 0.5,
-"subs": [
-{
-"char": "火",
-"want": "huo3",
-"heard": "guo3",
-"heard_char": "果"
-}
-],
+"got": "huo3 che1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "火車火車嘟嘟嘟": {
@@ -16461,26 +16130,13 @@
 "poly": []
 },
 "熱氣球": {
-"file": "fde660e64859.mp3",
+"file": "fx-da0c991b060e.mp3",
 "kind": "zh",
-"heard": "任气穷",
+"heard": "热气球",
 "want": "re4 qi4 qiu2",
-"got": "ren4 qi4 qiong2",
-"err": 0.667,
-"subs": [
-{
-"char": "熱",
-"want": "re4",
-"heard": "ren4",
-"heard_char": "任"
-},
-{
-"char": "球",
-"want": "qiu2",
-"heard": "qiong2",
-"heard_char": "穷"
-}
-],
+"got": "re4 qi4 qiu2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "熱狗": {
@@ -16568,26 +16224,13 @@
 "poly": []
 },
 "爸爸": {
-"file": "7332d3401a11.mp3",
+"file": "fx-964faa85c6e9.mp3",
 "kind": "zh",
-"heard": "答爱是办吧",
+"heard": "答安是爸吧",
 "want": "ba4 ba4",
-"got": "ban4 ba5",
-"err": 0.5,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "ban4",
-"heard_char": "办"
-},
-{
-"char": "爸",
-"want": "ba4",
-"heard": "",
-"heard_char": ""
-}
-],
+"got": "ba4 ba5",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "爸爸問：「為什麼拿小的呢？」": {
@@ -16661,20 +16304,13 @@
 "poly": []
 },
 "牛奶": {
-"file": "86e48d9c7749.mp3",
+"file": "fx-ce4d6a745216.mp3",
 "kind": "zh",
-"heard": "达安是牛南",
+"heard": "党安是牛奶",
 "want": "niu2 nai3",
-"got": "niu2 nan2",
-"err": 0.5,
-"subs": [
-{
-"char": "奶",
-"want": "nai3",
-"heard": "nan2",
-"heard_char": "南"
-}
-],
+"got": "niu2 nai3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "牠在湖水裡一看，哇！原來自己是一隻美麗的天鵝！": {
@@ -16955,20 +16591,13 @@
 "poly": []
 },
 "玉米": {
-"file": "a0f1efaaf89e.mp3",
+"file": "fx-5b45cac35003.mp3",
 "kind": "zh",
-"heard": "达安是岳米",
+"heard": "达安是玉米",
 "want": "yu4 mi3",
-"got": "yue4 mi3",
-"err": 0.5,
-"subs": [
-{
-"char": "玉",
-"want": "yu4",
-"heard": "yue4",
-"heard_char": "岳"
-}
-],
+"got": "yu4 mi3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "王之渙": {
@@ -17019,20 +16648,13 @@
 "poly": []
 },
 "玩": {
-"file": "812be57d8b30.mp3",
+"file": "fx-1654d6f3bc83.mp3",
 "kind": "zh",
-"heard": "答案是",
+"heard": "答爱是完",
 "want": "wan2",
-"got": "",
-"err": 1.0,
-"subs": [
-{
-"char": "玩",
-"want": "wan2",
-"heard": "",
-"heard_char": ""
-}
-],
+"got": "wan2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "玩具回家囉": {
@@ -19004,20 +18626,13 @@
 "poly": []
 },
 "皮皮": {
-"file": "7f26121359e3.mp3",
+"file": "fx-8e185a7b0ae2.mp3",
 "kind": "zh",
-"heard": "达安是皮片",
+"heard": "达安是皮辟",
 "want": "pi2 pi2",
-"got": "pi2 pian4",
-"err": 0.5,
-"subs": [
-{
-"char": "皮",
-"want": "pi2",
-"heard": "pian4",
-"heard_char": "片"
-}
-],
+"got": "pi2 pi4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "直升機": {
@@ -20375,20 +19990,13 @@
 "poly": []
 },
 "老虎": {
-"file": "2f7efd925fec.mp3",
+"file": "fx-c8cf4cc4c7f0.mp3",
 "kind": "zh",
-"heard": "党安是朗虎",
+"heard": "达安是老虎",
 "want": "lao3 hu3",
-"got": "lang3 hu3",
-"err": 0.5,
-"subs": [
-{
-"char": "老",
-"want": "lao3",
-"heard": "lang3",
-"heard_char": "朗"
-}
-],
+"got": "lao3 hu3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "老鼠": {
@@ -20760,26 +20368,13 @@
 "poly": []
 },
 "臭臭的": {
-"file": "4436995d4366.mp3",
+"file": "fx-4b1e3d6d51e0.mp3",
 "kind": "zh",
-"heard": "抽车路的",
+"heard": "臭臭的",
 "want": "chou4 chou4 de5",
-"got": "chou1 che1 lu4 de5",
-"err": 0.429,
-"subs": [
-{
-"char": "臭",
-"want": "chou4",
-"heard": "che1",
-"heard_char": "车"
-},
-{
-"char": "",
-"want": "",
-"heard": "lu4",
-"heard_char": "路"
-}
-],
+"got": "chou4 chou4 de5",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "舉頭望明月": {
@@ -21244,20 +20839,13 @@
 ]
 },
 "薯條": {
-"file": "c2c9e1f77498.mp3",
+"file": "fx-09469ba3b7f6.mp3",
 "kind": "zh",
-"heard": "达安是属调",
+"heard": "达安是属条",
 "want": "shu3 tiao2",
-"got": "shu3 diao4",
-"err": 0.5,
-"subs": [
-{
-"char": "條",
-"want": "tiao2",
-"heard": "diao4",
-"heard_char": "调"
-}
-],
+"got": "shu3 tiao2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "藍光英雄": {
@@ -21492,43 +21080,23 @@
 "poly": []
 },
 "蝸牛": {
-"file": "d354576778b8.mp3",
+"file": "fx-f6e4b104b0ce.mp3",
 "kind": "zh",
-"heard": "达案是蜗牛",
+"heard": "达案是瓜牛",
 "want": "gua1 niu2",
-"got": "wo1 niu2",
-"err": 0.5,
-"subs": [
-{
-"char": "蝸",
-"want": "gua1",
-"heard": "wo1",
-"heard_char": "蜗"
-}
-],
+"got": "gua1 niu2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "螃蟹": {
-"file": "b69a298ea062.mp3",
+"file": "fx-09d1eee4247b.mp3",
 "kind": "zh",
-"heard": "答案是彭县",
+"heard": "答案是庞蟹",
 "want": "pang2 xie4",
-"got": "peng2 xian4",
-"err": 1.0,
-"subs": [
-{
-"char": "螃",
-"want": "pang2",
-"heard": "peng2",
-"heard_char": "彭"
-},
-{
-"char": "蟹",
-"want": "xie4",
-"heard": "xian4",
-"heard_char": "县"
-}
-],
+"got": "pang2 xie4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "融四歲，能讓梨": {
@@ -21833,20 +21401,13 @@
 "poly": []
 },
 "詠鵝": {
-"file": "7fdf1c32ccc4.mp3",
+"file": "fx-5df9aa7a7ea6.mp3",
 "kind": "zh",
-"heard": "达安是永乐",
+"heard": "达安是永额",
 "want": "yong3 e2",
-"got": "yong3 le4",
-"err": 0.5,
-"subs": [
-{
-"char": "鵝",
-"want": "e2",
-"heard": "le4",
-"heard_char": "乐"
-}
-],
+"got": "yong3 e2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "話說多，不如少": {
@@ -22288,26 +21849,13 @@
 "poly": []
 },
 "走、走，過馬路。": {
-"file": "ccefddf3d198.mp3",
+"file": "fx-a8ae2b968b30.mp3",
 "kind": "zh",
-"heard": "整整过马路",
+"heard": "走走过马路",
 "want": "zou3 zou3 guo4 ma3 lu4",
-"got": "zheng3 zheng3 guo4 ma3 lu4",
-"err": 0.4,
-"subs": [
-{
-"char": "走",
-"want": "zou3",
-"heard": "zheng3",
-"heard_char": "整"
-},
-{
-"char": "走",
-"want": "zou3",
-"heard": "zheng3",
-"heard_char": "整"
-}
-],
+"got": "zou3 zou3 guo4 ma3 lu4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "超人力霸王": {
@@ -22378,26 +21926,13 @@
 "poly": []
 },
 "跟": {
-"file": "90df409ad53c.mp3",
+"file": "fx-0b3bb306f3d7.mp3",
 "kind": "zh",
-"heard": "答安是戈恩",
+"heard": "答安是根",
 "want": "gen1",
-"got": "ge1 en1",
-"err": 1.0,
-"subs": [
-{
-"char": "跟",
-"want": "gen1",
-"heard": "ge1",
-"heard_char": "戈"
-},
-{
-"char": "",
-"want": "",
-"heard": "en1",
-"heard_char": "恩"
-}
-],
+"got": "gen1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "跟我念": {
@@ -22421,26 +21956,13 @@
 "poly": []
 },
 "跟著念一次": {
-"file": "1be02f0c4fa6.mp3",
+"file": "fx-ded046fd856a.mp3",
 "kind": "zh",
-"heard": "赶着恋一次",
+"heard": "根着念一次",
 "want": "gen1 zhe5 nian4 yi1 ci4",
-"got": "gan3 zhe5 lian4 yi1 ci4",
-"err": 0.4,
-"subs": [
-{
-"char": "跟",
-"want": "gen1",
-"heard": "gan3",
-"heard_char": "赶"
-},
-{
-"char": "念",
-"want": "nian4",
-"heard": "lian4",
-"heard_char": "恋"
-}
-],
+"got": "gen1 zhe5 nian4 yi1 ci4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "路上有一個人，穿著厚厚的外套。": {
@@ -22464,20 +21986,13 @@
 "poly": []
 },
 "跳到": {
-"file": "9265fbeed12f.mp3",
+"file": "fx-0aa7d869f8f9.mp3",
 "kind": "zh",
-"heard": "答安是跳的",
+"heard": "达安市跳道",
 "want": "tiao4 dao4",
-"got": "tiao4 de5",
-"err": 0.5,
-"subs": [
-{
-"char": "到",
-"want": "dao4",
-"heard": "de5",
-"heard_char": "的"
-}
-],
+"got": "tiao4 dao4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "躺在草地上看星星，好多好多星星呀！": {
@@ -22605,20 +22120,13 @@
 "poly": []
 },
 "農場": {
-"file": "5196bf37c7ab.mp3",
+"file": "fx-5d7361b4c521.mp3",
 "kind": "zh",
-"heard": "达案是农长",
+"heard": "党案是农场",
 "want": "nong2 chang3",
-"got": "nong2 zhang3",
-"err": 0.5,
-"subs": [
-{
-"char": "場",
-"want": "chang3",
-"heard": "zhang3",
-"heard_char": "长"
-}
-],
+"got": "nong2 chang3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "農場穀倉": {
@@ -23706,20 +23214,13 @@
 "poly": []
 },
 "韻母": {
-"file": "4a9ea9a8a97b.mp3",
+"file": "fx-45572f424e3c.mp3",
 "kind": "zh",
-"heard": "达安氏越母",
+"heard": "达安氏运母",
 "want": "yun4 mu3",
-"got": "yue4 mu3",
-"err": 0.5,
-"subs": [
-{
-"char": "韻",
-"want": "yun4",
-"heard": "yue4",
-"heard_char": "越"
-}
-],
+"got": "yun4 mu3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "預備，開始！小兔子一下子就跑得好遠好遠。": {
@@ -23911,28 +23412,21 @@
 ]
 },
 "首孝悌，次謹信": {
-"file": "bc50111a6e37.mp3",
+"file": "fx-1c2c6959b4d6.mp3",
 "kind": "zh",
-"heard": "首效体字景姓",
+"heard": "首效<unk>赐景信",
 "want": "shou3 xiao4 ti4 ci4 jin3 xin4",
-"got": "shou3 xiao4 ti3 zi4 jing3 xing4",
-"err": 0.167,
+"got": "shou3 xiao4 ci4 jing3 xin4",
+"err": 0.091,
 "subs": [
 {
-"char": "次",
-"want": "ci4",
-"heard": "zi4",
-"heard_char": "字"
+"char": "悌",
+"want": "ti4",
+"heard": "",
+"heard_char": ""
 }
 ],
-"poly": [
-{
-"char": "次",
-"want": "ci4",
-"heard": "zi4",
-"heard_char": "字"
-}
-]
+"poly": []
 },
 "香九齡，能溫席": {
 "file": "147b914653cf.mp3",
