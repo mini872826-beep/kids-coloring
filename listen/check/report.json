@@ -322,24 +322,14 @@
 "poly": []
 },
 "ㄆ": {
-"file": "a41d28ec91f4.mp3",
+"file": "fx-34950c51500c.mp3",
 "kind": "zy",
-"heard": "答安叙托",
+"heard": "答爱是坡",
 "want": "po1",
-"got": "tuo1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄆ",
-"want": "po1",
-"heard": "tuo1",
-"heard_char": "托"
-}
-],
-"poly": [],
-"whisper": "答案是撲",
-"w_score": 0.0,
-"w_ok": false
+"got": "po1",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "ㄆㄚ": {
 "file": "f2df6319f4e4.mp3",
@@ -587,7 +577,7 @@
 }
 ],
 "poly": [],
-"whisper": "答案是 刀",
+"whisper": "答案是?刀",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -672,24 +662,14 @@
 "poly": []
 },
 "ㄊㄚˋ": {
-"file": "185c01910339.mp3",
+"file": "fx-d9113ecb0383.mp3",
 "kind": "zy",
-"heard": "答安是帕",
+"heard": "答安是她",
 "want": "ta4",
-"got": "pa4",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄊㄚˋ",
-"want": "ta4",
-"heard": "pa4",
-"heard_char": "帕"
-}
-],
-"poly": [],
-"whisper": "答案是 怕",
-"w_score": 0.0,
-"w_ok": false
+"got": "ta1",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "ㄊㄞˋ": {
 "file": "791ccb3a5905.mp3",
@@ -1127,7 +1107,7 @@
 }
 ],
 "poly": [],
-"whisper": "答案是 喝",
+"whisper": "答案是 喝。",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -1717,9 +1697,9 @@
 }
 ],
 "poly": [],
-"whisper": "答案是日",
-"w_score": 1.0,
-"w_ok": true
+"whisper": "答案是 遇",
+"w_score": 0.0,
+"w_ok": false
 },
 "ㄖㄜˋ": {
 "file": "7d5617bddcaa.mp3",
@@ -1737,7 +1717,7 @@
 }
 ],
 "poly": [],
-"whisper": "答案是 熱",
+"whisper": "答案是 热",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -1802,24 +1782,14 @@
 "poly": []
 },
 "ㄛ": {
-"file": "6a67b32d4a2b.mp3",
+"file": "fx-79e64811a78d.mp3",
 "kind": "zy",
-"heard": "答安叙多",
+"heard": "答爱是喔",
 "want": "o1",
-"got": "duo1",
-"err": 1.0,
-"subs": [
-{
-"char": "ㄛ",
-"want": "o1",
-"heard": "duo1",
-"heard_char": "多"
-}
-],
-"poly": [],
-"whisper": "答案是我",
-"w_score": 0.0,
-"w_ok": false
+"got": "o1",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "ㄜ": {
 "file": "6d95cc02ba9e.mp3",
@@ -2097,7 +2067,7 @@
 }
 ],
 "poly": [],
-"whisper": "答案是五",
+"whisper": "答案是 5",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -10044,7 +10014,7 @@
 "heard_char": "布"
 }
 ],
-"whisper": "小兔子种的红萝卜,长得好大好大!",
+"whisper": "小兔子种的红萝卜,长得好大好大。",
 "w_score": 1.0,
 "w_ok": true
 },
@@ -17206,1651 +17176,631 @@
 "白紙 1": {
 "file": "f78bf1dd7434.mp3",
 "kind": "zh",
-"heard": "达安是百指一",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 yi1",
-"err": 0.2,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "yi1",
-"heard_char": "一"
-}
-],
+"heard": "白子衣",
+"want": "bai2 zhi3 yi1",
+"got": "bai2 zi5 yi1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 10": {
 "file": "c3c917607b11.mp3",
 "kind": "zh",
-"heard": "答安是百指时",
-"want": "bai2 zhi3",
+"heard": "百指石",
+"want": "bai2 zhi3 shi2",
 "got": "bai3 zhi3 shi2",
-"err": 0.2,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "时"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 11": {
 "file": "ec90bb63bf2f.mp3",
 "kind": "zh",
-"heard": "答案是百指十一",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 shi2 yi1",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "yi1",
-"heard_char": "一"
-}
-],
+"heard": "百子十一",
+"want": "bai2 zhi3 shi2 yi1",
+"got": "bai3 zi5 shi2 yi1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 12": {
 "file": "a69c6fa1833e.mp3",
 "kind": "zh",
-"heard": "答案是百指十二",
-"want": "bai2 zhi3",
+"heard": "百指十二",
+"want": "bai2 zhi3 shi2 er4",
 "got": "bai3 zhi3 shi2 er4",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 13": {
 "file": "7e5c2296b89a.mp3",
 "kind": "zh",
-"heard": "答安是百指十三",
-"want": "bai2 zhi3",
+"heard": "百指十三",
+"want": "bai2 zhi3 shi2 san1",
 "got": "bai3 zhi3 shi2 san1",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 14": {
 "file": "0ead21a15dc0.mp3",
 "kind": "zh",
-"heard": "答案是百指十寺",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 shi2 si4",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "寺"
-}
-],
+"heard": "白指十嗣",
+"want": "bai2 zhi3 shi2 si4",
+"got": "bai2 zhi3 shi2 si4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 15": {
 "file": "8f1e1556bd2f.mp3",
 "kind": "zh",
-"heard": "党安市百指十武",
-"want": "bai2 zhi3",
+"heard": "百指十五",
+"want": "bai2 zhi3 shi2 wu3",
 "got": "bai3 zhi3 shi2 wu3",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "武"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 16": {
 "file": "aba4fccf8fd1.mp3",
 "kind": "zh",
-"heard": "答安是百指十六",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 shi2 liu4",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "liu4",
-"heard_char": "六"
-}
-],
+"heard": "白指十六",
+"want": "bai2 zhi3 shi2 liu4",
+"got": "bai2 zhi3 shi2 liu4",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 17": {
 "file": "36675ad96e46.mp3",
 "kind": "zh",
-"heard": "答案是百指时妻",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 shi2 qi1",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "时"
-},
-{
-"char": "",
-"want": "",
-"heard": "qi1",
-"heard_char": "妻"
-}
-],
+"heard": "白指时妻",
+"want": "bai2 zhi3 shi2 qi1",
+"got": "bai2 zhi3 shi2 qi1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 18": {
 "file": "1e6aeeb4e679.mp3",
 "kind": "zh",
-"heard": "答安士百指十八",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 shi2 ba1",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "ba1",
-"heard_char": "八"
-}
-],
+"heard": "百子十八",
+"want": "bai2 zhi3 shi2 ba1",
+"got": "bai3 zi5 shi2 ba1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 19": {
 "file": "b7ae0c9b27cb.mp3",
 "kind": "zh",
-"heard": "党安市百址始久",
-"want": "bai2 zhi3",
+"heard": "百址始九",
+"want": "bai2 zhi3 shi2 jiu3",
 "got": "bai3 zhi3 shi3 jiu3",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "shi3",
-"heard_char": "始"
-},
-{
-"char": "",
-"want": "",
-"heard": "jiu3",
-"heard_char": "久"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 2": {
 "file": "81ab103196dc.mp3",
 "kind": "zh",
-"heard": "达安是百指二",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 er4",
-"err": 0.2,
+"heard": "百举阿尔",
+"want": "bai2 zhi3 er4",
+"got": "bai3 ju3 a1 er3",
+"err": 0.429,
 "subs": [
+{
+"char": "紙",
+"want": "zhi3",
+"heard": "ju3",
+"heard_char": "举"
+},
 {
 "char": "",
 "want": "",
-"heard": "er4",
-"heard_char": "二"
+"heard": "a1",
+"heard_char": "阿"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "白纸2",
+"w_score": 1.0,
+"w_ok": true
 },
 "白紙 20": {
 "file": "a509fbfeb751.mp3",
 "kind": "zh",
-"heard": "达安世百子二十",
-"want": "bai2 zhi3",
-"got": "bai3 zi5 er4 shi2",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-}
-],
+"heard": "白子二十",
+"want": "bai2 zhi3 er4 shi2",
+"got": "bai2 zi5 er4 shi2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 21": {
 "file": "d65baca52eb4.mp3",
 "kind": "zh",
-"heard": "答案是百指二十一",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 er4 shi2 yi1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "yi1",
-"heard_char": "一"
-}
-],
-"poly": [],
-"whisper": "答案是白紙21",
-"w_score": 0.571,
-"w_ok": false
+"heard": "百子二十一",
+"want": "bai2 zhi3 er4 shi2 yi1",
+"got": "bai3 zi5 er4 shi2 yi1",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 22": {
 "file": "e2ce4e83c66f.mp3",
 "kind": "zh",
-"heard": "达安是百指二十二",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 er4 shi2 er4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-}
-],
-"poly": [],
-"whisper": "答案是 白紙 22",
-"w_score": 0.571,
-"w_ok": false
+"heard": "百子二十二",
+"want": "bai2 zhi3 er4 shi2 er4",
+"got": "bai3 zi5 er4 shi2 er4",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 23": {
 "file": "444a6a7f9948.mp3",
 "kind": "zh",
-"heard": "答安是百指二十三",
-"want": "bai2 zhi3",
+"heard": "百指二十三",
+"want": "bai2 zhi3 er4 shi2 san1",
 "got": "bai3 zhi3 er4 shi2 san1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-}
-],
-"poly": [],
-"whisper": "答案是白紙23",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 24": {
 "file": "761e31064e9a.mp3",
 "kind": "zh",
-"heard": "答安是百指二十四",
-"want": "bai2 zhi3",
+"heard": "百指二十四",
+"want": "bai2 zhi3 er4 shi2 si4",
 "got": "bai3 zhi3 er4 shi2 si4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-}
-],
-"poly": [],
-"whisper": "答案是白纸24",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 25": {
 "file": "29139b7f7185.mp3",
 "kind": "zh",
-"heard": "达安世百指二十五",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 er4 shi2 wu3",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-}
-],
-"poly": [],
-"whisper": "答案是白紙25",
-"w_score": 0.571,
-"w_ok": false
+"heard": "百子二十五",
+"want": "bai2 zhi3 er4 shi2 wu3",
+"got": "bai3 zi5 er4 shi2 wu3",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 26": {
 "file": "e740572eb63c.mp3",
 "kind": "zh",
-"heard": "答安是百子二十六",
-"want": "bai2 zhi3",
-"got": "bai3 zi5 er4 shi2 liu4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "liu4",
-"heard_char": "六"
-}
-],
-"poly": [],
-"whisper": "答案是白纸26",
-"w_score": 0.571,
-"w_ok": false
+"heard": "白子二十六",
+"want": "bai2 zhi3 er4 shi2 liu4",
+"got": "bai2 zi5 er4 shi2 liu4",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 27": {
 "file": "f4d8a1d12d84.mp3",
 "kind": "zh",
-"heard": "答案是逮指二十七",
-"want": "bai2 zhi3",
-"got": "dai3 zhi3 er4 shi2 qi1",
-"err": 0.714,
-"subs": [
-{
-"char": "白",
-"want": "bai2",
-"heard": "dai3",
-"heard_char": "逮"
-},
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "qi1",
-"heard_char": "七"
-}
-],
-"poly": [],
-"whisper": "答案是白紙27",
-"w_score": 0.571,
-"w_ok": false
+"heard": "百指二十期",
+"want": "bai2 zhi3 er4 shi2 qi1",
+"got": "bai3 zhi3 er4 shi2 qi1",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 28": {
 "file": "45d1fda8cdf5.mp3",
 "kind": "zh",
-"heard": "答安叙百指二十八",
-"want": "bai2 zhi3",
+"heard": "百指二十八",
+"want": "bai2 zhi3 er4 shi2 ba1",
 "got": "bai3 zhi3 er4 shi2 ba1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "ba1",
-"heard_char": "八"
-}
-],
-"poly": [],
-"whisper": "答案是白紙28",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 29": {
 "file": "6e694feb18a8.mp3",
 "kind": "zh",
-"heard": "达案是百址二十九",
-"want": "bai2 zhi3",
+"heard": "百址二十九",
+"want": "bai2 zhi3 er4 shi2 jiu3",
 "got": "bai3 zhi3 er4 shi2 jiu3",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "jiu3",
-"heard_char": "九"
-}
-],
-"poly": [],
-"whisper": "答案是白紙29",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 3": {
 "file": "0de6d1d51bb5.mp3",
 "kind": "zh",
-"heard": "达安是百指三",
-"want": "bai2 zhi3",
+"heard": "百址三",
+"want": "bai2 zhi3 san1",
 "got": "bai3 zhi3 san1",
-"err": 0.2,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 30": {
 "file": "4fcb55c5f6ba.mp3",
 "kind": "zh",
-"heard": "答案世百指三世",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 san1 shi4",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi4",
-"heard_char": "世"
-}
-],
+"heard": "百指三时",
+"want": "bai2 zhi3 san1 shi2",
+"got": "bai3 zhi3 san1 shi2",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 31": {
 "file": "adc5c7d02ae0.mp3",
 "kind": "zh",
-"heard": "党案市百指三十一",
-"want": "bai2 zhi3",
+"heard": "百趾三十一",
+"want": "bai2 zhi3 san1 shi2 yi1",
 "got": "bai3 zhi3 san1 shi2 yi1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "yi1",
-"heard_char": "一"
-}
-],
-"poly": [],
-"whisper": "答案是白紙31",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 32": {
 "file": "3b40fd05f45f.mp3",
 "kind": "zh",
-"heard": "答案是百指三十二",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 san1 shi2 er4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-}
-],
-"poly": [],
-"whisper": "答案是白紙32",
-"w_score": 0.571,
-"w_ok": false
+"heard": "百子三十二",
+"want": "bai2 zhi3 san1 shi2 er4",
+"got": "bai3 zi5 san1 shi2 er4",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 33": {
 "file": "8da7b4ce6e99.mp3",
 "kind": "zh",
-"heard": "答案是百指三十三",
-"want": "bai2 zhi3",
+"heard": "百指三十三",
+"want": "bai2 zhi3 san1 shi2 san1",
 "got": "bai3 zhi3 san1 shi2 san1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-}
-],
-"poly": [],
-"whisper": "答案是白紙33",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 34": {
 "file": "43c34b29ffd1.mp3",
 "kind": "zh",
-"heard": "答安世百指三十四",
-"want": "bai2 zhi3",
+"heard": "百指三十四",
+"want": "bai2 zhi3 san1 shi2 si4",
 "got": "bai3 zhi3 san1 shi2 si4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-}
-],
-"poly": [],
-"whisper": "答案是百指三十四。",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 35": {
 "file": "560100f967b5.mp3",
 "kind": "zh",
-"heard": "答安世百指三十五",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 san1 shi2 wu3",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-}
-],
-"poly": [],
-"whisper": "答案是白紙35",
-"w_score": 0.571,
-"w_ok": false
+"heard": "百子三十五",
+"want": "bai2 zhi3 san1 shi2 wu3",
+"got": "bai3 zi5 san1 shi2 wu3",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 36": {
 "file": "e3ce55e9afb2.mp3",
 "kind": "zh",
-"heard": "答安是百址三十六",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 san1 shi2 liu4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "liu4",
-"heard_char": "六"
-}
-],
-"poly": [],
-"whisper": "答案是白紙36",
-"w_score": 0.571,
-"w_ok": false
+"heard": "百子三十六",
+"want": "bai2 zhi3 san1 shi2 liu4",
+"got": "bai3 zi5 san1 shi2 liu4",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 37": {
 "file": "6ce04e0cf888.mp3",
 "kind": "zh",
-"heard": "答案士百趾三十七",
-"want": "bai2 zhi3",
+"heard": "百趾三十七",
+"want": "bai2 zhi3 san1 shi2 qi1",
 "got": "bai3 zhi3 san1 shi2 qi1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "qi1",
-"heard_char": "七"
-}
-],
-"poly": [],
-"whisper": "答案是白紙三十七",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 38": {
 "file": "e136a4e3db2d.mp3",
 "kind": "zh",
-"heard": "答案是百趾三十八",
-"want": "bai2 zhi3",
+"heard": "百址三十八",
+"want": "bai2 zhi3 san1 shi2 ba1",
 "got": "bai3 zhi3 san1 shi2 ba1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "ba1",
-"heard_char": "八"
-}
-],
-"poly": [],
-"whisper": "答案是白紙38",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 39": {
 "file": "fe7e0de5d70b.mp3",
 "kind": "zh",
-"heard": "答案是百址三十九",
-"want": "bai2 zhi3",
+"heard": "百址三十九",
+"want": "bai2 zhi3 san1 shi2 jiu3",
 "got": "bai3 zhi3 san1 shi2 jiu3",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "jiu3",
-"heard_char": "九"
-}
-],
-"poly": [],
-"whisper": "答案是白紙39",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 4": {
 "file": "4a457b744070.mp3",
 "kind": "zh",
-"heard": "答安是百指四",
-"want": "bai2 zhi3",
+"heard": "百指嗣",
+"want": "bai2 zhi3 si4",
 "got": "bai3 zhi3 si4",
-"err": 0.2,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 40": {
 "file": "9e99d0a9714d.mp3",
 "kind": "zh",
-"heard": "答案士百指四时",
-"want": "bai2 zhi3",
+"heard": "百指四时",
+"want": "bai2 zhi3 si4 shi2",
 "got": "bai3 zhi3 si4 shi2",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "时"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 41": {
 "file": "2c6ffdc095e1.mp3",
 "kind": "zh",
-"heard": "答案士百趾四十一",
-"want": "bai2 zhi3",
+"heard": "百指四十一",
+"want": "bai2 zhi3 si4 shi2 yi1",
 "got": "bai3 zhi3 si4 shi2 yi1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "yi1",
-"heard_char": "一"
-}
-],
-"poly": [],
-"whisper": "答案是白紙41",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 42": {
 "file": "5f785dc120bb.mp3",
 "kind": "zh",
-"heard": "答安士百指四十二",
-"want": "bai2 zhi3",
+"heard": "百指四十二",
+"want": "bai2 zhi3 si4 shi2 er4",
 "got": "bai3 zhi3 si4 shi2 er4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-}
-],
-"poly": [],
-"whisper": "答案是百指四十二。",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 43": {
 "file": "5a207b362c83.mp3",
 "kind": "zh",
-"heard": "党案士百趾四十三",
-"want": "bai2 zhi3",
+"heard": "百止四十三",
+"want": "bai2 zhi3 si4 shi2 san1",
 "got": "bai3 zhi3 si4 shi2 san1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-}
-],
-"poly": [],
-"whisper": "答案是白紙43",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 44": {
 "file": "54d455ac6a8c.mp3",
 "kind": "zh",
-"heard": "答案氏百指四十寺",
-"want": "bai2 zhi3",
+"heard": "百指四十四",
+"want": "bai2 zhi3 si4 shi2 si4",
 "got": "bai3 zhi3 si4 shi2 si4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "寺"
-}
-],
-"poly": [],
-"whisper": "答案是白紙44",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 45": {
 "file": "3e167878fcb0.mp3",
 "kind": "zh",
-"heard": "党安市百指四十武",
-"want": "bai2 zhi3",
+"heard": "百址四十五",
+"want": "bai2 zhi3 si4 shi2 wu3",
 "got": "bai3 zhi3 si4 shi2 wu3",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "武"
-}
-],
-"poly": [],
-"whisper": "答案是白紙45",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 46": {
 "file": "f22a8f5bbd44.mp3",
 "kind": "zh",
-"heard": "答案市百指四十六",
-"want": "bai2 zhi3",
+"heard": "百指四十六",
+"want": "bai2 zhi3 si4 shi2 liu4",
 "got": "bai3 zhi3 si4 shi2 liu4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "liu4",
-"heard_char": "六"
-}
-],
-"poly": [],
-"whisper": "答案是白纸46",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 47": {
 "file": "4cd643e681e3.mp3",
 "kind": "zh",
-"heard": "答案氏百止四十七",
-"want": "bai2 zhi3",
+"heard": "百止四十期",
+"want": "bai2 zhi3 si4 shi2 qi1",
 "got": "bai3 zhi3 si4 shi2 qi1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "qi1",
-"heard_char": "七"
-}
-],
-"poly": [],
-"whisper": "答案是白紙47",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 48": {
 "file": "faff6e97e1a4.mp3",
 "kind": "zh",
-"heard": "答案士百子四十八",
-"want": "bai2 zhi3",
+"heard": "百子四十八",
+"want": "bai2 zhi3 si4 shi2 ba1",
 "got": "bai3 zi5 si4 shi2 ba1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "ba1",
-"heard_char": "八"
-}
-],
-"poly": [],
-"whisper": "答案是百指四十八",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 49": {
 "file": "a7c0040b9651.mp3",
 "kind": "zh",
-"heard": "答案是百指四十角",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 si4 shi2 jiao3",
-"err": 0.429,
+"heard": "白指四十角",
+"want": "bai2 zhi3 si4 shi2 jiu3",
+"got": "bai2 zhi3 si4 shi2 jiao3",
+"err": 0.2,
 "subs": [
 {
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "四"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
+"char": "九",
+"want": "jiu3",
 "heard": "jiao3",
 "heard_char": "角"
 }
 ],
-"poly": [],
-"whisper": "答案是白紙49",
-"w_score": 0.571,
-"w_ok": false
+"poly": []
 },
 "白紙 5": {
 "file": "7142837c9df9.mp3",
 "kind": "zh",
-"heard": "答安是白直武",
-"want": "bai2 zhi3",
+"heard": "白植武",
+"want": "bai2 zhi3 wu3",
 "got": "bai2 zhi2 wu3",
-"err": 0.2,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "武"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 50": {
 "file": "1bceff3cdc67.mp3",
 "kind": "zh",
-"heard": "达安是百指武时",
-"want": "bai2 zhi3",
+"heard": "百指五时",
+"want": "bai2 zhi3 wu3 shi2",
 "got": "bai3 zhi3 wu3 shi2",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "武"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "时"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 51": {
 "file": "9a5b559e1ab3.mp3",
 "kind": "zh",
-"heard": "答案是百指五十一",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 wu3 shi2 yi1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "yi1",
-"heard_char": "一"
-}
-],
-"poly": [],
-"whisper": "答案是白紙51",
-"w_score": 0.571,
-"w_ok": false
+"heard": "百子五十伊",
+"want": "bai2 zhi3 wu3 shi2 yi1",
+"got": "bai3 zi5 wu3 shi2 yi1",
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 52": {
 "file": "fc3b554a5715.mp3",
 "kind": "zh",
-"heard": "答安是白职五十二",
-"want": "bai2 zhi3",
+"heard": "白植五十二",
+"want": "bai2 zhi3 wu3 shi2 er4",
 "got": "bai2 zhi2 wu3 shi2 er4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "er4",
-"heard_char": "二"
-}
-],
-"poly": [],
-"whisper": "答案是白紙 52",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 53": {
 "file": "2be5eb78307d.mp3",
 "kind": "zh",
-"heard": "答案士白职五十三",
-"want": "bai2 zhi3",
+"heard": "白植五十三",
+"want": "bai2 zhi3 wu3 shi2 san1",
 "got": "bai2 zhi2 wu3 shi2 san1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "san1",
-"heard_char": "三"
-}
-],
-"poly": [],
-"whisper": "答案是白紙53",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 54": {
 "file": "6d0f2b324144.mp3",
 "kind": "zh",
-"heard": "答案是白职五十寺",
-"want": "bai2 zhi3",
+"heard": "白职五十四",
+"want": "bai2 zhi3 wu3 shi2 si4",
 "got": "bai2 zhi2 wu3 shi2 si4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "si4",
-"heard_char": "寺"
-}
-],
-"poly": [],
-"whisper": "答案是白紙54",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 55": {
 "file": "4c077205b69e.mp3",
 "kind": "zh",
-"heard": "答安士白职五十武",
-"want": "bai2 zhi3",
+"heard": "白植五十武",
+"want": "bai2 zhi3 wu3 shi2 wu3",
 "got": "bai2 zhi2 wu3 shi2 wu3",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "武"
-}
-],
-"poly": [],
-"whisper": "答案是白紙55",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 56": {
 "file": "95df9502c178.mp3",
 "kind": "zh",
-"heard": "答案士白职五十六",
-"want": "bai2 zhi3",
+"heard": "白职五十六",
+"want": "bai2 zhi3 wu3 shi2 liu4",
 "got": "bai2 zhi2 wu3 shi2 liu4",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "liu4",
-"heard_char": "六"
-}
-],
-"poly": [],
-"whisper": "答案是白紙56",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 57": {
 "file": "16f9e9cac9c7.mp3",
 "kind": "zh",
-"heard": "答案是白职五十期",
-"want": "bai2 zhi3",
+"heard": "白植五十妻",
+"want": "bai2 zhi3 wu3 shi2 qi1",
 "got": "bai2 zhi2 wu3 shi2 qi1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "qi1",
-"heard_char": "期"
-}
-],
-"poly": [],
-"whisper": "答案是白紙57",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 58": {
 "file": "a77f53aa0e9d.mp3",
 "kind": "zh",
-"heard": "答安是白职五十八",
-"want": "bai2 zhi3",
+"heard": "白植五十八",
+"want": "bai2 zhi3 wu3 shi2 ba1",
 "got": "bai2 zhi2 wu3 shi2 ba1",
-"err": 0.429,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
-"heard": "ba1",
-"heard_char": "八"
-}
-],
-"poly": [],
-"whisper": "答案是白紙58",
-"w_score": 0.571,
-"w_ok": false
+"err": 0.0,
+"subs": [],
+"poly": []
 },
 "白紙 59": {
 "file": "cb7c2a2a9392.mp3",
 "kind": "zh",
-"heard": "答安是百址五十角",
-"want": "bai2 zhi3",
+"heard": "百址五十角",
+"want": "bai2 zhi3 wu3 shi2 jiu3",
 "got": "bai3 zhi3 wu3 shi2 jiao3",
-"err": 0.429,
+"err": 0.2,
 "subs": [
 {
-"char": "",
-"want": "",
-"heard": "wu3",
-"heard_char": "五"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "十"
-},
-{
-"char": "",
-"want": "",
+"char": "九",
+"want": "jiu3",
 "heard": "jiao3",
 "heard_char": "角"
 }
 ],
-"poly": [],
-"whisper": "答案是白紙59",
-"w_score": 0.571,
-"w_ok": false
+"poly": []
 },
 "白紙 6": {
 "file": "6145991e5740.mp3",
 "kind": "zh",
-"heard": "达安是白直六",
-"want": "bai2 zhi3",
+"heard": "白直六",
+"want": "bai2 zhi3 liu4",
 "got": "bai2 zhi2 liu4",
-"err": 0.2,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "liu4",
-"heard_char": "六"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 60": {
 "file": "91578883ae56.mp3",
 "kind": "zh",
-"heard": "答安士百指六时",
-"want": "bai2 zhi3",
+"heard": "百指六时",
+"want": "bai2 zhi3 liu4 shi2",
 "got": "bai3 zhi3 liu4 shi2",
-"err": 0.333,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "liu4",
-"heard_char": "六"
-},
-{
-"char": "",
-"want": "",
-"heard": "shi2",
-"heard_char": "时"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 7": {
 "file": "4d0d456dc862.mp3",
 "kind": "zh",
-"heard": "答案是百指妻",
-"want": "bai2 zhi3",
-"got": "bai3 zhi3 qi1",
-"err": 0.2,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "qi1",
-"heard_char": "妻"
-}
-],
+"heard": "白指妻",
+"want": "bai2 zhi3 qi1",
+"got": "bai2 zhi3 qi1",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 8": {
 "file": "bb561a7cd6aa.mp3",
 "kind": "zh",
-"heard": "答案是百指八",
-"want": "bai2 zhi3",
+"heard": "百指八",
+"want": "bai2 zhi3 ba1",
 "got": "bai3 zhi3 ba1",
-"err": 0.2,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "ba1",
-"heard_char": "八"
-}
-],
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白紙 9": {
 "file": "2e58ca9cd4bd.mp3",
 "kind": "zh",
-"heard": "答案是白职球",
-"want": "bai2 zhi3",
-"got": "bai2 zhi2 qiu2",
-"err": 0.2,
-"subs": [
-{
-"char": "",
-"want": "",
-"heard": "qiu2",
-"heard_char": "球"
-}
-],
+"heard": "白职久",
+"want": "bai2 zhi3 jiu3",
+"got": "bai2 zhi2 jiu3",
+"err": 0.0,
+"subs": [],
 "poly": []
 },
 "白色": {
@@ -23747,7 +22697,7 @@
 "heard_char": "字"
 }
 ],
-"whisper": "首校 替次见闻",
+"whisper": "首校,替次见闻",
 "w_score": 1.0,
 "w_ok": true
 },
