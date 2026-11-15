@@ -186,7 +186,10 @@
 "heard": "qi1",
 "heard_char": "七"
 }
-]
+],
+"whisper": "誰要吃麵包?大家都說,我要!",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄅ": {
 "file": "6f971f9c15b3.mp3",
@@ -303,7 +306,10 @@
 "heard_char": "丁"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 冰",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄅㄧㄥˇ": {
 "file": "a3a5f09c93d5.mp3",
@@ -330,7 +336,10 @@
 "heard_char": "托"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是撲",
+"w_score": 0.0,
+"w_ok": false
 },
 "ㄆㄚ": {
 "file": "f2df6319f4e4.mp3",
@@ -347,7 +356,10 @@
 "heard_char": "哈"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是啪",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄆㄞ": {
 "file": "c458866d12c4.mp3",
@@ -464,7 +476,10 @@
 "heard_char": "妳"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是你。",
+"w_score": 0.0,
+"w_ok": false
 },
 "ㄈ": {
 "file": "6cd7e14919a4.mp3",
@@ -481,7 +496,10 @@
 "heard_char": "佛"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 佛",
+"w_score": 0.0,
+"w_ok": false
 },
 "ㄈㄚ": {
 "file": "359bbef26d57.mp3",
@@ -568,7 +586,10 @@
 "heard_char": "高"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 刀",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄉㄢˋ": {
 "file": "89173e384349.mp3",
@@ -665,7 +686,10 @@
 "heard_char": "帕"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 怕",
+"w_score": 0.0,
+"w_ok": false
 },
 "ㄊㄞˋ": {
 "file": "791ccb3a5905.mp3",
@@ -732,7 +756,10 @@
 "heard_char": "抗"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 燙",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄊㄧㄠˊ": {
 "file": "46d7d22e8e49.mp3",
@@ -809,7 +836,10 @@
 "heard_char": "来"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 奶",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄋㄢˊ": {
 "file": "d3c63a213ae5.mp3",
@@ -846,7 +876,10 @@
 "heard_char": "勒"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 乐",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄌㄚ": {
 "file": "e188cc706c28.mp3",
@@ -873,7 +906,10 @@
 "heard_char": "朗"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是老。",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄌㄨˋ": {
 "file": "ad6a1246d471.mp3",
@@ -950,7 +986,10 @@
 "heard_char": "口"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 狗",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄍㄢ": {
 "file": "63c9245ef01a.mp3",
@@ -997,7 +1036,10 @@
 "heard_char": "波"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 郭",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄍㄨㄛˇ": {
 "file": "f325a6d67c7a.mp3",
@@ -1084,7 +1126,10 @@
 "heard_char": "科"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 喝",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄏㄞˇ": {
 "file": "7dda226c82a9.mp3",
@@ -1141,7 +1186,10 @@
 "heard_char": "乌"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 呼",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄏㄨˇ": {
 "file": "81c093a7de3f.mp3",
@@ -1338,7 +1386,10 @@
 "heard_char": "茄"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是且",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄑㄧㄡ": {
 "file": "e8962419e117.mp3",
@@ -1505,7 +1556,10 @@
 "heard_char": "居"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 知",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄓㄨ": {
 "file": "177224a9cae4.mp3",
@@ -1532,7 +1586,10 @@
 "heard_char": "屈"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 吃",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄔㄜ": {
 "file": "b502fc73ebbc.mp3",
@@ -1559,7 +1616,10 @@
 "heard_char": "长"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是長",
+"w_score": 0.0,
+"w_ok": false
 },
 "ㄔㄨㄢˊ": {
 "file": "15f60c4a5501.mp3",
@@ -1656,7 +1716,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是日",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄖㄜˋ": {
 "file": "7d5617bddcaa.mp3",
@@ -1673,7 +1736,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 熱",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄗ": {
 "file": "3a983f1aa94b.mp3",
@@ -1750,7 +1816,10 @@
 "heard_char": "多"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是我",
+"w_score": 0.0,
+"w_ok": false
 },
 "ㄜ": {
 "file": "6d95cc02ba9e.mp3",
@@ -1787,7 +1856,10 @@
 "heard_char": "裴"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是A",
+"w_score": 0.0,
+"w_ok": false
 },
 "ㄞ": {
 "file": "3a54daf2f067.mp3",
@@ -1814,7 +1886,10 @@
 "heard_char": "费"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是A",
+"w_score": 0.0,
+"w_ok": false
 },
 "ㄠ": {
 "file": "36abc7e9dd2d.mp3",
@@ -1911,7 +1986,10 @@
 "heard_char": "弟"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 以",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄧˊ": {
 "file": "f50b64d169ca.mp3",
@@ -2018,7 +2096,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是五",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄨˊ": {
 "file": "008a9933d6bc.mp3",
@@ -2045,7 +2126,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 物",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄨㄚ": {
 "file": "190ea46e7c62.mp3",
@@ -2072,7 +2156,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 鱼",
+"w_score": 1.0,
+"w_ok": true
 },
 "ㄩˋ": {
 "file": "e7dfffa3fbc9.mp3",
@@ -2099,7 +2186,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是一",
+"w_score": 1.0,
+"w_ok": true
 },
 "一一得一": {
 "file": "1cb3174fb48f.mp3",
@@ -2619,7 +2709,10 @@
 "heard_char": "卿"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "七,一得七",
+"w_score": 1.0,
+"w_ok": true
 },
 "七七四十九": {
 "file": "d9b99abac979.mp3",
@@ -3009,7 +3102,10 @@
 "heard_char": "阿"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "32",
+"w_score": 1.0,
+"w_ok": true
 },
 "三十五": {
 "file": "2dd47eb83c7e.mp3",
@@ -3606,7 +3702,10 @@
 "heard_char": "企"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 酒",
+"w_score": 1.0,
+"w_ok": true
 },
 "九一得九": {
 "file": "1035ec6af28a.mp3",
@@ -4098,7 +4197,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "22",
+"w_score": 1.0,
+"w_ok": true
 },
 "二十五": {
 "file": "53c51421e47f.mp3",
@@ -4215,7 +4317,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是五",
+"w_score": 1.0,
+"w_ok": true
 },
 "五一得五": {
 "file": "cbe653ff8173.mp3",
@@ -4396,7 +4501,10 @@
 "heard_char": "席"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "52",
+"w_score": 1.0,
+"w_ok": true
 },
 "五十五": {
 "file": "7e7bbbe2bbce.mp3",
@@ -5947,7 +6055,10 @@
 "heard_char": "什"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是80",
+"w_score": 1.0,
+"w_ok": true
 },
 "八十一": {
 "file": "3df8f0ff5288.mp3",
@@ -7352,7 +7463,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "關 關 關 關 關",
+"w_score": 0.0,
+"w_ok": false
 },
 "呼～一口氣把蠟燭吹熄了！": {
 "file": "2005a3a0f0d7.mp3",
@@ -8010,7 +8124,10 @@
 "heard_char": "什"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "四、五、二、十",
+"w_score": 1.0,
+"w_ok": true
 },
 "四五六，翻跟斗": {
 "file": "6d073f342dc1.mp3",
@@ -8690,7 +8807,10 @@
 "heard": "bu4",
 "heard_char": "不"
 }
-]
+],
+"whisper": "大红萝卜",
+"w_score": 1.0,
+"w_ok": true
 },
 "大象": {
 "file": "ce51f23b2207.mp3",
@@ -9923,7 +10043,10 @@
 "heard": "bu4",
 "heard_char": "布"
 }
-]
+],
+"whisper": "小兔子种的红萝卜,长得好大好大!",
+"w_score": 1.0,
+"w_ok": true
 },
 "小兔子說：「我不該驕傲。」堅持不放棄，慢慢走也能成功！": {
 "file": "4c7234c39d1c.mp3",
@@ -12372,7 +12495,10 @@
 "heard": "qi1",
 "heard_char": "期"
 }
-]
+],
+"whisper": "我吃好吃的糖果。",
+"w_score": 1.0,
+"w_ok": true
 },
 "我吃好吃的糖果。": {
 "file": "fa00954eb4e1.mp3",
@@ -13625,7 +13751,10 @@
 "heard": "ceng2",
 "heard_char": "曾"
 }
-]
+],
+"whisper": "新增小朋友",
+"w_score": 1.0,
+"w_ok": true
 },
 "新年這一天": {
 "file": "1e59d1f7c687.mp3",
@@ -16109,7 +16238,10 @@
 "heard": "zhong4",
 "heard_char": "重"
 }
-]
+],
+"whisper": "熊媽媽說,每天早晚刷牙,鑄牙蟲就不見了。",
+"w_score": 1.0,
+"w_ok": true
 },
 "熊貓": {
 "file": "9230128876c3.mp3",
@@ -16488,7 +16620,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是狗",
+"w_score": 1.0,
+"w_ok": true
 },
 "狼來了": {
 "file": "0c1045a075c8.mp3",
@@ -16842,7 +16977,10 @@
 "heard_char": "朴"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是嫖蟲",
+"w_score": 1.0,
+"w_ok": true
 },
 "甜甜圈": {
 "file": "955e61e4648a.mp3",
@@ -16953,7 +17091,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 化",
+"w_score": 1.0,
+"w_ok": true
 },
 "畫好了，好棒！": {
 "file": "7a01a9309ead.mp3",
@@ -17370,7 +17511,10 @@
 "heard_char": "一"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙21",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 22": {
 "file": "e2ce4e83c66f.mp3",
@@ -17399,7 +17543,10 @@
 "heard_char": "二"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 白紙 22",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 23": {
 "file": "444a6a7f9948.mp3",
@@ -17428,7 +17575,10 @@
 "heard_char": "三"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙23",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 24": {
 "file": "761e31064e9a.mp3",
@@ -17457,7 +17607,10 @@
 "heard_char": "四"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白纸24",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 25": {
 "file": "29139b7f7185.mp3",
@@ -17486,7 +17639,10 @@
 "heard_char": "五"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙25",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 26": {
 "file": "e740572eb63c.mp3",
@@ -17515,7 +17671,10 @@
 "heard_char": "六"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白纸26",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 27": {
 "file": "f4d8a1d12d84.mp3",
@@ -17550,7 +17709,10 @@
 "heard_char": "七"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙27",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 28": {
 "file": "45d1fda8cdf5.mp3",
@@ -17579,7 +17741,10 @@
 "heard_char": "八"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙28",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 29": {
 "file": "6e694feb18a8.mp3",
@@ -17608,7 +17773,10 @@
 "heard_char": "九"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙29",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 3": {
 "file": "0de6d1d51bb5.mp3",
@@ -17677,7 +17845,10 @@
 "heard_char": "一"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙31",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 32": {
 "file": "3b40fd05f45f.mp3",
@@ -17706,7 +17877,10 @@
 "heard_char": "二"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙32",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 33": {
 "file": "8da7b4ce6e99.mp3",
@@ -17735,7 +17909,10 @@
 "heard_char": "三"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙33",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 34": {
 "file": "43c34b29ffd1.mp3",
@@ -17764,7 +17941,10 @@
 "heard_char": "四"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是百指三十四。",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 35": {
 "file": "560100f967b5.mp3",
@@ -17793,7 +17973,10 @@
 "heard_char": "五"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙35",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 36": {
 "file": "e3ce55e9afb2.mp3",
@@ -17822,7 +18005,10 @@
 "heard_char": "六"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙36",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 37": {
 "file": "6ce04e0cf888.mp3",
@@ -17851,7 +18037,10 @@
 "heard_char": "七"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙三十七",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 38": {
 "file": "e136a4e3db2d.mp3",
@@ -17880,7 +18069,10 @@
 "heard_char": "八"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙38",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 39": {
 "file": "fe7e0de5d70b.mp3",
@@ -17909,7 +18101,10 @@
 "heard_char": "九"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙39",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 4": {
 "file": "4a457b744070.mp3",
@@ -17978,7 +18173,10 @@
 "heard_char": "一"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙41",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 42": {
 "file": "5f785dc120bb.mp3",
@@ -18007,7 +18205,10 @@
 "heard_char": "二"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是百指四十二。",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 43": {
 "file": "5a207b362c83.mp3",
@@ -18036,7 +18237,10 @@
 "heard_char": "三"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙43",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 44": {
 "file": "54d455ac6a8c.mp3",
@@ -18065,7 +18269,10 @@
 "heard_char": "寺"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙44",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 45": {
 "file": "3e167878fcb0.mp3",
@@ -18094,7 +18301,10 @@
 "heard_char": "武"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙45",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 46": {
 "file": "f22a8f5bbd44.mp3",
@@ -18123,7 +18333,10 @@
 "heard_char": "六"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白纸46",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 47": {
 "file": "4cd643e681e3.mp3",
@@ -18152,7 +18365,10 @@
 "heard_char": "七"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙47",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 48": {
 "file": "faff6e97e1a4.mp3",
@@ -18181,7 +18397,10 @@
 "heard_char": "八"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是百指四十八",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 49": {
 "file": "a7c0040b9651.mp3",
@@ -18210,7 +18429,10 @@
 "heard_char": "角"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙49",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 5": {
 "file": "7142837c9df9.mp3",
@@ -18279,7 +18501,10 @@
 "heard_char": "一"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙51",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 52": {
 "file": "fc3b554a5715.mp3",
@@ -18308,7 +18533,10 @@
 "heard_char": "二"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙 52",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 53": {
 "file": "2be5eb78307d.mp3",
@@ -18337,7 +18565,10 @@
 "heard_char": "三"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙53",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 54": {
 "file": "6d0f2b324144.mp3",
@@ -18366,7 +18597,10 @@
 "heard_char": "寺"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙54",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 55": {
 "file": "4c077205b69e.mp3",
@@ -18395,7 +18629,10 @@
 "heard_char": "武"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙55",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 56": {
 "file": "95df9502c178.mp3",
@@ -18424,7 +18661,10 @@
 "heard_char": "六"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙56",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 57": {
 "file": "16f9e9cac9c7.mp3",
@@ -18453,7 +18693,10 @@
 "heard_char": "期"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙57",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 58": {
 "file": "a77f53aa0e9d.mp3",
@@ -18482,7 +18725,10 @@
 "heard_char": "八"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙58",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 59": {
 "file": "cb7c2a2a9392.mp3",
@@ -18511,7 +18757,10 @@
 "heard_char": "角"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是白紙59",
+"w_score": 0.571,
+"w_ok": false
 },
 "白紙 6": {
 "file": "6145991e5740.mp3",
@@ -20357,7 +20606,10 @@
 "heard_char": "假"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是 脚",
+"w_score": 1.0,
+"w_ok": true
 },
 "腳踏車": {
 "file": "44725aa861fb.mp3",
@@ -20912,7 +21164,10 @@
 "heard": "da2",
 "heard_char": "达"
 }
-]
+],
+"whisper": "盖高塔",
+"w_score": 1.0,
+"w_ok": true
 },
 "薯條": {
 "file": "fx-09469ba3b7f6.mp3",
@@ -21765,7 +22020,10 @@
 "heard_char": "吗"
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "答案是猫",
+"w_score": 1.0,
+"w_ok": true
 },
 "貓咪": {
 "file": "37814f41ca47.mp3",
@@ -22163,7 +22421,10 @@
 "heard": "chong2",
 "heard_char": "虫"
 }
-]
+],
+"whisper": "青州已過萬重山",
+"w_score": 1.0,
+"w_ok": true
 },
 "輕輕躺在小床上": {
 "file": "adb518b97203.mp3",
@@ -23485,7 +23746,10 @@
 "heard": "zi4",
 "heard_char": "字"
 }
-]
+],
+"whisper": "首校 替次见闻",
+"w_score": 1.0,
+"w_ok": true
 },
 "首孝悌，次謹信": {
 "file": "fx-1c2c6959b4d6.mp3",
@@ -23822,7 +24086,10 @@
 "heard_char": ""
 }
 ],
-"poly": []
+"poly": [],
+"whisper": "呃呃呃",
+"w_score": 1.0,
+"w_ok": true
 },
 "鹿柴": {
 "file": "37f274b33927.mp3",
