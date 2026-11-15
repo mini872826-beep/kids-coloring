@@ -1,0 +1,287 @@
+{
+ "ㄅㄚˇ": {
+  "file": "fx-78f2316cf036.mp3",
+  "was": "e1c489e68c55.mp3",
+  "why": "HsiaoYu 念「把」"
+ },
+ "ㄅㄚˋ": {
+  "file": "fx-0fe6391da0a3.mp3",
+  "was": "4bf9bc4cfd6c.mp3",
+  "why": "HsiaoYu 念「爸」"
+ },
+ "ㄅㄠ": {
+  "file": "fx-46b0b22ec160.mp3",
+  "was": "0218a73f29a2.mp3",
+  "why": "HsiaoYu 念「包」"
+ },
+ "ㄇㄠ": {
+  "file": "fx-849ebabe5f14.mp3",
+  "was": "983b54f58ff4.mp3",
+  "why": "HsiaoYu 念「貓」"
+ },
+ "ㄈㄟ": {
+  "file": "fx-838440bd9288.mp3",
+  "was": "8ecea1eb4f28.mp3",
+  "why": "HsiaoYu 念「飛」"
+ },
+ "ㄈㄢ": {
+  "file": "fx-6961f6a127ef.mp3",
+  "was": "e5f4a3688bef.mp3",
+  "why": "HsiaoYu 念「翻」"
+ },
+ "ㄈㄥ": {
+  "file": "fx-ef3c586288f1.mp3",
+  "was": "d406018fb48f.mp3",
+  "why": "HsiaoYu 念「風」"
+ },
+ "ㄎㄨ": {
+  "file": "fx-7fb83c3312aa.mp3",
+  "was": "905aad4bf395.mp3",
+  "why": "HsiaoYu 念「哭」"
+ },
+ "ㄐㄧㄠ": {
+  "file": "fx-7227f9c26ff3.mp3",
+  "was": "296598a12936.mp3",
+  "why": "HsiaoYu 念「蕉」"
+ },
+ "ㄒㄧㄥ": {
+  "file": "fx-8e33bdb8a5b0.mp3",
+  "was": "a39b6a9824bf.mp3",
+  "why": "HsiaoYu 念「星」"
+ },
+ "ㄒㄩㄝ": {
+  "file": "fx-d6c98dd34cf8.mp3",
+  "was": "2ef400921959.mp3",
+  "why": "HsiaoYu 念「靴」"
+ },
+ "ㄜ": {
+  "file": "fx-a1e83fa1676d.mp3",
+  "was": "8e13bc7ebfa8.mp3",
+  "why": "HsiaoYu 念「鵝」"
+ },
+ "ㄜˊ": {
+  "file": "fx-ca10dfe50211.mp3",
+  "was": "8b7eef8bfc94.mp3",
+  "why": "HsiaoYu 念「鵝」"
+ },
+ "ㄨˊ": {
+  "file": "fx-76a68c9735a4.mp3",
+  "was": "b7b84e901040.mp3",
+  "why": "HsiaoYu 念「無」"
+ },
+ "九五四十五": {
+  "file": "fx-bdc78fdf00b6.mp3",
+  "was": "1020b7f4277a.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "二一得二": {
+  "file": "fx-9a205db69188.mp3",
+  "was": "d4f05ae533ff.mp3",
+  "why": "整句每個字都指定讀音"
+ },
+ "二十一": {
+  "file": "fx-6af6b6047224.mp3",
+  "was": "e34b4a15c207.mp3",
+  "why": "整句每個字都指定讀音"
+ },
+ "五五二十五": {
+  "file": "fx-928afd584a10.mp3",
+  "was": "c6e131427f59.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "個": {
+  "file": "fx-9d417b1a5541.mp3",
+  "was": "4791ee98632f.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "再來": {
+  "file": "fx-5773f7d31300.mp3",
+  "was": "5c32821baf0c.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "十": {
+  "file": "fx-60fa9f432437.mp3",
+  "was": "8d473858a7c4.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "十位": {
+  "file": "fx-a256bf587b35.mp3",
+  "was": "23fb934ad558.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "四十": {
+  "file": "fx-2da8ce3a7aed.mp3",
+  "was": "1edf29bd9817.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "太棒啦，讀完啦！": {
+  "file": "fx-abc331f34bb3.mp3",
+  "was": "7910ef6bd175.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "小貓": {
+  "file": "fx-c07037fe3123.mp3",
+  "was": "6276314947e4.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "念謠": {
+  "file": "fx-170d3a31c853.mp3",
+  "was": "960ae37b8b08.mp3",
+  "why": "整句每個字都指定讀音"
+ },
+ "恐龍蛋": {
+  "file": "fx-f9122ae161e2.mp3",
+  "was": "ad9099cacdfa.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "我喜歡葡萄。": {
+  "file": "fx-387bf1d6628f.mp3",
+  "was": "254caa2f2ec8.mp3",
+  "why": "整句指定讀音（再錄一次）"
+ },
+ "拿走": {
+  "file": "fx-9789d073b297.mp3",
+  "was": "0e08311b73ff.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "故事": {
+  "file": "fx-bf1dcf679f88.mp3",
+  "was": "dd82e3504686.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "昆蟲": {
+  "file": "fx-d880661a8e9d.mp3",
+  "was": "fd5b55a8bf9b.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "晚安晚安": {
+  "file": "fx-3083e27ca813.mp3",
+  "was": "dd5d8eb34c9c.mp3",
+  "why": "整句每個字都指定讀音"
+ },
+ "杜牧": {
+  "file": "fx-198cd045be86.mp3",
+  "was": "4a0e97306f88.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "松鼠": {
+  "file": "fx-f2f0f559936a.mp3",
+  "was": "2594adfe6660.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "檸檬": {
+  "file": "fx-3bd75f6f97de.mp3",
+  "was": "b8d662bc8bc6.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "水餃": {
+  "file": "fx-0b143b20c63e.mp3",
+  "was": "994ab2715f3c.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "海豹": {
+  "file": "fx-f2e482f91613.mp3",
+  "was": "2c9121041726.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "火車": {
+  "file": "fx-9eee283be10f.mp3",
+  "was": "f0bd2d616203.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "熱氣球": {
+  "file": "fx-da0c991b060e.mp3",
+  "was": "fde660e64859.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "爸爸": {
+  "file": "fx-964faa85c6e9.mp3",
+  "was": "7332d3401a11.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "牛奶": {
+  "file": "fx-ce4d6a745216.mp3",
+  "was": "86e48d9c7749.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "玉米": {
+  "file": "fx-5b45cac35003.mp3",
+  "was": "a0f1efaaf89e.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "玩": {
+  "file": "fx-1654d6f3bc83.mp3",
+  "was": "812be57d8b30.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "皮皮": {
+  "file": "fx-8e185a7b0ae2.mp3",
+  "was": "7f26121359e3.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "老虎": {
+  "file": "fx-c8cf4cc4c7f0.mp3",
+  "was": "2f7efd925fec.mp3",
+  "why": "整句每個字都指定讀音"
+ },
+ "臭臭的": {
+  "file": "fx-4b1e3d6d51e0.mp3",
+  "was": "4436995d4366.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "薯條": {
+  "file": "fx-09469ba3b7f6.mp3",
+  "was": "c2c9e1f77498.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "蝸牛": {
+  "file": "fx-f6e4b104b0ce.mp3",
+  "was": "d354576778b8.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "螃蟹": {
+  "file": "fx-09d1eee4247b.mp3",
+  "was": "b69a298ea062.mp3",
+  "why": "整句每個字都指定讀音"
+ },
+ "詠鵝": {
+  "file": "fx-5df9aa7a7ea6.mp3",
+  "was": "7fdf1c32ccc4.mp3",
+  "why": "整句每個字都指定讀音"
+ },
+ "走、走，過馬路。": {
+  "file": "fx-a8ae2b968b30.mp3",
+  "was": "ccefddf3d198.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "跟": {
+  "file": "fx-0b3bb306f3d7.mp3",
+  "was": "90df409ad53c.mp3",
+  "why": "整句指定讀音（再錄一次）"
+ },
+ "跟著念一次": {
+  "file": "fx-ded046fd856a.mp3",
+  "was": "1be02f0c4fa6.mp3",
+  "why": "整句指定讀音（再錄一次）"
+ },
+ "跳到": {
+  "file": "fx-0aa7d869f8f9.mp3",
+  "was": "9265fbeed12f.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "農場": {
+  "file": "fx-5d7361b4c521.mp3",
+  "was": "5196bf37c7ab.mp3",
+  "why": "念錯的字指定讀音"
+ },
+ "韻母": {
+  "file": "fx-45572f424e3c.mp3",
+  "was": "4a9ea9a8a97b.mp3",
+  "why": "整句指定讀音（再錄一次）"
+ },
+ "首孝悌，次謹信": {
+  "file": "fx-1c2c6959b4d6.mp3",
+  "was": "bc50111a6e37.mp3",
+  "why": "念錯的字指定讀音"
+ }
+}
