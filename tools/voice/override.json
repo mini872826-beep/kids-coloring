@@ -213,5 +213,20 @@
   "file": "fx-1c2c6959b4d6.mp3",
   "was": "bc50111a6e37.mp3",
   "why": "念錯的字指定讀音"
+ },
+ "ㄆ": {
+  "file": "fx-34950c51500c.mp3",
+  "was": "a41d28ec91f4.mp3",
+  "why": "HsiaoChen 念「坡」"
+ },
+ "ㄊㄚˋ": {
+  "file": "fx-d9113ecb0383.mp3",
+  "was": "185c01910339.mp3",
+  "why": "HsiaoChen 念「踏」"
+ },
+ "ㄛ": {
+  "file": "fx-79e64811a78d.mp3",
+  "was": "6a67b32d4a2b.mp3",
+  "why": "HsiaoChen 念「喔」"
  }
 }
