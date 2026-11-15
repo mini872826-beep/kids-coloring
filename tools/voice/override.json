@@ -228,5 +228,10 @@
   "file": "fx-79e64811a78d.mp3",
   "was": "6a67b32d4a2b.mp3",
   "why": "HsiaoChen 念「喔」"
+ },
+ "呱呱呱呱呱": {
+  "file": "fx-870d4e1db508.mp3",
+  "was": "47c97fa94bb7.mp3",
+  "why": "Whisper 聽到「呱呱呱呱呱」（原本聽到「關關關」）；分數低是因為 pypinyin 把呱念 gu"
  }
 }

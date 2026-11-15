@@ -34,12 +34,13 @@ VOICES = ['zh-TW-HsiaoChenNeural', 'zh-TW-HsiaoYuNeural']
 
 
 class Whisper:
-    def __init__(self):
+    def __init__(self, lang='zh', model=None):
         from faster_whisper import WhisperModel
-        self.m = WhisperModel('small', device='cpu', compute_type='int8')
+        self.lang = lang
+        self.m = model or WhisperModel('small', device='cpu', compute_type='int8')
 
     def __call__(self, x):
-        segs, _ = self.m.transcribe(x, language='zh', beam_size=5)
+        segs, _ = self.m.transcribe(x, language=self.lang, beam_size=5)
         return ''.join(s.text for s in segs)
 
 

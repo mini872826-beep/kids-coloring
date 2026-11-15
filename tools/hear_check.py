@@ -128,7 +128,12 @@ def heard_py(text):
     from pypinyin import lazy_pinyin, Style
     text = re.sub(r'\d+', num_zh, text)
     t = re.sub(r'[^一-鿿]', '', text)
-    return list(t), lazy_pinyin(t, style=Style.TONE3, neutral_tone_with_five=True)
+    py = lazy_pinyin(t, style=Style.TONE3, neutral_tone_with_five=True)
+    return list(t), [HEARD_FIX.get(c, p) for c, p in zip(t, py)]
+
+
+# 聽到的字 pypinyin 會挑錯讀音的（呱呱墜地的 gu）：兒歌裡都是這個音
+HEARD_FIX = {'呱': 'gua1'}
 
 
 def load(path):
@@ -246,9 +251,17 @@ def second_opinion(res, idx):
     可疑的中文／注音再給 Whisper（會理解意思）聽一次；Whisper 聽起來是對的，就標 w_ok。"""
     import hear_fix as hf
     sus = [t for t, r in res.items() if r.get('kind') in ('zh', 'zy') and (r.get('poly') or r.get('err', 0) > .34)]
-    if not sus:
-        return
     w = hf.Whisper()
+    # 英文也一樣：wav2vec2 沒有字典，狀聲詞、名字常拼錯；Whisper 聽起來對就標 w_ok
+    wen = hf.Whisper('en', w.m)
+    for t, r in res.items():
+        if r.get('kind') == 'en' and r.get('err', 0) > .3:
+            try:
+                r2 = check_en(wen, t, 'audio/' + r['file'])
+                r['whisper'], r['w_ok'] = r2['heard'], r2['err'] <= .3
+            except Exception as e:
+                r['whisper'] = 'error: ' + str(e)[:100]
+    print('english second opinion:', sum(bool(r.get('w_ok')) for r in res.values() if r.get('kind') == 'en'), flush=True)
     carrier = load('audio/' + idx[CARRIER])[:-3200]
     for t in sus:
         r = res[t]
@@ -273,14 +286,14 @@ def page(res=None):
     poly = [(t, r) for t, r in res.items() if r.get('poly') and not r.get('w_ok')]
     zh = sorted([(t, r) for t, r in res.items() if r.get('kind') in ('zh', 'zy') and not r.get('poly') and not r.get('w_ok')
                  and r.get('err', 0) > .34], key=lambda x: -x[1]['err'])
-    en = sorted([(t, r) for t, r in res.items() if r.get('kind') == 'en' and r.get('err', 0) > .3], key=lambda x: -x[1]['err'])
+    en = sorted([(t, r) for t, r in res.items() if r.get('kind') == 'en' and not r.get('w_ok') and r.get('err', 0) > .3], key=lambda x: -x[1]['err'])
     fmt = lambda s: '、'.join(f'{esc(x["char"])} 應念 <b>{x["want"]}</b>，聽到 <b class=no>{x["heard"]}</b>（{esc(x["heard_char"])}）' for x in s)
     sec = [
         ('1. 多音字念成另一個讀音（兩隻耳朵都覺得不對）', poly, lambda r: fmt(r['poly'])),
         ('2. 中文聽起來差很多（兩隻耳朵都覺得不對）', zh, lambda r: f'應：{r["want"]}<br>聽：{esc(r["got"])}（{r["err"]}）'),
-        ('（兩隻耳朵意見不同）大陸耳朵聽起來怪，懂意思的 Whisper 聽起來是對的', ok2,
-         lambda r: f'應：{r["want"]}<br>大陸耳朵：{esc(r["got"])}<br>Whisper：{esc(r.get("whisper", ""))}'),
-        ('3. 英文聽起來差很多', en, lambda r: f'聽到：{esc(r["heard"])}<br>{esc("；".join(r["subs"][:4]))}（{r["err"]}）'),
+        ('（兩隻耳朵意見不同）第一隻耳朵聽起來怪，懂意思的 Whisper 聽起來是對的（大多沒問題）', ok2,
+         lambda r: f'應：{r["want"]}<br>第一隻耳朵：{esc(r.get("got") or r.get("heard", ""))}<br>Whisper：{esc(r.get("whisper", ""))}'),
+        ('3. 英文聽起來差很多（兩隻耳朵都覺得不對）', en, lambda r: f'聽到：{esc(r["heard"])}<br>{esc("；".join(r["subs"][:4]))}（{r["err"]}）'),
     ]
     body = ''.join(f'<h3>{h}：{len(rows)} 段</h3><table>{"".join(row(t, r, f(r)) for t, r in rows)}</table>' for h, rows, f in sec)
     n = {k: sum(1 for r in res.values() if r.get('kind') == k) for k in ('zh', 'zy', 'en')}
