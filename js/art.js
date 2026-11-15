@@ -958,7 +958,7 @@
     { id: 'duckling', cat: 'animal', name: '小鴨子', svg: duckling, also: ['story-duck'] },
     { id: 'swan', cat: 'animal', name: '天鵝', svg: swan, also: ['story-duck'] },
     { id: 'jar', cat: 'story-crow', name: '水瓶和石頭', svg: jarArt },
-    { id: 'giant-carrot', cat: 'story-carrot', name: '大蘿蔔', svg: giantCarrot },
+    { id: 'giant-carrot', cat: 'story-carrot', name: '大紅蘿蔔', svg: giantCarrot },
     { id: 'hospital', cat: 'building', name: '醫院', svg: hospital },
     { id: 'police-station', cat: 'building', name: '警察局', svg: policeStation },
     { id: 'fire-station', cat: 'building', name: '消防局', svg: fireStation },
