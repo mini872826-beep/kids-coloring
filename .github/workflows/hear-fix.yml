@@ -1,0 +1,48 @@
+# 讀音自我修正：讀音檢查標出可疑的錄音，自己錄幾個版本、用兩隻耳朵聽，挑念對的換上（結果 /listen/check/fix.html）
+name: 讀音自我修正
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['tools/hear_fix.py', '.github/workflows/hear-fix.yml']
+permissions:
+  contents: write
+  pages: write
+  actions: write
+concurrency:
+  group: hear-check
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - run: pip install -q torch --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -q transformers faster-whisper numpy edge-tts soundfile opencc-python-reimplemented pypinyin
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-ears-v2
+      - name: 自我修正
+        env:
+          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
+        run: python tools/hear_fix.py
+      - name: 推回 main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A audio listen/check tools/voice/override.json
+          git commit -m "Pronunciation self-correction" || exit 0
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 15; done
+          # 換上之後再完整檢查一次
+          curl -sS -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/hear-check.yml/dispatches" -d '{"ref":"main"}' || true

@@ -51,6 +51,8 @@ def zhuyin_read():
 
 
 ZY = zhuyin_read()
+# 讀音自我修正換上的錄音：{句子: {'file': 新檔名, 'was': 原本的檔名}}（原本的檔名變了 = 句子或設定改過，就不用舊的修正）
+OVERRIDE = json.load(open('tools/voice/override.json', encoding='utf-8')) if os.path.exists('tools/voice/override.json') else {}
 
 
 def is_english(text):
@@ -205,6 +207,10 @@ async def main():
         if os.path.exists(path):
             index[text] = name
 
+    # 讀音自我修正（tools/hear_fix.py）挑出來念得比較對的版本：句子和設定沒變才用
+    for text, o in OVERRIDE.items():
+        if text in index and o.get('was') == index[text] and os.path.exists(os.path.join(OUT, o['file'])):
+            index[text] = o['file']
     keep = set(index.values())
     for f in os.listdir(OUT):
         if f.endswith('.mp3') and f not in keep:

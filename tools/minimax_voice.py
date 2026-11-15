@@ -15,12 +15,13 @@ HOST = 'https://api.minimax.io'
 LOUD = -21.8     # 和志工 1 的旁白一樣大聲（dB）
 
 
-def say(text):
+def say(text, fix=None):
+    """fix：自己指定讀音清單（讀音自我修正 tools/hear_fix.py 用）；沒給就照 mm_fix"""
     body = {'model': MM['model'], 'text': text, 'stream': False,
             'voice_setting': {'voice_id': MM['voice_id'], 'speed': mm_speed(text)},
             'audio_setting': {'format': 'mp3', 'sample_rate': 32000}}
-    if mm_fix(text):   # 多音字：指定讀音（例如「數一數」念 ㄕㄨˇ ㄧˋ ㄕㄨˇ）
-        fix = mm_fix(text)
+    fix = mm_fix(text) if fix is None else list(fix)
+    if fix:   # 多音字：指定讀音（例如「數一數」念 ㄕㄨˇ ㄧˋ ㄕㄨˇ）
         try:   # MiniMax 內部可能先轉成簡體再比對，簡體寫法也一起給
             import opencc
             fix += [f for f in (opencc.OpenCC('t2s').convert(x) for x in fix) if f not in fix]
