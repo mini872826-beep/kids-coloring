@@ -75,6 +75,7 @@ def expected_zh(text):
     import opencc
     from pypinyin import lazy_pinyin, Style
     cc = opencc.OpenCC('t2s')
+    text = re.sub(r'\d+', num_zh, text)   # 「白紙 21」的數字也要念
     chars = [c for c in text if '一' <= c <= '鿿']
     s = cc.convert(text)
     py = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True, errors=lambda x: [None] * len(x))

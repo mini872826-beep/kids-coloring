@@ -29,7 +29,7 @@ TMP = '/tmp/fx'
 # 注音符號的另一個同音字（代表字念不好時試試看）
 ALT = {'ㄓ': ['之', '蜘'], 'ㄔ': ['痴', '嗤'], 'ㄕ': ['師', '獅'], 'ㄖ': ['日'], 'ㄗ': ['資', '滋'], 'ㄘ': ['疵', '雌'],
        'ㄙ': ['思', '絲'], 'ㄩ': ['迂', '淤'], 'ㄜ': ['鵝', '額'], 'ㄝ': ['欸'], 'ㄨ': ['烏', '屋'], 'ㄧ': ['衣', '一'],
-       'ㄈ': ['佛'], 'ㄌ': ['勒'], 'ㄋ': ['訥'], 'ㄤ': ['骯'], 'ㄥ': ['鞥'], 'ㄟ': ['誒']}
+       'ㄈ': ['佛'], 'ㄆ': ['坡', '潑'], 'ㄊㄚˋ': ['踏', '蹋'], 'ㄇㄧˇ': ['米', '靡'], 'ㄛ': ['喔', '噢'], 'ㄌ': ['勒'], 'ㄋ': ['訥'], 'ㄤ': ['骯'], 'ㄥ': ['鞥'], 'ㄟ': ['誒']}
 VOICES = ['zh-TW-HsiaoChenNeural', 'zh-TW-HsiaoYuNeural']
 
 
@@ -113,7 +113,7 @@ def main():
     sus = [t for t, r in rep.items() if r.get('kind') == 'zy' and r.get('err', 0) > .34]
     sus += [t for t, r in rep.items() if r.get('kind') == 'zh' and not re.search(r'\d', t)
             and (r.get('poly') or r.get('err', 0) > .34)]
-    sus = [t for t in sus if t in idx][:limit]
+    sus = [t for t in sus if t in idx and not rep[t].get('w_ok')][:limit]   # Whisper 聽起來對的就不用重錄
     print(len(sus), 'suspects', flush=True)
     ears = [hc.Ear(hc.ZH_MODEL), Whisper()]
     carrier = hc.load('audio/' + idx[hc.CARRIER])[:-3200]
