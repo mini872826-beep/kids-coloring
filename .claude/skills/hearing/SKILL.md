@@ -34,3 +34,10 @@ App 的錄音都在 `audio/`（`audio/index.json`：句子 → 檔名）。Claud
    補進 `pronounce`。
 3. **自我修正**：`hear-fix.yml`（`tools/hear_fix.py`）把可疑的錄音用幾種方法重錄，兩隻耳朵（wav2vec2＋Whisper）挑念對的換上，
    結果在 /listen/check/fix.html；跑完會自動再跑一次讀音檢查。
+
+## 自我修正的經驗（11/15）
+- 微軟（edge-tts）同一個聲音每次錄出來都一樣，重錄沒用，要換聲音或換字。
+- 注音整區改用曉雨（比較 35 個：曉雨好 19、一樣 16、差 0）。不要一區混兩個聲音。
+- wav2vec2 是大陸模型，台灣捲舌音（ㄓㄔㄖ）常聽成 ㄐㄑ；Whisper（懂意思的耳朵）比較準，兩隻耳朵意見不同時以 Whisper 為主再自己判斷。
+- Whisper 會把數字寫成阿拉伯數字，hear_check.heard_py 會換回國字再比。
+- 乘法表「二一得二」的「得」台灣念 ㄉㄜˊ（minimax.json「一得」）。

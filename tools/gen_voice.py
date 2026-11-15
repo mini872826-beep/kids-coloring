@@ -37,7 +37,9 @@ TRIM = 'silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.03,a
 
 # 注音符號和單一個字的標準發音（學注音用，key 是注音本身，例如「ㄅ」「ㄅㄚˊ」）：
 # MiniMax 大姊姊單獨念一個字常常念歪（ㄆ 念成「泡」、ㄦ 像英文），改用微軟曉臻（台灣標準發音）念代表字，音量調到和大姊姊一樣
-ZY_TAG = 'zy1'
+ZY_TAG = 'zy2'
+# 注音用曉雨：讀音自我修正比較 35 個注音，曉雨 19 個比較清楚、16 個一樣、0 個比較差（ㄓㄔㄖ曉臻聽起來像 G／區／遇）
+ZY_VOICE = 'zh-TW-HsiaoYuNeural'
 ZY_RATE = '-10%'
 
 
@@ -120,7 +122,7 @@ def breezy_name(text, spk='v1'):
 def file_name(text):
     # 聲音設定也算進去，換聲音時會全部重錄
     if text in ZY:
-        return hashlib.sha1(f'{VOICE}|{ZY_TAG}|{ZY_RATE}|{text}|{ZY[text]}'.encode('utf-8')).hexdigest()[:12] + '.mp3'
+        return hashlib.sha1(f'{ZY_VOICE}|{ZY_TAG}|{ZY_RATE}|{text}|{ZY[text]}'.encode('utf-8')).hexdigest()[:12] + '.mp3'
     key = f'{voice_for(text)}|{split_slow(text)[1] or RATE}|{PITCH}|trim|{text}'
     return hashlib.sha1(key.encode('utf-8')).hexdigest()[:12] + '.mp3'
 
@@ -152,7 +154,7 @@ async def record(text, path):
     if text in ZY:
         for attempt in range(4):
             try:
-                await edge_tts.Communicate(ZY[text], VOICE, rate=ZY_RATE, pitch=PITCH).save(path)
+                await edge_tts.Communicate(ZY[text], ZY_VOICE, rate=ZY_RATE, pitch=PITCH).save(path)
                 if os.path.getsize(path) > 0:
                     trim(path)
                     loud(path)

@@ -113,8 +113,19 @@ def readings(ch):
     return r
 
 
+def num_zh(m):
+    """Whisper 會把聽到的「三十二」寫成 32：換回國字再比"""
+    n, d = int(m.group()), '零一二三四五六七八九'
+    if n < 10:
+        return d[n]
+    if n < 100:
+        return ('' if n < 20 else d[n // 10]) + '十' + (d[n % 10] if n % 10 else '')
+    return ''.join(d[int(c)] for c in m.group())
+
+
 def heard_py(text):
     from pypinyin import lazy_pinyin, Style
+    text = re.sub(r'\d+', num_zh, text)
     t = re.sub(r'[^一-鿿]', '', text)
     return list(t), lazy_pinyin(t, style=Style.TONE3, neutral_tone_with_five=True)
 
