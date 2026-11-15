@@ -24,3 +24,13 @@ App 的錄音都在 `audio/`（`audio/index.json`：句子 → 檔名）。Claud
    - 英文：改句子寫法或 `tools/gen_voice.py` 的英文聲音設定。
    - 推上去後 `voice.yml` 只重錄有改的句子；錄好再跑一次讀音檢查確認。
 4. 台灣讀音和大陸不同的詞，加到 `tools/hear_check.py` 的 `TW` 表（例如 垃圾 le4 se4、星期 qi2），以免把對的當成錯的。
+
+## 另一隻眼：看圖、看意思（只靠耳朵不夠）
+耳朵只能確認「錄音和文字一樣」；如果文字本身寫錯（圖是餅乾、字卻寫「餅錢」），照字念一定錯。所以每次也要：
+1. **看圖**：每個分類的線稿和名字並排截圖（Playwright 打開首頁，用 `ART.DRAWINGS` 依 `cat` 分組，`ART.svgDoc(d.svg)` 畫出來），
+   一張一張看名字跟圖對不對。
+2. **讀懂每一句**：`node tools/phrases.js --minimax` 列出全部中文，逐句讀，找錯字和照意思該念的特別讀音
+   （古詩、三字經、弟子規的破音字：孝弟 ti4、少小 shao4、石徑斜 xia2、返景 ying3、一日還 huan2、冠必正 guan1……），
+   補進 `pronounce`。
+3. **自我修正**：`hear-fix.yml`（`tools/hear_fix.py`）把可疑的錄音用幾種方法重錄，兩隻耳朵（wav2vec2＋Whisper）挑念對的換上，
+   結果在 /listen/check/fix.html；跑完會自動再跑一次讀音檢查。
