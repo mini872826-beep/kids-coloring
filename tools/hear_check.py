@@ -235,8 +235,29 @@ def main():
             res[t] = {'file': f, 'kind': kind(t), **r}
             if n % 100 == 0:
                 print(n, t[:30], r.get('err'), flush=True)
+    second_opinion(res, idx)
     json.dump(res, open(f'{OUT}/report.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
     page(res)
+
+
+def second_opinion(res, idx):
+    """第二隻耳朵：wav2vec2 是大陸模型，台灣捲舌音、短短的字常聽錯。
+    可疑的中文／注音再給 Whisper（會理解意思）聽一次；Whisper 聽起來是對的，就標 w_ok。"""
+    import hear_fix as hf
+    sus = [t for t, r in res.items() if r.get('kind') in ('zh', 'zy') and (r.get('poly') or r.get('err', 0) > .34)]
+    if not sus:
+        return
+    w = hf.Whisper()
+    carrier = load('audio/' + idx[CARRIER])[:-3200]
+    for t in sus:
+        r = res[t]
+        try:
+            exp = [zhuyin_py(t)] if r['kind'] == 'zy' else expected_zh(t)[1]
+            sc, heard = hf.score([w], exp, 'audio/' + r['file'], carrier)
+            r['whisper'], r['w_score'], r['w_ok'] = heard[0], round(sc, 3), sc >= .66
+        except Exception as e:
+            r['whisper'] = 'error: ' + str(e)[:100]
+    print('second opinion:', sum(bool(res[t].get('w_ok')) for t in sus), 'of', len(sus), 'OK by Whisper', flush=True)
 
 
 def page(res=None):
@@ -247,14 +268,17 @@ def page(res=None):
 
     def row(t, r, extra):
         return f'<tr><td>{play(r["file"])}</td><td>{esc(t)}</td><td>{extra}</td></tr>'
-    poly = [(t, r) for t, r in res.items() if r.get('poly')]
-    zh = sorted([(t, r) for t, r in res.items() if r.get('kind') in ('zh', 'zy') and not r.get('poly') and r.get('err', 0) > .34],
-                key=lambda x: -x[1]['err'])
+    ok2 = [(t, r) for t, r in res.items() if r.get('w_ok')]
+    poly = [(t, r) for t, r in res.items() if r.get('poly') and not r.get('w_ok')]
+    zh = sorted([(t, r) for t, r in res.items() if r.get('kind') in ('zh', 'zy') and not r.get('poly') and not r.get('w_ok')
+                 and r.get('err', 0) > .34], key=lambda x: -x[1]['err'])
     en = sorted([(t, r) for t, r in res.items() if r.get('kind') == 'en' and r.get('err', 0) > .3], key=lambda x: -x[1]['err'])
     fmt = lambda s: '、'.join(f'{esc(x["char"])} 應念 <b>{x["want"]}</b>，聽到 <b class=no>{x["heard"]}</b>（{esc(x["heard_char"])}）' for x in s)
     sec = [
-        ('1. 多音字念成另一個讀音（最可能真的念錯）', poly, lambda r: fmt(r['poly'])),
-        ('2. 中文聽起來差很多（可能念錯，也可能是辨識不準）', zh, lambda r: f'應：{r["want"]}<br>聽：{esc(r["got"])}（{r["err"]}）'),
+        ('1. 多音字念成另一個讀音（兩隻耳朵都覺得不對）', poly, lambda r: fmt(r['poly'])),
+        ('2. 中文聽起來差很多（兩隻耳朵都覺得不對）', zh, lambda r: f'應：{r["want"]}<br>聽：{esc(r["got"])}（{r["err"]}）'),
+        ('（兩隻耳朵意見不同）大陸耳朵聽起來怪，懂意思的 Whisper 聽起來是對的', ok2,
+         lambda r: f'應：{r["want"]}<br>大陸耳朵：{esc(r["got"])}<br>Whisper：{esc(r.get("whisper", ""))}'),
         ('3. 英文聽起來差很多', en, lambda r: f'聽到：{esc(r["heard"])}<br>{esc("；".join(r["subs"][:4]))}（{r["err"]}）'),
     ]
     body = ''.join(f'<h3>{h}：{len(rows)} 段</h3><table>{"".join(row(t, r, f(r)) for t, r in rows)}</table>' for h, rows, f in sec)

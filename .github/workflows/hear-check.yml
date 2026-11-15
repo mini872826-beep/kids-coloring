@@ -26,11 +26,11 @@ jobs:
           python-version: '3.12'
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: pip install -q torch --index-url https://download.pytorch.org/whl/cpu
-      - run: pip install -q transformers numpy edge-tts soundfile opencc-python-reimplemented pypinyin
+      - run: pip install -q transformers faster-whisper numpy edge-tts soundfile opencc-python-reimplemented pypinyin
       - uses: actions/cache@v4
         with:
           path: ~/.cache/huggingface
-          key: hf-ears-v1
+          key: hf-ears-v2
       - run: python tools/hear_check.py
       - name: 推回 main
         run: |
